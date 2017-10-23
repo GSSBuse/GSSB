@@ -1,0 +1,328 @@
+@CHARSET "UTF-8";
+
+body.v4 a.button,
+body.v4 button.button {
+	display: inline-block !important;
+	border: none !important;
+	background-image: url(../img/sprites.buttons.png) !important;
+	background-repeat: no-repeat !important;
+	cursor: pointer !important;
+	margin: 0 3px !important;
+	font-weight: normal !important;
+}
+
+body.v4 .button {
+	background-color: transparent;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+button::-moz-focus-inner {
+	border: none;  /* overrides extra padding in Firefox */
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	/* Safari and Google Chrome only - fix margins */
+body.v4 .button span {
+		
+	}
+}
+
+body.v4 a.button {
+	text-decoration: none !important;
+}
+body.v4 button.button {
+	text-decoration: none !important;
+	font-size:24px;
+	margin-top:0;
+	padding:0;
+}
+
+body.v4 a.button span,
+body.v4 button.button span {
+	display: block !important;
+	border: none !important;
+	background-image: url(../img/sprites.buttons.png)!important;
+	background-repeat: no-repeat !important;
+	cursor: pointer !important;
+	font-weight: normal !important;
+	padding-right: 0 !important;
+}
+
+/* sizes */
+
+body.v4 .button.S {
+	height: 30px !important;
+	padding-right: 5px !important;
+
+}
+
+body.v4 .button.S span {
+	height: 30px !important;
+	padding-left: 5px !important;
+	line-height: 30px !important;
+	font-size: 14px !important;
+    text-align: center;
+}
+
+body.v4 .button.M {
+	height: 36px !important;
+	padding-right: 25px !important;
+}
+
+body.v4 .button.M span {
+	height: 36px !important;
+	padding-left: 25px !important;
+	line-height: 36px !important;
+	font-size: 16px !important;
+}
+
+body.v4 .button.L {
+	height: 52px !important;
+	padding-right: 25px !important;
+}
+
+body.v4 .button.L span {
+	height: 52px !important;
+	padding-left: 25px !important;
+	line-height: 52px !important;
+	font-size: 18px !important;
+}
+
+/* green M */
+
+body.v4 a:link.button.M.green,
+body.v4 a:visited.button.M.green,
+body.v4 button.button.M.green {
+	background-position: right -36px !important;
+}
+
+body.v4 a:link.button.M.green span,
+body.v4 a:visited.button.M.green span,
+body.v4 button.button.M.green span {
+	background-position: 0 0 !important;
+	color: #fff !important;
+	/* text-shadow: 0px 1px 1px #414141 !important; */
+}
+
+body.v4 a:hover.button.M.green,
+body.v4 a:active.button.M.green,
+body.v4 button:hover.button.M.green {
+	background-position: right -108px !important;
+}
+
+body.v4 a:hover.button.M.green span,
+body.v4 a:active.button.M.green span,
+body.v4 button:hover.button.M.green span {
+	background-position: 0 -72px !important;
+}
+
+/* green M oval */
+
+body.v4 a:link.button.oval.M.green,
+body.v4 a:visited.button.oval.M.green {
+	background-position: right -180px !important;
+}
+
+body.v4 a:link.button.oval.M.green span,
+body.v4 a:visited.button.oval.M.green span {
+	background-position: 0 -144px !important;
+}
+
+body.v4 a:hover.button.oval.M.green,
+body.v4 a:active.button.oval.M.green {
+	background-position: right -252px !important;
+}
+
+body.v4 a:hover.button.oval.M.green span,
+body.v4 a:active.button.oval.M.green span {
+	background-position: 0 -216px !important;
+}
+
+/* green L */
+
+body.v4 a:link.button.L.green,
+body.v4 a:visited.button.L.green {
+	background-position: right -340px !important;
+}
+
+body.v4 a:link.button.L.green span,
+body.v4 a:visited.button.L.green span {
+	background-position: 0 -288px !important;
+	color: #fff !important;
+	text-shadow: 0px 1px 1px #414141 !important;
+}
+
+body.v4 a:hover.button.L.green,
+body.v4 a:active.button.L.green {
+	background-position: right -444px !important;
+}
+
+body.v4 a:hover.button.L.green span,
+body.v4 a:active.button.L.green span {
+	background-position: 0 -392px !important;
+}
+
+/* blue M */
+
+body.v4 a:link.button.M.blue,
+body.v4 a:visited.button.M.blue {
+	background-position: right -532px !important;
+}
+
+body.v4 a:link.button.M.blue span,
+body.v4 a:visited.button.M.blue span {
+	background-position: 0 -496px !important;
+	color: #fff !important;
+	text-shadow: 0px 1px 1px #414141 !important;
+}
+
+body.v4 a:hover.button.M.blue,
+body.v4 a:active.button.M.blue {
+	background-position: right -604px !important;
+}
+
+body.v4 a:hover.button.M.blue span,
+body.v4 a:active.button.M.blue span {
+	background-position: 0 -568px !important;
+}
+
+/* blue M oval */
+
+body.v4 a:link.button.oval.M.blue,
+body.v4 a:visited.button.oval.M.blue {
+	background-position: right -676px !important;
+}
+
+body.v4 a:link.button.oval.M.blue span,
+body.v4 a:visited.button.oval.M.blue span {
+	background-position: 0 -640px !important;
+}
+
+body.v4 a:hover.button.oval.M.blue,
+body.v4 a:active.button.oval.M.blue {
+	background-position: right -748px !important;
+}
+
+body.v4 a:hover.button.oval.M.blue span,
+body.v4 a:active.button.oval.M.blue span {
+	background-position: 0 -712px !important;
+}
+
+/* blue L */
+
+body.v4 a:link.button.L.blue,
+body.v4 a:visited.button.L.blue {
+	background-position: right -836px !important;
+}
+
+body.v4 a:link.button.L.blue span,
+body.v4 a:visited.button.L.blue span {
+	background-position: 0 -784px !important;
+	color: #fff !important;
+	text-shadow: 0px 1px 1px #414141 !important;
+}
+
+body.v4 a:hover.button.L.blue,
+body.v4 a:active.button.L.blue {
+	background-position: right -940px !important;
+}
+
+body.v4 a:hover.button.L.blue span,
+body.v4 a:active.button.L.blue span {
+	background-position: 0 -888px !important;
+}
+
+/* gray S */
+
+body.v4 a:link.button.S.gray,
+body.v4 a:visited.button.S.gray {
+	background-position: right -1518px !important;
+}
+
+body.v4 a:link.button.S.gray span,
+body.v4 a:visited.button.S.gray span {
+	background-position: 0 -1488px !important;
+	color: #4c4c4c !important;
+	text-shadow: 0px 1px 1px #BABABA !important;
+}
+
+body.v4 a:hover.button.S.gray,
+body.v4 a:active.button.S.gray {
+	background-position: right -1578px !important;
+}
+
+body.v4 a:hover.button.S.gray span,
+body.v4 a:active.button.S.gray span {
+	background-position: 0 -1548px !important;
+}
+
+/* gray M */
+
+body.v4 a:link.button.M.gray,
+body.v4 a:visited.button.M.gray {
+	background-position: right -1028px !important;
+}
+
+body.v4 a:link.button.M.gray span,
+body.v4 a:visited.button.M.gray span {
+	background-position: 0 -992px !important;
+	color: #4c4c4c !important;
+	text-shadow: 0px 1px 1px #BABABA !important;
+}
+
+body.v4 a:hover.button.M.gray,
+body.v4 a:active.button.M.gray {
+	background-position: right -1100px !important;
+}
+
+body.v4 a:hover.button.M.gray span,
+body.v4 a:active.button.M.gray span {
+	background-position: 0 -1064px !important;
+}
+
+/* gray M oval */
+
+body.v4 a:link.button.oval.M.gray,
+body.v4 a:visited.button.oval.M.gray {
+	background-position: right -1172px !important;
+}
+
+body.v4 a:link.button.oval.M.gray span,
+body.v4 a:visited.button.oval.M.gray span {
+	background-position: 0 -1136px !important;
+}
+
+body.v4 a:hover.button.oval.M.gray,
+body.v4 a:active.button.oval.M.gray {
+	background-position: right -1244px !important;
+}
+
+body.v4 a:hover.button.oval.M.gray span,
+body.v4 a:active.button.oval.M.gray span {
+	background-position: 0 -1208px !important;
+}
+
+/* gray L */
+
+body.v4 a:link.button.L.gray,
+body.v4 a:visited.button.L.gray {
+	background-position: right -1332px !important;
+}
+
+body.v4 a:link.button.L.gray span,
+body.v4 a:visited.button.L.gray span {
+	background-position: 0 -1280px !important;
+	color: #4c4c4c !important;
+	text-shadow: 0px 1px 1px #BABABA !important;
+}
+
+body.v4 a:hover.button.L.gray,
+body.v4 a:active.button.L.gray {
+	background-position: right -1436px !important;
+}
+
+body.v4 a:hover.button.L.gray span,
+body.v4 a:active.button.L.gray span {
+	background-position: 0 -1384px !important;
+}

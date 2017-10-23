@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tab切换，样例</title>
+<link href="static/css/common.css" rel="stylesheet">
+<script type="text/javascript">
+	var ctx = "/dengyutest/"
+</script>
+<!-- src表明requirejs的地址。 data-main标明了第一配置项js。 data-page表示配置结束后运行的脚本。可以添加多个script标签，并指定 data-page -->
+<script type="text/javascript" src="static/vendors/require/require.min.js" data-main="static/js/require.config" data-page="example"></script>
+</head>
+<body>
+<div class="container ms-controller"  ms-controller="tabs">
+	<div class="row">
+		<div class="col-xs-6 ">
+			<div class="row">
+				<div class="col-xs-12">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="row">
+						<!-- 选项卡 -->
+						<div class="col-xs-6 tab" ms-class="active:$index==data.currentIndex" ms-repeat="data.tablist" ms-mouseover="changeTab($index)">{{el.name}}</div>
+					</div>
+				</div>
+				<!-- 内容列表 -->
+				<div class="col-xs-12 infolist">
+					<ul>
+						<li ms-repeat="data.infolist" class="fadeInLeft animated">{{el}}</li>
+					</ul>
+				</div>
+			</div>
+			{{data.a}}<br>
+			<input ms-duplex="data.a" >
+			<div ms-widget="userselect">
+			</div>
+		</div>
+	</div>
+	
+	<form ms-widget="validation">
+        <h3>验证组件</h3>
+        <p><input ms-duplex-required="data.a" placeholder="不能为空"></p>
+        <p><input ms-duplex-int="b" placeholder="必须输入整数"></p>
+        <p><input ms-duplex-decimal="c" placeholder="必须输入小数"></p>
+        <p><input ms-duplex-alpha="d" placeholder="必须输入字母"></p>
+        <p><input ms-duplex-chs="e" placeholder="必须输入中文"></p>
+        <p><input ms-duplex-ipv4="f" placeholder="请输入互联网协议（Internet Protocol，IP）的第四版"></p>
+        <p><input ms-duplex-phone="g" placeholder="必须输入手机号码"></p>
+        <button type="submit">submit
+        </button>
+        <button type="button" ms-click="reset">reset
+        </button>
+    </form>
+</div>
+
+<script type="text/javascript">
+// 加载配置文件
+require(["require.config"], function(cfg) {
+	// 加载jquery
+	require(["jquery"], function($) {
+		// 在任意位置执行脚本。并可以使用任意js脚本
+		$(document.body).append($("<div>附加脚本添加的内容</div>"));
+	});
+})
+
+
+</script>
+</body>
+</html>

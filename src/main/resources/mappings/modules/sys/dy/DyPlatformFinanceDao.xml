@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.dy.DyPlatformFinanceDao">
+    
+	<sql id="dyPlatformFinanceColumns">
+		a.id AS "id",
+		a.client_id AS "clientId",
+		a.operate AS "operate",
+		a.operate_amount AS "operateAmount",
+		a.total_amount AS "totalAmount",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="dyPlatformFinanceJoins">
+	</sql>
+    
+	<select id="get" resultType="DyPlatformFinance">
+		SELECT 
+			<include refid="dyPlatformFinanceColumns"/>
+		FROM dy_platform_finance a
+		<include refid="dyPlatformFinanceJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DyPlatformFinance">
+		SELECT 
+			<include refid="dyPlatformFinanceColumns"/>,
+			b.name AS "dyClient.name",
+			b.nickname AS "dyClient.nickname"
+		FROM dy_platform_finance a LEFT JOIN dy_client b
+			ON b.del_flag = #{DEL_FLAG_NORMAL}
+			AND a.client_id = b.id
+		<include refid="dyPlatformFinanceJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="clientId != null and clientId != ''">
+				AND a.client_id = #{clientId}
+			</if>
+			<if test="dyClient != null and dyClient.nickname != null and dyClient.nickname != ''">
+				AND b.nickname LIKE 
+					<if test="dbName == 'oracle'">'%'||#{dyClient.nickname}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{dyClient.nickname}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{dyClient.nickname},'%')</if>
+			</if>
+			<if test="operate != null and operate != ''">
+				AND a.operate = #{operate}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DyPlatformFinance">
+		SELECT 
+			<include refid="dyPlatformFinanceColumns"/>
+		FROM dy_platform_finance a
+		<include refid="dyPlatformFinanceJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO dy_platform_finance(
+			id,
+			client_id,
+			operate,
+			operate_amount,
+			total_amount,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{clientId},
+			#{operate},
+			#{operateAmount},
+			#{totalAmount},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE dy_platform_finance SET 	
+			client_id = #{clientId},
+			operate = #{operate},
+			operate_amount = #{operateAmount},
+			total_amount = #{totalAmount},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE dy_platform_finance SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

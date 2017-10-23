@@ -1,0 +1,978 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.dy.DyDomainnameDao">
+    
+	<sql id="dyDomainnameColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.client_id AS "clientId",
+		a.begin_time AS "beginTime",
+		a.end_time AS "endTime",
+		a.deposit AS "deposit",
+		a.description AS "description",
+		a.type AS "type",
+		a.reserve_price AS "reservePrice",
+		a.appraise_price AS "appraisePrice",
+		a.increment AS "increment",
+		a.status AS "status",
+		a.wait_time AS "waitTime",
+		a.bonus_share_total AS "bonusShareTotal",
+		a.bonus_share_number AS "bonusShareNumber",
+		a.bonus_second AS "bonusSecond",
+		a.image1 AS "image1",
+		a.image2 AS "image2",
+		a.image3 AS "image3",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	<sql id="bidCashInfoColumns">
+		 a.id AS "domainId",
+		 a.name AS "domainName",
+		 a.client_id AS "sellClientId",		
+		 date_format(a.end_time, "%Y-%m-%d %H:%i:%s") AS "endTime",
+		 date_format(a.wait_time, "%Y-%m-%d %H:%i:%s") AS "waitTime",
+		 a.bonus_share_total AS "bonusShareTotal",
+		 a.bonus_second AS "bonusSecond",
+		 a.status AS "status",
+		 b.nickname AS "sellNickname",
+		 b.name AS "sellName",
+		 b.openid AS "sellOpenId",
+		 c.bid_amount AS "bidAmount",
+		 d.id AS "buyClientId",
+		 d.nickname AS "buyNickname",
+		 d.name AS "buyName",
+		 d.openid AS "buyOpenId",
+		 bb.id AS "sellBrokerId",
+		 bb.name AS "sellBrokerName",
+		 db.id AS "buyBrokerId",
+		 db.name AS "buyBrokerName"
+	</sql>
+	<sql id="dyDomainnameJoins">
+	</sql>
+    
+	<select id="get" resultType="DyDomainname">
+		SELECT 
+			<include refid="dyDomainnameColumns"/>
+		FROM dy_domainname a
+		<include refid="dyDomainnameJoins"/>
+		WHERE a.id = #{id}
+		and a.del_flag = 0
+	</select>
+	
+	<select id="findPageByUserId" resultType="DyDomainname">
+		SELECT 
+			<include refid="dyDomainnameColumns"/>
+			,b.id AS "dyClient.id",
+			 b.name AS "dyClient.name",
+			 b.nickname AS "dyClient.nickname",
+			 b.mobile AS "dyClient.mobile",
+			 c.id AS "dyClient.broker.id",
+			 c.name AS "dyClient.broker.name"
+		FROM dy_domainname a,
+			 dy_client b,
+			 sys_user c
+		<include refid="dyDomainnameJoins"/>
+		<where>
+			a.del_flag = 0
+			AND a.client_id = b.id
+			AND B.broker_id = c.id
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="id != null and id != ''">
+				AND a.id = '#{id}'
+			</if>
+			<if test="clientId != null and clientId != ''">
+				AND a.client_id = '#{clientId}'
+			</if>
+			<if test="beginTime != null and beginTime != ''">
+				AND a.begin_time = #{beginTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				AND a.end_time = #{endTime}
+			</if>
+			<if test="deposit != null and deposit != ''">
+				AND a.deposit = #{deposit}
+			</if>
+			<if test="status != null and status == '03'">
+				AND a.status >= #{status}
+			</if>
+			<if test="status != null and status != '' and status != '03'">
+				AND a.status = #{status}
+			</if>
+			<if test="currentSysUserId != null and currentSysUserId != ''">
+				AND b.broker_id = #{currentSysUserId}
+			</if>
+			<if test="client != null">
+				<if test="client.nickname != null and client.nickname != ''">
+					AND b.nickname LIKE 
+						<if test="dbName == 'oracle'">'%'||#{client.nickname}||'%'</if>
+						<if test="dbName == 'mssql'">'%'+#{client.nickname}+'%'</if>
+						<if test="dbName == 'mysql'">concat('%',#{client.nickname},'%')</if>
+				</if>
+				<if test="client.mobile != null and client.mobile != ''">
+					AND b.mobile LIKE 
+						<if test="dbName == 'oracle'">'%'||#{client.mobile}||'%'</if>
+						<if test="dbName == 'mssql'">'%'+#{client.mobile}+'%'</if>
+						<if test="dbName == 'mysql'">concat('%',#{client.mobile},'%')</if>
+				</if>
+				<if test="client.broker != null and client.broker != ''">
+					<if test="client.broker.name != null and client.broker.name != ''">
+						AND c.name LIKE
+							<if test="dbName == 'oracle'">'%'||#{client.broker.name}||'%'</if>
+							<if test="dbName == 'mssql'">'%'+#{client.broker.name}+'%'</if>
+							<if test="dbName == 'mysql'">concat('%',#{client.broker.name},'%')</if>
+					</if>
+				</if>
+			</if>
+		</where>
+			<choose>
+				<!-- 根据会员姓名排序 -->
+				<when test="page !=null and page.orderBy == 'dyClient.name ASC' ">
+					ORDER BY b.name ASC ,  a.update_date DESC
+				</when>
+				<when test="page !=null and page.orderBy == 'dyClient.name DESC' ">
+					ORDER BY b.name DESC ,  a.update_date DESC
+				</when>
+				<!-- 根据会员昵称排序 -->
+				<when test="page !=null and page.orderBy == 'dyClient.nickname ASC' ">
+					ORDER BY b.nickname ASC ,  a.update_date DESC
+				</when>
+				<when test="page !=null and page.orderBy == 'dyClient.nickname DESC' ">
+					ORDER BY b.nickname DESC ,  a.update_date DESC
+				</when>
+				<!-- 根据经纪人姓名排序 -->
+				<when test="page !=null and page.orderBy == 'brokerName ASC' ">
+					ORDER BY c.name ASC ,  a.update_date DESC
+				</when>
+				<when test="page !=null and page.orderBy == 'brokerName DESC' ">
+					ORDER BY c.name DESC ,  a.update_date DESC
+				</when>
+				<!-- 根据（域名名称/截拍时间）排序 -->
+				<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+					ORDER BY ${page.orderBy} ,  a.update_date DESC
+				</when>
+				<otherwise>
+					ORDER BY  a.update_date DESC
+				</otherwise>
+			</choose>
+	</select>
+	
+	<select id="findList" resultType="DyDomainname">
+		SELECT 
+			<include refid="dyDomainnameColumns"/>
+		FROM dy_domainname a
+		<include refid="dyDomainnameJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="clientId != null and clientId != ''">
+				AND a.client_id = #{clientId}
+			</if>
+			<if test="beginTime != null and beginTime != ''">
+				AND a.begin_time = #{beginTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				AND a.end_time = #{endTime}
+			</if>
+			<if test="deposit != null and deposit != ''">
+				AND a.deposit = #{deposit}
+			</if>
+			<if test="description != null and description != ''">
+				AND a.description = #{description}
+			</if>
+			<if test="status != null and status != ''">
+				AND a.status >= #{status}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+
+	<!-- 自定义获取列表 -->
+	<select id="customizedFindList" resultType="DyDomainname">
+		SELECT DISTINCT
+			<include refid="dyDomainnameColumns"/>
+			<if test="clientId != null and clientId != ''">
+			,if(a.client_id = #{clientId} or b.id IS NOT NULL or c.id IS NOT NULL, '1', '2') as 'tmp'
+			</if>
+		FROM dy_domainname a
+		<if test="clientId != null and clientId != ''">
+		LEFT JOIN dy_attention b on b.domainname_id = a.id and b.client_id = #{clientId}
+		LEFT JOIN dy_bidhistory c on c.domainname_id = a.id and c.client_id = #{clientId}
+		</if>
+		<include refid="dyDomainnameJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+			AND a.name LIKE 
+				<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+		</if>
+		<if test="id != null and id != ''">
+			AND a.id = #{id}
+			AND a.status >= #{status}
+		</if>
+		<!--
+		<if test="status != null and status != ''">
+			AND a.status = #{status}
+		</if>-->
+		<if test="id == null or id == ''">
+			AND (a.end_time IS NULL OR to_days(a.end_time) - to_days(now()) >= 0)
+			AND a.status = #{status}
+		</if>
+<!-- 		<if test="page.orderBy == '1'">
+			ORDER BY tmp asc, a.end_time asc
+		</if>
+		<if test="page.orderBy == '2'">
+			ORDER BY  a.end_time asc, tmp asc
+		</if> -->
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy == 1">
+			ORDER BY a.end_time asc, tmp asc
+			</when>
+			<when test="page !=null and page.orderBy != null and page.orderBy == 2">
+			ORDER BY a.end_time asc, tmp asc
+			</when>
+			<otherwise>
+			ORDER BY a.end_time asc
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="findAllList" resultType="DyDomainname">
+		SELECT 
+			<include refid="dyDomainnameColumns"/>
+		FROM dy_domainname a
+		<include refid="dyDomainnameJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	<select id="findListByClientId" resultType="DyDomainname">
+		SELECT 
+			<include refid="dyDomainnameColumns"/>
+		FROM dy_domainname a,
+			 dy_client c
+		<where>
+			c.id = a.client_id
+			and a.del_flag = 0
+			and c.del_flag = 0
+			<if test="clientId != null and clientId != ''">
+			and c.id = #{clientId}
+			</if>
+			<if test="status != null and status != ''">
+			and a.status like #{status}
+			</if>
+		</where>
+		ORDER BY a.end_time ASC
+	</select>
+	
+	<select id="findConfirmList" resultType="BidCashInfo">
+		SELECT
+			 <include refid="bidCashInfoColumns"/>
+		FROM  dy_domainname a,
+			  dy_client b,
+			  sys_user bb,
+			  dy_client d,
+			  sys_user db,
+			  (SELECT k.* 
+					FROM (
+						select * from dy_bidhistory 
+						where del_flag = '0' 
+						order by bid_amount desc ,proxy_amount desc 
+						) k 
+					GROUP BY k.domainname_id
+			 ) c
+		<where>
+			  a.client_id = b.id
+			 AND c.domainname_id = a.id
+			 AND c.client_id = d.id
+			 AND b.broker_id = bb.id
+			 AND d.broker_id = db.id
+			 AND a.del_flag = 0
+			 AND c.del_flag = 0
+			 AND (a.status like '1_'
+			      OR a.status like '2_')
+			 <if test="status != null and status != ''">
+			 	AND a.status = #{status}
+			 </if>
+			 <if test="queryBrokerId != null and queryBrokerId != ''">
+			 	AND (
+				 		 b.broker_id = #{queryBrokerId}
+								OR d.broker_id = #{queryBrokerId}
+					)
+			 </if>
+			 <if test="sellNickname != null and sellNickname != ''">
+			 		AND b.nickname LIKE 
+					<if test="dbName == 'oracle'">'%'||#{sellNickname}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{sellNickname}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{sellNickname},'%')</if>
+			 </if>
+			 <if test="buyNickname != null and buyNickname != ''">
+			 		AND d.nickname LIKE 
+					<if test="dbName == 'oracle'">'%'||#{buyNickname}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{buyNickname}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{buyNickname},'%')</if>
+			 </if>
+			 <if test="domainName != null and domainName != ''">
+			 		AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{domainName}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{domainName}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{domainName},'%')</if>
+			 </if>
+		</where>
+			GROUP BY c.domainname_id
+			<choose>
+				<!-- 根据域名名称排序 -->
+				<when test="page !=null and page.orderBy == 'domainName ASC'">
+					ORDER BY a.name ASC , a.end_time DESC
+				</when>
+				<when test="page !=null and page.orderBy == 'domainName DESC'">
+					ORDER BY a.name DESC , a.end_time DESC
+				</when>
+				<!-- 根据卖家姓名排序 -->
+				<when test="page !=null and page.orderBy == 'sellName ASC'">
+					ORDER BY b.name ASC , a.end_time DESC
+				</when>
+				<when test="page !=null and page.orderBy == 'sellName DESC'">
+					ORDER BY b.name DESC , a.end_time DESC
+				</when>
+				<!-- 根据买家姓名排序 -->
+				<when test="page !=null and page.orderBy == 'buyName ASC'">
+					ORDER BY d.name ASC , a.end_time DESC
+				</when>
+				<when test="page !=null and page.orderBy == 'buyName DESC'">
+					ORDER BY d.name DESC , a.end_time DESC
+				</when>
+				<!-- 根据卖家经纪人姓名排序 -->
+				<when test="page !=null and page.orderBy == 'sellBrokerName ASC'">
+					ORDER BY bb.name ASC , a.end_time DESC
+				</when>
+				<when test="page !=null and page.orderBy == 'sellBrokerName DESC'">
+					ORDER BY bb.name DESC , a.end_time DESC
+				</when>
+				<!-- 根据买家经纪人姓名排序 -->
+				<when test="page !=null and page.orderBy == 'buyBrokerName ASC'">
+					ORDER BY db.name ASC , a.end_time DESC
+				</when>
+				<when test="page !=null and page.orderBy == 'buyBrokerName DESC'">
+					ORDER BY db.name DESC , a.end_time DESC
+				</when>
+				<!-- 根据域名状态排序 -->
+				<when test="page !=null and page.orderBy == 'status ASC'">
+					ORDER BY a.status ASC , a.end_time DESC
+				</when>
+				<when test="page !=null and page.orderBy == 'status DESC'">
+					ORDER BY a.status DESC , a.end_time DESC
+				</when>
+				<otherwise>
+					ORDER BY a.end_time DESC
+				</otherwise>
+			</choose>
+	</select>
+	<select id="finddealByDomainId" resultType="BidCashInfo">
+		SELECT
+			 <include refid="bidCashInfoColumns"/>
+		FROM  dy_domainname a,
+			  dy_client b,
+			  sys_user bb,
+			  dy_client d,
+			  sys_user db,
+			  (SELECT k.* 
+					FROM (
+						select * from dy_bidhistory 
+						where del_flag = '0' 
+						order by bid_amount desc ,proxy_amount desc 
+						) k 
+					GROUP BY k.domainname_id
+			 ) c
+		<where>
+			  a.client_id = b.id
+			 AND a.id = #{0}
+			 AND c.domainname_id = a.id
+			 AND c.client_id = d.id
+			 AND b.broker_id = bb.id
+			 AND d.broker_id = db.id
+			 AND a.del_flag = 0
+			 AND c.del_flag = 0
+			 and b.del_flag = 0
+			 and d.del_flag = 0
+		</where>
+			ORDER BY a.end_time DESC
+	</select>
+	
+	<select id="checkDealNums" resultType="int">
+		SELECT 
+			count(*)
+		FROM dy_domainname a
+		<where>
+			a.del_flag = 0
+			AND a.end_time BETWEEN #{0}	AND #{1}
+			AND a.status != '00'
+			AND a.status != '01'
+			AND a.status != '02'
+		</where>
+	</select>
+	
+	<select id="getMaxDealDate" resultType="Date">
+		SELECT 
+			max(end_time)
+		FROM dy_domainname a
+		<where>
+		    a.del_flag = 0
+			AND a.end_time BETWEEN #{0}	AND #{1}
+		</where>
+	</select>
+	
+	<select id="unconfirmCount" resultType="int">
+		SELECT 
+			count(*)
+		FROM dy_domainname a
+		<where>
+			a.del_flag = '0'
+		AND a.status = '01'
+		</where>
+	</select>
+	
+	<select id="clientToSellDo" resultType="int">
+		SELECT	
+			count(*)
+		FROM dy_domainname a
+		<where>
+			a.del_flag = '0'
+			AND a.status = '12'
+			AND a.client_id = #{0}
+		</where>
+	</select>
+	
+	<select id="clientToBuyDo" resultType="int">
+		SELECT	
+			count(*)
+		FROM dy_domainname a,
+			 (SELECT k.* 
+					FROM (
+						select * from dy_bidhistory 
+						where del_flag = '0' 
+						order by bid_amount desc ,proxy_amount desc 
+						) k 
+					GROUP BY k.domainname_id
+			 ) b
+		<where>
+			a.del_flag = '0'
+			AND a.status in ('11','13')
+			AND b.client_id = #{0}
+			AND a.id = b.domainname_id
+		</where>
+	</select>
+	
+	<select id="unconfirmCountBroker" resultType="int">
+		SELECT 
+			count(*)
+		FROM dy_domainname a,
+			 dy_client b
+		<where>
+				a.del_flag = '0'
+			AND b.del_flag = '0'
+			AND b.id = a.client_id
+			AND b.broker_id = #{0}
+			AND a.status = '01'
+		</where>
+	</select>
+	
+	<select id="unfinishCount" resultType="int">
+		SELECT 
+			count(*)
+		FROM dy_domainname a
+		<where>
+			a.del_flag = '0'
+		AND a.status = '14'
+		</where>
+	</select>
+	
+	<select id="unfinishCountBroker" resultType="int">
+		SELECT 
+			count(*)
+		FROM dy_domainname a,
+			 dy_client c,
+			 (SELECT k.* 
+					FROM (
+						select * from dy_bidhistory 
+						where del_flag = '0' 
+						order by bid_amount desc ,proxy_amount desc 
+						) k 
+					GROUP BY k.domainname_id
+			 ) b
+		<where>
+				a.del_flag = '0'
+			AND c.del_flag = '0'
+			AND a.id = b.domainname_id
+			AND b.client_id = c.id
+			AND c.broker_id = #{0}
+			AND a.status = '14'
+		</where>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO dy_domainname(
+			id,
+			name,
+			client_id,
+			begin_time,
+			end_time,
+			deposit,
+			description,
+			type,
+			reserve_price,
+			appraise_price,
+			increment,
+			status,
+			wait_time,
+			bonus_share_total,
+			bonus_share_number,
+			bonus_second,
+			image1,
+			image2,
+			image3,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{name},
+			#{clientId},
+			#{beginTime},
+			#{endTime},
+			#{deposit},
+			#{description},
+			#{type},
+			#{reservePrice},
+			#{appraisePrice},
+			#{increment},
+			#{status},
+			#{waitTime},
+			#{bonusShareTotal},
+			#{bonusShareNumber},
+			#{bonusSecond},
+			#{image1},
+			#{image2},
+			#{image3},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE dy_domainname SET 	
+			name = #{name},
+			client_id = #{clientId},
+			begin_time = #{beginTime},
+			end_time = #{endTime},
+			deposit = #{deposit},
+			description = #{description},
+			type = #{type},
+			reserve_price = #{reservePrice},
+			appraise_price = #{appraisePrice},
+			increment = #{increment},
+			status = #{status},
+			wait_time = #{waitTime},
+			bonus_share_total = #{bonusShareTotal},
+			bonus_share_number = #{bonusShareNumber},
+			bonus_second = #{bonusSecond},
+			image1 = #{image1},
+			image2 = #{image2},
+			image3 = #{image3},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+		and del_flag = 0
+	</update>
+	
+	
+	<update id="delete">
+		UPDATE dy_domainname SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteDomainByClientId">
+		DELETE FROM dy_domainname
+		WHERE
+			del_flag = '0'
+		AND client_id = #{clientId}
+		AND status = '02'
+	</update>
+	
+	<update id="deleteDomainById">
+		DELETE FROM dy_domainname
+		WHERE
+			del_flag = '0'
+		AND client_id = #{clientId}
+		AND id = #{id}
+		AND status = '02'
+	</update>
+
+	<select id="getAuctionData" resultType="PageDomainEntity">
+		SELECT DISTINCT
+			a.id AS "id",
+			a.name AS "name",
+			a.client_id AS "clientId",
+			a.begin_time AS "beginTime",
+			a.end_time AS "endTime",
+			a.deposit AS "deposit",
+			a.description AS "description",
+			a.type AS "type",
+			a.reserve_price AS "reservePrice",
+			a.appraise_price AS "appraisePrice",
+			a.increment AS "increment",
+			a.status AS "status",
+			a.wait_time AS "waitTime",
+			a.bonus_share_total AS "bonusShareTotal",
+			a.bonus_share_number AS "bonusShareNumber",
+			a.bonus_second AS "bonusSecond",
+			a.image1 AS "image1",
+			a.image2 AS "image2",
+			a.image3 AS "image3",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag",
+			e.id AS "client.id",
+			e.nickname AS "client.nickname",
+			e.photo AS "client.photo",
+			coalesce(b.bid_amount,0) AS "currAmount",
+			if(c.id is null,false,true) as "attentioned",
+			if(d.id is null,false,true) as "hasNews",
+			d.new_bid_count as newBidCount,
+			if(NOW() >= a.end_time, true, false) as "endFlag"
+		FROM dy_domainname a
+		LEFT JOIN (select domainname_id, max(bid_amount) as bid_amount from dy_bidhistory where  del_flag = 0 and domainname_id = #{0}) b on a.id = b.domainname_id
+		LEFT JOIN dy_attention c on a.id = c.domainname_id and c.del_flag = 0 and c.client_id = #{1}
+		LEFT JOIN dy_news d on a.id = d.domainname_id and d.del_flag = 0 and d.new_bid_count > 0 and d.client_id = #{1}
+		LEFT JOIN dy_client e on a.client_id = e.id and e.del_flag = 0
+		WHERE a.del_flag = 0
+		AND a.id = #{0}
+	</select>
+
+	<update id="updateEndTimeById">
+		UPDATE dy_domainname SET 
+			update_date = NOW(),
+			end_time = #{1}
+		WHERE id = #{0}
+		AND del_flag = 0
+	</update>
+
+	<update id="updateDomainStatusById">
+		UPDATE dy_domainname SET 
+			update_date = NOW(),
+			status = #{1},
+			wait_time = DATE_ADD(NOW(),INTERVAL #{2} DAY)
+		WHERE id = #{0}
+		AND del_flag = 0
+	</update>
+
+	<update id="updateOverdueDomainStatus">
+		UPDATE dy_domainname SET 
+			update_date = NOW(),
+			status = #{1}
+		WHERE status = #{0}
+		AND wait_time &lt;= NOW()
+		AND del_flag = 0
+	</update>
+	
+	<select id="getHistoryInfo" resultType="Map">
+	SELECT
+		d.id AS "domainnameId",
+		d.status AS "status",
+		d.name AS "name",
+		d.client_id AS "sellClientId",
+		c.nickname AS "sellNickName",
+		d.update_date AS "sellDate",
+		t.bid_amount AS "bidAmount",
+		t.client_id AS "buyClientId",
+		t.nickname AS "buyNickName"
+	FROM dy_domainname d  LEFT JOIN  (select b.*,c.nickname from dy_bidhistory b ,dy_client c where b.client_id = c.id) t ON d.id = t.domainname_id, dy_client c 
+	WHERE d.client_id = c.id
+	and d.del_flag = 0
+	and c.del_flag = 0
+	AND d.status like '1_'
+	AND DATE_SUB(CURDATE(),INTERVAL 7 DAY) &lt;= Date(d.update_date)
+	AND EXISTS (
+			SELECT domainname_id, bid_amount,client_id
+			FROM (
+					SELECT k.*
+					FROM (select * from dy_bidhistory where del_flag = '0' order by bid_amount desc ,proxy_amount desc ) k
+					GROUP BY k.domainname_id) e
+			WHERE t.domainname_id = e.domainname_id AND t.bid_amount = e.bid_amount AND t.client_id = e.client_id)
+	ORDER BY d.update_date DESC
+	</select>
+	
+	<!-- 状态03，有人出价且无保留价，获取买家、卖家、域名信息-->
+	<select id="domainnameBuyerAndSellerIfDomainEndAuction" resultType="TransactionInformation">
+		SELECT
+			d.id AS domainnameId,
+			d.client_id As sellerId,
+			b.client_id As buyerId,
+			b.bid_amount As bidAmount,
+			b.proxy_amount As proxyAmount
+		FROM dy_domainname d ,dy_bidhistory  b
+		WHERE d.status = #{status}
+		<if test="domainnameId !=null and domainnameId != ''">
+			and d.id = #{domainnameId}
+		</if>
+		AND d.end_time &lt;= NOW()
+		AND d.reserve_price = 0
+		AND d.del_flag = 0
+		AND b.del_flag = 0
+		AND d.id = b.domainname_id
+		AND EXISTS (
+				SELECT domainname_id, bid_amount,client_id
+				FROM (
+					SELECT k.*
+					FROM (select * from dy_bidhistory where del_flag = '0' order by bid_amount desc ,proxy_amount desc) k
+					GROUP BY k.domainname_id) t
+				WHERE b.domainname_id = t.domainname_id AND b.bid_amount = t.bid_amount AND b.client_id = t.client_id)
+	</select>
+	
+	<!-- 状态03，有人出价且无保留价，状态改为11-->
+	<update id="updateStatusIfDomainEndAuction">
+		UPDATE dy_domainname d SET 
+			d.update_date = NOW(),
+			d.status = #{1},
+			d.wait_time = date_add(d.end_time,interval #{2} day)
+		WHERE d.status = #{0}
+		AND d.reserve_price = 0
+		AND d.end_time &lt;= NOW()
+		AND d.del_flag = 0
+		AND exists (select *
+						from
+							 (select domainname_id	 from  dy_bidhistory group by domainname_id)t
+						where d.id = t.domainname_id
+						)
+	</update>
+	<!-- 状态03，已节拍且无人出价，获取域名实体-->
+	<select id="getDomainnameIfDomainEndAuctionAndNoBid" resultType="DyDomainname">
+		SELECT 
+		<include refid="dyDomainnameColumns"/>
+		FROM dy_domainname a
+		WHERE a.status = #{domainStatus03}
+		<if test="domainnameId !=null and domainnameId != ''">
+			and a.id = #{domainnameId}
+		</if>
+		AND a.end_time &lt;= NOW()
+		AND a.del_flag = 0
+		AND not exists (select *
+						from
+							 (select domainname_id	 from  dy_bidhistory group by domainname_id)t
+						where a.id = t.domainname_id
+						)
+	</select>
+	<!--状态03，有人出价且低于保留价，获取买家、卖家、域名信息-->
+	<select id="getDomainnameIfDomainEndAuctionAndLow" resultType="TransactionInformation">
+		SELECT
+			d.id AS domainnameId,
+			d.client_id As sellerId,
+			b.client_id As buyerId,
+			b.bid_amount As bidAmount,
+			b.proxy_amount As proxyAmount
+		FROM dy_domainname d ,dy_bidhistory  b
+		WHERE d.status = #{status}
+		<if test="domainnameId !=null and domainnameId != ''">
+			and d.id = #{domainnameId}
+		</if>
+		AND d.end_time &lt;= NOW()
+		AND d.reserve_price > 0
+		AND d.del_flag = 0
+		AND b.del_flag = 0
+		AND d.id = b.domainname_id
+		AND EXISTS (
+				SELECT domainname_id, bid_amount,client_id
+				FROM (
+					SELECT k.*
+					FROM (select * from dy_bidhistory where del_flag = '0' order by bid_amount desc ,proxy_amount desc) k
+					GROUP BY k.domainname_id) t
+				WHERE b.domainname_id = t.domainname_id AND b.bid_amount = t.bid_amount AND b.client_id = t.client_id AND d.reserve_price > t.bid_amount)
+	</select>
+	
+	<!--状态03，有人出价且高于保留价，获取买家、卖家、域名信息-->
+	<select id="getDomainnameIfDomainEndAuctionAndHigh" resultType="TransactionInformation">
+		SELECT
+			d.id AS domainnameId,
+			d.client_id As sellerId,
+			b.client_id As buyerId,
+			b.bid_amount As bidAmount,
+			b.proxy_amount As proxyAmount
+		FROM dy_domainname d ,dy_bidhistory  b
+		WHERE d.status = #{status}
+		<if test="domainnameId !=null and domainnameId != ''">
+			and d.id = #{domainnameId}
+		</if>
+		AND d.end_time &lt;= NOW()
+		AND d.reserve_price > 0
+		AND d.del_flag = 0
+		AND b.del_flag = 0
+		AND d.id = b.domainname_id
+		AND EXISTS (
+				SELECT domainname_id, bid_amount,client_id
+				FROM (
+					SELECT k.*
+					FROM (select * from dy_bidhistory where del_flag = '0' order by bid_amount desc ,proxy_amount desc) k
+					GROUP BY k.domainname_id) t
+				WHERE b.domainname_id = t.domainname_id AND b.bid_amount = t.bid_amount AND b.client_id = t.client_id AND d.reserve_price &lt; t.bid_amount)
+	</select>
+	
+	<select id="getTransactionByDomainId" resultType="TransactionInformation">
+		SELECT
+			d.id AS domainnameId,
+			d.client_id As sellerId,
+			b.client_id As buyerId,
+			b.bid_amount As bidAmount
+		FROM dy_domainname d ,dy_bidhistory  b
+		WHERE  d.del_flag = 0
+		   AND b.del_flag = 0
+		   AND d.id = #{0}
+		   AND d.id = b.domainname_id
+		   AND EXISTS (
+				SELECT domainname_id, bid_amount,client_id
+				FROM (
+					SELECT k.*
+					FROM (select * from dy_bidhistory where del_flag = '0' order by bid_amount desc ,proxy_amount desc) k
+					GROUP BY k.domainname_id) t
+				WHERE b.domainname_id = t.domainname_id AND b.bid_amount = t.bid_amount AND b.client_id = t.client_id)
+	</select>
+	
+	<select id="myTransactionsBuyPage" resultType="TransactionsEntity">
+		SELECT 
+			d.name As "domainname",
+			d.end_time As "endTime",
+			d.status As "domainnameStatus",
+			d.wait_time As "waitTime",
+			d.id As "domainnameId",
+			c.photo As photo
+			<if test="searchStatusOne == '03'">
+				,b.bid_amount As "currentPrice"
+			</if>
+			<if test="searchStatusOne != '03'">
+				,b.bid_amount As "dealPrice"
+			</if>
+		FROM dy_bidhistory b,dy_domainname d LEFT JOIN dy_client c ON d.client_id = c.id and c.del_flag = 0 and d.del_flag = 0
+		WHERE (d.status like #{searchStatusOne} or d.status like #{searchStatusTwo})
+		<if test="searchStatusOne == '1_'">
+			and b.client_id = #{currentClientId}
+			and d.status &lt;&gt; '15'
+		</if>
+		<if test="searchStatusOne == '15' or searchStatusTwo == '2_'">
+			AND b.client_id = #{currentClientId}
+		</if>
+		AND b.domainname_id = d.id
+		AND b.del_flag = 0
+		AND EXISTS (
+			SELECT domainname_id, bid_amount,client_id
+			FROM (
+					SELECT k.*
+					FROM (select * from dy_bidhistory where del_flag = '0' order by bid_amount desc ,proxy_amount desc) k
+					GROUP BY k.domainname_id) t
+			WHERE b.domainname_id = t.domainname_id AND b.client_id = t.client_id AND b.bid_amount = t.bid_amount AND b.client_id = t.client_id)
+		<if test="searchStatusOne == '03'">
+			AND EXISTS (
+				SELECT domainname_id
+				FROM dy_bidhistory t
+				WHERE b.domainname_id = t.domainname_id	and t.client_id = #{currentClientId})
+		</if>
+		ORDER BY b.bid_amount
+	</select>
+	<select id="myTransactionsSellPage" resultType="TransactionsEntity">
+		SELECT 
+			d.name As "domainname",
+			d.end_time As "endTime",
+			d.status As "domainnameStatus",
+			d.wait_time As "waitTime",
+			d.id As "domainnameId",
+			c.photo As photo
+			<if test="searchStatusOne == '03'">
+				,b.bid_amount As "currentPrice"
+			</if>
+			<if test="searchStatusOne != '03'">
+				,b.bid_amount As "dealPrice"
+			</if>
+		FROM dy_client c , dy_domainname d  LEFT JOIN dy_bidhistory b  ON d.id = b.domainname_id and d.del_flag = 0 and b.del_flag = 0
+		WHERE (d.status like #{searchStatusOne} or d.status like #{searchStatusTwo})
+		<if test="searchStatusOne == '1_'">
+			and d.status &lt;&gt; '15'
+		</if>
+		and c.del_flag = 0
+		and d.client_id=#{currentClientId}
+		AND d.client_id = c.id
+		GROUP BY d.id
+	</select>
+	
+	<select id="lastOneHourDomainInfo" resultType="FollowInfoToMsg">
+		SELECT 
+			d.name As "domainname",
+			d.id As "domainnameId",
+			c.openid As "openId"
+		FROM dy_client c , dy_domainname d ,dy_attention a
+		WHERE d.del_flag = 0
+		AND c.del_flag = 0
+		AND a.del_flag = 0
+		AND d.status = '03'
+		AND d.end_time &lt;= #{min60}
+		AND d.end_time >= #{min59}
+		AND d.id = a.domainname_id
+		And a.client_id = c.id
+	</select>
+	<select id="getDomainNum" resultType="DomainEndNumEntity">
+		SELECT count(*)>=#{maxNum} AS 'flag' ,Date(d.end_time) AS 'date'
+		FROM dy_domainname d
+		WHERE d.del_flag = 0
+		AND d.end_time &lt;= #{endDate}
+		AND d.end_time >= #{beginDate}
+		AND d.status = '03'
+		group by Date(d.end_time)
+		order by Date(d.end_time) asc
+	</select>
+	
+</mapper>

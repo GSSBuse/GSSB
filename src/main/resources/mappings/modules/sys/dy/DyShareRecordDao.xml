@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.dy.DyShareRecordDao">
+    
+	<sql id="dyShareRecordColumns">
+		a.id AS "id",
+		a.domainname_id AS "domainnameId",
+		a.client_id AS "clientId",
+		a.share_time AS "shareTime",
+		a.redbag_amount AS "redbagAmount",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="dyShareRecordJoins">
+	</sql>
+    
+	<select id="get" resultType="DyShareRecord">
+		SELECT 
+			<include refid="dyShareRecordColumns"/>
+		FROM dy_share_record a
+		<include refid="dyShareRecordJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DyShareRecord">
+		SELECT 
+			<include refid="dyShareRecordColumns"/>
+		FROM dy_share_record a
+		<include refid="dyShareRecordJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="domainnameId != null and domainnameId != ''">
+				AND a.domainname_id = #{domainnameId}
+			</if>
+			<if test="clientId != null and clientId != ''">
+				AND a.client_id = #{clientId}
+			</if>
+			<if test="shareTime != null and shareTime != ''">
+				AND a.share_time = #{shareTime}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DyShareRecord">
+		SELECT 
+			<include refid="dyShareRecordColumns"/>
+		FROM dy_share_record a
+		<include refid="dyShareRecordJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO dy_share_record(
+			id,
+			domainname_id,
+			client_id,
+			share_time,
+			redbag_amount,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{domainnameId},
+			#{clientId},
+			#{shareTime},
+			#{redbagAmount},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE dy_share_record SET 	
+			domainname_id = #{domainnameId},
+			client_id = #{clientId},
+			share_time = #{shareTime},
+			redbag_amount = #{redbagAmount}
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE dy_share_record SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

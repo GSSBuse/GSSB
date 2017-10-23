@@ -1,0 +1,426 @@
+@CHARSET "UTF-8";
+
+body .map_box table td a:link,
+body .map_box table td a:visited,
+body .map_box table td {
+	font-size: 11px !important;
+}
+
+body .map_head a:link, 
+body .map_head a:visited,
+body .map_box .left {
+	font-size: 13px;
+	font-family: 'Droid Sans', sans-serif;
+}
+
+body .precontent p.bodytext_mo a:link, 
+.precontent p.bodytext_mo a:visited, 
+.precontent p.bodytext a:link, 
+.precontent p.bodytext a:visited, 
+.precontent p.bodytext a.internal_link:link, 
+.precontent p.bodytext a.internal_link:visited,
+body #searchbox li a, 
+body #searchbox_ma li a {
+	font-size: 11px !important;
+}	
+	
+body #sellDomainsOverview ul li {
+	font-size: 12px;
+}
+
+body #popup ul.bodytext li, 
+body .popup ul.bodytext li {
+	font-size: 13px !important;
+}
+
+.whitebox {
+    background-color: #fff;
+    margin: 0px 10px 20px 10px !important;
+    font-size: 11px;
+    overflow: hidden;
+}
+
+body #popup .whitebox h3, 
+body .popup .whitebox h3 {
+	font-size: 12px;
+}
+
+body div.thirdnavi100 {
+	margin-left: 0 !important;
+	margin-top: 1px;
+}
+	
+body div.thirdnavi li a:link, 
+body div.thirdnavi li a:visited {
+	font-size: 14px;
+}	
+	
+body #dnm_body {
+	margin-left: 0 !important;
+	margin-top: -1px;
+}	
+	
+body label.terms {
+	font-size: 13px !important;
+}	
+
+body .whiteboxLogin h3, 
+body .whitebox h3,
+body .plusBox h3 {
+	font-size: 14px;
+}
+
+body textarea, body input, body select,
+body .auswahl {
+	font-size: 11px;
+	font-family: 'Droid Sans', Helvetica, sans-serif;	
+}
+
+body .whitebox,
+body div.precontent p {
+	font-size: 13px;
+	font-family: 'Droid Sans', Helvetica, sans-serif !important;
+}
+
+body .messageBox100 h1,
+body .messageBox100 h1 a:link,
+body .messageBox100 h1 a:visited {
+	font-size: 12px !important;
+}
+
+body .paginagtion,
+body .paginagtion a:link, 
+body .paginagtion a:visited {
+	font-size: 12px;
+}
+
+body #progressbar .progressStep span.inactive p,
+body #progressbar .progressStep span.active p {
+	line-height: 17px;
+}
+
+body #offerSubmission h1 span a.internal_link {
+	font-size: 12px !important;
+}
+
+body .whitebox .contenttable thead th, 
+body .contenttable thead th {
+	font-size: 13px !important;
+}
+
+body .whitebox .contenttable tbody td, 
+body .contenttable tbody td {
+	font-size: 13px;
+}
+
+body #offerSubmission h1, body #offerSubmission h1 span {
+	font-size: 14px;
+}
+
+body h2, body h3 {
+	font-size: 14px;
+}
+
+body div.m09 h1 {
+	font-size: 14px;
+}
+
+div.m09 h1.domain {
+	font-size: 13px;
+}
+
+body .whitebox.m09 p {
+	font-size: 13px;
+}
+
+body .small {
+	font-size: 11px !important;
+}
+
+body a.button160_external:link, 
+body a.button160_external:visited {
+	font-size: 12px !important;
+}
+
+body .fadebox p.bottom_advice {
+	font-size: 11px;
+}
+
+body #parking_tools div.pt3rdNav {
+	margin: 0;
+}
+
+body .messageBoxError h1,
+body .messageBoxInfo h1 {
+	font-size: 12px !important; 
+}
+
+body #parking_tools .m13 label {
+	font-size: 12px;	
+}
+
+body #parking_tools th {
+	font-size:  12px;
+}
+
+html body #parking_tools #overview_table td {
+	font-size: 13px !important;
+}
+
+body .whitebox table th,
+body .whitebox table td {
+	font-size: 13px;
+}
+
+body #fourthnavi li a:link,
+body #fourthnavi li a:visited {
+	font-size: 12px;
+}
+
+body .entry h4 {
+	font-size: 13px;
+}
+
+body .commentinput label {
+	font-size: 13px;
+}
+
+body div.thirdnavi {
+	/*margin: 0;*/
+}
+
+body div.contentbox50 div.content {
+	float: right;
+	width: 392px !important;
+}
+
+body #domainSignupContent .box.lightBlue h2, .box h2 {
+	font-size: 14px;
+	letter-spacing: 0;
+}
+
+body #searchContent #searchBar #infoballoonAuctionEvent {
+	left: 80px !important;
+	top: 230px !important;
+}
+
+body div.contentbase .advancedFilter_extension_DialogTip {
+	left: 380px !important;
+}
+
+
+body.newWhite .contentbase {
+	background: #fff;
+}
+
+body.newWhite .contentbase .precontent h1,
+body.newWhite .contentbase .precontent p {
+	color: #012266;
+}
+
+body.newWhite .contentbase .keyvisual {
+	display: none;
+}
+
+
+body #contentNew {
+	margin: 0 0 0 60px;
+}
+
+body #contentNew h1 {
+	margin: 10px 0 10px 0;
+}
+
+body a.btnDGyN span {
+	line-height: 23px !important;
+}
+
+body #offerpage .domainName h1 { 
+	margin-bottom: 20px;
+}
+
+div.sedoform .blockcolsingle1 {
+	display:block;
+    /*width: 340px;*/
+    background-color: transparent;
+}
+div.sedoform .blockcolsingle2 {
+	display:block;
+    width: 200px;
+   background-color: transparent; 
+}
+div.sedoform .blockcolsingle2 img{
+	float:right;
+	width:100px;
+	height:100px;
+}
+.uploadingimg img{
+	margin-left:40px;
+	width:100px;
+	height:100px;
+}
+div.sedoform .blockcolsingle1 div.row {
+    clear: both;
+    /*width: 260px;*/
+}
+div.sedoform .blockcolsingle1 .col1 {
+    color: #002166;
+    font-weight: normal !important;
+    line-height: 12px;
+    text-align: right;
+    width: 90px;
+    float: left;
+    margin: 2px 10px 0 0;
+}
+div.sedoform .blockcolsingle1 .col2 {
+    /*width: 150px;*/
+    height: 31px;
+    display: block;
+    font-weight: normal !important;
+    float: left;
+    margin: 0;
+}
+div.sedoform .input, form.sedoform .input {
+    background-color: #FFFFFF;
+    border: 1px solid #9DB5D7;
+    color: #012266;
+    height: 15px;
+    padding: 1px;
+    width: 120px;
+}
+div.sedoform .input[disabled], form.sedoform .input[disabled] {
+    background-color: #CCC;
+}
+.tips {
+    float: right;
+    display: inline;
+    color: #FF7F00;
+    height: 15px;
+    width: 15px;
+    padding:0px;
+    line-height: 15px;
+    margin-top: 5px;
+}
+.i-ok{
+	margin-top: 5px;
+    display: block;
+    width: 14px;
+    height: 14px;
+   /*  background-position: 0 -600px; */
+}
+.i-wrong{
+	margin-top: 5px;
+    display: block;
+    width: 14px;
+    height: 14px;
+}
+ .i-ok{
+    background: url(../img/icon_ok.png) no-repeat;
+}
+.i-wrong{
+	background: url(../img/icon_wrong.png) no-repeat;
+}
+
+.submitbutton {
+    color: #FFFFFF;
+    cursor: pointer;
+    font: bold 11px verdana, arial, sans-serif;
+    padding-bottom: 3px;
+    text-align: center;
+    text-decoration: none !important;
+}
+.sb140, .sb160 {
+    height: 22px;
+    margin: 0;
+    padding: 0;
+}
+.sb140, .sb160, a.button140_external:link, a.button140_external:visited, p.bodytext a.button140_internal:link, p.bodytext a.button140_internal:visited, a.button140:link, a.button140:visited, #searchbox a.button140:link, #searchbox a.button140:visited {
+    background:  url(../img/sedo.sprites.png) no-repeat 0 -326px;
+    color: #FFFFFF !important;
+    float: left;
+    font: bold 11px Verdana, Arial, sans-serif !important;
+    height: 22px;
+    margin: 0px;
+    padding: 3px 0 3px 0;
+    text-align: center;
+    text-decoration: none;
+    behavior: url(/script/htc/PIE.htc);
+   /*  text-shadow: 1px 1px 1px #666666; */
+    width: 140px;
+    line-height: 13px !important;
+}
+
+.sb140[disabled], .sb160[disabled] {
+    background-position: 0 -430px;
+}
+
+div.sedoform  .col1 {
+    color: #002166;
+    font-weight: normal !important;
+    line-height: 12px;
+    text-align: right;
+    width: 90px;
+    float: left;
+    margin: 2px 10px 0 0;
+}
+.marginright260{
+	margin-right:260px;
+}
+
+a.button-white {
+	color: #FFF;
+    border: 1px solid #FFF;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+.ab-left {
+	position: absolute;
+    top: 30px;
+    left: 10px;
+}
+
+.contentbox form .error {
+	border: 1px solid red !important;
+}
+.contentbox form .reason {
+	color: red;
+}
+.contentbox form .reason:BEFORE {
+	content: " ";
+	background: url(../img/icon_wrong.png) no-repeat;
+	width: 14px;
+	height: 14px;
+	display: inline-block;
+}
+
+.line-input {
+	border-bottom: 1px solid #012266;
+	
+}
+
+
+
+div.m09.whitebox.upload .uploadingimg .col2 {
+	height: 110px;
+	position: relative;
+	width: 110px;
+	padding-left: 0px;
+}
+
+div.m09.whitebox.upload .uploadingimg img {
+	position: absolute;
+	top: 0px;
+	margin-left: 0px;
+	padding-left: 0px;
+}
+
+div.m09.whitebox.upload .uploadingimg input[type='file'] {
+	position: absolute;
+	top: 0px;
+	margin-left: 0px;
+	visibility: hidden;
+	width: 100px;
+	height: 100px;
+}
+

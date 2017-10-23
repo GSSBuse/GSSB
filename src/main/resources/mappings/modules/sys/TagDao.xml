@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.TagDao">
+
+    <resultMap id="tagResult" type="Tag">
+		<id property="id" column="id" />
+		<result property="tag" column="tag" />
+		<result property="dataScope" column="dataScope" />
+		<result property="remarks" column="remarks" />
+		<result property="useable" column="useable" />
+		<result property="sysData" column="sysData" /><!--
+		<collection property="userList" ofType="User">
+			<id property="id" column="userList.id" />
+			<id property="loginName" column="userList.loginName" />
+			<id property="name" column="userList.name" />
+			<id property="email" column="userList.email" />
+			<id property="phone" column="userList.phone" />
+			<id property="mobile" column="userList.mobile" />
+			<id property="office.name" column="userList.office.name" />
+			<id property="company.name" column="userList.company.name" />
+		</collection> -->
+		<collection property="menuList" ofType="Menu">
+			<id property="id" column="menuList.id" />
+		</collection>
+		<collection property="officeList" ofType="Office">
+			<id property="id" column="officeList.id" />
+		</collection>
+	</resultMap>
+
+    <sql id="tagColumns">
+    	a.id,
+    	a.office_id AS "office.id",
+    	a.tag,
+		a.data_scope AS dataScope,
+		a.remarks,
+		a.create_by AS "createBy.id",
+		a.create_date,
+		a.update_by AS "updateBy.id",
+		a.update_date,
+		a.del_flag,
+    	o.name AS "office.name",
+    	o.code,
+    	a.useable AS useable,
+    	a.is_sys AS sysData
+    </sql>
+
+	<select id="get" resultMap="tagResult">
+		SELECT
+			<include refid="tagColumns"/>,<!--
+			ur.user_id AS "userList.id",
+			u.login_name AS "userList.loginName",
+			u.name AS "userList.name",
+			u.email AS "userList.email",
+			u.phone AS "userList.phone",
+			u.mobile AS "userList.mobile",
+			uc.name AS "userList.company.name",
+			uo.name AS "userList.office.name", -->
+			rm.menu_id AS "menuList.id",
+			ro.office_id AS "officeList.id"
+		FROM sys_tag a
+		JOIN sys_office o ON o.id = a.office_id<!--
+		LEFT JOIN sys_user_role ur ON ur.role_id = a.id
+		LEFT JOIN sys_user u ON u.id = ur.user_id
+		LEFT JOIN sys_office uc ON uc.id = u.company_id
+		LEFT JOIN sys_office uo ON uo.id = u.office_id -->
+		LEFT JOIN sys_role_menu rm ON rm.role_id = a.id
+		LEFT JOIN sys_role_office ro ON ro.role_id = a.id
+		WHERE a.id = #{id}
+	</select>
+
+	<select id="getByTag" resultType="Tag">
+		SELECT
+			<include refid="tagColumns"/>
+		FROM sys_tag a
+		JOIN sys_office o ON o.id = a.office_id
+		WHERE a.tag = #{tag} AND a.del_flag = #{DEL_FLAG_NORMAL}
+	</select>
+
+	<select id="findList" resultMap="tagResult">
+		SELECT <!-- DISTINCT -->
+			<include refid="tagColumns"/>,
+			ro.office_id AS "officeList.id"
+		FROM sys_tag a
+		LEFT JOIN sys_office o ON o.id = a.office_id
+		LEFT JOIN sys_user_role ur ON ur.role_id = a.id
+		LEFT JOIN sys_user u ON u.id = ur.user_id
+		LEFT JOIN sys_role_office ro ON ro.role_id = a.id
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.useable=#{useable}
+		<if test="user != null and user.id != null and user.id != ''">
+			AND u.id = #{user.id}
+		</if>
+		<if test="user != null and user.loginName != null and user.loginName != ''">
+			AND u.login_name = #{user.loginName}
+		</if>
+		<!-- 数据范围过滤 -->
+		${sqlMap.dsf}
+		ORDER BY o.code, a.tag
+	</select>
+
+	<select id="findAllList" resultType="Tag">
+		SELECT
+			<include refid="tagColumns"/>
+		FROM sys_tag a
+		LEFT JOIN sys_office o ON o.id = a.office_id
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+		ORDER BY o.code, a.tag
+	</select>
+
+	<insert id="insert">
+		INSERT INTO sys_tag(
+			id,
+			office_id,
+			tag,
+			data_scope,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			is_sys,
+			useable
+		) VALUES (
+			#{id},
+			#{office.id},
+			#{tag},
+			#{dataScope},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{sysData},
+			#{useable}
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE sys_tag SET
+			office_id = #{office.id},
+			tag = #{tag},
+			data_scope = #{dataScope},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			is_sys = #{sysData},
+			useable = #{useable}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="deleteTagMenu">
+		DELETE FROM sys_role_menu WHERE role_id = #{id}
+	</delete>
+
+	<insert id="insertTagMenu">
+		INSERT INTO sys_role_menu(role_id, menu_id)
+		<foreach collection="menuList" item="menu" separator=" union all ">
+			SELECT #{id}, #{menu.id} FROM dual
+		</foreach>
+	</insert>
+
+	<delete id="deleteTagOffice">
+		DELETE FROM sys_role_office WHERE role_id = #{id}
+	</delete>
+
+	<insert id="insertTagOffice">
+		INSERT INTO sys_role_office(role_id, office_id)
+		<foreach collection="officeList" item="office" separator=" union all ">
+			SELECT #{id}, #{office.id} FROM dual
+		</foreach>
+	</insert>
+
+	<update id="delete">
+		UPDATE sys_tag SET
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+</mapper>

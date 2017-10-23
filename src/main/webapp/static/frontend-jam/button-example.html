@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	    
+		<script type="text/javascript">
+			//var ctx = "/front_end_framework";
+		</script>
+		<link href="static/css/common.css" rel="stylesheet">
+		<script type="text/javascript" src="static/vendors/require/require.min.js" data-main="static/js/require.config"></script>
+   		
+	</head>
+	<body class="ms-loader ms-loading">
+	
+	<div data-role="page" id="button-example" ms-controller="button-example" data-title="Buttons" class="ms-controller">
+	
+	    <div data-role="header" data-position="fixed" data-theme="b">
+	        <h1>输入及表单</h1>
+	        <a href="#demo-intro" data-rel="back" data-icon="carat-l" data-iconpos="notext">Back</a>
+	        <a href="#" onclick="window.location.reload()" data-icon="back" data-iconpos="notext">Refresh</a>
+	    </div><!-- /header -->
+	    <div role="main" class="ui-content" ms-on-swiperight="eventtip"  ms-on-taphold="eventtip">
+			<div ms-widget="overscroll"></div>
+			<form>
+			    <input type="button" value="事件" ms-click="showAlert">
+			    <input type="submit" value="Submit">
+			    <input type="reset" value="Reset">
+			</form>
+			
+			<input type="button" data-icon="delete" data-iconpos="notext" value="Icon only">
+		    <div id="custom-border-radius">
+		        <div class="ui-input-btn ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all">
+		            Enhanced - Icon only
+		            <input type="button" data-enhanced="true" value="Enhanced - Icon only">
+		        </div>
+		    </div>
+			
+			<input id="input1" type="button" data-inline="true" value="Input">
+			
+		    <div class="ui-input-btn ui-btn ui-btn-inline" ms-class="ui-state-disabled:!(data.canAnchor)">
+		        Enhanced
+		        <input type="button" data-enhanced="true" value="Enhanced">
+		    </div>
+			<a class="ui-btn" ms-class="ui-state-disabled:!(data.canAnchor)">Anchor</a>
+		
+			<input type="button" disabled="disabled" value="Input button with disabled attribute">
+		    <div class="ui-input-btn ui-btn ui-state-disabled">
+		        Enhanced
+		        <input type="button" disabled="disabled" data-enhanced="true" value="Enhanced">
+		    </div>
+	
+			<div class="ui-corner-all custom-corners">
+			  <div class="ui-bar ui-bar-a">
+			    <h3>输入框:</h3>
+			  </div>
+			  <div class="ui-body ui-body-a">
+				<label for="text-3">Text input: data-clear-btn="true"</label>
+	     		<input type="text" data-clear-btn="true" name="text-3" id="text-3" ms-duplex="data.input">
+	
+				<label>
+			        <input type="checkbox" name="checkbox-0 ">check box
+			    </label>
+				<input type="checkbox" name="checkbox-mini-0" id="checkbox-mini-0" data-mini="true">
+		    	<label for="checkbox-mini-0">{{data.input}}</label>
+			  </div>
+			</div>
+			<div ms-widget="overscroll,$,$osup"></div>
+	    </div><!-- /content -->
+		<script type="text/javascript" data-page="button-example"></script>
+	</div><!-- /page -->
+	</body>
+</html>

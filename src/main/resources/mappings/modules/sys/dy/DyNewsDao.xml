@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.dy.DyNewsDao">
+    
+	<sql id="dyNewsColumns">
+		a.id AS "id",
+		a.domainname_id AS "domainnameId",
+		a.client_id AS "clientId",
+		a.new_bid_count AS "newBidCount",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="dyNewsJoins">
+	</sql>
+    
+	<select id="get" resultType="DyNews">
+		SELECT 
+			<include refid="dyNewsColumns"/>
+		FROM dy_news a
+		<include refid="dyNewsJoins"/>
+		WHERE a.id = #{id}
+		and a.del_flag = 0
+	</select>
+	
+	<select id="findList" resultType="DyNews">
+		SELECT 
+			<include refid="dyNewsColumns"/>
+		FROM dy_news a
+		<include refid="dyNewsJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="domainnameId != null and domainnameId != ''">
+				AND a.domainname_id = #{domainnameId}
+			</if>
+			<if test="clientId != null and clientId != ''">
+				AND a.client_id = #{clientId}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DyNews">
+		SELECT 
+			<include refid="dyNewsColumns"/>
+		FROM dy_news a
+		<include refid="dyNewsJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="getMessageNum" resultType="int">
+		SELECT 
+			count(*)
+		FROM dy_news a
+		<include refid="dyNewsJoins"/>
+		<where>
+			a.client_id = #{clientId}
+			AND a.new_bid_count > 0
+		</where>	
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO dy_news(
+			id,
+			domainname_id,
+			client_id,
+			new_bid_count,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{domainnameId},
+			#{clientId},
+			#{newBidCount},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE dy_news SET 	
+			domainname_id = #{domainnameId},
+			client_id = #{clientId},
+			new_bid_count = #{newBidCount},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+		and del_flag = 0
+	</update>
+	
+	<update id="delete">
+		UPDATE dy_news SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+	<update id="updateNewBidCount">
+		UPDATE dy_news SET 	
+			new_bid_count = new_bid_count + 1,
+			update_date = sysdate()
+		WHERE domainname_id = #{0}
+		AND client_id != #{1}
+		and del_flag = 0
+	</update>
+
+	<update id="deleteById">
+		DELETE FROM dy_news
+		WHERE id = #{id}
+	</update>
+
+	<update id="clearBidCount">
+		UPDATE dy_news SET 	
+			new_bid_count = 0,
+			update_date = sysdate()
+		WHERE domainname_id = #{domainnameId}
+		AND client_id = #{clientId}
+		AND del_flag = #{DEL_FLAG_NORMAL}
+	</update>
+
+	<update id="deleteOverDomainNews">
+		DELETE FROM `dy_news`
+		WHERE `domainname_id` IN 
+			(SELECT `id` FROM `dy_domainname` WHERE STATUS > "03")
+	</update>
+</mapper>

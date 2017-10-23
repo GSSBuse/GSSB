@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.dy.DyLevelSettingDao">
+    
+	<sql id="dyLevelSettingColumns">
+		a.id AS "id",
+		a.level AS "level",
+		a.price AS "price",
+		a.type AS "type",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="dyLevelSettingJoins">
+	</sql>
+    
+	<select id="get" resultType="DyLevelSetting">
+		SELECT 
+			<include refid="dyLevelSettingColumns"/>
+		FROM dy_level_setting a
+		<include refid="dyLevelSettingJoins"/>
+		WHERE a.id = #{id}
+		and a.del_flag = 0
+	</select>
+	
+	<select id="findList" resultType="DyLevelSetting">
+		SELECT 
+			<include refid="dyLevelSettingColumns"/>
+		FROM dy_level_setting a
+		<include refid="dyLevelSettingJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			AND a.type = #{type}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.level ASC 
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DyLevelSetting">
+		SELECT 
+			<include refid="dyLevelSettingColumns"/>
+		FROM dy_level_setting a
+		<include refid="dyLevelSettingJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.type,a.level
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="queryByLevel" resultType="long">
+		select 
+			price 
+		from dy_level_setting b
+		where
+			b.del_flag = 0
+			and b.type = #{1}
+			and	b.level = ( select 
+								min(level)
+							from dy_level_setting a
+							where 
+								a.level > #{0}
+							and a.type = #{1}
+							and a.del_flag = 0)
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO dy_level_setting(
+			id,
+			level,
+			price,
+			type,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{level},
+			#{price},
+			#{type},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE dy_level_setting SET 	
+			level = #{level},
+			price = #{price},
+			type = #{type},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+		and del_flag = 0
+	</update>
+	
+	<update id="delete">
+		UPDATE dy_level_setting SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteAll">
+		UPDATE dy_level_setting SET 
+			del_flag = 1
+		WHERE del_flag = 0
+			AND type = '${type}'
+	</update>
+	
+</mapper>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.dy.DyAttentionDao">
+    
+	<sql id="dyAttentionColumns">
+		a.id AS "id",
+		a.client_id AS "clientId",
+		a.domainname_id AS "domainnameId",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="dyAttentionJoins">
+	</sql>
+    
+	<select id="get" resultType="DyAttention">
+		SELECT 
+			<include refid="dyAttentionColumns"/>
+		FROM dy_attention a
+		<include refid="dyAttentionJoins"/>
+		WHERE a.id = #{id}
+		AND a.del_flag = 0
+	</select>
+	
+	<select id="findList" resultType="DyAttention">
+		SELECT 
+			<include refid="dyAttentionColumns"/>
+		FROM dy_attention a
+		<include refid="dyAttentionJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="clientId != null and clientId != ''">
+				AND a.client_id = #{clientId}
+			</if>
+			<if test="domainnameId != null and domainnameId != ''">
+				AND a.domainname_id = #{domainnameId}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DyAttention">
+		SELECT 
+			<include refid="dyAttentionColumns"/>
+		FROM dy_attention a
+		<include refid="dyAttentionJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO dy_attention(
+			id,
+			client_id,
+			domainname_id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{clientId},
+			#{domainnameId},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE dy_attention SET 	
+			client_id = #{clientId},
+			domainname_id = #{domainnameId},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+		AND del_flag = 0
+	</update>
+	
+	<update id="delete">
+		DELETE FROM dy_attention
+		WHERE
+			del_flag = #{DEL_FLAG_NORMAL}
+		AND client_id = #{clientId}
+		AND domainname_id = #{domainnameId}
+	</update>
+	
+	<!-- 根据域名ID获取关注会员列表 -->
+	<select id="findAttentionList" resultType="DyClient">
+		SELECT 
+			a.id AS "id",
+			a.dyid AS "dyid",
+			a.openid AS "openid",
+			a.name AS "name",
+			a.nickname AS "nickname",
+			a.email AS "email",
+			a.mobile AS "mobile",
+			a.qq AS "qq",
+			a.wx AS "wx",
+			a.photo AS "photo",
+			a.vip AS "vip",
+			a.seal_flag AS "sealFlag",
+			a.broker_id AS "brokerId",
+			a.authentication_mark AS "authenticationMark",
+			a.default_income_expense AS "defaultIncomeExpense",
+			a.authentication_positive_image_url AS "authenticationPositiveImageUrl",
+			a.authentication_negative_image_url AS "authenticationNegativeImageUrl",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag"
+		FROM dy_attention b
+		LEFT JOIN dy_client a ON a.id = b.client_id AND a.del_flag = 0
+		<include refid="dyAttentionJoins"/>
+		<where>
+			a.del_flag = 0
+		AND b.domainname_id = #{domainnameId}
+		</where>
+		ORDER BY b.create_date DESC
+	</select>
+</mapper>

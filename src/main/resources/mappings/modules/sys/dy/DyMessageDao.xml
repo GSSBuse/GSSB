@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.dy.DyMessageDao">
+    
+	<sql id="dyMessageColumns">
+		a.id AS "id",
+		a.title AS "title",
+		a.description AS "description",
+		a.picture AS "picture",
+		a.show_picture AS "showPicture",
+		a.url_type AS "urlType",
+		a.url_id AS "urlId",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="dyMessageJoins">
+	</sql>
+    
+	<select id="get" resultType="DyMessage">
+		SELECT 
+			<include refid="dyMessageColumns"/>
+		FROM dy_message a
+		<include refid="dyMessageJoins"/>
+		WHERE a.id = #{id}
+		and a.del_flag = 0
+	</select>
+	
+	<select id="findList" resultType="DyMessage">
+		SELECT 
+			<include refid="dyMessageColumns"/>
+		FROM dy_message a
+		<include refid="dyMessageJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="title != null and title != ''">
+				AND a.title LIKE 
+					<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{title},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DyMessage">
+		SELECT 
+			<include refid="dyMessageColumns"/>
+		FROM dy_message a
+		<include refid="dyMessageJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO dy_message(
+			id,
+			title,
+			description,
+			picture,
+			show_picture,
+			url_type,
+			url_id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{title},
+			#{description},
+			#{picture},
+			#{showPicture},
+			#{urlType},
+			#{urlId},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE dy_message SET 	
+			title = #{title},
+			description = #{description},
+			picture = #{picture},
+			show_picture = #{showPicture},
+			url_type = #{urlType},
+			url_id = #{urlId},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+		and del_flag = 0
+	</update>
+	
+	<update id="delete">
+		UPDATE dy_message SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

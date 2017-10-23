@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.wx.dao.WxInterfaceInfoDao">
+    
+	<sql id="wxInterfaceInfoColumns">
+		a.id AS "id",
+		a.office_id AS "office.id",
+		a.corpid AS "corpid",
+		a.provider_secret AS "providerSecret",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		o2.name AS "office.name"
+	</sql>
+	
+	<sql id="wxInterfaceInfoJoins">
+		LEFT JOIN sys_office o2 ON o2.id = a.office_id
+	</sql>
+    
+	<select id="get" resultType="WxInterfaceInfo">
+		SELECT 
+			<include refid="wxInterfaceInfoColumns"/>
+		FROM wx_interface_info a
+		<include refid="wxInterfaceInfoJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="WxInterfaceInfo">
+		SELECT 
+			<include refid="wxInterfaceInfoColumns"/>
+		FROM wx_interface_info a
+		<include refid="wxInterfaceInfoJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="WxInterfaceInfo">
+		SELECT 
+			<include refid="wxInterfaceInfoColumns"/>
+		FROM wx_interface_info a
+		<include refid="wxInterfaceInfoJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="getWxInterfaceInfoByCompanyId" resultType="WxInterfaceInfo">
+		SELECT 
+			<include refid="wxInterfaceInfoColumns"/>
+		FROM wx_interface_info a,
+			 sys_office o2
+		<where><!--
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			and  -->o2.id = a.office_id
+			and o2.id = #{officeId}
+		</where>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO wx_interface_info(
+			id,
+			office_id,
+			corpid,
+			provider_secret,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{office.id},
+			#{corpid},
+			#{providerSecret},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE wx_interface_info SET 	
+			office_id = #{office.id},
+			corpid = #{corpid},
+			provider_secret = #{providerSecret},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE wx_interface_info SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

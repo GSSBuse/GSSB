@@ -1,0 +1,21 @@
+
+
+
+
+
+.tab {
+	border: 1px solid blue;
+	/*border-bottom-color: white;*/
+}
+.tab.active {
+	border-bottom-color: white;
+}
+
+.infolist {
+	border: 1px solid blue;
+	border-top-color: white;
+}
+
+.infolist li {
+	
+}

@@ -1,0 +1,8 @@
+{
+	inputs: [
+	    "../vendors/animate/animate.min.css",
+	    "custom.css",
+	    "dropscroll.css"
+	],
+	output: "all.css"
+}

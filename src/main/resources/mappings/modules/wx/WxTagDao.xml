@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.wx.dao.WxTagDao">
+    
+	<sql id="wxTagColumns">
+		a.id AS "id",
+		a.office_id AS "office.id",
+		a.name AS "name",
+		a.enname AS "enname",
+		a.tag_type AS "tagType",
+		a.data_scope AS "dataScope",
+		a.is_sys AS "isSys",
+		a.useable AS "useable",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		o2.name AS "office.name"
+	</sql>
+	
+	<sql id="wxTagJoins">
+		LEFT JOIN sys_office o2 ON o2.id = a.office_id
+	</sql>
+
+	<select id="get" resultType="WxTag">
+		SELECT 
+			<include refid="wxTagColumns"/>
+		FROM wx_tag a
+		<include refid="wxTagJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="WxTag">
+		SELECT 
+			<include refid="wxTagColumns"/>
+		FROM wx_tag a
+		<include refid="wxTagJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="WxTag">
+		SELECT 
+			<include refid="wxTagColumns"/>
+		FROM wx_tag a
+		<include refid="wxTagJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO wx_tag(
+			id,
+			office_id,
+			name,
+			enname,
+			tag_type,
+			data_scope,
+			is_sys,
+			useable,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{office.id},
+			#{name},
+			#{enname},
+			#{tagType},
+			#{dataScope},
+			#{isSys},
+			#{useable},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE wx_tag SET 	
+			office_id = #{office.id},
+			name = #{name},
+			enname = #{enname},
+			tag_type = #{tagType},
+			data_scope = #{dataScope},
+			is_sys = #{isSys},
+			useable = #{useable},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE wx_tag SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="outUserInTag">
+		DELETE FROM wx_user_tag
+		WHERE user_id = #{userId}
+		AND tag_id = #{tagId}
+	</delete>
+	
+	<insert id="assignUserToTag">
+		INSERT INTO wx_user_tag(
+			user_id,
+			tag_id
+		) VALUES (
+			#{userId},
+			#{tagId}
+		)
+	</insert>
+</mapper>

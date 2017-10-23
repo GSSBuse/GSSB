@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<title>测试页面</title>
+		<script type="text/javascript">
+			function testPackage() {
+				var sa = {'package':"abc"};
+				
+				alert("package: " + sa.package)
+				return false;
+			}
+			
+			function testPackage2() {
+				var sa = {package:"abc"};
+				
+				alert("package: " + sa.package)
+				return false;
+			}
+			
+			function testImgUrl() {
+				alert("http://" + window.location.host + "/dengyu/static/images/brand_logo.jpg");
+				return false;
+			}
+		</script>
+	</head>
+	<body>
+		<a href="#" onclick="return testPackage()">测试package</a>
+		
+		<a href="#" onclick="return testPackage2()">测试package2</a>
+		
+		<a href="#" onclick="return testImgUrl()">测试logo地址</a>
+	</body>
+</html>

@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.dy.DyClientDao">
+    
+	<sql id="dyClientColumns">
+		a.id AS "id",
+		a.dyid AS "dyid",
+		a.openid AS "openid",
+		a.name AS "name",
+		a.nickname AS "nickname",
+		a.email AS "email",
+		a.pay_password AS "payPassword",
+		a.mobile AS "mobile",
+		a.qq AS "qq",
+		a.wx AS "wx",
+		a.photo AS "photo",
+		a.vip AS "vip",
+		a.avoid_deposit as "avoidDeposit",
+		a.seal_flag AS "sealFlag",
+		a.email_flag AS "emailFlag",
+		a.broker_id AS "brokerId",
+		a.IDcard_number AS "IDcardNumber",
+		a.authentication_mark AS "authenticationMark",
+		a.default_income_expense AS "defaultIncomeExpense",
+		a.authentication_positive_image_url AS "authenticationPositiveImageUrl",
+		a.authentication_negative_image_url AS "authenticationNegativeImageUrl",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="dyClientColumnsInclude">
+		<include refid="dyClientColumns"/>,
+		b.id AS "broker.id",
+		b.name AS "broker.name",
+		c.id AS "dyFinance.id",
+		c.account_balance AS "dyFinance.accountBalance",
+		c.freeze_balance AS "dyFinance.freezeBalance"
+	</sql>
+	
+	<sql id="dyClientJoins">
+	</sql>
+    
+	<select id="get" resultType="DyClient">
+		SELECT 
+			<include refid="dyClientColumns"/>
+		FROM dy_client a
+		<include refid="dyClientJoins"/>
+		WHERE a.id = #{id}
+		and a.del_flag = 0
+	</select>
+	
+	<select id="getByOpenid" resultType="DyClient">
+		SELECT 
+			<include refid="dyClientColumns"/>
+		FROM dy_client a
+		<include refid="dyClientJoins"/>
+		WHERE a.openid = #{openid}
+		and a.del_flag = 0
+	</select>
+	
+	<select id="getByDyid" resultType="DyClient">
+		SELECT 
+			<include refid="dyClientColumns"/>
+		FROM dy_client a
+		<include refid="dyClientJoins"/>
+		WHERE a.dyid = #{dyid}
+		and a.del_flag = 0
+	</select>
+	
+	<select id="findList" resultType="DyClient">
+		SELECT 
+			<include refid="dyClientColumnsInclude"/>
+		FROM dy_client a,
+			 sys_user b,
+			 dy_finance c
+		<include refid="dyClientJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			AND b.del_flag = #{DEL_FLAG_NORMAL}
+			AND c.del_flag = #{DEL_FLAG_NORMAL}
+			AND a.broker_id = b.id
+			AND c.client_id = a.id
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="nickname != null and nickname != ''">
+				AND a.nickname LIKE
+					<if test="dbName == 'oracle'">'%'||#{nickname}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{nickname}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{nickname},'%')</if>
+			</if>
+			<if test="brokerId != null and brokerId != ''">
+				AND a.broker_id = #{brokerId}
+			</if>
+			<if test="qq != null and qq != ''">
+				AND a.qq = #{qq}
+			</if>
+			<if test="authenticationMark != null and authenticationMark != ''">
+				AND a.authentication_mark = #{authenticationMark}
+			</if>
+			<if test="wx != null and wx != ''">
+				AND a.wx LIKE
+					<if test="dbName == 'oracle'">'%'||#{wx}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{wx}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{wx},'%')</if>
+			</if>
+			<if test="mobile != null and mobile != ''">
+				AND a.mobile LIKE
+					<if test="dbName == 'oracle'">'%'||#{mobile}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{mobile}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{mobile},'%')</if>
+			</if>
+			<if test="broker != null and broker != ''">
+				<if test="broker.name != null and broker.name != ''">
+					AND b.name LIKE
+						<if test="dbName == 'oracle'">'%'||#{broker.name}||'%'</if>
+						<if test="dbName == 'mssql'">'%'+#{broker.name}+'%'</if>
+						<if test="dbName == 'mysql'">concat('%',#{broker.name},'%')</if>
+				</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.dyid
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DyClient">
+		SELECT 
+			<include refid="dyClientColumns"/>
+		FROM dy_client a
+		<include refid="dyClientJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="getRandomBroker" resultType="User">
+		SELECT 
+			a.id,
+	    	a.company_id AS "company.id",
+	    	a.office_id AS "office.id",
+	    	a.login_name,
+	    	a.password,
+	    	a.no,
+			a.name,
+			a.email,
+			a.phone,
+			a.mobile,
+			a.wechat,
+			a.qq,
+			count(b.id)
+		FROM sys_user a LEFT JOIN dy_client b ON b.broker_id = a.id AND b.del_flag = 0, sys_user_role c, sys_role d
+		WHERE a.del_flag = 0 AND a.id = c.user_id AND d.id = c.role_id AND d.name = '经纪人' 
+		GROUP BY a.id
+		ORDER BY count(b.id) asc
+		LIMIT 1
+	</select>
+	<select id="getNewDyId" resultType="String">
+		select dyid+1 
+		from dy_client 
+		where dyid &gt; 9999
+		order by dyid-0 desc
+		LIMIT 1
+	</select>
+	
+	<select id="unmarkCount" resultType="int">
+		SELECT	 
+			count(*)
+		FROM
+			dy_client a
+		<where>
+			a.del_flag = '0'
+			AND a.authentication_mark= 2
+		</where>
+	</select>
+	
+	<select id="unmarkCountBroker" resultType="int">
+		SELECT	 
+			count(*)
+		FROM
+			dy_client a
+		<where>
+			a.del_flag = '0'
+			AND a.authentication_mark= 2
+			AND a.broker_id = #{0}
+		</where>
+	</select>
+	
+	<select id="findLinkClientList" resultType="DyClient">
+		select 
+			<include refid="dyClientColumns"/> 
+		from dy_client a
+		where a.id in (
+				  select client_id as 'clientId' from dy_domainname h where h.id in <foreach item="item" index="index" collection="idList" open="(" separator="," close=")">#{item}</foreach> and h.del_flag = 0
+			union select client_id as 'clientId' from dy_access_record b where b.domainname_id in <foreach item="item" index="index" collection="idList" open="(" separator="," close=")">#{item}</foreach> and b.del_flag = 0
+			union select share_clientid as 'clientId' from dy_access_record c where c.domainname_id in <foreach item="item" index="index" collection="idList" open="(" separator="," close=")">#{item}</foreach> and c.del_flag = 0
+			union select client_id as 'clientId' from dy_bidhistory d where d.domainname_id in <foreach item="item" index="index" collection="idList" open="(" separator="," close=")">#{item}</foreach> and d.del_flag = 0
+			union select client_id as 'clientId' from dy_attention e where e.domainname_id in <foreach item="item" index="index" collection="idList" open="(" separator="," close=")">#{item}</foreach> and e.del_flag = 0
+			union select client_id as 'clientId' from dy_bonus f where f.domainname_id in <foreach item="item" index="index" collection="idList" open="(" separator="," close=")">#{item}</foreach> and f.del_flag = 0
+			union select client_id as 'clientId' from dy_share_record g where g.domainname_id in <foreach item="item" index="index" collection="idList" open="(" separator="," close=")">#{item}</foreach> and g.del_flag = 0)
+	</select>
+	
+	<select id="hasDyid" resultType="int">
+		SELECT 
+			count(*)
+		FROM dy_client a
+		WHERE a.del_flag = '0'
+			AND a.dyid = #{0}
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO dy_client(
+			id,
+			dyid,
+			openid,
+			name,
+			nickname,
+			email,
+			pay_password,
+			mobile,
+			qq,
+			wx,
+			photo,
+			vip,
+			avoid_deposit,
+			seal_flag,
+			email_flag,
+			broker_id,
+			IDcard_number,
+			authentication_mark,
+			default_income_expense,
+			authentication_positive_image_url,
+			authentication_negative_image_url,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{dyid},
+			#{openid},
+			#{name},
+			#{nickname},
+			#{email},
+			#{payPassword},
+			#{mobile},
+			#{qq},
+			#{wx},
+			#{photo},
+			#{vip},
+			#{avoidDeposit},
+			#{sealFlag},
+			#{emailFlag},
+			#{brokerId},
+			#{IDcardNumber},
+			#{authenticationMark},
+			#{defaultIncomeExpense},
+			#{authenticationPositiveImageUrl},
+			#{authenticationNegativeImageUrl},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE dy_client SET 	
+			dyid = #{dyid},
+			openid = #{openid},
+			name = #{name},
+			nickname = #{nickname},
+			email = #{email},
+			pay_password = #{payPassword},
+			mobile = #{mobile},
+			qq = #{qq},
+			wx = #{wx},
+			photo = #{photo},
+			vip = #{vip},
+			avoid_deposit = #{avoidDeposit},
+			seal_flag = #{sealFlag},
+			email_flag = #{emailFlag},
+			broker_id = #{brokerId},
+			IDcard_number = #{IDcardNumber},
+			authentication_mark = #{authenticationMark},
+			default_income_expense = #{defaultIncomeExpense},
+			authentication_positive_image_url = #{authenticationPositiveImageUrl},
+			authentication_negative_image_url = #{authenticationNegativeImageUrl},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+		and del_flag = 0
+	</update>
+	
+	<update id="delete">
+		UPDATE dy_client SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateName">
+		UPDATE dy_client SET
+			name = #{name},
+			update_date = now()
+		WHERE id = #{id}
+		and del_flag = 0
+	</update>
+	
+	<update id="updateWx">
+		UPDATE dy_client SET
+			wx = #{wx},
+			update_date = now()
+		WHERE id = #{id}
+		and del_flag = 0
+	</update>
+	<update id="saveEmailFlag">
+		UPDATE dy_client SET
+			email_flag = #{emailFlag},
+			update_date = now()
+		WHERE id = #{id}
+		and del_flag = 0
+	</update>
+	
+	<update id="updateQQ">
+		UPDATE dy_client SET
+			qq = #{qq},
+			update_date = now()
+		WHERE id = #{id}
+		and del_flag = 0
+	</update>
+	
+	<update id="updateMobile">
+		UPDATE dy_client SET
+			mobile = #{mobile},
+			update_date = now()
+		WHERE id = #{id}
+		and del_flag = 0
+	</update>
+	<update id="updateEmail">
+		UPDATE dy_client SET
+			email = #{email},
+			email_flag = '0',
+			update_date = now()
+		WHERE id = #{id}
+		and del_flag = 0
+	</update>
+	<update id="updateDefault_income_expense">
+		UPDATE dy_client SET
+			default_income_expense = #{default_income_expense},
+			update_date = now()
+		WHERE id = #{id}
+		and del_flag = 0
+	</update>
+	
+	<select id="getClientForBroker" resultType="DyClient">
+		SELECT 
+			<include refid="dyClientColumns"/>
+		FROM dy_client a
+		<include refid="dyClientJoins"/>
+		WHERE a.broker_id = #{brokerId}
+		and a.del_flag = 0
+	</select>
+</mapper>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.dy.DyBonusDao">
+    
+	<sql id="dyBonusColumns">
+		a.id AS "id",
+		a.domainname_id AS "domainnameId",
+		a.client_id AS "clientId",
+		a.money AS "money",
+		a.type AS "type",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="bonusClientColumns">
+		a.id AS "id",
+		a.domainname_id AS "domainnameId",
+		a.client_id AS "clientId",
+		a.money AS "money",
+		a.type AS "type",
+		a.create_date AS "createDate",
+		b.photo AS "clientPhoto",
+		b.nickname AS "clientNickname"
+	</sql>
+	
+	<sql id="dyBonusJoins">
+	</sql>
+    
+	<select id="get" resultType="DyBonus">
+		SELECT 
+			<include refid="dyBonusColumns"/>
+		FROM dy_bonus a
+		<include refid="dyBonusJoins"/>
+		WHERE a.id = #{id}
+		and a.del_flag = 0
+	</select>
+	
+	<select id="getBonusListByDomainId" resultType="BonusClient">
+		SELECT
+			<include refid="bonusClientColumns"/>
+		FROM dy_bonus a,
+			 dy_client b
+		<where>
+			a.del_flag = 0
+		AND b.del_flag = 0
+		AND a.client_id = b.id
+		AND a.domainname_id = #{0}
+		</where>
+	</select>
+	
+	<select id="findList" resultType="DyBonus">
+		SELECT 
+			<include refid="dyBonusColumns"/>
+		FROM dy_bonus a
+		<include refid="dyBonusJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="domainnameId != null and domainnameId != ''">
+				AND a.domainname_id = #{domainnameId}
+			</if>
+			<if test="clientId != null and clientId != ''">
+				AND a.client_id = #{clientId}
+			</if>
+			<if test="money != null and money != ''">
+				AND a.money = #{money}
+			</if>
+			<if test="type != null and type != ''">
+				AND a.type = #{type}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findShareOrsecondBonusList" resultType="ShareOrSecondBonus">
+		SELECT 
+			a.money AS "money",
+			a.type AS "type",
+			a.create_date AS "createDate",
+			d.name AS "domainname"
+		FROM dy_bonus a LEFT JOIN dy_domainname d on a.domainname_id = d.id and d.del_flag = 0
+		<include refid="dyBonusJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			AND a.client_id = #{clientId}
+			AND a.type in('01','02')
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	<select id="findAllList" resultType="DyBonus">
+		SELECT 
+			<include refid="dyBonusColumns"/>
+		FROM dy_bonus a
+		<include refid="dyBonusJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO dy_bonus(
+			id,
+			domainname_id,
+			client_id,
+			money,
+			type,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{domainnameId},
+			#{clientId},
+			#{money},
+			#{type},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE dy_bonus SET 	
+			domainname_id = #{domainnameId},
+			client_id = #{clientId},
+			money = #{money},
+			type = #{type},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+		and del_flag = 0
+	</update>
+	
+	<update id="delete">
+		UPDATE dy_bonus SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

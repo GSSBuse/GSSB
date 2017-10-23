@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.dy.DyAccessRecordDao">
+    
+	<sql id="dyAccessRecordColumns">
+		a.id AS "id",
+		a.domainname_id AS "domainnameId",
+		a.client_id AS "clientId",
+		a.share_clientid AS "shareClientid",
+		a.access_time AS "accessTime",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="dyAccessRecordJoins">
+	</sql>
+    
+	<select id="get" resultType="DyAccessRecord">
+		SELECT 
+			<include refid="dyAccessRecordColumns"/>
+		FROM dy_access_record a
+		<include refid="dyAccessRecordJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DyAccessRecord">
+		SELECT 
+			<include refid="dyAccessRecordColumns"/>
+		FROM dy_access_record a
+		<include refid="dyAccessRecordJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="domainnameId != null and domainnameId != ''">
+				AND a.domainname_id = #{domainnameId}
+			</if>
+			<if test="clientId != null and clientId != ''">
+				AND a.client_id = #{clientId}
+			</if>
+			<if test="shareClientid != null and shareClientid != ''">
+				AND a.share_clientid = #{shareClientid}
+			</if>
+			<if test="accessTime != null and accessTime != ''">
+				AND a.access_time = #{accessTime}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DyAccessRecord">
+		SELECT 
+			<include refid="dyAccessRecordColumns"/>
+		FROM dy_access_record a
+		<include refid="dyAccessRecordJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="getShareClientId" resultType="String">
+		select 
+			share_clientid
+		from dy_access_record a
+		where 
+			a.del_flag = '0'
+			and a.domainname_id = #{0}
+			and a.client_id = #{1}
+			and a.update_date = (
+					select 
+						min(update_date)
+					from dy_access_record b
+					where 
+						b.del_flag = '0'
+						and b.domainname_id = #{0}
+						and b.client_id = #{1}
+						and b.share_clientid != #{1}
+					)
+	</select>
+	
+	<select id="getShareClient" resultType="DyClient">
+		select 
+			c.id AS "id",
+			c.name AS "name",
+			c.nickname AS "nickname"
+		from  (select 
+					*
+				from dy_access_record b
+				where 
+					b.del_flag = '0'
+					and b.domainname_id = #{0}
+					and b.client_id = #{1}
+					and b.share_clientid != #{1}
+				order by b.update_date ASC 
+				LIMIT 1
+				) a,
+			   dy_client c
+		where 
+			a.share_clientid = c.id
+			and c.del_flag = '0'
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO dy_access_record(
+			id,
+			domainname_id,
+			client_id,
+			share_clientid,
+			access_time,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{domainnameId},
+			#{clientId},
+			#{shareClientid},
+			#{accessTime},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE dy_access_record SET 	
+			domainname_id = #{domainnameId},
+			client_id = #{clientId},
+			share_clientid = #{shareClientid},
+			access_time = #{accessTime},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE dy_access_record SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.dy.DyFinanceDao">
+    
+	<sql id="dyFinanceColumns">
+		a.id AS "id",
+		a.client_id AS "clientId",
+		a.account_balance AS "accountBalance",
+		a.freeze_balance AS "freezeBalance",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="dyFinanceJoins">
+	</sql>
+	
+	<select id="get" resultType="DyFinance">
+		SELECT 
+			<include refid="dyFinanceColumns"/>
+		FROM dy_finance a
+		<include refid="dyFinanceJoins"/>
+		WHERE
+				<choose>
+				<when test=" id != null and id != ''">
+					a.id = #{id}
+					and a.del_flag = 0
+				</when>
+				<otherwise>
+				 a.client_id = #{clientId}
+				 and a.del_flag = 0
+				</otherwise>
+			</choose>
+	</select>
+	
+	<select id="getByClientId" resultType="DyFinance">
+		SELECT 
+			<include refid="dyFinanceColumns"/>
+		FROM dy_finance a
+		<include refid="dyFinanceJoins"/>
+		WHERE
+			 a.client_id = #{0}
+			 and a.del_flag = 0
+	</select>
+	
+	<select id="findList" resultType="DyFinance">
+		SELECT 
+			<include refid="dyFinanceColumns"/>
+		FROM dy_finance a
+		<include refid="dyFinanceJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="clientId != null and clientId != ''">
+				AND a.client_id = #{clientId}
+			</if>
+			<if test="accountBalance != null and accountBalance != ''">
+				AND a.account_balance = #{accountBalance}
+			</if>
+			<if test="freezeBalance != null and freezeBalance != ''">
+				AND a.freeze_balance = #{freezeBalance}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DyFinance">
+		SELECT 
+			<include refid="dyFinanceColumns"/>
+		FROM dy_finance a
+		<include refid="dyFinanceJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO dy_finance(
+			id,
+			client_id,
+			account_balance,
+			freeze_balance,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{clientId},
+			#{accountBalance},
+			#{freezeBalance},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE dy_finance SET 	
+			client_id = #{clientId},
+			account_balance = #{accountBalance},
+			freeze_balance = #{freezeBalance},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE dy_finance SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+	<update id="updateFreezeBalance">
+		UPDATE dy_finance SET
+<!-- 			account_balance = account_balance - #{deposit}, -->
+			freeze_balance = freeze_balance + #{freezeBalance},
+			update_date = sysdate()
+		WHERE id = #{id} and update_date = #{updateDate} and del_flag = 0
+	</update>
+
+	<update id="updateAccountBalance">
+		UPDATE dy_finance SET
+			account_balance = account_balance + #{accountBalance},
+			update_date = sysdate()
+		WHERE id = #{id} and update_date = #{updateDate} and del_flag = 0
+	</update>
+	
+	<update id="updateFinance">
+		UPDATE dy_finance SET
+			account_balance = #{accountBalance},
+			freeze_balance = #{freezeBalance},
+			update_date = sysdate()
+		WHERE client_id = #{clientId} and update_date = #{updateDate} and del_flag = 0
+	</update>
+	
+</mapper>

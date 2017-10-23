@@ -1,0 +1,13 @@
+{
+	inputs: [
+	    "../vendors/jingle/js/lib/zepto.min.js",
+	    "../vendors/jingle/js/lib/zepto.touch2mouse.js",
+	    "../vendors/jingle/js/lib/iscroll.js",
+	    "../vendors/jingle/js/lib/iscroll.js",
+	    "../vendors/jquery/plugins/jq.hashchange.min.js",
+	    "../vendors/frozenui-1.3.0/dist/js/frozen.js",
+	    "utils.js",
+	    "../vendors/jweixin/jweixin-1.0.0.js"
+	],
+	output: "all-common.js"
+}

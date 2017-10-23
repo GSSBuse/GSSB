@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.dy.DyCashFlowDao">
+    
+	<sql id="dyCashFlowColumns">
+		a.id AS "id",
+		a.client_id AS "clientId",
+		a.domainname_id AS "domainnameId",
+		a.operate AS "operate",
+		a.operate_amount AS "operateAmount",
+		a.operate_time AS "operateTime",
+		a.confirm_result AS "confirmResult",
+		a.amount_balance AS "amountBalance",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="dyCashFlowColumnsInclude">
+		<include refid="dyCashFlowColumns"/>,
+			b.id AS "dyClient.broker.id",
+			b.name AS "dyClient.broker.name",
+			c.id AS "dyClient.id",
+			c.dyid AS "dyClient.dyid",
+			c.name AS "dyClient.name",
+			c.nickname AS "dyClient.nickname",
+			c.mobile AS "dyClient.mobile",
+			c.email AS "dyClient.email",
+			c.default_income_expense AS "dyClient.defaultIncomeExpense"
+	</sql>
+	
+	<sql id="dyCashFlowInfo">
+		a.id AS "id",
+		a.client_id AS "clientId",
+		a.operate AS "operate",
+		a.operate_amount AS "operateAmount",
+		a.operate_time AS "operateTime",
+		a.confirm_result AS "confirmResult",
+		a.amount_balance AS "amountBalance",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		b.dyid AS "dyid",
+		b.name AS "name",
+		b.nickname AS "nickname",
+		b.mobile AS "mobile",
+		c.account_balance AS "accountBalance",
+		c.freeze_balance AS "freezeBalance",
+		d.id AS "brokerId",
+		d.name AS "brokerName"
+	</sql>
+	
+	<sql id="dyCashFlowJoins">
+	</sql>
+    
+	<select id="get" resultType="DyCashFlow">
+		SELECT 
+			<include refid="dyCashFlowColumns"/>
+		FROM dy_cash_flow a
+		<include refid="dyCashFlowJoins"/>
+		WHERE a.id = #{id}
+		and a.del_flag = 0
+	</select>
+	
+	<select id="getCashFlowInfo" resultType="DyCashFlow">
+		SELECT 
+			<include refid="dyCashFlowColumnsInclude"/>
+		FROM dy_cash_flow a,
+			 sys_user b,
+			 dy_client c
+		<include refid="dyCashFlowJoins"/>
+		<where>
+			a.del_flag = '0'
+			AND a.id = #{id}
+			AND b.del_flag = '0'
+			AND c.del_flag = '0'
+			AND a.client_id = c.id
+			AND b.id = c.broker_id
+		</where>
+	</select>
+	
+	<select id="findPageforQuery" resultType="DyCashFlow">
+		SELECT 
+			<include refid="dyCashFlowColumnsInclude"/>
+		FROM dy_cash_flow a,
+			 sys_user b,
+			 dy_client c
+		<include refid="dyCashFlowJoins"/>
+		<where>
+			a.del_flag = '0'
+			AND b.del_flag = '0'
+			AND c.del_flag = '0'
+			AND a.client_id = c.id
+			AND b.id = c.broker_id
+			<if test="brokerId != null and brokerId != ''">
+				AND c.broker_id = #{brokerId}
+			</if>
+			<if test="brokerName != null and brokerName != ''">
+				AND b.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{brokerName}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{brokerName}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{brokerName},'%')</if>
+			</if>
+			<if test="name != null and name != ''">
+				AND c.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="dyid != null and dyid != ''">
+				AND c.dyid = #{dyid}
+					
+			</if>
+			<if test="startTime != null and startTime != ''">
+				AND a.operate_time &gt;= STR_TO_DATE('${startTime}','%Y-%m-%d %H:%i:%s') 
+			</if>
+			<if test="endTime != null and endTime != ''">
+				AND a.operate_time &lt;= STR_TO_DATE('${endTime}','%Y-%m-%d %H:%i:%s') 
+			</if>
+			<if test="operate != null and operate != ''">
+				AND a.operate = #{operate}
+			</if>
+			<if test="operate == null or operate == ''">
+				AND a.operate in ('微信充值','线下充值','提现')
+			</if>
+			<if test="confirmResult != null and confirmResult != ''">
+				AND a.confirm_result = #{confirmResult}
+			</if>
+		</where>
+			<choose>
+				<!-- 根据经纪人姓名排序 -->
+				<when test="page !=null and page.orderBy == 'brokerName ASC'">
+					ORDER BY b.name ASC , FIELD(a.confirm_result,'等待','处理中','完成','打回','已取消') , a.operate_time DESC
+				</when>
+				<when test="page !=null and page.orderBy == 'brokerName DESC'">
+					ORDER BY b.name DESC , FIELD(a.confirm_result,'等待','处理中','完成','打回','已取消') , a.operate_time DESC
+				</when>
+				<!-- 根据会员姓名排序 -->
+				<when test="page !=null and page.orderBy == 'clientName ASC'">
+					ORDER BY c.name ASC , FIELD(a.confirm_result,'等待','处理中','完成','打回','已取消') , a.operate_time DESC
+				</when>
+				<when test="page !=null and page.orderBy == 'clientName DESC'">
+					ORDER BY c.name DESC , FIELD(a.confirm_result,'等待','处理中','完成','打回','已取消') , a.operate_time DESC
+				</when>
+				<!-- 根据会员米友号排序 -->
+				<when test="page !=null and page.orderBy == 'clientDyid ASC'">
+					ORDER BY c.dyid ASC , FIELD(a.confirm_result,'等待','处理中','完成','打回','已取消') , a.operate_time DESC
+				</when>
+				<when test="page !=null and page.orderBy == 'clientDyid DESC'">
+					ORDER BY c.dyid DESC , FIELD(a.confirm_result,'等待','处理中','完成','打回','已取消') , a.operate_time DESC
+				</when>
+				<!-- 根据会员昵称排序 -->
+				<when test="page !=null and page.orderBy == 'clientNickname ASC'">
+					ORDER BY c.nickname ASC , FIELD(a.confirm_result,'等待','处理中','完成','打回','已取消') , a.operate_time DESC
+				</when>
+				<when test="page !=null and page.orderBy == 'clientNickname DESC'">
+					ORDER BY c.nickname DESC , FIELD(a.confirm_result,'等待','处理中','完成','打回','已取消') , a.operate_time DESC
+				</when>
+				<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+					ORDER BY ${page.orderBy}
+				</when>
+				<otherwise>
+					order by FIELD(a.confirm_result,'等待','处理中','完成','打回','已取消')
+						, a.operate_time DESC
+				</otherwise>
+			</choose>
+	</select>
+	
+	<select id="findCashListByClientId" resultType="DyCashFlow">
+		SELECT 
+			<include refid="dyCashFlowColumns"/>,
+			b.name AS "dyDomainname.name"
+		FROM dy_cash_flow a LEFT JOIN dy_domainname b
+			 ON a.domainname_id = b.id AND a.del_flag = #{DEL_FLAG_NORMAL} AND a.del_flag = #{DEL_FLAG_NORMAL}
+		<where>
+			 a.client_id = #{clientId}
+			  AND a.operate NOT IN ('冻结','解冻')
+		</where>
+			ORDER BY a.operate_time DESC
+	</select>
+	
+	<select id="findFreePageByClientId" resultType="DyCashFlow">
+		SELECT 
+			<include refid="dyCashFlowColumns"/>,
+			b.name AS "dyDomainname.name"
+		FROM dy_cash_flow a LEFT JOIN dy_domainname b
+			 ON a.domainname_id = b.id AND a.del_flag = #{DEL_FLAG_NORMAL} AND a.del_flag = #{DEL_FLAG_NORMAL}
+		<where>
+			 a.client_id = #{clientId}
+			 AND a.operate IN ('冻结','解冻','提现')
+		</where>
+			ORDER BY a.operate_time DESC
+	</select>
+	
+	<select id="findLastCashFlow" resultType="CashFlowInfo">
+		SELECT
+		  <include refid="dyCashFlowInfo"/>
+		FROM	dy_cash_flow a,
+	  			dy_client b,
+	  			dy_finance c,
+	  			sys_user d
+	  	<where>
+	  			 a.del_flag = 0
+			AND  b.del_flag = 0
+			AND  c.del_flag = 0
+			AND  d.del_flag = 0
+			AND  a.client_id = b.id
+			AND  b.broker_id = d.id
+			AND  c.client_id = b.id
+			AND  a.create_by = #{brokerId}
+			AND  a.operate in ('微信充值','线下充值','提现')
+	  	</where>
+	  	ORDER BY a.operate_time DESC
+	  	LIMIT 5
+	</select>
+	
+	<select id="findList" resultType="DyCashFlow">
+		SELECT 
+			<include refid="dyCashFlowColumns"/>
+		FROM dy_cash_flow a
+		<include refid="dyCashFlowJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="clientId != null and clientId != ''">
+				AND a.client_id = #{clientId}
+			</if>
+			<if test="domainnameId != null and domainnameId != ''">
+				AND a.domainname_id = #{domainnameId}
+			</if>
+			<if test="operate != null and operate != ''">
+				AND a.operate = #{operate}
+			</if>
+			<if test="operateAmount != null and operateAmount != ''">
+				AND a.operate_amount = #{operateAmount}
+			</if>
+			<if test="operateTime != null and operateTime != ''">
+				AND a.operate_time = #{operateTime}
+			</if>
+			<if test="confirmResult != null and confirmResult != ''">
+				AND a.confirm_result = #{confirmResult}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findCashFlowList" resultType="DyCashFlow">
+		SELECT 
+			<include refid="dyCashFlowColumns"/>
+			,d.name As "dyDomainname.name"
+		FROM dy_cash_flow a LEFT JOIN dy_domainname d ON a.domainname_id = d.id
+		<include refid="dyCashFlowJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			AND a.operate not in ('冻结','解冻')
+			<if test="clientId != null and clientId != ''">
+				AND a.client_id = #{clientId}
+			</if>
+			<if test="operateAmount != null and operateAmount != ''">
+				AND a.operate_amount = #{operateAmount}
+			</if>
+			<if test="operateTime != null and operateTime != ''">
+				AND a.operate_time = #{operateTime}
+			</if>
+			<if test="confirmResult != null and confirmResult != ''">
+				AND a.confirm_result = #{confirmResult}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findCashFlowWithdrawals" resultType="DyCashFlow">
+		SELECT 
+			<include refid="dyCashFlowColumns"/>
+		FROM dy_cash_flow a
+		<include refid="dyCashFlowJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			AND a.confirm_result in ('等待','处理中')
+			<if test="clientId != null and clientId != ''">
+				AND a.client_id = #{clientId}
+			</if>
+			<if test="operate != null and operate != ''">
+				AND a.operate = #{operate}
+			</if>
+			<if test="operateAmount != null and operateAmount != ''">
+				AND a.operate_amount = #{operateAmount}
+			</if>
+			<if test="operateTime != null and operateTime != ''">
+				AND a.operate_time = #{operateTime}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findFreezeInfoList" resultType="DyCashFlow">
+		SELECT 
+			<include refid="dyCashFlowColumns"/>
+			,d.name As "dyDomainname.name"
+		FROM dy_cash_flow a LEFT JOIN dy_domainname d ON a.domainname_id = d.id
+		<include refid="dyCashFlowJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="clientId != null and clientId != ''">
+				AND a.client_id = #{clientId}
+			</if>
+			<if test="operateAmount != null and operateAmount != ''">
+				AND a.operate_amount = #{operateAmount}
+			</if>
+			<if test="operateTime != null and operateTime != ''">
+				AND a.operate_time = #{operateTime}
+			</if>
+			<!-- 显示变更，要求显示冻结和解冻记录，解冻记录也是冻结记录
+			AND (a.operate in ('冻结')
+				 OR (a.operate in ('提现') and a.confirm_result in ('等待','处理中')))
+				 -->
+			AND a.operate in ('冻结','解冻','提现')
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DyCashFlow">
+		SELECT 
+			<include refid="dyCashFlowColumns"/>
+		FROM dy_cash_flow a
+		<include refid="dyCashFlowJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="cUnconfirmCount" resultType="int">
+		SELECT 
+			count(*)
+		FROM dy_cash_flow a
+		<where>
+			a.del_flag = 0
+		AND	a.confirm_result = '等待'
+		AND a.operate in ('微信充值','线下充值','提现')
+		</where>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO dy_cash_flow(
+			id,
+			client_id,
+			domainname_id,
+			operate,
+			operate_amount,
+			operate_time,
+			confirm_result,
+			amount_balance,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{clientId},
+			#{domainnameId},
+			#{operate},
+			#{operateAmount},
+			#{operateTime},
+			#{confirmResult},
+			#{amountBalance},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE dy_cash_flow SET 	
+			client_id = #{clientId},
+			domainname_id = #{domainnameId},
+			operate = #{operate},
+			operate_amount = #{operateAmount},
+			operate_time = #{operateTime},
+			confirm_result = #{confirmResult},
+			amount_balance = #{amountBalance},
+			update_by = #{updateBy.id},
+			update_date = sysdate(),
+			remarks = #{remarks}
+		WHERE id = #{id}
+		and del_flag = 0
+	</update>
+	
+	<update id="delete">
+		UPDATE dy_cash_flow SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	<select id="findWithdrawalsList" resultType="DyCashFlow">
+		SELECT 
+		<include refid="dyCashFlowColumns"/>
+		FROM dy_cash_flow a
+		<where>
+			a.del_flag = 0
+		AND a.client_id	= #{clientId}
+		AND	a.operate = #{CASHFLOW_OPERATE_WITHDRAW}
+		AND a.confirm_result in (#{CASHFLOW_CONFIRM_WAIT} , #{CASHFLOW_COMFIRM_DOING})
+		</where>
+		ORDER BY a.update_date DESC
+	</select>
+	
+	<update id="updateCashFlow">
+		UPDATE dy_cash_flow SET
+			confirm_result = #{confirmResult},
+			amount_balance = #{amountBalance},
+			remarks = #{remarks},
+			update_date = sysdate()
+		WHERE id = #{id} and update_date = #{updateDate} and del_flag = 0
+	</update>
+	
+	<update id="updateFreeCashFlow">
+		UPDATE dy_cash_flow SET
+			operate = '解冻',
+			update_date = sysdate()
+		WHERE
+			del_flag = #{DEL_FLAG_NORMAL}
+			AND	client_id = #{clientId}
+			AND domainname_id = #{domainnameId}
+			AND	operate_amount = #{operateAmount}
+			AND operate = '冻结'
+	</update>
+	
+	<update id="updateFreeCashFlowAmount">
+		UPDATE dy_cash_flow SET
+			operate_amount = #{1},
+			update_date = sysdate()
+		WHERE
+			del_flag = 0
+			AND	client_id = #{0.clientId}
+			AND domainname_id = #{0.domainnameId}
+			AND	operate_amount = #{0.operateAmount}
+			AND operate = '冻结'
+	</update>
+</mapper>

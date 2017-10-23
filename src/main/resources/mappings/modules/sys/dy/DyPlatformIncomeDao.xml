@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.dy.DyPlatformIncomeDao">
+    
+	<sql id="dyPlatformIncomeColumns">
+		a.id AS "id",
+		a.domainname_id AS "domainnameId",
+		a.buy_client_id AS "buyClientId",
+		a.operate AS "operate",
+		a.operate_amount AS "operateAmount",
+		a.total_amount AS "totalAmount",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="dyPlatformIncomeJoins">
+	</sql>
+    
+	<select id="get" resultType="DyPlatformIncome">
+		SELECT 
+			<include refid="dyPlatformIncomeColumns"/>
+		FROM dy_platform_income a
+		<include refid="dyPlatformIncomeJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DyPlatformIncome">
+		SELECT 
+			<include refid="dyPlatformIncomeColumns"/>,
+			b.name as "dyDomainname.name",
+			b.status as "dyDomainname.status",
+			c.name as "buyClient.name",
+			c.nickname as "buyClient.nickname",
+			d.name as "dyDomainname.dyClient.name",
+			d.nickname as "dyDomainname.dyClient.nickname"
+		FROM dy_platform_income a
+			LEFT JOIN dy_domainname b ON a.domainname_id = b.id
+			LEFT JOIN dy_client c ON a.buy_client_id = c.id ,
+			dy_client d
+		<include refid="dyPlatformIncomeJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			AND b.client_id = d.id
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DyPlatformIncome">
+		SELECT 
+			<include refid="dyPlatformIncomeColumns"/>
+		FROM dy_platform_income a
+		<include refid="dyPlatformIncomeJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO dy_platform_income(
+			id,
+			domainname_id,
+			buy_client_id,
+			operate,
+			operate_amount,
+			total_amount,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{domainnameId},
+			#{buyClientId},
+			#{operate},
+			#{operateAmount},
+			#{totalAmount},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE dy_platform_income SET 	
+			domainname_id = #{domainnameId},
+			buy_client_id = #{buyClientId},
+			operate = #{operate},
+			operate_amount = #{operateAmount},
+			total_amount = #{totalAmount},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE dy_platform_income SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

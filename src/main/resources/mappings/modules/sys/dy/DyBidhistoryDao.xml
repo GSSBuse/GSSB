@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.dy.DyBidhistoryDao">
+    
+	<sql id="dyBidhistoryColumns">
+		a.id AS "id",
+		a.domainname_id AS "domainnameId",
+		a.client_id AS "clientId",
+		a.bid_amount AS "bidAmount",
+		a.proxy_amount AS "proxyAmount",
+		a.type AS "type",
+		a.bid_time AS "bidTime",
+		a.share_openid AS "shareOpenid",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="myTransactionsBuyInfoColumns">
+		b.bid_amount AS "bidAmount",
+		b.domainname_id AS "domainnameId",
+		d.name AS "name",
+		d.wait_time AS "waitTime",
+		d.end_time AS "endTime",
+		d.status AS "status",
+		c.photo AS "photo"
+	</sql>
+
+	<sql id="myTransactionsSellInfoColumns">
+		max(b.bid_amount) AS "bidAmount",
+		d.id AS "domainnameId",
+		d.name AS "name",
+		d.wait_time AS "waitTime",
+		d.end_time AS "endTime",
+		d.status AS "status",
+		c.photo AS "photo"
+	</sql>
+	
+	<sql id="bidClientColumns">
+		a.id as "bidhistoryId",
+		c.id as "domainId",
+		c.name as "domainName",
+		c.status as "domainStatus",
+		b.id as "clientId",
+		b.dyid as "dyid",
+		a.bid_amount as "bidAmount",
+		a.proxy_amount as "proxyAmount",
+		a.share_openid AS "shareOpenid",
+		b.nickname as "nickname",
+		b.photo as "photo",
+		date_format(a.bid_time, '%y-%m-%d %H:%i:%s') as "bidTime",
+		a.type as "type",
+		date_format(c.end_time, '%y-%m-%d %H:%i:%s') as "endTime"
+	</sql>
+	
+	<sql id="dyBidhistoryJoins">
+	</sql>
+    
+	<select id="get" resultType="DyBidhistory">
+		SELECT 
+			<include refid="dyBidhistoryColumns"/>
+		FROM dy_bidhistory a
+		<include refid="dyBidhistoryJoins"/>
+		WHERE a.id = #{id}
+		AND a.del_flag = 0
+	</select>
+	
+	<select id="findSecondHighList" resultType="BidCashInfo">
+		SELECT
+			  b.id as "secondClientId",
+			  b.name as "secondClientName",
+			  b.nickname as "secondClientNickname"
+		FROM dy_bidhistory a,
+			 dy_client b
+		<where>
+			    a.domainname_id = #{0}
+			AND a.client_id = b.id
+			AND a.del_flag = 0
+			AND b.del_flag = 0
+			ORDER BY a.bid_amount DESC,a.proxy_amount DESC
+			LIMIT 2
+		</where>
+	</select>
+	
+	<select id="findList" resultType="DyBidhistory">
+		SELECT 
+			<include refid="dyBidhistoryColumns"/>
+		FROM dy_bidhistory a
+		<include refid="dyBidhistoryJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="domainnameId != null and domainnameId != ''">
+				AND a.domainname_id = #{domainnameId}
+			</if>
+			<if test="clientId != null and clientId != ''">
+				AND a.client_id = #{clientId}
+			</if>
+			<if test="bidAmount != null and bidAmount != ''">
+				AND a.bid_amount = #{bidAmount}
+			</if>
+			<if test="proxyAmount != null and proxyAmount != ''">
+				AND a.proxy_amount = #{proxyAmount}
+			</if>
+			<if test="type != null and type != ''">
+				AND a.type = #{type}
+			</if>
+			<if test="bidTime != null and bidTime != ''">
+				AND a.bid_time = #{bidTime}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.bid_amount DESC,a.proxy_amount DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="DyBidhistory">
+		SELECT 
+			<include refid="dyBidhistoryColumns"/>
+		FROM dy_bidhistory a
+		<include refid="dyBidhistoryJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findListForAmounter" resultType="BidClient">
+		SELECT
+			<include refid="bidClientColumns"/>
+		FROM dy_bidhistory a
+		LEFT JOIN dy_client b on a.client_id = b.id and b.del_flag = 0
+		LEFT JOIN dy_domainname c on a.domainname_id = c.id and c.del_flag = 0
+		WHERE
+			a.domainname_id = #{0}
+			AND a.id != #{1}
+			AND a.del_flag = 0
+			AND a.bid_amount > (select bid_amount from dy_bidhistory where id = #{1})
+		ORDER BY a.bid_amount desc
+	</select>
+	
+	<select id="customizedFindList" resultType="BidClient">
+		SELECT
+			<include refid="bidClientColumns"/>
+		FROM dy_bidhistory a
+		LEFT JOIN dy_client b on a.client_id = b.id and b.del_flag = 0
+		LEFT JOIN dy_domainname c on a.domainname_id = c.id and c.del_flag = 0
+		WHERE
+		a.del_flag = 0
+		AND a.domainname_id = #{domainId}
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY a.bid_amount desc, a.proxy_amount desc
+			</when>
+			<otherwise>
+				ORDER BY a.bid_time desc
+			</otherwise>
+		</choose>
+	</select>
+		
+	<select id="bidhistoryList" resultType="BidClient">
+		SELECT
+			<include refid="bidClientColumns"/>
+		FROM dy_bidhistory a,
+			 dy_client b,
+			 dy_domainname c
+		<where>
+			a.del_flag = 0
+			and b.del_flag = 0
+			and a.domainname_id = c.id
+			and a.client_id = b.id
+			and a.domainname_id = #{domainId}
+			<if test="type != null and type != ''">
+				AND a.type = #{type}
+			</if>
+			<if test="clientId != null and clientId != ''">
+				AND a.client_id = #{clientId}
+			</if>
+			<if test="dyid != null and dyid != ''">
+				AND b.dyid = #{dyid}
+			</if>
+			<if test="bidAmount != null and bidAmount != ''">
+				AND a.bid_amount = #{bidAmount}
+			</if>
+			<if test="bidhistoryId != null and bidhistoryId != ''">
+				AND a.id = #{bidhistoryId}
+			</if>
+		</where>
+			ORDER BY a.bid_amount desc, a.proxy_amount desc
+	</select>		
+		
+	<select id="getMaxAmountById" resultType="Long">
+		SELECT
+			bid_amount
+		FROM 
+			dy_bidhistory a
+			/*
+			(SELECT k.* 
+					FROM (
+						select * from dy_bidhistory 
+						where del_flag = '0' 
+						order by bid_amount desc ,proxy_amount desc 
+						) k 
+					GROUP BY k.domainname_id
+			 ) a
+			 */
+		<where>
+			a.domainname_id = #{domainId}
+			AND a.del_flag = 0
+		</where>
+			order by bid_amount desc ,proxy_amount desc 
+			LIMIT 1
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO dy_bidhistory(
+			id,
+			domainname_id,
+			client_id,
+			bid_amount,
+			proxy_amount,
+			type,
+			bid_time,
+			share_openid,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{domainnameId},
+			#{clientId},
+			#{bidAmount},
+			#{proxyAmount},
+			#{type},
+			#{bidTime},
+			#{shareOpenid},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE dy_bidhistory SET 	
+			domainname_id = #{domainnameId},
+			client_id = #{clientId},
+			bid_amount = #{bidAmount},
+			proxy_amount = #{proxyAmount},
+			type = #{type},
+			bid_time = #{bidTime},
+			share_openid = #{shareOpenid},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+		AND del_flag = 0
+	</update>
+	
+	<update id="delete">
+		UPDATE dy_bidhistory SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+	<select id="getMaxBidAmount" resultType="DyBidhistory">
+		SELECT 
+			<include refid="dyBidhistoryColumns"/>
+		FROM dy_bidhistory a
+		<include refid="dyBidhistoryJoins"/>
+		WHERE a.domainname_id = #{domainId}
+		AND a.del_flag = 0
+		ORDER BY a.bid_amount DESC, a.proxy_amount desc LIMIT 1
+	</select>
+	
+	<select id="myTransactionsBuyInfo" resultType="Map">
+		SELECT 
+		<include refid="myTransactionsBuyInfoColumns"/>
+		FROM dy_bidhistory b,dy_domainname d LEFT JOIN dy_client c ON d.client_id = c.id and c.del_flag = 0 and d.del_flag = 0
+		WHERE d.status like #{status}
+		<if test="status == '1_'">
+			and b.client_id = #{clientId}
+			and d.status &lt;&gt; '15'
+		</if>
+		<if test="status == '15'">
+			AND b.client_id = #{clientId}
+			AND d.status = #{status}
+		</if>
+		<if test="status == '2_'">
+			AND b.client_id = #{clientId}
+		</if>
+		AND b.domainname_id = d.id
+		AND b.del_flag = 0
+		AND EXISTS (
+			SELECT domainname_id, bid_amount,client_id
+			FROM (
+					SELECT k.*
+					FROM (select * from dy_bidhistory where del_flag = '0' order by bid_amount desc ,proxy_amount desc) k
+					GROUP BY k.domainname_id) t
+			WHERE b.domainname_id = t.domainname_id AND b.client_id = t.client_id AND b.bid_amount = t.bid_amount AND b.client_id = t.client_id)
+		<if test="status == '03'">
+			AND EXISTS (
+				SELECT domainname_id
+				FROM dy_bidhistory t
+				WHERE b.domainname_id = t.domainname_id	and t.client_id = #{clientId})
+		</if>
+		ORDER BY b.bid_amount
+	</select>
+	<select id="myTransactionsSellInfo" resultType="Map">
+		SELECT 
+		<include refid="myTransactionsSellInfoColumns"/>
+		FROM dy_client c , dy_domainname d  LEFT JOIN dy_bidhistory b  ON d.id = b.domainname_id and d.del_flag = 0 and b.del_flag = 0
+		WHERE d.status like #{status} 
+		<if test="status == '1_'">
+			and d.status &lt;&gt; '15'
+		</if>
+		<if test="status == '15'">
+			and d.status = #{status}
+		</if>
+		and c.del_flag = 0
+		and d.client_id=#{clientId}
+		AND d.client_id = c.id
+		GROUP BY d.id
+	</select>
+	
+	<update id="updateProxyAmountById">
+		UPDATE dy_bidhistory SET 	
+			proxy_amount = #{1},
+			update_date = NOW()
+		WHERE id = #{0}
+		and del_flag = 0
+	</update>
+	<select id="domainnameBuyerAndSeller" resultType="TransactionInformation">
+		SELECT
+			d.id AS domainnameId,
+			d.client_id As sellerId,
+			b.client_id As buyerId,
+			b.bid_amount As bidAmount,
+			b.proxy_amount As proxyAmount
+		FROM dy_domainname d ,dy_bidhistory  b
+		WHERE d.status = #{status}
+		<if test="domainnameId != '' and domainnameId !=null ">
+			and d.id = #{domainnameId}
+		</if>
+		AND d.wait_time &lt;= NOW()
+		AND d.del_flag = 0
+		AND b.del_flag = 0
+		AND d.id = b.domainname_id
+		AND EXISTS (
+				SELECT domainname_id, bid_amount,client_id
+				FROM (
+					SELECT k.*
+					FROM (select * from dy_bidhistory where del_flag = '0' order by bid_amount desc ,proxy_amount desc) k
+					GROUP BY k.domainname_id) t
+				WHERE b.domainname_id = t.domainname_id AND b.bid_amount = t.bid_amount AND b.client_id = t.client_id)
+	</select>
+	
+	<select id="getSuccessfulBidder" resultType="DyBidhistory">
+		SELECT
+			<include refid="dyBidhistoryColumns"/>
+		FROM dy_bidhistory a
+		WHERE a.domainname_id = #{domainnameId}
+		AND a.del_flag = 0
+		AND EXISTS (
+				SELECT domainname_id, bid_amount,client_id
+				FROM (
+					SELECT k.*
+					FROM (select * from dy_bidhistory where del_flag = '0' order by bid_amount desc ,proxy_amount desc) k
+					GROUP BY k.domainname_id) t
+				WHERE a.domainname_id = t.domainname_id AND a.bid_amount = t.bid_amount AND a.client_id = t.client_id)
+	</select>
+</mapper>
