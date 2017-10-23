@@ -1,0 +1,15 @@
+1.git下载
+32bit链接：http://pan.baidu.com/s/1bpAlWYj 密码：u0ih
+64bit链接：http://pan.baidu.com/s/1bpbadhP 密码：vv9g
+2.git安装配置地址：http://www.cnblogs.com/ximiaomiao/p/7140456.html
+3. 
+全局配置中设置一下两行
+git config --global user.name "water"
+git config --global user.email "cyyyw01002001@sina.com"
+4.本地代码推送远程
+git remote add origin git@github.com:GSSB123/GSSB.git
+（如果提示已存在请输入： git remote set-url origin git@github.com:GSSB123/GSSB.git）
+5.推送命令
+git add XXX
+git commit -m "此处输入日期或者其他名字"
+git push -u origin master
