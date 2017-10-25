@@ -19,8 +19,8 @@
 			${article.title}
 		</div>
 		<div id="article-time" class="m-t-5">
-			<span class="time"><fmt:formatDate value="${article.createDate}" pattern="yyyy-MM-dd"/> 拍域名</span>
-			<a href="${pageContext.request.contextPath}/domainname/error.html">拍域名</a>
+			<span class="time"><fmt:formatDate value="${article.createDate}" pattern="yyyy-MM-dd"/> 米乐拍卖</span>
+			<a href="${pageContext.request.contextPath}/domainname/error.html">米乐拍卖</a>
 		</div>
 		<div id="article-content" class="m-t-5">
 			${article.content}

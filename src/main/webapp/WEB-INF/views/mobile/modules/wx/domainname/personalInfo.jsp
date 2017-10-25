@@ -23,6 +23,7 @@
 								<h4 class="ui-nowrap title-value">{{datas.userinfo.dyid}}</h4>
 							</div>
 						</li>
+						<%-- 
 						<li class="ui-border-t">
 							<div class="ui-list-info">
 								<h4 class="ui-nowrap title-key">昵称</h4>
@@ -31,6 +32,7 @@
 								<h4 class="ui-nowrap title-value">{{datas.userinfo.nickname}}</h4>
 							</div>
 						</li>
+						
 						<li class="ui-border-t" ms-if="datas.userinfo.authenticationMark==1 || datas.userinfo.authenticationMark==2">
 							<div class="ui-list-info">
 								<h4 class="ui-nowrap title-key">姓名</h4>
@@ -51,6 +53,7 @@
 								</h4>
 							</div>
 						</li>
+						--%>
 						<li class="ui-border-t" ms-click="linkToChangePhone">
 							<div class="ui-list-info">
 								<h4 class="ui-nowrap title-key">手机</h4>
@@ -63,7 +66,8 @@
 								</h4>
 							</div>
 						</li>
-						<li class="ui-border-t" ms-if="!datas.userinfo.email || datas.userinfo.emailFlag==''" ms-click="addEmail">
+						<%--
+						<li class="ui-border-t" ms-if="!datas.userinfo.email || datas.userinfo.emailFlag=='' || datas.userinfo.emailFlag=='2'" ms-click="addEmail">
 							<div class="ui-list-info">
 								<h4 class="ui-nowrap title-key">Email</h4>
 							</div>
@@ -103,33 +107,35 @@
 									{{datas.userinfo.email}}<i	class="ui-icon-warn-lg personal-information-i"></i>
 								</h4>
 							</div>
-						</li>
+						</li> --%>
 						<li class="ui-border-t" ms-click="changeWx">
 							<div class="ui-list-info">
 								<h4 class="ui-nowrap title-key">微信</h4>
 							</div>
 							<div>
 								<h4 class="ui-nowrap title-value">
-									<span ms-if="datas.userinfo.wx || datas.userinfo.qq">{{datas.userinfo.wx}}</span>
-									<span ms-if="!(datas.userinfo.wx || datas.userinfo.qq)" class="iconfont icon-yuandian ui-txt-warning" style="font-size: 10px;" ></span>
+									<span ms-if="datas.userinfo.wx">{{datas.userinfo.wx}}</span>
+									<span ms-if="!(datas.userinfo.wx)" class="iconfont icon-yuandian ui-txt-warning" style="font-size: 10px;" ></span>
 									
 									<i	class="ui-icon-arrow personal-information-i"></i>
 								</h4>
 							</div>
 						</li>
+						<%--
 						<li class="ui-border-t" ms-click="changeQQ">
 							<div class="ui-list-info">
 								<h4 class="ui-nowrap title-key">QQ</h4>
 							</div>
 							<div>
 								<h4 class="ui-nowrap title-value" >
-									<span ms-if="datas.userinfo.wx || datas.userinfo.qq">{{datas.userinfo.qq}}</span>
-									<span ms-if="!(datas.userinfo.wx || datas.userinfo.qq)" class="iconfont icon-yuandian ui-txt-warning" style="font-size: 10px;" ></span>
-									
+									<span ms-if="datas.userinfo.qq">{{datas.userinfo.qq}}</span>
+									<span ms-if="!(datas.userinfo.qq)" class="iconfont icon-yuandian ui-txt-warning" style="font-size: 10px;" ></span>
+									 
 									<i	class="ui-icon-arrow personal-information-i"></i>
 								</h4>
 							</div>
-						</li>
+						</li>--%>
+						<%--
 						<li class="ui-border-t" ms-if="datas.userinfo.authenticationMark==2" ms-click="viewIDcard">
 							<div class="ui-list-info">
 								<h4 class="ui-nowrap title-key">身份证</h4>
@@ -176,6 +182,21 @@
 								<h4 class="ui-nowrap title-value" >
 									<span ms-if="!datas.userinfo.defaultIncomeExpense" class="iconfont icon-yuandian ui-txt-warning" style="font-size: 10px;" ></span>
 									{{datas.userinfo.defaultIncomeExpense}}<i class="ui-icon-arrow personal-information-i"></i>
+								</h4>
+							</div>
+						</li>
+						--%>
+						<li class="ui-border-t" ms-click="open_identity_bank_info_dialog">
+							<div class="ui-list-info">
+								<h4 class="ui-nowrap title-key">身份银行信息</h4>
+							</div>
+							<div>
+								<h4 class="ui-nowrap title-value" >
+									<span ms-if="!datas.userinfo.defaultIncomeExpense || !datas.userinfo.bankName || !datas.userinfo.bankLocation || datas.userinfo.authenticationMark==0" class="iconfont icon-yuandian ui-txt-warning" style="font-size: 10px;" ></span>
+									<span ms-if="datas.userinfo.authenticationMark==0 && datas.userinfo.idcardNumber">身份认证失败</span>
+									<span ms-if="datas.userinfo.authenticationMark==1">身份已认证</span>
+									<span ms-if="datas.userinfo.authenticationMark==2">身份认证中</span>
+									<i class="ui-icon-arrow personal-information-i"></i>
 								</h4>
 							</div>
 						</li>
@@ -258,6 +279,7 @@
 					</div>
 				</div>
 			</div>
+			<%--
 			<!-- 身份认证 -->
 			<!-- 认证 -->
 			<div class="ui-dialog dialog-font" id="changeIDcard">
@@ -271,11 +293,11 @@
 							<ul class="ui-list ui-list-text ui-border-tb cashflow-ul">
 								<label>身份证号：</label>
 								<div class="ui-form-item ui-border-b p-l-0">
-									 <input class="p-l-0"type="text" name="IDcardNumber" id="IDcardNumber"
-										ms-duplex="datas.temp.idcardNumber" placeholder="我们将保护您的隐私安全"
+									 <input class="p-l-0"type="text" name="idcardNumber" id="idcardNumber"
+										ms-duplex="datas.temp.IDcardNumber" placeholder="我们将保护您的隐私安全"
 										style="width: 100%;"> <i
 										class="ui-icon-close"
-										ms-class-1="hidden:datas.temp.IDcardNumber.length==0"
+										ms-class-1="hidden:datas.temp.idcardNumber.length==0"
 										ms-click="clearIDcardNumberInput"> </i>
 								</div>
 								<label style="text-align: left;">上传身份证的正反面照片</label>
@@ -314,7 +336,7 @@
 					</header>
 					<div class="ui-dialog-bd">
 						<div class="ui-form ui-border-t">
-							<div ms-if="datas.userinfo.authenticationMark == '2'">身份证号： {{datas.userinfo.idcardNumber}}</div>
+							<div ms-if="datas.userinfo.authenticationMark == '2'">身份证号： {{datas.userinfo.IDcardNumber}}</div>
 							<ul class="ui-list ui-list-text ui-border-tb cashflow-ul">
 								<li class="ui-border-t">
 									<div class="ui-list-info" style="width: 50%;">
@@ -339,6 +361,7 @@
 					</div>
 				</div>
 			</div>
+			 
 			<!-- 修改姓名 -->
 			<div class="ui-dialog dialog-font" id="changeName">
 				<div class="ui-dialog-cnt" style="width: 90%;">
@@ -369,6 +392,7 @@
 					</div>
 				</div>
 			</div>
+			--%>
 
 			<!-- 查看经纪人 -->
 			<div class="ui-dialog dialog-font" id="viewBroker">
@@ -506,6 +530,7 @@
 					</div>
 				</div>
 			</div>
+			<%-- 
 			<!-- 银行信息弹窗：默认收支方式 -->
 			<div class="ui-dialog dialog-font" id="change-default-income-expense">
 				<div class="ui-dialog-cnt" style="width: 90%;">
@@ -545,6 +570,7 @@
 					</div>
 				</div>
 			</div>
+			--%>
 			<!-- 修改默认收支方式的支付密码弹窗 -->
 			<div class="ui-dialog dialog-font" id="verificationPayPasswordForDIE">
 				<div class="ui-dialog-cnt" style="width: 90%;">
@@ -561,9 +587,84 @@
 						</div>
 						<div class="ui-btn-wrap" style="padding: 15px 0px;" data-scroll='true'>
 							<div>
-							<button id="zhifu" class="ui-btn-lg ui-btn-primary" ms-click="confirmChangeDefaultIncomeExpense">确定</button>
+							<button id="zhifu" class="ui-btn-lg ui-btn-primary" ms-click="confirmChangeIdentityBankInfo">确定</button>
 							<br>
 							<button	class="select ui-btn-lg ui-btn-primary" id="dialogButton" ms-click="clearForDIE">取消</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<%--身份银行信息修改弹窗 --%>
+			<div class="ui-dialog dialog-font" style="position: absolute; min-height: 450px;" id="identity-bank-info">
+				<div class="ui-dialog-cnt" style="width: 90%;">
+					<header class="ui-dialog-hd ui-border-b">
+						<h3>认证身份银行信息</h3>
+					</header>
+					<div class="ui-dialog-bd p-t-5">
+						<div class="guide">（请输入真实的信息）</div>
+						<div class="ui-form ui-border-t">
+							<div class="ui-form-item ui-border-b" ms-if="datas.userinfo.authenticationMark == 0">
+								<label>姓名：</label> <input type="text" name="name" id="name"
+									ms-duplex="datas.temp.name" placeholder="我们将保护您的隐私安全"
+									style="padding-left: 60px; width: 100%;"> <i
+									class="ui-icon-close"
+									ms-class-1="hidden:datas.temp.name.length==0"
+									ms-click="clearNameInput"> </i>
+							</div>
+							<div class="ui-form-item ui-border-b" ms-if="datas.userinfo.authenticationMark != 0">
+								<label>姓名：</label> 
+								<input type="text" ms-attr-value="datas.userinfo.name"
+									style="padding-left: 60px; width: 100%;" readonly>
+							</div>
+							<div class="ui-form-item ui-border-b" ms-if="datas.userinfo.authenticationMark == 0">
+								<label>身份证：</label>
+								<input type="text" name="idcardNumber" id="idcardNumber"
+										ms-duplex="datas.temp.idcardNumber" placeholder="我们将保护您的隐私安全"
+										style="padding-left: 60px;width: 100%;"> <i
+										class="ui-icon-close"
+										ms-class-1="hidden:datas.temp.idcardNumber.length==0"
+										ms-click="clearIDcardNumberInput"> </i>
+							</div>
+							<div class="ui-form-item ui-border-b" ms-if="datas.userinfo.authenticationMark != 0">
+								<label>身份证：</label> 
+								<input type="text" ms-attr-value="tomark(datas.userinfo.idcardNumber)"
+									style="padding-left: 60px; width: 100%;" readonly>
+							</div>
+							<div class="ui-form-item ui-border-b">
+								<label>卡号：</label> 
+								<input type="tel"	name="default_income_expense" id="default_income_expense"
+									ms-duplex="datas.temp.defaultIncomeExpense"	 placeholder="我们将保护您的隐私安全"
+									style="padding-left: 60px; width: 100%;"> <i
+									class="ui-icon-close"
+									ms-class-1="hidden:datas.temp.defaultIncomeExpense.length==0"
+									ms-click="clearBankCardNumberInput"> </i>
+							</div>
+							<div class="ui-form-item ui-border-b">
+								<label>开户行：</label> 
+								<input type="text"	name="bankName" id="bankName"
+									ms-duplex="datas.temp.bankName"	 placeholder="我们将保护您的隐私安全"
+									style="padding-left: 60px; width: 100%;"> <i
+									class="ui-icon-close"
+									ms-class-1="hidden:datas.temp.bankName.length==0"
+									ms-click="clearBankNameInput"> </i>
+							</div>
+							<div class="ui-form-item ui-border-b bank-location">
+								<label style="width: 120px">银行所在省市：</label> 
+								<input type="text"	name="bankLocation" id="bankLocation"
+									ms-duplex="datas.temp.bankLocation"	 placeholder="我们将保护您的隐私安全"
+									style="padding-left: 110px; width: 100%;"> <i
+									class="ui-icon-close"
+									ms-class-1="hidden:datas.temp.bankLocation.length==0"
+									ms-click="clearBankLocationInput"> </i>
+							</div>
+						</div>
+						<div class="ui-btn-wrap" style="padding: 15px 0px;" data-scroll='true'>
+							<div>
+							<button class="ui-btn-lg ui-btn-primary"
+								ms-click="openPayPassword">确定</button>
+							<br>
+							<button	class="ui-btn-lg ui-btn-primary" ms-click="cancelChangeIdentityBankInfo">取消</button>
 							</div>
 						</div>
 					</div>

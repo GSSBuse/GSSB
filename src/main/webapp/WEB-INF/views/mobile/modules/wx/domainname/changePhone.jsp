@@ -38,7 +38,7 @@
 						<h4 class="ui-title">我们将发送验证码到：{{datas.temp.mobile}}</h4>
 						<div class="ui-btn-wrap" style="padding: 15px 0px;" data-scroll='true'>
 							<div>
-							<a href="#pageVerificationInput" class="ui-btn-lg ui-btn-primary" ms-click="changeMobileConfirm">确定</a>
+							<a class="ui-btn-lg ui-btn-primary" ms-click="changeMobileConfirm">确定</a>
 							<br>
 							<button type="button" data-role="button"
 								class="select ui-btn-lg ui-btn-primary" id="dialogButton">取消</button>

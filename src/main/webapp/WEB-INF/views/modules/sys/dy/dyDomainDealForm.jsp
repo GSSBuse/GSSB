@@ -86,6 +86,12 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<label class="control-label">保留价：</label>
+			<div class="controls">
+				<form:input path="reservePrice" readonly="true" htmlEscape="false"/>
+			</div>
+		</div>
+		<div class="control-group">
 			<label class="control-label">成交金额：</label>
 			<div class="controls">
 				<form:input path="bidAmount" readonly="true" htmlEscape="false"/>
@@ -153,45 +159,46 @@
 			<label class="control-label">状态：</label>
 			<div class="controls">
 				<c:if test="${bidCashInfo.status eq '11'}">
-					<select name="status">
-						<option value="11" selected="selected">待买家付款</option>
-						<option value="21" >买家违约</option>
-						<option value="12" >待卖家转移域名</option>
+					<select name="status" style="width: 210px;">
+						<option value="11" selected="selected">1.待买家付款</option>
+						<option value="12" >2.买家已付款，待卖家转移域名</option>
+						<option value="21" >5.买家违约</option>
+						<option value="22" >6.卖家违约</option>
 					</select>
 				</c:if>
 				<c:if test="${bidCashInfo.status eq '12'}">
-					<select name="status">
-						<option value="12" selected="selected">待卖家转移域名</option>
-						<option value="13" >待买家确认</option>
-						<option value="22" >卖家违约</option>
-						<option value="21" >买家违约</option>
+					<select name="status" style="width: 210px;">
+						<option value="12" selected="selected">2.买家已付款，待卖家转移域名</option>
+						<option value="13" >3.卖家已转移域名，待买家确认</option>
+						<option value="21" >5.买家违约</option>
+						<option value="22" >6.卖家违约</option>
 					</select>
 				</c:if>
 				<c:if test="${bidCashInfo.status eq '13'}">
-					<select name="status">
-						<option value="13" selected="selected">待买家确认</option>
-						<option value="14" >待经纪人确认交易完成</option>
-						<option value="22" >卖家违约</option>
-						<option value="21" >买家违约</option>
+					<select name="status" style="width: 210px;">
+						<option value="13" selected="selected">3.卖家已转移域名，待买家确认</option>
+						<option value="14" >4.买家已确认，等待交易完成</option>
+						<option value="21" >5.买家违约</option>
+						<option value="22" >6.卖家违约</option>
 					</select>
 				</c:if>
 				<c:if test="${bidCashInfo.status eq '14'}">
-					<select name="status">
-						<option value="14" selected="selected">待经纪人确认交易完成</option>
-						<option value="15" >交易结束</option>
+					<select name="status" style="width: 210px;">
+						<option value="14" selected="selected">4.买家已确认，等待交易完成</option>
+						<option value="15" >f.交易结束</option>
 					</select>
 				</c:if>
 				<c:if test="${bidCashInfo.status eq '15'}">
-					交易完成
+					f.交易完成
 				</c:if>
 				<c:if test="${bidCashInfo.status eq '21'}">
-					买家违约
+					5.买家违约
 				</c:if>
 				<c:if test="${bidCashInfo.status eq '22'}">
-					卖家违约
+					6.卖家违约
 				</c:if>
 				<c:if test="${bidCashInfo.status eq '23'}">
-					流拍或终止
+					e.流拍或终止
 				</c:if>
 			</div>
 		</div>

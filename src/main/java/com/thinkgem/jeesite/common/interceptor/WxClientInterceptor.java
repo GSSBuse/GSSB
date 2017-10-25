@@ -2,6 +2,7 @@ package com.thinkgem.jeesite.common.interceptor;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import com.thinkgem.jeesite.common.define.Constant;
+import com.thinkgem.jeesite.common.utils.DateUtils;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.common.utils.UserAgentUtils;
 import com.thinkgem.jeesite.common.wx.WeChat;
@@ -53,11 +55,15 @@ public class WxClientInterceptor implements HandlerInterceptor, Constant{
 	@Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		// 资源类访问跳过 Ajax请求跳过
+//		if (!(handler instanceof ResourceHttpRequestHandler) && WeChat.isWeiXin(request)) {
+//			logger.debug("request begin: " + request.getRequestURL() + "?" + request.getQueryString());
+//			logger.debug("open id: " + request.getSession().getAttribute("weixin_openid"));
+//		}
 		if (!(handler instanceof ResourceHttpRequestHandler) && !WeChat.isAjax(request)) {
 
 			UserAgent ua = UserAgentUtils.getUserAgent(request);
 			request.setAttribute("isApple",ua.getOperatingSystem().getName().contains("iPhone"));
-			logger.debug(ua + ":" + ua.getOperatingSystem());
+			//logger.debug(ua + ":" + ua.getOperatingSystem());
 			
 			if (ignore(request, response)) {
 				return true;
@@ -66,6 +72,7 @@ public class WxClientInterceptor implements HandlerInterceptor, Constant{
 			if (DySysUtils.getCurrentDyClient() == null) {
 				// 微信访问时更新用户信息并缓存
 				if (WeChat.isWeiXin(request)) {
+					
 					// 获取用户信息，并更新到数据库
 					String openid = (String)request.getSession().getAttribute("weixin_openid");
 					
@@ -87,6 +94,10 @@ public class WxClientInterceptor implements HandlerInterceptor, Constant{
 									String responseDate = oauth.getToken(code);
 									Object jsonObject = Json.fromJson(responseDate);
 									openid = (String)Mapl.cell(jsonObject, "openid");
+									request.getSession().setAttribute("weixin_openid", openid);
+									if (StringUtils.isEmpty(openid)) {
+										logger.debug("=======获取用户OpenId失败=======" + responseDate);
+									}
 								} catch (Exception e) {
 									logger.debug("=======获取用户OpenId失败=======" + e.getMessage());
 								}
@@ -97,60 +108,81 @@ public class WxClientInterceptor implements HandlerInterceptor, Constant{
 					DyClient dc = dyClientService.getByOpenid(openid);
 					if (dc != null && !"1".equals(dc.getSealFlag())) {
 						try {
-							UserInfo userInfo = User.getUserInfo(WeChat.getAccessToken(), openid);
-							if (StringUtils.isNotEmpty(userInfo.getNickname())) {
-								dc.setNickname(userInfo.getNickname());
+							Date date = new Date();
+							date = DateUtils.setSeconds(date, 0);
+							date = DateUtils.setMinutes(date, 0);
+							date = DateUtils.setHours(date, 0);
+							
+							// 如果最后一次更新是在前一天。则更新个人信息
+							if (dc.getUpdateDate() == null || dc.getUpdateDate().compareTo(date) < 0) {
+								UserInfo userInfo = User.getUserInfo(WeChat.getAccessToken(), openid);
+								if (StringUtils.isNotEmpty(userInfo.getNickname())) {
+									dc.setNickname(userInfo.getNickname());
+								}
+								if (StringUtils.isNotEmpty(userInfo.getHeadimgurl())) {
+									String headImg = userInfo.getHeadimgurl();
+									if (headImg != null && headImg.lastIndexOf('/') < headImg.length()-1) {
+										headImg = headImg.substring(0, headImg.lastIndexOf('/')+1);
+									}
+									dc.setPhoto(headImg);
+								}
+							
 							}
-							if (StringUtils.isNotEmpty(userInfo.getHeadimgurl())) {
+							if (dc.getAuthenticationMark() == null) {
+								dc.setAuthenticationMark(AUTHENTICATION_MARK_0);
+							}
+							dyClientService.save(dc);
+						} catch (Exception e) {
+							logger.debug("=======同步用户信息失败=======", e);
+						}
+						UserUtils.getSession().setAttribute(Constant.SESSION_KEY_CURRENT_CLIENT, dc);
+						
+						return true;
+					}
+					if (dc == null && !StringUtils.isEmpty(openid)) {
+						try {
+							UserInfo userInfo = User.getUserInfo(WeChat.getAccessToken(), openid);
+							
+							if (StringUtils.isNotEmpty(userInfo.getNickname())) {
+								com.thinkgem.jeesite.modules.sys.entity.User broker = null;
+								dc = new DyClient();
+								dc.setEmailFlag(Constant.EMAIL_FLAG_2);
+								dc.setAuthenticationMark(AUTHENTICATION_MARK_0);
+								// 自动分配经纪人
+								broker = dyClientService.getRandomBroker();
+								dc.setBrokerId(broker.getId());
+								dc.setVip("0");
+								dc.setSealFlag("0");
+								dc.preInsert(broker);
+								dc.setIsNewRecord(true);
+								
+								dc.setNickname(userInfo.getNickname());
+								dc.setOpenid(openid);
 								String headImg = userInfo.getHeadimgurl();
 								if (headImg != null && headImg.lastIndexOf('/') < headImg.length()-1) {
 									headImg = headImg.substring(0, headImg.lastIndexOf('/')+1);
 								}
 								dc.setPhoto(headImg);
+								dc.setAvoidDeposit(SWITCH_OFF);
+								
+								dyClientService.save(dc);
+								
+								DyFinance finance = new DyFinance();
+								finance.setClientId(dc.getId());
+								finance.setAccountBalance(0L);
+								finance.setFreezeBalance(0L);
+								finance.preInsert(broker);
+								finance.setIsNewRecord(true);
+								
+								dyFinanceService.save(finance);
+								
+								UserUtils.getSession().setAttribute("current_dy_client", dc);
+
+								return true;
 							}
-						
-							dyClientService.save(dc);
-							UserUtils.getSession().setAttribute(Constant.SESSION_KEY_CURRENT_CLIENT, dc);
 						} catch (Exception e) {
-							logger.debug("=======同步用户信息失败=======" + e.getMessage());
+							logger.error("创建新用户失败： openid:"+openid, e);
 						}
-						
-						return true;
-					}
-					if (dc == null) {
-						com.thinkgem.jeesite.modules.sys.entity.User broker = null;
-						dc = new DyClient();
-						dc.setEmailFlag(Constant.EMAIL_FLAG_2);
-						// 自动分配经纪人
-						broker = dyClientService.getRandomBroker();
-						dc.setBrokerId(broker.getId());
-						dc.setVip("0");
-						dc.setSealFlag("0");
-						dc.preInsert(broker);
-						dc.setIsNewRecord(true);
-						
-						UserInfo userInfo = User.getUserInfo(WeChat.getAccessToken(), openid);
-						dc.setNickname(userInfo.getNickname());
-						dc.setOpenid(openid);
-						String headImg = userInfo.getHeadimgurl();
-						if (headImg != null && headImg.lastIndexOf('/') < headImg.length()-1) {
-							headImg = headImg.substring(0, headImg.lastIndexOf('/')+1);
-						}
-						dc.setPhoto(headImg);
-						dc.setAvoidDeposit(SWITCH_OFF);
-						
-						dyClientService.save(dc);
-						
-						DyFinance finance = new DyFinance();
-						finance.setClientId(dc.getId());
-						finance.setAccountBalance(0L);
-						finance.setFreezeBalance(0L);
-						finance.preInsert(broker);
-						finance.setIsNewRecord(true);
-						
-						dyFinanceService.save(finance);
-						
-						UserUtils.getSession().setAttribute("current_dy_client", dc);
 					}
 				}
 				return judgeCanBeAccessed(request, response);
@@ -196,8 +228,10 @@ public class WxClientInterceptor implements HandlerInterceptor, Constant{
 	@Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
-	    // TODO Auto-generated method stub
-	    
+		if (!(handler instanceof ResourceHttpRequestHandler) && UserAgentUtils.isMobileOrTablet(request)) {
+			logger.debug("request end: " + request.getRequestURL() + "?" + request.getQueryString());
+			logger.debug("open id: " + request.getSession().getAttribute("weixin_openid"));
+		}
     }
 	
 	private boolean ignore(HttpServletRequest request, HttpServletResponse response) {

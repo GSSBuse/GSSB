@@ -1359,6 +1359,13 @@ input[type=number]::-webkit-inner-spin-button {
     background-color: rgba(0,0,0,0.3);
 }
 
+.bigphoto>img{
+    width: 90%;
+    max-height: 80%;
+    text-align: center;
+    margin-top: 30%
+}
+
 .bigphoto .back-white{
 	width: 90%;
 	max-height: 80%;
@@ -1373,4 +1380,15 @@ input[type=number]::-webkit-inner-spin-button {
 }
 .att-list.expand-attendtion {
 	max-height: 64px;
+}
+
+#personalInfo #identity-bank-info .ui-form-item label{
+	width: auto;
+}
+#personalInfo #identity-bank-info .bank-location label:not(.ui-switch):not(.ui-checkbox):not(.ui-checkbox-s):not(.ui-radio) {
+	width: 96px;
+}
+#identity-bank-info {
+	/*position: absolute;*/
+	/*overflow-y: scroll;*/
 }

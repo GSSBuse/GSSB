@@ -1,7 +1,6 @@
 package com.thinkgem.jeesite.modules.paimai.front.web;
 
 import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -16,21 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.thinkgem.jeesite.common.bean.AjaxResult;
 import com.thinkgem.jeesite.common.define.Constant;
 import com.thinkgem.jeesite.common.persistence.Page;
-import com.thinkgem.jeesite.modules.sys.dao.UserDao;
-import com.thinkgem.jeesite.modules.sys.dao.dy.DyDomainnameDao;
 import com.thinkgem.jeesite.modules.sys.entity.dy.DyCashFlow;
 import com.thinkgem.jeesite.modules.sys.entity.dy.DyClient;
 import com.thinkgem.jeesite.modules.sys.entity.dy.DyFinance;
-import com.thinkgem.jeesite.modules.sys.service.dy.AuctionScheduleService;
-import com.thinkgem.jeesite.modules.sys.service.dy.DyAttentionService;
-import com.thinkgem.jeesite.modules.sys.service.dy.DyBidhistoryService;
-import com.thinkgem.jeesite.modules.sys.service.dy.DyBonusService;
 import com.thinkgem.jeesite.modules.sys.service.dy.DyCashFlowService;
 import com.thinkgem.jeesite.modules.sys.service.dy.DyClientService;
 import com.thinkgem.jeesite.modules.sys.service.dy.DyDomainnameService;
 import com.thinkgem.jeesite.modules.sys.service.dy.DyFinanceService;
-import com.thinkgem.jeesite.modules.sys.service.dy.DyNewsService;
-import com.thinkgem.jeesite.modules.sys.service.dy.DyWxpayResultService;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import com.thinkgem.jeesite.modules.wx.utils.DySysUtils;
 
@@ -213,13 +204,24 @@ public class FrontFinancialController implements Constant{
 			if (operate.equals("提现")) {
 				try {
 					//MD5加密原始密码
-					String payPasswordMD5 = DigestUtils.md5Hex(payPassword.toString());
-					if(payPasswordMD5.equals(u.getPayPassword())){
-						financeService.updateFreezeBalanceForRecharge(u, money,CASHFLOW_OPERATE_WITHDRAW);
+					int wxRechargeTotalMoney = 0;//计算历史微信充值总额
+					int wxWwithdrawalsTotalMoney = 0;//计算历史和已经提交的微信提现总额
+					wxRechargeTotalMoney = cashFlowService.rechargeTotalMoney(u.getId(), CASHFLOW_OPERATE_RECHARGE_ONLINE);
+					wxWwithdrawalsTotalMoney = cashFlowService.withdrawalsTotalMoney(u.getId(), CASHFLOW_OPERATE_RECHARGE_ONLINE);
+					
+					String remarks = null;
+					if(money <= (wxRechargeTotalMoney - wxWwithdrawalsTotalMoney)){
+						remarks = "微信提现";
 					}else{
-						AjaxResult ar = AjaxResult.makeWarn("安全密码错误");
-						return ar;
+						remarks = "线下提现";
 					}
+					if(remarks.equals("线下提现")){
+						//验证用户是否完善了个人信息的填写
+						if(!clientService.checkPersonalInfo(u)){
+							return AjaxResult.makeError("请先填写完整的个人信息");
+						}
+					}
+					financeService.updateFreezeBalanceForRecharge(u, money,CASHFLOW_OPERATE_WITHDRAW,remarks);
 				} catch (Exception e) {
 					throw e;
 				}

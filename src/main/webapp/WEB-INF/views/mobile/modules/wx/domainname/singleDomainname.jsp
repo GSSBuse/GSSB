@@ -18,7 +18,7 @@
 				<i ms-if="!datas.singlePage" class="ui-icon-return" onclick="history.back()"></i>
 				<h1></h1><a ms-click="linkToAllDomain" class="ui-btn">查看所有域名</a>
 			</header>
-			<section class="ui-container p-t-0_2">
+			<section class="ui-container p-t-0_2" ms-class="has-footer:!(datas.singlePage)">
 				<div class="ui-row p-r-5 p-l-5">
 					<!-- 域名详情循环显示开始 -->
 					<div ms-repeat-del="datas.domainList" class="ui-border-b" style="overflow: hidden;">
@@ -157,6 +157,11 @@
 							<div class="ui-row">
 								<div class="all-arrow">
 									<span class="ui-panel-subtitle m-l-0 bid-count">出价记录（{{del.bidCount}}）</span>
+									<span class="small-font red" ms-if="del.reservePrice && !del.proxyAmount && del.currAmount<del.reservePrice">未过保留价</span>
+									<span class="small-font green" ms-if="del.reservePrice && !del.proxyAmount && del.currAmount>=del.reservePrice">出价已达保留价</span>
+									<span class="small-font red" ms-if="del.reservePrice && del.proxyAmount && del.proxyAmount<del.reservePrice">代理价未过保留价</span>
+									<span class="small-font green" ms-if="del.reservePrice && del.proxyAmount && del.proxyAmount>=del.reservePrice">代理价已达保留价</span>
+									
 									<a href="#" ms-click="goBiddingList(del.id)"><span class="bid-count-all">全部</span></a>
 								</div>
 							</div>
@@ -201,7 +206,7 @@
 			</section>
 			<!-- 出价表单 -->
 			<div id="bidFormSingle" class="ui-dialog">
-				<div class="ui-dialog-cnt" ms-class-1="has-footer:(!datas.singlePage)" style="border-radius: 0px; width: 100%; position: fixed; bottom: 0;">
+				<div class="ui-dialog-cnt" style="border-radius: 0px; width: 100%; position: fixed; bottom: 0;">
 					<div class="ui-row-flex">
 						<div class="ui-col ui-col ui-flex ui-flex-align-center"><div class="p-l-10">当前价&nbsp;&nbsp;<span id="bidCurrentSingle" style="color: #576b95"></span>元</div></div>
 						<div class="ui-col ui-col ui-flex ui-flex-pack-end"><div class="iconfont icon-close center p-r-10"></div></div>
@@ -269,9 +274,9 @@
 							<div> 注：请在打款备注里留下您的米友号。</div>
 						</div>
 						<div class="ui-whitespace">
-							<h1>保证金：<span class="ui-txt-warning">￥ {{datas.tmp.deposit}}元</span></h1>
+							<h1>需充值：<span class="ui-txt-warning">￥ {{datas.tmp.charge}}元</span></h1>
 							<h3>继续参加本次拍卖需缴纳保证金{{datas.tmp.deposit}}元</h3>
-							<h3>帐户余额不足，请充值</h3>
+							<h3>帐户可用余额不足，请充值</h3>
 						</div>
 						<div class="ui-form ui-border-t">
 							<form action="#">
@@ -290,7 +295,7 @@
 							</form>
 						</div>
 						<ul class="ui-row ui-whitespace p-t-10">
-							<li><button class="ui-btn-lg ui-btn-primary m-b-10" ms-click="charge(datas.tmp.deposit)">安全支付</button></li>
+							<li><button class="ui-btn-lg ui-btn-primary m-b-10" ms-click="charge(datas.tmp.charge)">安全支付</button></li>
 						</ul>
 					</section>
 				</div>

@@ -4,7 +4,6 @@
 package com.thinkgem.jeesite.modules.sys.service.dy;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +16,17 @@ import com.thinkgem.jeesite.common.service.CrudService;
 import com.thinkgem.jeesite.common.service.ServiceException;
 import com.thinkgem.jeesite.common.wx.WeChat;
 import com.thinkgem.jeesite.common.wx.oauth.Message;
+import com.thinkgem.jeesite.modules.sys.dao.dy.DyCashFlowDao;
+import com.thinkgem.jeesite.modules.sys.dao.dy.DyClientDao;
+import com.thinkgem.jeesite.modules.sys.dao.dy.DyFinanceDao;
+import com.thinkgem.jeesite.modules.sys.dao.dy.DyPlatformFinanceDao;
+import com.thinkgem.jeesite.modules.sys.dao.dy.DyWxpayResultDao;
 import com.thinkgem.jeesite.modules.sys.entity.dy.DyCashFlow;
 import com.thinkgem.jeesite.modules.sys.entity.dy.DyClient;
 import com.thinkgem.jeesite.modules.sys.entity.dy.DyFinance;
 import com.thinkgem.jeesite.modules.sys.entity.dy.DyPlatformFinance;
 import com.thinkgem.jeesite.modules.sys.entity.dy.DyWxpayResult;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
-import com.thinkgem.jeesite.modules.sys.dao.dy.DyCashFlowDao;
-import com.thinkgem.jeesite.modules.sys.dao.dy.DyClientDao;
-import com.thinkgem.jeesite.modules.sys.dao.dy.DyFinanceDao;
-import com.thinkgem.jeesite.modules.sys.dao.dy.DyPlatformFinanceDao;
-import com.thinkgem.jeesite.modules.sys.dao.dy.DyWxpayResultDao;
 import com.thinkgem.jeesite.modules.wx.utils.DySysUtils;
 
 /**
@@ -109,6 +108,7 @@ public class DyWxpayResultService extends CrudService<DyWxpayResultDao, DyWxpayR
 			cashFlow.setAmountBalance(finance.getAccountBalance()+wxpayResult.getTotalFee());//充值后的余额
 			cashFlow.setOperateTime(wxpayResult.getTimeEnd());
 			cashFlow.setConfirmResult(CASHFLOW_COMFIRM_DONE);
+			cashFlow.setTransactionId(wxpayResult.getTransactionId());
 			// 设置id,create_by,create_date,update_by,update_date,del_flag,remarks
 			cashFlow.preInsert(UserUtils.get(client.getBrokerId()));
 			// 设置该实体为新记录

@@ -195,6 +195,7 @@ public class DyDomainnameController extends BaseController {
 					//待卖家转移域名
 					dyFinanceService.pay(dyClientService.get(bidCashInfo.getBuyClientId()), String.valueOf(bidCashInfo.getBidAmount()), bidCashInfo.getDomainId());
 				}else if(StringUtils.equals(Constant.DOMAIN_STATUS_13, dyDomainname.getStatus())){
+					//待买家确认
 					//设置操作限制时间
 					Calendar cal = Calendar.getInstance();
 					cal.setTime(new Date());
@@ -211,6 +212,7 @@ public class DyDomainnameController extends BaseController {
 					content = content.replace("{{waittime.DATA}}", bidCashInfo.getWaitTime());
 					message.SendNews(WeChat.getAccessToken(), bidCashInfo.getBuyOpenId(), title, content, dyDomainname.getId());
 				}else if(StringUtils.equals(Constant.DOMAIN_STATUS_14, dyDomainname.getStatus())){
+					//待经纪人确认交易完成
 					//设置操作限制时间
 					Calendar cal = Calendar.getInstance();
 					cal.setTime(new Date());

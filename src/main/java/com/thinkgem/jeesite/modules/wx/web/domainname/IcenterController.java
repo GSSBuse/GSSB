@@ -63,6 +63,7 @@ import com.thinkgem.jeesite.modules.sys.utils.SendEmail;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import com.thinkgem.jeesite.modules.wx.entity.domainname.ShareOrSecondBonus;
 import com.thinkgem.jeesite.modules.wx.utils.DySysUtils;
+import com.thinkgem.jeesite.modules.wx.utils.SmsSendUtils;
 
 /**
  * @author wufl.fnst
@@ -124,7 +125,7 @@ public class IcenterController implements Constant{
 	public String index(Model model) {
 
 		if ("true".equals(Global.getConfig("local.debug"))) {
-			DyClient user = clientService.get("1");
+			DyClient user = clientService.get("3");
 			UserUtils.getSession().setAttribute("current_dy_client", user);
 		}
 		if (DySysUtils.getCurrentDyClient() == null) {
@@ -322,7 +323,9 @@ public class IcenterController implements Constant{
 			tplValueMap.put("code", sys_verificationCode);
 			try {
 				System.out.println("code: "+sys_verificationCode); 
-//				SmsSendUtils.sendSms(Long.parseLong(mobile), Constant.TPL_ID_1, tplValueMap);
+				if (!Boolean.parseBoolean(Global.getConfig("local.debug"))) {
+					SmsSendUtils.sendSms(Long.parseLong(mobile), Constant.TPL_ID_1, tplValueMap);
+				}
 			} catch (Exception e) {
 				AjaxResult ar = AjaxResult.makeError("");
 				return ar;
@@ -391,7 +394,9 @@ public class IcenterController implements Constant{
 			tplValueMap.put("code", sys_verificationCode);
 			try {
 				System.out.println("code: "+sys_verificationCode);
-//				SmsSendUtils.sendSms(Long.parseLong(u.getMobile()), Constant.TPL_ID_1, tplValueMap);
+				if (!Boolean.parseBoolean(Global.getConfig("local.debug"))) {
+					SmsSendUtils.sendSms(Long.parseLong(u.getMobile()), Constant.TPL_ID_1, tplValueMap);
+				}
 			} catch (Exception e) {
 				AjaxResult ar = AjaxResult.makeError("");
 				ar.getData().put("userinfo", u);
@@ -1119,7 +1124,44 @@ public class IcenterController implements Constant{
 			return AjaxResult.makeError("非法访问！");
 		}
 	}
-	
+	/**
+	 * 个人中心：根据会员ID更新会员身份银行信息
+	 * @param 
+	 * @return
+	 */
+	@RequestMapping(value = {"changeIdentityBankInfo"},method={RequestMethod.POST})
+	@ResponseBody /* 必须设置这个注解，不然无法返回正确数据 */
+	public AjaxResult changeIdentityBankInfo(Model model,String name,String idcardNumber,String defaultIncomeExpense,String bankName,String bankLocation) {
+		// 获取登录用户信息
+		DyClient u = DySysUtils.getCurrentDyClient();
+		if (u == null) {
+			return AjaxResult.makeWarn("非法访问");
+		}
+		DyClient dyClient = clientService.get(u.getId());
+		try {
+			if(dyClient.getAuthenticationMark() == null || AUTHENTICATION_MARK_0.equals(dyClient.getAuthenticationMark())){
+				dyClient.setAuthenticationMark(AUTHENTICATION_MARK_2);
+			}
+			dyClient.setName(name);
+			dyClient.setIDcardNumber(idcardNumber);
+			dyClient.setDefaultIncomeExpense(defaultIncomeExpense);
+			dyClient.setBankName(bankName);
+			dyClient.setBankLocation(bankLocation);
+			clientService.save(dyClient);
+			UserUtils.getSession().setAttribute("current_dy_client", dyClient);
+			AjaxResult ar = AjaxResult.makeSuccess("身份银行信息更新成功");
+			u.setDefaultIncomeExpense(defaultIncomeExpense);
+			ar.getData().put("newDefaultIncomeExpense",	defaultIncomeExpense);
+			ar.getData().put("newName",	name);
+			ar.getData().put("newIdcardNumber",	idcardNumber);
+			ar.getData().put("newBankName",	bankName);
+			ar.getData().put("newBankLocation",	bankLocation);
+			return ar;
+		} catch (Exception e) {
+			logger.error("会员银行信息更新出错", e);
+			return AjaxResult.makeError("会员银行信息更新出错:" + e.getMessage());
+		}
+	}
 	/**
 	 * 个人中心：获取用户提现进程信息
 	 * @return
@@ -1183,24 +1225,42 @@ public class IcenterController implements Constant{
 		// 获取登录用户信息
 		DyClient u = DySysUtils.getCurrentDyClient();
 		if (u != null) {
-			if(from != null && from.equals("rechargeForBid")){
-				//出价金额不足的充值不需要检测个人信息
-			}else{
-				//验证用户是否完善了个人信息的填写
-				if(!clientService.checkPersonalInfo(u)){
-					return AjaxResult.makeError("请先填写完整的个人信息");
-				}
-			}
-			
 			Long money = Long.parseLong(operateAmount);
 			// 如果是提现操作，需要将提现金额冻结
 			if (operate.equals("提现")) {
 				try {
-					financeService.updateFreezeBalanceForRecharge(u, money,CASHFLOW_OPERATE_WITHDRAW);
+					int wxRechargeTotalMoney = 0;//计算历史微信充值总额
+					int wxWwithdrawalsTotalMoney = 0;//计算历史和已经提交的微信提现总额
+					wxRechargeTotalMoney = cashFlowService.rechargeTotalMoney(u.getId(), CASHFLOW_OPERATE_RECHARGE_ONLINE);
+					wxWwithdrawalsTotalMoney = cashFlowService.withdrawalsTotalMoney(u.getId(), CASHFLOW_OPERATE_RECHARGE_ONLINE);
+					
+					String remarks = null;
+					if(money <= (wxRechargeTotalMoney - wxWwithdrawalsTotalMoney)){
+						remarks = "微信提现";
+					}else{
+						remarks = "线下提现";
+					}
+					if(remarks.equals("线下提现")){
+						//验证用户是否完善了个人信息的填写
+						if(!clientService.checkPersonalInfo(u)){
+							AjaxResult ar = AjaxResult.makeError("请先填写完整的个人信息");
+							ar.getData().put("check", "nouserinfo");
+							return ar;
+						}
+					}
+					financeService.updateFreezeBalanceForRecharge(u, money,CASHFLOW_OPERATE_WITHDRAW,remarks);
 				} catch (Exception e) {
 					throw e;
 				}
 			} else {// 充值（线下操作）
+				if(from != null && from.equals("rechargeForBid")){
+					//出价金额不足的充值不需要检测个人信息
+				}else{
+					//验证用户是否完善了个人信息的填写
+					if(!clientService.checkPersonalInfo(u)){
+						return AjaxResult.makeError("请先填写完整的个人信息");
+					}
+				}
 				try {
 					// 构建资金流表记录，插入到表中
 					DyCashFlow cashFlow = new DyCashFlow();
@@ -1295,10 +1355,11 @@ public class IcenterController implements Constant{
 				ar.getData().put("package", packages);
 				ar.getData().put("signType", "MD5");
 				ar.getData().put("paySign", paySign);
+				logger.debug(ar);
 				return ar;
 			} else {
-				Exception e = new Exception(u.getNickname()+":充值下订单失败");
-				logger.debug(e.getMessage());
+				Exception e = new Exception(u.getNickname()+":充值下订单失败。(" + wxReturnUnifiedOrder.getErr_code_des());
+				logger.error(e.getMessage());
 				throw e;
 			}
 		} else {

@@ -39,10 +39,13 @@
 		 a.bonus_second AS "bonusSecond",
 		 a.status AS "status",
 		 b.nickname AS "sellNickname",
+		 b.dyid AS "sellDyId",
 		 b.name AS "sellName",
 		 b.openid AS "sellOpenId",
+		 a.reserve_price AS "reservePrice",
 		 c.bid_amount AS "bidAmount",
 		 d.id AS "buyClientId",
+		 d.dyid AS "buyDyId",
 		 d.nickname AS "buyNickname",
 		 d.name AS "buyName",
 		 d.openid AS "buyOpenId",
@@ -67,6 +70,7 @@
 		SELECT 
 			<include refid="dyDomainnameColumns"/>
 			,b.id AS "dyClient.id",
+			 b.dyid AS "dyClient.dyid",
 			 b.name AS "dyClient.name",
 			 b.nickname AS "dyClient.nickname",
 			 b.mobile AS "dyClient.mobile",
@@ -111,6 +115,12 @@
 				AND b.broker_id = #{currentSysUserId}
 			</if>
 			<if test="client != null">
+				<if test="client.dyid != null and client.dyid != ''">
+					AND b.dyid LIKE 
+						<if test="dbName == 'oracle'">'%'||#{client.dyid}||'%'</if>
+						<if test="dbName == 'mssql'">'%'+#{client.dyid}+'%'</if>
+						<if test="dbName == 'mysql'">concat('%',#{client.dyid},'%')</if>
+				</if>
 				<if test="client.nickname != null and client.nickname != ''">
 					AND b.nickname LIKE 
 						<if test="dbName == 'oracle'">'%'||#{client.nickname}||'%'</if>
@@ -131,6 +141,13 @@
 							<if test="dbName == 'mysql'">concat('%',#{client.broker.name},'%')</if>
 					</if>
 				</if>
+			</if>
+			
+			<if test="searchStartTime != null and searchStartTime != ''">
+				AND a.end_time >= #{searchStartTime}
+			</if>
+			<if test="searchEndTime != null and searchEndTime != ''">
+				AND a.end_time &lt; ADDDATE(#{searchEndTime}, INTERVAL 1 DAY)
 			</if>
 		</where>
 			<choose>
@@ -342,11 +359,23 @@
 					<if test="dbName == 'mssql'">'%'+#{sellNickname}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{sellNickname},'%')</if>
 			 </if>
+			 <if test="sellDyId != null and sellDyId != ''">
+			 		AND b.dyid LIKE 
+					<if test="dbName == 'oracle'">'%'||#{sellDyId}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{sellDyId}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{sellDyId},'%')</if>
+			 </if>
 			 <if test="buyNickname != null and buyNickname != ''">
 			 		AND d.nickname LIKE 
 					<if test="dbName == 'oracle'">'%'||#{buyNickname}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{buyNickname}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{buyNickname},'%')</if>
+			 </if>
+			 <if test="buyDyId != null and buyDyId != ''">
+			 		AND d.dyid LIKE 
+					<if test="dbName == 'oracle'">'%'||#{buyDyId}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{buyDyId}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{buyDyId},'%')</if>
 			 </if>
 			 <if test="domainName != null and domainName != ''">
 			 		AND a.name LIKE 
@@ -354,6 +383,12 @@
 					<if test="dbName == 'mssql'">'%'+#{domainName}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{domainName},'%')</if>
 			 </if>
+			 <if test="searchStartTime != null and searchStartTime != ''">
+				AND a.end_time >= #{searchStartTime}
+			</if>
+			<if test="searchEndTime != null and searchEndTime != ''">
+				AND a.end_time &lt; ADDDATE(#{searchEndTime}, INTERVAL 1 DAY)
+			</if>
 		</where>
 			GROUP BY c.domainname_id
 			<choose>
@@ -730,7 +765,7 @@
 		d.name AS "name",
 		d.client_id AS "sellClientId",
 		c.nickname AS "sellNickName",
-		d.update_date AS "sellDate",
+		d.end_time AS "sellDate",
 		t.bid_amount AS "bidAmount",
 		t.client_id AS "buyClientId",
 		t.nickname AS "buyNickName"
@@ -739,7 +774,7 @@
 	and d.del_flag = 0
 	and c.del_flag = 0
 	AND d.status like '1_'
-	AND DATE_SUB(CURDATE(),INTERVAL 7 DAY) &lt;= Date(d.update_date)
+	AND DATE_SUB(CURDATE(),INTERVAL 7 DAY) &lt;= Date(d.end_time)
 	AND EXISTS (
 			SELECT domainname_id, bid_amount,client_id
 			FROM (
@@ -817,7 +852,8 @@
 			d.client_id As sellerId,
 			b.client_id As buyerId,
 			b.bid_amount As bidAmount,
-			b.proxy_amount As proxyAmount
+			b.proxy_amount As proxyAmount,
+			d.reserve_price As reservePrice
 		FROM dy_domainname d ,dy_bidhistory  b
 		WHERE d.status = #{status}
 		<if test="domainnameId !=null and domainnameId != ''">
@@ -844,7 +880,8 @@
 			d.client_id As sellerId,
 			b.client_id As buyerId,
 			b.bid_amount As bidAmount,
-			b.proxy_amount As proxyAmount
+			b.proxy_amount As proxyAmount,
+			d.reserve_price As reservePrice
 		FROM dy_domainname d ,dy_bidhistory  b
 		WHERE d.status = #{status}
 		<if test="domainnameId !=null and domainnameId != ''">
@@ -861,7 +898,7 @@
 					SELECT k.*
 					FROM (select * from dy_bidhistory where del_flag = '0' order by bid_amount desc ,proxy_amount desc) k
 					GROUP BY k.domainname_id) t
-				WHERE b.domainname_id = t.domainname_id AND b.bid_amount = t.bid_amount AND b.client_id = t.client_id AND d.reserve_price &lt; t.bid_amount)
+				WHERE b.domainname_id = t.domainname_id AND b.bid_amount = t.bid_amount AND b.client_id = t.client_id AND d.reserve_price &lt;= t.bid_amount)
 	</select>
 	
 	<select id="getTransactionByDomainId" resultType="TransactionInformation">
@@ -973,6 +1010,32 @@
 		AND d.status = '03'
 		group by Date(d.end_time)
 		order by Date(d.end_time) asc
+	</select>
+	<select id="findHistoryInfoPage" resultType="HistoryInfo">
+		SELECT
+			d.id AS "domainnameId",
+			d.status AS "status",
+			d.name AS "name",
+			d.client_id AS "sellClientId",
+			c.nickname AS "sellNickName",
+			d.end_time AS "sellDate",
+			t.bid_amount AS "bidAmount",
+			t.client_id AS "buyClientId",
+			t.nickname AS "buyNickName"
+		FROM dy_domainname d  LEFT JOIN  (select b.*,c.nickname from dy_bidhistory b ,dy_client c where b.client_id = c.id) t ON d.id = t.domainname_id, dy_client c 
+		WHERE d.client_id = c.id
+		and d.del_flag = 0
+		and c.del_flag = 0
+		AND d.status like '1_'
+		AND DATE_ADD(CURDATE(),INTERVAL -7 DAY) &lt;= Date(d.end_time)
+		AND EXISTS (
+				SELECT domainname_id, bid_amount,client_id
+				FROM (
+						SELECT k.*
+						FROM (select * from dy_bidhistory where del_flag = '0' order by bid_amount desc ,proxy_amount desc ) k
+						GROUP BY k.domainname_id) e
+				WHERE t.domainname_id = e.domainname_id AND t.bid_amount = e.bid_amount AND t.client_id = e.client_id)
+		ORDER BY d.end_time DESC
 	</select>
 	
 </mapper>

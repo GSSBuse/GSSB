@@ -100,8 +100,20 @@
 			<li><label>卖家手机：</label>
 				<form:input path="dyClient.mobile" htmlEscape="false" maxlength="100" class="input-medium"/>
 			</li>
+			<li><label>卖家米友号：</label>
+				<form:input path="dyClient.dyid" htmlEscape="false" maxlength="100" class="input-medium"/>
+			</li>
+			<li><label>截拍日期：</label>
+				<input name="searchStartTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
+					value="${dyDomainname.searchStartTime}"
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input name="searchEndTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
+					value="${dyDomainname.searchEndTime}"
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});"/>
+			</li>
 			<li><label>状态：</label>
-				<form:select path="status">
+				<form:select path="status" cssStyle="width: 100px;">
 					<form:options items="${fns:getDictList('dy_domainname_status')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
 			</li>
@@ -116,6 +128,7 @@
 		<thead>
 			<tr>
 				<th class="sort-column name">域名名称</th>
+				<th >卖家米友号</th>
 				<th class="sort-column dyClient.name">卖家姓名</th>
 				<th class="sort-column dyClient.nickname">卖家昵称</th>
 				<th>卖家手机</th>
@@ -132,6 +145,7 @@
 		<c:forEach items="${page.list}" var="dyDomainname">
 			<tr>
 				<td><a href="${ctx}/sys/dy/dyDomainname/form?id=${dyDomainname.id}">${dyDomainname.name}</a></td>
+				<td>${dyDomainname.dyClient.dyid}</td>
 				<td>${dyDomainname.dyClient.name}</td>
 				<td>${dyDomainname.dyClient.nickname}</td>
 				<td>${dyDomainname.dyClient.mobile}</td>
@@ -169,8 +183,7 @@
 					<c:if test="${dyDomainname.status ne '01' and dyDomainname.status ne '00'}">
 						<a href="${ctx}/sys/dy/dyDomainname/form?id=${dyDomainname.id}">修改</a>
 					</c:if>
-					<%-- <a href="${ctx}/sys/dy/dyDomainname/delete?id=${dyDomainname.id}" onclick="return confirmx('确认要删除该域名信息吗？', this.href)">删除</a> --%>
-    				<c:if test="${dyDomainname.status ne '01' and dyDomainname.status ne '02' and dyDomainname.status ne '00'}">
+					<c:if test="${dyDomainname.status ne '01' and dyDomainname.status ne '02' and dyDomainname.status ne '00'}">
 					     <a href="${ctx}/sys/dy/dyBidhistory?domainId=${dyDomainname.id}">出价管理</a>
 					 </c:if>
 					 <c:if test="${dyDomainname.status eq '03'}">
@@ -182,6 +195,10 @@
 					<%-- <c:if test="${dyDomainname.status eq '01'}">
 					     <a href="#"onclick="jjj(this, '${dyDomainname.id}')">审核</a>
 					 </c:if> --%>
+					 <c:if test="${dyDomainname.status eq '00'}">
+					 	<a href="${ctx}/sys/dy/dyDomainname/delete?id=${dyDomainname.id}" onclick="return confirmx('确认要删除该域名信息吗？', this.href)">删除</a>
+					 </c:if>
+    				
 				</td></shiro:hasPermission>
 			</tr>
 		</c:forEach>

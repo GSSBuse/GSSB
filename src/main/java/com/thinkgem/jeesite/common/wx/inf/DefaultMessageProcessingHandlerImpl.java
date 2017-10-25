@@ -202,13 +202,17 @@ public class DefaultMessageProcessingHandlerImpl implements MessageProcessingHan
 				}
 				try {
 					UserInfo userInfo = User.getUserInfo(WeChat.getAccessToken(), openid);
-					dc.setNickname(userInfo.getNickname());
-					dc.setOpenid(openid);
-					String headImg = userInfo.getHeadimgurl();
-					if (headImg != null && headImg.lastIndexOf('/') < headImg.length()-1) {
-						headImg = headImg.substring(0, headImg.lastIndexOf('/')+1);
+					if (StringUtils.isNotEmpty(userInfo.getNickname())) {
+						dc.setNickname(userInfo.getNickname());
 					}
-					dc.setPhoto(headImg);
+					dc.setOpenid(openid);
+					if (StringUtils.isNotEmpty(userInfo.getHeadimgurl())) {
+						String headImg = userInfo.getHeadimgurl();
+						if (headImg != null && headImg.lastIndexOf('/') < headImg.length()-1) {
+							headImg = headImg.substring(0, headImg.lastIndexOf('/')+1);
+						}
+						dc.setPhoto(headImg);
+					}
 					dc.setAvoidDeposit(SWITCH_OFF);
 					
 					getDyClientService().save(dc);

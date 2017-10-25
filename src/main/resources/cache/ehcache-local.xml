@@ -29,7 +29,7 @@
 	<!-- 系统活动会话缓存 -->
     <cache name="activeSessionsCache" maxEntriesLocalHeap="10000" overflowToDisk="true"
            eternal="true" timeToLiveSeconds="0" timeToIdleSeconds="0"
-           diskPersistent="true" diskExpiryThreadIntervalSeconds="600"/>
+           diskPersistent="true" diskExpiryThreadIntervalSeconds="600" memoryStoreEvictionPolicy="LRU"/>
     
     <!-- 简单页面缓存
     <cache name="SimplePageCachingFilter" maxEntriesLocalHeap="100" eternal="false" overflowToDisk="true"

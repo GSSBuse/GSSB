@@ -3,6 +3,8 @@ package com.thinkgem.jeesite.common.bean;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.nutz.json.Json;
+
 /**
  * Ajax调用结果
  * The Class AjaxResult.<br>
@@ -86,4 +88,8 @@ public class AjaxResult {
 	    return this;
 	}
 	
+	@Override
+	public String toString() {
+		return Json.toJson(this);
+	}
 }

@@ -121,7 +121,7 @@
 				var unconfirmCount= 0;
 				var unfinishCount=0;
 				var cUnconfirmCount=0;
-				$.get("${ctx}/sys/dy/dyClient/unmarkCount",function(data){
+				$.get("${ctx}/sys/dy/dyClient/unmarkCount?_="+(new Date()).getTime(),function(data){
 					 unmarkCount = parseFloat(data);
 					if (unmarkCount > 0){
 						$("#notifyNum2").show().html("("+unmarkCount+")");
@@ -129,7 +129,7 @@
 						$("#notifyNum2").hide()
 					}
 					/*域名审核通知消息数量*/
-					$.get("${ctx}/sys/dy/dyDomainname/unconfirmCount",function(data1){
+					$.get("${ctx}/sys/dy/dyDomainname/unconfirmCount?_="+(new Date()).getTime(),function(data1){
 						 unconfirmCount = parseFloat(data1);
 						if (unconfirmCount > 0){
 							$("#domainUnconfirmCount").show().html("("+unconfirmCount+")");
@@ -137,7 +137,7 @@
 							$("#domainUnconfirmCount").hide()
 						}
 						/*域名成交通知消息数量*/
-						$.get("${ctx}/sys/dy/dyDomainname/unfinishCount",function(data2){
+						$.get("${ctx}/sys/dy/dyDomainname/unfinishCount?_="+(new Date()).getTime(),function(data2){
 							unfinishCount = parseFloat(data2);
 							if(unfinishCount >0 ){
 								$("#domainUnfinishCount").show().html("("+unfinishCount+")");
@@ -145,7 +145,7 @@
 								$("#domainUnfinishCount").hide();
 							}
 							/*充值提现通知消息数量*/
-								$.get("${ctx}/sys/dy/dyCashFlow/cUnconfirmCount",function(data3){
+								$.get("${ctx}/sys/dy/dyCashFlow/cUnconfirmCount?_="+(new Date()).getTime(),function(data3){
 									cUnconfirmCount = parseFloat(data3);
 									if(cUnconfirmCount>0){
 										$("#cashUnconfirmCount").show().html("("+cUnconfirmCount+")");
@@ -170,7 +170,7 @@
 				var unmarkCount = 0;
 				var unconfirmCount= 0;
 				var unfinishCount=0;
-				$.get("${ctx}/sys/dy/dyClient/unmarkCount",function(data){
+				$.get("${ctx}/sys/dy/dyClient/unmarkCount?_="+(new Date()).getTime(),function(data){
 					 unmarkCount = parseFloat(data);
 					if (unmarkCount > 0){
 						$("#notifyNum2").show().html("("+unmarkCount+")");
@@ -178,7 +178,7 @@
 						$("#notifyNum2").hide()
 					}
 					/*域名审核通知消息数量*/
-					$.get("${ctx}/sys/dy/dyDomainname/unconfirmCount",function(data1){
+					$.get("${ctx}/sys/dy/dyDomainname/unconfirmCount?_="+(new Date()).getTime(),function(data1){
 						 unconfirmCount = parseFloat(data1);
 						if (unconfirmCount > 0){
 							$("#domainUnconfirmCount").show().html("("+unconfirmCount+")");
@@ -186,7 +186,7 @@
 							$("#domainUnconfirmCount").hide()
 						}
 						/*域名成交通知消息数量*/
-						$.get("${ctx}/sys/dy/dyDomainname/unfinishCount",function(data2){
+						$.get("${ctx}/sys/dy/dyDomainname/unfinishCount?_="+(new Date()).getTime(),function(data2){
 							unfinishCount = parseFloat(data2);
 							if(unfinishCount >0 ){
 								$("#domainUnfinishCount").show().html("("+unfinishCount+")");
@@ -209,7 +209,7 @@
 			function getNotifyNumForMoney(){
 				/*充值提现通知消息数量*/
 				var cUnconfirmCount=0;
-				$.get("${ctx}/sys/dy/dyCashFlow/cUnconfirmCount",function(data3){
+				$.get("${ctx}/sys/dy/dyCashFlow/cUnconfirmCount?_="+(new Date()).getTime(),function(data3){
 					cUnconfirmCount = parseFloat(data3);
 					if(cUnconfirmCount>0){
 						$("#cashUnconfirmCount").show().html("("+cUnconfirmCount+")");

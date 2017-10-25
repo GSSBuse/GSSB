@@ -5,7 +5,7 @@
 	
  --%>
  
-<%-- --%>
+<%-- 
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/frontend-jam/static/vendors/jingle/js/lib/zepto.min.js" ></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/frontend-jam/static/vendors/jingle/js/lib/zepto.touch2mouse.js" ></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/frontend-jam/static/vendors/jingle/js/lib/iscroll.js" ></script>
@@ -14,13 +14,13 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/frontend-jam/static/js/utils.js" ></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/frontend-jam/static/vendors/jweixin/jweixin-1.0.0.js" ></script>
+--%>
 
-<!-- 
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/frontend-jam/static/js/all-common.js" ></script>
- -->
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/frontend-jam/static/vendors/avalon/avalon.mobile.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/frontend-jam/static/js/require.config.js?4"></script>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/frontend-jam/static/vendors/avalon/avalon.mobile.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/frontend-jam/static/js/require.config.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/frontend-jam/static/js/frozen-common.js"></script>
 
  

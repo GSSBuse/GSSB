@@ -1,6 +1,5 @@
 package com.thinkgem.jeesite.modules.sys.service.dy;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.thinkgem.jeesite.common.define.Constant;
 import com.thinkgem.jeesite.common.service.ServiceException;
@@ -164,8 +162,16 @@ public class AuctionScheduleService implements Constant {
 			for (int i = 0; i < listLowerReservePrice.size(); i++) {
 				try {
 					TransactionInformation transactionInformation = listLowerReservePrice.get(i);//买卖信息
-					dyDomainnameService.auctionSuccessAndLowerReservePriceHandle(transactionInformation,true);
-					domainIds[i] = transactionInformation.getDomainnameId();
+					/*
+					 * 增加功能：  当代理竞价高于保留价时，使用保留价进行实际出价。再回到正确处理环节
+					 */
+					if(transactionInformation.getProxyAmount() != null && transactionInformation.getProxyAmount() >= transactionInformation.getReservePrice()){
+						// 代理竞价高于保留价时，自动出价到保留价
+						dyDomainnameService.auctionSuccessAndProxyHigherReservePriceHandle(transactionInformation);
+					} else {
+						dyDomainnameService.auctionSuccessAndLowerReservePriceHandle(transactionInformation,true);
+						domainIds[i] = transactionInformation.getDomainnameId();
+					}
 				} catch (Exception e) {
 					logger.debug(e.toString());
 				}
@@ -181,8 +187,11 @@ public class AuctionScheduleService implements Constant {
 		FollowInfoToMsg followInfoToMsg = new FollowInfoToMsg();
 		// 设置时间
 		Date date = new Date();
-		followInfoToMsg.setMin59(new Date(date.getTime() + 59*60*1000));
-		followInfoToMsg.setMin60(new Date(date.getTime() + 60*60*1000));
+		// 2016/3/8 时间改为15分钟前
+//		followInfoToMsg.setMin59(new Date(date.getTime() + 59*60*1000));
+//		followInfoToMsg.setMin60(new Date(date.getTime() + 60*60*1000));
+		followInfoToMsg.setMin59(new Date(date.getTime() + 14*60*1000));
+		followInfoToMsg.setMin60(new Date(date.getTime() + 15*60*1000));
 		List<FollowInfoToMsg> list = dyDomainnameService.lastOneHourDomainInfo(followInfoToMsg);
 		for(int i = 0;i<list.size();i++){
 			//发送消息

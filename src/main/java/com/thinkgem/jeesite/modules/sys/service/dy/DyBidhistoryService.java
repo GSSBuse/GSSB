@@ -249,8 +249,33 @@ public class DyBidhistoryService extends CrudService<DyBidhistoryDao, DyBidhisto
 					throw new ServiceException("更新代理竞价失败");
 				}
 				/**获取改代理竞价的冻结资金*/
-				Long newDeposit = DySysUtils.calculateDepositAndIncrement(dyBidhistory.getProxyAmount(), BID_RULE_TYPE_DEPOSIT);//计算当前保证金
-				Long oldDeposit = DySysUtils.calculateDepositAndIncrement(oldDyBidhistory.getProxyAmount(), BID_RULE_TYPE_DEPOSIT);//计算原来的保证金
+				// 不计算。使用资金流表作为依据
+				DyClient buyerClient = dyClientDao.get(dyBidhistory.getClientId());
+//				Long newDeposit = DySysUtils.calculateDepositAndIncrement(dyBidhistory.getProxyAmount(), BID_RULE_TYPE_DEPOSIT);//计算当前保证金
+//				Long oldDeposit = DySysUtils.calculateDepositAndIncrement(oldDyBidhistory.getProxyAmount(), BID_RULE_TYPE_DEPOSIT);//计算原来的保证金
+				// 计算当前保证金(新)
+				Long newDeposit = 0L;
+				if(Constant.SWITCH_ON.equals(buyerClient.getAvoidDeposit())){
+					//当前用户可以免除保证金
+					newDeposit = 0L;
+				}else{
+					newDeposit = DySysUtils.calculateDepositAndIncrement(dyBidhistory.getProxyAmount(), BID_RULE_TYPE_DEPOSIT);//计算买家保证金,有可能是0
+				}
+				
+				//买家旧保证金记录
+				Long oldDeposit = 0L;
+				DyCashFlow cashFlow = new DyCashFlow();
+				cashFlow.setClientId(dyBidhistory.getClientId());
+				cashFlow.setDomainnameId(dyBidhistory.getDomainnameId());
+				cashFlow.setOperate(CASHFLOW_OPERATE_FREEZE);
+				List<DyCashFlow> list = cashFlowService.findList(cashFlow);
+				if (list.isEmpty()) {
+					throw new ServiceException("无买家保证金记录");
+				} else {
+					cashFlow = list.get(0);
+					oldDeposit = cashFlow.getOperateAmount();
+				}
+				
 				long gap = 0;
 				if(newDeposit.longValue() == oldDeposit.longValue()){
 					return ;
@@ -1415,6 +1440,7 @@ public class DyBidhistoryService extends CrudService<DyBidhistoryDao, DyBidhisto
 					AjaxResult ar = AjaxResult.makeWarn("出价失败，帐户余额不足，请充值");
 					ar.getData().put("type", "");
 					ar.getData().put("deposit", deposit);
+					ar.getData().put("charge", deposit - availableBalance);
 					return ar;
 				}
 	

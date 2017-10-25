@@ -11,6 +11,7 @@
 		a.operate_time AS "operateTime",
 		a.confirm_result AS "confirmResult",
 		a.amount_balance AS "amountBalance",
+		a.transaction_id AS "transactionId",
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
 		a.update_by AS "updateBy.id",
@@ -29,7 +30,9 @@
 			c.nickname AS "dyClient.nickname",
 			c.mobile AS "dyClient.mobile",
 			c.email AS "dyClient.email",
-			c.default_income_expense AS "dyClient.defaultIncomeExpense"
+			c.default_income_expense AS "dyClient.defaultIncomeExpense",
+			c.bank_name AS "dyClient.bankName",
+			c.bank_location AS "dyClient.bankLocation"
 	</sql>
 	
 	<sql id="dyCashFlowInfo">
@@ -391,6 +394,7 @@
 			operate_time,
 			confirm_result,
 			amount_balance,
+			transaction_id,
 			create_by,
 			create_date,
 			update_by,
@@ -406,6 +410,7 @@
 			#{operateTime},
 			#{confirmResult},
 			#{amountBalance},
+			#{transactionId},
 			#{createBy.id},
 			#{createDate},
 			#{updateBy.id},
@@ -424,6 +429,7 @@
 			operate_time = #{operateTime},
 			confirm_result = #{confirmResult},
 			amount_balance = #{amountBalance},
+			transaction_id = #{transactionId},
 			update_by = #{updateBy.id},
 			update_date = sysdate(),
 			remarks = #{remarks}
@@ -482,4 +488,17 @@
 			AND	operate_amount = #{0.operateAmount}
 			AND operate = '冻结'
 	</update>
+	<select id="rechargeTotalMoney" resultType="int">
+		select IFNULL(sum(c.operate_amount),0)
+		from dy_cash_flow c
+		where c.operate = #{rechargeWay}
+		and c.client_id = #{clientId}
+	</select>
+	<select id="withdrawalsTotalMoney" resultType="int">
+		select IFNULL(sum(c.operate_amount),0)
+		from dy_cash_flow c
+		where c.remarks = #{withdrawalsWay}
+		and c.client_id = #{clientId}
+		and c.confirm_result in('等待','处理中','完成')
+	</select>
 </mapper>

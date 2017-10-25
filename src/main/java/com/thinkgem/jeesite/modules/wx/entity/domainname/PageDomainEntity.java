@@ -29,8 +29,8 @@ public class PageDomainEntity extends DyDomainname {
 	private DyClient client;              // 域名所有者
 	private boolean endFlag;              // 结拍标识
 	private String currentSysUserId;		  //当前系统登录者ID
-	private Long proxyAmount;	// 代理竞价金额
-	private Long proxyIncrement;	// 代理竞价加价幅度
+	private Long proxyAmount = 0L;	// 代理竞价金额
+	private Long proxyIncrement = 0L;	// 代理竞价加价幅度
 	private String topBidClientId;	// 最高出价会员ID
 	/**
 	 * @return the currAmount

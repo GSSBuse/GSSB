@@ -51,13 +51,13 @@ public class User {
 		if(StringUtils.isNotEmpty(jsonStr)){
 			Object obj = Json.fromJson(jsonStr);
 			if(Mapl.cell(obj,"errcode") != null){
-				System.out.println("openid=" + openid);
+				log.error("openid=" + openid);
 				
 				throw new Exception((String)Mapl.cell(obj,"errmsg"));
 
 				//return new UserInfo();
 			} else {
-				System.out.println(jsonStr);
+				log.debug(jsonStr);
 			}
 			UserInfo user = Mapl.maplistToT(obj, UserInfo.class);
 			return user;
@@ -83,16 +83,19 @@ public class User {
 		if(StringUtils.isNotEmpty(jsonStr)){
 			Object obj = Json.fromJson(jsonStr);
 			if(Mapl.cell(obj,"errcode") != null){
-				System.out.println("openid=" + openid);
+				log.error("openid=" + openid);
 				
+				WeChat.invalidAccessToken();
 				throw new Exception((String)Mapl.cell(obj,"errmsg"));
 
 				//return new UserInfo();
 			} else {
-				System.out.println(jsonStr);
+				log.debug(jsonStr);
 			}
 			UserInfo user = Mapl.maplistToT(obj, UserInfo.class);
 			return user;
+		} else {
+			log.warn("微信获取用户信息接口。没有返回任何信息。openid：" + openid);
 		}
 		return new UserInfo();
 	}

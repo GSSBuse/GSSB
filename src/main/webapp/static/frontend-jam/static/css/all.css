@@ -45,9 +45,13 @@
 	0% {-webkit-transform: translate3d(0,90%,0)}
 	100% {-webkit-transform: translate3d(0,0,0)}
 }
-
 .page.animated{
     -webkit-animation-duration: 250ms;
+    -webkit-animation-fill-mode: both;
+    -webkit-animation-timing-function: ease-in-out
+}
+.animated{
+    -webkit-animation-duration: 500ms;
     -webkit-animation-fill-mode: both;
     -webkit-animation-timing-function: ease-in-out
 }
@@ -87,7 +91,38 @@
 .slideUpOut{
     -webkit-animation-name: slideUpOut;
 }
-/* 微信样式*/
+@-webkit-keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0,-100%,0);
+        transform: translate3d(0,-100%,0)
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0,-100%,0);
+        transform: translate3d(0,-100%,0)
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none
+    }
+}
+
+.fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown
+}/* 微信样式*/
 body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -1448,6 +1483,13 @@ input[type=number]::-webkit-inner-spin-button {
     background-color: rgba(0,0,0,0.3);
 }
 
+.bigphoto>img{
+    width: 90%;
+    max-height: 80%;
+    text-align: center;
+    margin-top: 30%
+}
+
 .bigphoto .back-white{
 	width: 90%;
 	max-height: 80%;
@@ -1462,6 +1504,17 @@ input[type=number]::-webkit-inner-spin-button {
 }
 .att-list.expand-attendtion {
 	max-height: 64px;
+}
+
+#personalInfo #identity-bank-info .ui-form-item label{
+	width: auto;
+}
+#personalInfo #identity-bank-info .bank-location label:not(.ui-switch):not(.ui-checkbox):not(.ui-checkbox-s):not(.ui-radio) {
+	width: 96px;
+}
+#identity-bank-info {
+	position: absolute;
+	/*overflow-y: scroll;*/
 }.dropload-up,.dropload-down{
     display: block;
     position: relative;

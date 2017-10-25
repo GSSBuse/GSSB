@@ -117,26 +117,7 @@
 			a.id AS "id",
 			a.dyid AS "dyid",
 			a.openid AS "openid",
-			a.name AS "name",
-			a.nickname AS "nickname",
-			a.email AS "email",
-			a.mobile AS "mobile",
-			a.qq AS "qq",
-			a.wx AS "wx",
-			a.photo AS "photo",
-			a.vip AS "vip",
-			a.seal_flag AS "sealFlag",
-			a.broker_id AS "brokerId",
-			a.authentication_mark AS "authenticationMark",
-			a.default_income_expense AS "defaultIncomeExpense",
-			a.authentication_positive_image_url AS "authenticationPositiveImageUrl",
-			a.authentication_negative_image_url AS "authenticationNegativeImageUrl",
-			a.create_by AS "createBy.id",
-			a.create_date AS "createDate",
-			a.update_by AS "updateBy.id",
-			a.update_date AS "updateDate",
-			a.remarks AS "remarks",
-			a.del_flag AS "delFlag"
+			a.photo AS "photo"
 		FROM dy_attention b
 		LEFT JOIN dy_client a ON a.id = b.client_id AND a.del_flag = 0
 		<include refid="dyAttentionJoins"/>

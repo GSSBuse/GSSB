@@ -238,7 +238,7 @@
 									ms-click="clearRechargeAmountInput"> </i>
 							</div>
 							<div id = "platformBankInfo" class="ui-dialog-bd ui-border-b hidden">
-								<div>拍域名银行信息</div>
+								<div>米乐拍卖银行信息</div>
 								<div> <img src="${pageContext.request.contextPath}/static/images/bank.PNG"></div>
 								<div>开户行：招商银行汉中门支行</div>
 								<div>开户名：南京登羽信息科技有限公司</div>
@@ -290,7 +290,7 @@
 			<div class="ui-dialog dialog-font" id="platform-bank-info">
 				<div class="ui-dialog-cnt" style="width: 90%;">
 					<header class="ui-dialog-hd ui-border-b">
-						<h3>拍域名银行信息</h3>
+						<h3>米乐拍卖银行信息</h3>
 					</header>
 					<div class="ui-dialog-bd">
 						<div> <img src="${pageContext.request.contextPath}/static/images/bank.PNG"></div>

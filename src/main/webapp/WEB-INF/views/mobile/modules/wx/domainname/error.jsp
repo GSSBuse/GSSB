@@ -9,9 +9,9 @@
 </head>
 <body ontouchstart="" class="ms-loader ms-loading">
 	<div class="page-wrapper">
-		<div data-title="关注拍域名" class="page active ms-controller" ms-controller="error"	id="error">
+		<div data-title="关注米乐拍卖" class="page active ms-controller" ms-controller="error"	id="error">
 			<section class="ui-container font-styles">
-				<div class="mainContent">
+				<div class="mainContent" style="height: auto;">
 					<div class="designerCard">
 					<!--
 						<div style="margin-top: 7%;width:100%;">

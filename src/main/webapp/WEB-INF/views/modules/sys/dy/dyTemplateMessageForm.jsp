@@ -34,6 +34,12 @@
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">
+			<label class="control-label">消息ID：</label>
+			<div class="controls">
+				<form:input path="templateId" htmlEscape="false" maxlength="255" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
 			<label class="control-label">消息标题：</label>
 			<div class="controls">
 				<form:input path="title" htmlEscape="false" maxlength="255" class="input-xlarge "/>

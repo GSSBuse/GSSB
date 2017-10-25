@@ -47,6 +47,7 @@ import com.thinkgem.jeesite.modules.sys.entity.dy.DyClient;
 import com.thinkgem.jeesite.modules.sys.entity.dy.DyDomainname;
 import com.thinkgem.jeesite.modules.sys.entity.dy.DyNews;
 import com.thinkgem.jeesite.modules.sys.entity.dy.DyShareRecord;
+import com.thinkgem.jeesite.modules.sys.entity.dy.DyTemplateMessage;
 import com.thinkgem.jeesite.modules.sys.service.dy.DyAccessRecordService;
 import com.thinkgem.jeesite.modules.sys.service.dy.DyAttentionService;
 import com.thinkgem.jeesite.modules.sys.service.dy.DyBidhistoryService;
@@ -56,6 +57,7 @@ import com.thinkgem.jeesite.modules.sys.service.dy.DyDomainnameService;
 import com.thinkgem.jeesite.modules.sys.service.dy.DyFinanceService;
 import com.thinkgem.jeesite.modules.sys.service.dy.DyNewsService;
 import com.thinkgem.jeesite.modules.sys.service.dy.DyShareRecordService;
+import com.thinkgem.jeesite.modules.sys.service.dy.DyTemplateMessageService;
 import com.thinkgem.jeesite.modules.sys.utils.CacheUpdateFlagUtil;
 import com.thinkgem.jeesite.modules.sys.utils.NewsUpdateFlagUtil;
 import com.thinkgem.jeesite.modules.sys.utils.ShowBidListCacheUtil;
@@ -114,6 +116,9 @@ public class IbuyController implements Constant {
 
 	@Autowired
 	private DyBonusService dyBonusService;               // 红包佣金信息Service
+	
+	@Autowired
+	private DyTemplateMessageService dyTemplateMessageService;
 
 	/**
 	 * 我要买 页面请求
@@ -133,8 +138,12 @@ public class IbuyController implements Constant {
 		// 获取初始化数据
 		// 第一次打开时，只显示两条
 		AjaxResult ar = this.domainList(model, String.valueOf(1), singleDomainId, shareClientId, null);
-		ar.getData().put("sysServerTime", new Date());//传输一个系统时间，用于计算倒计时
-		model.addAttribute("initData", JsonMapper.toJsonString(ar.getData()));
+		Map<String, Object> data = ar.getData();
+		data.put("sysServerTime", new Date());//传输一个系统时间，用于计算倒计时
+		
+		data.put("sharemsg", dyTemplateMessageService.findList(new DyTemplateMessage(0, "SHR001")));
+		
+		model.addAttribute("initData", JsonMapper.toJsonString(data));
 		
 		return "modules/wx/domainname/ibuy";
 	}
@@ -146,26 +155,42 @@ public class IbuyController implements Constant {
 			@RequestParam(value = "shareClientId", required = false)String shareClientId,
 			@RequestParam(value = "autoFollow", required = false)String autoFollow){
 		//当用户进入某个域名页面时，自动添加对该域名的关注 
-				if ( StringUtils.isNotBlank(singleDomainId) && StringUtils.isNotBlank(autoFollow) ) {
-					try {
-						DyClient currClient = DySysUtils.getCurrentDyClient();
-						
-						DyAttention entity = new DyAttention();
-						entity.setClientId(currClient.getId());
-						entity.setDomainnameId(singleDomainId);
-						entity.setDelFlag(DyAttention.DEL_FLAG_NORMAL);
-						
-						if(!dyAttentionService.isAttented(entity)){
-							entity.preInsert(UserUtils.get(currClient.getBrokerId()));
-							entity.setIsNewRecord(true);
-							dyAttentionService.save(entity);
-						}
-					} catch (Exception e) {
-						return "modules/wx/domainname/singleDomainname";
-					}
+		if ( StringUtils.isNotBlank(singleDomainId) && StringUtils.isNotBlank(autoFollow) ) {
+			try {
+				DyClient currClient = DySysUtils.getCurrentDyClient();
+				
+				DyAttention entity = new DyAttention();
+				entity.setClientId(currClient.getId());
+				entity.setDomainnameId(singleDomainId);
+				entity.setDelFlag(DyAttention.DEL_FLAG_NORMAL);
+				
+				if(!dyAttentionService.isAttented(entity)){
+					entity.preInsert(UserUtils.get(currClient.getBrokerId()));
+					entity.setIsNewRecord(true);
+					dyAttentionService.save(entity);
 				}
-				/**author wufulin end**/
+			} catch (Exception e) {
 				return "modules/wx/domainname/singleDomainname";
+			}
+		}
+		
+		AjaxResult ar = AjaxResult.makeSuccess("");
+		Map<String, String> clientInfo = Maps.newHashMap();
+		DyClient currClient = DySysUtils.getCurrentDyClient();
+		if (null != currClient) {
+			clientInfo.put("id", currClient.getId());
+			clientInfo.put("nickname", currClient.getNickname());
+			clientInfo.put("photo", currClient.getPhoto());
+			clientInfo.put("mobile", currClient.getMobile());
+		} else {
+			clientInfo = null;
+		}
+		
+		ar.getData().put("currClient", clientInfo);
+		model.addAttribute("initData", JsonMapper.toJsonString(ar.getData()));
+		
+		/**author wufulin end**/
+		return "modules/wx/domainname/singleDomainname";
 		
 	}
 	/**
@@ -329,9 +354,28 @@ public class IbuyController implements Constant {
 	@ResponseBody
 	@RequestMapping(value = {"domainList"})
 	public AjaxResult domainList(Model model, String pageIndex, String singleDomainId, String shareClientId, Integer pageSizeSp) {
+		
+		DyClient currClient = DySysUtils.getCurrentDyClient();
+		
+		if (StringUtils.isEmpty(singleDomainId)) {
+			AjaxResult ar = AjaxResult.makeSuccess("");
+			Map<String, String> clientInfo = Maps.newHashMap();
+			if (null != currClient) {
+				clientInfo.put("id", currClient.getId());
+				clientInfo.put("nickname", currClient.getNickname());
+				clientInfo.put("photo", currClient.getPhoto());
+				clientInfo.put("mobile", currClient.getMobile());
+			} else {
+				clientInfo = null;
+			}
+			ar.getData().put("currClient", clientInfo);
+			ar.getData().put("domainList", ListUtils.EMPTY_LIST);
+			ar.getData().put("count", 0);
+			ar.getData().put("shareBonusEnable", DySysUtils.SHARE_BONUS_ENABLE);//添加红包开关
+			ar.getData().put("sysServerTime", new Date());//传输一个系统时间，用于计算倒计时
+		}
 		// 将分享链接openid保存至用户session中
 		UserUtils.getSession().setAttribute(SESSION_KEY_SHARE_OPENID, shareClientId);
-		DyClient currClient = DySysUtils.getCurrentDyClient();
 
 		Page<DyDomainname> page = new Page<DyDomainname>();
 		page.setPageSize(pageSizeSp == null?PAGE_SIZE_3:pageSizeSp);
@@ -399,33 +443,34 @@ public class IbuyController implements Constant {
 			// 是否结拍
 			pDomain.setEndFlag(domain.getEndTime().compareTo(new Date()) <= 0);
 
+			// 查询出价记录列表
+			bidCount = this.getBidClientList(domainId, bidList);
+			pDomain.setBidCount(bidCount);
+			pDomain.setBidList(bidList);
+			if (bidList.size() > 3) {
+				pDomain.setBidList(bidList.subList(0, 3));
+			}
+			if (bidList.isEmpty()) {
+				pDomain.setCurrAmount(0L);
+				pDomain.setTopBidClientId("");
+			} else {
+				pDomain.setCurrAmount(bidList.get(0).getBidAmount());
+				pDomain.setProxyAmount(bidList.get(0).getProxyAmount());
+				pDomain.setTopBidClientId(bidList.get(0).getClientId());
+				if (null != bidList.get(0).getProxyAmount()) {
+					bidList.get(0).setProxyIncrement(DySysUtils.calculateDepositAndIncrement(bidList.get(0).getProxyAmount(), BID_RULE_TYPE_INCREMENT));
+					pDomain.setProxyIncrement(bidList.get(0).getProxyIncrement());
+				}
+			}
+			pDomain.setIncrement(DySysUtils.calculateDepositAndIncrement(pDomain.getCurrAmount(), BID_RULE_TYPE_INCREMENT));
+			pDomain.setDeposit(DySysUtils.calculateDepositAndIncrement(pDomain.getCurrAmount().longValue() + pDomain.getIncrement().longValue(), BID_RULE_TYPE_DEPOSIT));
+			if (null == pDomain.getIncrement()) {
+				pDomain.setIncrement(0L);
+			}
+	
+
 			if (page.getPageNo() != 1 || !StringUtils.isEmpty(singleDomainId)) {
-				// 查询出价记录列表
-				bidCount = this.getBidClientList(domainId, bidList);
-				pDomain.setBidCount(bidCount);
-				pDomain.setBidList(bidList);
-				if (bidList.size() > 3) {
-					pDomain.setBidList(bidList.subList(0, 3));
-				}
-				if (bidList.isEmpty()) {
-					pDomain.setCurrAmount(0L);
-					pDomain.setTopBidClientId("");
-				} else {
-					pDomain.setCurrAmount(bidList.get(0).getBidAmount());
-					pDomain.setProxyAmount(bidList.get(0).getProxyAmount());
-					pDomain.setTopBidClientId(bidList.get(0).getClientId());
-					if (null != bidList.get(0).getProxyAmount()) {
-						bidList.get(0).setProxyIncrement(DySysUtils.calculateDepositAndIncrement(bidList.get(0).getProxyAmount(), BID_RULE_TYPE_INCREMENT));
-						pDomain.setProxyIncrement(bidList.get(0).getProxyIncrement());
-					}
-				}
-				pDomain.setIncrement(DySysUtils.calculateDepositAndIncrement(pDomain.getCurrAmount(), BID_RULE_TYPE_INCREMENT));
-				pDomain.setDeposit(DySysUtils.calculateDepositAndIncrement(pDomain.getCurrAmount().longValue() + pDomain.getIncrement().longValue(), BID_RULE_TYPE_DEPOSIT));
-				if (null == pDomain.getIncrement()) {
-					pDomain.setIncrement(0L);
-				}
-	
-	
+					
 				// 查询关注会员列表
 				attentionCount = this.getAttentionClientList(pDomain.getId(), attentionList);
 				pDomain.setAttentionCount(attentionCount);
@@ -444,12 +489,6 @@ public class IbuyController implements Constant {
 							: ATTENTION_NORMAL); // 域名是否被关注文本
 				}
 			} else {
-				pDomain.setBidCount(-1L);
-				pDomain.setBidList(ListUtils.EMPTY_LIST);
-				pDomain.setCurrAmount(-1L);
-				pDomain.setTopBidClientId("");
-				pDomain.setIncrement(0L);
-				pDomain.setDeposit(0L);
 				pDomain.setAttentionCount(-1L);
 				pDomain.setAttentionList(ListUtils.EMPTY_LIST);
 			}
@@ -462,6 +501,7 @@ public class IbuyController implements Constant {
 			clientInfo.put("id", currClient.getId());
 			clientInfo.put("nickname", currClient.getNickname());
 			clientInfo.put("photo", currClient.getPhoto());
+			clientInfo.put("mobile", currClient.getMobile());
 		} else {
 			clientInfo = null;
 		}
@@ -651,10 +691,10 @@ public class IbuyController implements Constant {
 			return ar;
 		}
 
-		List<DyClient> attentionCList = new ArrayList<DyClient>();;
-		Long attentionCount = this.getAttentionClientList(domainId, attentionCList);
-		ar.getData().put("attentionCount", attentionCount);
-		ar.getData().put("attentionCList", attentionCList);
+//		List<DyClient> attentionCList = new ArrayList<DyClient>();;
+//		Long attentionCount = this.getAttentionClientList(domainId, attentionCList);
+//		ar.getData().put("attentionCount", attentionCount);
+//		ar.getData().put("attentionCList", attentionCList);
 		NewsUpdateFlagUtil.setUpdateTimestamp();
 		return ar;
 	}
@@ -875,7 +915,7 @@ public class IbuyController implements Constant {
 	@ResponseBody
 	@RequestMapping(value = {"bidData"})
 	public AjaxResult bidData(String domainId , String pageIndex){
-		if (domainId == null) {
+		if (StringUtils.isEmpty(domainId)) {
 			return AjaxResult.makeWarn("没有更多出价了");
 		}
 		
@@ -917,12 +957,12 @@ public class IbuyController implements Constant {
 			bidClientList.add(bidClient);
 		}
 		AjaxResult ar = AjaxResult.makeSuccess("");
-		ar.getData().put("domainName", domain.getName());
+		ar.getData().put("domainName", domain!=null?domain.getName():"");
 		ar.getData().put("bidClientList", bidClientList);
 		ar.getData().put("bidCount", pageDomain.getCount());
 		ar.getData().put("endTime", DateUtils.formatDate(domain.getEndTime(), "MM月dd日 HH:mm"));
 		ar.getData().put("isFinished", domain.getEndTime().compareTo(new Date()) <= 0);
-		ar.getData().put("hasBonusSecond", null != domain.getBonusSecond() && domain.getBonusSecond().compareTo(0L) > 0);
+		ar.getData().put("hasBonusSecond", domain != null && null != domain.getBonusSecond() && domain.getBonusSecond().compareTo(0L) > 0);
 
 		return ar;
 	}
@@ -1059,7 +1099,7 @@ public class IbuyController implements Constant {
 	}
 
 	/**
-	 * 根据域名ID获取关注会员列表
+	 * 根据域名ID获取关注会员列表。仅可手机端使用
 	 * @param domainId 域名ID
 	 * @param attentionCList 域名-关注会员列表
 	 * @return 关注会员总数

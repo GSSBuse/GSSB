@@ -204,10 +204,10 @@ require(["utils"], function(utils) {
 			if(!vm.datas.userinfo.qq && !vm.datas.userinfo.wx){
 				return false;
 			}
-			if(vm.datas.userinfo.authenticationMark != "1" || !vm.datas.userinfo.authenticationPositiveImageUrl || !vm.datas.userinfo.authenticationNegativeImageUrl){
+			if(vm.datas.userinfo.authenticationMark != "1" || !vm.datas.userinfo.idcardNumber){
 				return false;
 			}
-			if(!vm.datas.userinfo.defaultIncomeExpense){
+			if(!vm.datas.userinfo.defaultIncomeExpense || !vm.datas.userinfo.bankName || !vm.datas.userinfo.bankLocation){
 				return false;
 			}
 			return true;

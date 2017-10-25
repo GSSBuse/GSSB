@@ -5,6 +5,9 @@
 	<!-- <title>个人中心</title> -->
  <title>米乐拍卖</title>
 	<%@include file="/WEB-INF/views/include/common.jsp"%>	
+	
+	<%@include file="/WEB-INF/views/include/commonjs.jsp" %>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/frontend-jam/static/js/icenter.js"></script>
 </head>
 <body ontouchstart="" class="ms-loader ms-loading">
 	<div class="page-wrapper">
@@ -109,7 +112,5 @@
 		</footer>
 		
 	</div>
-	<%@include file="/WEB-INF/views/include/commonjs.jsp" %>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/static/frontend-jam/static/js/icenter.js"></script>
 </body>
 </html>

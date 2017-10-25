@@ -20,7 +20,9 @@ define( function() {
 				authenticationNegativeImageUrl:"",
 				photo:"",
 				dyid:"",
-				idcardNumber:""
+				idcardNumber:"",
+				bankName : "",
+				bankLocation : ""
 			},
 			// 需要更新的数据，可以暂存在这里
 			temp : {
@@ -37,7 +39,9 @@ define( function() {
 				authenticationNegativeImageUrl:"",
 				photo:"",
 				dyid:"",
-				IDcardNumber:""
+				idcardNumber:"",
+				bankName : "",
+				bankLocation : ""
 			},
 			//经济人信息
 			brokerinfo:{
@@ -63,11 +67,37 @@ define( function() {
 				payPassword:""//存储修改支付方式时的支付密码
 			}
 		},
+		tomark: function(idnum) {
+			if (idnum && idnum.length > 4) {
+				return idnum.substring(0, idnum.length-4).replace(/\d/g, "*") + idnum.substring(idnum.length-4, idnum.length);
+			} else {
+				return idnum;
+			}
+		},
 		//跳转至修改手机页面
 		linkToChangePhone:function(){
 			$.m.changePage("changePhone.html");
 		},
-		// 财务管理：认证默认收支方式
+		//打开身份银行信息对话框
+		open_identity_bank_info_dialog : function(){
+			if(!vm.datas.userinfo.payPassword){
+				$.tips({
+					content : "请先设置安全密码",
+					stayTime:1000,
+					type : "warn"
+				}).on("tips:hide",function(){
+					$.m.changePage("#addPayPassword?type=set");
+				});
+				return false
+			}
+			$("#identity-bank-info").dialog("show");
+		},
+		//取消修改默认收支方式
+		cancelChangeIdentityBankInfo:function(){
+			$("#identity-bank-info").dialog("hide");
+			avalon.mix(vm.datas.temp, vm.datas.userinfo);
+		},
+		// 认证默认收支方式
 		open_income_expense_dialog:function(e){
 			if(!vm.datas.userinfo.payPassword){
 				$.tips({
@@ -91,6 +121,192 @@ define( function() {
 		clearBankCardNumberInput:function(e){
 			vm.datas.temp.defaultIncomeExpense = "";
 			document.getElementById("default_income_expense").focus();
+		},
+		clearBankNameInput :function(){
+			vm.datas.temp.bankName = "";
+			document.getElementById("bankName").focus();
+		},
+		clearBankLocationInput :function(){
+			vm.datas.temp.bankLocation = "";
+			document.getElementById("bankLocation").focus();
+		},
+		//打开修改身份银行信息的支付密码弹窗
+		openPayPassword:function(){
+			if(vm.datas.temp.defaultIncomeExpense == ""){
+				$.tips({
+					content : "银行卡号不能为空",
+					stayTime:2000,
+					type : "warn"
+				});
+				return false;
+			}else{
+				var reg = /^[\d]{15,22}$/;//只能输入银行卡号格式
+				if(!reg.test(vm.datas.temp.defaultIncomeExpense)){
+					$.tips({
+						content : "只能输入银行卡号格式",
+						stayTime:2000,
+						type : "warn"
+					});
+					return false;
+				}
+			}
+			if(vm.datas.temp.bankName ==""){
+				$.tips({
+					content : "开户行名称不能为空",
+					stayTime:2000,
+					type : "warn"
+				});
+				return false;
+			}else{
+				var reg = /^[\u4E00-\u9FA5]{2,50}$/;//只能输入汉字
+				if(!reg.test(vm.datas.temp.bankName)){
+					$.tips({
+						content : "开户行名称只能输入2至50位汉字",
+						stayTime:2000,
+						type : "warn"
+					});
+					return false;
+				}
+			}
+			
+			if(vm.datas.temp.bankLocation ==""){
+				$.tips({
+					content : "开户行所在地不能为空",
+					stayTime:2000,
+					type : "warn"
+				});
+				return false;
+			}else{
+				var reg = /^[\u4E00-\u9FA5]{2,50}$/;//只能输入汉字
+				if(!reg.test(vm.datas.temp.bankLocation)){
+					$.tips({
+						content : "开户行所在地只能输入2至50位汉字",
+						stayTime:2000,
+						type : "warn"
+					});
+					return false;
+				}
+			}
+			
+			if(vm.datas.userinfo.authenticationMark == 0){
+				//身份未认证，姓名、身份证号可以修改
+				if(vm.datas.temp.name ==""){
+					$.tips({
+						content : "姓名不能为空",
+						stayTime:2000,
+						type : "warn"
+					});
+					return false;
+				}else{
+					var reg = /^[\u4E00-\u9FA5]{2,10}$/;//只能输入汉字
+					if(!reg.test(vm.datas.temp.name)){
+						$.tips({
+							content : "姓名只能输入2至10位汉字",
+							stayTime:2000,
+							type : "warn"
+						});
+						return false;
+					}
+				}
+				if(vm.datas.temp.idcardNumber ==""){
+					$.tips({
+						content : "身份证号不能为空",
+						stayTime:2000,
+						type : "warn"
+					});
+					return false;
+				}else{
+					var reg = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;//只能输入身份证格式
+					if(!reg.test(vm.datas.temp.idcardNumber)){
+						$.tips({
+							content : "身份证号格式不对",
+							stayTime:2000,
+							type : "warn"
+						});
+						return false;
+					}
+				}
+			}
+			
+			$("#identity-bank-info").dialog("hide");
+			$("#verificationPayPasswordForDIE").dialog("show");
+			$("#payPasswords").focus();
+		},
+		//提交修改身份银行信息
+		confirmChangeIdentityBankInfo:function(e){
+			if(vm.datas.cashflowinfo.payPassword == ""){
+				$.tips({
+					content : "不能为空",
+					stayTime:2000,
+					type : "warn"
+				});
+				return false;
+			}
+			
+			var reg = /^[\d]{6}$/;//只能输入6位数字
+			if(!reg.test(vm.datas.cashflowinfo.payPassword)){
+				$.tips({
+					content : "只能输入6位数字",
+					stayTime:2000,
+					type : "warn"
+				});
+				return false;
+			}
+			committing.show();
+			$.post("verificationOldPassword", {oldPassword:vm.datas.cashflowinfo.payPassword}, function(res){
+				if(res.type == "success"){
+					$.post("changeIdentityBankInfo", {name : vm.datas.temp.name,idcardNumber :vm.datas.temp.idcardNumber,defaultIncomeExpense:vm.datas.temp.defaultIncomeExpense,bankName:vm.datas.temp.bankName,bankLocation : vm.datas.temp.bankLocation}, function(res){
+						if (res.type=="success") {
+							vm.datas.userinfo.name = res.data.newName;
+							vm.datas.userinfo.idcardNumber = res.data.newIdcardNumber;
+							vm.datas.userinfo.defaultIncomeExpense = res.data.newDefaultIncomeExpense;
+							vm.datas.userinfo.bankName = res.data.newBankName;
+							vm.datas.userinfo.bankLocation = res.data.newBankLocation;
+							if (!vm.datas.userinfo.authenticationMark || vm.datas.userinfo.authenticationMark=="0") {
+								vm.datas.userinfo.authenticationMark = 2;
+							}
+							
+							vm.datas.temp.name = vm.datas.userinfo.name;
+							vm.datas.temp.idcardNumber = vm.datas.userinfo.idcardNumber;
+							vm.datas.temp.defaultIncomeExpense = vm.datas.userinfo.defaultIncomeExpense;
+							vm.datas.temp.bankName = vm.datas.userinfo.bankName;
+							vm.datas.temp.bankLocation = vm.datas.userinfo.bankLocation;
+							
+						}else if(res.type=="error"){
+							avalon.mix(vm.datas.temp, res.data.userinfo);
+						}
+						vm.datas.cashflowinfo.payPassword = "";
+						$("#identity-bank-info").dialog("hide");
+						$("#verificationPayPasswordForDIE").dialog("hide");
+						committing.hide();
+						$.tips({
+							content : res.msg,
+							stayTime:2000,
+							type : res.type
+						});
+					});
+				}else if(res.type == "warn"){
+					$("#identity-bank-info").dialog("hide");
+					$("#verificationPayPasswordForDIE").dialog("show");
+					vm.datas.cashflowinfo.payPassword = "";
+					committing.hide();
+					$.tips({
+						content : res.msg,
+						stayTime:2000,
+						type : res.type
+					});
+				}else{
+					vm.datas.cashflowinfo.payPassword = "";
+					$("#identity-bank-info").dialog("hide");
+					$("#verificationPayPasswordForDIE").dialog("hide");
+					committing.hide();
+					$.tips({
+						content : res.msg,
+						stayTime:2000,
+						type : res.type
+					});
+				}
+			});	
 		},
 		//打开修改银行卡号的支付密码弹窗
 		openVerificationPayPasswordForDIE:function(){
@@ -496,12 +712,12 @@ define( function() {
 		//身份认证:修改弹窗
 		changeIDcard:function(){
 			$("#changeIDcard").dialog("show");
-			$("#IDcardNumber").focus();
+			$("#idcardNumber").focus();
 		},
 		//清除身份证号的输入
 		clearIDcardNumberInput : function(){
-			vm.datas.temp.IDcardNumber = "";
-			document.getElementById("IDcardNumber").focus();
+			vm.datas.temp.idcardNumber = "";
+			document.getElementById("idcardNumber").focus();
 		},
 		//选择正面证件图片
 		authentication_image1:function(){
@@ -547,7 +763,7 @@ define( function() {
 		},
 		//确认提交身份认证
 		confirmAuthentication:function(){
-			if($("#IDcardNumber").val()==""){
+			if($("#idcardNumber").val()==""){
 				$.tips({
 					content : "身份证号不能为空",
 					stayTime:2000,
@@ -555,7 +771,7 @@ define( function() {
 				});
 				return false;
 			}
-			if($("#IDcardNumber").val() == vm.datas.userinfo.idcardNumber){
+			if($("#idcardNumber").val() == vm.datas.userinfo.idcardNumber){
 				$.tips({
 					content : "身份证号不能与原来的相同",
 					stayTime:2000,
@@ -565,7 +781,7 @@ define( function() {
 			}
 			
 			var reg = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;//只能输入身份证格式
-			if(!reg.test(vm.datas.temp.IDcardNumber)){
+			if(!reg.test(vm.datas.temp.idcardNumber)){
 				$.tips({
 					content : "身份证号格式不对",
 					stayTime:2000,
@@ -588,7 +804,7 @@ define( function() {
 						    	vm.datas.authentication.image2_serverId = res.serverId; // 返回图片的服务器端ID
 						    	//微信接口上传成功，则提交到后台处理（从微信服务上下载到自己的服务器上）
 								if(vm.datas.authentication.image1_serverId !="fail" && vm.datas.authentication.image2_serverId !="fail" && vm.datas.authentication.image1_serverId !="" && vm.datas.authentication.image2_serverId !=""){
-									$.post("authenticationIDcard", {image1_serverId:vm.datas.authentication.image1_serverId,image2_serverId:vm.datas.authentication.image2_serverId,IDcardNumber : vm.datas.temp.IDcardNumber}, function(res){
+									$.post("authenticationIDcard", {image1_serverId:vm.datas.authentication.image1_serverId,image2_serverId:vm.datas.authentication.image2_serverId,idcardNumber : vm.datas.temp.idcardNumber}, function(res){
 										$.tips({
 											content : res.msg,
 											stayTime:2000,
@@ -598,7 +814,7 @@ define( function() {
 							            	vm.datas.userinfo.authenticationPositiveImageUrl = res.data.authenticationPositiveImageUrl;
 							            	vm.datas.userinfo.authenticationNegativeImageUrl = res.data.authenticationNegativeImageUrl;
 							            	vm.datas.userinfo.authenticationMark = "2";
-							            	vm.datas.userinfo.idcardNumber = vm.datas.temp.IDcardNumber;
+							            	vm.datas.userinfo.idcardNumber = vm.datas.temp.idcardNumber;
 							            	//$("#authentication_image1").attr("src",vm.datas.authentication.image_source);
 							    			//$("#authentication_image2").attr("src",vm.datas.authentication.image_source);
 							            	$("#changeIDcard").dialog("hide");
@@ -644,7 +860,7 @@ define( function() {
 					type : "warn"
 				});
 			}
-			//vm.datas.temp.IDcardNumber = "";
+			//vm.datas.temp.idcardNumber = "";
 		}else{
 				$.tips({
 					content : "请继续选择照片，不能为空",

@@ -15,8 +15,8 @@ import org.apache.log4j.Logger;
 import org.nutz.json.Json;
 
 import com.thinkgem.jeesite.common.wx.WeChat;
-import com.thinkgem.jeesite.common.wx.bean.ClickCommonButton;
 import com.thinkgem.jeesite.common.wx.bean.Button;
+import com.thinkgem.jeesite.common.wx.bean.ClickCommonButton;
 import com.thinkgem.jeesite.common.wx.bean.ComplexButton;
 import com.thinkgem.jeesite.common.wx.bean.MenuBean;
 import com.thinkgem.jeesite.common.wx.bean.ViewCommonButton;
@@ -81,28 +81,29 @@ public class Menu {
 	 * 创建菜单样例
 	 */
 	public boolean createMenuDemo(){
+		System.out.println(ConfKit.get("root_uri"));
 		ViewCommonButton btn1 = new ViewCommonButton();
 		btn1.setName("我要买");
 		btn1.setType("view");
-		String url1 = ConfKit.get("root_uri") + "/servlet/OAuthServlet?jump=1";
+		String url1 = ConfKit.get("root_uri") + "/domainname/ibuy.html";
 		btn1.setUrl(url1);
 		
 		ViewCommonButton btn2 = new ViewCommonButton();
 		btn2.setName("我要卖");
 		btn2.setType("view");
-		String url2 = ConfKit.get("root_uri") + "/servlet/OAuthServlet?jump=2";
+		String url2 = ConfKit.get("root_uri") + "/domainname/isell.html";
 		btn2.setUrl(url2);
 
 		ViewCommonButton btn31 = new ViewCommonButton();
 		btn31.setName("个人中心");
 		btn31.setType("view");
-		String url31 = ConfKit.get("root_uri") + "/servlet/OAuthServlet?jump=3";
+		String url31 = ConfKit.get("root_uri") + "/domainname/icenter.html";
 		btn31.setUrl(url31);
 		
 		ViewCommonButton btn32 = new ViewCommonButton();
 		btn32.setName("历史交易");
 		btn32.setType("view");
-		String url32 = ConfKit.get("root_uri") + "/servlet/OAuthServlet?jump=4";
+		String url32 = ConfKit.get("root_uri") + "/domainname/getHistory.html";
 		btn32.setUrl(url32);
 		
 		ClickCommonButton btn33 = new ClickCommonButton();
@@ -110,9 +111,15 @@ public class Menu {
 		btn33.setType("click");
 		btn33.setKey("contact");
 		
+		ViewCommonButton btn34 = new ViewCommonButton();
+		btn34.setName("使用指南");
+		btn34.setType("view");
+		String url34 = ConfKit.get("root_uri") + "/domainname/viewArticle?articleId=2";
+		btn34.setUrl(url34);
+		
 		ComplexButton btn3 = new ComplexButton();  
 		btn3.setName("其它");  
-		btn3.setSub_button(new Button[] { btn31, btn32 ,btn33});
+		btn3.setSub_button(new Button[] { btn31, btn32 ,btn33,btn34});
 		//我的，联系经纪人、查看交易记录
 
 		/**

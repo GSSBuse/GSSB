@@ -24,6 +24,8 @@
 		a.default_income_expense AS "defaultIncomeExpense",
 		a.authentication_positive_image_url AS "authenticationPositiveImageUrl",
 		a.authentication_negative_image_url AS "authenticationNegativeImageUrl",
+		a.bank_name AS "bankName",
+		a.bank_location AS "bankLocation",
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
 		a.update_by AS "updateBy.id",
@@ -84,6 +86,12 @@
 			AND c.del_flag = #{DEL_FLAG_NORMAL}
 			AND a.broker_id = b.id
 			AND c.client_id = a.id
+			<if test="dyid != null and dyid != ''">
+				AND a.dyid LIKE 
+					<if test="dbName == 'oracle'">'%'||#{dyid}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{dyid}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{dyid},'%')</if>
+			</if>
 			<if test="name != null and name != ''">
 				AND a.name LIKE 
 					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
@@ -251,6 +259,8 @@
 			default_income_expense,
 			authentication_positive_image_url,
 			authentication_negative_image_url,
+			bank_name,
+			bank_location,
 			create_by,
 			create_date,
 			update_by,
@@ -279,6 +289,8 @@
 			#{defaultIncomeExpense},
 			#{authenticationPositiveImageUrl},
 			#{authenticationNegativeImageUrl},
+			#{bankName},
+			#{bankLocation},
 			#{createBy.id},
 			#{createDate},
 			#{updateBy.id},
@@ -310,6 +322,8 @@
 			default_income_expense = #{defaultIncomeExpense},
 			authentication_positive_image_url = #{authenticationPositiveImageUrl},
 			authentication_negative_image_url = #{authenticationNegativeImageUrl},
+			bank_name = #{bankName},
+			bank_location = #{bankLocation},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},
 			remarks = #{remarks}

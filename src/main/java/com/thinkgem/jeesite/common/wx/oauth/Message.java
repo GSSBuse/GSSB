@@ -215,7 +215,11 @@ public class Message {
 		artList.add(articles);
 		String result = "";
 		try {
+			try {
 			result = SendNews(accessToken, openId, artList);
+			} catch (Exception e) {
+				LOGGER.error("客服图文消息发送异常:",e);
+			}
 			if (result != null) {
 				if (!result.contains("ok")) {
 					LOGGER.error("客服图文消息发送异常:" + result);

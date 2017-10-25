@@ -1,7 +1,7 @@
 require.config({
     "baseUrl": (window.ctx?ctx+"/":"")+ "static/frontend-jam/static/js",
     "waitSeconds" : 0,
-    "urlArgs": "ver=v1.0.37",
+    "urlArgs": "ver=v1.0.40",
     "paths": {
       "vendors-lib" : "../vendors",
       "jq-plugin" : "../vendors/jquery/plugins",

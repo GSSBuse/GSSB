@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.h2.util.StringUtils;
 import org.nutz.json.Json;
 
 import com.thinkgem.jeesite.common.wx.inf.ErrorCode;
@@ -109,7 +108,7 @@ public class DuoKefu {
     	if (map.size() > 0) {
     		List<Map<String, String>> list = (List<Map<String, String>>) map.get("kf_online_list");
     		for (Map<String, String> kf : list) {
-    			if (StringUtils.equals(kf.get("kf_account"), kfAccount)) {
+    			if (kfAccount != null && kfAccount.equalsIgnoreCase(kf.get("kf_account"))) {
     				return true;
     			}
     		}

@@ -14,20 +14,16 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
 import org.nutz.json.Json;
@@ -35,7 +31,6 @@ import org.nutz.mapl.Mapl;
 
 import com.thinkgem.jeesite.common.utils.ExpireCacheDataProducer;
 import com.thinkgem.jeesite.common.utils.ExpireDataUtil;
-import com.thinkgem.jeesite.common.utils.Reflections;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.common.utils.exception.ProduceException;
 import com.thinkgem.jeesite.common.wx.aes.SHA1;
@@ -88,6 +83,9 @@ public class WeChat {
 	private static final String CONVERT_TO_SHORT_URL = "https://api.weixin.qq.com/cgi-bin/shorturl?access_token=";
 	private static final String UNIFIEDORDER_URL= "https://api.mch.weixin.qq.com/pay/unifiedorder";//统一下单接口
 	private static final String SEND_REDPACK_URL = "https://api.mch.weixin.qq.com/mmpaymkttransfers/sendredpack";//发送红包接口
+	
+	private static final String[] ERROR_CODE_ACCESSTOKEN = {"40001", "40002", "40014", "42001"};
+	
     private static Class<?>  messageProcessingHandlerClazz = null;
     /**
      * 消息操作接口
@@ -120,7 +118,7 @@ public class WeChat {
     public static String tradeNumber(String type){
     	String number = null;
     	Date date = new Date();
-    	number = type+new SimpleDateFormat("yyyyMMddHHmmss").format(date);
+    	number = type+new SimpleDateFormat("yyyyMMddHHmmssS").format(date);
     	return number;
     }
     /**
@@ -136,7 +134,7 @@ public class WeChat {
 			//生成统一下单的签名
 			String sign = Pay.createUnifiedOrderSign(unifiedOrderParameters,key);
 			unifiedOrderParameters.setSign(sign);
-			LOGGER.debug("sign:"+sign);
+			
 //			//获取需要的参数
 //			Map<String, String> map = new HashMap<String, String>();
 //			for (Field field : UnifiedOrder.class.getDeclaredFields()) {
@@ -149,10 +147,10 @@ public class WeChat {
 			XStream xs = new XStream(new XppDriver(new NoNameCoder()));//XStreamFactory.init(false)会插入下划线，如a_b会变成a__b;
 			xs.alias("xml", unifiedOrderParameters.getClass());
 			String xml = xs.toXML(unifiedOrderParameters);
-			
+			LOGGER.debug("wxPay preorder send xml : "+xml);
 			//发送统一下单请求
 			String returnXml = HttpKit.post(UNIFIEDORDER_URL, xml);
-
+			LOGGER.debug("wxPay preorder return xml : "+returnXml);
 			// 转换微信post过来的xml内容
 			XStream xs1 = XStreamFactory.init(false);
 			xs1.ignoreUnknownElements();
@@ -249,6 +247,11 @@ public class WeChat {
 						// 有效时间减去10分钟
 						this.expires_in = Long.parseLong(expires_in) - 600;
 					}
+					Object errcode = Mapl.cell(json, "errcode");
+					if ("0".equals(errcode)) {
+						invalidAccessToken();
+						throw new ProduceException("token获取失败，重新获取");
+					}
 					return access_token;
 				} catch (Exception e) {
 					throw new ProduceException(e);
@@ -263,6 +266,11 @@ public class WeChat {
 		});
 		LOGGER.info("当前的access_token：" + token);
 		return token;
+    }
+    
+
+    public static void invalidAccessToken() {
+    	ExpireDataUtil.put("ATK_C", null, 0);
     }
     
     /**
@@ -281,14 +289,20 @@ public class WeChat {
 				try {
 					String jsonStr = HttpKit.get(JSAPITICKET_URL.concat("&access_token=") + getAccessToken());
 					Object json = Json.fromJson(jsonStr);
-					String access_token = Mapl.cell(json, "ticket").toString();
+					Object errcode = Mapl.cell(json, "errcode");
+					if (ArrayUtils.contains(ERROR_CODE_ACCESSTOKEN, errcode)) {
+						invalidAccessToken();
+						throw new RuntimeException("微信请求错误 : " + json);
+					}
+					String ticket = Mapl.cell(json, "ticket").toString();
 					// 凭证有效时间，单位：秒
 					String expires_in = Mapl.cell(json, "expires_in") != null ? Mapl.cell(json, "expires_in").toString() : null;
 					if (StringUtils.isNumeric(expires_in)) {
 						// 有效时间减去10分钟
 						this.expires_in = Long.parseLong(expires_in) - 600;
 					}
-					return access_token;
+				
+					return ticket;
 				} catch (Exception e) {
 					throw new ProduceException(e);
 				}
@@ -723,58 +737,6 @@ public class WeChat {
  		}else {
  			System.out.println("创建失败");
 		}
-// 		WeChat wechat = new WeChat();
-// 		
-// 		String accessToken = WeChat.getAccessToken();
-// 		System.out.println(accessToken);
-// 		
-// 		String url = WeChat.toShortUrl(accessToken, "http://mp.weixin.qq.com/wiki/10/165c9b15eddcfbd8699ac12b0bd89ae6.html");
-// 		
-// 		System.out.println(url);
- 		
-// 		WxTemplate t = new WxTemplate();
-//		t.setUrl("");
-//		t.setTouser("o6cyhjmz-Wcvq_f3O4iYfpJPOGnc");
-//		//t.setTouser(openid);
-//		t.setTopcolor("#000000");
-//		t.setTemplate_id("jMIN7uh7THTzq4xgS_a6LaThHdnXPs2hyG1O8pbySlw");
-//
-//		Map<String, TemplateData> m = new HashMap<String, TemplateData>();
-//
-//		TemplateData first = new TemplateData();
-//		first.setColor("#000000");
-//		first.setValue("您好，您的“保修工单”申请小唯已经收到，正抓紧为您解决，请耐心等待:)");
-//		m.put("first", first);
-//
-//		TemplateData orderId = new TemplateData();
-//		orderId.setColor("#000000");
-//		orderId.setValue("testtest");
-//		m.put("Apply_id", orderId);
-//
-//		TemplateData orderType = new TemplateData();
-//		orderType.setColor("#000000");
-//		orderType.setValue("testtest");
-//		m.put("Apply_Type", orderType);
-//
-//		TemplateData orderContent = new TemplateData();
-//		orderContent.setColor("#000000");
-//		orderContent.setValue("工单已提交，待处理");
-//		m.put("Apply_State", orderContent);
-//
-//		TemplateData date = new TemplateData();
-//		date.setColor("#000000");
-//		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
-//		date.setValue(df.format(new Date()));
-//		m.put("Apply_CreateTime", date);
-//
-//		TemplateData remark = new TemplateData();
-//		remark.setColor("#0000FF");
-//		remark.setValue("点击“详情”查看服务工单详细信息，如有疑问请致电400-828-1878或直接在微信留言，小唯将第一时间为您服务！");
-//		m.put("remark", remark);
-//
-//		t.setData(m);
-//
-// 		System.out.println(message.sendTemplate(accessToken, t));
-	
+ 		//System.out.println(menu.getMenuInfo("wKggalTjS2IjFSrsoY2iZx8A_QEzdm1xP_-0ioApqmEIatvJAWVSPEHSwO8K_qaOVmn51wU4t5uyCCZhNtgzNch1btPKGpSJNgKxpwyBmvgvCKKUPaBET0OQ5WqJwo1dFDQeAJAMKX"));
  	}
 }

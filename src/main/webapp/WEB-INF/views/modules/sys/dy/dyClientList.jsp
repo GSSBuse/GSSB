@@ -53,6 +53,9 @@
 			<li><label>手机号：</label>
 				<form:input path="mobile" htmlEscape="false" maxlength="200" class="input-medium"/>
 			</li>
+			<li><label>米友号：</label>
+				<form:input path="dyid" htmlEscape="false" maxlength="200" class="input-medium"/>
+			</li>
 			<li><label>身份认证：</label>
 				<select name="authenticationMark">
 				 	<option value="" <c:if test="${empty dyClient.authenticationMark}">selected="selected"</c:if>>查看全部</option>

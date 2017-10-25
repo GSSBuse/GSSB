@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/views/include/frontHead.jsp"%>
 <script type="text/javascript" src="${ctxStatic }/front/js/myTransactions.js"></script>
-<title>财务管理-拍域名</title>
+<title>米乐拍卖-米乐拍卖</title>
 </head>
 <body class="v4 layout01">
 	 <div id="uiWrapper">

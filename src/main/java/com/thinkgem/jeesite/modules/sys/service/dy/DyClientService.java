@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.thinkgem.jeesite.common.define.Constant;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
+import com.thinkgem.jeesite.common.service.ServiceException;
 import com.thinkgem.jeesite.modules.sys.dao.UserDao;
 import com.thinkgem.jeesite.modules.sys.dao.dy.DyClientDao;
 import com.thinkgem.jeesite.modules.sys.dao.dy.DyFinanceDao;
@@ -53,6 +54,10 @@ public class DyClientService extends CrudService<DyClientDao, DyClient> implemen
 	}
 	
 	public Page<DyClient> findPage(Page<DyClient> page, DyClient dyClient) {
+		if (dyClient.getNickname() != null) {
+			// 支持特殊字符 元
+			dyClient.setNickname(dyClient.getNickname().replace("&yen;", "¥"));
+		}
 		return super.findPage(page, dyClient);
 	}
 	
@@ -87,7 +92,17 @@ public class DyClientService extends CrudService<DyClientDao, DyClient> implemen
 			}
 			dyClient.setDyid(dyId);
 		}
-		super.save(dyClient);
+		//super.save(dyClient);
+		if (dyClient.getIsNewRecord()){
+			dyClient.preInsert();
+			dao.insert(dyClient);
+		}else{
+			dyClient.preUpdate();
+			int n = dao.update(dyClient);
+			if(n==0){
+				throw new ServiceException("无法更新会员信息:" + dyClient.toString());
+			}
+		}
 	}
 	
 	@Transactional(readOnly = false)
@@ -290,19 +305,21 @@ public class DyClientService extends CrudService<DyClientDao, DyClient> implemen
 		if(StringUtils.isBlank(dyClient.getName())){
 			return false;
 		}
-		if(!EMAIL_FLAG_1.equals(dyClient.getEmailFlag()) || StringUtils.isBlank(dyClient.getEmail())){
-			return false;
-		}
+		// 2016-2-15 个人信息认证不在需要“邮件”和“qq”
+//		if(!EMAIL_FLAG_1.equals(dyClient.getEmailFlag()) || StringUtils.isBlank(dyClient.getEmail())){
+//			return false;
+//		}
 		if(StringUtils.isBlank(dyClient.getMobile())){
 			return false;
 		}
-		if(StringUtils.isBlank(dyClient.getQq()) && StringUtils.isBlank(dyClient.getWx())){
+		if(//StringUtils.isBlank(dyClient.getQq()) && 
+				StringUtils.isBlank(dyClient.getWx())){
 			return false;
 		}
-		if(StringUtils.isBlank(dyClient.getDefaultIncomeExpense())){
+		if(StringUtils.isBlank(dyClient.getDefaultIncomeExpense())|| StringUtils.isBlank(dyClient.getBankName())||StringUtils.isBlank(dyClient.getBankLocation())){
 			return false;
 		}
-		if(!AUTHENTICATION_MARK_1.equals(dyClient.getAuthenticationMark()) || StringUtils.isBlank(dyClient.getAuthenticationPositiveImageUrl()) || StringUtils.isBlank(dyClient.getAuthenticationNegativeImageUrl())){
+		if(!AUTHENTICATION_MARK_1.equals(dyClient.getAuthenticationMark()) || StringUtils.isBlank(dyClient.getIDcardNumber())){
 			return false;
 		}
 		if(StringUtils.isBlank(dyClient.getPayPassword())){

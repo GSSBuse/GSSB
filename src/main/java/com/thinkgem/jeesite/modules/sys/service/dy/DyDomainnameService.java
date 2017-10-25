@@ -8,7 +8,6 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.base.Objects;
 import com.thinkgem.jeesite.common.bean.AjaxResult;
 import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.define.Constant;
@@ -57,6 +57,7 @@ import com.thinkgem.jeesite.modules.sys.entity.dy.DyNews;
 import com.thinkgem.jeesite.modules.sys.entity.dy.DyPlatformIncome;
 import com.thinkgem.jeesite.modules.sys.entity.dy.DyShareRecord;
 import com.thinkgem.jeesite.modules.sys.entity.dy.FollowInfoToMsg;
+import com.thinkgem.jeesite.modules.sys.entity.dy.HistoryInfo;
 import com.thinkgem.jeesite.modules.sys.entity.dy.TransactionInformation;
 import com.thinkgem.jeesite.modules.sys.utils.NewsUpdateFlagUtil;
 import com.thinkgem.jeesite.modules.sys.utils.ShowDomainCacheUtil;
@@ -776,28 +777,30 @@ public class DyDomainnameService extends CrudService<DyDomainnameDao, DyDomainna
 		DyFinance dyFinance = new DyFinance();
 		dyFinance.setClientId(dyDomainname.getClientId());
 		dyFinance = dyFinanceDao.findList(dyFinance).get(0);
-		Long deposit = this.getSellDeposit();//提交域名卖家 保证金
+		
+		Long deposit = null;//冻结的保证金金额
+		DyCashFlow cashFlow = new DyCashFlow();
+		cashFlow.setClientId(dyDomainname.getClientId());
+		cashFlow.setDomainnameId(dyDomainname.getId());
+		cashFlow.setOperate(CASHFLOW_OPERATE_FREEZE);
+		cashFlow.setConfirmResult(CASHFLOW_COMFIRM_DONE);
+		cashFlow.setIsNewRecord(false);
+		List<DyCashFlow> list = cashFlowService.findList(cashFlow);
+		if(list.isEmpty()){
+			throw new ServiceException("无此冻结记录（域名审核失败时）");
+		}else{
+			cashFlow = list.get(0);
+			deposit = cashFlow.getOperateAmount();
+		}
+		
 		int n = dyFinanceDao.updateFreezeBalance(dyFinance.getId(), 0L - deposit, dyFinance.getUpdateDate());
 		if(n == 0){
 			throw new ServiceException();
 		}
 		
 		//将解冻记录更新到资金流
-		DyCashFlow cashFlow = new DyCashFlow();
-		cashFlow.setClientId(dyDomainname.getClientId());
-		cashFlow.setDomainnameId(dyDomainname.getId());
-		cashFlow.setOperate(CASHFLOW_OPERATE_FREEZE);
-		cashFlow.setOperateAmount(deposit);
-		cashFlow.setConfirmResult(CASHFLOW_COMFIRM_DONE);
-		cashFlow.setIsNewRecord(false);
-		List<DyCashFlow> list = cashFlowService.findList(cashFlow);
-		if(list.isEmpty()){
-			throw new ServiceException("无此冻结记录（域名审核时）");
-		}else{
-			cashFlow = list.get(0);
-			cashFlow.setOperate(CASHFLOW_OPERATE_UNFREEZE);
-			cashFlowService.save(cashFlow);
-		}
+		cashFlow.setOperate(CASHFLOW_OPERATE_UNFREEZE);
+		cashFlowService.save(cashFlow);
 		
 		//红包扣除退回
 		//将红包扣除插入资金流，财务余额扣除
@@ -1269,8 +1272,19 @@ public class DyDomainnameService extends CrudService<DyDomainnameDao, DyDomainna
 			}
 		}
 		
+		// 发送 高于保留价成交消息
+		sendSuccessHigherReservePriceMessage(transactionInformation, dyDomainname, cal);
 		
-		DyClient seller = dyClientDao.get(transactionInformation.getSellerId());
+	}
+	/**
+	 * 发送 高于保留价成交消息
+	 * @param transactionInformation
+	 * @param dyDomainname
+	 * @param cal
+	 */
+    void sendSuccessHigherReservePriceMessage(TransactionInformation transactionInformation, DyDomainname dyDomainname,
+            Calendar cal) {
+	    DyClient seller = dyClientDao.get(transactionInformation.getSellerId());
 		DyClient buyer = dyClientDao.get(transactionInformation.getBuyerId());
 		 try {
 			//向卖家发送消息通知
@@ -1293,8 +1307,7 @@ public class DyDomainnameService extends CrudService<DyDomainnameDao, DyDomainna
 		} catch (Exception e) {
 			logger.error("向买家/卖家发送信息失败");
 		}
-		
-	}
+    }
 	
 	/**域名状态03且已过节拍时间，有人出价低于保留价，对该域名进行处理
 	 * @param transactionInformation 某个域名的买卖信息
@@ -1303,6 +1316,8 @@ public class DyDomainnameService extends CrudService<DyDomainnameDao, DyDomainna
 	 */
 	@Transactional(readOnly = false)
 	public void auctionSuccessAndLowerReservePriceHandle(TransactionInformation transactionInformation,boolean isSengMsg) throws Exception,ServiceException{
+		
+		
 		String domainnameId = transactionInformation.getDomainnameId();
 		
 		//统计该域名红包发出情况，剩余则返还卖家
@@ -1953,4 +1968,79 @@ public class DyDomainnameService extends CrudService<DyDomainnameDao, DyDomainna
 		list = dao.getDomainNum(DySysUtils.DEAL_NUM,beginDate,endDate);
 		 return list;
 	}
+	/**
+	 * 获取平台历史交易信息，分页
+	 * @param page
+	 * @param dyCashFlow
+	 * @return
+	 */
+	public Page<HistoryInfo> findHistoryInfoPage(Page<HistoryInfo> page, HistoryInfo historyInfo) {
+		historyInfo.setPage(page);
+		page.setList(dao.findHistoryInfoPage(historyInfo));
+		return page;
+	}
+	
+	@Transactional(readOnly = false)
+	public void auctionSuccessAndProxyHigherReservePriceHandle(TransactionInformation transactionInformation) {
+		String domainnameId = transactionInformation.getDomainnameId();
+//		String sellerId = transactionInformation.getSellerId();
+		String buyerId = transactionInformation.getBuyerId();
+		DyClient buyerClient = dyClientDao.get(buyerId);
+		
+		//更新买家的冻结资金信息：冻结保证金变为冻结成交价
+		Long buyerDeposit = null;
+		Long oldDeposit = null;
+		
+		// 新出价与保留价相同
+		Long newBidAmount = transactionInformation.getReservePrice();
+		
+		// 更新出价信息
+		DyBidhistory bidHis = dyBidhistoryDao.getMaxBidAmount(domainnameId);
+		if (Objects.equal(bidHis.getClientId(), buyerId) 
+				&& Objects.equal(bidHis.getBidAmount(), transactionInformation.getBidAmount()) 
+				) {
+			// 完全一致更新记录
+			bidHis.setBidAmount(newBidAmount);
+			bidHis.setBidTime(new Date());
+			bidHis.setRemarks("由于代理竞价高于保留价。自动抬价：" + transactionInformation.getBidAmount() + " -> " + newBidAmount);
+			dyBidhistoryDao.update(bidHis);
+		}
+		
+		if(Constant.SWITCH_ON.equals(buyerClient.getAvoidDeposit())){
+			//当前用户可以免除保证金
+			buyerDeposit = 0L;
+		}else{
+			// 重新计算保证金
+			buyerDeposit = DySysUtils.calculateDepositAndIncrement(newBidAmount, BID_RULE_TYPE_DEPOSIT);//计算买家保证金,有可能是0
+		}
+		//买家旧保证金记录
+		DyCashFlow cashFlow = new DyCashFlow();
+		cashFlow.setClientId(buyerId);
+		cashFlow.setDomainnameId(domainnameId);
+		cashFlow.setOperate(CASHFLOW_OPERATE_FREEZE);
+		List<DyCashFlow> list = cashFlowService.findList(cashFlow);
+		if (list.isEmpty()) {
+			throw new ServiceException("无买家保证金记录");
+		} else {
+			cashFlow = list.get(0);
+			oldDeposit = cashFlow.getOperateAmount();
+		}
+		
+		if(buyerDeposit.longValue() != oldDeposit.longValue()){
+			//买家新保证金冻结记录
+			cashFlow.setOperateAmount(buyerDeposit);
+			cashFlowService.save(cashFlow);
+			
+			//更新买家的财务信息
+			DyFinance buyerFinance = new DyFinance();
+			buyerFinance.setClientId(buyerId);
+			buyerFinance = dyFinanceDao.findAllList(buyerFinance).get(0);
+			int n1 = dyFinanceDao.updateFreezeBalance(buyerFinance.getId(), buyerDeposit - oldDeposit, buyerFinance.getUpdateDate());
+			if(n1==0){
+				throw new ServiceException();
+			}
+		}
+		
+		
+    }	
 }

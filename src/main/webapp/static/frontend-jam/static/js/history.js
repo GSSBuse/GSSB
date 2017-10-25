@@ -9,7 +9,8 @@ define([], function() {
 	var vm = avalon.define({
 		$id : "history",
 		datas:{
-			historyinfo:[]
+			historyinfo:[],
+			pageIndex : 1
 		},
 		//跳转至当个域名页面
 		linkToSingleDomainname:function(id){
@@ -20,10 +21,25 @@ define([], function() {
 	
 	// 下面是获取个人资金流,页面和js加载的时候就要初始化，所以不需要监听任何事件
 	$("#getHistory").on("pageloaded", function(e, d){
-		$.get("getHistoryInfo.json", {}, function(res) {
-			//最近七天交易记录，记录以Map记录：domainnameId（域名id），status（域名状态），name（域名名称），sellClientId（卖家id），sellNickName（卖家昵称），sellDate（交易日期），bidAmount（成交价），buyClientId（买家id），buyNickName(买家昵称)
-			vm.datas.historyinfo.pushArray(res.data.historyinfo);
+		vm.datas.historyinfo.clear();
+		vm.datas.pageIndex = 1;
+		utils.loadmore("loadmore_historyInfo", function(callback){
+			$.get("getHistoryInfoPage.json", {pageIndex : vm.datas.pageIndex},	function(res){
+				if (res.type == "success") {
+					vm.datas.historyinfo.pushArray(res.data.historyinfo);
+					vm.datas.pageIndex = vm.datas.pageIndex + 1;
+					setTimeout(function(){
+						$("#getHistory").trigger("touchmove");
+					}, 100);
+				} else {
+					setTimeout(function(){
+						$("#loadmore_historyInfo").addClass("hide-loadmore");
+					}, 2000);
+				}
+				callback(res.type);
+			});
 		});
+		$("#getHistory").trigger("touchmove");
 	});
 	return vm;
 });	

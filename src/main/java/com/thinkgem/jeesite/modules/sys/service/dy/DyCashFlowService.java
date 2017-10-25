@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.define.Constant;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
@@ -212,6 +213,20 @@ public class DyCashFlowService extends CrudService<DyCashFlowDao, DyCashFlow> {
 				throw new ServiceException("更新个人账户信息失败");
 			}
 		}
+		//判断是否可以微信提现
+		if(dyCashFlow.getOperate().equals(Constant.CASHFLOW_OPERATE_WITHDRAW)){
+			int wxRechargeTotalMoney = 0;//计算历史微信充值总额
+			int wxWwithdrawalsTotalMoney = 0;//计算历史和已经提交的微信提现总额
+			wxRechargeTotalMoney = this.rechargeTotalMoney(dyCashFlow.getClientId(), Constant.CASHFLOW_OPERATE_RECHARGE_ONLINE);
+			wxWwithdrawalsTotalMoney = this.withdrawalsTotalMoney(dyCashFlow.getClientId(), Constant.CASHFLOW_OPERATE_RECHARGE_ONLINE);
+			String remarks = null;
+			if(dyCashFlow.getOperateAmount() <= (wxRechargeTotalMoney - wxWwithdrawalsTotalMoney)){
+				remarks = "微信提现";
+			}else{
+				remarks = "线下提现";
+			}
+			dyCashFlow.setRemarks(remarks);
+		}
 		dyCashFlow.preInsert();
 		if(dao.insert(dyCashFlow) == 0){
 			throw new ServiceException("充值提现申请失败");
@@ -238,15 +253,25 @@ public class DyCashFlowService extends CrudService<DyCashFlowDao, DyCashFlow> {
 			}
 			dyCashFlow.setConfirmResult(Constant.CASHFLOW_COMFIRM_NOT);
 			dyCashFlow.setAmountBalance(dyFinanceTemp.getAccountBalance());
-			String title = DySysUtils.TEMPLATE_TITLE_0025;
-			String content = DySysUtils.TEMPLATE_MESSAGE_0025;
-			Message message = new Message();
-			content = content.replace("{{amount.DATA}}", Long.toString(dyCashFlow.getOperateAmount()));
-			content = content.replace("{{total.DATA}}", Long.toString(dyCashFlow.getAmountBalance()));
-			message.SendNews(WeChat.getAccessToken(), dyClientDao.get(dyCashFlow.getClientId()).getOpenid(), title, content, null);
+			
 		}
 		if(dao.updateCashFlow(dyCashFlow) == 0){
 			throw new ServiceException("更新个人账户信息失败");
+		}
+		if(!StringUtils.isNotBlank(pass)){ 
+			try {
+				//打回发送消息
+				String title = DySysUtils.TEMPLATE_TITLE_0025;
+				String content = DySysUtils.TEMPLATE_MESSAGE_0025;
+				Message message = new Message();
+				content = content.replace("{{amount.DATA}}", Long.toString(dyCashFlow.getOperateAmount()));
+				content = content.replace("{{total.DATA}}", Long.toString(dyCashFlow.getAmountBalance()));
+				if (!Boolean.parseBoolean(Global.getConfig("local.debug"))) {
+					message.SendNews(WeChat.getAccessToken(), dyClientDao.get(dyCashFlow.getClientId()).getOpenid(), title, content, null);
+				}
+			} catch(Exception e) {
+				logger.warn("通知消息发送失败", e);
+			}
 		}
 		logger.debug("[cashLog]会员id:"+dyCashFlow.getClientId()+"会员资金流id:"+dyCashFlow.getId()+dyCashFlow.getOperate()+"解冻："+dyCashFlow.getOperateAmount()+"冻结总额："+money);
 }
@@ -374,5 +399,24 @@ public class DyCashFlowService extends CrudService<DyCashFlowDao, DyCashFlow> {
 			throw new ServiceException();
 		}
 		logger.debug("[cashLog]会员id:"+clientId+"会员资金流id:"+dyCashFlow.getId()+"取消提现,解冻："+money+"冻结总额："+dyFinance.getFreezeBalance());
+	}
+	/**
+	 * 根据会员id计算该会员的历史充值总额（微信充值或者线下充值）
+	 * @param clientId
+	 * @param rechargeWay 线下充值  微信充值
+	 * @return
+	 */
+	public int rechargeTotalMoney(String clientId,String rechargeWay){
+		return dao.rechargeTotalMoney(clientId, rechargeWay);
+	}
+	
+	/**
+	 * 根据会员id计算该会员的历史提现总额（微信提现或者线下提现）
+	 * @param clientId
+	 * @param withdrawalsWay 微信提现 线下提现
+	 * @return
+	 */
+	public int withdrawalsTotalMoney(String clientId,String rechargeWay){
+		return dao.withdrawalsTotalMoney(clientId, rechargeWay);				
 	}
 }

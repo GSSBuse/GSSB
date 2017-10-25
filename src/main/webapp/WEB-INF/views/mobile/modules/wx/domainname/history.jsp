@@ -23,6 +23,12 @@
 					</li>
 				</ul>
 			</section>
+			<div id="loadmore_historyInfo" class="dropload-down has-footer">
+				<div class="dropload-load">
+					<div class="dropload-showmore"><span class="loading"></span>加载更多...</div>
+					<div class="dropload-nomore">没有更多历史记录数据了</div>
+				</div>
+			</div>
 			<script type="text/javascript" data-page="history"></script>
 			
 			<footer class="ui-footer ui-footer-stable">

@@ -9,7 +9,7 @@
 </head>
 <body ontouchstart="" class="ms-loader ms-loading">
 	<div class="page-wrapper">
-		<div data-title="关注拍域名" class="page active ms-controller" ms-controller="protocolProvision"	id="protocolProvision">
+		<div data-title="关注米乐拍卖" class="page active ms-controller" ms-controller="protocolProvision"	id="protocolProvision">
 			<section class="ui-container font-styles">
 				
 			</section>

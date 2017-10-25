@@ -73,7 +73,7 @@
 			<div class="control-group">
 				<label class="control-label">所属经纪人:</label>
 				<div class="controls">
-	                <sys:treeselect id="broker" name="brokerId" value="${dyClient.broker.id}" labelName="broker.name" labelValue="${dyClient.broker.name}"
+	                <sys:treeselect id="broker" name="brokerId" value="${dyClient.broker.id}" labelName="brokerName" labelValue="${dyClient.broker.name}"
 						title="经纪人" url="/sys/user/brokerTreeDate" cssClass="required"/>
 				</div>
 			</div>
@@ -218,6 +218,19 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<label class="control-label">银行支行：</label>
+			<div class="controls">
+				<form:input path="bankName" htmlEscape="false" maxlength="64" minlength="0" class="input-xlarge"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">银行所在省市：</label>
+			<div class="controls">
+				<form:input path="bankLocation" htmlEscape="false" maxlength="64" minlength="0" class="input-xlarge"/>
+			</div>
+		</div>
+		<%-- 
+		<div class="control-group">
 			<label class="control-label">身份证正面照片：</label>
 			<div class="controls">
 				<form:hidden id="nameImage1" path="authenticationPositiveImageUrl" htmlEscape="false" maxlength="255" class="input-xlarge"/>
@@ -233,6 +246,7 @@
 				<input class="btn" type="button" value="预览" onclick="preView('nameImage2')">
 			</div>
 		</div>
+		 --%>
 		<div class="control-group">
 			<label class="control-label">备注信息：</label>
 			<div class="controls">

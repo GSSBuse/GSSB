@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>天天域名-我要买</title>
+<title>米乐拍卖-我要买</title>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/views/include/frontHead.jsp"%>
 <script type="text/javascript">

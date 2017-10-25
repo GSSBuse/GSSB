@@ -44,7 +44,7 @@ define(function() {
 			//财务信息
 			financeinfo:{
 				accountBalance:"",
-				freezeBalance:"",
+				freezeBalance:""
 			},
 			//可用余额
 			available_balance:"",
@@ -87,21 +87,25 @@ define(function() {
 				if(!vm.datas.userinfo.name){
 					return false;
 				}
-				if(vm.datas.userinfo.emailFlag != "1" || !vm.datas.userinfo.email ){
-					return false;
-				}
+				// 2016-02-15 个人信息认证不在需要“邮件”和“qq”
+				//if(vm.datas.userinfo.emailFlag != "1" || !vm.datas.userinfo.email ){
+				//	return false;
+				//}
 				if(!vm.datas.userinfo.mobile){
 					return false;
 				}
-				if(!vm.datas.userinfo.qq && !vm.datas.userinfo.wx){
+				if(//!vm.datas.userinfo.qq && 
+					!vm.datas.userinfo.wx){
 					return false;
 				}
-				if(vm.datas.userinfo.authenticationMark != "1" || !vm.datas.userinfo.authenticationPositiveImageUrl || !vm.datas.userinfo.authenticationNegativeImageUrl){
+				
+				if(vm.datas.userinfo.authenticationMark != "1" || !vm.datas.userinfo.idcardNumber){
 					return false;
 				}
-				if(!vm.datas.userinfo.defaultIncomeExpense){
+				if(!vm.datas.userinfo.defaultIncomeExpense || !vm.datas.userinfo.bankName || !vm.datas.userinfo.bankLocation){
 					return false;
 				}
+				
 				return true;
 			} catch(e) {
 				alert(e);
@@ -119,26 +123,6 @@ define(function() {
 					$.m.changePage("#addPayPassword?type=set");
 				});
 				return false
-			}
-			var verificationPersonalInfo = vm.checkPersonalInfo();
-			if(!verificationPersonalInfo){
-				if (vm.datas.userinfo.authenticationMark != "2") {
-					$.tips({
-						content : "请先完善个人信息",
-						stayTime:1000,
-						type : "warn"
-					}).on("tips:hide",function(){
-						$.m.changePage("#personalInfo");
-					});
-				}
-				if(vm.datas.userinfo.authenticationMark == "2"){
-					$.tips({
-						content : "请等待经纪人审核个人信息",
-						stayTime: 1000,
-						type : "warn"
-					});
-				}
-				return false;
 			}
 			$("#withdrawals").dialog("show");
 			$("#operate_amount").focus();
@@ -225,13 +209,35 @@ define(function() {
 									$("#verificationPayPasswordForWithdrawals").dialog("hide");
 									vm.datas.cashflowinfo.payPassword = "";
 									vm.datas.cashflowinfo.operateAmount = "";
+								} else if (res.type == "error"){
+									var verificationPersonalInfo = vm.checkPersonalInfo();
+									if(!verificationPersonalInfo){
+										committing.hide();
+										if (vm.datas.userinfo.authenticationMark != "2") {
+											$.tips({
+												content : "请先完善个人信息",
+												stayTime:1000,
+												type : "warn"
+											}).on("tips:hide",function(){
+												$.m.changePage("#personalInfo");
+											});
+										}
+										if(vm.datas.userinfo.authenticationMark == "2"){
+											$.tips({
+												content : "请等待经纪人审核个人信息",
+												stayTime: 1000,
+												type : "warn"
+											});
+										}
+										return false;
+									}
 								}
-								committing.hide();
 								$.tips({
 						                content : res.msg,
 						                stayTime:2000,
 						                type : res.type
 						        });
+								committing.hide();
 							 },
 							 error : function(){
 								 $("#verificationPayPasswordForWithdrawals").dialog("hide");

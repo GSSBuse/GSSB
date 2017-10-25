@@ -126,13 +126,13 @@
 				<th class="sort-column clientName">会员姓名</th>
 				<th class="sort-column clientNickname">微信昵称</th>
 				<th>手机</th>
-				<th>邮箱</th>
+				<th>微信订单号</th>
 				<th>银行账号</th>
 				<th>操作</th>
 				<th>操作金额</th>
 				<th>操作时间</th>
 				<th>财务确认结果</th>
-				<th width="20%">备注</th>
+				<th width="10%">备注</th>
 				<shiro:hasPermission name="sys:dy:dyCashFlow:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -155,9 +155,11 @@
 					${dyCashFlow.dyClient.mobile}
 				</td>
 				<td>
-					${dyCashFlow.dyClient.email}
+					${dyCashFlow.transactionId}
 				</td>
 				<td>
+					${dyCashFlow.dyClient.bankName} <br>
+					${dyCashFlow.dyClient.bankLocation}<br>
 					${dyCashFlow.dyClient.defaultIncomeExpense}
 				</td>
 				<td>

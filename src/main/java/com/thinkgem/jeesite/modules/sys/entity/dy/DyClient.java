@@ -36,6 +36,14 @@ public class DyClient extends DataEntity<DyClient> {
 	private String defaultIncomeExpense;		// 默认收支方式
 	private String authenticationPositiveImageUrl;		// 身份证正面照片
 	private String authenticationNegativeImageUrl;		// 身份证反面照片
+	/**
+	 * 开户银行支行
+	 */
+	private String bankName;
+	/**
+	 * 银行所在省市
+	 */
+	private String bankLocation;
 	
 	private String newPayPassword;  // 新密码
 	
@@ -350,7 +358,7 @@ public class DyClient extends DataEntity<DyClient> {
 	 * authenticationPositiveImageUrl的取得
 	 * @return authenticationPositiveImageUrl
 	 */
-	@Length(min=0, max=100, message="身份证正面照片长度必须介于 0 和 100 之间")
+	@Length(min=0, max=500, message="身份证正面照片长度必须介于 0 和 500 之间")
 	public String getAuthenticationPositiveImageUrl() {
 		return authenticationPositiveImageUrl;
 	}
@@ -367,7 +375,7 @@ public class DyClient extends DataEntity<DyClient> {
 	 * authenticationNegativeImageUrl的取得
 	 * @return authenticationNegativeImageUrl
 	 */
-	@Length(min=0, max=100, message="身份证反面照片长度必须介于 0 和 100 之间")
+	@Length(min=0, max=500, message="身份证反面照片长度必须介于 0 和 500 之间")
 	public String getAuthenticationNegativeImageUrl() {
 		return authenticationNegativeImageUrl;
 	}
@@ -410,6 +418,40 @@ public class DyClient extends DataEntity<DyClient> {
 	 */
 	public void setDyFinance(DyFinance dyFinance) {
 		this.dyFinance = dyFinance;
+	}
+
+	/**
+	 * 开户银行支行的取得
+	 * @return 开户银行支行
+	 */
+	@Length(min=0, max=100, message="开户银行支行长度必须介于 0 和 100 之间")
+	public String getBankName() {
+	    return bankName;
+	}
+
+	/**
+	 * 开户银行支行的设定
+	 * @param bankName 开户银行支行
+	 */
+	public void setBankName(String bankName) {
+	    this.bankName = bankName;
+	}
+
+	/**
+	 * 银行所在省市的取得
+	 * @return 银行所在省市
+	 */
+	@Length(min=0, max=200, message="银行所在省市长度必须介于 0 和 200 之间")
+	public String getBankLocation() {
+	    return bankLocation;
+	}
+
+	/**
+	 * 银行所在省市的设定
+	 * @param bankLocation 银行所在省市
+	 */
+	public void setBankLocation(String bankLocation) {
+	    this.bankLocation = bankLocation;
 	}
 
 	/**

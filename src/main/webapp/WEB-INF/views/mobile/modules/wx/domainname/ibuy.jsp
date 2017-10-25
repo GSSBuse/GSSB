@@ -2,6 +2,9 @@
 
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fns" uri="http://java.sun.com/jsp/jstl/functionss" %>
+<c:set var="cdnname">${fns:getConfig('cdn.domain')}</c:set>
+<%-- <html manifest="${pageContext.request.contextPath}/static/appcache/cache.manifest"> --%>
 <html>
 <head>
 	<!-- <title>我要买</title> -->
@@ -16,6 +19,11 @@
 		//pageData.domainList = JSON.parse('${domainList}');
 		--%>
 	</script>
+	
+	<%@include file="/WEB-INF/views/include/commonjs.jsp" %>
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/frontend-jam/static/js/ibuy.js"></script>
+	
 </head>
 <!--
 <body class="ms-loader ms-loading">
@@ -69,9 +77,9 @@
 										<img class="image1" ms-attr-src="{{del.image1}}" ms-attr-alt="{{del.name}}" ms-attr-title="{{del.name}}" ms-click="previewImage($index, 0)">
 									</div>
 									<!-- 如果有两张或三张图片显示-->
-									<img ms-if="del.image1 && del.image2" ms-attr-id="'image1'+ del.id" ms-attr-height="datas.imageHeight" ms-attr-width="datas.imageWidth" ms-attr-src="{{del.image1}}" ms-attr-alt="{{del.name}}" ms-attr-title="{{del.name}}" ms-click="previewImage($index, 0)">
-									<img ms-if="del.image2" ms-attr-id="'image2'+ del.id" ms-attr-height="datas.imageHeight" ms-attr-width="datas.imageWidth" ms-attr-src="{{del.image2}}" ms-attr-alt="{{del.name}}" ms-attr-title="{{del.name}}" ms-click="previewImage($index, 1)">
-									<img ms-if="del.image3" ms-attr-id="'image3'+ del.id" ms-attr-height="datas.imageHeight" ms-attr-width="datas.imageWidth" ms-attr-src="{{del.image3}}" ms-attr-alt="{{del.name}}" ms-attr-title="{{del.name}}" ms-click="previewImage($index, 2)">
+									<img ms-if="del.image1 && del.image2" ms-attr-id="'image1'+ del.id" ms-attr-height="datas.imageHeight" ms-attr-width="datas.imageWidth" ms-attr-src="'${cdnname}' + del.image1" ms-attr-alt="{{del.name}}" ms-attr-title="{{del.name}}" ms-click="previewImage($index, 0)">
+									<img ms-if="del.image2" ms-attr-id="'image2'+ del.id" ms-attr-height="datas.imageHeight" ms-attr-width="datas.imageWidth" ms-attr-src="'${cdnname}' + del.image2" ms-attr-alt="{{del.name}}" ms-attr-title="{{del.name}}" ms-click="previewImage($index, 1)">
+									<img ms-if="del.image3" ms-attr-id="'image3'+ del.id" ms-attr-height="datas.imageHeight" ms-attr-width="datas.imageWidth" ms-attr-src="'${cdnname}' + del.image3" ms-attr-alt="{{del.name}}" ms-attr-title="{{del.name}}" ms-click="previewImage($index, 2)">
 									<%-- 
 									<div class="ui-list-info ibuy-image1-div" ms-if="del.image1 && del.image2">
 										<img ms-attr-id="'image1'+ del.id" ms-attr-height="datas.imageHeight" ms-attr-width="datas.imageWidth" ms-attr-src="{{del.image1}}" ms-attr-alt="{{del.name}}" ms-attr-title="{{del.name}}" ms-click="previewImage($index, 0)">
@@ -97,9 +105,9 @@
 									<div class="ui-list-info p-r-0 width-74">
 										<span class="ui-flex ui-flex-pack-end ui-txt-info count-down">距离结束:
 											
-											<span ms-html="getCountDown(del.endTime, $index).displayTime"></span>	
-											 <%--
-											 <span class="time"></span>--%>
+											<%--<span ms-html="getCountDown(del.endTime, $index).displayTime"></span>	--%>
+											 
+											 <span class="time"></span>
 										</span>
 									</div>
 								</li>
@@ -170,6 +178,10 @@
 							<div class="ui-row">
 								<div class="all-arrow">
 									<span class="ui-panel-subtitle m-l-0 bid-count">出价记录（{{del.bidCount}}）</span>
+									<span class="small-font red" ms-if="del.reservePrice && !del.proxyAmount && del.currAmount<del.reservePrice">未过保留价</span>
+									<span class="small-font green" ms-if="del.reservePrice && !del.proxyAmount && del.currAmount>=del.reservePrice">出价已达保留价</span>
+									<span class="small-font red" ms-if="del.reservePrice && del.proxyAmount && del.proxyAmount<del.reservePrice">代理价未过保留价</span>
+									<span class="small-font green" ms-if="del.reservePrice && del.proxyAmount && del.proxyAmount>=del.reservePrice">代理价已达保留价</span>
 									<a href="#" ms-click="goBiddingList(del.id)"><span class="bid-count-all">全部</span></a>
 								</div>
 							</div>
@@ -224,8 +236,8 @@
 			</div>
 
 			<!-- 出价表单 -->
-			<div id="bidForm" class="ui-dialog has-footer">
-				<div class="ui-dialog-cnt has-footer" style="border-radius: 0px; width: 100%; position: fixed; bottom: 0;">
+			<div id="bidForm" class="ui-dialog">
+				<div class="ui-dialog-cnt" style="border-radius: 0px; width: 100%; position: fixed; bottom: 0;">
 					<div class="ui-row-flex">
 						<div class="ui-col ui-col ui-flex ui-flex-align-center"><div class="p-l-10">当前价&nbsp;&nbsp;<span id="bidCurrent" style="color: #576b95"></span>元</div></div>
 						<div class="ui-col ui-col ui-flex ui-flex-pack-end"><div class="iconfont icon-close center p-r-10"></div></div>
@@ -242,7 +254,7 @@
 							<i ms-click="clearAmount"class="ui-icon-close" style="position: absolute; right: 7px;"></i>
 						</div>
 						<div class="service-protocol">
-							<span class="p-l-10" ms-click="LinkToServiceProtocol">出价即表示同意《拍域名竞拍服务协议》</span>
+							<span class="p-l-10" ms-click="LinkToServiceProtocol">出价即表示同意《米乐拍卖竞拍服务协议》</span>
 						</div>
 						<ul class="ui-row ui-whitespace p-t-10">
 							<li><button class="ui-btn-lg ui-btn-primary m-b-10" ms-click="bidding">出价</button></li>
@@ -285,7 +297,7 @@
 					</header>
 					<section class="ui-border-t">
 						<div id = "platformBankInfo" class="ui-dialog-bd ui-border-b hidden">
-							<div>拍域名银行信息</div>
+							<div>米乐拍卖银行信息</div>
 							<div> <img src="${pageContext.request.contextPath}/static/images/bank.PNG"></div>
 							<div>开户行：招商银行汉中门支行</div>
 							<div>开户名：南京登羽信息科技有限公司</div>
@@ -293,9 +305,9 @@
 							<div> 注：请在打款备注里留下您的米友号。</div>
 						</div>
 						<div class="ui-whitespace">
-							<h1>保证金：<span class="ui-txt-warning">￥ {{datas.tmp.deposit}}元</span></h1>
+							<h1>需充值：<span class="ui-txt-warning">￥ {{datas.tmp.charge}}元</span></h1>
 							<h3>继续参加本次拍卖需缴纳保证金{{datas.tmp.deposit}}元</h3>
-							<h3>帐户余额不足，请充值</h3>
+							<h3>帐户可用余额不足，请充值</h3>
 						</div>
 						<div class="ui-form ui-border-t">
 							<form action="#">
@@ -314,7 +326,7 @@
 							</form>
 						</div>
 						<ul class="ui-row ui-whitespace p-t-10">
-							<li><button class="ui-btn-lg ui-btn-primary m-b-10" ms-click="charge(datas.tmp.deposit)">安全支付</button></li>
+							<li><button class="ui-btn-lg ui-btn-primary m-b-10" ms-click="charge(datas.tmp.charge)">安全支付</button></li>
 						</ul>
 					</section>
 				</div>
@@ -326,7 +338,7 @@
 						<h3>线下充值提醒</h3>
 					</header>
 					<div class="ui-dialog-bd">
-						<div> 您已操作{{datas.tmp.deposit}}元充值，请尽快完成线下充值。</div>
+						<div> 您已操作{{datas.tmp.charge}}元充值，请尽快完成线下充值。</div>
 						<div class="ui-btn-wrap" style="padding: 15px 0px;" data-scroll='true'>
 							<div>
 								<button type="button" data-role="button" class="select ui-btn-lg ui-btn-primary" id="dialogButton">确认</button>
@@ -389,8 +401,5 @@
 				</div>
 			</footer>
 	</div>
-	<%@include file="/WEB-INF/views/include/commonjs.jsp" %>
-	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/static/frontend-jam/static/js/ibuy.js"></script>
 </body>
 </html>

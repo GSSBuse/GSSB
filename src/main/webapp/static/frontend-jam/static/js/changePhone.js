@@ -72,6 +72,7 @@ define([], function() {
 				}
 			});
 			committing.hide();
+			$.m.changePage("#pageVerificationInput", $.m.getParam())
 		},
 		clearVerificationInput: function(e){
 			vm.datas.temp.verificationCode="";
@@ -130,8 +131,10 @@ define([], function() {
 						                type : res.type
 						            }).on("tips:hide",function(){
 						            	// 完成后跳转
-						            	var up = $.m.getUrlParam();
-						            	if (up.fromIsell) {
+						            	var up = $.m.getParam();
+						            	if (up.from) {
+						            		$.m.changePage("#"+up.from, {newMobile:vm.datas.temp.mobile});
+						            	}else if (up.fromIsell) {
 						            		window.location.href = ctx + "/domainname/isell.html";
 						            	} else {
 						            		$.m.changePage("#personalInfo");

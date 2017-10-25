@@ -43,4 +43,22 @@ public class ViewArticleController {
 		model.addAttribute("article", article);
 		return "modules/wx/domainname/viewArticle";
 	}
+	
+	/**
+	 * 使用指南显示
+	 * @param model
+	 * @param articleId
+	 * @return
+	 */
+	@RequestMapping(value = {"userGuidance"})
+	public String userGuidance(Model model, String articleId) {
+		// 获取文章内容
+		DyArticle article = dyArticleService.get(articleId);
+		if (article == null || !"0".equals(article.getDelFlag())){
+			return "error/404";
+		}
+		
+		model.addAttribute("article", article);
+		return "modules/wx/domainname/userGuidance";
+	}
 }

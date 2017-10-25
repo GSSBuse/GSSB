@@ -42,19 +42,49 @@
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<sys:tableSort name="orderBy" value="${page.orderBy}" callback="page();" id="orderBy"></sys:tableSort>
 		<ul class="ul-form">
-			<li><label>域名名称：</label>
-				<form:input path="domainName" htmlEscape="false" maxlength="100" class="input-medium"/>
-			</li>
 			<li><label>卖家昵称：</label>
 				<form:input path="sellNickname" htmlEscape="false" maxlength="100" class="input-medium"/>
+			</li>
+			<li><label>卖家米友号：</label>
+				<form:input path="sellDyId" htmlEscape="false" maxlength="100" class="input-medium"/>
 			</li>
 			<li><label>买家昵称：</label>
 				<form:input path="buyNickname" htmlEscape="false" maxlength="100" class="input-medium"/>
 			</li>
+			<li><label>买家米友号：</label>
+				<form:input path="buyDyId" htmlEscape="false" maxlength="100" class="input-medium"/>
+			</li>
+			<li><label>域名名称：</label>
+				<form:input path="domainName" htmlEscape="false" maxlength="100" class="input-medium"/>
+			</li>
+			<li><label>截拍日期：</label>
+				<input name="searchStartTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
+					value="${bidCashInfo.searchStartTime}"
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input name="searchEndTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
+					value="${bidCashInfo.searchEndTime}"
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});"/>
+			</li>
+			<li class="clearfix"></li>
+		</ul>
+		<ul class="ul-form">
+			<li><label>交易状态：</label>
+				<form:select path="status" cssStyle="width: 230px;">
+					<option value="" >*.全部</option>
+					<option value="11" >1.待买家付款</option>
+					<option value="12" >2.买家已付款，待卖家转移域名</option>
+					<option value="13" >3.卖家已转移域名，待买家确认</option>
+					<option value="14" >4.买家已确认，等待交易完成</option>
+					<option value="21" >5.买家违约</option>
+					<option value="22" >6.卖家违约</option>
+					<option value="15" >f.交易结束</option>
+					<option value="23" >e.流拍或终止</option>
+				</form:select>
+			</li>
 			<li><input type="hidden" name="allList" value="${allList}"/></li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li style="margin-left: 50px"><input id="allListCheck" type="checkbox" onclick="allListType(this)" />只看自己</li>	
-			<li class="clearfix"></li>
 		</ul>	
 	</form:form>
 	<sys:message content="${message}"/>
@@ -68,6 +98,7 @@
 				<th class="sort-column buyName">买家姓名</th>
 				<th>买家昵称</th>
 				<th class="sort-column buyBrokerName">买家经纪人</th>
+				<th>保留价</th>
 				<th>成交金额</th>
 				<th>佣金</th>
 				<th>次高价红包</th>
@@ -98,10 +129,15 @@
 					${bidCashInfo.buyName}
 				</td>
 				<td>
-					${bidCashInfo.buyNickname}
+					<a href="${ctx}/sys/dy/dyClient/form?id=${bidCashInfo.buyClientId}">
+						${bidCashInfo.buyNickname}
+					</a>
 				</td>
 				<td>
 					${bidCashInfo.buyBrokerName}
+				</td>
+				<td>
+					${bidCashInfo.reservePrice}
 				</td>
 				<td>
 					${bidCashInfo.bidAmount}
@@ -120,28 +156,28 @@
 				</td>
 				<td>
 					<c:if test="${bidCashInfo.status eq '11'}">
-						待买家付款
+						1.待买家付款
 					</c:if>
 					<c:if test="${bidCashInfo.status eq '12'}">
-						待卖家转移域名
+						2.买家已付款，待卖家转移域名
 					</c:if>
 					<c:if test="${bidCashInfo.status eq '13'}">
-						待买家确认
+						3.卖家已转移域名，待买家确认
 					</c:if>
 					<c:if test="${bidCashInfo.status eq '14'}">
-						等待确认
+						4.买家已确认，等待交易完成
 					</c:if>
 					<c:if test="${bidCashInfo.status eq '15'}">
-						交易完成
+						f.交易完成
 					</c:if>
 					<c:if test="${bidCashInfo.status eq '21'}">
-						买家违约
+						5.买家违约
 					</c:if>
 					<c:if test="${bidCashInfo.status eq '22'}">
-						卖家违约
+						6.卖家违约
 					</c:if>
 					<c:if test="${bidCashInfo.status eq '23'}">
-						流拍或终止
+						e.流拍或终止
 					</c:if>
 				</td>
 				<td>

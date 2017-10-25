@@ -8,7 +8,7 @@ define("myTransactionsInfo", function() {
 			//财务信息
 			financeinfo:{
 				accountBalance:"",
-				freezeBalance:"",
+				freezeBalance:""
 			},
 			//可用余额
 			available_balance:"",			
@@ -55,7 +55,36 @@ define("myTransactionsInfo", function() {
 			//资金信息:用于充值
 			cashflowinfo:{
 				rechargeAmount:"",
-				operate:"",
+				operate:""
+			}
+		},
+		//检查用户是否完善了个人信息
+		checkPersonalInfo : function(){
+			try {
+				if(!vm.datas.userinfo.name){
+					return false;
+				}
+				// 2016-02-15 个人信息认证不在需要“邮件”和“qq”
+				//if(vm.datas.userinfo.emailFlag != "1" || !vm.datas.userinfo.email ){
+				//	return false;
+				//}
+				if(!vm.datas.userinfo.mobile){
+					return false;
+				}
+				if(//!vm.datas.userinfo.qq && 
+					!vm.datas.userinfo.wx){
+					return false;
+				}
+				if(vm.datas.userinfo.authenticationMark != "1" || !vm.datas.userinfo.idcardNumber){
+					return false;
+				}
+				if(!vm.datas.userinfo.defaultIncomeExpense || !vm.datas.userinfo.bankName || !vm.datas.userinfo.bankLocation){
+					return false;
+				}
+				return true;
+			} catch(e) {
+				alert(e);
+				return false;
 			}
 		},
 		//我的交易付款余额不足：充值弹窗
@@ -283,7 +312,27 @@ define("myTransactionsInfo", function() {
 					stayTime:1000,
 					type : "warn"
 				}).on("tips:hide",function(){
-					vm.recharge();
+					var flag = vm.checkPersonalInfo();
+					if(flag){
+						vm.recharge();
+					}else{
+						if (vm.datas.userinfo.authenticationMark != "2") {
+							$.tips({
+								content : "请先完善个人信息",
+								stayTime:1000,
+								type : "warn"
+							}).on("tips:hide",function(){
+								$.m.changePage("#personalInfo");
+							});
+						}
+						if(vm.datas.userinfo.authenticationMark == "2"){
+							$.tips({
+								content : "请等待经纪人审核个人信息",
+								stayTime: 1000,
+								type : "warn"
+							});
+						}
+					}
 				});
 			}else{
 				vm.datas.payment.payMoney=vm.datas.myTransactions.myTransactionsBoughtList[index].bidAmount;

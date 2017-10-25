@@ -27,7 +27,10 @@ define("singleDomainname", function (){
 				nickname : "",
 				currentClientId : null,
 				bidBtn : null,
-				deposit : 0
+				deposit : 0,
+				charge: 0,
+				bidAmountForRecharge : 0,//充值后自动出价的金额
+				domainIdForRecharge : ""//充值后自动出价的域名id
 			},
 			singlePage: window.singlePage
 		},
@@ -200,6 +203,7 @@ define("singleDomainname", function (){
 							$("#bidCurrentSingle").text(vm.datas.domainList[index].currAmount);
 						}
 						$("#bidFormSingle").dialog("show");
+						$(".ui-footer-stable").hide();
 					} catch (e) {
 						alert(e);
 					}
@@ -214,9 +218,205 @@ define("singleDomainname", function (){
 //				$("#icon-cursor").toggleClass("icon-cursor");
 //			}, 500);
 		},
-		// 出价
+		// 充值后的自动出价
+		biddingForRecharge : function(){
+			$.ajax({
+				type: "POST",
+				url : "bid",
+				data : {
+					"domainId" : vm.datas.tmp.domainIdForRecharge,
+					"bidAmount" : vm.datas.tmp.bidAmountForRecharge
+				},
+				dataType : "json",
+				success : function(res) {
+					var index = vm.datas.tmp.index;
+					if (res.type == "success") {
+						if(res.msg == "出价被超出"){
+							$.tips({
+								content : res.msg,
+								stayTime : 2000,
+								type : "warn"
+							});
+						}else{
+							$.tips({
+								content : res.msg,
+								stayTime : 2000,
+								type : res.type
+							});
+						}
+
+						$.get("getBidListByDomainId", {domainId : vm.datas.domainList[index].id},
+								function(res) {
+								if(res.data.isNoBid=="false"){//历史有人出价
+									vm.datas.domainList[vm.datas.tmp.index].endTime = res.data.pDomain.endTime;
+									vm.datas.domainList[vm.datas.tmp.index].currAmount = res.data.pDomain.currAmount;
+									vm.datas.domainList[vm.datas.tmp.index].deposit = res.data.pDomain.deposit;
+									vm.datas.domainList[vm.datas.tmp.index].increment = res.data.pDomain.increment;
+									vm.datas.domainList[vm.datas.tmp.index].bidList = res.data.pDomain.bidList;
+									vm.datas.domainList[vm.datas.tmp.index].proxyAmount = res.data.pDomain.proxyAmount;
+									vm.datas.domainList[vm.datas.tmp.index].proxyIncrement = res.data.pDomain.proxyIncrement;
+									vm.datas.domainList[vm.datas.tmp.index].bidCount = res.data.pDomain.bidCount;
+									vm.datas.domainList[vm.datas.tmp.index].topBidClientId = res.data.pDomain.topBidClientId;
+
+									var domain = vm.datas.domainList[vm.datas.tmp.index];
+									//延时1毫秒设置按钮的值
+									setTimeout(function(){
+										vm.buttonText(domain);
+									}, 1);
+									//更新出价弹窗的值
+									try {
+										if (domain.clientId != vm.datas.tmp.currentClientId && (domain.bidCount==0 || domain.topBidClientId != vm.datas.tmp.currentClientId)) {
+											$("#bidAmount").text(domain.currAmount + domain.increment);
+											$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+										}
+										if (domain.clientId != vm.datas.tmp.currentClientId && domain.bidCount>0 && domain.topBidClientId == vm.datas.tmp.currentClientId && domain.proxyAmount) {
+											$("#bidAmount").text(domain.proxyAmount + domain.proxyIncrement);
+											$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+										}
+										if (domain.clientId != vm.datas.tmp.currentClientId && domain.bidCount>0 && domain.topBidClientId == vm.datas.tmp.currentClientId && !domain.proxyAmount) {
+											$("#bidAmount").text( domain.currAmount + domain.increment);
+											$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+										}
+										vm.datas.tmp.domainId = vm.datas.domainList[vm.datas.tmp.index].id;
+									} catch (e) {
+										alert(e);
+									}
+								}else{//历史无人出价
+									$("#bidAmount").text( vm.datas.domainList[vm.datas.tmp.index].increment);
+									$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+									vm.datas.tmp.domainId = vm.datas.domainList[vm.datas.tmp.index].id;
+								}
+							});
+					} else if (res.type == "warn") {
+						if (res.data.type) {
+							$.tips({
+								content : res.msg,
+								stayTime : 3000,
+								type : res.type
+							});
+							$("#bidForm").dialog("show");
+							$(".ui-footer-stable").hide();
+							$.get("getBidListByDomainId", {domainId : vm.datas.domainList[index].id},
+									function(res) {
+									if(res.data.isNoBid=="false"){//历史有人出价
+										vm.datas.domainList[vm.datas.tmp.index].endTime = res.data.pDomain.endTime;
+										vm.datas.domainList[vm.datas.tmp.index].currAmount = res.data.pDomain.currAmount;
+										vm.datas.domainList[vm.datas.tmp.index].deposit = res.data.pDomain.deposit;
+										vm.datas.domainList[vm.datas.tmp.index].increment = res.data.pDomain.increment;
+										vm.datas.domainList[vm.datas.tmp.index].bidList = res.data.pDomain.bidList;
+										vm.datas.domainList[vm.datas.tmp.index].proxyAmount = res.data.pDomain.proxyAmount;
+										vm.datas.domainList[vm.datas.tmp.index].proxyIncrement = res.data.pDomain.proxyIncrement;
+										vm.datas.domainList[vm.datas.tmp.index].bidCount = res.data.pDomain.bidCount;
+										vm.datas.domainList[vm.datas.tmp.index].topBidClientId = res.data.pDomain.topBidClientId;
+
+										var domain = vm.datas.domainList[vm.datas.tmp.index];
+										//延时1毫秒设置按钮的值
+										setTimeout(function(){
+											vm.buttonText(domain);
+										}, 1);
+										//更新出价弹窗的值
+										try {
+											//更新出价弹窗的值
+											if (domain.clientId != vm.datas.tmp.currentClientId && (domain.bidCount==0 || domain.topBidClientId != vm.datas.tmp.currentClientId)) {
+												$("#bidAmount").text(domain.currAmount + domain.increment);
+												$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+											}
+											if (domain.clientId != vm.datas.tmp.currentClientId && domain.bidCount>0 && domain.topBidClientId == vm.datas.tmp.currentClientId && domain.proxyAmount) {
+												$("#bidAmount").text(domain.proxyAmount + domain.proxyIncrement);
+												$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+											}
+											if (domain.clientId != vm.datas.tmp.currentClientId && domain.bidCount>0 && domain.topBidClientId == vm.datas.tmp.currentClientId && !domain.proxyAmount) {
+												$("#bidAmount").text( domain.currAmount + domain.increment);
+												$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+											}
+											vm.datas.tmp.domainId = vm.datas.domainList[vm.datas.tmp.index].id;
+											$("#bidForm").dialog("show");
+											$(".ui-footer-stable").hide();
+										} catch (e) {
+											alert(e);
+										}
+									}else{//历史无人出价
+										$("#bidAmount").text( vm.datas.domainList[vm.datas.tmp.index].increment);
+										$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+										vm.datas.tmp.domainId = vm.datas.domainList[vm.datas.tmp.index].id;
+										$("#bidForm").dialog("show");
+										$(".ui-footer-stable").hide();
+									}
+								});
+						} else {
+							$.get("getBidListByDomainId", {domainId : vm.datas.domainList[index].id},
+									function(res) {
+									if(res.data.isNoBid=="false"){//历史有人出价
+										vm.datas.domainList[vm.datas.tmp.index].endTime = res.data.pDomain.endTime;
+										vm.datas.domainList[vm.datas.tmp.index].currAmount = res.data.pDomain.currAmount;
+										vm.datas.domainList[vm.datas.tmp.index].deposit = res.data.pDomain.deposit;
+										vm.datas.domainList[vm.datas.tmp.index].increment = res.data.pDomain.increment;
+										vm.datas.domainList[vm.datas.tmp.index].bidList = res.data.pDomain.bidList;
+										vm.datas.domainList[vm.datas.tmp.index].proxyAmount = res.data.pDomain.proxyAmount;
+										vm.datas.domainList[vm.datas.tmp.index].proxyIncrement = res.data.pDomain.proxyIncrement;
+										vm.datas.domainList[vm.datas.tmp.index].bidCount = res.data.pDomain.bidCount;
+										vm.datas.domainList[vm.datas.tmp.index].topBidClientId = res.data.pDomain.topBidClientId;
+
+										var domain = vm.datas.domainList[vm.datas.tmp.index];
+										//延时1毫秒设置按钮的值
+										setTimeout(function(){
+											vm.buttonText(domain);
+										}, 1);
+										//更新出价弹窗的值
+										try {
+											if (domain.clientId != vm.datas.tmp.currentClientId && (domain.bidCount==0 || domain.topBidClientId != vm.datas.tmp.currentClientId)) {
+												$("#bidAmount").text(domain.currAmount + domain.increment);
+												$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+											}
+											if (domain.clientId != vm.datas.tmp.currentClientId && domain.bidCount>0 && domain.topBidClientId == vm.datas.tmp.currentClientId && domain.proxyAmount) {
+												$("#bidAmount").text(domain.proxyAmount + domain.proxyIncrement);
+												$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+											}
+											if (domain.clientId != vm.datas.tmp.currentClientId && domain.bidCount>0 && domain.topBidClientId == vm.datas.tmp.currentClientId && !domain.proxyAmount) {
+												$("#bidAmount").text( domain.currAmount + domain.increment);
+												$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+											}
+											
+											vm.datas.tmp.domainId = vm.datas.domainList[vm.datas.tmp.index].id;
+//											$("#bidForm").dialog("show");
+										} catch (e) {
+											alert(e);
+										}
+									}else{//历史无人出价
+										$("#bidAmount").text( vm.datas.domainList[vm.datas.tmp.index].increment);
+										$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+										vm.datas.tmp.domainId = vm.datas.domainList[vm.datas.tmp.index].id;
+//										$("#bidForm").dialog("show");
+									}
+								});
+							$("#bondForm #platformBankInfo").addClass("hidden");
+							$.tips({
+								content : "充值还没有到账，稍后重新出价",
+								stayTime : 3000,
+								type : res.type
+							});
+						}
+					} else {
+						$.tips({
+							content : res.msg,
+							stayTime : 3000,
+							type : res.type
+						});
+					}
+				},
+				error : function(res) {
+					$.tips({
+						content : "出价失败，请重试",
+						stayTime : 3000,
+						type : "error"
+					});
+				}
+		});
+		},
+		// 普通出价
 		bidding : function(){
 			$("#bidFormSingle").dialog("hide");
+			$(".ui-footer-stable").show();
 //			clearInterval(interval_cursor);
 			if (vm.datas.tmp.currentClientId == "" || vm.datas.tmp.currentClientId == null) {
 				$.tips({
@@ -370,6 +570,7 @@ define("singleDomainname", function (){
 													}
 													vm.datas.tmp.domainId = vm.datas.domainList[vm.datas.tmp.index].id;
 													$("#bidFormSingle").dialog("show");
+													$(".ui-footer-stable").hide();
 												} catch (e) {
 													alert(e);
 												}
@@ -378,6 +579,7 @@ define("singleDomainname", function (){
 												$("#bidCurrentSingle").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
 												vm.datas.tmp.domainId = vm.datas.domainList[vm.datas.tmp.index].id;
 												$("#bidFormSingle").dialog("show");
+												$(".ui-footer-stable").hide();
 											}
 										});
 								} else {
@@ -437,7 +639,9 @@ define("singleDomainname", function (){
 											}
 										});
 									vm.datas.tmp.deposit = res.data.deposit;
-									
+									vm.datas.tmp.charge = res.data.charge;
+									vm.datas.tmp.bidAmountForRecharge = bidAmount;//记录此次出价的金额，用户充完值之后自动帮其出价
+									vm.datas.tmp.domainIdForRecharge = vm.datas.tmp.domainId;//记录此次出价的域名id,用户充完值之后自动帮其出价
 									$("#bondFormSingle #platformBankInfo").addClass("hidden");
 									$("#bondFormSingle #online").trigger('click');
 									$("#bondFormSingle").dialog("show");
@@ -488,6 +692,7 @@ define("singleDomainname", function (){
 							type : res.type
 						}).on("tips:hide",function(){
 							$("#singleDomainname #prompt-msg").dialog("show");
+							vm.biddingForRecharge();
 						});;
 					}else{
 						$.tips({
@@ -518,6 +723,7 @@ define("singleDomainname", function (){
 										stayTime:2000,
 										type : "success"
 										});
+								vm.biddingForRecharge();
 								}
 							});
 					},
@@ -613,7 +819,7 @@ define("singleDomainname", function (){
 			: "http://" + window.location.host + ctx + "/static/images/brand_logo.jpg";
 			
 		if (vm.datas.domainList[index].status === "03") {
-			mainTitle += '正在【拍域名】拍卖';
+			mainTitle += '正在【米乐拍卖】拍卖';
 		}
 		
 		wx.onMenuShareAppMessage({
@@ -722,6 +928,7 @@ define("singleDomainname", function (){
 			$("#bondFormSingle #platformBankInfo").addClass("hidden");
 			e.stopPropagation();
 		});
+		
 	});
 
 	$("#singleDomainname").on("pageshow", function() {
@@ -930,6 +1137,7 @@ define("singleDomainname", function (){
 
 	$(".icon-close").bind("click", function(){
 		$("#bidFormSingle").dialog("hide");
+		$(".ui-footer-stable").show();
 //		clearInterval(interval_cursor);
 	});
 

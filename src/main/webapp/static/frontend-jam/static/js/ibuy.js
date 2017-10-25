@@ -29,8 +29,12 @@ define("ibuy", function (){
 				shareClientId : $.m.getParam().shareClientId ? $.m.getParam().shareClientId : '',
 				nickname : "",
 				currentClientId : null,
+				currentMobile : null,
 				bidBtn : null,
-				deposit : 0
+				deposit : 0,
+				charge: 0,
+				bidAmountForRecharge : 0,//充值后自动出价的金额
+				domainIdForRecharge : ""//充值后自动出价的域名id
 			}
 		},
 		//跳转至服务协议页面
@@ -99,13 +103,6 @@ define("ibuy", function (){
 				});
 				return false;
 			}
-			
-//			var endIndex = window.location.href.indexOf("?");
-//			if (endIndex == -1) {
-//				var url = window.location.href.slice(0) + "?singleDomainId=" + vm.datas.domainList[index].id + "&shareClientId=" + vm.datas.shareClientId;
-//			} else {
-//				var url = window.location.href.slice(0, endIndex) + "?singleDomainId=" + vm.datas.domainList[index].id + "&shareClientId=" + vm.datas.shareClientId;
-//			}
 			var url = utils.shareHref(window.location.href,"singleDomainname.html")+"?singleDomainId=" + vm.datas.domainList[index].id + "&shareClientId=" + vm.datas.shareClientId;
 			
 			var self = $(this);
@@ -114,7 +111,7 @@ define("ibuy", function (){
 				$(this).removeClass("show");
 			});
 			wx.onMenuShareAppMessage({
-				title: vm.datas.domainList[index].name + '正在【拍域名】拍卖' , // 分享标题
+				title: vm.datas.domainList[index].name + '正在【米乐拍卖】拍卖' , // 分享标题
 				desc: vm.datas.domainList[index].description, // 分享描述
 				link: url, // 分享链接
 				imgUrl: "http://" + window.location.host + vm.datas.domainList[index].image1, // 分享图标
@@ -132,7 +129,7 @@ define("ibuy", function (){
 
 			//获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
 			wx.onMenuShareTimeline({
-				title : vm.datas.domainList[index].name + '正在【拍域名】拍卖' , // 分享标题
+				title : vm.datas.domainList[index].name + '正在【米乐拍卖】拍卖' , // 分享标题
 				link : url, // 分享链接
 				imgUrl : "http://" + window.location.host + vm.datas.domainList[index].image1, // 分享图标
 				success : function() {
@@ -147,7 +144,7 @@ define("ibuy", function (){
 
 			//获取“分享到QQ”按钮点击状态及自定义分享内容接口
 			wx.onMenuShareQQ({
-				title: vm.datas.domainList[index].name + '正在【拍域名】拍卖' , // 分享标题
+				title: vm.datas.domainList[index].name + '正在【米乐拍卖】拍卖' , // 分享标题
 				desc: vm.datas.domainList[index].description, // 分享描述
 				link : url, // 分享链接
 				imgUrl : "http://" + window.location.host + vm.datas.domainList[index].image1, // 分享图标
@@ -163,7 +160,7 @@ define("ibuy", function (){
 
 			//获取“分享到腾讯微博”按钮点击状态及自定义分享内容接口
 			wx.onMenuShareWeibo({
-				title: vm.datas.domainList[index].name + '正在【拍域名】拍卖' , // 分享标题
+				title: vm.datas.domainList[index].name + '正在【米乐拍卖】拍卖' , // 分享标题
 				desc: vm.datas.domainList[index].description, // 分享描述
 				link : url, // 分享链接
 				imgUrl : "http://" + window.location.host + vm.datas.domainList[index].image1, // 分享图标
@@ -179,7 +176,7 @@ define("ibuy", function (){
 
 			//获取“分享到QQ空间”按钮点击状态及自定义分享内容接口
 			wx.onMenuShareQZone({
-				title: vm.datas.domainList[index].name + '正在【拍域名】拍卖' , // 分享标题
+				title: vm.datas.domainList[index].name + '正在【米乐拍卖】拍卖' , // 分享标题
 				desc: vm.datas.domainList[index].description, // 分享描述
 				link : url, // 分享链接
 				imgUrl : "http://" + window.location.host + vm.datas.domainList[index].image1, // 分享图标
@@ -222,6 +219,17 @@ define("ibuy", function (){
 					type : "error"
 				}).on("tips:hide",function(){
 					$.m.changePage("#error");
+				});
+				return false;
+			}
+			
+			if (!vm.datas.tmp.currentMobile) {
+				$.tips({
+					content : "请先设置手机号码再进行域名出价",
+					stayTime : 2000,
+					type : "error"
+				}).on("tips:hide",function(){
+					$.m.changePage("#changePhone", {from:"ibuy"});
 				});
 				return false;
 			}
@@ -272,6 +280,8 @@ define("ibuy", function (){
 							$("#bidCurrent").text(vm.datas.domainList[index].currAmount);
 						}
 						$("#bidForm").dialog("show");
+						// 2.18 出价键盘经常会按到下面的菜单，这个页面不要下面的菜单
+						$(".ui-footer-stable").hide();
 					} catch (e) {
 						alert(e);
 					}
@@ -286,9 +296,205 @@ define("ibuy", function (){
 //				$("#icon-cursor").toggleClass("icon-cursor");
 //			}, 500);
 		},
-		// 出价
+		// 充值后的自动出价
+		biddingForRecharge : function(){
+			$.ajax({
+				type: "POST",
+				url : "bid",
+				data : {
+					"domainId" : vm.datas.tmp.domainIdForRecharge,
+					"bidAmount" : vm.datas.tmp.bidAmountForRecharge
+				},
+				dataType : "json",
+				success : function(res) {
+					var index = vm.datas.tmp.index;
+					if (res.type == "success") {
+						if(res.msg == "出价被超出"){
+							$.tips({
+								content : res.msg,
+								stayTime : 2000,
+								type : "warn"
+							});
+						}else{
+							$.tips({
+								content : res.msg,
+								stayTime : 2000,
+								type : res.type
+							});
+						}
+
+						$.get("getBidListByDomainId", {domainId : vm.datas.domainList[index].id},
+								function(res) {
+								if(res.data.isNoBid=="false"){//历史有人出价
+									vm.datas.domainList[vm.datas.tmp.index].endTime = res.data.pDomain.endTime;
+									vm.datas.domainList[vm.datas.tmp.index].currAmount = res.data.pDomain.currAmount;
+									vm.datas.domainList[vm.datas.tmp.index].deposit = res.data.pDomain.deposit;
+									vm.datas.domainList[vm.datas.tmp.index].increment = res.data.pDomain.increment;
+									vm.datas.domainList[vm.datas.tmp.index].bidList = res.data.pDomain.bidList;
+									vm.datas.domainList[vm.datas.tmp.index].proxyAmount = res.data.pDomain.proxyAmount;
+									vm.datas.domainList[vm.datas.tmp.index].proxyIncrement = res.data.pDomain.proxyIncrement;
+									vm.datas.domainList[vm.datas.tmp.index].bidCount = res.data.pDomain.bidCount;
+									vm.datas.domainList[vm.datas.tmp.index].topBidClientId = res.data.pDomain.topBidClientId;
+
+									var domain = vm.datas.domainList[vm.datas.tmp.index];
+									//延时1毫秒设置按钮的值
+									setTimeout(function(){
+										vm.buttonText(domain);
+									}, 1);
+									//更新出价弹窗的值
+									try {
+										if (domain.clientId != vm.datas.tmp.currentClientId && (domain.bidCount==0 || domain.topBidClientId != vm.datas.tmp.currentClientId)) {
+											$("#bidAmount").text(domain.currAmount + domain.increment);
+											$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+										}
+										if (domain.clientId != vm.datas.tmp.currentClientId && domain.bidCount>0 && domain.topBidClientId == vm.datas.tmp.currentClientId && domain.proxyAmount) {
+											$("#bidAmount").text(domain.proxyAmount + domain.proxyIncrement);
+											$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+										}
+										if (domain.clientId != vm.datas.tmp.currentClientId && domain.bidCount>0 && domain.topBidClientId == vm.datas.tmp.currentClientId && !domain.proxyAmount) {
+											$("#bidAmount").text( domain.currAmount + domain.increment);
+											$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+										}
+										vm.datas.tmp.domainId = vm.datas.domainList[vm.datas.tmp.index].id;
+									} catch (e) {
+										alert(e);
+									}
+								}else{//历史无人出价
+									$("#bidAmount").text( vm.datas.domainList[vm.datas.tmp.index].increment);
+									$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+									vm.datas.tmp.domainId = vm.datas.domainList[vm.datas.tmp.index].id;
+								}
+							});
+					} else if (res.type == "warn") {
+						if (res.data.type) {
+							$.tips({
+								content : res.msg,
+								stayTime : 3000,
+								type : res.type
+							});
+							$("#bidForm").dialog("show");
+							$(".ui-footer-stable").hide();
+							$.get("getBidListByDomainId", {domainId : vm.datas.domainList[index].id},
+									function(res) {
+									if(res.data.isNoBid=="false"){//历史有人出价
+										vm.datas.domainList[vm.datas.tmp.index].endTime = res.data.pDomain.endTime;
+										vm.datas.domainList[vm.datas.tmp.index].currAmount = res.data.pDomain.currAmount;
+										vm.datas.domainList[vm.datas.tmp.index].deposit = res.data.pDomain.deposit;
+										vm.datas.domainList[vm.datas.tmp.index].increment = res.data.pDomain.increment;
+										vm.datas.domainList[vm.datas.tmp.index].bidList = res.data.pDomain.bidList;
+										vm.datas.domainList[vm.datas.tmp.index].proxyAmount = res.data.pDomain.proxyAmount;
+										vm.datas.domainList[vm.datas.tmp.index].proxyIncrement = res.data.pDomain.proxyIncrement;
+										vm.datas.domainList[vm.datas.tmp.index].bidCount = res.data.pDomain.bidCount;
+										vm.datas.domainList[vm.datas.tmp.index].topBidClientId = res.data.pDomain.topBidClientId;
+
+										var domain = vm.datas.domainList[vm.datas.tmp.index];
+										//延时1毫秒设置按钮的值
+										setTimeout(function(){
+											vm.buttonText(domain);
+										}, 1);
+										//更新出价弹窗的值
+										try {
+											//更新出价弹窗的值
+											if (domain.clientId != vm.datas.tmp.currentClientId && (domain.bidCount==0 || domain.topBidClientId != vm.datas.tmp.currentClientId)) {
+												$("#bidAmount").text(domain.currAmount + domain.increment);
+												$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+											}
+											if (domain.clientId != vm.datas.tmp.currentClientId && domain.bidCount>0 && domain.topBidClientId == vm.datas.tmp.currentClientId && domain.proxyAmount) {
+												$("#bidAmount").text(domain.proxyAmount + domain.proxyIncrement);
+												$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+											}
+											if (domain.clientId != vm.datas.tmp.currentClientId && domain.bidCount>0 && domain.topBidClientId == vm.datas.tmp.currentClientId && !domain.proxyAmount) {
+												$("#bidAmount").text( domain.currAmount + domain.increment);
+												$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+											}
+											vm.datas.tmp.domainId = vm.datas.domainList[vm.datas.tmp.index].id;
+											$("#bidForm").dialog("show");
+											$(".ui-footer-stable").hide();
+										} catch (e) {
+											alert(e);
+										}
+									}else{//历史无人出价
+										$("#bidAmount").text( vm.datas.domainList[vm.datas.tmp.index].increment);
+										$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+										vm.datas.tmp.domainId = vm.datas.domainList[vm.datas.tmp.index].id;
+										$("#bidForm").dialog("show");
+										$(".ui-footer-stable").hide();
+									}
+								});
+						} else {
+							$.get("getBidListByDomainId", {domainId : vm.datas.domainList[index].id},
+									function(res) {
+									if(res.data.isNoBid=="false"){//历史有人出价
+										vm.datas.domainList[vm.datas.tmp.index].endTime = res.data.pDomain.endTime;
+										vm.datas.domainList[vm.datas.tmp.index].currAmount = res.data.pDomain.currAmount;
+										vm.datas.domainList[vm.datas.tmp.index].deposit = res.data.pDomain.deposit;
+										vm.datas.domainList[vm.datas.tmp.index].increment = res.data.pDomain.increment;
+										vm.datas.domainList[vm.datas.tmp.index].bidList = res.data.pDomain.bidList;
+										vm.datas.domainList[vm.datas.tmp.index].proxyAmount = res.data.pDomain.proxyAmount;
+										vm.datas.domainList[vm.datas.tmp.index].proxyIncrement = res.data.pDomain.proxyIncrement;
+										vm.datas.domainList[vm.datas.tmp.index].bidCount = res.data.pDomain.bidCount;
+										vm.datas.domainList[vm.datas.tmp.index].topBidClientId = res.data.pDomain.topBidClientId;
+
+										var domain = vm.datas.domainList[vm.datas.tmp.index];
+										//延时1毫秒设置按钮的值
+										setTimeout(function(){
+											vm.buttonText(domain);
+										}, 1);
+										//更新出价弹窗的值
+										try {
+											if (domain.clientId != vm.datas.tmp.currentClientId && (domain.bidCount==0 || domain.topBidClientId != vm.datas.tmp.currentClientId)) {
+												$("#bidAmount").text(domain.currAmount + domain.increment);
+												$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+											}
+											if (domain.clientId != vm.datas.tmp.currentClientId && domain.bidCount>0 && domain.topBidClientId == vm.datas.tmp.currentClientId && domain.proxyAmount) {
+												$("#bidAmount").text(domain.proxyAmount + domain.proxyIncrement);
+												$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+											}
+											if (domain.clientId != vm.datas.tmp.currentClientId && domain.bidCount>0 && domain.topBidClientId == vm.datas.tmp.currentClientId && !domain.proxyAmount) {
+												$("#bidAmount").text( domain.currAmount + domain.increment);
+												$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+											}
+											
+											vm.datas.tmp.domainId = vm.datas.domainList[vm.datas.tmp.index].id;
+//											$("#bidForm").dialog("show");
+										} catch (e) {
+											alert(e);
+										}
+									}else{//历史无人出价
+										$("#bidAmount").text( vm.datas.domainList[vm.datas.tmp.index].increment);
+										$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
+										vm.datas.tmp.domainId = vm.datas.domainList[vm.datas.tmp.index].id;
+//										$("#bidForm").dialog("show");
+									}
+								});
+							$("#bondForm #platformBankInfo").addClass("hidden");
+							$.tips({
+								content : "充值还没有到账，稍后重新出价",
+								stayTime : 3000,
+								type : res.type
+							});
+						}
+					} else {
+						$.tips({
+							content : res.msg,
+							stayTime : 3000,
+							type : res.type
+						});
+					}
+				},
+				error : function(res) {
+					$.tips({
+						content : "出价失败，请重试",
+						stayTime : 3000,
+						type : "error"
+					});
+				}
+		});
+		},
+		// 普通出价出价
 		bidding : function(){
 			$("#bidForm").dialog("hide");
+			$(".ui-footer-stable").show();
 //			clearInterval(interval_cursor);
 			if (vm.datas.tmp.currentClientId == "" || vm.datas.tmp.currentClientId == null) {
 				$.tips({
@@ -398,6 +604,7 @@ define("ibuy", function (){
 										type : res.type
 									});
 									$("#bidForm").dialog("show");
+									$(".ui-footer-stable").hide();
 									$.get("getBidListByDomainId", {domainId : vm.datas.domainList[index].id},
 											function(res) {
 											if(res.data.isNoBid=="false"){//历史有人出价
@@ -443,6 +650,7 @@ define("ibuy", function (){
 													}
 													vm.datas.tmp.domainId = vm.datas.domainList[vm.datas.tmp.index].id;
 													$("#bidForm").dialog("show");
+													$(".ui-footer-stable").hide();
 												} catch (e) {
 													alert(e);
 												}
@@ -451,6 +659,7 @@ define("ibuy", function (){
 												$("#bidCurrent").text(vm.datas.domainList[vm.datas.tmp.index].currAmount);
 												vm.datas.tmp.domainId = vm.datas.domainList[vm.datas.tmp.index].id;
 												$("#bidForm").dialog("show");
+												$(".ui-footer-stable").hide();
 											}
 										});
 								} else {
@@ -510,7 +719,9 @@ define("ibuy", function (){
 											}
 										});
 									vm.datas.tmp.deposit = res.data.deposit;
-									
+									vm.datas.tmp.charge = res.data.charge;
+									vm.datas.tmp.bidAmountForRecharge = bidAmount;//记录此次出价的金额，用户充完值之后自动帮其出价
+									vm.datas.tmp.domainIdForRecharge = vm.datas.tmp.domainId;//记录此次出价的域名id,用户充完值之后自动帮其出价
 									$("#bondForm #platformBankInfo").addClass("hidden");
 									$("#bondForm #online").trigger('click');
 									$("#bondForm").dialog("show");
@@ -561,6 +772,7 @@ define("ibuy", function (){
 							type : res.type
 						}).on("tips:hide",function(){
 							$("#ibuy #prompt-msg").dialog("show");
+							vm.biddingForRecharge();
 						});
 					}else{
 						$.tips({
@@ -591,6 +803,7 @@ define("ibuy", function (){
 										stayTime:2000,
 										type : "success"
 										});
+								vm.biddingForRecharge();
 								}
 							});
 					},
@@ -680,6 +893,30 @@ define("ibuy", function (){
 			$(this).toggleClass("expand-attendtion");
 		}
 	});
+	
+	// 初始化 加载更多
+	function initLoadMore() {
+		utils.loadmore("loadmore", function(callback){
+			$.get("domainList.json", 
+					{pageIndex : vm.datas.pageIndex},
+					function(res){
+						if (res.type == "success") {
+							vm.datas.domainList.pushArray(res.data.domainList);
+							vm.datas.pageIndex = vm.datas.pageIndex + 1;
+						} else {
+							setTimeout(function(){
+								$("#loadmore").addClass("hide-loadmore");
+							}, 2000);
+						}
+						if ($("#ibuy").data("scroll")) {
+                    		var dml = $.m.Scroll("#ibuy");
+                    		dml.scroller.refresh();
+                		}
+						callback(res.type);
+					}
+			);
+		});
+	}
 
 	// 页面显示之后，通过参数获取数据
 	var timeout_news, interval_date, timeout_ibuy;
@@ -698,36 +935,39 @@ define("ibuy", function (){
 //					if (res.type === 'success') {
 						vm.datas.domainList.clear();
 //						vm.datas.domainList.pushArray(res.data.domainList);
-						vm.datas.domainList.pushArray(pageData.domainList);
+						//vm.datas.domainList.pushArray(pageData.domainList);
 //						vm.datas.tmp.nickname = res.data.currClient.nickname;
 //						vm.datas.tmp.currentClientId = res.data.currClient.id;
 						//红包开关
 						vm.datas.shareBonusEnable = pageData.shareBonusEnable;
 						//服务器当前时间
 						vm.$sysServerTime = pageData.sysServerTime;
-//						var loadIndex = 0;
-//						var loadLength = pageData.domainList.length;
-//						if (loadIndex < loadLength) {
-//							vm.datas.domainList.push(pageData.domainList[loadIndex++]);
-//						}
-//						var pushData = function() { 
-//                            if (loadIndex < loadLength) { 
-//                                vm.datas.domainList.push(pageData.domainList[loadIndex++]); 
-//                                setTimeout(pushData, 100); 
-//                            } else {
-//                            	
-//                            	setTimeout(function(){
-//                            		$("#ibuy").trigger("touchmove");
-//                            		$("#ibuy").trigger("scrollEnd");
-//                            		
-//                            		if ($("#ibuy").data("scroll")) {
-//	                            		var dml = $.m.Scroll("#ibuy");
-//	                            		dml.scroller.refresh();
-//                            		}
-//                            	}, 100);
-//                            }
-//                        }
-//                        pushData();
+						var loadIndex = 0;
+						var loadLength = pageData.domainList.length;
+						var pushData = function() { 
+                            if (loadIndex < loadLength) { 
+                                vm.datas.domainList.push(pageData.domainList[loadIndex++]); 
+                                setTimeout(pushData, 200); 
+                            } else {
+                            	
+								initLoadMore();
+								
+								setTimeout(function(){
+									pollingMessage();
+									interval_ibuy_status_check();
+								}, 100);		
+                            	setTimeout(function(){
+                            		$("#ibuy").trigger("touchmove");
+                            		$("#ibuy").trigger("scrollEnd");
+                            		
+                            		if ($("#ibuy").data("scroll")) {
+	                            		var dml = $.m.Scroll("#ibuy");
+	                            		dml.scroller.refresh();
+                            		}
+                            	}, 1000);
+                            }
+                        }
+                        pushData();
 						//设置图片显示
 //						for(var i = 0;i < vm.datas.domainList.length; i++){
 //							$("#image1"+vm.datas.domainList[i].id).css("height",+vm.datas.screenWidth*0.85*0.30+"px")
@@ -738,40 +978,11 @@ define("ibuy", function (){
 						vm.datas.tmp.nickname = pageData.currClient.nickname;
 						if (pageData.currClient) {
 							vm.datas.tmp.currentClientId = pageData.currClient.id;
+							vm.datas.tmp.currentMobile = pageData.currClient.mobile;
 						}
 						vm.datas.pageIndex = vm.datas.pageIndex + 1;
 						if (vm.datas.tmp.singleDomainId != undefined && vm.datas.tmp.singleDomainId != null && vm.datas.tmp.singleDomainId != "") {
 						} else {
-							utils.loadmore("loadmore", function(callback){
-								$.get("domainList.json", 
-										{pageIndex : vm.datas.pageIndex},
-										function(res){
-											if (res.type == "success") {
-												vm.datas.domainList.pushArray(res.data.domainList);
-												vm.datas.pageIndex = vm.datas.pageIndex + 1;
-												//设置图片显示
-//												for(var i = 0;i < vm.datas.domainList.length; i++){
-//													$("#image1"+vm.datas.domainList[i].id).css("height",+vm.datas.screenWidth*0.85*0.30+"px")
-//													$("#image2"+vm.datas.domainList[i].id).css("height",+vm.datas.screenWidth*0.85*0.30+"px")
-//													$("#image3"+vm.datas.domainList[i].id).css("height",+vm.datas.screenWidth*0.85*0.30+"px")
-//												}
-											} else {
-//												$.tips({
-//													content : res.msg,
-//													stayTime : 4000,
-//													type : res.type
-//												});
-												setTimeout(function(){
-													$("#loadmore").addClass("hide-loadmore");
-												}, 2000);
-											}
-											if ($("#ibuy").data("scroll")) {
-			                            		var dml = $.m.Scroll("#ibuy");
-			                            		dml.scroller.refresh();
-		                            		}
-											callback(res.type);
-										});
-							});
 						}
 //					} else {
 //						$.tips({
@@ -784,9 +995,7 @@ define("ibuy", function (){
 //				});
 						
 
-						
-						pollingMessage();
-						interval_ibuy_status_check();
+		startCountDown();		
 						
 		$("#bondForm #offline").click(function(e){
 			$("#bondForm #platformBankInfo").removeClass("hidden");
@@ -821,12 +1030,39 @@ define("ibuy", function (){
 		}, 1000);
 		// 轮询页面最新状态
 		//interval_ibuy_status_check();
+		
+		var param = $.m.getParam();
+		if (param.newMobile) {
+			vm.datas.tmp.currentMobile = param.newMobile;
+		}
 	});
 	
 	// 设置服务器时间每秒加1秒
 	setInterval(function() {
 		vm.$sysServerTime = vm.$sysServerTime + 1000;//服务器时间加1秒
+		vm.datas.tmp.newDate = vm.$sysServerTime;
+		startCountDown();
 	}, 1000);
+	
+	var scnHeight = utils.getScreenHeight();
+	var startCountDown = function() {
+		if (redrawData && vm.datas.domainList && vm.datas.domainList.size() > 0) {
+			$(".time").each(function(i) {
+				var offset = $(this).offset();
+				if (offset.top - offset.height < -scnHeight) {
+					return true;
+				}
+				
+				if (offset.top > scnHeight*2) {
+					return true;
+				}
+				
+				var del = vm.datas.domainList[i];
+				var cd = vm.getCountDown(del.endTime, i);
+				$(this).html(cd.displayTime);
+			});
+		}
+	}
 	
 	var msgTimestamp = 0;
 	// 获取新消息 新消息轮询
@@ -848,12 +1084,12 @@ define("ibuy", function (){
 		});
     }
     
-    var invalid_date_func = function() {
-		if (redrawData) {
-			utils.jscache.clear();
-			vm.datas.tmp.newDate = vm.$sysServerTime;
-		}
-	}
+//    var invalid_date_func = function() {
+//		if (redrawData) {
+//			utils.jscache.clear();
+//			vm.datas.tmp.newDate = vm.$sysServerTime;
+//		}
+//	}
                 
                 
 	var getPos = function(e) {
@@ -877,49 +1113,34 @@ define("ibuy", function (){
 	var redrawData = true;
 	var startPos = {x:0,y:0};
 	var nowPos = {x:0,y:0};
-	$("#ibuy").on("scrollStart", function(e) {
-		//console.log("scrollStart")
-		nowPos = startPos = getPos(e);
-		//clearTimeout(timeout_news);
-		clearInterval(interval_date);
-		//clearTimeout(timeout_ibuy);
-		redrawData = false;
-	});
-	//$("#ibuy").on("touchmove", function(e) {
-		//console.log("touchmove")
-		//nowPos = getPos(e);
-	//});
-	$("#ibuy").on("touchend", function(e) {
-		console.log("touchend")
-		//nowPos = getPos(e);
-		if (!redrawData){
-			interval_date = setInterval(invalid_date_func, 1000);
+	if ($("#ibuy").data("scroll")) {
+		$("#ibuy").on("scrollStart", function(e) {
+			//console.log("scrollStart")
+			nowPos = startPos = getPos(e);
+			//clearTimeout(timeout_news);
+			clearInterval(interval_date);
+			//clearTimeout(timeout_ibuy);
+			redrawData = false;
+		});
+		$("#ibuy").on("touchend", function(e) {
+			console.log("touchend")
+			//nowPos = getPos(e);
+			if (!redrawData){
+//				interval_date = setInterval(invalid_date_func, 1000);
+				redrawData = true;
+			}
+		});
+		$("#ibuy").on("scrollEnd", function(e) {
+			//console.log("scrollEnd")
 			redrawData = true;
-		}
-	});
-	$("#ibuy").on("scrollEnd", function(e) {
-		//console.log("scrollEnd")
-		redrawData = true;
-		// 定时设置当前时间
-		if (!redrawData){
-			interval_date = setInterval(invalid_date_func, 1000);
-		}
-		//interval_ibuy_status_check();
-		//pollingMessage();
-	});
-	
-	$("#ibuy").on("scrollTouchEnd", function(e) {
-		//console.log("scrollTouchEnd")
-		//console.log(getPos(e))
-		//if (!redrawData){
-		//	redrawData = posYDelta(nowPos, startPos) <3;
 			// 定时设置当前时间
-		//	interval_date = setInterval(invalid_date_func, 1000);
+			if (!redrawData){
+//				interval_date = setInterval(invalid_date_func, 1000);
+			}
 			//interval_ibuy_status_check();
 			//pollingMessage();
-		//}
-		
-	});
+		});
+	}
 	
 	// 轮询ibuy数据
 	var interval_ibuy_status_check = function() {
@@ -973,7 +1194,7 @@ define("ibuy", function (){
 						}
 					}
 				}
-				timeout_ibuy = setTimeout(interval_ibuy_status_check, 500);
+				timeout_ibuy = setTimeout(interval_ibuy_status_check, 1000);
 			}
 		);
 	}
@@ -1033,10 +1254,14 @@ define("ibuy", function (){
 						jsApiList : [ 'hideMenuItems', 'onMenuShareTimeline',
 								'onMenuShareAppMessage', 'previewImage' ,'chooseWXPay']
 					});
+					var mainTitle = '今晚8:00，大量精品，快来捡漏拉';
+					var mainDesc = "j.com.cn，btb.com，67778.com";
 					
-					var mainTitle = '碉堡了，刷刷“朋友圈”就能拍卖域名';
-					var mainDesc = "你没见过这么简单的域名拍卖，点进来试试。每天推出各种品类的精品域名。";
-					var mainUrl = window.location.href;
+					if (pageData.sharemsg && pageData.sharemsg.length > 0) {
+						mainTitle = pageData.sharemsg[0].title;
+						mainDesc = pageData.sharemsg[0].content;
+					}
+					var mainUrl = utils.shareHref(window.location.href,"ibuy.html");
 					var mainImg = "http://" + window.location.host + ctx + "/static/images/brand_logo.jpg";
 
 					wx.ready(function() {
@@ -1153,6 +1378,7 @@ define("ibuy", function (){
 
 	$(".icon-close").bind("click", function(){
 		$("#bidForm").dialog("hide");
+		$(".ui-footer-stable").show();
 //		clearInterval(interval_cursor);
 	});
 	
@@ -1169,7 +1395,7 @@ define("ibuy", function (){
 		d2.append("<br>");
 		
 		var s = $("<span>");
-		s.text("长按二维码关注拍域名，立即参与竞拍。");
+		s.text("长按二维码关注米乐拍卖，立即参与竞拍。");
 		d2.append(s);
 		
 		d.append(d2);

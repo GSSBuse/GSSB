@@ -16,6 +16,7 @@ import com.thinkgem.jeesite.modules.sys.entity.dy.DomainEndNumEntity;
 import com.thinkgem.jeesite.modules.sys.entity.dy.DyDomainname;
 import com.thinkgem.jeesite.modules.sys.entity.dy.TransactionInformation;
 import com.thinkgem.jeesite.modules.sys.entity.dy.FollowInfoToMsg;
+import com.thinkgem.jeesite.modules.sys.entity.dy.HistoryInfo;
 import com.thinkgem.jeesite.modules.wx.entity.domainname.BidCashInfo;
 import com.thinkgem.jeesite.modules.wx.entity.domainname.PageDomainEntity;
 
@@ -223,4 +224,10 @@ public interface DyDomainnameDao extends CrudDao<DyDomainname> {
 	 * @return
 	 */
 	public List<DomainEndNumEntity> getDomainNum(@Param("maxNum")int maxNum,@Param("beginDate")Date beginDate,@Param("endDate")Date endDate);
+	/**
+	 * 获取平台历史交易信息，分页
+	 * @param dyCashFlow
+	 * @return
+	 */
+	public List<HistoryInfo> findHistoryInfoPage(HistoryInfo historyInfo);
 }

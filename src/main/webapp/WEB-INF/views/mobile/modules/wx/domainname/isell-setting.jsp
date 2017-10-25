@@ -20,10 +20,10 @@
 				<button class="ui-btn ui-btn-primary sub" id="submitDomain" ms-click="submitDomain()" ms-if="datas.from=='setDomainname' || datas.from == 'changeDomainname'">提交</button>
 				<button class="ui-btn ui-btn-primary" id="submitDomain" disabled="disabled" ms-if="datas.from=='seeDomainname'">提交</button>
 				<div class="service-protocol" style="margin-top: 25px;">
-					<span class="p-l-10" ms-click="LinkToServiceProtocol">提交即表示同意<span style="color:#586c96;">《拍域名竞拍服务协议》</span></span>
+					<span class="p-l-10" ms-click="LinkToServiceProtocol">提交即表示同意<span style="color:#586c96;">《米乐拍卖竞拍服务协议》</span></span>
 				</div>
 			</header>
-			<section class="ui-container" style="border-top-width:44px;">
+			<section class="ui-container has-footer" style="border-top-width:44px;">
 				<!--  
 				<ul class="ui-list ui-list-text ui-border-tb">
 					<li class="ui-border-t">

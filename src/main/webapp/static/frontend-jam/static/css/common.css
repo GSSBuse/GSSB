@@ -446,3 +446,11 @@ input[type=number]::-webkit-outer-spin-button {
 .p-t-70 {
 	padding-top: 70px !important;
 }
+
+.red {
+	color: red;
+}
+
+.green {
+	color: green;
+}

@@ -27,6 +27,7 @@ public class DyCashFlow extends DataEntity<DyCashFlow> {
 	private Date operateTime;		// 操作时间
 	private String confirmResult;	// 经纪人确认结果
 	private Long amountBalance;		// 操作后余额
+	private String transactionId;  // 微信订单号
 	private DyClient dyClient;
 	private DyDomainname dyDomainname;
 	public DyCashFlow() {
@@ -39,6 +40,7 @@ public class DyCashFlow extends DataEntity<DyCashFlow> {
 		paramsStr += "  会员姓名：" + dyClient.getName();
 		paramsStr += "  会员昵称：" + dyClient.getNickname();
 		paramsStr += "  银行账号：" + dyClient.getDefaultIncomeExpense();
+		paramsStr += "  微信订单号：" + transactionId;
 		paramsStr += "  操作：" + operate;
 		paramsStr += "  操作金额：" + operateAmount;
 		paramsStr += "	操作时间：" + operateTime;
@@ -113,6 +115,20 @@ public class DyCashFlow extends DataEntity<DyCashFlow> {
 		this.amountBalance = amountBalance;
 	}
 
+	/**
+	 * 微信订单号的取得
+	 * @return 微信订单号
+	 */
+	public String getTransactionId() {
+	    return transactionId;
+	}
+	/**
+	 * 微信订单号的设定
+	 * @param transactionId 微信订单号
+	 */
+	public void setTransactionId(String transactionId) {
+	    this.transactionId = transactionId;
+	}
 	public DyClient getDyClient() {
 		return dyClient;
 	}

@@ -539,7 +539,7 @@
 			<div class="ui-dialog dialog-font" id="platform-bank-info">
 				<div class="ui-dialog-cnt" style="width: 90%;">
 					<header class="ui-dialog-hd ui-border-b">
-						<h3>拍域名银行信息</h3>
+						<h3>米乐拍卖银行信息</h3>
 					</header>
 					<div class="ui-dialog-bd">
 						<div> 注：请在打款备注里留下您的米友号。</div>

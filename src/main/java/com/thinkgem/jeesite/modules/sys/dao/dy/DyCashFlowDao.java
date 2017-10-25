@@ -109,4 +109,21 @@ public interface DyCashFlowDao extends CrudDao<DyCashFlow> {
 	 * 修改冻结资金流的冻结金额（域名Id、会员id、操作金额、）
 	 */
 	public int updateFreeCashFlowAmount(DyCashFlow dyCashFlow , long newProxyAmount);
+	
+	/**
+	 * 根据会员id计算该会员的历史充值总额（微信充值或者线下充值）
+	 * @param clientId
+	 * @param rechargeWay 线下充值  微信充值
+	 * @return
+	 */
+	public int rechargeTotalMoney(@Param("clientId")String clientId,@Param("rechargeWay")String rechargeWay);
+	
+	/**
+	 * 根据会员id计算该会员的历史提现总额（微信提现或者线下提现）
+	 * @param clientId
+	 * @param withdrawalsWay 微信提现 线下提现
+	 * @return
+	 */
+	public int withdrawalsTotalMoney(@Param("clientId")String clientId,@Param("withdrawalsWay")String rechargeWay);
+	
 }

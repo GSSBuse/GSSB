@@ -5387,6 +5387,9 @@ new function() { // jshint ignore:line
       tapGesture.element = targetElement
       tapGesture.pageX = touch.pageX
       tapGesture.pageY = touch.pageY
+      tapGesture.touchStartY = touch.pageY
+      tapGesture.touchStartX = touch.pageX
+      
         // 如果点击太快,阻止双击带来的放大收缩行为
       if ((tapGesture.startTime - tapGesture.lastTime) < tapGesture.tapDelay) {
         event.preventDefault()

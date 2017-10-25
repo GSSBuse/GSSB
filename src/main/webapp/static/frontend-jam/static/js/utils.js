@@ -100,6 +100,10 @@ var factory = function(){
 			displayTime : displayTime
 		}
 	}
+	
+	var getScreenHeight = function () {
+		return document.compatMode === "BackCompat" ? document.body.clientHeight : document.documentElement.clientHeight;
+	}
 
 	var loadmore = function(element, callback) {
 		var self = $("#" + element);
@@ -128,7 +132,7 @@ var factory = function(){
 					eleTop = item.offsetTop,
 					eleHeight = item.offsetHeight,
 					winTop = parentPage.scrollTop(),//document.compatMode === "BackCompat" ? document.body.scrollTop : document.documentElement.scrollTop,
-					winHeight = document.compatMode === "BackCompat" ? document.body.clientHeight : document.documentElement.clientHeight;
+					winHeight = getScreenHeight();
 	
 				if(winTop === 0){ //修正chrome下取不到的問題
 					winTop = document.body.scrollTop;
@@ -152,7 +156,7 @@ var factory = function(){
 					"delta:" + delta + "<br>"+
 					""
 				);
-				if (delta < 300) {
+				if (delta < 500) {
 					if (!$(self).hasClass("nomore") && self.data("loadmore-status") == "checking") {
 						self.data("loadmore-status", "loading");
 						setTimeout(function(){
@@ -176,13 +180,13 @@ var factory = function(){
 				return true;
 			}
 			
-			var eventName = "touchmove";
-			if (parentPage.data("scroll")) {
-				eventName = "scrollEnd";
-				parentPage.on(eventName, checkload);
-			} else {
+			//var eventName = "touchmove";
+			//if (parentPage.data("scroll")) {
+			//	eventName = "scrollEnd";
+			//	parentPage.on(eventName, checkload);
+			//} else {
 				setInterval(checkload, 1000);
-			}
+			//}
 		} catch (e) {
 			alert(e);
 		}
@@ -218,6 +222,7 @@ var factory = function(){
 		shareHref : shareHref,
 		priceDisplay:priceDisplay,
 		parseDateStr : parseDateStr,
+		getScreenHeight: getScreenHeight,
 		jscache : jscache
 	}
 };

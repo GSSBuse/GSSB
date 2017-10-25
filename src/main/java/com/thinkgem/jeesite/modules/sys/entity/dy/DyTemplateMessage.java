@@ -26,6 +26,11 @@ public class DyTemplateMessage extends DataEntity<DyTemplateMessage> {
 	public DyTemplateMessage(String id){
 		super(id);
 	}
+	
+	public DyTemplateMessage(int nouse,String templateId){
+		super();
+		setTemplateId(templateId);
+	}
 
 	@Length(min=0, max=64, message="消息ID长度必须介于 0 和 64 之间")
 	public String getTemplateId() {

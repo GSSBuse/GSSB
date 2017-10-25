@@ -161,9 +161,10 @@ public class DyFinanceService extends CrudService<DyFinanceDao, DyFinance> imple
 	 * @param currentClient 会员实体
 	 * @param freezeBalance 冻结的金额数
 	 * @param updateDate用于检测同步问题
+	 * @param remarks 备注微信提现还是先下提现
 	 */
 	@Transactional(readOnly = false)
-	public void updateFreezeBalanceForRecharge(DyClient currentClient, Long freezeBalance,String operate) throws Exception{
+	public void updateFreezeBalanceForRecharge(DyClient currentClient, Long freezeBalance,String operate,String remarks) throws Exception{
 		//更新财务表
 		DyFinance finance = new DyFinance();
 		finance.setClientId(currentClient.getId());
@@ -183,6 +184,7 @@ public class DyFinanceService extends CrudService<DyFinanceDao, DyFinance> imple
 		cashFlow.setOperateAmount(freezeBalance);
 		cashFlow.setOperateTime(new Date());
 		cashFlow.setConfirmResult(CASHFLOW_CONFIRM_WAIT);
+		cashFlow.setRemarks(remarks);		
 		//设置id,create_by,create_date,update_by,update_date,del_flag,remarks
 		cashFlow.preInsert(UserUtils.get(currentClient.getBrokerId()));
 		//设置该实体为新记录
