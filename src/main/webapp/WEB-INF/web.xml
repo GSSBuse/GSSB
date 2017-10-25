@@ -45,7 +45,7 @@
   </filter>
   <filter-mapping>
     <filter-name>sitemeshFilter</filter-name>
-    <url-pattern>/dy_manage_4513/*</url-pattern>
+    <url-pattern>/manage/*</url-pattern>
   </filter-mapping>
   <filter-mapping>
     <filter-name>sitemeshFilter</filter-name>
