@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.gb.GbBuyDao">
+    
+	<sql id="gbBuyColumns">
+		a.id AS "id",
+		a.gbclient_id AS "gbclientId",
+		a.type_id AS "typeId",
+		a.price AS "price",
+		a.realprice AS "realprice",
+		a.connacts AS "connacts",
+		a.mobile AS "mobile",
+		a.description AS "description",
+		a.title AS "title",
+		a.create_time AS "createTime",
+		a.status AS "status",
+		a.del_flag AS "delFlag",
+		a.deal_time AS "dealTime"
+	</sql>
+	
+	<sql id="gbBuyJoins">
+	</sql>
+    
+	<select id="get" resultType="GbBuy">
+		SELECT 
+			<include refid="gbBuyColumns"/>
+		FROM gb_buy a
+		<include refid="gbBuyJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="GbBuy">
+		SELECT 
+			<include refid="gbBuyColumns"/>
+		FROM gb_buy a
+		<include refid="gbBuyJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="title != null and title != ''">
+				AND a.title LIKE 
+					<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{title},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="GbBuy">
+		SELECT 
+			<include refid="gbBuyColumns"/>
+		FROM gb_buy a
+		<include refid="gbBuyJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO gb_buy(
+			id,
+			gbclient_id,
+			type_id,
+			price,
+			realprice,
+			connacts,
+			mobile,
+			description,
+			title,
+			create_time,
+			status,
+			del_flag,
+			deal_time
+		) VALUES (
+			#{id},
+			#{gbclientId},
+			#{typeId},
+			#{price},
+			#{realprice},
+			#{connacts},
+			#{mobile},
+			#{description},
+			#{title},
+			#{createTime},
+			#{status},
+			#{delFlag},
+			#{dealTime}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE gb_buy SET 	
+			gbclient_id = #{gbclientId},
+			type_id = #{typeId},
+			price = #{price},
+			realprice = #{realprice},
+			connacts = #{connacts},
+			mobile = #{mobile},
+			description = #{description},
+			title = #{title},
+			create_time = #{createTime},
+			status = #{status},
+			deal_time = #{dealTime}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE gb_buy SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

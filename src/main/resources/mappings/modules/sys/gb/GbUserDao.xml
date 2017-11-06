@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.gb.GbUserDao">
+    
+	<sql id="gbUserColumns">
+		a.id AS "id",
+		a.username AS "username",
+		a.password AS "password",
+		a.name AS "name",
+		a.mobile AS "mobile",
+		a.email AS "email",
+		a.wechat AS "wechat",
+		a.qq AS "qq",
+		a.zfb AS "zfb",
+		a.create_time AS "createTime",
+		a.update_time AS "updateTime",
+		a.is_delete AS "isDelete"
+	</sql>
+	
+	<sql id="gbUserJoins">
+	</sql>
+    
+	<select id="get" resultType="GbUser">
+		SELECT 
+			<include refid="gbUserColumns"/>
+		FROM gb_user a
+		<include refid="gbUserJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="GbUser">
+		SELECT 
+			<include refid="gbUserColumns"/>
+		FROM gb_user a
+		<include refid="gbUserJoins"/>
+		<where>
+			
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="GbUser">
+		SELECT 
+			<include refid="gbUserColumns"/>
+		FROM gb_user a
+		<include refid="gbUserJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO gb_user(
+			id,
+			username,
+			password,
+			name,
+			mobile,
+			email,
+			wechat,
+			qq,
+			zfb,
+			create_time,
+			update_time,
+			is_delete
+		) VALUES (
+			#{id},
+			#{username},
+			#{password},
+			#{name},
+			#{mobile},
+			#{email},
+			#{wechat},
+			#{qq},
+			#{zfb},
+			#{createTime},
+			#{updateTime},
+			#{isDelete}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE gb_user SET 	
+			username = #{username},
+			password = #{password},
+			name = #{name},
+			mobile = #{mobile},
+			email = #{email},
+			wechat = #{wechat},
+			qq = #{qq},
+			zfb = #{zfb},
+			create_time = #{createTime},
+			update_time = #{updateTime},
+			is_delete = #{isDelete}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM gb_user
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.gb.GbBuyCommentsDao">
+    
+	<sql id="gbBuyCommentsColumns">
+		a.id AS "id",
+		a.gbclient_id AS "gbclientId",
+		a.buy_id AS "buyId",
+		a.comments AS "comments",
+		a.create_time AS "createTime",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="gbBuyCommentsJoins">
+	</sql>
+    
+	<select id="get" resultType="GbBuyComments">
+		SELECT 
+			<include refid="gbBuyCommentsColumns"/>
+		FROM gb_buy_comments a
+		<include refid="gbBuyCommentsJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="GbBuyComments">
+		SELECT 
+			<include refid="gbBuyCommentsColumns"/>
+		FROM gb_buy_comments a
+		<include refid="gbBuyCommentsJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="GbBuyComments">
+		SELECT 
+			<include refid="gbBuyCommentsColumns"/>
+		FROM gb_buy_comments a
+		<include refid="gbBuyCommentsJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO gb_buy_comments(
+			id,
+			gbclient_id,
+			buy_id,
+			comments,
+			create_time,
+			del_flag
+		) VALUES (
+			#{id},
+			#{gbclientId},
+			#{buyId},
+			#{comments},
+			#{createTime},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE gb_buy_comments SET 	
+			gbclient_id = #{gbclientId},
+			buy_id = #{buyId},
+			comments = #{comments},
+			create_time = #{createTime}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE gb_buy_comments SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
