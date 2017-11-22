@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.gbj.GbjUserBuyCommentsDao">
+    
+	<sql id="gbjUserBuyCommentsColumns">
+		a.id AS "id",
+		a.buy_id AS "buyId",
+		a.parent_id AS "parentId",
+		a.child_id AS "childId",
+		a.content AS "content",
+		a.comment_time AS "commentTime",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="gbjUserBuyCommentsJoins">
+	</sql>
+    
+	<select id="get" resultType="GbjUserBuyComments">
+		SELECT 
+			<include refid="gbjUserBuyCommentsColumns"/>
+		FROM gbj_user_buy_comments a
+		<include refid="gbjUserBuyCommentsJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="GbjUserBuyComments">
+		SELECT 
+			<include refid="gbjUserBuyCommentsColumns"/>
+		FROM gbj_user_buy_comments a
+		<include refid="gbjUserBuyCommentsJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="buyId != null and buyId != ''">
+				AND a.buy_id = #{buyId}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="GbjUserBuyComments">
+		SELECT 
+			<include refid="gbjUserBuyCommentsColumns"/>
+		FROM gbj_user_buy_comments a
+		<include refid="gbjUserBuyCommentsJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO gbj_user_buy_comments(
+			id,
+			buy_id,
+			parent_id,
+			child_id,
+			content,
+			comment_time,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{buyId},
+			#{parentId},
+			#{childId},
+			#{content},
+			#{commentTime},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE gbj_user_buy_comments SET 	
+			buy_id = #{buyId},
+			parent_id = #{parentId},
+			child_id = #{childId},
+			content = #{content},
+			comment_time = #{commentTime},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE gbj_user_buy_comments SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
