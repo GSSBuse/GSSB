@@ -22,12 +22,11 @@ import freemarker.template.Template;
 public class SendMailUtil {
 
 	// private static final String smtphost = "192.168.1.70";
-	private static final String from = "thinkgem@163.com";
-	private static final String fromName = "测试公司";
+	private static final String from = "18191268187@163.com";
+	private static final String fromName = "商标免费查询";
 	private static final String charSet = "utf-8";
-	private static final String username = "thinkgem@163.com";
-	private static final String password = "123456";
-
+	private static final String username = "18191268187@163.com";
+	private static final String password = "www18829285209";
 	private static Map<String, String> hostMap = new HashMap<String, String>();
 	static {
 		// 126
