@@ -17,6 +17,16 @@ function hideURLbar(){
 	
 
 });
+
+$(document).ready(function() {
+	
+});
+function page(n,s){
+	$("#pageNo").val(n);
+	$("#pageSize").val(s);
+	$("#searchForm").submit();
+	return false;
+}
 </script>
 </head>
 <body>
@@ -127,49 +137,59 @@ function hideURLbar(){
 </div>
 <div class="features">
     <div class="container">
-        <div class="col-md-4">
-           <h4 class="tz-title-4 tzcolor-blue">
-             <p class="tzweight_Bold m_2"><span class="m_1">最热<br></span>买标信息</p>
-          </h4>
-          <ul class="offer">
-             <li><p class="m_3"><span class="m_4">商标<br></span>猪八戒</p></li> 
-             <li><p class="m_5">50元</p></li>    
-          </ul>
-        </div>
-        <div class="col-md-8 row_1">
-            <h4 class="tz-title-4 tzcolor-blue">
-             <p class="tzweight_Bold m_2"><span class="m_1">最新<br></span>买标信息</p>
-           </h4>
-           <div class="section_1">
-            <div class="col_1_of_3 span_1_of_3">
-                <div class="list_1">
-                    <ul>
-                      <li><a href="">【商标】练练车</a></li>
-                      <li><a href="">【商标】练练车阿斯</a></li>
-                      <li><a href="">【商标】练练车傻傻的</a></li>
-                      <li><a href="">【商标】练练车啊等等</a></li>     
-                    </ul>
-                </div>
-            </div>
-            <div class="col_1_of_3 span_1_of_3">
-                <div class="list_1">
-                    <ul>
-                      <li><a href="">【商标】练练车</a></li>
-                      <li><a href="">【商标】练练车sda</a></li>
-                      <li><a href="">【商标】练练车as</a></li>
-                      <li><a href="">【商标】练练车是</a></li>     
-                    </ul>
-                </div>
-            </div>
-            <div class="col_1_of_3 span_1_of_3">
-                <a class="but1" href="#">查看全部</a>
-            </div>
-            <div class="clearfix"> </div>
-           </div>
-        </div>
-    </div>
+        <table id="contentTable" class="table table-striped table-bordered table-condensed">
+		<thead>
+			<tr>
+				<th>用户ID</th>
+				<th>国标类型</th>
+				<th>预算价格</th>
+				<th>实际成交价格</th>
+				<th>联系人</th>
+				<th>联系人手机号</th>
+				<th>国标描述</th>
+				<th>国标标题</th>
+				<th>备注信息</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<sys:message content="${message}"/>
+		<c:forEach items="${page.list}" var="gbjBuyEntity">
+			<tr>
+				<td><a href="${ctx}/paimai/front/index/list?id=${gbjBuyEntity.id}">
+					${gbjBuyEntity.user.id}
+				</a></td>
+				<td>
+					${fns:getDictLabel(gbjBuyEntity.typeId, 'gbjBuy_type_id', '')}
+				</td>
+				<td>
+					${gbjBuyEntity.price}
+				</td>
+				<td>
+					${gbjBuyEntity.realprice}
+				</td>
+				<td>
+					${gbjBuyEntity.linkman}
+				</td>
+				<td>
+					${gbjBuyEntity.mobile}
+				</td>
+				<td>
+					${gbjBuyEntity.description}
+				</td>
+				<td>
+					${gbjBuyEntity.title}
+				</td>
+				<td>
+					${gbjBuyEntity.remarks}
+				</td>
+				
+			</tr>
+		</c:forEach>
+		</tbody>
+	</table>
 </div>
-
+</div>
 <div class="domain">
     <div class="container">
         <div class="col-md-4">

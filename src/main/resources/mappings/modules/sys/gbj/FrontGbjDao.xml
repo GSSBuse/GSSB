@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.gbj.FrontGbjBuyDao">
+    
+	<sql id="gbjBuyColumns">
+		a.id AS "id",
+		a.user_id AS "user.id",
+		a.type_id AS "typeId",
+		a.price AS "price",
+		a.realprice AS "realprice",
+		a.linkman AS "linkman",
+		a.mobile AS "mobile",
+		a.description AS "description",
+		a.title AS "title",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="gbjBuyJoins">
+	</sql>
+    
+	<select id="get" resultType="GbjBuyEntity">
+		SELECT 
+			<include refid="gbjBuyColumns"/>
+		FROM gbj_buy a
+		<include refid="gbjBuyJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="GbjBuyEntity">
+		SELECT 
+			<include refid="gbjBuyColumns"/>
+		FROM gbj_buy a
+		<include refid="gbjBuyJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="user != null and user.id != null and user.id != ''">
+				AND a.user_id = #{user.id}
+			</if>
+			<if test="typeId != null and typeId != ''">
+				AND a.type_id = #{typeId}
+			</if>
+			<if test="title != null and title != ''">
+				AND a.title LIKE 
+					<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{title},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="GbjBuyEntity">
+		SELECT 
+			<include refid="gbjBuyColumns"/>
+		FROM gbj_buy a
+		<include refid="gbjBuyJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO gbj_buy(
+			id,
+			user_id,
+			type_id,
+			price,
+			realprice,
+			linkman,
+			mobile,
+			description,
+			title,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{user.id},
+			#{typeId},
+			#{price},
+			#{realprice},
+			#{linkman},
+			#{mobile},
+			#{description},
+			#{title},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE gbj_buy SET 	
+			user_id = #{user.id},
+			type_id = #{typeId},
+			price = #{price},
+			realprice = #{realprice},
+			linkman = #{linkman},
+			mobile = #{mobile},
+			description = #{description},
+			title = #{title},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE gbj_buy SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
