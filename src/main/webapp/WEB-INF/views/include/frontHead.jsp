@@ -15,6 +15,15 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}${fns:getFrontPath()}"/>
 <c:set var="ctxStatic" value="${pageContext.request.contextPath}/static"/>
 
+<link rel="stylesheet" type="text/css" href="${ctxStatic}/front/css/base.css">
+<link rel="stylesheet" type="text/css" href="${ctxStatic}/front/css/buttons.css">
+<link rel="stylesheet" type="text/css" href="${ctxStatic}/front/css/table.css">
+<link rel="stylesheet" type="text/css" href="${ctxStatic}/front/css/center.css" >
+<link rel="stylesheet" type="text/css" href="${ctxStatic}/front/css/override.css" >
+<link rel="stylesheet" type="text/css" href="${ctxStatic}/front/css/navigation.css" >
+<script type="text/javascript" src="${ctxStatic}/jquery/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="${ctxStatic}/frontend-jam/static/vendors/avalon/avalon.js"></script>
+<script type="text/javascript" src="${ctxStatic}/frontend-jam/static/js/utils.js"></script>
 <!-- Custom Theme files -->
 <link href="${ctxStatic }/front/css/bootstrap.css" rel='stylesheet' type='text/css' />
 <link href="${ctxStatic }/front/css/style.css" rel='stylesheet' type='text/css' />
@@ -52,4 +61,6 @@
     });
 });
 </script>
-        
+
+<link href="${ctxStatic}/jquery-jbox/2.3/Skins/Blue/jbox.css" rel="stylesheet" />
+<script src="${ctxStatic}/jquery-jbox/2.3/jquery.jBox-2.3.js" type="text/javascript"></script>        

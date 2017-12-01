@@ -1,0 +1,142 @@
+@CHARSET "UTF-8";
+
+.table-wrapper {
+    display: table;
+    width: 75%;
+}
+.buy_table-wrapper {
+    display: table;
+    width: 100%;
+    min-height:575px;
+}
+
+.table-container {
+    display: table-cell;
+    width: 33%;
+    vertical-align: top;
+}
+
+.table {
+	position: relative;
+}
+
+.table.blue {
+	/*float: left;*/
+	border-bottom: 1px solid #D5D5D5;
+}
+
+.table.blue tbody, .table.blue tfoot{
+	/*float: left;*/
+	border: 1px solid #D5D5D5;
+	border-top: none;
+	border-bottom: none;
+}
+
+.table.blue.no-border {
+    border: none;
+}
+
+#resultListTable .first.jqs_tbl_checkbox {
+    padding-top: 3px;
+}
+
+.table.blue h3 {
+	color: #fff;
+	text-shadow: 0px 1px 1px #414141;
+}
+
+.table.blue .thead .tr {
+	background: #266cd4;
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzI2NmNkNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxYzUzYTYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top, #266cd4 0%, #1c53a6 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#266cd4), color-stop(100%,#1c53a6));
+	background: -webkit-linear-gradient(top, #266cd4 0%,#1c53a6 100%);
+	background: -o-linear-gradient(top, #266cd4 0%,#1c53a6 100%);
+	background: -ms-linear-gradient(top, #266cd4 0%,#1c53a6 100%);
+	background: linear-gradient(to bottom, #266cd4 0%,#1c53a6 100%);
+}
+
+.table.blue .thead .tr .th {
+	padding: 14px 20px;
+ 	border-top: 1px solid #1c53a6; 
+	position: relative;
+	z-index: 20;
+	vertical-align:	middle;
+	white-space: nowrap;
+}
+
+.table.blue .thead .tr .th * {
+	vertical-align:	middle;
+}
+
+.table.blue .thead .tr .th.br {
+	border-right: 1px solid #1c53a6;
+}
+
+.table.blue .thead .tr .th.bl {
+	border-left: 1px solid #266fdd;
+}
+
+.table.blue .tbody .tr.even {
+	background-color: #fff;
+}
+
+.table.blue .tbody .tr.odd {
+	background-color: #e0edff;
+}
+
+.table.blue .tbody .tr.highlighted {
+	background-color: #c5d6e8;
+}
+
+.table.blue .tbody .tr .td {
+	padding: 10px 20px;
+	white-space: nowrap;
+	height: auto;
+}
+
+.table.blue .tbody .tr .td.even {
+}
+
+.table.blue .tbody .tr .td.odd {
+	padding-left: 0;
+}
+
+.table.blue .tbody .tr .td a.url:link,
+.table.blue .tbody .tr .td a.url:visited,
+.table.blue .tbody .tr .td.url {
+	color: #292929;
+	text-decoration: none;
+}
+
+.table.blue .tbody .tr .td a.url:hover,
+.table.blue .tbody .tr .td a.url:active {
+	text-decoration: underline;
+}
+
+.table.blue .tbody .tr .td a.price:link,
+.table.blue .tbody .tr .td a.price:visited,
+.table.blue .tbody .tr .td.price {
+	color: #228e05;
+	text-decoration: none;
+}
+
+.more .nextpage{
+	color: #228e05;
+	text-decoration: none;
+}
+
+.table.blue .tbody .tr .td a.price:hover,
+.table.blue .tbody .tr .td a.price:active {
+	text-decoration: underline;
+}
+
+.table.blue tbody tr td.loading {
+    background: #fff url(/fileadmin/images/animated/loader-32x32.gif) no-repeat center center;
+    height: 369px;
+}
+
+.table.blue .jcarousel-item {
+	width: 318px;
+	height: 41px;
+}

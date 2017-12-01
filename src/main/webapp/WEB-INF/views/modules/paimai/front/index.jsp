@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page language="java" import="com.thinkgem.jeesite.common.utils.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,19 +14,8 @@ function hideURLbar(){
 	window.scrollTo(0,1); 
 	} 
 	
-
-});
-
-$(document).ready(function() {
-	
-});
-function page(n,s){
-	$("#pageNo").val(n);
-	$("#pageSize").val(s);
-	$("#searchForm").submit();
-	return false;
-}
 </script>
+
 </head>
 <body>
 <div class="header">
@@ -135,60 +123,6 @@ function page(n,s){
         </div>
     </div>
 </div>
-<div class="features">
-    <div class="container">
-        <table id="contentTable" class="table table-striped table-bordered table-condensed">
-		<thead>
-			<tr>
-				<th>用户ID</th>
-				<th>国标类型</th>
-				<th>预算价格</th>
-				<th>实际成交价格</th>
-				<th>联系人</th>
-				<th>联系人手机号</th>
-				<th>国标描述</th>
-				<th>国标标题</th>
-				<th>备注信息</th>
-				<th>操作</th>
-			</tr>
-		</thead>
-		<tbody>
-		<sys:message content="${message}"/>
-		<c:forEach items="${page.list}" var="gbjBuyEntity">
-			<tr>
-				<td><a href="${ctx}/paimai/front/index/list?id=${gbjBuyEntity.id}">
-					${gbjBuyEntity.user.id}
-				</a></td>
-				<td>
-					${fns:getDictLabel(gbjBuyEntity.typeId, 'gbjBuy_type_id', '')}
-				</td>
-				<td>
-					${gbjBuyEntity.price}
-				</td>
-				<td>
-					${gbjBuyEntity.realprice}
-				</td>
-				<td>
-					${gbjBuyEntity.linkman}
-				</td>
-				<td>
-					${gbjBuyEntity.mobile}
-				</td>
-				<td>
-					${gbjBuyEntity.description}
-				</td>
-				<td>
-					${gbjBuyEntity.title}
-				</td>
-				<td>
-					${gbjBuyEntity.remarks}
-				</td>
-				
-			</tr>
-		</c:forEach>
-		</tbody>
-	</table>
-</div>
 </div>
 <div class="domain">
     <div class="container">
@@ -280,85 +214,56 @@ function page(n,s){
         </div>
     </div>
 </div>
-                             
-<div id="search-dialog" class="mfp-hide">
+                
+<!-- 免费查询form表单 -->                             
+<div id="search-dialog" class="mfp-hide"  ms-controller="search-dialog">
      <div class="pop_up">
          <div class="payment-online-form-left" >
-         <!--     <form:form id="inputForm" modelAttribute="gbjTouristRequire" action="${ctx}/paimai/front/FrontCommon/save" method="post" class="form-horizontal">-->
-               
-               <form name="sendEmail" action="">
+            <form id="domainform" method="post" action="${ctx }/index.html" ms-widget="validation"  class="form-horizontal">
                  <h4><span class="shipping"> </span>免费查询</h4>
                  <h6>专业顾问人工查询，结果分析更准确</H6>
                  <ul>
                      <li>
                         <div>商标名称</div>
-                        <input  id="content" name="searchContents" class="text-box-dark" type="text" value="请填写要查询的商标名称" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '请填写要查询的商标名称';}">
+                        <input  id="name" name="name" class="text-box-dark" type="text" value="请填写要查询的商标名称" ms-duplex-required="datas.domainInfo.name" maxlength="20" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '请填写要查询的商标名称';}">
                     </li>
                      <li>
                         <div>联系电话</div>
-                        <input id="mobile"  name="mobile" class="text-box-dark" type="text" value="请输入您的联系电话" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '请输入您的联系电话';}">
+                        <input id="mobile"  name="mobile" class="text-box-dark" type="text" value="请输入您的联系电话" ms-duplex-required-phone="datas.domainInfo.mobile" maxlength="11" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '请输入您的联系电话';}">
                      </li>
                      <li>
                         <div>联系人</div>
-                        <input id="name"   name="name" class="text-box-dark" type="text" value="如：王先生/王女士" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '如：王先生/王女士';}">
+                        <input id="connacts"   name="connacts" class="text-box-dark" type="text" value="如：王先生/王女士" ms-duplex-required="datas.domainInfo.connacts" maxlength="20" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '如：王先生/王女士';}">
                      </li>
                      <div class="clearfix"> </div>
                  </ul>
-                 <div class="clear"> <ul class="payment-sendbtns">
-                     <li> <input  id="sendemail"  type="submit" value="获取查询结果" ></li>
-                   
+                  <ul class="payment-sendbtns">
+                     <li> <input  id="submitChange"  type="submit" value="获取查询结果" ></li>
                  </ul>
-               
-                 <div class="clearfix"> </div>
-            </form:form>
-            
-            
-        <jsp:useBean id="loginBean" class="com.thinkgem.jeesite.common.utils.SendEmailBean" />
-        <jsp:setProperty property="content" name="loginBean" param="searchContents" />
-        <jsp:setProperty property="name" name="loginBean" param="name" />
-        <jsp:setProperty property="mobile" name="loginBean" param="mobile" /> 
-        
-         
-        <jsp:getProperty property="isSend" name="loginBean"   /><br />       
-  
-             
+            </form>
          </div>
     </div>
 </div>
  
-//我要买标 对话框
+<!--我要买标 对话框 -->
 <div id="dialog1" class="mfp-hide">
-     <div class="pop_up">
-         <div class="payment-online-form-left">
-             <form>
-                 <h4><span class="shipping"> </span>我要买标</h4>
-                 <h6>请输入您要买标的信息</H6>
-                 <ul>
-                     <li>
-                        <div>商标名称</div>
-                        <input class="text-box-dark" type="text" value="请填写要查询的商标名称" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '请填写要查询的商标名称';}">
-                    </li>
-                     <li>
-                        <div>联系电话</div>
-                        <input class="text-box-dark" type="text" value="请输入您的联系电话" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '请输入您的联系电话';}">
-                     </li>
-                     <li>
-                        <div>联系人</div>
-                        <input class="text-box-dark" type="text" value="如：王先生/王女士" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '如：王先生/王女士';}">
-                     </li>
-                     <div class="clearfix"> </div>
-                 </ul>
-                 <div class="clear"> </div>
-                 <ul class="payment-sendbtns">
-                     <li><input type="submit" value="获取查询结果"></li>
-                 </ul>
-                 <div class="clearfix"> </div>
-             </form>
-         </div>
-    </div>
+<!--     TODO  -->
 </div> 
 
+<!--我要卖标  对话框 -->
+<div id="dialog2" class="mfp-hide">
+<!--     TODO  -->
+</div> 
 
+<!--悬赏起名 对话框 -->
+<div id="dialog3" class="mfp-hide">
+<!--     TODO  -->
+</div> 
+
+<!--淘金客 对话框 -->
+<div id="dialog4" class="mfp-hide">
+<!--     TODO  -->
+</div> 
  <script type="text/javascript">
     $(function(){
       //SyntaxHighlighter.all();
@@ -385,31 +290,8 @@ function page(n,s){
       });
     });
   </script>
-   <script type="text/javascript">
-	$(document).ready(function(){
-		 $("#sendemail").click(function(){
-		 		 		 if($("#content").val()=="请填写要查询的商标名称")  
-	        {  
-	            alert('商标名称不能为空');  
-	            	           return false;  
-	        }  
-		 		 		if($("#mobile").val()=="请输入您的联系电话")  
-		 		        {  
-		 		           alert('联系电话无效');  
-		 		           return false;  
-		 		        }   
-		 if($("#name").val()=="如：王先生/王女士")  
-	        {  
-	            alert('联系人不能为空');  
-	            	           return false;  
-	        }   
-	      	        
-	        
-	     		  });
-	
-});
-</script>
-  
+
+<script type="text/javascript" src="${ctxStatic }/front/js/searchBrand.js"></script>  
 </body>
 </html>
 

@@ -20,7 +20,8 @@ public class GbBuy extends DataEntity<GbBuy> {
 	private static final long serialVersionUID = 1L;
 	private String gbclientId;		// 用户id
 	private String typeId;		// 国标类型1:商标2:版权3:专利
-	private Long price;		// price
+	private String name;		// name
+	private Long price;		// prices
 	private Long realprice;		// 国标实际成交价格
 	private String connacts;		// connacts
 	private String mobile;		// mobile
@@ -54,6 +55,14 @@ public class GbBuy extends DataEntity<GbBuy> {
 
 	public void setTypeId(String typeId) {
 		this.typeId = typeId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	@NotNull(message="price不能为空")
