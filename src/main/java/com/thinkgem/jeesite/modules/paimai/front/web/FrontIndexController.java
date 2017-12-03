@@ -14,14 +14,16 @@ import com.thinkgem.jeesite.common.mapper.JsonMapper;
 import com.thinkgem.jeesite.common.utils.SendMailUtil;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.sys.entity.gb.GbBuy;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjTouristRequire;
 import com.thinkgem.jeesite.modules.sys.service.gb.GbBuyService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.GbjTouristRequireService;
 
 @Controller
 @RequestMapping(value = "${frontPath}")
 public class FrontIndexController extends BaseController{
 		
 	@Autowired
-	private GbBuyService gbBuyService;             // 国商商标查询Service
+	private GbjTouristRequireService gbjTouristRequireService;             // 国商商标查询Service
 	
 	/**
 	 * 网站首页
@@ -36,13 +38,13 @@ public class FrontIndexController extends BaseController{
 	 */
 	@RequestMapping(value= {"searchBrand"})
 	@ResponseBody
-	public AjaxResult searchBrand(Model model, GbBuy gbBuy, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+	public AjaxResult searchBrand(Model model, GbjTouristRequire gbjTouristRequire, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		
-		model.addAttribute("domainInfoJson", JsonMapper.toJsonString(gbBuy));
+		model.addAttribute("domainInfoJson", JsonMapper.toJsonString(gbjTouristRequire));
 		try{
 			
 			//STEP1  提交查询信息，保存到数据库
-			gbBuyService.save(gbBuy);
+			gbjTouristRequireService.save(gbjTouristRequire);
 			
 			/*保存日志*/  //暂时去掉业务日志，后期打开 by wanghs
 			//LogUtils.saveSpecialLog(request, null);

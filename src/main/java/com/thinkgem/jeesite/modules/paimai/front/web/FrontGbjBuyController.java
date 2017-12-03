@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.HtmlUtils;
 
 import com.thinkgem.jeesite.common.bean.AjaxResult;
@@ -24,45 +25,44 @@ import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.paimai.bean.GbjBuyEntity;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjTouristRequire;
 import com.thinkgem.jeesite.modules.sys.front.service.gbj.FrontGbjBuyService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjBuyService;
 import com.thinkgem.jeesite.modules.wx.entity.domainname.PageDomainEntity;
 
 @Controller
-@RequestMapping(value = "${adminPath}/paimai/front/index")
+//@RequestMapping(value = "${frontPath}")
 public class FrontGbjBuyController extends BaseController{
 
 	@Autowired
-	private FrontGbjBuyService frontGbjBuyService;
+	private GbjBuyService gbjBuyService;
 	
-	@ModelAttribute
-	public GbjBuyEntity get(@RequestParam(required=false) String id) {
-		GbjBuyEntity gbjBuyEntity = null;
-		if (StringUtils.isNotBlank(id)){
-			gbjBuyEntity = frontGbjBuyService.get(id);
-		}
-		if (gbjBuyEntity == null){
-			gbjBuyEntity = new GbjBuyEntity();
-		}
-		return gbjBuyEntity;
-	}
-	
-	
-	//@RequiresPermissions("paimai:front:index:view")
-	@RequestMapping(value = "list")
-	@Transactional(readOnly = false)
-	public String list(GbjBuyEntity gbjBuyEntity, HttpServletRequest request, HttpServletResponse response, Model model) {
-		Page<GbjBuyEntity> page = frontGbjBuyService.findPage(new Page<GbjBuyEntity>(request, response), gbjBuyEntity); 
-		model.addAttribute("page", page);
-	
+	//@RequestMapping(value= {"", "index"})
+	public String index(Model model) {
 		return "modules/paimai/front/index";
+	}	
+	
+	//@RequestMapping(value= {"buy"})
+	@ResponseBody
+	public AjaxResult buy(Model model, GbjBuy gbjBuy, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		
+		model.addAttribute("domainInfoJson", JsonMapper.toJsonString(gbjBuy));
+		try{
+			
+			gbjBuyService.save(gbjBuy);
+						
+			
+			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+			
+			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
+			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+		}
+		
 	}
 	
-	//@RequiresPermissions("paimai:front:index:view")
-	/*@RequestMapping(value = "form")
-	public String form(GbjBuyEntity gbjBuyEntity, Model model) {
-		model.addAttribute("gbjBuyEntity", gbjBuyEntity);
-		return "modules/paimai/front/index";
-	}
-	*/
+	
+	
 }
