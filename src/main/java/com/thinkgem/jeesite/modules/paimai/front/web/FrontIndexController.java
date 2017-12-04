@@ -14,8 +14,10 @@ import com.thinkgem.jeesite.common.mapper.JsonMapper;
 import com.thinkgem.jeesite.common.utils.SendMailUtil;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.sys.entity.gb.GbBuy;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjTouristRequire;
 import com.thinkgem.jeesite.modules.sys.service.gb.GbBuyService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.GbjBuyService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjTouristRequireService;
 
 @Controller
@@ -24,6 +26,12 @@ public class FrontIndexController extends BaseController{
 		
 	@Autowired
 	private GbjTouristRequireService gbjTouristRequireService;             // 国商商标查询Service
+	
+	
+	@Autowired
+	private GbjBuyService gbjBuyService;                       //我要买标信息发布 2017/12/3  by snnu                                
+	
+	
 	
 	/**
 	 * 网站首页
@@ -52,6 +60,31 @@ public class FrontIndexController extends BaseController{
 			//STEP2 发送邮件  TODO
 			// SendMailUtil.sendCommonMail(toMailAddr, subject, message);			
 			
+			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+			
+			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
+			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+		}
+		
+	}
+	/**
+	 * 我要买标信息提交   2017/12/3  
+	 * by snnu
+ 	 */
+	@RequestMapping(value= {"gbBuy"})  
+	@ResponseBody
+	public AjaxResult gbBuy(Model model, GbjBuy gbjBuy, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		
+		model.addAttribute("domain2InfoJson", JsonMapper.toJsonString(gbjBuy));
+		try{
+			
+			
+			//STEP1  提交查询信息，保存到数据库
+			gbjBuyService.save(gbjBuy);
+		
 			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
 			
 			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
