@@ -1,29 +1,43 @@
 package com.thinkgem.jeesite.modules.paimai.front.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.bean.AjaxResult;
 import com.thinkgem.jeesite.common.mapper.JsonMapper;
-import com.thinkgem.jeesite.common.utils.SendMailUtil;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.sys.entity.gb.GbBuy;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjTouristRequire;
 import com.thinkgem.jeesite.modules.sys.service.gb.GbBuyService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.GbjBuyService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjTouristRequireService;
 
+/**
+ * 官网首页 页面控制器
+ * @author wanghs
+ * @since 2017/11/15
+ *
+ */
 @Controller
 @RequestMapping(value = "${frontPath}")
 public class FrontIndexController extends BaseController{
 		
 	@Autowired
 	private GbjTouristRequireService gbjTouristRequireService;             // 国商商标查询Service
+
+	@Autowired
+	private GbBuyService gbBuyService; //我要买标service
 	
 	/**
 	 * 网站首页
@@ -61,6 +75,29 @@ public class FrontIndexController extends BaseController{
 			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
 		}
 		
+	}
+	
+	/**
+	 * 获取页面显示我要买标信息的最新数据
+	 * @param domainBuyIdList
+	 * @return 我要买标的最新数据
+	 */
+	@RequestMapping(value = "polling/gbbuyData")
+	@ResponseBody
+	public AjaxResult gbbuyData( @RequestParam("count") String count) {
+		
+		//取得最新的我要买标信息
+		List<GbBuy> pageDomainBuyList = new ArrayList<GbBuy>();
+		try {
+			pageDomainBuyList = gbBuyService.findDomainBuyList(count);
+		   	 
+			AjaxResult ar = AjaxResult.makeSuccess("");
+			ar.getData().put("gbbuyData", pageDomainBuyList);
+			return ar;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AjaxResult.makeError("");
+		}
 	}
 	
 }

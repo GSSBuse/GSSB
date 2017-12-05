@@ -16,8 +16,10 @@ function hideURLbar(){
 	
 </script>
 
+<script type="text/javascript" src="${ctxStatic }/front/js/index.js"></script>
+
 </head>
-<body>
+<body ms-controller="index">
 <div class="header">
     <div class="container">
         <div class="header_top">
@@ -123,107 +125,58 @@ function hideURLbar(){
         </div>
     </div>
 </div>
-</div>
-<div class="domain">
-    <div class="container">
-        <div class="col-md-4">
-           <h4 class="tz-title-4 tzcolor-blue">
-             <p class="tzweight_Bold m_2"><span class="m_1">最热<br></span>买标信息</p>
-          </h4>
-          <ul class="offer">
-             <li><p class="m_3"><span class="m_4">商标<br></span>猪八戒</p></li> 
-             <li><p class="m_5">50元</p></li>    
-          </ul>
-        </div>
-        <div class="col-md-8 row_1">
-            <h4 class="tz-title-4 tzcolor-blue">
-             <p class="tzweight_Bold m_2"><span class="m_1">最新<br></span>买标信息</p>
-           </h4>
-           <div class="section_1">
-            <div class="col_1_of_3 span_1_of_3">
-                <div class="list_1">
-                    <ul>
-                      <li><a href="">【商标】练练车</a></li>
-                      <li><a href="">【商标】练练车阿斯</a></li>
-                      <li><a href="">【商标】练练车傻傻的</a></li>
-                      <li><a href="">【商标】练练车啊等等</a></li>     
-                    </ul>
-                </div>
-            </div>
-            <div class="col_1_of_3 span_1_of_3">
-                <div class="list_1">
-                    <ul>
-                      <li><a href="">【商标】练练车</a></li>
-                      <li><a href="">【商标】练练车sda</a></li>
-                      <li><a href="">【商标】练练车as</a></li>
-                      <li><a href="">【商标】练练车是</a></li>     
-                    </ul>
-                </div>
-            </div>
-            <div class="col_1_of_3 span_1_of_3">
-                <a class="but1" href="#">查看全部</a>
-            </div>
-            <div class="clearfix"> </div>
-           </div>
-        </div>
-        
-    </div>
-</div>
 
 <div class="features">
     <div class="container">
-        <div class="col-md-4">
-           <h4 class="tz-title-4 tzcolor-blue">
-             <p class="tzweight_Bold m_2"><span class="m_1">最热<br></span>买标信息</p>
-          </h4>
-          <ul class="offer">
-             <li><p class="m_3"><span class="m_4">商标<br></span>猪八戒</p></li> 
-             <li><p class="m_5">50元</p></li>    
-          </ul>
-        </div>
-        <div class="col-md-8 row_1">
-            <h4 class="tz-title-4 tzcolor-blue">
-             <p class="tzweight_Bold m_2"><span class="m_1">最新<br></span>买标信息</p>
-           </h4>
-           <div class="section_1">
-            <div class="col_1_of_3 span_1_of_3">
-                <div class="list_1">
-                    <ul>
-                      <li><a href="">【商标】练练车</a></li>
-                      <li><a href="">【商标】练练车阿斯</a></li>
-                      <li><a href="">【商标】练练车傻傻的</a></li>
-                      <li><a href="">【商标】练练车啊等等</a></li>     
-                    </ul>
+        <div class="box1">
+            <div class="col-md-1" >
+            </div>
+            <div class="col-md-4" >
+                <h4 class="tz-title-4 tzcolor-blue">
+                    <p class="tzweight_Bold m_2"><span class="m_1">最新买标信息</span></p>
+                </h4>
+	            <div>
+	                <div class="list_1">
+	                    <ul>
+	                        <li ms-repeat-el="datas.domainBuyList">{{el.title}}</li>
+	                    </ul>
+	                </div>
+	            </div>
+            </div>
+            <div class="col-md-4">
+                <h4 class="tz-title-4 tzcolor-blue">
+                    <p class="tzweight_Bold m_2"><span class="m_1">最新卖标信息</span></p>
+                </h4>
+                <div>
+                    <div class="list_2">
+                        <ul>
+                            //TODO
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="col_1_of_3 span_1_of_3">
-                <div class="list_1">
-                    <ul>
-                      <li><a href="">【商标】练练车</a></li>
-                      <li><a href="">【商标】练练车sda</a></li>
-                      <li><a href="">【商标】练练车as</a></li>
-                      <li><a href="">【商标】练练车是</a></li>     
-                    </ul>
+            <div class="col-md-3">
+                <h4 class="tz-title-4 tzcolor-blue">
+                    <p class="tzweight_Bold m_2"><span class="m_1">最新起名悬赏</span></p>
+                </h4>
+                <div>
+                    <div class="list_3">
+                        <ul>
+                            //TODO
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="col_1_of_3 span_1_of_3">
-                <a class="but1" href="#">查看全部</a>
-            </div>
-            <div class="clearfix"> </div>
-           </div>
         </div>
     </div>
 </div>
-
-
-          
-                
+             
 <!-- 免费查询form表单 -->                             
 <div id="search-dialog" class="mfp-hide"  ms-controller="search-dialog">
      <div class="pop_up">
          <div class="payment-online-form-left" >
             <form id="domainform" method="post" action="${ctx }/index.html" ms-widget="validation"  class="form-horizontal">
-                 <h4><span class="shipping"> </span>免费查询</h4>
+                 <h4><span class="shipping"></span>免费查询</h4>
                  <h6>专业顾问人工查询，结果分析更准确</H6>
                  <ul>
                      <li>
@@ -238,10 +191,10 @@ function hideURLbar(){
                         <div>联系人</div>
                         <input id="connacts"   name="connacts" class="text-box-dark" type="text" value="如：王先生/王女士" ms-duplex-required="datas.domainInfo.connacts" maxlength="20" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '如：王先生/王女士';}">
                      </li>
-                     <div class="clearfix"> </div>
                  </ul>
                   <ul class="payment-sendbtns">
                      <li> <input  id="submitChange"  type="submit" value="获取查询结果" ></li>
+                     <div class="clearfix"> </div>
                  </ul>
             </form>
          </div>

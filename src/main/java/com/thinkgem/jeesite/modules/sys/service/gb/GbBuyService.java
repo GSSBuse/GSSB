@@ -5,13 +5,15 @@ package com.thinkgem.jeesite.modules.sys.service.gb;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
-import com.thinkgem.jeesite.modules.sys.entity.gb.GbBuy;
 import com.thinkgem.jeesite.modules.sys.dao.gb.GbBuyDao;
+import com.thinkgem.jeesite.modules.sys.entity.gb.GbBuy;
 
 /**
  * 买标信息管理Service
@@ -21,7 +23,10 @@ import com.thinkgem.jeesite.modules.sys.dao.gb.GbBuyDao;
 @Service
 @Transactional(readOnly = true)
 public class GbBuyService extends CrudService<GbBuyDao, GbBuy> {
-
+	
+	@Autowired
+	GbBuyDao gbBuydao;
+	
 	public GbBuy get(String id) {
 		return super.get(id);
 	}
@@ -42,6 +47,10 @@ public class GbBuyService extends CrudService<GbBuyDao, GbBuy> {
 	@Transactional(readOnly = false)
 	public void delete(GbBuy gbBuy) {
 		super.delete(gbBuy);
+	}
+	
+	public List<GbBuy> findDomainBuyList(@Param(value="counts") String count) {
+		return gbBuydao.findDomainBuyList(Integer.parseInt(count));
 	}
 	
 }
