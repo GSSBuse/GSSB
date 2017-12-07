@@ -1,42 +1,72 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<div class="footer">
-    <div class="container">
-        <div class="col-md-3 box_1">
-            <img src="images/f_logo.png" alt=""/>
-            <p>Copyright &copy; 2017.国标商标  All rights reserved.</p>
+<footer id="footer-wrapper">
+        <div id="footer" class="container">
+                <div class="row">
+
+                        <div class="span3">
+                                <section class="widget">
+                                        <h3 class="title">关于我们</h3>
+                                        <div class="textwidget">
+                                                <p>国标商标是一家专注于商标专利版权交易咨询的专业公司。等等等等公司和网站的基本介绍 </p>
+                                        </div>
+                                </section>
+                        </div>
+
+                        <div class="span3">
+                                <section class="widget"><h3 class="title">友情连接</h3>
+                                        <ul>
+                                                <li><a href="#">百度</a> </li>
+                                                <li><a href="#">其他连接网站</a> </li>
+                                                <li><a href="#">连接地址可以在后台设置</a> </li>
+                                                <li><a href="#">连接地址可以在后台设置</a> </li>
+                                        </ul>
+                                        
+                                </section>
+                        </div>
+                        
+                        <div class="span3">
+                                <section class="widget"><h3 class="title">&nbsp;</h3>
+                                        <ul>
+                                                <li><a href="#">百度</a> </li>
+                                                <li><a href="#">其他连接网站</a> </li>
+                                                <li><a href="#">连接地址可以在后台设置</a> </li>
+                                                <li><a href="#">连接地址可以在后台设置</a> </li>
+                                        </ul>
+                                        
+                                </section>
+                        </div>
+                        <div class="span3">
+                                <section class="widget">
+                                        <h3 class="title">关注我们</h3>
+                                        <div id="twitter_update_list">
+                                                <ul>
+                                                        <li>
+                                                        <img style="width:45%;" src="${ctxStatic }/images/weixin.png"/>
+                                                        &nbsp;
+                                                        <img style="width:45%;" src="${ctxStatic }/images/weixin.png"/>
+                                                        </li>
+                                                </ul>
+                                        </div>
+                                       
+                                </section>
+                        </div>
+                </div>
         </div>
-        <div class="col-md-3 box_2">
-            <h4>友情链接</h4>
-            <ul class="list_2">
-                <li><a href="#">首页</a></li>
-                <li><a href="#">国标商标</a></li>
-                <li><a href="#">其他官网</a></li>
-                <li><a href="#">baidu</a></li>
-            </ul>
-            <ul class="list_2">
-                <li><a href="#">其他官网2</a></li>
-                <li><a href="#">其他官网3</a></li>
-                <li><a href="#">其他官网4</a></li>
-            </ul>
-            <div class="clearfix"> </div>
+        <!-- end of #footer -->
+
+        <!-- Footer Bottom -->
+        <div id="footer-bottom-wrapper">
+                <div id="footer-bottom" class="container">
+                        <div class="row">
+                                <div class="span12">
+                                        <p class="copyright">
+                                                Copyright &copy; 2017.国标商标  All rights reserved.
+                                                                                                                                                陕ICP备123456789号-1
+                                        </p>
+                                </div>
+                        </div>
+                </div>
         </div>
-        <div class="col-md-3 box_2">
-            <h4>联系我们</h4>
-            <address class="address">
-              <dl>
-                 <dt></dt>
-                 <dd>地址 : <span>西安</span></dd>
-                 <dd>邮箱 : <a href="mailto@example.com">mailto(at)example.com</a></dd>
-                 <dd>电话 : <span> 400 598 598</span></dd>
-              </dl>
-           </address>
-        </div>
-        <div class="col-md-3 box_2">
-            <h4>关注我们</h4>
-            <ul class="footer_social">
-              <li><a href=""> <i class="weibo"> </i> </a></li>
-              <li><a href=""><i class="weixin"> </i> </a></li>
-           </ul>
-        </div>
-    </div>
-</div>
+        <!-- End of Footer Bottom -->
+
+</footer>

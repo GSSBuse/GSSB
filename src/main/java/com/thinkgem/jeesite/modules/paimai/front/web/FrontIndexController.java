@@ -55,6 +55,54 @@ public class FrontIndexController extends BaseController{
 	}	
 
 	/**
+	 * 网站首页
+	 */
+	@RequestMapping(value= {"index1"})
+	public String index1(Model model) {
+		return "modules/paimai/front/index1";
+	}
+	/**
+	 * 第三方登录回调
+	 */
+	@RequestMapping(value= {"login"})
+	public String login(Model model, HttpServletRequest request) {
+		model.addAttribute("userinfo", "test");
+		return "modules/paimai/front/index";
+	}	
+	
+	/**
+	 * 联系我们页面
+	 */
+	@RequestMapping(value= {"contact"})
+	public String contact(Model model) {
+		return "modules/paimai/front/contact";
+	}
+	
+
+	/**
+	 * 咨询详细一览页面
+	 */
+	@RequestMapping(value= {"articles"})
+	public String articles(Model model) {
+		return "modules/paimai/front/articles";
+	}	
+
+	/**
+	 * 咨询详细一览页面
+	 */
+	@RequestMapping(value= {"single"})
+	public String single(Model model) {
+		return "modules/paimai/front/single";
+	}	
+	
+	/**
+	 * 帮助说明页面
+	 */
+	@RequestMapping(value= {"faqs"})
+	public String faqs(Model model) {
+		return "modules/paimai/front/faqs";
+	}
+	/**
 	 * 免费查询提交表单
 	 */
 	@RequestMapping(value= {"searchBrand"})

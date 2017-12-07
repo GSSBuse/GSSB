@@ -21,9 +21,6 @@
 <link rel="stylesheet" type="text/css" href="${ctxStatic}/front/css/center.css" >
 <link rel="stylesheet" type="text/css" href="${ctxStatic}/front/css/override.css" >
 <link rel="stylesheet" type="text/css" href="${ctxStatic}/front/css/navigation.css" >
-<script type="text/javascript" src="${ctxStatic}/jquery/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="${ctxStatic}/frontend-jam/static/vendors/avalon/avalon.js"></script>
-<script type="text/javascript" src="${ctxStatic}/frontend-jam/static/js/utils.js"></script>
 <!-- Custom Theme files -->
 <link href="${ctxStatic }/front/css/bootstrap.css" rel='stylesheet' type='text/css' />
 <link href="${ctxStatic }/front/css/style.css" rel='stylesheet' type='text/css' />
@@ -35,12 +32,12 @@
 
 <script type="text/javascript" src="${ctxStatic }/front/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/jquery.magnific-popup.js"></script>
-<script type="text/javascript" src="${ctxStatic}/frontend-jam/static/vendors/avalon/avalon.js"></script>
-<script type="text/javascript" src="${ctxStatic}/frontend-jam/static/js/utils.js"></script>
-
 <script type="text/javascript" src="${ctxStatic }/front/js/nav.js"></script>
 <script defer src="${ctxStatic }/front/js/jquery.flexslider.js"></script>
 
+<script type="text/javascript" src="${ctxStatic}/jquery/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="${ctxStatic}/frontend-jam/static/vendors/avalon/avalon.js"></script>
+<script type="text/javascript" src="${ctxStatic}/frontend-jam/static/js/utils.js"></script>
 
 <script type="text/javascript">
 	var ctx = '${ctx}';

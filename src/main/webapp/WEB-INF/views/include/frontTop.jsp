@@ -1,95 +1,240 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101442633" charset="utf-8"></script>
 
-				<ul id="uiMainNav">
-          			<li><a href="${ctx }/index.html">首页</a></li>
-          			<li><a href="${ctx }/ibuy.html" class="">我要买</a></li>
-          			<c:if test="${ currentClient != null}" >
-	          			<li><a href="${ctx }/isell.html">我要卖</a></li>
-	          			<li><a href="${ctx }/icenter.html">个人中心</a>
-	          				<div class="sub">
-	          					<a href="${ctx }/icenter.html">个人信息</a>
-	          					<a href="${ctx }/financialManagement/financeInfo.html">财务管理</a>
-	          					<a href="${ctx }/myTransactions.html">我的交易</a>
-	          					<%-- <a href="${ctx }/securitysetting.html">安全设置</a> --%>
-	          				</div>
-	          			</li>
-          			</c:if>
-          		</ul>
+<div class="header-wrapper">
+        <header>
+                <div class="container">
+                        <div class="logo-container">
+                                <!-- Website Logo -->
+                                <a href="#"  title="国标商标">
+                                        <img style="width:15%;" src="${ctxStatic }/images/logo.png" alt="国标商标">
+                                </a>
+                                <span class="tag-line">专业知识产权服务平台</span>
+                        </div>
+                
+                
+                        <!-- Start of Main Navigation -->
+                        <nav class="main-nav">
+                                <div class="menu-top-menu-container">
+                                        <ul id="menu-top-menu" class="clearfix">
+<li class="current-menu-item"><a href="${ctx }/index1.html">首页</a></li>
+<li><a href="${ctx }/articles.html">交易信息</a></li>
+<li><a href="${ctx }/faqs.html">帮助说明</a></li>
+<li><a href="${ctx }/contact.html">联系我们</a></li>
+<li><span id="qqLoginBtn"></span></li>
+<li><span id="username"></span></li>
+<li><img id="userimgId" src=""/></li>
+                                        </ul>
+                                </div>
+                        </nav>
+                        <!-- End of Main Navigation -->
+                
+                </div>
+        </header>
+</div>
+<!-- End of Header -->
+
+<!-- Start of Search Wrapper -->
+<div class="search-area-wrapper">
+        <div class="search-area container">
+                <p align="center"><img style="width:70%;" src="${ctxStatic }/images/copyright.png" alt=""/></p>
+                <p class="search-tag-line">专业知识产权服务平台</p>
+                <p class="search-tag-line">&nbsp;&nbsp;商标&nbsp;版权&nbsp;专利</p>
+
+                <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
+                        <select class="search-term required">
+                            <option>专利</option>
+                            <option>版权</option>
+                            <option>商标</option>
+                        </select>
+                        <input class="search-term required" type="text" id="s" name="s" placeholder="请输入您想要查询的商标" />
+                        <input class="search-btn" type="button" onclick="show()" value="免费查询" />
+                </form>
+        </div>
+</div>
+
+   
+<!-- 免费查询form表单 -->
+<div id="search-dialog-bg" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0;background-color: rgba(0, 0, 0, 0.5);z-index: 1;display: none;"></div>               
+<div id="search-dialog" style="position: fixed;background: rgb(249, 249, 249);top: 50%;left: 50%;transform: translate(-50%, -50%);z-index: 10;display: none;">
+    <div id="close-dialog" style="position: absolute;right: -10px;top: -14px;width: 24px;height: 24px;text-align: center;font-size: 25px;border: 2px solid #d2d1d1;border-radius: 50%;background-color: #fff; color: #e71a1a;cursor: pointer;">×</div>
+    <form id="domainform"  action="${ctx }/index1.html" method="post" style="padding: 20px 30px;margin: 0;">
+           <h1 class="post-title"><a href="#">免费查询</a></h3>
+           <p class="comment-notes">请输入您需要查询的信息。专业顾问人工查询，结果分析更准确！</p>
+
+           <div>
+                   <label for="author">商标名称 *</label>
+                   <input class="span4" type="text" name="author" id="author" value="" size="22">
+           </div>
+
+           <div>
+                   <label for="email">联系电话 *</label>
+                   <input class="span4" type="text" name="email" id="email" value="" size="22" >
+           </div>
+
+           <div>
+                   <label for="url">联系人 *</label>
+                   <input class="span4" type="text" name="url" id="url" value="" size="22" >
+           </div>
+           <div>
+                   <input class="btn" name="submit" type="submit" id="submit"  value="提交查询">
+           </div>
+   </form>
+</div>
+
+<!-- End of Search Wrapper -->
+<script type="text/javascript"> 
+function show(){
+    document.getElementById("search-dialog").style.display="block";
+    document.getElementById("search-dialog-bg").style.display = 'block';
+}
+         
+function hide(){
+    document.getElementById("search-dialog").style.display="none";
+    document.getElementById("search-dialog-bg").style.display = 'none';
+}
+
+// 点击弹窗背景关闭当前弹窗
+$('#search-dialog-bg').click(function(){
+	$('#search-dialog,#search-dialog-bg').hide();
+});
+// 点击弹窗的关闭按钮关闭当前弹窗
+$('#close-dialog').click(function(){
+    $('#search-dialog,#search-dialog-bg').hide();
+});
+
+</script>
+    <!--qq登录用 -->
+  <script>
+        QC.Login({
+            //btnId：插入按钮的节点id，必选
+            btnId:"qqLoginBtn",
+            //用户需要确认的scope授权项，可选，默认all
+            scope:"all",
+            //按钮尺寸，可用值[A_XL| A_L| A_M| A_S|  B_M| B_S| C_S]，可选，默认B_S
+            size: "B_M"
+        }, function(reqData, opts){//登录成功
+            //根据返回数据，更换按钮显示状态方法
+            console.log(reqData);//查看返回数据
+            QC.Login.getMe(function(openId, accessToken){//获取用户的openId
+                console.log('QQOPENID:'+openId);
+                //thirdparty(null,null,reqData.figureurl_qq_1,reqData.nickname,1,openId);
+                $("#userimgId").attr('src',reqData.figureurl_qq_1); 
+                $('#username').html(reqData.nickname);
+                //QC.Login.signOut();//退出QQ登录调用事件
+            });
+        }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 下面的待删除 -->
+<!-- 				<ul id="uiMainNav"> -->
+<%--           			<li><a href="${ctx }/index.html">首页</a></li> --%>
+<%--           			<li><a href="${ctx }/ibuy.html" class="">我要买</a></li> --%>
+<%--           			<c:if test="${ currentClient != null}" > --%>
+<%-- 	          			<li><a href="${ctx }/isell.html">我要卖</a></li> --%>
+<%-- 	          			<li><a href="${ctx }/icenter.html">个人中心</a> --%>
+<!-- 	          				<div class="sub"> -->
+<%-- 	          					<a href="${ctx }/icenter.html">个人信息</a> --%>
+<%-- 	          					<a href="${ctx }/financialManagement/financeInfo.html">财务管理</a> --%>
+<%-- 	          					<a href="${ctx }/myTransactions.html">我的交易</a> --%>
+<%-- 	          					<a href="${ctx }/securitysetting.html">安全设置</a> --%>
+<!-- 	          				</div> -->
+<!-- 	          			</li> -->
+<%--           			</c:if> --%>
+<!--           		</ul> -->
           		
-          		<div id="uiBlueBar">
-          			<a id="uiLogo" href="${ctx }/index.html" title="首页">拍域名</a>
-          			<div id="uiSearch">
-          				<form method="get" action="${ctx }/ibuy.html">
-          					<span class="table-cell search-input">
-          						<input type="hidden" name="keyword">
-          						<input type="hidden" name="search_trigger" value="off">
+<!--           		<div id="uiBlueBar"> -->
+<%--           			<a id="uiLogo" href="${ctx }/index.html" title="首页">拍域名</a> --%>
+<!--           			<div id="uiSearch"> -->
+<%--           				<form method="get" action="${ctx }/ibuy.html"> --%>
+<!--           					<span class="table-cell search-input"> -->
+<!--           						<input type="hidden" name="keyword"> -->
+<!--           						<input type="hidden" name="search_trigger" value="off"> -->
           						
-          						<span class="input-wrapper">
-          							<span class="search-input">
-          								<input class="mainSearch" type="text" value="${searchDomain}" name="domain" id="">
-          							</span>
-	          						<!-- <span id="">
-		          						<div class="tld-dialog-selector">
-		          							<span class="tld-dialog-selector-text">后缀</span>
-		          							<span class="tld-dialog-selector-toggle"></span>
-		          						</div>
-	          						</span> -->
-          						</span>
-          					</span>
-          					<span class="table-cell search-button" id="submitSearch"><a href="" class="button green L left"><span>搜索</span></a></span>
-          				</form>
-          			</div>
-          			<div id="uiLoginSignup">
-          				<div id="uiLoginBox">
-          					<c:if test="${ currentClient != null}" >
-          					<div class="loggedin" id="js_showUserNotifications" 
-          							<c:if test="${ currentClient == null}">style="display: none;"</c:if>
-          							<c:if test="${ currentClient != null}">style="display: block;"</c:if>>
-          						<div id="" class=" formular"  >
-		          						<div class="loggedin" id="" style="">
-		          							<span>
-		          								<strong class="name">您好 ${currentClient.nickname }!</strong> 
-		          								<a href="" class="logout" title="注销" id="logout">注销</a>
-		          							</span>
-		          						</div>
-		          					</div>
-          					</div>
-          					</c:if>
-          					<c:if test="${ currentClient == null}" >
-	          				<div class="loggedout" >
-		          				<div class="uiLoginBoxButton"><a href="#" class="uiLoginBoxButtonInner" id="js_login_box_button">&nbsp;登录&nbsp;</a>
-		          					<div id="js_uiLoginBox" class="uiLoginBox formular" style="display: none;">
-		          						<img alt="微信登录二维码" src="${ctx }/common/loginQrImage"><br>
-		          						请使用微信扫一扫授权登录。
-		          					</div>
+<!--           						<span class="input-wrapper"> -->
+<!--           							<span class="search-input"> -->
+<%--           								<input class="mainSearch" type="text" value="${searchDomain}" name="domain" id=""> --%>
+<!--           							</span> -->
+<!-- 	          						<span id="">
+<!-- 		          						<div class="tld-dialog-selector"> -->
+<!-- 		          							<span class="tld-dialog-selector-text">后缀</span> -->
+<!-- 		          							<span class="tld-dialog-selector-toggle"></span> -->
+<!-- 		          						</div> -->
+<!-- 	          						</span> -->
+<!--           						</span> -->
+<!--           					</span> -->
+<!--           					<span class="table-cell search-button" id="submitSearch"><a href="" class="button green L left"><span>搜索</span></a></span> -->
+<!--           				</form> -->
+<!--           			</div> -->
+<!--           			<div id="uiLoginSignup"> -->
+<!--           				<div id="uiLoginBox"> -->
+<%--           					<c:if test="${ currentClient != null}" > --%>
+<!--           					<div class="loggedin" id="js_showUserNotifications"  -->
+<%--           							<c:if test="${ currentClient == null}">style="display: none;"</c:if> --%>
+<%--           							<c:if test="${ currentClient != null}">style="display: block;"</c:if>> --%>
+<!--           						<div id="" class=" formular"  > -->
+<!-- 		          						<div class="loggedin" id="" style=""> -->
+<!-- 		          							<span> -->
+<%-- 		          								<strong class="name">您好 ${currentClient.nickname }!</strong>  --%>
+<!-- 		          								<a href="" class="logout" title="注销" id="logout">注销</a> -->
+<!-- 		          							</span> -->
+<!-- 		          						</div> -->
+<!-- 		          					</div> -->
+<!--           					</div> -->
+<%--           					</c:if> --%>
+<%--           					<c:if test="${ currentClient == null}" > --%>
+<!-- 	          				<div class="loggedout" > -->
+<!-- 		          				<div class="uiLoginBoxButton"><a href="#" class="uiLoginBoxButtonInner" id="js_login_box_button">&nbsp;登录&nbsp;</a> -->
+<!-- 		          					<div id="js_uiLoginBox" class="uiLoginBox formular" style="display: none;"> -->
+<%-- 		          						<img alt="微信登录二维码" src="${ctx }/common/loginQrImage"><br> --%>
+<!-- 		          						请使用微信扫一扫授权登录。 -->
+<!-- 		          					</div> -->
 		          					
-		          					<div id="js_uiLoginBox2" class="uiLoginBox formular" style="display: none;">
-		          						<span class="line" id="js_input_empty_hint" style="display: none; color:red;">用户名或密码不能为空！</span>
-		          						<span class="line" id="js_error_hint" style="display: none; color:red;">登陆信息错误！</span>
-		          						<form  method="post" name="loginform" id="js_bluebar_login_form">
-		          							<input type="hidden" name="linkurl" value="">
-		          							<input type="hidden" name="partnerid" value="">
-		          							<input type="hidden" name="language" value="cn">
-		          							<input type="hidden" name="session" value="">
-		          							<input type="hidden" name="tracked" value="">
-		          							<input type="hidden" name="task" value="login">
-		          							<span class="line">
-		          								<input type="text" class="input text js_default_val" tabindex="100" name="login_name" placeholder="米友号"></span>
-		          							<span class="line">
-		          								<input type="password" class="input text js_default_val" tabindex="101" name="password" placeholder="密码"></span>
-		          							<span class="line aCenter" id="js_login_span">
-		          								<button type="button" class="button green M" id="js_login_button" value="">
-		          								<span>登录</span></button>
-		          							</span>
-		          						    <span class="line aCenter"><a href="" class="forgotdetails">若忘记密码请联系经纪人</a></span>
-		          							<!--<span class="line fRight"><a href="" class="create_new_account register_link">创建新账户！</a></span> -->
+<!-- 		          					<div id="js_uiLoginBox2" class="uiLoginBox formular" style="display: none;"> -->
+<!-- 		          						<span class="line" id="js_input_empty_hint" style="display: none; color:red;">用户名或密码不能为空！</span> -->
+<!-- 		          						<span class="line" id="js_error_hint" style="display: none; color:red;">登陆信息错误！</span> -->
+<!-- 		          						<form  method="post" name="loginform" id="js_bluebar_login_form"> -->
+<!-- 		          							<input type="hidden" name="linkurl" value=""> -->
+<!-- 		          							<input type="hidden" name="partnerid" value=""> -->
+<!-- 		          							<input type="hidden" name="language" value="cn"> -->
+<!-- 		          							<input type="hidden" name="session" value=""> -->
+<!-- 		          							<input type="hidden" name="tracked" value=""> -->
+<!-- 		          							<input type="hidden" name="task" value="login"> -->
+<!-- 		          							<span class="line"> -->
+<!-- 		          								<input type="text" class="input text js_default_val" tabindex="100" name="login_name" placeholder="米友号"></span> -->
+<!-- 		          							<span class="line"> -->
+<!-- 		          								<input type="password" class="input text js_default_val" tabindex="101" name="password" placeholder="密码"></span> -->
+<!-- 		          							<span class="line aCenter" id="js_login_span"> -->
+<!-- 		          								<button type="button" class="button green M" id="js_login_button" value=""> -->
+<!-- 		          								<span>登录</span></button> -->
+<!-- 		          							</span> -->
+<!-- 		          						    <span class="line aCenter"><a href="" class="forgotdetails">若忘记密码请联系经纪人</a></span> -->
+<!-- 		          							<span class="line fRight"><a href="" class="create_new_account register_link">创建新账户！</a></span> -->
 		          						
-		          						</form>
-		          					</div>
-		          				</div>
-	          				</div>
-	          				</c:if>
-          				</div>
-          		</div>
-          	</div>
+<!-- 		          						</form> -->
+<!-- 		          					</div> -->
+<!-- 		          				</div> -->
+<!-- 	          				</div> -->
+<%-- 	          				</c:if> --%>
+<!--           				</div> -->
+<!--           		</div> -->
+<!--           	</div> -->
