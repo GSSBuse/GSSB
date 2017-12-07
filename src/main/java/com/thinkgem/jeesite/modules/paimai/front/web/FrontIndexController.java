@@ -15,34 +15,35 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.bean.AjaxResult;
 import com.thinkgem.jeesite.common.mapper.JsonMapper;
+import com.thinkgem.jeesite.common.utils.SendMailUtil;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.sys.entity.gb.GbBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjSold;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjTouristRequire;
 import com.thinkgem.jeesite.modules.sys.service.gb.GbBuyService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjBuyService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.GbjRewardService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.GbjSoldService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjTouristRequireService;
 
-/**
- * 官网首页 页面控制器
- * @author wanghs
- * @since 2017/11/15
- *
- */
 @Controller
 @RequestMapping(value = "${frontPath}")
 public class FrontIndexController extends BaseController{
 		
 	@Autowired
 	private GbjTouristRequireService gbjTouristRequireService;             // 国商商标查询Service
-
-	@Autowired
-	private GbBuyService gbBuyService; //我要买标service
 	
 	
 	@Autowired
-	private GbjBuyService gbjBuyService;                       //我要买标信息发布 2017/12/3  by snnu                                
+	private GbjBuyService gbjBuyService;                                  //我要买标信息发布 2017/12/3  by snnu                                
 	
+	@Autowired
+	private GbjSoldService gbjSoldService;                               //我要买标信息发布 2017/12/3  by snnu  
+	
+	@Autowired
+	private GbjRewardService gbjRewardService;                          //我要买标信息发布 2017/12/3  by snnu  
 	
 	
 	/**
@@ -70,7 +71,10 @@ public class FrontIndexController extends BaseController{
 			//LogUtils.saveSpecialLog(request, null);
 			
 			//STEP2 发送邮件  TODO
-			// SendMailUtil.sendCommonMail(toMailAddr, subject, message);			
+			String toMailAddr = "928335288@qq.com";
+			String subject = "国商商标查询";
+			String message = JsonMapper.toJsonString(gbjTouristRequire);
+		    SendMailUtil.sendFtlMail(toMailAddr, subject, message, null);			
 			
 			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
 			
@@ -85,12 +89,12 @@ public class FrontIndexController extends BaseController{
 	/**
 	 * 我要买标信息提交   2017/12/3  
 	 * by snnu
- 	 */
+ 	*/
 	@RequestMapping(value= {"gbBuy"})  
 	@ResponseBody
 	public AjaxResult gbBuy(Model model, GbjBuy gbjBuy, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		
-		model.addAttribute("domain2InfoJson", JsonMapper.toJsonString(gbjBuy));
+		model.addAttribute("domainInfo1Json", JsonMapper.toJsonString(gbjBuy));
 		try{
 			
 			
@@ -107,7 +111,56 @@ public class FrontIndexController extends BaseController{
 		}
 		
 	}
-	
+	/**
+	 * 我要卖标信息提交   2017/12/5 
+	 * by snnu
+	 */
+	@RequestMapping(value= {"gbsold"})  
+	@ResponseBody
+	public AjaxResult gbsold(Model model, GbjSold gbjSold, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		
+		model.addAttribute("domainInfo2Json", JsonMapper.toJsonString(gbjSold));
+		try{
+			
+			
+			//STEP1  提交查询信息，保存到数据库
+			gbjSoldService.save(gbjSold);
+		
+			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+			
+			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
+			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+		}
+		
+	}	
+	/**
+	 * 悬赏起名信息提交   2017/12/5  
+	 * by snnu
+ 	*/
+	@RequestMapping(value= {"gbreward"})  
+	@ResponseBody
+	public AjaxResult gbreward(Model model, GbjReward gbjReward, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		
+		model.addAttribute("domainInfo3Json", JsonMapper.toJsonString(gbjReward));
+		try{
+			
+			
+			//STEP1  提交查询信息，保存到数据库
+			gbjRewardService.save(gbjReward);
+		
+			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+			
+			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
+			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+		}
+		
+	}
 	/**
 	 * 获取页面显示我要买标信息的最新数据
 	 * @param domainBuyIdList
@@ -118,9 +171,9 @@ public class FrontIndexController extends BaseController{
 	public AjaxResult gbbuyData( @RequestParam("count") String count) {
 		
 		//取得最新的我要买标信息
-		List<GbBuy> pageDomainBuyList = new ArrayList<GbBuy>();
+		List<GbjBuy> pageDomainBuyList = new ArrayList<GbjBuy>();
 		try {
-			pageDomainBuyList = gbBuyService.findDomainBuyList(count);
+			pageDomainBuyList = gbjBuyService.findDomainBuyList(count);
 		   	 
 			AjaxResult ar = AjaxResult.makeSuccess("");
 			ar.getData().put("gbbuyData", pageDomainBuyList);
@@ -130,5 +183,48 @@ public class FrontIndexController extends BaseController{
 			return AjaxResult.makeError("");
 		}
 	}
-	
+	/**
+	 * 获取页面显示我要卖标信息的最新数据
+	 * @param domainSoldIdList
+	 * @return 我要卖标的最新数据
+	 */
+	@RequestMapping(value = "polling/gbsoldData")
+	@ResponseBody
+	public AjaxResult gbsoldData( @RequestParam("count") String count) {
+		
+		//取得最新的我要买标信息
+		List<GbjSold> pageDomainSoldList = new ArrayList<GbjSold>();
+		try {
+			pageDomainSoldList = gbjSoldService.findDomainSoldList(count);
+		   	 
+			AjaxResult ar = AjaxResult.makeSuccess("");
+			ar.getData().put("gbsoldData", pageDomainSoldList);
+			return ar;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AjaxResult.makeError("");
+		}
+	} 
+	/**
+	 * 获取页面显示悬赏信息的最新数据
+	 * @param domainSoldIdList
+	 * @return 悬赏的最新数据
+	 */
+	@RequestMapping(value = "polling/gbrewardData")
+	@ResponseBody
+	public AjaxResult gbrewardData( @RequestParam("count") String count) {
+		
+		//取得最新的我要买标信息
+		List<GbjReward> pageDomainRewardList = new ArrayList<GbjReward>();
+		try {
+			pageDomainRewardList = gbjRewardService.findDomainRewardList(count);
+		   	 
+			AjaxResult ar = AjaxResult.makeSuccess("");
+			ar.getData().put("gbrewardData", pageDomainRewardList);
+			return ar;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AjaxResult.makeError("");
+		}
+	} 
 }

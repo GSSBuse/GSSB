@@ -1,21 +1,23 @@
 
 /**
- * 买标信息
+ * 悬赏信息
  */
  
 require(["plugin/validation/avalon.validation", "domReady!"], function() {
 	var now = new Date();
 	var defaultInfo = {
-		linkman: "",
-		mobile: "",
-		title: ""
+		titleNeed: "",
+		title:"",
+		user:"",
+		rewardMoney: ""
+	
 	}
 	
 	var validationVM = null;
 	var vm = avalon.define({
-		$id : "buy-dialog",
+		$id : "reward-dialog",
 		datas : {
-			domainInfo1: defaultInfo
+			domainInfo3 : defaultInfo
 		},
 		validation: {
 			validationHooks:{},
@@ -44,11 +46,11 @@ require(["plugin/validation/avalon.validation", "domReady!"], function() {
                     showError(reason.element, reason)
                 })
                 if (reasons.length === 0) {
-                	$("#submit01").attr("disabled", true);
+                	$("#submit03").attr("disabled", true);
                 	$.jBox.tip("提交处理中",'loading',{opacity:0});
                     $.ajax({
-						url: ctx + "/gbBuy.json",
-						data: vm.datas.domainInfo1,
+						url: ctx + "/gbreward.json",
+						data: vm.datas.domainInfo3,
 						type: "POST",
 						success: function (resp) {
 							if (resp.type == "success") {
@@ -58,7 +60,7 @@ require(["plugin/validation/avalon.validation", "domReady!"], function() {
 								}, 1000);
 							} else {
 								$.jBox.error(resp.msg, '错误', {border:5}); 
-								$("#submit01").attr("disabled", false);
+								$("#submit03").attr("disabled", false);
 							}
 						}
 					});

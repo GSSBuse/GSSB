@@ -8,7 +8,8 @@ pageData = window.pageData?window.pageData:[];
 var vm = avalon.define({
 		$id : "index",
 		test: "tst",
-		domainBuyList1 : [{title:"test"},{title:"test2"}],//买标信息一览（最新11条，首页只表示最新的）
+		domainBuyList1 : [{title:"test"},{title:"test2"}],
+		//domainSoldList1 : [{title:"test"},{title:"test2"}],//买标信息一览（最新11条，首页只表示最新的）
 		datas : {
 			domainBuyList : [],//买标信息一览（最新11条，首页只表示最新的）
 			domainSoldList : [],//卖标信息一览（最新11条，首页只表示最新的）
@@ -65,7 +66,7 @@ var vm = avalon.define({
 	// 轮询买标信息一览数据
 	var interval_gbbuy_status_check = function() {
 		
-		var count = 11;//首页最多显示11条
+		var count = 6;//首页最多显示11条
 		
 		$.post(
 			"polling/gbbuyData.json",
@@ -86,11 +87,39 @@ var vm = avalon.define({
 	// 轮询卖标信息一览数据
 	var interval_gbsold_status_check = function() {
 		//TODO
+          var count = 6;//首页最多显示11条
+		$.post(
+			"polling/gbsoldData.json",
+			{
+				count : count         //参数1，检索的limit条数
+			},
+			function(res) {
+				if (res.type == "success") {					
+					vm.datas.domainSoldList.clear();
+					vm.datas.domainSoldList.pushArray(res.data.gbsoldData);
+					timeout_gbsold = setTimeout(interval_gbsold_status_check, 30000); //30秒自动刷新一次
+				}
+			}
+		);
 	}
 	interval_gbsold_status_check();
 	
 	// 轮询悬赏信息一览数据
 	var interval_gbreward_status_check = function() {
 		//TODO
+		 var count = 6;//首页最多显示11条
+			$.post(
+				"polling/gbrewardData.json",
+				{
+					count : count         //参数1，检索的limit条数
+				},
+				function(res) {
+					if (res.type == "success") {					
+						vm.datas.domainRewardList.clear();
+						vm.datas.domainRewardList.pushArray(res.data.gbrewardData);
+						timeout_gbreward = setTimeout(interval_gbreward_status_check, 30000); //30秒自动刷新一次
+					}
+				}
+			);
 	}
 	interval_gbreward_status_check();

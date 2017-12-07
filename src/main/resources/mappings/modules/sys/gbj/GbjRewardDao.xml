@@ -131,4 +131,18 @@
 		WHERE id = #{id}
 	</update>
 	
+	<select id="findDomainRewardList" resultType="GbjReward" parameterType="java.lang.Integer">
+        SELECT
+              b.reward_money as "rewardMoney",
+              b.title as "title"
+        FROM gbj_reward b
+        <where>
+               b.del_flag =  0
+            ORDER BY b.update_date DESC
+            <if test="_parameter != null and _parameter != ''">
+                limit #{counts}
+            </if>
+        </where>
+    </select>
+	
 </mapper>
