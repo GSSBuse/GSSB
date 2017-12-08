@@ -50,53 +50,6 @@ jQuery(document).ready(function(e) {
     $('.tagcloud a').removeAttr('style').addClass('btn btn-mini');
 
 	
-	/*-----------------------------------------------------------------------------------*/
-	/*	Flickr Feed
-	/*-----------------------------------------------------------------------------------*/
-	
-	$('#basicuse').jflickrfeed({
-								limit: 9,
-								qstrings: {
-									id: '52617155@N08'
-								},
-								itemTemplate: '<a href="{{image_b}}" title="{{title}}" data-rel="prettyPhoto[flickrg]"><img src="{{image_s}}" alt="{{title}}" /></a>'
-							}, function(data){ 
-										
-											$('a[data-rel]').each(function() {
-												$(this).attr('rel', $(this).data('rel'));
-											});
-
-
-											$("a[rel^='prettyPhoto']").prettyPhoto({
-												deeplinking: false,
-												social_tools: false,
-												overlay_gallery: false
-											});
-							});
-
-
-    /*-----------------------------------------------------------------------------------*/
-	/* Pretty Photo Lightbox
-	/*-----------------------------------------------------------------------------------*/
-   if( jQuery().prettyPhoto )
-    {
-        $(".pretty-photo").prettyPhoto({
-            deeplinking: false,
-            social_tools: false
-        });
-
-
-        $('a[data-rel]').each(function() {
-            $(this).attr('rel', $(this).data('rel'));
-        });
-
-
-        $("a[rel^='prettyPhoto']").prettyPhoto({
-            deeplinking: false,
-            social_tools: false
-        });
-    }
-
 
 
 
@@ -109,8 +62,6 @@ jQuery(document).ready(function(e) {
 			$(this).addClass('current').next('dd').slideDown(500).siblings('dd').slideUp(500);
 		});	
     });
-
-
 
 	/* ---------------------------------------------------- */
 	/*	Toggle

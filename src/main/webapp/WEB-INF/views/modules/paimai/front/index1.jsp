@@ -177,7 +177,7 @@
                                         </div>
                                         <div class="row home-category-list-area">
                                                 <div class="span12" style="text-align: center;">
-                                                        <input type="submit" name="submit" value="查看更多" class="btn btn-inverse">
+                                                        <input class="search-btn" type="button" onclick="window.location.href('${ctx }/articles.html')" value="查看更多" />
                                                 </div>
                                         </div>
                                         <!-- end of page content -->
@@ -194,8 +194,6 @@
                 <!-- End of Footer -->
 
                 <a href="#top" id="scroll-top"></a>
-
-                
 
         </body>
 </html>

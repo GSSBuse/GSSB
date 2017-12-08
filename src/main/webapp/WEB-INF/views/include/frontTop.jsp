@@ -18,13 +18,13 @@
                         <nav class="main-nav">
                                 <div class="menu-top-menu-container">
                                         <ul id="menu-top-menu" class="clearfix">
-<li class="current-menu-item"><a href="${ctx }/index1.html">首页</a></li>
-<li><a href="${ctx }/articles.html">交易信息</a></li>
-<li><a href="${ctx }/faqs.html">帮助说明</a></li>
-<li><a href="${ctx }/contact.html">联系我们</a></li>
-<li><span id="qqLoginBtn"></span></li>
-<li><span id="username"></span></li>
-<li><img id="userimgId" src=""/></li>
+											<li class="current-menu-item"><a href="${ctx }/index1.html">首页</a></li>
+											<li><a href="${ctx }/articles.html">交易信息</a></li>
+											<li><a href="${ctx }/faqs.html">帮助说明</a></li>
+											<li><a href="${ctx }/contact.html">联系我们</a></li>
+											<li><span id="qqLoginBtn"></span></li>
+											<li><span id="username"></span></li>
+											<li><img id="userimgId" src=""/></li>
                                         </ul>
                                 </div>
                         </nav>
@@ -43,10 +43,10 @@
                 <p class="search-tag-line">&nbsp;&nbsp;商标&nbsp;版权&nbsp;专利</p>
 
                 <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
-                        <select class="search-term required">
-                            <option>专利</option>
-                            <option>版权</option>
-                            <option>商标</option>
+                        <select class="select-term">
+                            <option value='1' selected>&nbsp;&nbsp;商标</option>
+                            <option value='2'>&nbsp;&nbsp;专利</option>
+                            <option value='3'>&nbsp;&nbsp;版权</option>
                         </select>
                         <input class="search-term required" type="text" id="s" name="s" placeholder="请输入您想要查询的商标" />
                         <input class="search-btn" type="button" onclick="show()" value="免费查询" />
@@ -133,7 +133,58 @@ $('#close-dialog').click(function(){
 
 
 
-
+<div class="main-im">
+    <div id="open_im" class="open-im">&nbsp;</div>  
+    <div class="im_main" id="im_main">
+        <div id="close_im" class="close-im"><a href="javascript:void(0);" title="点击关闭">&nbsp;</a></div>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=4005958&site=qq&menu=yes" target="_blank" class="im-qq qq-a" title="在线QQ客服">
+            <div class="qq-container"></div>
+            <div class="qq-hover-c"><img class="img-qq" src="${ctxStatic }/images/qq.png"></div>
+            <span> QQ在线咨询</span>
+        </a>
+        <div class="im-tel">
+            <div>售前咨询热线</div>
+            <div class="tel-num">400-123-45678</div>
+            <div>售后咨询热线</div>
+            <div class="tel-num">010-12345678</div>
+        </div>
+        <div class="im-footer" style="position:relative">
+            <div class="weixing-container">
+                <div class="weixing-show">
+                    <div class="weixing-txt">微信扫一扫<br>打开国标商标</div>
+                    <img class="weixing-ma" src="${ctxStatic }/images/weixing-ma.jpg">
+                    <div class="weixing-sanjiao"></div>
+                    <div class="weixing-sanjiao-big"></div>
+                </div>
+            </div>
+            <div class="go-top"><a href="javascript:;" title="返回顶部"></a> </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+</div>
+<script>
+$(function(){
+    $('#close_im').bind('click',function(){
+        $('#main-im').css("height","0");
+        $('#im_main').hide();
+        $('#open_im').show();
+    });
+    $('#open_im').bind('click',function(e){
+        $('#main-im').css("height","272");
+        $('#im_main').show();
+        $(this).hide();
+    });
+    $('.go-top').bind('click',function(){
+        $(window).scrollTop(0);
+    });
+    $(".weixing-container").bind('mouseenter',function(){
+        $('.weixing-show').show();
+    })
+    $(".weixing-container").bind('mouseleave',function(){        
+        $('.weixing-show').hide();
+    });
+});
+</script>
 
 
 

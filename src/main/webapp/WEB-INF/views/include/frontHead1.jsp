@@ -26,7 +26,7 @@
 <link rel='stylesheet' id='pretty-photo-css-css'  href='${ctxStatic}/front/js1/prettyphoto/prettyPhotoaeb9.css?ver=3.1.4' type='text/css' media='all' />
 <link rel='stylesheet' id='main-css-css'  href='${ctxStatic}/front/css1/main5152.css?ver=1.0' type='text/css' media='all' />
 <link rel='stylesheet' id='custom-css-css'  href='${ctxStatic}/front/css1/custom5152.css?ver=1.0' type='text/css' media='all' />
-
+<link rel='stylesheet' id='custom-css-css'  href='${ctxStatic}/front/css1/im.css?ver=1.0' type='text/css' media='all' />
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
