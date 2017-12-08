@@ -48,16 +48,16 @@ public class FrontIndexController extends BaseController{
 	
 	/**
 	 * 网站首页
-	 */
+	 
 	@RequestMapping(value= {"", "index"})
 	public String index(Model model) {
 		return "modules/paimai/front/index";
-	}	
+	}	*/
 
 	/**
 	 * 网站首页
 	 */
-	@RequestMapping(value= {"index1"})
+	@RequestMapping(value= {"","index1"})
 	public String index1(Model model) {
 		return "modules/paimai/front/index1";
 	}

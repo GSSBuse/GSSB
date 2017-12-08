@@ -8,7 +8,7 @@ require(["plugin/validation/avalon.validation", "domReady!"], function() {
 	var defaultInfo = {
 		name: "",
 		mobile: "",
-		connacts: ""
+		searchContents: ""
 	}
 	
 	var validationVM = null;
@@ -54,7 +54,7 @@ require(["plugin/validation/avalon.validation", "domReady!"], function() {
 							if (resp.type == "success") {
 								$.jBox.tip("提交成功,我们会尽快联系您！",'success',{opacity:0});
 								setTimeout(function(){
-									window.location.href = ctx + "/index.html";
+									window.location.href = ctx + "/index1.html";
 								}, 1000);
 							} else {
 								$.jBox.error(resp.msg, '提交错误，请稍后重试。', {border:5}); 

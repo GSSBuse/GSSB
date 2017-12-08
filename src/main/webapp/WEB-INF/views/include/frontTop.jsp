@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101442633" charset="utf-8"></script>
-
-<div class="header-wrapper">
+<script type="text/javascript" src="${ctxStatic }/front/js/searchBrand.js"></script> 
+<div class="header-wrapper" >
         <header>
                 <div class="container">
                         <div class="logo-container">
@@ -42,7 +42,7 @@
                 <p class="search-tag-line">专业知识产权服务平台</p>
                 <p class="search-tag-line">&nbsp;&nbsp;商标&nbsp;版权&nbsp;专利</p>
 
-                <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
+                <form id="search-form" class="search-form clearfix" method="get" action="${ctx }/index1.html" autocomplete="off">
                         <select class="select-term">
                             <option value='1' selected>&nbsp;&nbsp;商标</option>
                             <option value='2'>&nbsp;&nbsp;专利</option>
@@ -57,28 +57,28 @@
    
 <!-- 免费查询form表单 -->
 <div id="search-dialog-bg" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0;background-color: rgba(0, 0, 0, 0.5);z-index: 1;display: none;"></div>               
-<div id="search-dialog" style="position: fixed;background: rgb(249, 249, 249);top: 50%;left: 50%;transform: translate(-50%, -50%);z-index: 10;display: none;">
-    <div id="close-dialog" style="position: absolute;right: -10px;top: -14px;width: 24px;height: 24px;text-align: center;font-size: 25px;border: 2px solid #d2d1d1;border-radius: 50%;background-color: #fff; color: #e71a1a;cursor: pointer;">×</div>
-    <form id="domainform"  action="${ctx }/index1.html" method="post" style="padding: 20px 30px;margin: 0;">
+<div id="search-dialog"  ms-controller="search-dialog"  style="position: fixed;background: rgb(249, 249, 249);top: 50%;left: 50%;transform: translate(-50%, -50%);z-index: 10;display: none;">
+    <div id="close-dialog"  style="position: absolute;right: -10px;top: -14px;width: 24px;height: 24px;text-align: center;font-size: 25px;border: 2px solid #d2d1d1;border-radius: 50%;background-color: #fff; color: #e71a1a;cursor: pointer;">×</div>
+    <form id="domainform"  action="${ctx }/index1.html" method="post" ms-widget="validation"  style="padding: 20px 30px;margin: 0;">
            <h1 class="post-title"><a href="#">免费查询</a></h3>
            <p class="comment-notes">请输入您需要查询的信息。专业顾问人工查询，结果分析更准确！</p>
 
            <div>
                    <label for="author">商标名称 *</label>
-                   <input class="span4" type="text" name="author" id="author" value="" size="22">
+                   <input class="span4" type="text" name="searchContents"  id="connacts"  ms-duplex-required="datas.domainInfo.searchContents" onFocus="this.value = '';" value="" size="22">
            </div>
 
            <div>
                    <label for="email">联系电话 *</label>
-                   <input class="span4" type="text" name="email" id="email" value="" size="22" >
+                   <input class="span4" type="text" name="mobile" id="mobile" ms-duplex-required="datas.domainInfo.name" onFocus="this.value = '';" value=""  size="22" >
            </div>
 
            <div>
                    <label for="url">联系人 *</label>
-                   <input class="span4" type="text" name="url" id="url" value="" size="22" >
+                   <input class="span4" type="text" name="name" id="name"  ms-duplex-required="datas.domainInfo.mobile" onFocus="this.value = '';" value="" size="22" >
            </div>
-           <div>
-                   <input class="btn" name="submit" type="submit" id="submit"  value="提交查询">
+           <div class="payment-sendbtns">
+                   <input class="btn" name="submit" type="submit" id="submitChange"  value="提交查询">
            </div>
    </form>
 </div>
@@ -185,7 +185,6 @@ $(function(){
     });
 });
 </script>
-
 
 
 

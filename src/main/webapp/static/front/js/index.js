@@ -6,7 +6,7 @@
 pageData = window.pageData?window.pageData:[];
 
 var vm = avalon.define({
-		$id : "index",
+		$id : "index1",
 		test: "tst",
 		domainBuyList1 : [{title:"test"},{title:"test2"}],
 		//domainSoldList1 : [{title:"test"},{title:"test2"}],//买标信息一览（最新11条，首页只表示最新的）

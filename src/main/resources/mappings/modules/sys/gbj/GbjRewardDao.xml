@@ -134,6 +134,7 @@
 	<select id="findDomainRewardList" resultType="GbjReward" parameterType="java.lang.Integer">
         SELECT
               b.reward_money as "rewardMoney",
+              b.create_date as "createDate",
               b.title as "title"
         FROM gbj_reward b
         <where>
