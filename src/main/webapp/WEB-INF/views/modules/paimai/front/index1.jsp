@@ -83,9 +83,9 @@
                                                                 <ul class="articles">
                                                                        <li class="article-entry standard" ms-repeat-el="datas.domainBuyList" >
 		                                                                        <h4><a href="${ctx }/single.html" >{{el.title}}</a></h4>
-		                                                                        <span class="article-meta">{{el.createDate}}<a href="#" title="查看该分类">商标   &amp; 餐饮</a></span>
+		                                                                        <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="查看该分类">商标   &amp; 餐饮</a></span>
 		                                                                        <span class="like-count">66</span>
-		                                                                </li>
+		                                                               </li>
                                                                        
                                                                 </ul>
                                                         </section>
@@ -97,7 +97,7 @@
 		                                                                
 		                                                                        <h4><a href="${ctx }/single.html" >{{el.title}}</a></h4>
 		                                                                
-		                                                                        <span class="article-meta">{{el.createDate}}<a href="#" title="查看该分类">商标   &amp; 餐饮</a></span>
+		                                                                        <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="查看该分类">商标   &amp; 餐饮</a></span>
 		                                                                        <span class="like-count">66</span>
 		                                                                </li>
                                                                 </ul>
@@ -110,7 +110,7 @@
 		                                                                
 		                                                                        <h4><a href="${ctx }/single.html" >{{el.title}}</a> {{el.rewardMoney}}元</h4>
 		                                                                
-		                                                                        <span class="article-meta">{{el.createDate}} <a href="#" title="查看该分类">商标   &amp; 餐饮</a></span>
+		                                                                        <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="查看该分类">商标   &amp; 餐饮</a></span>
 		                                                                        <span class="like-count">66</span>
 		                                                                </li>
                                                                 </ul>
