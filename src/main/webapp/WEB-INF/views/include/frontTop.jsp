@@ -2,55 +2,67 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101442633" charset="utf-8"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/searchBrand.js"></script> 
-<div class="header-wrapper" >
-        <header>
-                <div class="container">
-                        <div class="logo-container">
-                                <!-- Website Logo -->
-                                <a href="#"  title="国标商标">
-                                        <img style="width:15%;" src="${ctxStatic }/images/logo.png" alt="国标商标">
-                                </a>
-                                <span class="tag-line">专业知识产权服务平台</span>
-                        </div>
-                
-                
-                        <!-- Start of Main Navigation -->
-                        <nav class="main-nav">
-                                <div class="menu-top-menu-container">
-                                        <ul id="menu-top-menu" class="clearfix">
-											<li class="current-menu-item"><a href="${ctx }/index1.html">首页</a></li>
-											<li><a href="${ctx }/articles.html">交易信息</a></li>
-											<li><a href="${ctx }/faqs.html">帮助说明</a></li>
-											<li><a href="${ctx }/contact.html">联系我们</a></li>
-											<li><span id="qqLoginBtn"></span></li>
-											<li><span id="username"></span></li>
-											<li><img id="userimgId" src=""/></li>
-                                        </ul>
-                                </div>
-                        </nav>
-                        <!-- End of Main Navigation -->
-                
-                </div>
-        </header>
-</div>
-<!-- End of Header -->
+
+<%@ include file="/WEB-INF/views/include/frontMenu.jsp"%>
+
 
 <!-- Start of Search Wrapper -->
 <div class="search-area-wrapper">
         <div class="search-area container">
                 <p align="center"><img style="width:70%;" src="${ctxStatic }/images/copyright.png" alt=""/></p>
-                <p class="search-tag-line">专业知识产权服务平台</p>
+                <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
+						<script type="text/javascript">
+						function showItem(obj,flag){
+						 //alert(flag);
+						 //alert(obj.id);
+						
+						 for(var i=1;i<=3;i++){
+						  var but_id = "but_"+i;
+						  if( "but_"+i == obj.id ){
+						   document.getElementById("but_"+i).style.border ="2px solid blue";
+						  }else{
+						   document.getElementById("but_"+i).style.border ="solid 1px #999";
+						  }
+						 }
+						}
+						</script>
+                <div align="center" style=" display: block; */">
+                               <ul >
+                                <li style="list-style-type:none;display: inline-block"><a class="faq_but1 but3" href="#" id="but_1" onClick="showItem(this,'inc_call')">商标</a>&nbsp;&nbsp;</li>
+                                <li style="list-style-type:none;display: inline-block"><a class="faq_but1 but3" href="#" id="but_2" onClick="showItem(this,'inc_call')">版权</a>&nbsp;&nbsp;</li>
+                                <li style="list-style-type:none;display: inline-block"><a class="faq_but1 but3" href="#" id="but_3" onClick="showItem(this,'inc_call')">专利</a></li>
+                               </ul>
+                </div>
                 <form id="search-form" class="search-form clearfix" method="get" action="${ctx }/index1.html" autocomplete="off">
-                        <select class="select-term">
-                            <option value='1' selected>&nbsp;&nbsp;商标</option>
-                            <option value='2'>&nbsp;&nbsp;专利</option>
-                            <option value='3'>&nbsp;&nbsp;版权</option>
-                        </select>
+                        
+<!--                         <select class="select-term"> -->
+<!--                             <option value='1' selected>&nbsp;&nbsp;商标</option> -->
+<!--                             <option value='2'>&nbsp;&nbsp;专利</option> -->
+<!--                             <option value='3'>&nbsp;&nbsp;版权</option> -->
+<!--                         </select> -->
                         <input class="search-term required" type="text" id="s" name="s" placeholder="请输入您想要查询的商标" />
                         <input class="search-btn" type="button" onclick="show()" value="免费查询" />
                 </form>
+                <div class="scroll-box">
+				     <ul>
+				      <li>2017/12/02 王先生 139582****1002 成功查询商标</li>
+                      <li>2017/12/03 王先生 139582****1002 成功查询商标</li>
+                      <li>2017/12/04 王先生 139582****1002 成功查询商标</li>
+                      <li>2017/12/05 王先生 139582****1002 成功查询商标</li>
+                      <li>2017/12/06 王先生 139582****1002 成功查询商标</li>
+                      <li>2017/12/07 王先生 139582****1002 成功查询商标</li>
+                      <li>2017/12/08 王先生 139582****1002 成功查询商标</li>
+                      <li>2017/12/09 王先生 139582****1002 成功查询商标</li>
+                      <li>2017/12/10 王先生 139582****1002 成功查询商标</li>
+                      <li>2017/12/11 王先生 139582****1002 成功查询商标</li>
+                      <li>2017/12/12 王先生 139582****1002 成功查询商标</li>
+				     </ul>
+				</div>
         </div>
+        
+
 </div>
 
    

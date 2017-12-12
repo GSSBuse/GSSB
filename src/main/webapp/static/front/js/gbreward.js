@@ -47,19 +47,20 @@ require(["plugin/validation/avalon.validation", "domReady!"], function() {
                 })
                 if (reasons.length === 0) {
                 	$("#submit03").attr("disabled", true);
-                	$.jBox.tip("提交处理中",'loading',{opacity:0});
+                	//$.jBox.tip("提交处理中",'loading',{opacity:0});
                     $.ajax({
 						url: ctx + "/gbreward.json",
 						data: vm.datas.domainInfo3,
 						type: "POST",
 						success: function (resp) {
 							if (resp.type == "success") {
-								$.jBox.tip("提交成功",'success',{opacity:0});
+								alert("提交成功！");
+							//	$.jBox.tip("提交成功",'success',{opacity:0});
 								setTimeout(function(){
-									window.location.href = ctx + "/index.html";
+									window.location.href = ctx + "/index1.html";
 								}, 1000);
 							} else {
-								$.jBox.error(resp.msg, '错误', {border:5}); 
+								//$.jBox.error(resp.msg, '错误', {border:5}); 
 								$("#submit03").attr("disabled", false);
 							}
 						}

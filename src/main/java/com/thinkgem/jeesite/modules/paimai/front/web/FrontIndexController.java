@@ -18,11 +18,13 @@ import com.thinkgem.jeesite.common.mapper.JsonMapper;
 import com.thinkgem.jeesite.common.utils.SendMailUtil;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.sys.entity.gb.GbBuy;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.ArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjSold;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjTouristRequire;
 import com.thinkgem.jeesite.modules.sys.service.gb.GbBuyService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.ArticleListService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjBuyService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjRewardService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjSoldService;
@@ -45,7 +47,9 @@ public class FrontIndexController extends BaseController{
 	@Autowired
 	private GbjRewardService gbjRewardService;                          //我要买标信息发布 2017/12/3  by snnu  
 	
-	
+	@Autowired
+	private ArticleListService articleListService;     
+
 	/**
 	 * 网站首页
 	 
@@ -101,6 +105,20 @@ public class FrontIndexController extends BaseController{
 	@RequestMapping(value= {"faqs"})
 	public String faqs(Model model) {
 		return "modules/paimai/front/faqs";
+	}
+	/**
+	 * 客户之声页面
+	 */
+	@RequestMapping(value= {"testimonials"})
+	public String testimonials(Model model) {
+		return "modules/paimai/front/testimonials";
+	}
+	/**
+	 * TODO空白页面
+	 */
+	@RequestMapping(value= {"todo"})
+	public String todo(Model model) {
+		return "modules/paimai/front/todo";
 	}
 	/**
 	 * 免费查询提交表单
@@ -275,4 +293,27 @@ public class FrontIndexController extends BaseController{
 			return AjaxResult.makeError("");
 		}
 	} 
+	/**
+	 * 获取页面显示全部信息的最新数据
+	 * @param domainIdList
+	 * @return 全部的最新数据
+	 */
+	@RequestMapping(value = "polling/ArticleData")
+	@ResponseBody
+	public AjaxResult ArticleData( @RequestParam("count") String count) {
+		
+		//取得最新的我要买标信息
+		List<ArticleList> pageDomainArticleList = new ArrayList<ArticleList>();
+		try {
+			pageDomainArticleList = articleListService.findDomainArticleList(count);
+		   	 
+			AjaxResult ar = AjaxResult.makeSuccess("");
+			ar.getData().put("ArticleData", pageDomainArticleList);
+			return ar;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AjaxResult.makeError("");
+		}
+	} 
+	
 }

@@ -11,7 +11,12 @@
 
         <body>
 
-                <%@ include file="/WEB-INF/views/include/frontTop.jsp"%>
+                <%@ include file="/WEB-INF/views/include/frontMenu.jsp"%>
+                <div class="about">
+                     <div class="container">
+                        <h1>联系我们<span class="m_1"><br>您有什么问题，我都可以帮您解答</span></h1>
+                    </div>
+                </div>
 
                 <!-- Start of Page Container -->
                 <div class="page-container">

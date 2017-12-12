@@ -8,9 +8,14 @@
         <head>
                 <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>
         </head>
-
-        <body>
-                <%@ include file="/WEB-INF/views/include/frontTop.jsp"%>
+<script type="text/javascript" src="${ctxStatic }/front/js/Article.js"></script>
+        <body ms-controller="articles">
+                <%@ include file="/WEB-INF/views/include/frontMenu.jsp"%>
+                <div class="about">
+                     <div class="container">
+                        <h1>买标信息<span class="m_1"><br>最新发布的买标信息，如有兴趣请联系123456789</span></h1>
+                    </div>
+                </div>
 
                 <!-- Start of Page Container -->
                 <div class="page-container">
@@ -18,17 +23,17 @@
                                 <div class="row">
 
                                         <!-- start of page content -->
-                                        <div class="span8 page-content">
+                                        <div class="span8 page-content"  ms-repeat-el="datas.domainArticleList">
 
                                                 <ul class="breadcrumb">
-                                                        <li><a href="#"国标商标</a><span class="divider">/</span></li>
+                                                        <li><a href="#">国标商标</a><span class="divider">/</span></li>
                                                         <li><a href="#">商标 &amp; 餐饮</a> <span class="divider">/</span></li>
                                                         <li class="active">我想买个小吃店的店名商标</li>
                                                 </ul>
 
                                                 <article class=" type-post format-standard hentry clearfix">
 
-                                                        <h1 class="post-title"><a href="#">我想买个小吃店的店名商标</a></h1>
+                                                        <h1 class="post-title"><a href="#">{{el.title}}</a></h1>
 
                                                         <div class="post-meta clearfix">
                                                                 <span class="date">2017/11/28</span>

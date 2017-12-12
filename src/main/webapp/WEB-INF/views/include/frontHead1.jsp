@@ -33,6 +33,13 @@
 <script src="${ctxStatic}/front/js1/html5.js"></script>
 <![endif]-->
 
+<!-- Custom Theme files -->
+<!-- webfonts -->
+<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'> -->
+<!-- Add fancyBox main JS and CSS files -->
+<link href="${ctxStatic }/front/css/popup.css" rel="stylesheet" type="text/css">
+<link href="${ctxStatic }/front/css/flexslider.css" rel='stylesheet' type='text/css' />
+
 <!-- script -->
 <script type='text/javascript' src='${ctxStatic}/front/js1/jquery-1.8.3.min.js'></script>
 <script type='text/javascript' src='${ctxStatic}/front/js1/jquery.easing.1.3.js'></script>
