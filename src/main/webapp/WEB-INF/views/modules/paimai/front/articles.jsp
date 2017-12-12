@@ -8,8 +8,8 @@
         <head>
                 <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>
         </head>
-
-        <body>
+<script type="text/javascript" src="${ctxStatic }/front/js/Article.js"></script>
+        <body ms-controller="articles"> 
                 <%@ include file="/WEB-INF/views/include/frontTop.jsp"%>
 
                 <!-- Start of Page Container -->
@@ -18,135 +18,33 @@
                                 <div class="row">
 
                                         <!-- start of page content -->
-                                        <div class="span8 main-listing">
+                                        <div class="span8 main-listing" >
                                                 <article class=" page type-page hentry clearfix">
                                                         <h1 class="post-title"><a href="#">交易信息</a></h1>
                                                         <hr>                                                        
                                                 </article>
-                                                <article class="format-standard type-post hentry clearfix">
+                                                <article class="format-standard type-post hentry clearfix"  ms-repeat-el="datas.domainArticleList">
 
                                                         <header class="clearfix">
 
                                                                 <h3 class="post-title">
-                                                                        <a href="${ctx }/single.html">我想买一个小吃店的商标</a>
+                                                                        <a href="${ctx }/single.html">{{el.title}}</a>
                                                                 </h3>
 
                                                                 <div class="post-meta clearfix">
-                                                                        <span class="date">2017/12/01</span>
-                                                                        <span class="category"><a href="#" title="查询该标签所有内容">商标 &amp; 餐饮</a></span>
+                                                                        <span class="date">{{el.createDate}}</span>
+                                                                        <span class="category"><a href="#" title="查询该标签所有内容">{{el.typeId}} &amp;&amp;&amp; 餐饮</a></span>
                                                                         <span class="comments"><a href="#">3个回复</a></span>
                                                                         <span class="like-count">66</span>
                                                                 </div><!-- end of post meta -->
 
                                                         </header>
 
-                                                        <p>开了一家麻辣烫，先买个“四川麻辣烫”的商标，期望价格200元，联系方式. . . <a class="readmore-link" href="#">查看全部</a></p>
+                                                        <p>{{el.description}}<a class="readmore-link" href="#">查看全部</a></p>
 
                                                 </article>
 
-                                                <article class="format-standard type-post hentry clearfix">
-
-                                                        <header class="clearfix">
-
-                                                                <h3 class="post-title">
-                                                                        <a href="${ctx }/single.html">这里是我要买的标题</a>
-                                                                </h3>
-
-                                                                <div class="post-meta clearfix">
-                                                                        <span class="date">2017/12/01</span>
-                                                                        <span class="category"><a href="#" title="查询该标签所有内容">类别 &amp; 行业</a></span>
-                                                                        <span class="comments"><a href="#">3个回复</a></span>
-                                                                        <span class="like-count">66</span>
-                                                                </div><!-- end of post meta -->
-
-                                                        </header>
-
-                                                        <p>这里是详细内容，如果字数超过100字就截取表示. . . <a class="readmore-link" href="#">查看全部</a></p>
-
-                                                </article>
                                                 
-                                                <article class="format-standard type-post hentry clearfix">
-
-                                                        <header class="clearfix">
-
-                                                                <h3 class="post-title">
-                                                                        <a href="${ctx }/single.html">这里是我要买的标题</a>
-                                                                </h3>
-
-                                                                <div class="post-meta clearfix">
-                                                                        <span class="date">2017/12/01</span>
-                                                                        <span class="category"><a href="#" title="查询该标签所有内容">类别 &amp; 行业</a></span>
-                                                                        <span class="comments"><a href="#">3个回复</a></span>
-                                                                        <span class="like-count">66</span>
-                                                                </div><!-- end of post meta -->
-
-                                                        </header>
-
-                                                        <p>循环取得内容，用ms-repeat来循环表示，注意这里有分页. . . <a class="readmore-link" href="#">查看全部</a></p>
-
-                                                </article>
-                                                <article class="format-standard type-post hentry clearfix">
-
-                                                        <header class="clearfix">
-
-                                                                <h3 class="post-title">
-                                                                        <a href="${ctx }/single.html">这里是我要买的标题</a>
-                                                                </h3>
-
-                                                                <div class="post-meta clearfix">
-                                                                        <span class="date">2017/12/01</span>
-                                                                        <span class="category"><a href="#" title="查询该标签所有内容">类别 &amp; 行业</a></span>
-                                                                        <span class="comments"><a href="#">3个回复</a></span>
-                                                                        <span class="like-count">66</span>
-                                                                </div><!-- end of post meta -->
-
-                                                        </header>
-
-                                                        <p>循环取得内容，用ms-repeat来循环表示，注意这里有分页. . . <a class="readmore-link" href="#">查看全部</a></p>
-
-                                                </article>
-                                                <article class="format-standard type-post hentry clearfix">
-
-                                                        <header class="clearfix">
-
-                                                                <h3 class="post-title">
-                                                                        <a href="${ctx }/single.html">这里是我要买的标题</a>
-                                                                </h3>
-
-                                                                <div class="post-meta clearfix">
-                                                                        <span class="date">2017/12/01</span>
-                                                                        <span class="category"><a href="#" title="查询该标签所有内容">类别 &amp; 行业</a></span>
-                                                                        <span class="comments"><a href="#">3个回复</a></span>
-                                                                        <span class="like-count">66</span>
-                                                                </div><!-- end of post meta -->
-
-                                                        </header>
-                                                        
-
-                                                        <p>循环取得内容，用ms-repeat来循环表示，注意这里有分页,有的地方可以使用图片有的地方可以使用图片有的地方可以使用图片有的地方可以使用图片有的地方可以使用图片有的地方可以使用图片. . . <a class="readmore-link" href="#">查看全部</a></p>
-
-                                                </article>
-
-                                                <article class="format-standard type-post hentry clearfix">
-
-                                                        <header class="clearfix">
-
-                                                                <h3 class="post-title">
-                                                                        <a href="${ctx }/single.html">这里是我要买的标题</a>
-                                                                </h3>
-
-                                                                <div class="post-meta clearfix">
-                                                                        <span class="date">2017/12/01</span>
-                                                                        <span class="category"><a href="#" title="查询该标签所有内容">类别 &amp; 行业</a></span>
-                                                                        <span class="comments"><a href="#">3个回复</a></span>
-                                                                        <span class="like-count">66</span>
-                                                                </div><!-- end of post meta -->
-
-                                                        </header>
-
-                                                        <p>循环取得内容，用ms-repeat来循环表示，注意这里有分页. . . <a class="readmore-link" href="#">查看全部</a></p>
-
-                                                </article>
                                                 <div id="pagination">
                                                         <a href="#" class="btn active">1</a>
                                                         <a href="#" class="btn">2</a>
