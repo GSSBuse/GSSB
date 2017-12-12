@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
+<br/>
+<br/><br/>
 <section class="widget">
         <div class="support-widget">
                 <h3 class="title">在线支持</h3>
@@ -9,32 +10,6 @@
                 <img  style="CURSOR: pointer" onclick="javascript:window.open('http://b.qq.com/webc.htm?new=0&sid=4005958&o=国商商标&q=7', '_blank', 'height=502, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');"  border="0" SRC=http://wpa.qq.com/pa?p=1:4005958:10 alt="点击这里给我发消息">
                 </p>
         </div>
-</section>
-
-<section class="widget">
-        <h3 class="title">最新交易信息</h3>
-        <ul class="articles">
-                <li class="article-entry standard">
-                        <h4><a href="${ctx }/single.html">这里是买卖标悬赏综合信息，最新的几条显示出来</a></h4>
-                        <span class="article-meta">YYYY/MM/DD <a href="#" title="查看该分类">类别   &amp; 行业分类</a></span>
-                        <span class="like-count">66</span>
-                </li>
-                <li class="article-entry standard">
-                        <h4><a href="${ctx }/single.html">这里是买卖标悬赏综合信息，最新的几条显示出来</a></h4>
-                        <span class="article-meta">YYYY/MM/DD <a href="#" title="查看该分类">类别   &amp; 行业分类</a></span>
-                        <span class="like-count">66</span>
-                </li>
-                <li class="article-entry video">
-                        <h4><a href="${ctx }/single.html">这里是买卖标悬赏综合信息，最新的几条显示出来</a></h4>
-                        <span class="article-meta">YYYY/MM/DD <a href="#" title="查看该分类">类别   &amp; 行业分类</a></span>
-                        <span class="like-count">66</span>
-                </li>
-                <li class="article-entry image">
-                        <h4><a href="${ctx }/single.html">这里是买卖标悬赏综合信息，最新的几条显示出来</a></h4>
-                        <span class="article-meta">YYYY/MM/DD <a href="#" title="查看该分类">类别   &amp; 行业分类</a></span>
-                        <span class="like-count">66</span>
-                </li>
-        </ul>
 </section>
 
 <section class="widget">
@@ -75,5 +50,31 @@
                 <li class="recentcomments"><a href="#" rel="external nofollow" class="url">大河</a> on <a href="#">我想给小吃店起个名字</a></li>
                 <li class="recentcomments"><a href="#" rel="external nofollow" class="url">大河</a> on <a href="#">我想给小吃店起个名字</a></li>
                 <li class="recentcomments"><a href="#" rel="external nofollow" class="url">大河</a> on <a href="#">这里一样循环取得留言信息然后ms-repeat循环，最多5条好了</a></li>
+        </ul>
+</section>
+
+<section class="widget">
+        <h3 class="title">最新交易信息</h3>
+        <ul class="articles">
+                <li class="article-entry standard">
+                        <h4><a href="${ctx }/single.html">这里是买卖标悬赏综合信息，最新的几条显示出来</a></h4>
+                        <span class="article-meta">YYYY/MM/DD <a href="#" title="查看该分类">类别   &amp; 行业分类</a></span>
+                        <span class="like-count">66</span>
+                </li>
+                <li class="article-entry standard">
+                        <h4><a href="${ctx }/single.html">这里是买卖标悬赏综合信息，最新的几条显示出来</a></h4>
+                        <span class="article-meta">YYYY/MM/DD <a href="#" title="查看该分类">类别   &amp; 行业分类</a></span>
+                        <span class="like-count">66</span>
+                </li>
+                <li class="article-entry video">
+                        <h4><a href="${ctx }/single.html">这里是买卖标悬赏综合信息，最新的几条显示出来</a></h4>
+                        <span class="article-meta">YYYY/MM/DD <a href="#" title="查看该分类">类别   &amp; 行业分类</a></span>
+                        <span class="like-count">66</span>
+                </li>
+                <li class="article-entry image">
+                        <h4><a href="${ctx }/single.html">这里是买卖标悬赏综合信息，最新的几条显示出来</a></h4>
+                        <span class="article-meta">YYYY/MM/DD <a href="#" title="查看该分类">类别   &amp; 行业分类</a></span>
+                        <span class="like-count">66</span>
+                </li>
         </ul>
 </section>

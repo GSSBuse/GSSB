@@ -40,7 +40,6 @@
         <div class="search-area container">
                 <p align="center"><img style="width:70%;" src="${ctxStatic }/images/copyright.png" alt=""/></p>
                 <p class="search-tag-line">专业知识产权服务平台</p>
-                <p class="search-tag-line">&nbsp;&nbsp;商标&nbsp;版权&nbsp;专利</p>
 
                 <form id="search-form" class="search-form clearfix" method="get" action="${ctx }/index1.html" autocomplete="off">
                         <select class="select-term">

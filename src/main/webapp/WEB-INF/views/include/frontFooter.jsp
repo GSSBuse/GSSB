@@ -3,7 +3,7 @@
         <div id="footer" class="container">
                 <div class="row">
 
-                        <div class="span3">
+                        <div class="span4">
                                 <section class="widget">
                                         <h3 class="title">关于我们</h3>
                                         <div class="textwidget">
@@ -35,15 +35,20 @@
                                         
                                 </section>
                         </div>
-                        <div class="span3">
+                        <div class="span2">
                                 <section class="widget">
                                         <h3 class="title">关注我们</h3>
                                         <div id="twitter_update_list">
                                                 <ul>
                                                         <li>
-                                                        <img style="width:45%;" src="${ctxStatic }/images/weixin.png"/>
-                                                        &nbsp;
-                                                        <img style="width:45%;" src="${ctxStatic }/images/weixin.png"/>
+                                                            <!-- JiaThis Button BEGIN -->
+															<div id="jiathis_style_32x32">
+															    <a class="jiathis_follow_tsina" rel="http://weibo.com/jiathis"></a>
+															    <a class="jiathis_follow_tqq" rel="http://t.qq.com/jiathis"></a>
+															    <a class="jiathis_follow_weixin" rel="http://www.jiathis.com/resource/default/images/weixin_code.jpg"></a>
+															</div>
+															<script type="text/javascript" src="http://v2.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+															<!-- JiaThis Button END -->
                                                         </li>
                                                 </ul>
                                         </div>
