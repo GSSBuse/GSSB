@@ -2,6 +2,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101442633" charset="utf-8"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/searchBrand.js"></script> 
+
+<div class="top red">
+        <div style="width: 1190px; margin: 0 auto;">
+            <span style="font-size: 16px;font-family: '微软雅黑';float: left;"><b>国标商标事务所--中国十佳知识产权代理有限公司</b></span>
+            <p style="background: url('${ctxStatic }/images/tel-bg.png') no-repeat left center; padding-left: 21px; float: right;">
+                                                咨询电话：029-12345678/87654321
+                <span><a href="#">登录</a> | <a href="#">注册</a></span>                                
+            </p>
+            
+        </div>
+</div>
+
 <div class="header-wrapper" >
         <header>
                 <div class="container">
@@ -30,9 +42,6 @@
                                             <li><a href="${ctx }/testimonials.html">客户之声</a></li>
 											<li><a href="${ctx }/faqs.html">帮助中心</a></li>
 											<li><a href="${ctx }/contact.html">联系我们</a></li>
-											<li><span id="qqLoginBtn"></span></li>
-											<li><span id="username"></span></li>
-											<li><img id="userimgId" src=""/></li>
                                         </ul>
                                 </div>
                         </nav>

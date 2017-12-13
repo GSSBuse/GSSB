@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101442633" charset="utf-8"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/searchBrand.js"></script> 
 
 <%@ include file="/WEB-INF/views/include/frontMenu.jsp"%>
@@ -9,32 +8,69 @@
 <!-- Start of Search Wrapper -->
 <div class="search-area-wrapper">
         <div class="search-area container">
-                <p align="center"><img style="width:70%;" src="${ctxStatic }/images/copyright.png" alt=""/></p>
-                <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+                <ul class="registInfo">
+                    <li class="mdl" style="display: none;">
+                        <h1>商标注册</h1>
+                        <h6>对产品、方法或者其改进所提出的新的技术方案</h6>
+                        <p>让世界感受到因您而不同</p>
+                       <!-- <a href="javascript:void(0);" onclick="openwin()"><p>了解详细</p></a>-->
+                    </li>
+                    <li class="partner" style="display: none;">
+                        <h1>专利申请</h1>
+                        <h6>产品的形状、构造或其结合所提出的适于实用的新的技术方案</h6>
+                        <p>通常指有具体形态的新颖性物件</p>
+                        <!--<a href="javascript:void(0);" onclick="openwin()"><p>了解详细</p></a>-->
+                    </li>
+                    <li class="qualifications" style="display: none;">
+                        <h1>版权登记</h1>
+                        <!--<h6 style="font-family:'STXinwei24b5e7e8749f9';" >您的创新智慧成果，国商助它成财</h6>-->
+                        <h6>对产品所作出的富有美感并适于工业应用的新设计</h6>
+                        <p>形状、图案或者其结合以及色彩与形状、图案的结合</p>
+                        <!--<p style="font-family:'STXinwei24b5e7e8749f9';" >快告诉您要申请的专利种类</p>-->
+                        <!--<a href="javascript:void(0);" onclick="openwin()"><p>了解详细</p></a>-->
+                    </li>
+                </ul>
+                <ul class="registbox">
+                    <li>
+                        <p onClick="openwin()">商标注册</p>
+                    </li>
 
+                    <li >
+                        <p onClick="openwin()">专利申请</p>
+                    </li>
 
-						<script type="text/javascript">
-						function showItem(obj,flag){
-						 //alert(flag);
-						 //alert(obj.id);
-						
-						 for(var i=1;i<=3;i++){
-						  var but_id = "but_"+i;
-						  if( "but_"+i == obj.id ){
-						   document.getElementById("but_"+i).style.border ="2px solid blue";
-						  }else{
-						   document.getElementById("but_"+i).style.border ="solid 1px #999";
-						  }
-						 }
-						}
-						</script>
-                <div align="center" style=" display: block; */">
-                               <ul >
-                                <li style="list-style-type:none;display: inline-block"><a class="faq_but1 but3" href="#" id="but_1" onClick="showItem(this,'inc_call')">商标</a>&nbsp;&nbsp;</li>
-                                <li style="list-style-type:none;display: inline-block"><a class="faq_but1 but3" href="#" id="but_2" onClick="showItem(this,'inc_call')">版权</a>&nbsp;&nbsp;</li>
-                                <li style="list-style-type:none;display: inline-block"><a class="faq_but1 but3" href="#" id="but_3" onClick="showItem(this,'inc_call')">专利</a></li>
-                               </ul>
-                </div>
+                    <li>
+                        <p onClick="openwin()">版权登记</p>
+                    </li>
+                </ul>
+                <script>
+	                $(function(){
+	                    /* 首页banner自动切换 */
+	                    var timer = 10000000;//秒为单位,作为时间间隔
+	                    var index = 0;//不做修改
+	                    var interval;
+	                    $(".registbox>li").mouseover(function(){
+	                        index = $(".registbox>li").index(this);
+	                        bannerAnmail();
+	                        clearInterval(interval);
+	                        interval = setInterval(bannerAnmail,timer*1000);
+	                    });
+	
+	                    function bannerAnmail() {
+	                        $(".registbox>li").removeClass("registlihover");
+	                        $(".registbox>li").eq(index).addClass("registlihover");
+	                        $(".registInfo>li").hide();
+	                        $(".registInfo>li").eq(index).fadeIn(100);
+	                        index +=1;
+	                        if(($(".registbox>li").length)==index){index=0;}
+	                    }
+	                    bannerAnmail();
+	                    interval = setInterval(bannerAnmail,timer*1000);
+	                    /* 首页banner自动切换 结束 */
+	                });
+
+				</script>
                 <form id="search-form" class="search-form clearfix" method="get" action="${ctx }/index1.html" autocomplete="off">
                         
 <!--                         <select class="select-term"> -->
@@ -116,34 +152,6 @@ $('#close-dialog').click(function(){
 });
 
 </script>
-    <!--qq登录用 -->
-  <script>
-        QC.Login({
-            //btnId：插入按钮的节点id，必选
-            btnId:"qqLoginBtn",
-            //用户需要确认的scope授权项，可选，默认all
-            scope:"all",
-            //按钮尺寸，可用值[A_XL| A_L| A_M| A_S|  B_M| B_S| C_S]，可选，默认B_S
-            size: "B_M"
-        }, function(reqData, opts){//登录成功
-            //根据返回数据，更换按钮显示状态方法
-            console.log(reqData);//查看返回数据
-            QC.Login.getMe(function(openId, accessToken){//获取用户的openId
-                console.log('QQOPENID:'+openId);
-                //thirdparty(null,null,reqData.figureurl_qq_1,reqData.nickname,1,openId);
-                $("#userimgId").attr('src',reqData.figureurl_qq_1); 
-                $('#username').html(reqData.nickname);
-                //QC.Login.signOut();//退出QQ登录调用事件
-            });
-        }
-    );
-  </script>
-
-
-
-
-
-
 <div class="main-im">
     <div id="open_im" class="open-im">&nbsp;</div>  
     <div class="im_main" id="im_main">
@@ -222,7 +230,7 @@ $(function(){
 <!-- 	          			</li> -->
 <%--           			</c:if> --%>
 <!--           		</ul> -->
-          		
+
 <!--           		<div id="uiBlueBar"> -->
 <%--           			<a id="uiLogo" href="${ctx }/index.html" title="首页">拍域名</a> --%>
 <!--           			<div id="uiSearch"> -->
@@ -230,7 +238,7 @@ $(function(){
 <!--           					<span class="table-cell search-input"> -->
 <!--           						<input type="hidden" name="keyword"> -->
 <!--           						<input type="hidden" name="search_trigger" value="off"> -->
-          						
+
 <!--           						<span class="input-wrapper"> -->
 <!--           							<span class="search-input"> -->
 <%--           								<input class="mainSearch" type="text" value="${searchDomain}" name="domain" id=""> --%>
@@ -269,7 +277,7 @@ $(function(){
 <%-- 		          						<img alt="微信登录二维码" src="${ctx }/common/loginQrImage"><br> --%>
 <!-- 		          						请使用微信扫一扫授权登录。 -->
 <!-- 		          					</div> -->
-		          					
+
 <!-- 		          					<div id="js_uiLoginBox2" class="uiLoginBox formular" style="display: none;"> -->
 <!-- 		          						<span class="line" id="js_input_empty_hint" style="display: none; color:red;">用户名或密码不能为空！</span> -->
 <!-- 		          						<span class="line" id="js_error_hint" style="display: none; color:red;">登陆信息错误！</span> -->
@@ -290,7 +298,7 @@ $(function(){
 <!-- 		          							</span> -->
 <!-- 		          						    <span class="line aCenter"><a href="" class="forgotdetails">若忘记密码请联系经纪人</a></span> -->
 <!-- 		          							<span class="line fRight"><a href="" class="create_new_account register_link">创建新账户！</a></span> -->
-		          						
+
 <!-- 		          						</form> -->
 <!-- 		          					</div> -->
 <!-- 		          				</div> -->

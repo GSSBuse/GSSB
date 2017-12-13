@@ -17,18 +17,17 @@ import com.thinkgem.jeesite.common.bean.AjaxResult;
 import com.thinkgem.jeesite.common.mapper.JsonMapper;
 import com.thinkgem.jeesite.common.utils.SendMailUtil;
 import com.thinkgem.jeesite.common.web.BaseController;
-import com.thinkgem.jeesite.modules.sys.entity.gb.GbBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.ArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjSold;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjTouristRequire;
-import com.thinkgem.jeesite.modules.sys.service.gb.GbBuyService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.ArticleListService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjBuyService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjRewardService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjSoldService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjTouristRequireService;
+
 
 @Controller
 @RequestMapping(value = "${frontPath}")
@@ -66,12 +65,12 @@ public class FrontIndexController extends BaseController{
 		return "modules/paimai/front/index1";
 	}
 	/**
-	 * 第三方登录回调
+	 * 登录注册
 	 */
 	@RequestMapping(value= {"login"})
 	public String login(Model model, HttpServletRequest request) {
 		model.addAttribute("userinfo", "test");
-		return "modules/paimai/front/index";
+		return "modules/paimai/front/login";
 	}	
 	
 	/**
@@ -105,20 +104,6 @@ public class FrontIndexController extends BaseController{
 	@RequestMapping(value= {"faqs"})
 	public String faqs(Model model) {
 		return "modules/paimai/front/faqs";
-	}
-	/**
-	 * 客户之声页面
-	 */
-	@RequestMapping(value= {"testimonials"})
-	public String testimonials(Model model) {
-		return "modules/paimai/front/testimonials";
-	}
-	/**
-	 * TODO空白页面
-	 */
-	@RequestMapping(value= {"todo"})
-	public String todo(Model model) {
-		return "modules/paimai/front/todo";
 	}
 	/**
 	 * 免费查询提交表单

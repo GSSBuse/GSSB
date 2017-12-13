@@ -93,7 +93,7 @@ span.tag-line {
   padding: 16px 14px 18px;
 }
 .main-nav div > ul > li a {
-  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "微软雅黑", Arial;
   font-size: 16px;
   color: #395996;
 }
@@ -138,6 +138,25 @@ span.tag-line {
 .main-nav .responsive-nav {
   display: none;
 }
+.top { height: 35px; width: 100%; background: url("../../images/top-bg.png") repeat-x bottom; line-height: 35px; }
+.red { color: #c33408; }
+/* Header - banner ---------------------------------------------------------------------------------------------------*/
+.registInfo { height: 270px; }
+.registInfo li { padding: 35px 50px; }
+.registInfo li>h1 { text-align: center; color: #fff; font-size: 40px; line-height: 80px; font-family: "微软雅黑", Arial; }
+.registInfo li>h1 span { width: 60px; height: 60px; display: inline-block; background: #c33408; text-align: center; line-height: 60px; border-radius: 60px; font-weight: normal; }
+.registInfo li>h6 { text-align: center; color: #fff; font-size: 17px; font-weight: normal; margin: 0; line-height: 50px; border-bottom: 1px solid #fea100; width: 480px; margin: 0 auto; }
+.registInfo li>p { text-align: center; color: #fff; font-size: 17px; font-weight: normal; margin: 0; line-height: 40px; }
+.registInfo li>a>p { border: 1px solid #fea100; text-align: center; margin: 0 auto; width: 120px; font-size: 14px; color: #fff; height: 30px; line-height: 30px; margin-top: 15px; }
+.registInfo li.gat>p { line-height: 30px; }
+.choose-title { text-align: center; font-size: 14px; color: #fefefe; font-weight: normal; line-height: 30px; }
+.registbox { overflow: hidden; height: auto; padding-top: 15px; width: 500px; margin: 0 auto; position: relative; }
+.registbox>li { height: 42px; float: left;  color: #ff0000; font-size: 16px; text-align: center; border: 1px solid #ffffff; cursor: pointer; position: relative; }
+.registbox>li:hover { }
+.registbox>li>p { font-size: 14px; background-color: #ff8000;color: #ffffff; line-height: 40px; width: 125px; }
+.registbox>a:hover { float: left; border: 1px solid #ff0000; }
+.registbox .registlihover { border: 1px solid #0080ff; color: #ff0000; }
+.registbox .registlihover>p { color: #00ff80; }
 
 /* Header - Search ---------------------------------------------------------------------------------------------------*/
 .search-area-wrapper {
@@ -152,7 +171,7 @@ span.tag-line {
 }
 
 h3.search-header {
-  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "微软雅黑", Arial;
   font-weight: bold;
   font-size: 36px;
   color: #fff;
@@ -160,7 +179,7 @@ h3.search-header {
 }
 
 p.search-tag-line {
-  font-family: "Droid Serif", serif;
+  font-family: "微软雅黑", Arial;
   font-style: italic;
   font-size: 18px;
   line-height: 28px;
@@ -173,7 +192,7 @@ form.search-form {
   text-align: center;
 }
 form.search-form .input-common, form.search-form input.search-term,form.search-form select.select-term, form.search-form input.search-btn {
-  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "微软雅黑", Arial;
   box-shadow: none;
   border-radius: 0;
   display: inline-block;
@@ -873,7 +892,7 @@ h1.search-title span {
   color: #666565;
   font-size: 14px;
   line-height: 22px;
-  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "微软雅黑", Arial;
   font-weight: 600;
   margin: 0;
 }

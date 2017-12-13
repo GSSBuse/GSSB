@@ -251,9 +251,7 @@ th {
   }
 }
 * {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+
 }
 *:before,
 *:after {
@@ -588,7 +586,7 @@ ol ol {
 }
 dl {
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 dt,
 dd {

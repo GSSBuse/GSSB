@@ -21,6 +21,7 @@
 
 <!-- Style Sheet-->
 <link rel="stylesheet" href="${ctxStatic}/front/css1/style.css"/>
+<link rel="stylesheet" href="${ctxStatic}/front/css1/loginstyle.css"/>
 <link rel='stylesheet' id='bootstrap-css-css'  href='${ctxStatic}/front/css1/bootstrap5152.css?ver=1.0' type='text/css' media='all' />
 <link rel='stylesheet' id='responsive-css-css'  href='${ctxStatic}/front/css1/responsive5152.css?ver=1.0' type='text/css' media='all' />
 <link rel='stylesheet' id='pretty-photo-css-css'  href='${ctxStatic}/front/js1/prettyphoto/prettyPhotoaeb9.css?ver=3.1.4' type='text/css' media='all' />
@@ -59,4 +60,6 @@
 
 <link href="${ctxStatic}/jquery-jbox/2.3/Skins/Blue/jbox.css" rel="stylesheet" />
 <script src="${ctxStatic}/jquery-jbox/2.3/jquery.jBox-2.3.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101442633" data-redirecturi="http://localhost:8182/gssb/index1.html" charset="utf-8"></script>
     
