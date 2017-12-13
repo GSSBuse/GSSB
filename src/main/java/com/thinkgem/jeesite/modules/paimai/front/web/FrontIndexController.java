@@ -107,20 +107,6 @@ public class FrontIndexController extends BaseController{
 		return "modules/paimai/front/faqs";
 	}
 	/**
-	 * 客户之声页面
-	 */
-	@RequestMapping(value= {"testimonials"})
-	public String testimonials(Model model) {
-		return "modules/paimai/front/testimonials";
-	}
-	/**
-	 * TODO空白页面
-	 */
-	@RequestMapping(value= {"todo"})
-	public String todo(Model model) {
-		return "modules/paimai/front/todo";
-	}
-	/**
 	 * 免费查询提交表单
 	 */
 	@RequestMapping(value= {"searchBrand"})
