@@ -28,14 +28,17 @@
 			<li><label>查询内容：</label>
 				<form:input path="searchContents" htmlEscape="false" maxlength="500" class="input-medium"/>
 			</li>
+			<li><label>商标类型：</label>
+				<form:select path="typeId" class="input-medium">
+					<form:option value="" label=""/>
+					<form:options items="${fns:getDictList('gbjBuy_type_id')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</form:select>
+			</li>
 			<li><label>姓名：</label>
 				<form:input path="name" htmlEscape="false" maxlength="200" class="input-medium"/>
 			</li>
 			<li><label>电话：</label>
 				<form:input path="mobile" htmlEscape="false" maxlength="200" class="input-medium"/>
-			</li>
-			<li><label>是否电话回访：</label>
-				<form:radiobuttons path="isCalled" items="${fns:getDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
@@ -46,11 +49,16 @@
 		<thead>
 			<tr>
 				<th>查询内容</th>
+				<th>商标类型</th>
 				<th>姓名</th>
 				<th>电话</th>
-				<th>是否电话回访</th>
+				<th>邮箱</th>
+				<th>QQ</th>
+				<th>是否回访</th>
 				<th>更新时间</th>
-				<th>备注信息</th>
+				<th>回访方式</th>
+				<th>回访备注</th>
+				<th>创建时间</th>
 				<th>删除标记</th>
 				<shiro:hasPermission name="sys:gbj:gbjTouristRequire:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
@@ -62,19 +70,34 @@
 					${gbjTouristRequire.searchContents}
 				</a></td>
 				<td>
+					${fns:getDictLabel(gbjTouristRequire.typeId, 'gbjBuy_type_id', '')}
+				</td>
+				<td>
 					${gbjTouristRequire.name}
 				</td>
 				<td>
 					${gbjTouristRequire.mobile}
 				</td>
 				<td>
-					${fns:getDictLabel(gbjTouristRequire.isCalled, 'yes_no', '')}
+					${gbjTouristRequire.email}
+				</td>
+				<td>
+					${gbjTouristRequire.qq}
+				</td>
+				<td>
+					${fns:getDictLabel(gbjTouristRequire.isVisit, 'yes_no', '')}
 				</td>
 				<td>
 					<fmt:formatDate value="${gbjTouristRequire.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<td>
-					${gbjTouristRequire.remarks}
+					${fns:getDictLabel(gbjTouristRequire.visitWay, '', '')}
+				</td>
+				<td>
+					${gbjTouristRequire.visitRemarks}
+				</td>
+				<td>
+					<fmt:formatDate value="${gbjTouristRequire.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<td>
 					${fns:getDictLabel(gbjTouristRequire.delFlag, 'del_flag', '')}

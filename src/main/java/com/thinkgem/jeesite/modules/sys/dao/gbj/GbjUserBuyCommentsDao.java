@@ -8,9 +8,9 @@ import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
 
 /**
- * 买标信息评论DAO接口
+ * 买标用户评论表DAO接口
  * @author snnu
- * @version 2017-11-20
+ * @version 2017-12-15
  */
 @MyBatisDao
 public interface GbjUserBuyCommentsDao extends CrudDao<GbjUserBuyComments> {

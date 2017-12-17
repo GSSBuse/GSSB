@@ -25,7 +25,7 @@ import com.thinkgem.jeesite.modules.sys.service.gbj.GbjTouristRequireService;
 /**
  * 游客查询管理Controller
  * @author snnu
- * @version 2017-11-20
+ * @version 2017-12-16
  */
 @Controller
 @RequestMapping(value = "${adminPath}/sys/gbj/gbjTouristRequire")

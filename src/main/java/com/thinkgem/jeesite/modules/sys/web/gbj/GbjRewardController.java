@@ -25,7 +25,7 @@ import com.thinkgem.jeesite.modules.sys.service.gbj.GbjRewardService;
 /**
  * 悬赏信息管理Controller
  * @author snnu
- * @version 2017-11-20
+ * @version 2017-12-17
  */
 @Controller
 @RequestMapping(value = "${adminPath}/sys/gbj/gbjReward")

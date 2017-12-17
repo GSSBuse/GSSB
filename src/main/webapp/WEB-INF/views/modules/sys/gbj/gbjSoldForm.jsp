@@ -33,10 +33,18 @@
 	<form:form id="inputForm" modelAttribute="gbjSold" action="${ctx}/sys/gbj/gbjSold/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
-		<div class="control-group">
+		<div class="control-group" style="visibility:hidden">
 			<label class="control-label">用户ID：</label>
 			<div class="controls">
-				<form:input path="user.id" htmlEscape="false" maxlength="200" class="input-xlarge "/>
+				<form:input path="user.id" value="f3e9b86259614079b176430b0886fc31"  htmlEscape="false" maxlength="200" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">真实姓名：</label>
+			<div class="controls">
+				<form:input path="realname" value="国商商标" readonly="true" htmlEscape="false" maxlength="200" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -49,39 +57,61 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">预算价格：</label>
+			<label class="control-label">国标标题：</label>
 			<div class="controls">
-				<form:input path="price" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">实际成交价格：</label>
-			<div class="controls">
-				<form:input path="realprice" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">联系人：</label>
-			<div class="controls">
-				<form:input path="linkman" htmlEscape="false" maxlength="200" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">联系人手机号：</label>
-			<div class="controls">
-				<form:input path="mobile" htmlEscape="false" maxlength="200" class="input-xlarge "/>
+				<form:input path="title" htmlEscape="false" maxlength="200" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">国标描述：</label>
 			<div class="controls">
-				<form:input path="description" htmlEscape="false" maxlength="500" class="input-xlarge "/>
+				<form:input path="description" htmlEscape="false" maxlength="500" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">国标标题：</label>
+			<label class="control-label">预算价格：</label>
 			<div class="controls">
-				<form:input path="title" htmlEscape="false" maxlength="200" class="input-xlarge "/>
+				<form:input path="price" htmlEscape="false" maxlength="20" class="input-xlarge required digits"/>
+				<span class="help-inline"><font color="red">*</font> </span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">联系人手机号：</label>
+			<div class="controls">
+				<form:input path="mobile" htmlEscape="false" maxlength="200" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">标签：</label>
+			<div class="controls">
+				<form:input path="tag" htmlEscape="false" maxlength="200" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">点赞数：</label>
+			<div class="controls">
+				<form:input path="upCounts" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">查看数：</label>
+			<div class="controls">
+				<form:input path="lookCounts" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">卖标信息撤回标记：</label>
+			<div class="controls">
+				<form:input path="frontDelFlag" htmlEscape="false" maxlength="1" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">评论数：</label>
+			<div class="controls">
+				<form:input path="commentsCounts" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
 			</div>
 		</div>
 		<div class="control-group">

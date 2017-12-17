@@ -5,22 +5,28 @@
 	<sql id="gbjBuyColumns">
 		a.id AS "id",
 		a.user_id AS "user.id",
+		a.realname AS "realname",
 		a.type_id AS "typeId",
-		a.price AS "price",
-		a.realprice AS "realprice",
-		a.linkman AS "linkman",
-		a.mobile AS "mobile",
-		a.description AS "description",
 		a.title AS "title",
+		a.description AS "description",
+		a.price AS "price",
+		a.mobile AS "mobile",
+		a.tag AS "tag",
+		a.up_counts AS "upCounts",
 		a.create_by AS "createBy.id",
-		a.create_date AS "createDate",
+		a.look_counts AS "lookCounts",
 		a.update_by AS "updateBy.id",
+		a.comments_counts AS "commentsCounts",
+		a.front_del_flag AS "frontDelFlag",
+		a.create_date AS "createDate",
 		a.update_date AS "updateDate",
 		a.remarks AS "remarks",
-		a.del_flag AS "delFlag"
+		a.del_flag AS "delFlag",
+		b.username AS "user.username"
 	</sql>
 	
 	<sql id="gbjBuyJoins">
+	LEFT JOIN gbj_user b ON b.id = a.user_id
 	</sql>
     
 	<select id="get" resultType="GbjBuy">
@@ -41,6 +47,9 @@
 			<if test="user != null and user.id != null and user.id != ''">
 				AND a.user_id = #{user.id}
 			</if>
+			<if test="realname != null and realname != ''">
+				AND a.realname = #{realname}
+			</if>
 			<if test="typeId != null and typeId != ''">
 				AND a.type_id = #{typeId}
 			</if>
@@ -49,6 +58,9 @@
 					<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{title},'%')</if>
+			</if>
+			<if test="tag != null and tag != ''">
+				AND a.tag = #{tag}
 			</if>
 		</where>
 		<choose>
@@ -83,32 +95,40 @@
 		INSERT INTO gbj_buy(
 			id,
 			user_id,
+			realname,
 			type_id,
-			price,
-			realprice,
-			linkman,
-			mobile,
-			description,
 			title,
+			description,
+			price,
+			mobile,
+			tag,
+			up_counts,
 			create_by,
-			create_date,
+			look_counts,
 			update_by,
+			comments_counts,
+			front_del_flag,
+			create_date,
 			update_date,
 			remarks,
 			del_flag
 		) VALUES (
 			#{id},
 			#{user.id},
+			#{realname},
 			#{typeId},
-			#{price},
-			#{realprice},
-			#{linkman},
-			#{mobile},
-			#{description},
 			#{title},
+			#{description},
+			#{price},
+			#{mobile},
+			#{tag},
+			#{upCounts},
 			#{createBy.id},
-			#{createDate},
+			#{lookCounts},
 			#{updateBy.id},
+			#{commentsCounts},
+			#{frontDelFlag},
+			#{createDate},
 			#{updateDate},
 			#{remarks},
 			#{delFlag}
@@ -118,16 +138,21 @@
 	<update id="update">
 		UPDATE gbj_buy SET 	
 			user_id = #{user.id},
+			realname = #{realname},
 			type_id = #{typeId},
-			price = #{price},
-			realprice = #{realprice},
-			linkman = #{linkman},
-			mobile = #{mobile},
-			description = #{description},
 			title = #{title},
+			description = #{description},
+			price = #{price},
+			mobile = #{mobile},
+			tag = #{tag},
+			up_counts = #{upCounts},
+			look_counts = #{lookCounts},
 			update_by = #{updateBy.id},
+			comments_counts = #{commentsCounts},
+			create_date = #{createDate},
 			update_date = #{updateDate},
-			remarks = #{remarks}
+			remarks = #{remarks},
+			del_flag = #{delFlag}
 		WHERE id = #{id}
 	</update>
 	
@@ -136,19 +161,5 @@
 			del_flag = #{DEL_FLAG_DELETE}
 		WHERE id = #{id}
 	</update>
-	<select id="findDomainBuyList" resultType="GbjBuy" parameterType="java.lang.Integer">
-        SELECT
-              b.type_id as "type",
-              b.mobile as "mobile",
-              b.create_date as "createDate",
-              b.title as "title"
-        FROM gbj_buy b
-        <where>
-               b.del_flag =  0
-            ORDER BY b.update_date DESC
-            <if test="_parameter != null and _parameter != ''">
-                limit #{counts}
-            </if>
-        </where>
-    </select>
+	
 </mapper>

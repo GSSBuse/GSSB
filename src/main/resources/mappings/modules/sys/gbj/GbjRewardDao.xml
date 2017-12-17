@@ -5,21 +5,28 @@
 	<sql id="gbjRewardColumns">
 		a.id AS "id",
 		a.user_id AS "user.id",
+		a.realname AS "realname",
+		a.type_id AS "typeId",
 		a.title AS "title",
-		a.title_need AS "titleNeed",
-		a.reward_money AS "rewardMoney",
-		a.is_pay_reward AS "isPayReward",
-		a.is_finished AS "isFinished",
-		a.up_count AS "upCount",
+		a.description AS "description",
+		a.price AS "price",
+		a.mobile AS "mobile",
+		a.tag AS "tag",
 		a.create_by AS "createBy.id",
-		a.create_date AS "createDate",
+		a.up_counts AS "upCounts",
+		a.look_counts AS "lookCounts",
 		a.update_by AS "updateBy.id",
+		a.front_del_flag AS "frontDelFlag",
+		a.comments_counts AS "commentsCounts",
 		a.update_date AS "updateDate",
+		a.create_date AS "createDate",
 		a.remarks AS "remarks",
-		a.del_flag AS "delFlag"
+		a.del_flag AS "delFlag",
+		b.username AS "user.username"
 	</sql>
 	
 	<sql id="gbjRewardJoins">
+	LEFT JOIN gbj_user b ON b.id = a.user_id
 	</sql>
     
 	<select id="get" resultType="GbjReward">
@@ -37,14 +44,14 @@
 		<include refid="gbjRewardJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
-			<if test="user != null and user.id != null and user.id != ''">
-				AND a.user_id = #{user.id}
+			<if test="realname != null and realname != ''">
+				AND a.realname = #{realname}
 			</if>
-			<if test="title != null and title != ''">
-				AND a.title LIKE 
-					<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
-					<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
-					<if test="dbName == 'mysql'">concat('%',#{title},'%')</if>
+			<if test="typeId != null and typeId != ''">
+				AND a.type_id = #{typeId}
+			</if>
+			<if test="price != null and price != ''">
+				AND a.price = #{price}
 			</if>
 		</where>
 		<choose>
@@ -79,31 +86,41 @@
 		INSERT INTO gbj_reward(
 			id,
 			user_id,
+			realname,
+			type_id,
 			title,
-			title_need,
-			reward_money,
-			is_pay_reward,
-			is_finished,
-			up_count,
+			description,
+			price,
+			mobile,
+			tag,
 			create_by,
-			create_date,
+			up_counts,
+			look_counts,
 			update_by,
+			front_del_flag,
+			comments_counts,
 			update_date,
+			create_date,
 			remarks,
 			del_flag
 		) VALUES (
 			#{id},
 			#{user.id},
+			#{realname},
+			#{typeId},
 			#{title},
-			#{titleNeed},
-			#{rewardMoney},
-			#{isPayReward},
-			#{isFinished},
-			#{upCount},
+			#{description},
+			#{price},
+			#{mobile},
+			#{tag},
 			#{createBy.id},
-			#{createDate},
+			#{upCounts},
+			#{lookCounts},
 			#{updateBy.id},
+			#{frontDelFlag},
+			#{commentsCounts},
 			#{updateDate},
+			#{createDate},
 			#{remarks},
 			#{delFlag}
 		)
@@ -112,13 +129,18 @@
 	<update id="update">
 		UPDATE gbj_reward SET 	
 			user_id = #{user.id},
+			realname = #{realname},
+			type_id = #{typeId},
 			title = #{title},
-			title_need = #{titleNeed},
-			reward_money = #{rewardMoney},
-			is_pay_reward = #{isPayReward},
-			is_finished = #{isFinished},
-			up_count = #{upCount},
+			description = #{description},
+			price = #{price},
+			mobile = #{mobile},
+			tag = #{tag},
+			up_counts = #{upCounts},
+			look_counts = #{lookCounts},
 			update_by = #{updateBy.id},
+			front_del_flag = #{frontDelFlag},
+			comments_counts = #{commentsCounts},
 			update_date = #{updateDate},
 			remarks = #{remarks},
 			del_flag = #{delFlag}
@@ -130,20 +152,5 @@
 			del_flag = #{DEL_FLAG_DELETE}
 		WHERE id = #{id}
 	</update>
-	
-	<select id="findDomainRewardList" resultType="GbjReward" parameterType="java.lang.Integer">
-        SELECT
-              b.reward_money as "rewardMoney",
-              b.create_date as "createDate",
-              b.title as "title"
-        FROM gbj_reward b
-        <where>
-               b.del_flag =  0
-            ORDER BY b.update_date DESC
-            <if test="_parameter != null and _parameter != ''">
-                limit #{counts}
-            </if>
-        </where>
-    </select>
 	
 </mapper>

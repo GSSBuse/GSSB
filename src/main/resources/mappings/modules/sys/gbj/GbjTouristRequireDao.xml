@@ -5,14 +5,19 @@
 	<sql id="gbjTouristRequireColumns">
 		a.id AS "id",
 		a.search_contents AS "searchContents",
+		a.type_id AS "typeId",
 		a.name AS "name",
 		a.mobile AS "mobile",
-		a.is_called AS "isCalled",
 		a.create_by AS "createBy.id",
-		a.create_date AS "createDate",
+		a.email AS "email",
+		a.qq AS "qq",
 		a.update_by AS "updateBy.id",
+		a.is_visit AS "isVisit",
 		a.update_date AS "updateDate",
+		a.visit_way AS "visitWay",
+		a.visit_remarks AS "visitRemarks",
 		a.remarks AS "remarks",
+		a.create_date AS "createDate",
 		a.del_flag AS "delFlag"
 	</sql>
 	
@@ -37,6 +42,9 @@
 			<if test="searchContents != null and searchContents != ''">
 				AND a.search_contents = #{searchContents}
 			</if>
+			<if test="typeId != null and typeId != ''">
+				AND a.type_id = #{typeId}
+			</if>
 			<if test="name != null and name != ''">
 				AND a.name LIKE 
 					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
@@ -45,9 +53,6 @@
 			</if>
 			<if test="mobile != null and mobile != ''">
 				AND a.mobile = #{mobile}
-			</if>
-			<if test="isCalled != null and isCalled != ''">
-				AND a.is_called = #{isCalled}
 			</if>
 		</where>
 		<choose>
@@ -82,26 +87,36 @@
 		INSERT INTO gbj_tourist_require(
 			id,
 			search_contents,
+			type_id,
 			name,
 			mobile,
-			is_called,
 			create_by,
-			create_date,
+			email,
+			qq,
 			update_by,
+			is_visit,
 			update_date,
+			visit_way,
+			visit_remarks,
 			remarks,
+			create_date,
 			del_flag
 		) VALUES (
 			#{id},
 			#{searchContents},
+			#{typeId},
 			#{name},
 			#{mobile},
-			#{isCalled},
 			#{createBy.id},
-			#{createDate},
+			#{email},
+			#{qq},
 			#{updateBy.id},
+			#{isVisit},
 			#{updateDate},
+			#{visitWay},
+			#{visitRemarks},
 			#{remarks},
+			#{createDate},
 			#{delFlag}
 		)
 	</insert>
@@ -109,11 +124,16 @@
 	<update id="update">
 		UPDATE gbj_tourist_require SET 	
 			search_contents = #{searchContents},
+			type_id = #{typeId},
 			name = #{name},
 			mobile = #{mobile},
-			is_called = #{isCalled},
+			email = #{email},
+			qq = #{qq},
 			update_by = #{updateBy.id},
+			is_visit = #{isVisit},
 			update_date = #{updateDate},
+			visit_way = #{visitWay},
+			visit_remarks = #{visitRemarks},
 			remarks = #{remarks}
 		WHERE id = #{id}
 	</update>

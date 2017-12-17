@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 /**
  * 用户信息表Entity
  * @author snnu
- * @version 2017-11-19
+ * @version 2017-12-17
  */
 public class GbjUser extends DataEntity<GbjUser> {
 	
@@ -32,7 +32,7 @@ public class GbjUser extends DataEntity<GbjUser> {
 		super(id);
 	}
 
-	@Length(min=0, max=100, message="用户名长度必须介于 0 和 100 之间")
+	@Length(min=1, max=100, message="用户名长度必须介于 1 和 100 之间")
 	public String getUsername() {
 		return username;
 	}
@@ -41,7 +41,7 @@ public class GbjUser extends DataEntity<GbjUser> {
 		this.username = username;
 	}
 	
-	@Length(min=0, max=200, message="密码长度必须介于 0 和 200 之间")
+	@Length(min=1, max=200, message="密码长度必须介于 1 和 200 之间")
 	public String getPassword() {
 		return password;
 	}
@@ -50,7 +50,7 @@ public class GbjUser extends DataEntity<GbjUser> {
 		this.password = password;
 	}
 	
-	@Length(min=0, max=200, message="真实姓名长度必须介于 0 和 200 之间")
+	@Length(min=1, max=200, message="真实姓名长度必须介于 1 和 200 之间")
 	public String getName() {
 		return name;
 	}
@@ -59,7 +59,7 @@ public class GbjUser extends DataEntity<GbjUser> {
 		this.name = name;
 	}
 	
-	@Length(min=0, max=100, message="手机长度必须介于 0 和 100 之间")
+	@Length(min=1, max=100, message="手机长度必须介于 1 和 100 之间")
 	public String getMobile() {
 		return mobile;
 	}
@@ -68,7 +68,7 @@ public class GbjUser extends DataEntity<GbjUser> {
 		this.mobile = mobile;
 	}
 	
-	@Length(min=0, max=100, message="邮箱长度必须介于 0 和 100 之间")
+	@Length(min=1, max=100, message="邮箱长度必须介于 1 和 100 之间")
 	public String getEmail() {
 		return email;
 	}
@@ -77,7 +77,7 @@ public class GbjUser extends DataEntity<GbjUser> {
 		this.email = email;
 	}
 	
-	@Length(min=0, max=200, message="微信长度必须介于 0 和 200 之间")
+	@Length(min=1, max=200, message="微信长度必须介于 1 和 200 之间")
 	public String getWechat() {
 		return wechat;
 	}
@@ -86,7 +86,7 @@ public class GbjUser extends DataEntity<GbjUser> {
 		this.wechat = wechat;
 	}
 	
-	@Length(min=0, max=100, message="QQ长度必须介于 0 和 100 之间")
+	@Length(min=1, max=100, message="QQ长度必须介于 1 和 100 之间")
 	public String getQq() {
 		return qq;
 	}
@@ -95,7 +95,7 @@ public class GbjUser extends DataEntity<GbjUser> {
 		this.qq = qq;
 	}
 	
-	@Length(min=0, max=100, message="支付宝长度必须介于 0 和 100 之间")
+	@Length(min=1, max=100, message="支付宝长度必须介于 1 和 100 之间")
 	public String getPayway() {
 		return payway;
 	}

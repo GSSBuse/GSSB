@@ -25,11 +25,17 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
-			<li><label>用户ID：</label>
-				<form:input path="user.id" htmlEscape="false" maxlength="200" class="input-medium"/>
+			<li><label>真实姓名：</label>
+				<form:input path="realname" htmlEscape="false" maxlength="200" class="input-medium"/>
 			</li>
-			<li><label>标题：</label>
-				<form:input path="title" htmlEscape="false" maxlength="500" class="input-medium"/>
+			<li><label>国标类型：</label>
+				<form:select path="typeId" class="input-medium">
+					<form:option value="" label=""/>
+					<form:options items="${fns:getDictList('gbjBuy_type_id')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</form:select>
+			</li>
+			<li><label>打赏金额：</label>
+				<form:input path="price" htmlEscape="false" maxlength="20" class="input-medium"/>
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
@@ -39,14 +45,17 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
-				<th>用户ID</th>
+				<th>用户名ID</th>
+				<th>真实姓名</th>
+				<th>国标类型</th>
 				<th>标题</th>
 				<th>起名需求</th>
 				<th>打赏金额</th>
-				<th>是否支付</th>
-				<th>是否完成</th>
-				<th>点赞个数</th>
-				<th>更新时间</th>
+				<th>手机号码</th>
+				<th>标签</th>
+				<th>点赞数</th>
+				<th>查看数</th>
+				<th>评论数</th>
 				<th>备注信息</th>
 				<th>删除标记</th>
 				<shiro:hasPermission name="sys:gbj:gbjReward:edit"><th>操作</th></shiro:hasPermission>
@@ -56,28 +65,37 @@
 		<c:forEach items="${page.list}" var="gbjReward">
 			<tr>
 				<td><a href="${ctx}/sys/gbj/gbjReward/form?id=${gbjReward.id}">
-					${gbjReward.user.id}
+					${gbjReward.user.username}
 				</a></td>
+				<td>
+					${gbjReward.realname}
+				</td>
+				<td>
+					${fns:getDictLabel(gbjReward.typeId, 'gbjBuy_type_id', '')}
+				</td>
 				<td>
 					${gbjReward.title}
 				</td>
 				<td>
-					${gbjReward.titleNeed}
+					${gbjReward.description}
 				</td>
 				<td>
-					${gbjReward.rewardMoney}
+					${gbjReward.price}
 				</td>
 				<td>
-					${fns:getDictLabel(gbjReward.isPayReward, 'yes_no', '')}
+					${gbjReward.mobile}
 				</td>
 				<td>
-					${fns:getDictLabel(gbjReward.isFinished, 'yes_no', '')}
+					${gbjReward.tag}
 				</td>
 				<td>
-					${gbjReward.upCount}
+					${gbjReward.upCounts}
 				</td>
 				<td>
-					<fmt:formatDate value="${gbjReward.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+					${gbjReward.lookCounts}
+				</td>
+				<td>
+					${gbjReward.commentsCounts}
 				</td>
 				<td>
 					${gbjReward.remarks}

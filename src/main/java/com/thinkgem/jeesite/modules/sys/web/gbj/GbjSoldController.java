@@ -25,7 +25,7 @@ import com.thinkgem.jeesite.modules.sys.service.gbj.GbjSoldService;
 /**
  * 卖标信息管理Controller
  * @author snnu
- * @version 2017-11-19
+ * @version 2017-12-16
  */
 @Controller
 @RequestMapping(value = "${adminPath}/sys/gbj/gbjSold")

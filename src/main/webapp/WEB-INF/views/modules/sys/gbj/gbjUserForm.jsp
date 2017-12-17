@@ -36,49 +36,57 @@
 		<div class="control-group">
 			<label class="control-label">用户名：</label>
 			<div class="controls">
-				<form:input path="username" htmlEscape="false" maxlength="100" class="input-xlarge "/>
+				<form:input path="username" htmlEscape="false" maxlength="100" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">密码：</label>
 			<div class="controls">
-				<form:input path="password" htmlEscape="false" maxlength="200" class="input-xlarge "/>
+				<form:input path="password" htmlEscape="false" maxlength="200" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">真实姓名：</label>
 			<div class="controls">
-				<form:input path="name" htmlEscape="false" maxlength="200" class="input-xlarge "/>
+				<form:input path="name" htmlEscape="false" maxlength="200" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">手机：</label>
 			<div class="controls">
-				<form:input path="mobile" htmlEscape="false" maxlength="100" class="input-xlarge "/>
+				<form:input path="mobile" htmlEscape="false" maxlength="100" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">邮箱：</label>
 			<div class="controls">
-				<form:input path="email" htmlEscape="false" maxlength="100" class="input-xlarge "/>
+				<form:input path="email" htmlEscape="false" maxlength="100" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">微信：</label>
 			<div class="controls">
-				<form:input path="wechat" htmlEscape="false" maxlength="200" class="input-xlarge "/>
+				<form:input path="wechat" htmlEscape="false" maxlength="200" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">QQ：</label>
 			<div class="controls">
-				<form:input path="qq" htmlEscape="false" maxlength="100" class="input-xlarge "/>
+				<form:input path="qq" htmlEscape="false" maxlength="100" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">支付宝：</label>
 			<div class="controls">
-				<form:input path="payway" htmlEscape="false" maxlength="100" class="input-xlarge "/>
+				<form:input path="payway" htmlEscape="false" maxlength="100" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">

@@ -3,21 +3,16 @@
  */
 package com.thinkgem.jeesite.modules.sys.dao.gbj;
 
-import java.util.List;
-
 import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
-import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
 
 /**
  * 悬赏信息管理DAO接口
  * @author snnu
- * @version 2017-11-20
+ * @version 2017-12-17
  */
 @MyBatisDao
 public interface GbjRewardDao extends CrudDao<GbjReward> {
-
-	public List<GbjReward> findDomainRewardList(int count);
 	
 }

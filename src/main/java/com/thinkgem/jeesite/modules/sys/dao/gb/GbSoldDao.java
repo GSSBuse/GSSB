@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.modules.sys.entity.gb.GbSold;
 /**
  * 卖标信息管理DAO接口
  * @author 管理员
- * @version 2017-11-02
+ * @version 2017-12-17
  */
 @MyBatisDao
 public interface GbSoldDao extends CrudDao<GbSold> {

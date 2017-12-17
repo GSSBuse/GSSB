@@ -25,8 +25,11 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
-			<li><label>用户ID：</label>
-				<form:input path="user.id" htmlEscape="false" maxlength="200" class="input-medium"/>
+			<li><label>用户名：</label>
+				<form:input path="user.username" htmlEscape="false" maxlength="200" class="input-medium"/>
+			</li>
+			<li><label>真实姓名：</label>
+				<form:input path="realname" htmlEscape="false" maxlength="200" class="input-medium"/>
 			</li>
 			<li><label>国标类型：</label>
 				<form:select path="typeId" class="input-medium">
@@ -37,6 +40,9 @@
 			<li><label>国标标题：</label>
 				<form:input path="title" htmlEscape="false" maxlength="200" class="input-medium"/>
 			</li>
+			<li><label>标签：</label>
+				<form:input path="tag" htmlEscape="false" maxlength="50" class="input-medium"/>
+			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
@@ -45,14 +51,18 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
-				<th>用户ID</th>
+				<th>用户名</th>
+				<th>真实姓名</th>
 				<th>国标类型</th>
-				<th>预算价格</th>
-				<th>实际成交价格</th>
-				<th>联系人</th>
-				<th>联系人手机号</th>
-				<th>国标描述</th>
 				<th>国标标题</th>
+				<th>国标描述</th>
+				<th>预算价格</th>
+				<th>联系人手机号</th>
+				<th>标签</th>
+				<th>点赞数</th>
+				<th>查看数</th>
+				<th>评论数</th>
+				<th>创建时间</th>
 				<th>备注信息</th>
 				<shiro:hasPermission name="sys:gbj:gbjBuy:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
@@ -61,28 +71,40 @@
 		<c:forEach items="${page.list}" var="gbjBuy">
 			<tr>
 				<td><a href="${ctx}/sys/gbj/gbjBuy/form?id=${gbjBuy.id}">
-					${gbjBuy.user.id}
+					${gbjBuy.user.username}
 				</a></td>
+				<td>
+					${gbjBuy.realname}
+				</td>
 				<td>
 					${fns:getDictLabel(gbjBuy.typeId, 'gbjBuy_type_id', '')}
 				</td>
 				<td>
-					${gbjBuy.price}
-				</td>
-				<td>
-					${gbjBuy.realprice}
-				</td>
-				<td>
-					${gbjBuy.linkman}
-				</td>
-				<td>
-					${gbjBuy.mobile}
+					${gbjBuy.title}
 				</td>
 				<td>
 					${gbjBuy.description}
 				</td>
 				<td>
-					${gbjBuy.title}
+					${gbjBuy.price}
+				</td>
+				<td>
+					${gbjBuy.mobile}
+				</td>
+				<td>
+					${gbjBuy.tag}
+				</td>
+				<td>
+					${gbjBuy.upCounts}
+				</td>
+				<td>
+					${gbjBuy.lookCounts}
+				</td>
+				<td>
+					${gbjBuy.commentsCounts}
+				</td>
+				<td>
+					<fmt:formatDate value="${gbjBuy.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<td>
 					${gbjBuy.remarks}

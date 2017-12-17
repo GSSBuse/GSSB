@@ -16,7 +16,7 @@ import com.thinkgem.jeesite.modules.sys.dao.gbj.GbjUserDao;
 /**
  * 用户信息表Service
  * @author snnu
- * @version 2017-11-19
+ * @version 2017-12-17
  */
 @Service
 @Transactional(readOnly = true)

@@ -14,9 +14,9 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
 import com.thinkgem.jeesite.modules.sys.dao.gbj.GbjUserBuyCommentsDao;
 
 /**
- * 买标信息评论Service
+ * 买标用户评论表Service
  * @author snnu
- * @version 2017-11-20
+ * @version 2017-12-15
  */
 @Service
 @Transactional(readOnly = true)

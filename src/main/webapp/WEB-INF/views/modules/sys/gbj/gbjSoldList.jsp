@@ -28,6 +28,9 @@
 			<li><label>用户ID：</label>
 				<form:input path="user.id" htmlEscape="false" maxlength="200" class="input-medium"/>
 			</li>
+			<li><label>真实姓名：</label>
+				<form:input path="realname" htmlEscape="false" maxlength="200" class="input-medium"/>
+			</li>
 			<li><label>国标类型：</label>
 				<form:select path="typeId" class="input-medium">
 					<form:option value="" label=""/>
@@ -45,14 +48,18 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
-				<th>用户ID</th>
+				<th>用户名</th>
+				<th>真实姓名</th>
 				<th>国标类型</th>
-				<th>预算价格</th>
-				<th>实际成交价格</th>
-				<th>联系人</th>
-				<th>联系人手机号</th>
-				<th>国标描述</th>
 				<th>国标标题</th>
+				<th>国标描述</th>
+				<th>预算价格</th>
+				<th>联系人手机号</th>
+				<th>标签</th>
+				<th>点赞数</th>
+				<th>查看数</th>
+				<th>评论数</th>
+				<th>创建时间</th>
 				<th>备注信息</th>
 				<th>删除标记</th>
 				<shiro:hasPermission name="sys:gbj:gbjSold:edit"><th>操作</th></shiro:hasPermission>
@@ -62,28 +69,40 @@
 		<c:forEach items="${page.list}" var="gbjSold">
 			<tr>
 				<td><a href="${ctx}/sys/gbj/gbjSold/form?id=${gbjSold.id}">
-					${gbjSold.user.id}
+					${gbjSold.user.username}
 				</a></td>
+				<td>
+					${gbjSold.realname}
+				</td>
 				<td>
 					${fns:getDictLabel(gbjSold.typeId, 'gbjBuy_type_id', '')}
 				</td>
 				<td>
-					${gbjSold.price}
-				</td>
-				<td>
-					${gbjSold.realprice}
-				</td>
-				<td>
-					${gbjSold.linkman}
-				</td>
-				<td>
-					${gbjSold.mobile}
+					${gbjSold.title}
 				</td>
 				<td>
 					${gbjSold.description}
 				</td>
 				<td>
-					${gbjSold.title}
+					${gbjSold.price}
+				</td>
+				<td>
+					${gbjSold.mobile}
+				</td>
+				<td>
+					${gbjSold.tag}
+				</td>
+				<td>
+					${gbjSold.upCounts}
+				</td>
+				<td>
+					${gbjSold.lookCounts}
+				</td>
+				<td>
+					${gbjSold.commentsCounts}
+				</td>
+				<td>
+					<fmt:formatDate value="${gbjSold.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<td>
 					${gbjSold.remarks}

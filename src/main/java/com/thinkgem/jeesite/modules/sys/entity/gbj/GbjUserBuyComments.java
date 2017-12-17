@@ -3,6 +3,7 @@
  */
 package com.thinkgem.jeesite.modules.sys.entity.gbj;
 
+import com.thinkgem.jeesite.modules.sys.entity.User;
 import org.hibernate.validator.constraints.Length;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -10,14 +11,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.thinkgem.jeesite.common.persistence.DataEntity;
 
 /**
- * 买标信息评论Entity
+ * 买标用户评论表Entity
  * @author snnu
- * @version 2017-11-20
+ * @version 2017-12-15
  */
 public class GbjUserBuyComments extends DataEntity<GbjUserBuyComments> {
 	
 	private static final long serialVersionUID = 1L;
-	private String buyId;		// 买标信息ID
+	private User user;		// 用户ID
 	private String parentId;		// 父ID
 	private String childId;		// 子ID
 	private String content;		// 评论内容
@@ -31,13 +32,12 @@ public class GbjUserBuyComments extends DataEntity<GbjUserBuyComments> {
 		super(id);
 	}
 
-	@Length(min=0, max=200, message="买标信息ID长度必须介于 0 和 200 之间")
-	public String getBuyId() {
-		return buyId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setBuyId(String buyId) {
-		this.buyId = buyId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	@Length(min=0, max=200, message="父ID长度必须介于 0 和 200 之间")

@@ -31,6 +31,9 @@
 			<li><label>真实姓名：</label>
 				<form:input path="name" htmlEscape="false" maxlength="200" class="input-medium"/>
 			</li>
+			<li><label>手机：</label>
+				<form:input path="mobile" htmlEscape="false" maxlength="100" class="input-medium"/>
+			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
@@ -46,6 +49,7 @@
 				<th>微信</th>
 				<th>QQ</th>
 				<th>支付宝</th>
+				<th>删除标记</th>
 				<shiro:hasPermission name="sys:gbj:gbjUser:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -72,6 +76,9 @@
 				</td>
 				<td>
 					${gbjUser.payway}
+				</td>
+				<td>
+					${fns:getDictLabel(gbjUser.delFlag, 'del_flag', '')}
 				</td>
 				<shiro:hasPermission name="sys:gbj:gbjUser:edit"><td>
     				<a href="${ctx}/sys/gbj/gbjUser/form?id=${gbjUser.id}">修改</a>

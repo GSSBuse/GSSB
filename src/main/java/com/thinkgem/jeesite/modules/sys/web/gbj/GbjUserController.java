@@ -25,7 +25,7 @@ import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserService;
 /**
  * 用户信息表Controller
  * @author snnu
- * @version 2017-11-19
+ * @version 2017-12-17
  */
 @Controller
 @RequestMapping(value = "${adminPath}/sys/gbj/gbjUser")

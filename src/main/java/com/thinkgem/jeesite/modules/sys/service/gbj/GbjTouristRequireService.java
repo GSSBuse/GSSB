@@ -16,7 +16,7 @@ import com.thinkgem.jeesite.modules.sys.dao.gbj.GbjTouristRequireDao;
 /**
  * 游客查询管理Service
  * @author snnu
- * @version 2017-11-20
+ * @version 2017-12-16
  */
 @Service
 @Transactional(readOnly = true)

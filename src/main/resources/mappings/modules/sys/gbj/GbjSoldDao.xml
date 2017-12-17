@@ -5,22 +5,28 @@
 	<sql id="gbjSoldColumns">
 		a.id AS "id",
 		a.user_id AS "user.id",
+		a.realname AS "realname",
 		a.type_id AS "typeId",
-		a.price AS "price",
-		a.realprice AS "realprice",
-		a.linkman AS "linkman",
-		a.mobile AS "mobile",
-		a.description AS "description",
 		a.title AS "title",
+		a.description AS "description",
+		a.price AS "price",
+		a.mobile AS "mobile",
+		a.tag AS "tag",
+		a.up_counts AS "upCounts",
+		a.look_counts AS "lookCounts",
 		a.create_by AS "createBy.id",
-		a.create_date AS "createDate",
+		a.front_del_flag AS "frontDelFlag",
+		a.comments_counts AS "commentsCounts",
 		a.update_by AS "updateBy.id",
 		a.update_date AS "updateDate",
+		a.create_date AS "createDate",
 		a.remarks AS "remarks",
-		a.del_flag AS "delFlag"
+		a.del_flag AS "delFlag",
+		b.username AS "user.username"
 	</sql>
 	
 	<sql id="gbjSoldJoins">
+	LEFT JOIN gbj_user b on b.id = a.user_id
 	</sql>
     
 	<select id="get" resultType="GbjSold">
@@ -40,6 +46,9 @@
 			a.del_flag = #{DEL_FLAG_NORMAL}
 			<if test="user != null and user.id != null and user.id != ''">
 				AND a.user_id = #{user.id}
+			</if>
+			<if test="realname != null and realname != ''">
+				AND a.realname = #{realname}
 			</if>
 			<if test="typeId != null and typeId != ''">
 				AND a.type_id = #{typeId}
@@ -83,33 +92,41 @@
 		INSERT INTO gbj_sold(
 			id,
 			user_id,
+			realname,
 			type_id,
-			price,
-			realprice,
-			linkman,
-			mobile,
-			description,
 			title,
+			description,
+			price,
+			mobile,
+			tag,
+			up_counts,
+			look_counts,
 			create_by,
-			create_date,
+			front_del_flag,
+			comments_counts,
 			update_by,
 			update_date,
+			create_date,
 			remarks,
 			del_flag
 		) VALUES (
 			#{id},
 			#{user.id},
+			#{realname},
 			#{typeId},
-			#{price},
-			#{realprice},
-			#{linkman},
-			#{mobile},
-			#{description},
 			#{title},
+			#{description},
+			#{price},
+			#{mobile},
+			#{tag},
+			#{upCounts},
+			#{lookCounts},
 			#{createBy.id},
-			#{createDate},
+			#{frontDelFlag},
+			#{commentsCounts},
 			#{updateBy.id},
 			#{updateDate},
+			#{createDate},
 			#{remarks},
 			#{delFlag}
 		)
@@ -118,15 +135,21 @@
 	<update id="update">
 		UPDATE gbj_sold SET 	
 			user_id = #{user.id},
+			realname = #{realname},
 			type_id = #{typeId},
-			price = #{price},
-			realprice = #{realprice},
-			linkman = #{linkman},
-			mobile = #{mobile},
-			description = #{description},
 			title = #{title},
+			description = #{description},
+			price = #{price},
+			mobile = #{mobile},
+			tag = #{tag},
+			up_counts = #{upCounts},
+			look_counts = #{lookCounts},
+			create_by = #{createBy.id},
+			front_del_flag = #{frontDelFlag},
+			comments_counts = #{commentsCounts},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},
+			create_date = #{createDate},
 			remarks = #{remarks}
 		WHERE id = #{id}
 	</update>
@@ -136,18 +159,5 @@
 			del_flag = #{DEL_FLAG_DELETE}
 		WHERE id = #{id}
 	</update>
-	<select id="findDomainSoldList" resultType="GbjSold" parameterType="java.lang.Integer">
-        SELECT
-              b.type_id as "type",
-              b.create_date as "createDate",
-              b.title as "title"
-        FROM gbj_sold b
-        <where>
-               b.del_flag =  0
-            ORDER BY b.update_date DESC
-            <if test="_parameter != null and _parameter != ''">
-                limit #{counts}
-            </if>
-        </where>
-    </select>
+	
 </mapper>

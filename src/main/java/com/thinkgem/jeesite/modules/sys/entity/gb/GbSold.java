@@ -12,7 +12,7 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 /**
  * 卖标信息管理Entity
  * @author 管理员
- * @version 2017-11-02
+ * @version 2017-12-17
  */
 public class GbSold extends DataEntity<GbSold> {
 	

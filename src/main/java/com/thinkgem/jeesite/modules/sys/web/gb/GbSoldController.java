@@ -25,7 +25,7 @@ import com.thinkgem.jeesite.modules.sys.service.gb.GbSoldService;
 /**
  * 卖标信息管理Controller
  * @author 管理员
- * @version 2017-11-02
+ * @version 2017-12-17
  */
 @Controller
 @RequestMapping(value = "${adminPath}/sys/gb/gbSold")

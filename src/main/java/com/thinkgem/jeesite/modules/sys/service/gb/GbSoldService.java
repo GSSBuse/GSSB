@@ -16,7 +16,7 @@ import com.thinkgem.jeesite.modules.sys.dao.gb.GbSoldDao;
 /**
  * 卖标信息管理Service
  * @author 管理员
- * @version 2017-11-02
+ * @version 2017-12-17
  */
 @Service
 @Transactional(readOnly = true)
