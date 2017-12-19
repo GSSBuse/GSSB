@@ -1,27 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.gbj.GbjUserBuyCommentsDao">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.gbj.GbjUserSoldCommentsDao">
     
-	<sql id="gbjUserBuyCommentsColumns">
+	<sql id="gbjUserSoldCommentsColumns">
 		a.id AS "id",
-		a.buy_id AS "buy.id",
-		a.parent_id AS "parentId",
-		a.child_id AS "childId",
-		a.comment AS "comment",
-		a.comment_time AS "commentTime",
-		a.create_by AS "createBy.id",
-		a.create_date AS "createDate",
-		a.update_by AS "updateBy.id",
-		a.update_date AS "updateDate",
-		a.remarks AS "remarks",
-		a.del_flag AS "delFlag",
-		b.title AS "buy.title"
-	</sql>
-	
-	
-	<sql id="gbjUserBuyCommentsColumn">
-		a.id AS "id",
-		a.buy_id AS "buy.id",
+		a.user_id AS "user.id",
 		a.parent_id AS "parentId",
 		a.child_id AS "childId",
 		a.comment AS "comment",
@@ -32,35 +15,26 @@
 		a.update_date AS "updateDate",
 		a.remarks AS "remarks",
 		a.del_flag AS "delFlag"
-		
 	</sql>
 	
-	<sql id="gbjUserBuyCommentsJoins">
-	LEFT JOIN gbj_buy b ON b.id = a.buy_id
-	</sql>
-	
-	<sql id="gbjUserBuyCommentsJoin">
+	<sql id="gbjUserSoldCommentsJoins">
 	</sql>
     
-	<select id="get" resultType="GbjUserBuyComments">
+	<select id="get" resultType="GbjUserSoldComments">
 		SELECT 
-			<include refid="gbjUserBuyCommentsColumns"/>
-		FROM gbj_user_buy_comments a
-		<include refid="gbjUserBuyCommentsJoins"/>
+			<include refid="gbjUserSoldCommentsColumns"/>
+		FROM gbj_user_sold_comments a
+		<include refid="gbjUserSoldCommentsJoins"/>
 		WHERE a.id = #{id}
 	</select>
 	
-	<select id="findList" resultType="GbjUserBuyComments">
+	<select id="findList" resultType="GbjUserSoldComments">
 		SELECT 
-			<include refid="gbjUserBuyCommentsColumns"/>
-		FROM gbj_user_buy_comments a
-		<include refid="gbjUserBuyCommentsJoins"/>
+			<include refid="gbjUserSoldCommentsColumns"/>
+		FROM gbj_user_sold_comments a
+		<include refid="gbjUserSoldCommentsJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
-			
-			<if test="comment != null and comment != ''">
-				AND a.comment = #{comment}
-			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -72,14 +46,13 @@
 		</choose>
 	</select>
 	
-	<select id="findAllList" resultType="GbjUserBuyComments">
+	<select id="findAllList" resultType="GbjUserSoldComments">
 		SELECT 
-			<include refid="gbjUserBuyCommentsColumn"/>
-		FROM gbj_user_buy_comments a
-		<include refid="gbjUserBuyCommentsJoin"/>
+			<include refid="gbjUserSoldCommentsColumns"/>
+		FROM gbj_user_sold_comments a
+		<include refid="gbjUserSoldCommentsJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
-			AND a.buy_id = #{buyCommentsId}
 		</where>		
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -92,9 +65,9 @@
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO gbj_user_buy_comments(
+		INSERT INTO gbj_user_sold_comments(
 			id,
-			buy_id,
+			user_id,
 			parent_id,
 			child_id,
 			comment,
@@ -107,7 +80,7 @@
 			del_flag
 		) VALUES (
 			#{id},
-			#{buy.id},
+			#{user.id},
 			#{parentId},
 			#{childId},
 			#{comment},
@@ -122,8 +95,8 @@
 	</insert>
 	
 	<update id="update">
-		UPDATE gbj_user_buy_comments SET 	
-			buy_id = #{buy.id},
+		UPDATE gbj_user_sold_comments SET 	
+			user_id = #{user.id},
 			parent_id = #{parentId},
 			child_id = #{childId},
 			comment = #{comment},
@@ -135,7 +108,7 @@
 	</update>
 	
 	<update id="delete">
-		UPDATE gbj_user_buy_comments SET 
+		UPDATE gbj_user_sold_comments SET 
 			del_flag = #{DEL_FLAG_DELETE}
 		WHERE id = #{id}
 	</update>

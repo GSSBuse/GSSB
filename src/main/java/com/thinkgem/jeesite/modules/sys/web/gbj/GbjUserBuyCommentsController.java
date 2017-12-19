@@ -23,9 +23,9 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserBuyCommentsService;
 
 /**
- * 买标用户评论表Controller
+ * 买标信息评论Controller
  * @author snnu
- * @version 2017-12-15
+ * @version 2017-12-18
  */
 @Controller
 @RequestMapping(value = "${adminPath}/sys/gbj/gbjUserBuyComments")
@@ -68,7 +68,7 @@ public class GbjUserBuyCommentsController extends BaseController {
 			return form(gbjUserBuyComments, model);
 		}
 		gbjUserBuyCommentsService.save(gbjUserBuyComments);
-		addMessage(redirectAttributes, "保存买标用户评论成功");
+		addMessage(redirectAttributes, "保存买标信息评论成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gbj/gbjUserBuyComments/?repage";
 	}
 	
@@ -76,7 +76,7 @@ public class GbjUserBuyCommentsController extends BaseController {
 	@RequestMapping(value = "delete")
 	public String delete(GbjUserBuyComments gbjUserBuyComments, RedirectAttributes redirectAttributes) {
 		gbjUserBuyCommentsService.delete(gbjUserBuyComments);
-		addMessage(redirectAttributes, "删除买标用户评论成功");
+		addMessage(redirectAttributes, "删除买标信息评论成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gbj/gbjUserBuyComments/?repage";
 	}
 

@@ -109,10 +109,18 @@
 				<td>
 					${gbjBuy.remarks}
 				</td>
-				<shiro:hasPermission name="sys:gbj:gbjBuy:edit"><td>
+				<td>
+				<shiro:hasPermission name="sys:gbj:gbjBuy:edit">
     				<a href="${ctx}/sys/gbj/gbjBuy/form?id=${gbjBuy.id}">修改</a>
+    			</shiro:hasPermission>
+    			<shiro:hasPermission name="sys:gbj:gbjBuy:edit">
 					<a href="${ctx}/sys/gbj/gbjBuy/delete?id=${gbjBuy.id}" onclick="return confirmx('确认要删除该买标信息列表吗？', this.href)">删除</a>
-				</td></shiro:hasPermission>
+				</shiro:hasPermission>
+			
+				<shiro:hasPermission name="sys:gbj:gbjUserBuyComments:view">	
+					<a href="${ctx}/sys/gbj/gbjUserBuyComments?buyCommentsId=${gbjBuy.id} ">评论管理</a>
+				</shiro:hasPermission>
+				</td>
 			</tr>
 		</c:forEach>
 		</tbody>

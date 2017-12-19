@@ -11,7 +11,7 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 /**
  * 悬赏信息管理Entity
  * @author snnu
- * @version 2017-12-17
+ * @version 2017-12-18
  */
 public class GbjReward extends DataEntity<GbjReward> {
 	
@@ -24,9 +24,12 @@ public class GbjReward extends DataEntity<GbjReward> {
 	private Long price;		// 打赏金额
 	private String mobile;		// 手机号码
 	private String tag;		// 标签
+	private String payStatus;		// 支付状态
+	private String status;		// 状态（未发布，已发布，已中标）
+	private Long payFlowNumber;		// 支付流水号
+	private String frontDelFlag;		// 撤回标记
 	private Long upCounts;		// 点赞数
 	private Long lookCounts;		// 查看数
-	private String frontDelFlag;		// 撤回标记
 	private Long commentsCounts;		// 评论数
 	
 	public GbjReward() {
@@ -36,7 +39,6 @@ public class GbjReward extends DataEntity<GbjReward> {
 	public GbjReward(String id){
 		super(id);
 	}
-	
 	
 	public GbjUser getUser() {
 		return user;
@@ -61,8 +63,8 @@ public class GbjReward extends DataEntity<GbjReward> {
 
 	public void setUser(String user) {
 		this.user = user;
-	}*/
-	
+	}
+	*/
 	@Length(min=1, max=200, message="真实姓名长度必须介于 1 和 200 之间")
 	public String getRealname() {
 		return realname;
@@ -72,7 +74,7 @@ public class GbjReward extends DataEntity<GbjReward> {
 		this.realname = realname;
 	}
 	
-	@Length(min=0, max=64, message="国标类型长度必须介于 0 和 64 之间")
+	@Length(min=1, max=64, message="国标类型长度必须介于 1 和 64 之间")
 	public String getTypeId() {
 		return typeId;
 	}
@@ -125,6 +127,41 @@ public class GbjReward extends DataEntity<GbjReward> {
 		this.tag = tag;
 	}
 	
+	@Length(min=0, max=20, message="支付状态长度必须介于 0 和 20 之间")
+	public String getPayStatus() {
+		return payStatus;
+	}
+
+	public void setPayStatus(String payStatus) {
+		this.payStatus = payStatus;
+	}
+	
+	@Length(min=0, max=20, message="状态（未发布，已发布，已中标）长度必须介于 0 和 20 之间")
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	public Long getPayFlowNumber() {
+		return payFlowNumber;
+	}
+
+	public void setPayFlowNumber(Long payFlowNumber) {
+		this.payFlowNumber = payFlowNumber;
+	}
+	
+	@Length(min=0, max=1, message="撤回标记长度必须介于 0 和 1 之间")
+	public String getFrontDelFlag() {
+		return frontDelFlag;
+	}
+
+	public void setFrontDelFlag(String frontDelFlag) {
+		this.frontDelFlag = frontDelFlag;
+	}
+	
 	public Long getUpCounts() {
 		return upCounts;
 	}
@@ -139,15 +176,6 @@ public class GbjReward extends DataEntity<GbjReward> {
 
 	public void setLookCounts(Long lookCounts) {
 		this.lookCounts = lookCounts;
-	}
-	
-	@Length(min=0, max=1, message="撤回标记长度必须介于 0 和 1 之间")
-	public String getFrontDelFlag() {
-		return frontDelFlag;
-	}
-
-	public void setFrontDelFlag(String frontDelFlag) {
-		this.frontDelFlag = frontDelFlag;
 	}
 	
 	public Long getCommentsCounts() {

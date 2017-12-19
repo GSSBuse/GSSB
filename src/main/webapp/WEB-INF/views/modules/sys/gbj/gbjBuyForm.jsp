@@ -43,7 +43,7 @@
 		<div class="control-group">
 			<label class="control-label">真实姓名：</label>
 			<div class="controls">
-				<form:input path="realname" value="国商商标" readonly="true" htmlEscape="false" maxlength="200" class="input-xlarge required"/>
+				<form:input path="realname"  htmlEscape="false" maxlength="200" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

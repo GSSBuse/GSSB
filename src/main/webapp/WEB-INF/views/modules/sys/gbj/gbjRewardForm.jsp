@@ -36,24 +36,25 @@
 		<div class="control-group" style="visibility:hidden">
 			<label class="control-label">用户名ID：</label>
 			<div class="controls">
-				<form:input path="user.id" value="f3e9b86259614079b176430b0886fc31" htmlEscape="false" maxlength="64" class="input-xlarge required"/>
+				<form:input path="user.id" value="f3e9b86259614079b176430b0886fc31" style="visibility:hidden" htmlEscape="false" maxlength="64" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">真实姓名：</label>
 			<div class="controls">
-				<form:input path="realname" value="国商商标" readonly="true" htmlEscape="false" maxlength="200" class="input-xlarge required"/>
+				<form:input path="realname" htmlEscape="false" maxlength="200" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">国标类型：</label>
 			<div class="controls">
-				<form:select path="typeId" class="input-xlarge ">
+				<form:select path="typeId" class="input-xlarge required">
 					<form:option value="" label=""/>
 					<form:options items="${fns:getDictList('gbjBuy_type_id')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -91,6 +92,30 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<label class="control-label">支付状态：</label>
+			<div class="controls">
+				<form:input path="payStatus" htmlEscape="false" maxlength="20" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">状态（未发布，已发布，已中标）：</label>
+			<div class="controls">
+				<form:radiobuttons path="status" items="${fns:getDictList('gbj_reward_status')}" itemLabel="label" itemValue="value" htmlEscape="false" class=""/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">支付流水号：</label>
+			<div class="controls">
+				<form:input path="payFlowNumber" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">撤回标记：</label>
+			<div class="controls">
+				<form:radiobuttons path="frontDelFlag" items="${fns:getDictList('gbj_front_del_flag')}" itemLabel="label" itemValue="value" htmlEscape="false" class=""/>
+			</div>
+		</div>
+		<div class="control-group">
 			<label class="control-label">点赞数：</label>
 			<div class="controls">
 				<form:input path="upCounts" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
@@ -103,21 +128,15 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">撤回标记：</label>
+			<label class="control-label">备注信息：</label>
 			<div class="controls">
-				<form:input path="frontDelFlag" htmlEscape="false" maxlength="1" class="input-xlarge "/>
+				<form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="500" class="input-xxlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">评论数：</label>
 			<div class="controls">
 				<form:input path="commentsCounts" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">备注信息：</label>
-			<div class="controls">
-				<form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="500" class="input-xxlarge "/>
 			</div>
 		</div>
 		<div class="form-actions">

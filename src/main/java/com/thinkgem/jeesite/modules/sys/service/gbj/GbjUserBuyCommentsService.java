@@ -14,9 +14,9 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
 import com.thinkgem.jeesite.modules.sys.dao.gbj.GbjUserBuyCommentsDao;
 
 /**
- * 买标用户评论表Service
+ * 买标信息评论Service
  * @author snnu
- * @version 2017-12-15
+ * @version 2017-12-18
  */
 @Service
 @Transactional(readOnly = true)
@@ -29,6 +29,7 @@ public class GbjUserBuyCommentsService extends CrudService<GbjUserBuyCommentsDao
 	public List<GbjUserBuyComments> findList(GbjUserBuyComments gbjUserBuyComments) {
 		return super.findList(gbjUserBuyComments);
 	}
+	
 	
 	public Page<GbjUserBuyComments> findPage(Page<GbjUserBuyComments> page, GbjUserBuyComments gbjUserBuyComments) {
 		return super.findPage(page, gbjUserBuyComments);

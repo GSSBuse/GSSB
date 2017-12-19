@@ -5,15 +5,14 @@ package com.thinkgem.jeesite.modules.sys.dao.gbj;
 
 import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
-import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserSoldComments;
 
 /**
- * 买标信息评论DAO接口
- * @author snnu
+ * 卖标信息评论DAO接口
+ * @author 管理员
  * @version 2017-12-18
  */
 @MyBatisDao
-public interface GbjUserBuyCommentsDao extends CrudDao<GbjUserBuyComments> {
-	
+public interface GbjUserSoldCommentsDao extends CrudDao<GbjUserSoldComments> {
 	
 }

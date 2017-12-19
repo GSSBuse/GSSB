@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
 /**
  * 悬赏信息管理DAO接口
  * @author snnu
- * @version 2017-12-17
+ * @version 2017-12-18
  */
 @MyBatisDao
 public interface GbjRewardDao extends CrudDao<GbjReward> {

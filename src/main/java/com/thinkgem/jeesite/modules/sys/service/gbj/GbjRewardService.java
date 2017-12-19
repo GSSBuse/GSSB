@@ -16,7 +16,7 @@ import com.thinkgem.jeesite.modules.sys.dao.gbj.GbjRewardDao;
 /**
  * 悬赏信息管理Service
  * @author snnu
- * @version 2017-12-17
+ * @version 2017-12-18
  */
 @Service
 @Transactional(readOnly = true)

@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>买标信息评论管理</title>
+	<title>管理买标评论管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -27,16 +27,17 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/sys/gbj/gbjUserBuyComments/">买标信息评论列表</a></li>
-		<li class="active"><a href="${ctx}/sys/gbj/gbjUserBuyComments/form?id=${gbjUserBuyComments.id}">买标信息评论<shiro:hasPermission name="sys:gbj:gbjUserBuyComments:edit">${not empty gbjUserBuyComments.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gbj:gbjUserBuyComments:edit">查看</shiro:lacksPermission></a></li>
+		<li><a href="${ctx}/sys/gb/gbjUserBuyComments/">管理买标评论列表</a></li>
+		<li class="active"><a href="${ctx}/sys/gb/gbjUserBuyComments/form?id=${gbjUserBuyComments.id}">管理买标评论<shiro:hasPermission name="sys:gb:gbjUserBuyComments:edit">${not empty gbjUserBuyComments.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gb:gbjUserBuyComments:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
-	<form:form id="inputForm" modelAttribute="gbjUserBuyComments" action="${ctx}/sys/gbj/gbjUserBuyComments/save" method="post" class="form-horizontal">
+	<form:form id="inputForm" modelAttribute="gbjUserBuyComments" action="${ctx}/sys/gb/gbjUserBuyComments/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">
-			<label class="control-label">买标信息ID：</label>
+			<label class="control-label">用户ID：</label>
 			<div class="controls">
-				<form:input path="buy.id" htmlEscape="false" maxlength="64" class="input-xlarge "/>
+				<form:input path="user.id" htmlEscape="false" maxlength="64" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -73,7 +74,7 @@
 			</div>
 		</div>
 		<div class="form-actions">
-			<shiro:hasPermission name="sys:gbj:gbjUserBuyComments:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
+			<shiro:hasPermission name="sys:gb:gbjUserBuyComments:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 		</div>
 	</form:form>

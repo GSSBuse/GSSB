@@ -60,7 +60,8 @@ public class GbjBuyController extends BaseController {
 		model.addAttribute("gbjBuy", gbjBuy);
 		return "modules/sys/gbj/gbjBuyForm";
 	}
-
+	
+	
 	@RequiresPermissions("sys:gbj:gbjBuy:edit")
 	@RequestMapping(value = "save")
 	public String save(GbjBuy gbjBuy, Model model, RedirectAttributes redirectAttributes) {

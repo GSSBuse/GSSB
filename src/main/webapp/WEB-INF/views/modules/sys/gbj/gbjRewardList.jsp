@@ -45,17 +45,18 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
-				<th>用户名ID</th>
+				<th>用户名</th>
 				<th>真实姓名</th>
 				<th>国标类型</th>
 				<th>标题</th>
 				<th>起名需求</th>
 				<th>打赏金额</th>
 				<th>手机号码</th>
-				<th>标签</th>
+				<th>支付状态</th>
+				<th>状态（未发布，已发布，已中标）</th>
+				<th>支付流水号</th>
+				<th>撤回标记</th>
 				<th>点赞数</th>
-				<th>查看数</th>
-				<th>评论数</th>
 				<th>备注信息</th>
 				<th>删除标记</th>
 				<shiro:hasPermission name="sys:gbj:gbjReward:edit"><th>操作</th></shiro:hasPermission>
@@ -86,16 +87,19 @@
 					${gbjReward.mobile}
 				</td>
 				<td>
-					${gbjReward.tag}
+					${gbjReward.payStatus}
+				</td>
+				<td>
+					${fns:getDictLabel(gbjReward.status, 'gbj_reward_status', '')}
+				</td>
+				<td>
+					${gbjReward.payFlowNumber}
+				</td>
+				<td>
+					${fns:getDictLabel(gbjReward.frontDelFlag, 'gbj_front_del_flag', '')}
 				</td>
 				<td>
 					${gbjReward.upCounts}
-				</td>
-				<td>
-					${gbjReward.lookCounts}
-				</td>
-				<td>
-					${gbjReward.commentsCounts}
 				</td>
 				<td>
 					${gbjReward.remarks}
