@@ -10,7 +10,7 @@
         </head>
 <script type="text/javascript" src="${ctxStatic }/front/js/Article.js"></script>
         <body ms-controller="articles">
-                <%@ include file="/WEB-INF/views/include/frontMenu.jsp"%>
+                <%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
                 <div class="about">
                      <div class="container">
                         <h1>买标信息<span class="m_1"><br>最新发布的买标信息，如有兴趣请联系123456789</span></h1>

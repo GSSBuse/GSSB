@@ -95,7 +95,7 @@ div.sedoform .bidAmount {
 		<div id="uiContainer">
 		
 			<div id="uiHeader">
-          		<%@ include file="/WEB-INF/views/include/frontTop.jsp"%>
+          		<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
 	          	<!-- 蓝条结束 -->
           	</div>
          	<!-- 头部结束 -->

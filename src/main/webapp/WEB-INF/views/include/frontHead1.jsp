@@ -27,7 +27,7 @@
 <link rel='stylesheet' id='pretty-photo-css-css'  href='${ctxStatic}/front/js1/prettyphoto/prettyPhotoaeb9.css?ver=3.1.4' type='text/css' media='all' />
 <link rel='stylesheet' id='main-css-css'  href='${ctxStatic}/front/css1/main5152.css?ver=1.0' type='text/css' media='all' />
 <link rel='stylesheet' id='custom-css-css'  href='${ctxStatic}/front/css1/custom5152.css?ver=1.0' type='text/css' media='all' />
-<link rel='stylesheet' id='custom-css-css'  href='${ctxStatic}/front/css1/im.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='im-css-css'  href='${ctxStatic}/front/css1/im.css?ver=1.0' type='text/css' media='all' />
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -42,7 +42,8 @@
 <link href="${ctxStatic }/front/css/flexslider.css" rel='stylesheet' type='text/css' />
 
 <!-- script -->
-<script type='text/javascript' src='${ctxStatic}/front/js1/jquery-1.8.3.min.js'></script>
+<script type="text/javascript" src="${ctxStatic }/front/js/jquery-1.11.1.min.js"></script>
+<script defer src="${ctxStatic }/front/js/jquery.flexslider.js"></script>
 <script type='text/javascript' src='${ctxStatic}/front/js1/jquery.easing.1.3.js'></script>
 <%-- <script type='text/javascript' src='${ctxStatic}/front/js1/prettyphoto/jquery.prettyPhoto.js'></script> --%>
 <%-- <script type='text/javascript' src='${ctxStatic}/front/js1/jflickrfeed.js'></script> --%>
@@ -61,5 +62,6 @@
 <link href="${ctxStatic}/jquery-jbox/2.3/Skins/Blue/jbox.css" rel="stylesheet" />
 <script src="${ctxStatic}/jquery-jbox/2.3/jquery.jBox-2.3.js" type="text/javascript"></script>
 
-<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101442633" data-redirecturi="http://localhost:8182/gssb/index1.html" charset="utf-8"></script>
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101442633"  charset="utf-8"></script>
+
     
