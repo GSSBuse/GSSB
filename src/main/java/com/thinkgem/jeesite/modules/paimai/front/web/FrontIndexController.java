@@ -18,15 +18,21 @@ import com.thinkgem.jeesite.common.mapper.JsonMapper;
 import com.thinkgem.jeesite.common.utils.SendMailUtil;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.ArticleList;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.BuyArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjSold;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjTouristRequire;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.RewardArticleList;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.SoldArticleList;
 import com.thinkgem.jeesite.modules.sys.service.gbj.ArticleListService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.BuyArticleListService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjBuyService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjRewardService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjSoldService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjTouristRequireService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.RewardArticleListService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.SoldArticleListService;
 
 
 @Controller
@@ -49,6 +55,12 @@ public class FrontIndexController extends BaseController{
 	@Autowired
 	private ArticleListService articleListService;     
 
+	@Autowired
+	private BuyArticleListService buyarticleListService; //买标信息 2017/12/15  by snnu
+	@Autowired
+	private SoldArticleListService soldarticleListService; //卖标信息发布 2017/12/15  by snnu
+	@Autowired
+	private RewardArticleListService rewardarticleListService; //悬赏信息发布 2017/12/15 by snnu
 	/**
 	 * 网站首页
 	 
@@ -83,7 +95,7 @@ public class FrontIndexController extends BaseController{
 	
 
 	/**
-	 * 咨询详细一览页面
+	 * 所有信息一览页面
 	 */
 	@RequestMapping(value= {"articles"})
 	public String articles(Model model) {
@@ -97,7 +109,25 @@ public class FrontIndexController extends BaseController{
 	public String single(Model model) {
 		return "modules/paimai/front/single";
 	}	
-	
+	/**
+	 * 咨询买标一览页面
+	 */
+	@RequestMapping(value= {"buyarticles"})
+	public String buyarticles(Model model) {
+		return "modules/paimai/front/buyarticles";
+	}	/**
+	 * 咨询卖标一览页面
+	 */
+	@RequestMapping(value= {"soldarticles"})
+	public String soldarticles(Model model) {
+		return "modules/paimai/front/soldarticles";
+	}	/**
+	 * 咨询悬赏一览页面
+	 */
+	@RequestMapping(value= {"rewardarticles"})
+	public String rewardarticles(Model model) {
+		return "modules/paimai/front/rewardarticles";
+	}	
 	/**
 	 * 帮助说明页面
 	 */
@@ -300,5 +330,70 @@ public class FrontIndexController extends BaseController{
 			return AjaxResult.makeError("");
 		}
 	} 
-	
+	/**
+	 * 获取页面显示我要买标信息的全部信息
+	 * @param domainBuyIdList
+	 * @return 我要买标的最新数据
+	 */
+	@RequestMapping(value = "polling/ArticleBuyData")
+	@ResponseBody
+	public AjaxResult ArticleBuyData( @RequestParam("count") String count) {
+		
+		//取得最新的我要买标信息
+		List<BuyArticleList> pageDomainBuyArticleList = new ArrayList<BuyArticleList>();
+		try {
+			pageDomainBuyArticleList = buyarticleListService.findDomainBuyArticleList(count);
+		   	 
+			AjaxResult ar = AjaxResult.makeSuccess("");
+			ar.getData().put("ArticleBuyData", pageDomainBuyArticleList);
+			return ar;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AjaxResult.makeError("");
+		}
+	}
+	/**
+	 * 获取页面显示我要卖信息的全部信息
+	 * @param domainBuyIdList
+	 * @return 卖标的最新数据
+	 */
+	@RequestMapping(value = "polling/ArticleSoldData")
+	@ResponseBody
+	public AjaxResult ArticleSoldData( @RequestParam("count") String count) {
+		
+		//取得最新的我要买标信息
+		List<SoldArticleList> pageDomainSoldArticleList = new ArrayList<SoldArticleList>();
+		try {
+			pageDomainSoldArticleList = soldarticleListService.findDomainSoldArticleList(count);
+		   	 
+			AjaxResult ar = AjaxResult.makeSuccess("");
+			ar.getData().put("ArticleSoldData", pageDomainSoldArticleList);
+			return ar;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AjaxResult.makeError("");
+		}
+	}
+	/**
+	 * 获取页面显示悬赏信息的全部信息
+	 * @param domainBuyIdList
+	 * @return 悬赏的最新数据
+	*/
+	@RequestMapping(value = "polling/ArticleRewardData")
+	@ResponseBody
+	public AjaxResult ArticleRewardData( @RequestParam("count") String count) {
+		
+		//取得最新的我要买标信息
+		List<RewardArticleList> pageDomainRewardArticleList = new ArrayList<RewardArticleList>();
+		try {
+			pageDomainRewardArticleList = rewardarticleListService.findDomainRewardArticleList(count);
+		   	 
+			AjaxResult ar = AjaxResult.makeSuccess("");
+			ar.getData().put("ArticleRewardData", pageDomainRewardArticleList);
+			return ar;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AjaxResult.makeError("");
+		}
+	} 
 }

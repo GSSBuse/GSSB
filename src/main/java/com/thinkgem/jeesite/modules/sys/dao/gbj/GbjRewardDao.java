@@ -3,6 +3,8 @@
  */
 package com.thinkgem.jeesite.modules.sys.dao.gbj;
 
+import java.util.List;
+
 import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
@@ -14,5 +16,5 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
  */
 @MyBatisDao
 public interface GbjRewardDao extends CrudDao<GbjReward> {
-	
+	public List<GbjReward> findDomainRewardList(int count);
 }

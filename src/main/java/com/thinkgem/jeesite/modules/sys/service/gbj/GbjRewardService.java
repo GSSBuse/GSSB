@@ -5,6 +5,8 @@ package com.thinkgem.jeesite.modules.sys.service.gbj;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +23,8 @@ import com.thinkgem.jeesite.modules.sys.dao.gbj.GbjRewardDao;
 @Service
 @Transactional(readOnly = true)
 public class GbjRewardService extends CrudService<GbjRewardDao, GbjReward> {
-
+	@Autowired
+	GbjRewardDao gbjRewarddao;
 	public GbjReward get(String id) {
 		return super.get(id);
 	}
@@ -42,6 +45,9 @@ public class GbjRewardService extends CrudService<GbjRewardDao, GbjReward> {
 	@Transactional(readOnly = false)
 	public void delete(GbjReward gbjReward) {
 		super.delete(gbjReward);
+	}
+	public List<GbjReward> findDomainRewardList(@Param(value="counts") String count) {
+		return gbjRewarddao.findDomainRewardList(Integer.parseInt(count));
 	}
 	
 }

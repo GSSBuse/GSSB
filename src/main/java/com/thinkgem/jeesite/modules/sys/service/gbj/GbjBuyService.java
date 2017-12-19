@@ -5,6 +5,8 @@ package com.thinkgem.jeesite.modules.sys.service.gbj;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +24,8 @@ import com.thinkgem.jeesite.modules.sys.dao.gbj.GbjBuyDao;
 @Transactional(readOnly = true)
 public class GbjBuyService extends CrudService<GbjBuyDao, GbjBuy> {
 
+	@Autowired
+	GbjBuyDao gbjBuydao;
 	public GbjBuy get(String id) {
 		return super.get(id);
 	}
@@ -42,6 +46,12 @@ public class GbjBuyService extends CrudService<GbjBuyDao, GbjBuy> {
 	@Transactional(readOnly = false)
 	public void delete(GbjBuy gbjBuy) {
 		super.delete(gbjBuy);
+	}
+	public List<GbjBuy> findDomainBuyList(@Param(value="counts") String count) {
+		return gbjBuydao.findDomainBuyList(Integer.parseInt(count));
+	}
+	public List<GbjBuy> findDomainArticleBuyList(@Param(value="counts") String count) {
+		return gbjBuydao.findDomainArticleBuyList(Integer.parseInt(count));
 	}
 	
 }

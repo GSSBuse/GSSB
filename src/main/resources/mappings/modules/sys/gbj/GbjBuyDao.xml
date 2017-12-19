@@ -161,5 +161,33 @@
 			del_flag = #{DEL_FLAG_DELETE}
 		WHERE id = #{id}
 	</update>
+	<select id="findDomainBuyList" resultType="GbjBuy" parameterType="java.lang.Integer">
+        SELECT
+              b.type_id as "type",
+              b.create_date as "createDate",
+              b.title as "title"
+        FROM gbj_buy b
+        <where>
+               b.del_flag =  0
+            ORDER BY b.update_date DESC
+            <if test="_parameter != null and _parameter != ''">
+                limit #{counts}
+            </if>
+        </where>
+    </select>
+	<select id="findDomainArticleBuyList" resultType="GbjBuy" parameterType="java.lang.Integer">
+        SELECT
+              b.type_id as "type",
+              b.create_date as "createDate",
+              b.title as "title"
+        FROM gbj_buy b
+        <where>
+               b.del_flag =  0
+            ORDER BY b.update_date DESC
+            <if test="_parameter != null and _parameter != ''">
+                limit #{counts}
+            </if>
+        </where>
+    </select>
 	
 </mapper>

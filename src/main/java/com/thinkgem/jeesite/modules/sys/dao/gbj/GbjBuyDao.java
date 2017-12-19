@@ -3,6 +3,8 @@
  */
 package com.thinkgem.jeesite.modules.sys.dao.gbj;
 
+import java.util.List;
+
 import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
@@ -14,5 +16,6 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
  */
 @MyBatisDao
 public interface GbjBuyDao extends CrudDao<GbjBuy> {
-	
+	public List<GbjBuy> findDomainBuyList(int count);
+	public List<GbjBuy> findDomainArticleBuyList(int count);
 }
