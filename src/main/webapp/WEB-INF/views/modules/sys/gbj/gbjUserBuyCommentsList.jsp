@@ -42,7 +42,6 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
-				<th>买标信息</th>
 				<th>评论内容</th>
 				<th>评论时间</th>
 				<th>更新时间</th>
@@ -53,10 +52,7 @@
 		</thead>
 		<tbody>
 		<c:forEach items="${page.list}" var="gbjUserBuyComments">
-			<tr>
-				<td><a href="${ctx}/sys/gbj/gbjUserBuyComments/form?id=${gbjUserBuyComments.id}">
-					${gbjUserBuyComments.buy.title}
-				</a></td>
+			<tr>				
 				<td>
 					${gbjUserBuyComments.comment}
 				</td>

@@ -25,7 +25,7 @@
 
         <body>
 
-                <%@ include file="/WEB-INF/views/include/frontMenu.jsp"%>
+                <%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
                 <div class="login-wrap">
 				    <div class="wrap clearfix">
 				        <div class="form-box fr loginV2"  style="display:block;">

@@ -268,9 +268,9 @@ jQuery(document).ready(function(e) {
     /*-----------------------------------------------------------------------------------*/
     /*	Search Form Validation
      /*-----------------------------------------------------------------------------------*/
-    $('#search-form').validate({
-        errorLabelContainer: $("#search-error-container")
-    });
+//    $('#search-form').validate({
+//        errorLabelContainer: $("#search-error-container")
+//    });
 	
 	
 	/*-----------------------------------------------------------------------------------*/

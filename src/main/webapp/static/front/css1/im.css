@@ -1,25 +1,4 @@
-* {
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-}
 
-a, img {
-	border: 0;
-}
-
-a {
-	text-decoration: none;
-}
-
-a:hover {
-	text-decoration: underline;
-}
-
-body {
-	font: 12px/180% Arial, Helvetica, sans-serif, "新宋体";
-	color: #333333;
-}
 
 /* 主要css样式*/
 .main-im {
@@ -218,6 +197,7 @@ body {
 
 .main-im .open-im {
 	cursor: pointer;
+	z-index:9999;
 	margin-left: 68px;
 	width: 40px;
 	height: 133px;

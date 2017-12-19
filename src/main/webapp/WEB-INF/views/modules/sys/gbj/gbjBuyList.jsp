@@ -118,7 +118,7 @@
 				</shiro:hasPermission>
 			
 				<shiro:hasPermission name="sys:gbj:gbjUserBuyComments:view">	
-					<a href="${ctx}/sys/gbj/gbjUserBuyComments?buyCommentsId=${gbjUserBuyComments.id} ">评论管理</a>
+					<a href="${ctx}/sys/gbj/gbjUserBuyComments?buyId=${gbjBuy.id} ">评论管理</a>
 				</shiro:hasPermission>
 				</td>
 			</tr>

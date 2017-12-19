@@ -57,7 +57,9 @@
 		<include refid="gbjUserBuyCommentsJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
-			
+			<if test="buyId != null and buyId != ''">
+                AND a.buy_id = #{buyId}
+            </if>
 			<if test="comment != null and comment != ''">
 				AND a.comment = #{comment}
 			</if>

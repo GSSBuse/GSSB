@@ -1,8 +1,3 @@
-
-/**
- * 首页
- */
- 
 require(["plugin/validation/avalon.validation", "domReady!"], function() {
 	var now = new Date();
 	var defaultInfo = {
@@ -10,7 +5,7 @@ require(["plugin/validation/avalon.validation", "domReady!"], function() {
 		mobile: "",
 		searchContents: ""
 	}
-	
+	alert(test);
 	var validationVM = null;
 	var vm = avalon.define({
 		$id : "search-dialog",

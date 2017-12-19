@@ -9,7 +9,7 @@
                 <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>
         </head>
         <body>
-		        <%@ include file="/WEB-INF/views/include/frontMenu.jsp"%>
+		        <%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
 				<div class="about">
 					 <div class="container">
 						<h1>客户之声<span class="m_1"><br>客户第一，客户是上帝</span></h1>

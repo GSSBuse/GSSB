@@ -1,7 +1,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="商标, 商标拍卖" />
+<meta name="keywords" content="国商局,商标,版权,专利,商标查询,版权登记,专利注册" />
 <%@ taglib prefix="shiro" uri="/WEB-INF/tlds/shiros.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -35,7 +35,7 @@
 <script type="text/javascript" src="${ctxStatic }/front/js/nav.js"></script>
 <script defer src="${ctxStatic }/front/js/jquery.flexslider.js"></script>
 
-<script type="text/javascript" src="${ctxStatic}/jquery/jquery-1.9.1.min.js"></script>
+<%-- <script type="text/javascript" src="${ctxStatic}/jquery/jquery-1.9.1.min.js"></script> --%>
 <script type="text/javascript" src="${ctxStatic}/frontend-jam/static/vendors/avalon/avalon.js"></script>
 <script type="text/javascript" src="${ctxStatic}/frontend-jam/static/js/utils.js"></script>
 

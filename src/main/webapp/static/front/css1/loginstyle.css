@@ -137,75 +137,7 @@ a:hover {color: #dd0000;}
 .form-foot_p label{ margin-left:5px; color:#d00;}
 .form-foot_p .spans{ font-size:12px;}
 .form-dl-jym{ display:none;}
-/*register*/
-.register-wrap{ width:100%; height:480px; background:#fff url("../../images/registerBg.jpg") center center no-repeat; color:#333; font-family:"Microsoft YaHei";}
-.register-wrap .wrap{ width:1176px; height:466px; padding:7px; margin:0 auto; background:#e5e5e5; background:rgba(0,0,0,.1);}
-.register-wrap .registerBox{ width:1176px; height:466px; background:#fff;}
-.registerBox .register-h1{ width:350px; height:38px; line-height:38px; padding:35px 0 25px; font-size:18px; text-align:center;}
-.registerBox .register-left{ position:relative; width:584px; height:466px; margin-left:234px; border-right:1px solid #ddd;}
-.register-left .form-error{ top:68px; left:0;}
-.register-left dl{width:348px;}
-.register-left dt{ width:77px;}
-.register-left dd{ width:251px;}
-.register-left .input-text{ width:251px; padding:0;}
-.register-left .btn-box .btn-settlement{ width:350px;}
-.register-left .input-yzm{width:86px; padding:0;}
-.register-left .correct{ display:none; position:absolute; right:10px; top:50%; height:24px; width:24px; margin-top:-12px; background:url("../../images/member.png") -35px 0 no-repeat;}
-/*.register-left .link-box{height:38px; line-height:38px; text-align:right; font-size:14px; color:#666;}*/
-.register-left .link-btn{ margin-left:12px;}
-.register-left .link-btn:link,.register-left .link-btn:visited{ color:#007fd7;}
-.register-left .link-btn:hover,.register-left .link-btn:active{ color:#d00;}
-.registerBox .register-right{ width:357px;}
-.register-right .link-box{ width:220px; margin:0 auto; padding:35px 0 13px; line-height:36px; font-size:14px; color:#666; text-align:center; border-bottom:1px dotted #ddd;}
-.register-right .right-p{ line-height:1; text-align:center; color:#666; margin-top:26px; font-size:14px;}
-.register-right .right-p .forget-pass{ margin-left:12px;}
-.register-right .login-short{ width:220px; margin:0 auto; margin-top:33px;}
-.register-right .login-short h3{ padding:19px 0 17px; font-size:14px; text-align:center;}
-.register-right .login-short ul{ text-align:center;}
-.register-right .login-short li{ float:none; display:inline-block; margin-right:8px;}
-.register-left .placeholder{ left:0;}
-.register-right .h3{height:60px; margin-top:13px; font-size:16px; color:#333; text-align:center;}
-.register-right .wx-text{line-height:30px;}
-.register-right .wx-text em{display:block; padding:15px 0; line-height:30px;}
-.register-right .wx-text b{font-weight:bold;}
-.register-right .qrcode-box{ position:relative;}
-.register-right .wx-img-box{ position:relative; z-index:2; display:block; width:158px; height:158px; margin:0 auto; border:1px solid #eee;}
-.register-right .wx-img-box .wx-qrCode{ display:block; width:158px; height:158px;}
-.register-right .wx-img-box .wx-qrCode-logo{ position:absolute;z-index:3; top:50%; left:50%; width:40px; height:40px; margin-left:-20px; margin-top:-20px;}
-.register-right .wx-img-box .statusImg{ display:none; position:absolute;z-index:4; top:0; left:0; width:158px; height:158px;}
 
-/*register-phone*/
-
-.register-phone{ width:100%; height:542px; background:#fff; color:#333; font-family:"Microsoft YaHei";}
-.register-phone .wrap{ width:1070px; height:423px; padding:7px; margin:0 auto; background:#e5e5e5; background:rgba(0,0,0,.1);}
-.register-phone .regPhoneBox{ width:954px; height:381px; padding:21px 58px; background:#fff;}
-.register-step{ width:1070px; height:90px; margin:17px auto 0;}
-.register-step .register-jd{position:relative; padding:26px 70px 10px; width:930px; height:4px;}
-.register-step .jd-over,.register-step .jd-none{ width:50%; height:4px; float:left;}
-.register-step .jd-over{ background:#fcc;}
-.register-step .jd-none{ background:#eee;}
-.register-step .step1,.register-step .step2,.register-step .step3{ position:absolute; top:17px; width:70px; height:47px; text-align:center;}
-.register-step .step1{ left:35px;}
-.register-step .step2{ left:50%; margin-left:-35px;}
-.register-step .step3{ right:35px;}
-.register-step .over i,.register-step .none i{ display:inline-block; width:23px; height:23px; background:url("../../images/member.png") -59px 0 no-repeat; vertical-align:top;}
-.register-step .none i{ background-position:-82px 0;}
-.register-step .over h3,.register-step .none h3{ color:#666; font-size:14px;}
-.register-step .none h3{ color:#ccc;}
-.regPhoneBox .register-h1{height:38px; line-height:38px; border-bottom:1px solid #d6d6d6; font-size:20px;}
-.regPhoneBox .register-h1 em{ font-size:14px; color:#999; margin-left:12px;}
-.regPhoneBox .register-center{ position:relative; width:350px; margin:40px auto 0;}
-.register-center .h1-error{ display:none; height:16px; padding:6px 6px 6px 12px;margin-bottom:15px; border:1px solid #ffddbc; background:#fffceb;}
-.register-center .h1-error .text{display:block; padding-left:22px; line-height:16px; font-family:"Microsoft YaHei"; color:#666; white-space:nowrap; background:url("../../images/member.png") -124px 0 no-repeat;}
-.regPhoneBox .btn-box .btn-settlement{ width:350px; margin-top:22px;}
-.regPhoneBox dl{ width:348px;}
-.regPhoneBox .center-h2{ text-align:center; height:20px; line-height:20px; padding:4px; margin-bottom:15px; border:1px solid #c4e3ff; background:#edf8ff;}
-.regPhoneBox .center-h2 i{ display:inline-block; height:19px; width:19px; margin-right:8px; background:url("../../images/member.png") -105px 0 no-repeat; vertical-align:top;}
-.regPhoneBox dd{ width:268px;}
-.regPhoneBox dt.note{ width:85px;}
-.regPhoneBox dd.note{ width:243px;}
-.regPhoneBox dl.unabled{ background:#eee;}
-.regPhoneBox dl.unabled .span-jym{ border-color:#ccc; color:#999;}
 
 /*test-phone*/
 .test-Phone{ width:100%; height:255px; margin-bottom:100px; background:#fff; color:#333; font-family:"Microsoft YaHei";}
@@ -393,28 +325,34 @@ a:hover {color: #dd0000;}
 /*20150925 modify*/
 .loginV2 .form-con{ width:380px; height:auto; padding:0;}
 .shortLogin .form-con{ position:relative; width:300px; height:auto; padding:52px 40px 0;}
+
+.registerBox .form-con{ position:relative; width:300px; height:auto; padding:52px 40px 0;}
 .loginV2 .login-normal,.loginV2 .login-partner{ width:300px; padding:40px 40px 0;}
 .loginV2 .form-error{ top:7px;}
 .shortLogin .form-error{ top:5px;}
+.registerBox .form-error{ top:5px;}
 .loginV2 dl{width:298px; padding:12px 0;}
 .shortLogin dl{width:298px; padding:16px 0;}
-.loginV2 dd,.shortLogin dd{ width:218px;}
-.loginV2 .input-text,.shortLogin .input-text{width:180px;}
-.loginV2 .input-yzm,.shortLogin .input-yzm{width:50px;}
+.registerBox dl{width:298px; padding:16px 0;}
+.loginV2 dd,.shortLogin dd,.registerBox dd{ width:218px;}
+.loginV2 .input-text,.shortLogin .input-text,.registerBox .input-text{width:180px;}
+.loginV2 .input-yzm,.shortLogin .input-yzm,.registerBox .input-yzm{width:50px;}
 .loginV2 .span-yzm{ top:-13px; width:150px; padding:5px 0;}
 .shortLogin .span-yzm{ width:150px;}
-.loginV2 .span-yzm img,.shortLogin .span-yzm img{ margin:0 5px 0 7px;}
+.registerBox .span-yzm{ width:150px;}
+.loginV2 .span-yzm img,.shortLogin .span-yzm img,.registerBox .span-yzm img{ margin:0 5px 0 7px;}
 .loginV2 .form-remember{ padding:1px 0 2px;}
 .shortLogin .form-remember{ padding:1px 0 2px;}
-.loginV2 .btn-box,.shortLogin .btn-box{ height:40px;}
-.loginV2 .btn-box .btn-settlement,.shortLogin .btn-box .btn-settlement{ width:100%;}
+.loginV2 .btn-box,.shortLogin .btn-box,.registerBox .btn-box{ height:40px;}
+.loginV2 .btn-box .btn-settlement,.shortLogin .btn-box .btn-settlement,.registerBox .btn-box .btn-settlement{ width:100%;}
 .loginV2 .forget-pass,.shortLogin .forget-pass{ color:#007fd7; font-size:12px;}
 .loginV2 .link-box .forget-pass,.loginV2 .link-box .register{ float:right; width:72px; line-height:34px; font-family:"Microsoft YaHei";}
 .loginV2 .link-box .register{ float:left; color:#007fd7;}
 .loginV2 .link-box .register:hover{ color:#d00;}
-.shortLogin .forgetPass,.shortLogin .backLogin{ float:left; line-height:38px; font-family:"Microsoft YaHei"; color:#007fd7;}
-.shortLogin .forgetPass:hover,.shortLogin .backLogin:hover{ color:#d00;}
+.shortLogin .forgetPass,.shortLogin .registerBox{ float:left; line-height:38px; font-family:"Microsoft YaHei"; color:#007fd7;}
+.shortLogin .forgetPass:hover,.shortLogin .shortLogin .backLogin:hover{ color:#d00;}
 .shortLogin .backLogin{ float:right;}
+.registerBox .backLogin{ float:right;}
 .loginV2 .login-short{ padding-top:1px; padding-bottom:2px; margin:0;}
 .loginV2 .short-left{ float:left; width:150px;}
 .loginV2 .short-right{ float:left; width:124px; padding-left:25px; border-left:1px dotted #ddd;}
@@ -425,4 +363,6 @@ a:hover {color: #dd0000;}
 .loginV2 .login-short .phone-short .phone{ float:left; height:33px; width:33px; margin-right:7px; background:url("../../images/member.png") -115px -57px no-repeat;}
 .loginV2 .login-short li{ margin-right:16px;}
 .shortLogin{ display:none;}
-.shortLogin .title{ height:40px; line-height:40px; padding-top:18px; font-size:18px; color:#d00; text-align:center;}
+.shortLogin .title{ height:0px; line-height:40px; padding-top:18px; font-size:18px; color:#d00; text-align:center;    margin: 0 0 0 0}
+.registerBox{ display:none;}
+.registerBox .title{ height:0px; line-height:40px; padding-top:18px; font-size:18px; color:#d00; text-align:center;    margin: 0 0 0 0}

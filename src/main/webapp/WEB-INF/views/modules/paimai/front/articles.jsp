@@ -10,7 +10,7 @@
         </head>
 <script type="text/javascript" src="${ctxStatic }/front/js/Article.js"></script>
         <body ms-controller="articles"> 
-                <%@ include file="/WEB-INF/views/include/frontMenu.jsp"%>
+                <%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
                 <div class="about">
                      <div class="container">
                         <h1>买标信息<span class="m_1"><br>最新发布的买标信息，如有兴趣请联系123456789</span></h1>
@@ -25,8 +25,10 @@
                                         <!-- start of page content -->
                                         <div class="span8 main-listing" >
                                                 <article class=" page type-page hentry clearfix">
-                                                        <h1 class="post-title"><a href="#">交易信息</a></h1>
-                                                        <hr>                                                        
+                                                        <span><h1 class="post-title"><a href="#">交易信息</a></h1></span>
+                                                        <span>
+                                                        <input type="button" onClick="javascript:alert('把首页的show1()移过来');"  value="我要发布买标信息">
+                                                                             
                                                 </article>
                                                 <article class="format-standard type-post hentry clearfix"  ms-repeat-el="datas.domainArticleList">
 

@@ -11,7 +11,7 @@
 
         <body>
 
-                <%@ include file="/WEB-INF/views/include/frontMenu.jsp"%>
+                <%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
                 <div class="about">
                      <div class="container">
                         <h1>TODO<span class="m_1"><br>暂时空白页，后面细化完善</span></h1>
