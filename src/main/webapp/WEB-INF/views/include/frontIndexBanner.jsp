@@ -154,7 +154,7 @@ $(function() {
 </div>
 <script type="text/javascript">
  $(function ($) {
-     //弹出
+     //弹出登录
      $("#indexSearch").hover(function () {
          $(this).stop().animate({
              opacity: '1'
