@@ -6,10 +6,11 @@
 require(["plugin/validation/avalon.validation", "domReady!"], function() {
 	var now = new Date();
 	var defaultInfo = {
-		titleNeed: "",
+		description: "",
 		title:"",
-		user:"",
-		rewardMoney: ""
+		mobile:"",
+		realname:"",
+		price: ""
 	
 	}
 	
@@ -57,7 +58,7 @@ require(["plugin/validation/avalon.validation", "domReady!"], function() {
 								alert("提交成功！");
 							//	$.jBox.tip("提交成功",'success',{opacity:0});
 								setTimeout(function(){
-									window.location.href = ctx + "/index1.html";
+									window.location.href = ctx + "/rewardarticles.html";
 								}, 1000);
 							} else {
 								//$.jBox.error(resp.msg, '错误', {border:5}); 

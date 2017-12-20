@@ -8,6 +8,7 @@
               d.mobile as "mobile",
               d.create_date as "createDate",
               d.title as "title",
+              d.price as "price",
               d.description as "description"
         FROM gbj_reward d
         <where>

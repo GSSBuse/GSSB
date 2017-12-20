@@ -27,7 +27,7 @@
                                         <div class="span12 page-content">
                                         </div>
                                                 <article class=" page type-page hentry clearfix">
-                                                        <h1 class="post-title"><a href="#">交易信息</a></h1>
+                                                        <h1 class="post-title"><a href="#">买标全部交易信息</a></h1>
                                                         
                                                         
                                                         <hr>                                                        
@@ -93,7 +93,7 @@
 <div id="buy-dialog"  ms-controller="buy-dialog"  style="position: fixed;background: rgb(249, 249, 249);top: 50%;left: 50%;transform: translate(-50%, -50%);z-index: 10;display: none;">
     <div id="close-dialog1"  style="position: absolute;right: -10px;top: -14px;width: 24px;height: 24px;text-align: center;font-size: 25px;border: 2px solid #d2d1d1;border-radius: 50%;background-color: #fff; color: #e71a1a;cursor: pointer;">×</div>
     <form id="domainform"  action="${ctx }/buyarticles.html" method="post" ms-widget="validation"  class="form-horizontal" style="padding: 20px 30px;margin: 0;">
-           <h1 class="post-title"><a href="#">我要买标</a></h3>
+           <h1 class="post-title"><a href="#">我要买标</a></h1>
            <p class="comment-notes">请输入您需要发布的信息。专业顾问人工查询，结果分析更准确！</p>
 
            <div>
@@ -104,6 +104,10 @@
            <div>
                    <label for="mobile">联系电话 *</label>
                    <input class="span4" type="text" name="mobile" id="mobile" ms-duplex-required="datas.domainInfo1.mobile" onFocus="this.value = '';" value=""  size="22" >
+           </div>
+           <div>
+                   <label for="mobile">联系人*</label>
+                   <input class="span4" type="text" name="realname" id="mobile" ms-duplex-required="datas.domainInfo1.realname" onFocus="this.value = '';" value=""  size="22" >
            </div>
 
           

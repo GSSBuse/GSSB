@@ -20,17 +20,17 @@
                         <div class="container">
                                <div class="span12 page-content">
                                        <div class="row-fluid top-cats" style="text-align: center;">
-                                           <a href="#buy-dialog" onclick="show1()">
+                                           <a href="${ctx }/buyarticles.html" >
                                                <section class="span3">
                                                        <img src="${ctxStatic }/images/service1.png"/>
                                                </section>
                                             </a>
-                                            <a href="#sold-dialog" onclick="show2()">
+                                            <a href="${ctx }/soldarticles.html" >
                                                <section class="span3">
                                                        <img src="${ctxStatic }/images/service2.png"/>
                                                </section>
                                             </a>
-                                            <a href="#sold-dialog" onclick="show3()">
+                                            <a href="${ctx }/rewardarticles.html" >
                                                <section class="span3">
                                                        <img src="${ctxStatic }/images/service3.png"/>
                                                </section>
@@ -66,7 +66,7 @@
                                                         </li>
                                                               
                                                        </ul>
-                                                       <a class="faq_but1 but3" href="${ctx }/articles.html">更多</a>
+                                                       <a class="faq_but1 but3" href="${ctx }/buyarticles.html">更多</a>
                                                </section>
 
                                                <section class="span4 articles-list">
@@ -78,19 +78,19 @@
                                                                  <span class="like-count">66</span>
                                                          </li>
                                                        </ul>
-                                                       <a class="faq_but1 but3" href="${ctx }/articles.html">更多</a>
+                                                       <a class="faq_but1 but3" href="${ctx }/soldarticles.html">更多</a>
                                                </section>
                                                
                                                <section class="span4 articles-list">
                                                        <h3 class="category">悬赏起名</h3>
                                                        <ul class="articles">
                                                               <li class="article-entry standard" ms-repeat-el="datas.domainRewardList" >		                                                                
-                                                                 <h4><a href="${ctx }/single.html" >{{el.title}}</a> {{el.rewardMoney}}元</h4>		                                                                
+                                                                 <h4><a href="${ctx }/single.html" >{{el.title}}</a>&nbsp;&nbsp;&nbsp;悬赏金额: {{el.price}}元</h4>		                                                                
                                                                  <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="查看该分类">商标   &amp; 餐饮</a></span>
                                                                  <span class="like-count">66</span>
                                                          </li>
                                                        </ul>
-                                                       <a class="faq_but1 but3" href="${ctx }/articles.html">更多</a>
+                                                       <a class="faq_but1 but3" href="${ctx }/rewardarticles.html">更多</a>
                                                </section>
                                        </div>
                                </div>
@@ -319,7 +319,7 @@
 <div id="reward-dialog"  ms-controller="reward-dialog"  style="position: fixed;background: rgb(249, 249, 249);top: 50%;left: 50%;transform: translate(-50%, -50%);z-index: 10;display: none;">
     <div id="close-dialog3"  style="position: absolute;right: -10px;top: -14px;width: 24px;height: 24px;text-align: center;font-size: 25px;border: 2px solid #d2d1d1;border-radius: 50%;background-color: #fff; color: #e71a1a;cursor: pointer;">×</div>
     <form id="domainform"  action="${ctx }/index1.html" method="post" ms-widget="validation"  style="padding: 20px 30px;margin: 0;">
-           <h1 class="post-title"><a href="#">悬赏起名</a></h3>
+           <h1 class="post-title"><a href="#">悬赏起名</a></h1>
            <p class="comment-notes">请输入您需要发布的悬赏信息。专业顾问人工查询，结果分析更准确！</p>
 
            <div>

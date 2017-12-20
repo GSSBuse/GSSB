@@ -55,7 +55,7 @@ require(["plugin/validation/avalon.validation", "domReady!"], function() {
 								alert("提交成功！");
 								//$.jBox.tip("提交成功",'success',{opacity:0});
 								setTimeout(function(){
-									window.location.href = ctx + "/index1.html";
+									window.location.href = ctx + "/soldarticles.html";
 								}, 1000);
 							} else {
 								//$.jBox.error(resp.msg, '错误', {border:5}); 

@@ -9,6 +9,7 @@
                 <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>
         </head>
 <script type="text/javascript" src="${ctxStatic }/front/js/Articlereward.js"></script>
+<script type="text/javascript" src="${ctxStatic }/front/js/gbreward.js"></script>
         <body ms-controller="rewardarticles"> 
                 <%@ include file="/WEB-INF/views/include/frontMenu.jsp"%>
                 <div class="about">
@@ -25,7 +26,7 @@
                                         <!-- start of page content -->
                                         <div class="span8 main-listing" >
                                                 <article class=" page type-page hentry clearfix">
-                                                        <h1 class="post-title"><a href="#">交易信息</a></h1>
+                                                        <h1 class="post-title"><a href="#">全部悬赏交易信息</a></h1>
                                                         <hr>                                                        
                                                 </article>
                                                 <article class="format-standard type-post hentry clearfix"  ms-repeat-el="datas.domainRewardArticleList">
@@ -33,8 +34,12 @@
                                                         <header class="clearfix">
 
                                                                 <h3 class="post-title">
-                                                                        <a href="${ctx }/single.html">{{el.title}}</a>
+                                                                        <a href="${ctx }/single.html">{{el.title}}</a> 
+                                                                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                                                        <a href="">悬赏金额:</a>
+                                                                        <a href="${ctx }/single.html">{{el.price}}元</a>
                                                                 </h3>
+                                                                
 
                                                                 <div class="post-meta clearfix">
                                                                         <span class="date">{{el.createDate}}</span>
@@ -64,6 +69,14 @@
 
                                         <!-- start of sidebar -->        
                                         <aside class="span4 page-sidebar">
+                                         <div class="row-fluid top-cats" style="text-align: right;">
+                                                <a href="#reward-dialog" onclick="show3()">
+                                                   <section class="span6">
+                                                      <img src="${ctxStatic }/images/service3.png"/>
+                                                       <h4>我要发布买标信息</h4>
+                                                     </section>
+                                               </a>
+                                         </div>
                                                 <%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
                                         </aside>
                                         <!-- end of sidebar -->
@@ -77,6 +90,47 @@
                 <!-- End of Footer -->
 
                 <a href="#top" id="scroll-top"></a>
+                <div id="reward-dialog-bg" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0;background-color: rgba(0, 0, 0, 0.5);z-index: 1;display: none;"></div>               
+<div id="reward-dialog"  ms-controller="reward-dialog"  style="position: fixed;background: rgb(249, 249, 249);top: 50%;left: 50%;transform: translate(-50%, -50%);z-index: 10;display: none;">
+    <div id="close-dialog3"  style="position: absolute;right: -10px;top: -14px;width: 24px;height: 24px;text-align: center;font-size: 25px;border: 2px solid #d2d1d1;border-radius: 50%;background-color: #fff; color: #e71a1a;cursor: pointer;">×</div>
+    <form id="domainform"  action="${ctx }/index1.html" method="post" ms-widget="validation"  style="padding: 20px 30px;margin: 0;">
+           <h1 class="post-title"><a href="#">悬赏起名</a></h1>
+           <p class="comment-notes">请输入您需要发布的悬赏信息。专业顾问人工查询，结果分析更准确！</p>
 
+           <div>
+                   <label for="author">起名标题 *</label>
+                   <input class="span4" type="text" name="title"  id="title"  ms-duplex-required="datas.domainInfo3.title" onFocus="this.value = '';" value="" size="22">
+           </div>
+           <div>
+                   <label for="author">起名需求 *</label>
+                   <input class="span4" type="text" name="description"  id="description"  ms-duplex-required="datas.domainInfo3.description" onFocus="this.value = '';" value="" size="22">
+           </div>
+           <div>
+                   <label for="email">打赏金额 *</label>
+                   <input class="span4" type="text" name="price" id="price" ms-duplex-required="datas.domainInfo3.price" onFocus="this.value = '';" value=""  size="22" >
+           </div>
+           <div class="payment-sendbtns">
+                   <input class="btn" name="submit" type="submit" id="submit03"  value="提交查询">
+           </div>
+   </form>
+</div>
+<script type="text/javascript"> <!--悬赏信息弹出框js -->
+function show3(){
+    document.getElementById("reward-dialog").style.display="block";
+    document.getElementById("reward-dialog-bg").style.display = 'block';
+}
+function hide(){
+    document.getElementById("reward-dialog").style.display="none";
+    document.getElementById("reward-dialog-bg").style.display = 'none';
+}
+// 点击弹窗背景关闭当前弹窗
+$('#reward-dialog-bg').click(function(){
+	$('#reward-dialog,#reward-dialog-bg').hide();
+});
+// 点击弹窗的关闭按钮关闭当前弹窗
+$('#close-dialog3').click(function(){
+    $('#reward-dialog,#reward-dialog-bg').hide();
+});
+</script>
         </body>
 </html>

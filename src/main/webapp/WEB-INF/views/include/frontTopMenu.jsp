@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101442633" charset="utf-8"></script>
 <div class="top">
     <div class="mainWidth top-notic">
         <div class="top-left f-l">
@@ -32,9 +32,9 @@
                                             <li class="current-menu-item"><a href="${ctx }/index1.html">首页</a></li>
                                             <li><a href="#">动态信息</a>                                            
                                                    <ul class="sub-menu">
-                                                           <li><a href="${ctx }/articles.html">买标</a></li>
-                                                           <li><a href="${ctx }/articles2.html">卖标</a></li>
-                                                           <li><a href="${ctx }/articles3.html">悬赏起名</a></li>
+                                                           <li><a href="${ctx }/buyarticles.html">买标</a></li>
+                                                           <li><a href="${ctx }/soldarticles.html">卖标</a></li>
+                                                           <li><a href="${ctx }/rewardarticles.html">悬赏起名</a></li>
                                                    </ul>
                                             </li>
                                             <li><a href="${ctx }/todo.html">商标查询</a></li>
