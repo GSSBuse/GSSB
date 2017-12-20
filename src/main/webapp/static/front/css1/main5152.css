@@ -118,7 +118,6 @@ span.tag-line {
   list-style: none;
   margin: 0;
   display: none;
-  z-index:1000;
 }
 .main-nav .sub-menu li {
   position: relative;
