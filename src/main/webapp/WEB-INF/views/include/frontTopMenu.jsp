@@ -30,14 +30,7 @@
                                 <div class="menu-top-menu-container">
                                         <ul id="menu-top-menu" class="clearfix">
                                             <li class="current-menu-item"><a href="${ctx }/index1.html">首页</a></li>
-                                            <li><a href="#">动态信息</a>                                            
-                                                   <ul class="sub-menu">
-                                                           <li><a href="${ctx }/articles.html">买标</a></li>
-                                                           <li><a href="${ctx }/articles2.html">卖标</a></li>
-                                                           <li><a href="${ctx }/articles3.html">悬赏起名</a></li>
-                                                   </ul>
-                                            </li>
-                                            <li><a href="${ctx }/todo.html">商标查询</a></li>
+                                            <li><a href="${ctx }/articles.html">商标查询</a></li>
                                             <li><a href="${ctx }/articles.html">商标查询</a></li>
 
                                             <li><a href="${ctx }/todo.html">商标注册</a></li>
