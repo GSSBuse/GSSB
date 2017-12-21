@@ -20,6 +20,7 @@ import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjBuyService;
 
 /**
@@ -80,5 +81,28 @@ public class GbjBuyController extends BaseController {
 		addMessage(redirectAttributes, "删除买标信息列表成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gbj/gbjBuy/?repage";
 	}
+	
+	
+	//发布买标信息
+		@RequiresPermissions("sys:gbj:gbjBuy:edit")
+		@RequestMapping(value = "release")
+		public String release(GbjBuy gbjBuy, RedirectAttributes redirectAttributes) {
+			//System.out.print("controller");
+			gbjBuyService.release(gbjBuy);
+			addMessage(redirectAttributes, "发布买标信息成功");
+			return "redirect:"+Global.getAdminPath()+"/sys/gbj/gbjBuy/?repage";
+		}
+		
+		
+		//撤回买标信息
+			@RequiresPermissions("sys:gbj:gbjBuy:edit")
+			@RequestMapping(value = "withdraw")
+			public String withdraw(GbjBuy gbjBuy, RedirectAttributes redirectAttributes) {
+				//System.out.print("controller");
+				gbjBuyService.withdraw(gbjBuy);
+				addMessage(redirectAttributes, "撤回买标信息成功");
+				return "redirect:"+Global.getAdminPath()+"/sys/gbj/gbjBuy/?repage";
+			}
+	
 
 }

@@ -16,9 +16,9 @@
         }
 	</script>
 </head>
-<body>
+<body> 
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/sys/gbj/gbjUserBuyComments/">买标信息评论列表</a></li>
+		<li class="active"><a href="${ctx}/sys/gbj/gbjUserBuyComments/form?id=${gbjUserBuyComments.id}">买标信息评论列表</a></li>
 		<shiro:hasPermission name="sys:gbj:gbjUserBuyComments:edit"><li><a href="${ctx}/sys/gbj/gbjUserBuyComments/form">买标信息评论添加</a></li></shiro:hasPermission>
 	</ul>
 	<form:form id="searchForm" modelAttribute="gbjUserBuyComments" action="${ctx}/sys/gbj/gbjUserBuyComments/" method="post" class="breadcrumb form-search">
@@ -30,11 +30,10 @@
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="btns">
-			<shiro:hasPermission name="sys:gbj:gbjBuy:view">
+				<shiro:hasPermission name="sys:gbj:gbjBuy:view">
     				<a class="btn btn-primary" href="${ctx}/sys/gbj/gbjBuy">返回</a>
-    			</shiro:hasPermission></li>
-			
-			
+    			</shiro:hasPermission>
+    		</li>
 			<li class="clearfix"></li>
 		</ul>
 	</form:form>
@@ -42,6 +41,7 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
+				<th>买标信息</th>
 				<th>评论内容</th>
 				<th>评论时间</th>
 				<th>更新时间</th>
@@ -52,7 +52,10 @@
 		</thead>
 		<tbody>
 		<c:forEach items="${page.list}" var="gbjUserBuyComments">
-			<tr>				
+			<tr>
+				<td><a href="${ctx}/sys/gbj/gbjUserBuyComments/form?id=${gbjUserBuyComments.id}">
+					${gbjUserBuyComments.buy.title}
+				</a></td>
 				<td>
 					${gbjUserBuyComments.comment}
 				</td>

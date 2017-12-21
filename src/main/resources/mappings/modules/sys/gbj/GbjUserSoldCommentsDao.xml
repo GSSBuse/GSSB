@@ -4,7 +4,7 @@
     
 	<sql id="gbjUserSoldCommentsColumns">
 		a.id AS "id",
-		a.user_id AS "user.id",
+		a.sold_id AS "sold.id",
 		a.parent_id AS "parentId",
 		a.child_id AS "childId",
 		a.comment AS "comment",
@@ -14,11 +14,26 @@
 		a.update_by AS "updateBy.id",
 		a.update_date AS "updateDate",
 		a.remarks AS "remarks",
-		a.del_flag AS "delFlag"
+		a.del_flag AS "delFlag",
+		b.title AS "sold.title"
 	</sql>
 	
+	
 	<sql id="gbjUserSoldCommentsJoins">
+	LEFT JOIN gbj_sold b ON b.id = a.sold_id
 	</sql>
+	
+	
+	<!-- 根据sold_id 查询评论列表 -->
+    <select id="getCommentsList" resultType="GbjUserSoldComments">
+		SELECT 
+			<include refid="gbjUserSoldCommentsColumns"/>
+		FROM gbj_user_sold_comments a
+		<include refid="gbjUserSoldCommentsJoins"/>
+		WHERE a.sold_id = #{sold_Id}
+		 
+	</select>
+	
     
 	<select id="get" resultType="GbjUserSoldComments">
 		SELECT 
@@ -35,6 +50,9 @@
 		<include refid="gbjUserSoldCommentsJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="comment != null and comment != ''">
+				AND a.comment = #{comment}
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -67,7 +85,7 @@
 	<insert id="insert">
 		INSERT INTO gbj_user_sold_comments(
 			id,
-			user_id,
+			sold_id,
 			parent_id,
 			child_id,
 			comment,
@@ -80,7 +98,7 @@
 			del_flag
 		) VALUES (
 			#{id},
-			#{user.id},
+			#{sold.id},
 			#{parentId},
 			#{childId},
 			#{comment},
@@ -96,7 +114,7 @@
 	
 	<update id="update">
 		UPDATE gbj_user_sold_comments SET 	
-			user_id = #{user.id},
+			sold_id = #{sold.id},
 			parent_id = #{parentId},
 			child_id = #{childId},
 			comment = #{comment},

@@ -27,19 +27,19 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/sys/gbj/gbjUserBuyComments/">买标信息评论列表</a></li>
+		<li><a href="${ctx}/sys/gbj/gbjUserBuyComments/ ">买标信息评论列表</a></li>
 		<li class="active"><a href="${ctx}/sys/gbj/gbjUserBuyComments/form?id=${gbjUserBuyComments.id}">买标信息评论<shiro:hasPermission name="sys:gbj:gbjUserBuyComments:edit">${not empty gbjUserBuyComments.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gbj:gbjUserBuyComments:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="gbjUserBuyComments" action="${ctx}/sys/gbj/gbjUserBuyComments/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
-		<div class="control-group">
+		 <%--<div class="control-group">
 			<label class="control-label">买标信息ID：</label>
 			<div class="controls">
 				<form:input path="buy.id" htmlEscape="false" maxlength="64" class="input-xlarge "/>
 			</div>
-		</div>
-		<div class="control-group">
+		</div> --%>
+		<%-- <div class="control-group">
 			<label class="control-label">父ID：</label>
 			<div class="controls">
 				<form:input path="parentId" htmlEscape="false" maxlength="200" class="input-xlarge "/>
@@ -50,11 +50,11 @@
 			<div class="controls">
 				<form:input path="childId" htmlEscape="false" maxlength="200" class="input-xlarge "/>
 			</div>
-		</div>
+		</div> --%>
 		<div class="control-group">
 			<label class="control-label">评论内容：</label>
 			<div class="controls">
-				<form:input path="comment" htmlEscape="false" maxlength="500" class="input-xlarge required"/>
+				<form:textarea path="comment" htmlEscape="false" rows="4" maxlength="500" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

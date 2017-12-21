@@ -46,6 +46,27 @@ public class GbjRewardService extends CrudService<GbjRewardDao, GbjReward> {
 	public void delete(GbjReward gbjReward) {
 		super.delete(gbjReward);
 	}
+	
+	
+	//发布悬赏信息
+	@Transactional(readOnly = false)
+	public void release(GbjReward gbjReward) {
+		
+		//System.out.print("service");
+		gbjRewarddao.release(gbjReward);
+	}
+	
+	//撤回悬赏信息
+		@Transactional(readOnly = false)
+		public void withdraw(GbjReward gbjReward) {
+			
+			//System.out.print("service");
+			gbjRewarddao.withdraw(gbjReward);
+		}
+	
+	
+	
+	
 	public List<GbjReward> findDomainRewardList(@Param(value="counts") String count) {
 		return gbjRewarddao.findDomainRewardList(Integer.parseInt(count));
 	}

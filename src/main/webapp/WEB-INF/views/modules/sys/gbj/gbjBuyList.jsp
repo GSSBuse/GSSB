@@ -16,9 +16,10 @@
         }
 	</script>
 </head>
+
 <body>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/sys/gbj/gbjBuy/">买标信息列表列表</a></li>
+		<li class="active"><a href="${ctx}/sys/gbj/gbjBuy/">买标信息管理列表</a></li>
 		<shiro:hasPermission name="sys:gbj:gbjBuy:edit"><li><a href="${ctx}/sys/gbj/gbjBuy/form">买标信息列表添加</a></li></shiro:hasPermission>
 	</ul>
 	<form:form id="searchForm" modelAttribute="gbjBuy" action="${ctx}/sys/gbj/gbjBuy/" method="post" class="breadcrumb form-search">
@@ -40,9 +41,7 @@
 			<li><label>国标标题：</label>
 				<form:input path="title" htmlEscape="false" maxlength="200" class="input-medium"/>
 			</li>
-			<li><label>标签：</label>
-				<form:input path="tag" htmlEscape="false" maxlength="50" class="input-medium"/>
-			</li>
+			
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
@@ -116,10 +115,19 @@
     			<shiro:hasPermission name="sys:gbj:gbjBuy:edit">
 					<a href="${ctx}/sys/gbj/gbjBuy/delete?id=${gbjBuy.id}" onclick="return confirmx('确认要删除该买标信息列表吗？', this.href)">删除</a>
 				</shiro:hasPermission>
-			
-				<shiro:hasPermission name="sys:gbj:gbjUserBuyComments:view">	
-					<a href="${ctx}/sys/gbj/gbjUserBuyComments?buyId=${gbjBuy.id} ">评论管理</a>
+				
+				<shiro:hasPermission name="sys:gbj:gbjBuy:edit">
+					<a href="${ctx}/sys/gbj/gbjBuy/release?id=${gbjBuy.id}" onclick="return confirmx('确认要发布该买标信息吗？', this.href)">发布</a>
 				</shiro:hasPermission>
+				
+				<shiro:hasPermission name="sys:gbj:gbjBuy:edit">
+					<a href="${ctx}/sys/gbj/gbjBuy/withdraw?id=${gbjBuy.id}" onclick="return confirmx('确认要撤回该买标信息吗？', this.href)">撤回</a>
+				</shiro:hasPermission>
+			
+			
+				<shiro:hasPermission name="sys:gbj:gbjUserBuyComments:view">
+					<a href="${ctx}/sys/gbj/gbjUserBuyComments/getBuyCommentsListbyid?buy_Id=${gbjBuy.id} ">评论管理</a>
+				</shiro:hasPermission>	
 				</td>
 			</tr>
 		</c:forEach>

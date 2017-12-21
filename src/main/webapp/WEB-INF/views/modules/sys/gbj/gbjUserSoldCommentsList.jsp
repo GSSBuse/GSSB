@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>管理卖标评论管理</title>
+	<title>卖标信息评论管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -18,14 +18,22 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/sys/gbj/gbjUserSoldComments/">管理卖标评论列表</a></li>
-		<shiro:hasPermission name="sys:gbj:gbjUserSoldComments:edit"><li><a href="${ctx}/sys/gbj/gbjUserSoldComments/form">管理卖标评论添加</a></li></shiro:hasPermission>
+		<li class="active"><a href="${ctx}/sys/gbj/gbjUserSoldComments/">卖标信息评论列表</a></li>
+		<shiro:hasPermission name="sys:gbj:gbjUserSoldComments:edit"><li><a href="${ctx}/sys/gbj/gbjUserSoldComments/form">卖标信息评论添加</a></li></shiro:hasPermission>
 	</ul>
 	<form:form id="searchForm" modelAttribute="gbjUserSoldComments" action="${ctx}/sys/gbj/gbjUserSoldComments/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
+			<li><label>评论内容：</label>
+				<form:input path="comment" htmlEscape="false" maxlength="200" class="input-medium"/>
+			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
+			<li class="btns">
+				<shiro:hasPermission name="sys:gbj:gbjSold:view">
+    				<a class="btn btn-primary" href="${ctx}/sys/gbj/gbjSold">返回</a>
+    			</shiro:hasPermission>
+    		</li>
 			<li class="clearfix"></li>
 		</ul>
 	</form:form>
@@ -33,7 +41,7 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
-				<th>用户ID</th>
+				<th>卖标信息</th>
 				<th>评论内容</th>
 				<th>评论时间</th>
 				<th>更新时间</th>
@@ -46,7 +54,7 @@
 		<c:forEach items="${page.list}" var="gbjUserSoldComments">
 			<tr>
 				<td><a href="${ctx}/sys/gbj/gbjUserSoldComments/form?id=${gbjUserSoldComments.id}">
-					${gbjUserSoldComments.user.id}
+					${gbjUserSoldComments.sold.title}
 				</a></td>
 				<td>
 					${gbjUserSoldComments.comment}

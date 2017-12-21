@@ -3,6 +3,8 @@
  */
 package com.thinkgem.jeesite.modules.sys.web.gbj;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,7 +28,7 @@ import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserBuyCommentsService;
  * 买标信息评论Controller
  * @author snnu
  * @version 2017-12-18
- */
+ */ 
 @Controller
 @RequestMapping(value = "${adminPath}/sys/gbj/gbjUserBuyComments")
 public class GbjUserBuyCommentsController extends BaseController {
@@ -44,6 +46,22 @@ public class GbjUserBuyCommentsController extends BaseController {
 			entity = new GbjUserBuyComments();
 		}
 		return entity;
+	}
+	
+	
+	//根据buy_Id查询买标信息评论信息
+	@RequiresPermissions("sys:gbj:gbjUserBuyComments:view")
+	@RequestMapping(value = {"getBuyCommentsListbyid"})
+	public String getComments(String buy_Id,HttpServletRequest request, 
+			HttpServletResponse response, Model model) {
+		
+		//System.out.print(buy_Id);                                    
+		Page<GbjUserBuyComments> page = gbjUserBuyCommentsService.findPages(new Page<GbjUserBuyComments>(request, response), buy_Id);
+		
+		model.addAttribute("page", page);
+		return "modules/sys/gbj/gbjUserBuyCommentsList";
+	
+		
 	}
 	
 	@RequiresPermissions("sys:gbj:gbjUserBuyComments:view")

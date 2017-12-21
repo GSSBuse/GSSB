@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
 import com.thinkgem.jeesite.modules.sys.dao.gbj.GbjBuyDao;
 
 /**
@@ -47,6 +48,23 @@ public class GbjBuyService extends CrudService<GbjBuyDao, GbjBuy> {
 	public void delete(GbjBuy gbjBuy) {
 		super.delete(gbjBuy);
 	}
+	
+	//发布买标信息
+		@Transactional(readOnly = false)
+		public void release(GbjBuy gbjBuy) {
+			
+			//System.out.print("service");
+			gbjBuydao.release(gbjBuy);
+		}
+		
+		//撤回买标信息
+		@Transactional(readOnly = false)
+		public void withdraw(GbjBuy gbjBuy) {
+					
+			//System.out.print("service");
+			gbjBuydao.withdraw(gbjBuy);
+		}
+	
 	public List<GbjBuy> findDomainBuyList(@Param(value="counts") String count) {
 		return gbjBuydao.findDomainBuyList(Integer.parseInt(count));
 	}

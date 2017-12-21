@@ -15,22 +15,39 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
  * @version 2017-12-18
  */
 public class GbjUserBuyComments extends DataEntity<GbjUserBuyComments> {
-	
+	 
 	private static final long serialVersionUID = 1L;
-	private String buyId;		// 买标信息ID
+	private GbjBuy buy;		
+	private String buyId;   // 买标信息ID
 	private String parentId;		// 父ID
 	private String childId;		// 子ID
 	private String comment;		// 评论内容
 	private Date commentTime;		// 评论时间
 	
 	public GbjUserBuyComments() {
-		super();
+		 super();
 	}
 
 	public GbjUserBuyComments(String id){
 		super(id);
 	}
-		
+	
+	public GbjBuy getBuy() {
+		return buy;
+	}
+	public void getBuy(GbjBuy buy) {
+		this.buy = buy;
+	}
+	
+	public void setBuy(GbjBuy buy) {
+		this.buy = buy;
+	}
+	
+	
+	public GbjUserBuyComments(GbjBuy buyId) {
+		this.buy = buyId;
+	}
+	
 	public String getBuyId() {
 		return buyId;
 	}
@@ -39,6 +56,15 @@ public class GbjUserBuyComments extends DataEntity<GbjUserBuyComments> {
 		this.buyId = buyId;
 	}
 
+	/*@Length(min=0, max=64, message="买标信息ID长度必须介于 0 和 64 之间")
+	public String getBuy() {
+		return buy;
+	}
+
+	public void setBuy(String buy) {
+		this.buy = buy;
+	}*/
+	
 	@Length(min=0, max=200, message="父ID长度必须介于 0 和 200 之间")
 	public String getParentId() {
 		return parentId;

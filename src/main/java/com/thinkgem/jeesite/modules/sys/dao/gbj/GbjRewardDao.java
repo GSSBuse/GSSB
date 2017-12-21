@@ -17,4 +17,12 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
 @MyBatisDao
 public interface GbjRewardDao extends CrudDao<GbjReward> {
 	public List<GbjReward> findDomainRewardList(int count);
+	
+	//发布悬赏信息
+	public int release(GbjReward gbjReward);
+	
+	//撤回悬赏信息
+	public int withdraw(GbjReward gbjReward);
+	
+	
 }

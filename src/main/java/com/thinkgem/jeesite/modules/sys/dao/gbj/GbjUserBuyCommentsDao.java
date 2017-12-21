@@ -3,6 +3,8 @@
  */
 package com.thinkgem.jeesite.modules.sys.dao.gbj;
 
+import java.util.List;
+
 import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
@@ -15,5 +17,6 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
 @MyBatisDao
 public interface GbjUserBuyCommentsDao extends CrudDao<GbjUserBuyComments> {
 	
-	
+	//根据buy_id 买标评论信息
+	 public List<GbjUserBuyComments>  getCommentsList(String buy_Id);
 }

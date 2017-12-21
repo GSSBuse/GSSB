@@ -15,7 +15,7 @@
         	return false;
         }
 	</script>
-</head>
+</head> 
 <body>
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctx}/sys/gbj/gbjSold/">卖标信息管理列表</a></li>
@@ -25,7 +25,7 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
-			<li><label>用户ID：</label>
+			<li><label>用户名：</label>
 				<form:input path="user.id" htmlEscape="false" maxlength="200" class="input-medium"/>
 			</li>
 			<li><label>真实姓名：</label>
@@ -61,7 +61,7 @@
 				<th>评论数</th>
 				<th>创建时间</th>
 				<th>备注信息</th>
-				<th>删除标记</th>
+			
 				<shiro:hasPermission name="sys:gbj:gbjSold:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -107,13 +107,27 @@
 				<td>
 					${gbjSold.remarks}
 				</td>
+				
 				<td>
-					${fns:getDictLabel(gbjSold.delFlag, 'del_flag', '')}
-				</td>
-				<shiro:hasPermission name="sys:gbj:gbjSold:edit"><td>
+				<shiro:hasPermission name="sys:gbj:gbjSold:edit">
     				<a href="${ctx}/sys/gbj/gbjSold/form?id=${gbjSold.id}">修改</a>
+    			</shiro:hasPermission>
+    			<shiro:hasPermission name="sys:gbj:gbjSold:edit">
 					<a href="${ctx}/sys/gbj/gbjSold/delete?id=${gbjSold.id}" onclick="return confirmx('确认要删除该卖标信息管理吗？', this.href)">删除</a>
-				</td></shiro:hasPermission>
+				</shiro:hasPermission>
+				
+				<shiro:hasPermission name="sys:gbj:gbjSold:edit">
+					<a href="${ctx}/sys/gbj/gbjSold/release?id=${gbjSold.id}" onclick="return confirmx('确认要发布该卖标信息吗？', this.href)">发布</a>
+				</shiro:hasPermission>
+				
+				<shiro:hasPermission name="sys:gbj:gbjSold:edit">
+					<a href="${ctx}/sys/gbj/gbjSold/withdraw?id=${gbjSold.id}" onclick="return confirmx('确认要撤回该卖标信息吗？', this.href)">撤回</a>
+				</shiro:hasPermission>
+				
+				<shiro:hasPermission name="sys:gbj:gbjUserSoldComments:view">	
+					<a href="${ctx}/sys/gbj/gbjUserSoldComments/getSoldCommentsListbyid?sold_Id=${gbjSold.id}">评论管理</a>
+				</shiro:hasPermission>
+				</td>
 			</tr>
 		</c:forEach>
 		</tbody>

@@ -79,5 +79,27 @@ public class GbjRewardController extends BaseController {
 		addMessage(redirectAttributes, "删除悬赏信息管理成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gbj/gbjReward/?repage";
 	}
+	
+	//发布悬赏信息
+	@RequiresPermissions("sys:gbj:gbjReward:edit")
+	@RequestMapping(value = "release")
+	public String release(GbjReward gbjReward, RedirectAttributes redirectAttributes) {
+		//System.out.print("controller");
+		gbjRewardService.release(gbjReward);
+		addMessage(redirectAttributes, "发布悬赏信息成功");
+		return "redirect:"+Global.getAdminPath()+"/sys/gbj/gbjReward/?repage";
+	}
+	
+	
+	//撤回悬赏信息
+		@RequiresPermissions("sys:gbj:gbjReward:edit")
+		@RequestMapping(value = "withdraw")
+		public String withdraw(GbjReward gbjReward, RedirectAttributes redirectAttributes) {
+			//System.out.print("controller");
+			gbjRewardService.withdraw(gbjReward);
+			addMessage(redirectAttributes, "撤回悬赏信息成功");
+			return "redirect:"+Global.getAdminPath()+"/sys/gbj/gbjReward/?repage";
+		}
+	
 
 }

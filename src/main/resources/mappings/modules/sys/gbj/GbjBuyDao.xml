@@ -156,6 +156,21 @@
 		WHERE id = #{id}
 	</update>
 	
+	<!-- 更新数据库发布买标信息 -->
+	<update id="release">
+		UPDATE gbj_buy SET 
+			front_del_flag = 1
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 更新数据库撤回买标信息 -->
+	<update id="withdraw">
+		UPDATE gbj_buy SET 
+			front_del_flag = 0
+		WHERE id = #{id}
+	</update>
+	
+	
 	<update id="delete">
 		UPDATE gbj_buy SET 
 			del_flag = #{DEL_FLAG_DELETE}

@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjSold;
 
 /**
@@ -17,4 +18,11 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjSold;
 @MyBatisDao
 public interface GbjSoldDao extends CrudDao<GbjSold> {
 	public List<GbjSold> findDomainSoldList(int count);
+	
+	//发布卖标信息
+	public int release(GbjSold gbjSold);
+			
+	//撤回卖标信息
+	public int withdraw(GbjSold gbjSold);
+	
 }

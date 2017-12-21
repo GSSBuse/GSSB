@@ -6,64 +6,63 @@ package com.thinkgem.jeesite.modules.sys.entity.gbj;
 import org.hibernate.validator.constraints.Length;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import javax.validation.constraints.NotNull;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
 
 /**
- * 卖标信息评论Entity
- * @author 管理员
+ * 悬赏信息评论Entity
+ * @author snnu
  * @version 2017-12-21
  */
-public class GbjUserSoldComments extends DataEntity<GbjUserSoldComments> {
+public class GbjUserRewardComments extends DataEntity<GbjUserRewardComments> {
 	
 	private static final long serialVersionUID = 1L;
-	private GbjSold sold;		
-	private String soldId;   // 卖标信息ID
+	private GbjReward reward;
+	private String rewardId;		// 悬赏信息ID
 	private String parentId;		// 父ID
 	private String childId;		// 子ID
 	private String comment;		// 评论内容
 	private Date commentTime;		// 评论时间
 	
-	public GbjUserSoldComments() {
+	public GbjUserRewardComments() {
 		super();
 	}
 
-	public GbjUserSoldComments(String id){
+	public GbjUserRewardComments(String id){
 		super(id);
 	}
 	
-	public GbjSold getSold() {
-		return sold;
+	public GbjReward getReward() {
+		return reward;
 	}
-	public void getSold(GbjSold sold) {
-		this.sold = sold;
-	}
-	
-	public void setSold(GbjSold sold) {
-		this.sold = sold;
+	public void getReward(GbjReward reward) {
+		this.reward= reward;
 	}
 	
-	
-	public GbjUserSoldComments(GbjSold soldId) {
-		this.sold = soldId;
+	public void setReward(GbjReward reward) {
+		this.reward = reward;
 	}
 	
-	public String getSoldId() {
-		return soldId;
+	
+	public GbjUserRewardComments(GbjReward rewardId) {
+		this.reward = rewardId;
+	}
+	
+	public String getRewardId() {
+		return rewardId;
 	}
 
-	public void setSoldId(String soldId) {
-		this.soldId = soldId;
+	public void setRewardId(String rewardId) {
+		this.rewardId = rewardId;
+	}
+	
+	/*@Length(min=0, max=64, message="用户ID长度必须介于 0 和 64 之间")
+	public String getReward() {
+		return reward;
 	}
 
-	/*@Length(min=0, max=64, message="卖标信息ID长度必须介于 0 和 64 之间")
-	public String getSold() {
-		return sold;
-	}
-
-	public void setSold(String sold) {
-		this.sold = sold;
+	public void setReward(String reward) {
+		this.reward = reward;
 	}*/
 	
 	@Length(min=0, max=64, message="父ID长度必须介于 0 和 64 之间")
@@ -94,7 +93,6 @@ public class GbjUserSoldComments extends DataEntity<GbjUserSoldComments> {
 	}
 	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@NotNull(message="评论时间不能为空")
 	public Date getCommentTime() {
 		return commentTime;
 	}

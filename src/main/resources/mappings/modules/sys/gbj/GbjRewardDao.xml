@@ -159,6 +159,21 @@
 		WHERE id = #{id}
 	</update>
 	
+	<!-- 更新数据库发布悬赏信息 -->
+	<update id="release">
+		UPDATE gbj_reward SET 
+			front_del_flag = 1
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 更新数据库撤回悬赏信息 -->
+	<update id="withdraw">
+		UPDATE gbj_reward SET 
+			front_del_flag = 0
+		WHERE id = #{id}
+	</update>
+	
+	
 	<update id="delete">
 		UPDATE gbj_reward SET 
 			del_flag = #{DEL_FLAG_DELETE}
@@ -168,8 +183,7 @@
         SELECT
               b.type_id as "type",
               b.create_date as "createDate",
-              b.title as "title",
-              b.price as "price"
+              b.title as "title"
         FROM gbj_reward b
         <where>
                b.del_flag =  0

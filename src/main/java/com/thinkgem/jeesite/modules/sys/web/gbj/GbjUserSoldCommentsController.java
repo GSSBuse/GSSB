@@ -19,13 +19,14 @@ import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserSoldComments;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserSoldCommentsService;
 
 /**
  * 卖标信息评论Controller
  * @author 管理员
- * @version 2017-12-18
+ * @version 2017-12-21
  */
 @Controller
 @RequestMapping(value = "${adminPath}/sys/gbj/gbjUserSoldComments")
@@ -45,6 +46,22 @@ public class GbjUserSoldCommentsController extends BaseController {
 		}
 		return entity;
 	}
+	
+	
+	//根据sold_Id查询买标信息评论信息
+		@RequiresPermissions("sys:gbj:gbjUserSoldComments:view")
+		@RequestMapping(value = {"getSoldCommentsListbyid"})
+		public String getComments(String sold_Id,HttpServletRequest request, 
+				HttpServletResponse response, Model model) {
+			
+			//System.out.print(buy_Id);                                    
+			Page<GbjUserSoldComments> page = gbjUserSoldCommentsService.findPages(new Page<GbjUserSoldComments>(request, response), sold_Id);
+			
+			model.addAttribute("page", page);
+			return "modules/sys/gbj/gbjUserSoldCommentsList";
+		
+			
+		}
 	
 	@RequiresPermissions("sys:gbj:gbjUserSoldComments:view")
 	@RequestMapping(value = {"list", ""})

@@ -109,12 +109,12 @@
 				<form:input path="payFlowNumber" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
 			</div>
 		</div>
-		<div class="control-group">
+		<%-- <div class="control-group">
 			<label class="control-label">撤回标记：</label>
 			<div class="controls">
 				<form:radiobuttons path="frontDelFlag" items="${fns:getDictList('gbj_front_del_flag')}" itemLabel="label" itemValue="value" htmlEscape="false" class=""/>
 			</div>
-		</div>
+		</div> --%>
 		<div class="control-group">
 			<label class="control-label">点赞数：</label>
 			<div class="controls">
