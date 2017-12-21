@@ -5,12 +5,14 @@ package com.thinkgem.jeesite.modules.sys.service.gbj;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
 import com.thinkgem.jeesite.modules.wx.entity.domainname.BidClient;
 import com.thinkgem.jeesite.modules.sys.dao.gbj.GbjUserBuyCommentsDao;
@@ -46,6 +48,7 @@ public class GbjUserBuyCommentsService extends CrudService<GbjUserBuyCommentsDao
 		return page;
 	}
 	
+	
 	public Page<GbjUserBuyComments> findPage(Page<GbjUserBuyComments> page, GbjUserBuyComments gbjUserBuyComments) {
 		return super.findPage(page, gbjUserBuyComments);
 	}
@@ -59,5 +62,8 @@ public class GbjUserBuyCommentsService extends CrudService<GbjUserBuyCommentsDao
 	public void delete(GbjUserBuyComments gbjUserBuyComments) {
 		super.delete(gbjUserBuyComments);
 	}
+	public List<GbjUserBuyComments> findDomainArticleBuyCommentsList(@Param(value="counts") String count) {
+	return gbjUserBuyCommentsDao.findDomainArticleBuyCommentsList(Integer.parseInt(count));
+}
 	
 }

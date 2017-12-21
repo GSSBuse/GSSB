@@ -36,7 +36,7 @@
 		<div class="control-group" style="visibility:hidden">
 			<label class="control-label">用户名ID：</label>
 			<div class="controls">
-				<form:input path="user.id" value="f3e9b86259614079b176430b0886fc31" style="visibility:hidden" htmlEscape="false" maxlength="64" class="input-xlarge required"/>
+				<form:input path="user.id" value="f3e9b86259614079b176430b0886fc31"  htmlEscape="false" maxlength="64" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -94,7 +94,7 @@
 		<div class="control-group">
 			<label class="control-label">支付状态：</label>
 			<div class="controls">
-				<form:input path="payStatus" htmlEscape="false" maxlength="20" class="input-xlarge "/>
+				<form:radiobuttons path="payStatus" items="${fns:getDictList('gbj_pay_status')}" itemLabel="label" itemValue="value" htmlEscape="false" class=""/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -109,12 +109,18 @@
 				<form:input path="payFlowNumber" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
 			</div>
 		</div>
-		<%-- <div class="control-group">
+		<div class="control-group">
+			<label class="control-label">中标者：</label>
+			<div class="controls">
+				<form:input path="successfulBidder" htmlEscape="false" maxlength="20" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
 			<label class="control-label">撤回标记：</label>
 			<div class="controls">
 				<form:radiobuttons path="frontDelFlag" items="${fns:getDictList('gbj_front_del_flag')}" itemLabel="label" itemValue="value" htmlEscape="false" class=""/>
 			</div>
-		</div> --%>
+		</div>
 		<div class="control-group">
 			<label class="control-label">点赞数：</label>
 			<div class="controls">

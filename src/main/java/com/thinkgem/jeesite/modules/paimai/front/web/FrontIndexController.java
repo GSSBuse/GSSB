@@ -1,7 +1,9 @@
 package com.thinkgem.jeesite.modules.paimai.front.web;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.bean.AjaxResult;
 import com.thinkgem.jeesite.common.mapper.JsonMapper;
+import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.utils.SendMailUtil;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.ArticleList;
@@ -23,6 +26,7 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjSold;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjTouristRequire;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.RewardArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.SoldArticleList;
 import com.thinkgem.jeesite.modules.sys.service.gbj.ArticleListService;
@@ -31,6 +35,7 @@ import com.thinkgem.jeesite.modules.sys.service.gbj.GbjBuyService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjRewardService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjSoldService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjTouristRequireService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserBuyCommentsService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.RewardArticleListService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.SoldArticleListService;
 
@@ -61,6 +66,9 @@ public class FrontIndexController extends BaseController{
 	private SoldArticleListService soldarticleListService; //卖标信息发布 2017/12/15  by snnu
 	@Autowired
 	private RewardArticleListService rewardarticleListService; //悬赏信息发布 2017/12/15 by snnu
+	
+	@Autowired
+	private GbjUserBuyCommentsService gbjUserBuyCommentsService;//评论信息展示2017/12/21 by snnu
 	/**
 	 * 网站首页
 	 
@@ -110,6 +118,13 @@ public class FrontIndexController extends BaseController{
 		return "modules/paimai/front/single";
 	}	
 	/**
+	 * 买标信息详细一览页面     snnu  12.21
+	 */
+	@RequestMapping(value= {"gbjbuysingle"})
+	public String gbjbuysingle(Model model) {
+		return "modules/paimai/front/gbjbuysingle";
+	}	
+	/**
 	 * 咨询买标一览页面
 	 */
 	@RequestMapping(value= {"buyarticles"})
@@ -152,10 +167,14 @@ public class FrontIndexController extends BaseController{
 			//LogUtils.saveSpecialLog(request, null);
 			
 			//STEP2 发送邮件  TODO
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("subject", "测试标题");
+			map.put("content", "测试内容");
 			String toMailAddr = "928335288@qq.com";
 			String subject = "国商商标查询";
+			String templatePath = "mailtemplate/test.ftl";
 			String message = JsonMapper.toJsonString(gbjTouristRequire);
-		    SendMailUtil.sendFtlMail(toMailAddr, subject, message, null);			
+		    SendMailUtil.sendFtlMail(toMailAddr, subject,templatePath, map);			
 			
 			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
 			
@@ -273,7 +292,7 @@ public class FrontIndexController extends BaseController{
 	@ResponseBody
 	public AjaxResult gbsoldData( @RequestParam("count") String count) {
 		
-		//取得最新的我要买标信息
+		//取得最新的我要卖标信息
 		List<GbjSold> pageDomainSoldList = new ArrayList<GbjSold>();
 		try {
 			pageDomainSoldList = gbjSoldService.findDomainSoldList(count);
@@ -317,7 +336,7 @@ public class FrontIndexController extends BaseController{
 	@ResponseBody
 	public AjaxResult ArticleData( @RequestParam("count") String count) {
 		
-		//取得最新的我要买标信息
+		//取得最新全部的信息
 		List<ArticleList> pageDomainArticleList = new ArrayList<ArticleList>();
 		try {
 			pageDomainArticleList = articleListService.findDomainArticleList(count);
@@ -352,6 +371,7 @@ public class FrontIndexController extends BaseController{
 			return AjaxResult.makeError("");
 		}
 	}
+	
 	/**
 	 * 获取页面显示我要卖信息的全部信息
 	 * @param domainBuyIdList
@@ -361,7 +381,7 @@ public class FrontIndexController extends BaseController{
 	@ResponseBody
 	public AjaxResult ArticleSoldData( @RequestParam("count") String count) {
 		
-		//取得最新的我要买标信息
+		//取得最新的我要卖标信息
 		List<SoldArticleList> pageDomainSoldArticleList = new ArrayList<SoldArticleList>();
 		try {
 			pageDomainSoldArticleList = soldarticleListService.findDomainSoldArticleList(count);
@@ -383,7 +403,7 @@ public class FrontIndexController extends BaseController{
 	@ResponseBody
 	public AjaxResult ArticleRewardData( @RequestParam("count") String count) {
 		
-		//取得最新的我要买标信息
+		//取得最新的我要悬赏信息
 		List<RewardArticleList> pageDomainRewardArticleList = new ArrayList<RewardArticleList>();
 		try {
 			pageDomainRewardArticleList = rewardarticleListService.findDomainRewardArticleList(count);
@@ -396,4 +416,29 @@ public class FrontIndexController extends BaseController{
 			return AjaxResult.makeError("");
 		}
 	} 
+	/**
+	 * 获取页面显示单个买标信息和评论信息    by snnu 2017/12/21
+	 * @param ArticleBuyCommentsData
+	 * @return 单个买标信息和评论信息
+	 */
+	@RequestMapping(value = "polling/ArticleBuyCommentsData")
+	@ResponseBody
+	public AjaxResult ArticleBuyCommentsData( @RequestParam("count") String count) {
+		
+		//单个买标信息和评论信息
+		List<GbjUserBuyComments> pageDomainBuyCommentsArticleList = new ArrayList<GbjUserBuyComments>();
+		try {
+			pageDomainBuyCommentsArticleList = gbjUserBuyCommentsService.findDomainArticleBuyCommentsList(count );
+		   	 
+			AjaxResult ar = AjaxResult.makeSuccess("");
+			ar.getData().put("ArticleBuyCommentsData", pageDomainBuyCommentsArticleList);
+			return ar;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AjaxResult.makeError("");
+		}
+	}
+	
+	
+	
 }

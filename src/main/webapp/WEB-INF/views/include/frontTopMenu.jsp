@@ -31,7 +31,7 @@
                                         <ul id="menu-top-menu" class="clearfix">
                                             <li class="current-menu-item"><a href="${ctx }/index1.html">首页</a></li>
                                             <li><a href="#">动态信息</a>                                            
-                                                   <ul class="sub-menu">
+                                                   <ul class="sub-menu" style="z-index:123">
                                                            <li><a href="${ctx }/buyarticles.html">买标</a></li>
                                                            <li><a href="${ctx }/soldarticles.html">卖标</a></li>
                                                            <li><a href="${ctx }/rewardarticles.html">悬赏起名</a></li>

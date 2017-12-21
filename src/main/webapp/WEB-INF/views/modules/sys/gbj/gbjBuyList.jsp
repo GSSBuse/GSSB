@@ -32,6 +32,12 @@
 			<li><label>真实姓名：</label>
 				<form:input path="realname" htmlEscape="false" maxlength="200" class="input-medium"/>
 			</li>
+			
+			<%-- <li><label>发布状态：</label>
+				<form:input path="frontDelFlag" htmlEscape="false" maxlength="200" class="input-medium"/>
+			</li> --%>
+			
+			
 			<li><label>国标类型：</label>
 				<form:select path="typeId" class="input-medium">
 					<form:option value="" label=""/>
@@ -63,6 +69,8 @@
 				<th>评论数</th>
 				<th>创建时间</th>
 				<th>备注信息</th>
+				
+				<th>发布撤回状态</th>
 				<shiro:hasPermission name="sys:gbj:gbjBuy:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -108,6 +116,11 @@
 				<td>
 					${gbjBuy.remarks}
 				</td>
+				
+				<td>
+					${fns:getDictLabel(gbjBuy.frontDelFlag, 'gbj_front_del_flag', '')}
+				</td>
+				
 				<td>
 				<shiro:hasPermission name="sys:gbj:gbjBuy:edit">
     				<a href="${ctx}/sys/gbj/gbjBuy/form?id=${gbjBuy.id}">修改</a>

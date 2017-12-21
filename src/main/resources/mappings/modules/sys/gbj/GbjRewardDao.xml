@@ -16,6 +16,7 @@
 		a.pay_status AS "payStatus",
 		a.status AS "status",
 		a.pay_flow_number AS "payFlowNumber",
+		a.successful_bidder AS "successfulBidder",
 		a.update_by AS "updateBy.id",
 		a.front_del_flag AS "frontDelFlag",
 		a.update_date AS "updateDate",
@@ -100,6 +101,7 @@
 			pay_status,
 			status,
 			pay_flow_number,
+			successful_bidder,
 			update_by,
 			front_del_flag,
 			update_date,
@@ -123,6 +125,7 @@
 			#{payStatus},
 			#{status},
 			#{payFlowNumber},
+			#{successfulBidder},
 			#{updateBy.id},
 			#{frontDelFlag},
 			#{updateDate},
@@ -148,6 +151,7 @@
 			pay_status = #{payStatus},
 			status = #{status},
 			pay_flow_number = #{payFlowNumber},
+			successful_bidder = #{successfulBidder},
 			update_by = #{updateBy.id},
 			front_del_flag = #{frontDelFlag},
 			update_date = #{updateDate},
@@ -158,6 +162,7 @@
 			del_flag = #{delFlag}
 		WHERE id = #{id}
 	</update>
+	
 	
 	<!-- 更新数据库发布悬赏信息 -->
 	<update id="release">
@@ -173,12 +178,12 @@
 		WHERE id = #{id}
 	</update>
 	
-	
 	<update id="delete">
 		UPDATE gbj_reward SET 
 			del_flag = #{DEL_FLAG_DELETE}
 		WHERE id = #{id}
 	</update>
+	
 	<select id="findDomainRewardList" resultType="GbjReward" parameterType="java.lang.Integer">
         SELECT
               b.type_id as "type",
@@ -193,5 +198,6 @@
             </if>
         </where>
     </select>
+	
 	
 </mapper>

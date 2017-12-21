@@ -3,6 +3,7 @@ require(["plugin/validation/avalon.validation", "domReady!"], function() {
 	var defaultInfo = {
 		name: "",
 		mobile: "",
+		qq:"",
 		searchContents: ""
 	}
 	alert(test);

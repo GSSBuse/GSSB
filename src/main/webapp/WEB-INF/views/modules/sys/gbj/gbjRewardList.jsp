@@ -53,11 +53,13 @@
 				<th>打赏金额</th>
 				<th>手机号码</th>
 				<th>支付状态</th>
-				<th>状态（未发布，已发布，已中标）</th>
+				<th>状态</th>
 				<th>支付流水号</th>
-				<th>发布撤回状态</th>
-				<!-- <th>点赞数</th> -->
-				<!-- <th>备注信息</th> -->
+				<th>中标者</th>
+				
+				<th>备注</th>
+				
+				<th>发布撤回</th>
 				<!-- <th>删除标记</th> -->
 				<shiro:hasPermission name="sys:gbj:gbjReward:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
@@ -87,7 +89,7 @@
 					${gbjReward.mobile}
 				</td>
 				<td>
-					${gbjReward.payStatus}
+					${fns:getDictLabel(gbjReward.payStatus, 'gbj_pay_status', '')}
 				</td>
 				<td>
 					${fns:getDictLabel(gbjReward.status, 'gbj_reward_status', '')}
@@ -96,38 +98,40 @@
 					${gbjReward.payFlowNumber}
 				</td>
 				<td>
+					${gbjReward.successfulBidder}
+				</td>
+				
+				<td>
+					${gbjReward.remarks}
+				</td>
+				<td>
 					${fns:getDictLabel(gbjReward.frontDelFlag, 'gbj_front_del_flag', '')}
 				</td>
-				<%-- <td>
-					${gbjReward.upCounts}
-				</td> --%>
-				<%-- <td>
-					${gbjReward.remarks}
-				</td> --%>
+				
 				<%-- <td>
 					${fns:getDictLabel(gbjReward.delFlag, 'del_flag', '')}
 				</td> --%>
-				<td>
-				<shiro:hasPermission name="sys:gbj:gbjReward:edit">
-    				<a href="${ctx}/sys/gbj/gbjReward/form?id=${gbjReward.id}">修改</a>
-    			</shiro:hasPermission>
-    			<shiro:hasPermission name="sys:gbj:gbjReward:edit">
-					<a href="${ctx}/sys/gbj/gbjReward/delete?id=${gbjReward.id}" onclick="return confirmx('确认要删除该悬赏信息管理吗？', this.href)">删除</a>
-				</shiro:hasPermission>
-				
-				<shiro:hasPermission name="sys:gbj:gbjReward:edit">
+					
+					<td><shiro:hasPermission name="sys:gbj:gbjReward:edit">
+						<a
+							href="${ctx}/sys/gbj/gbjReward/form?id=${gbjReward.id}">修改</a> <a
+							href="${ctx}/sys/gbj/gbjReward/delete?id=${gbjReward.id}"
+							onclick="return confirmx('确认要删除该悬赏信息管理吗？', this.href)">删除</a>
+					</shiro:hasPermission>
+					<shiro:hasPermission name="sys:gbj:gbjReward:edit">
 					<a href="${ctx}/sys/gbj/gbjReward/release?id=${gbjReward.id}" onclick="return confirmx('确认要发布该悬赏信息吗？', this.href)">发布</a>
 				</shiro:hasPermission>
 				
 				<shiro:hasPermission name="sys:gbj:gbjReward:edit">
 					<a href="${ctx}/sys/gbj/gbjReward/withdraw?id=${gbjReward.id}" onclick="return confirmx('确认要撤回该悬赏信息吗？', this.href)">撤回</a>
 				</shiro:hasPermission>
-				
-				<shiro:hasPermission name="sys:gbj:gbjUserRewardComments:view">
-					<a href="${ctx}/sys/gbj/gbjUserRewardComments/getRewardCommentsListbyid?reward_Id=${gbjReward.id}">评论管理</a>
-				</shiro:hasPermission>
-				</td>
-			</tr>
+					
+					<shiro:hasPermission name="sys:gbj:gbjUserRewardComments:view">
+					<a href="${ctx}/sys/gbj/gbjUserRewardComments/getRewardCommentsListbyid?reward_Id=${gbjReward.id} ">评论管理</a>
+				</shiro:hasPermission>	
+					
+					</td>
+				</tr>
 		</c:forEach>
 		</tbody>
 	</table>

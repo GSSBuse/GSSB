@@ -131,5 +131,18 @@
 			del_flag = #{DEL_FLAG_DELETE}
 		WHERE id = #{id}
 	</update>
+	<select id="findDomainArticleBuyCommentsList" resultType="GbjUserBuyComments" parameterType="java.lang.Integer">
+        SELECT
+             c.comment AS "comment",
+		c.comment_time AS "commentTime"
+        FROM gbj_user_buy_comments c
+        <where>
+               c.del_flag =  0
+            ORDER BY c.update_date DESC
+            <if test="_parameter != null and _parameter != ''">
+                limit #{counts}
+            </if>
+        </where>
+    </select>
 	
 </mapper>

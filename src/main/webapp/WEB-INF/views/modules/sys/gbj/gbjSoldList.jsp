@@ -61,6 +61,7 @@
 				<th>评论数</th>
 				<th>创建时间</th>
 				<th>备注信息</th>
+				<th>发布撤回状态</th>
 			
 				<shiro:hasPermission name="sys:gbj:gbjSold:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
@@ -106,6 +107,10 @@
 				</td>
 				<td>
 					${gbjSold.remarks}
+				</td>
+				
+				<td>
+					${fns:getDictLabel(gbjSold.frontDelFlag, 'gbj_front_del_flag', '')}
 				</td>
 				
 				<td>

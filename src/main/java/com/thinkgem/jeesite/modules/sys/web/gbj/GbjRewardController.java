@@ -19,13 +19,14 @@ import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjRewardService;
 
 /**
  * 悬赏信息管理Controller
  * @author snnu
- * @version 2017-12-18
+ * @version 2017-12-21
  */
 @Controller
 @RequestMapping(value = "${adminPath}/sys/gbj/gbjReward")
@@ -80,26 +81,26 @@ public class GbjRewardController extends BaseController {
 		return "redirect:"+Global.getAdminPath()+"/sys/gbj/gbjReward/?repage";
 	}
 	
+	
 	//发布悬赏信息
-	@RequiresPermissions("sys:gbj:gbjReward:edit")
-	@RequestMapping(value = "release")
-	public String release(GbjReward gbjReward, RedirectAttributes redirectAttributes) {
-		//System.out.print("controller");
-		gbjRewardService.release(gbjReward);
-		addMessage(redirectAttributes, "发布悬赏信息成功");
-		return "redirect:"+Global.getAdminPath()+"/sys/gbj/gbjReward/?repage";
-	}
-	
-	
-	//撤回悬赏信息
-		@RequiresPermissions("sys:gbj:gbjReward:edit")
-		@RequestMapping(value = "withdraw")
-		public String withdraw(GbjReward gbjReward, RedirectAttributes redirectAttributes) {
-			//System.out.print("controller");
-			gbjRewardService.withdraw(gbjReward);
-			addMessage(redirectAttributes, "撤回悬赏信息成功");
-			return "redirect:"+Global.getAdminPath()+"/sys/gbj/gbjReward/?repage";
-		}
-	
+			@RequiresPermissions("sys:gbj:gbjReward:edit")
+			@RequestMapping(value = "release")
+			public String release(GbjReward gbjReward, RedirectAttributes redirectAttributes) {
+				//System.out.print("controller");
+				gbjRewardService.release(gbjReward);
+				addMessage(redirectAttributes, "发布买标信息成功");
+				return "redirect:"+Global.getAdminPath()+"/sys/gbj/gbjReward/?repage";
+			}
+			
+			
+			//撤回悬赏信息
+				@RequiresPermissions("sys:gbj:gbjReward:edit")
+				@RequestMapping(value = "withdraw")
+				public String withdraw(GbjReward gbjReward, RedirectAttributes redirectAttributes) {
+					//System.out.print("controller");
+					gbjRewardService.withdraw(gbjReward);
+					addMessage(redirectAttributes, "撤回买标信息成功");
+					return "redirect:"+Global.getAdminPath()+"/sys/gbj/gbjReward/?repage";
+				}
 
 }

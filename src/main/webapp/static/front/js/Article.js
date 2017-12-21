@@ -11,8 +11,9 @@ var vm = avalon.define({
 		//domainBuyList1 : [{title:"test"},{title:"test2"}],
 		//domainSoldList1 : [{title:"test"},{title:"test2"}],//买标信息一览（最新11条，首页只表示最新的）
 		datas : {
-			domainArticleList : [],//买标信息一览（最新11条，首页只表示最新的）
-			//domainSoldList : [],//卖标信息一览（最新11条，首页只表示最新的）
+			//domainArticleList : [],//买标信息一览（最新11条，首页只表示最新的）
+		     domainBuyArticleList : [],//卖标信息一览（最新11条，首页只表示最新的）
+		     domainBuyCommentsArticleList:[],//评论内容获取
 			//domainRewardList : [],//卖标信息一览（最新11条，首页只表示最新的）
 			timeStamp: 0,
 			tmp : {
@@ -84,4 +85,44 @@ var vm = avalon.define({
 	}
 	interval_Article_status_check();
 	
+var interval_ArticleBuy_status_check = function() {
+		
+		var count = 11;//首页最多显示11条
+		
+		$.post(
+			"polling/ArticleBuyData.json",
+			{
+				count : count         //参数1，检索的limit条数
+			},
+			function(res) {
+				if (res.type == "success") {					
+					vm.datas.domainBuyArticleList.clear();
+					vm.datas.domainBuyArticleList.pushArray(res.data.ArticleBuyData);
+					timeout_ArticleBuy = setTimeout(interval_ArticleBuy_status_check, 30000); //30秒自动刷新一次
+				}
+			}
+		);
+	}
+	interval_ArticleBuy_status_check();
+	
+	//评论内容展示
+var interval_ArticleBuyComments_status_check = function() {
+		
+		var count = 11;//首页最多显示11条
+		
+		$.post(
+			"polling/ArticleBuyCommentsData.json",
+			{
+				count : count         //参数1，检索的limit条数
+			},
+			function(res) {
+				if (res.type == "success") {					
+					vm.datas.domainBuyCommentsArticleList.clear();
+					vm.datas.domainBuyCommentsArticleList.pushArray(res.data.ArticleBuyCommentsData);
+					timeout_ArticleBuyComments = setTimeout(interval_ArticleBuyComments_status_check, 30000); //30秒自动刷新一次
+				}
+			}
+		);
+	}
+	interval_ArticleBuyComments_status_check();
 	

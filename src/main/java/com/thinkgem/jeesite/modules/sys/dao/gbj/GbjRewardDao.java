@@ -7,12 +7,13 @@ import java.util.List;
 
 import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
 
 /**
  * 悬赏信息管理DAO接口
  * @author snnu
- * @version 2017-12-18
+ * @version 2017-12-21
  */
 @MyBatisDao
 public interface GbjRewardDao extends CrudDao<GbjReward> {
@@ -20,9 +21,7 @@ public interface GbjRewardDao extends CrudDao<GbjReward> {
 	
 	//发布悬赏信息
 	public int release(GbjReward gbjReward);
-	
+		
 	//撤回悬赏信息
 	public int withdraw(GbjReward gbjReward);
-	
-	
 }

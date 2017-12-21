@@ -12,19 +12,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
 import com.thinkgem.jeesite.modules.sys.dao.gbj.GbjRewardDao;
 
 /**
  * 悬赏信息管理Service
  * @author snnu
- * @version 2017-12-18
+ * @version 2017-12-21
  */
 @Service
 @Transactional(readOnly = true)
 public class GbjRewardService extends CrudService<GbjRewardDao, GbjReward> {
+
 	@Autowired
 	GbjRewardDao gbjRewarddao;
+	
 	public GbjReward get(String id) {
 		return super.get(id);
 	}
@@ -49,26 +52,24 @@ public class GbjRewardService extends CrudService<GbjRewardDao, GbjReward> {
 	
 	
 	//发布悬赏信息
-	@Transactional(readOnly = false)
-	public void release(GbjReward gbjReward) {
-		
-		//System.out.print("service");
-		gbjRewarddao.release(gbjReward);
-	}
-	
-	//撤回悬赏信息
-		@Transactional(readOnly = false)
-		public void withdraw(GbjReward gbjReward) {
+			@Transactional(readOnly = false)
+			public void release(GbjReward gbjReward) {
+				
+				//System.out.print("service");
+				gbjRewarddao.release(gbjReward);
+			}
 			
-			//System.out.print("service");
-			gbjRewarddao.withdraw(gbjReward);
+			//撤回买标信息
+			@Transactional(readOnly = false)
+			public void withdraw(GbjReward gbjReward) {
+						
+				//System.out.print("service");
+				gbjRewarddao.withdraw(gbjReward);
+			}
+		
+		public List<GbjReward> findDomainRewardList(@Param(value="counts") String count) {
+			return gbjRewarddao.findDomainRewardList(Integer.parseInt(count));
 		}
-	
-	
-	
-	
-	public List<GbjReward> findDomainRewardList(@Param(value="counts") String count) {
-		return gbjRewarddao.findDomainRewardList(Integer.parseInt(count));
-	}
+		
 	
 }
