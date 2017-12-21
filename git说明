@@ -13,3 +13,4 @@ git remote add origin git@github.com:GSSB123/GSSB.git
 git add XXX
 git commit -m "此处输入日期或者其他名字"
 git push -u origin master
+测试
