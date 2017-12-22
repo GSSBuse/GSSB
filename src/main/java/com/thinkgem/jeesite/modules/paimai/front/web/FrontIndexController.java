@@ -93,6 +93,8 @@ public class FrontIndexController extends BaseController{
 		return "modules/paimai/front/login";
 	}	
 	
+	
+	
 	/**
 	 * 联系我们页面
 	 */

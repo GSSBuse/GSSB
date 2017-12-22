@@ -89,7 +89,7 @@ $(function() {
                 <div class="serch-bg"> </div>
                 <div class="serch-border">
                     <input type="text" value="请输入您想申请的商标、版权、专利名称" id="indexSearchInput">
-                    <a href="javascript:void(0);" id="indexSearch" class="button">
+                    <a href="javascript:void(0);"   id="indexSearch" class="button">
                         <div class="serch-botton"> 查询能否注册 </div>
                     </a>
                     <div style="clear:both"></div>
@@ -115,14 +115,18 @@ $(function() {
 <!----End of banner------>  
 
 <!----Start of 弹出框------>
-<div id="LoginBox" >
-    <div id="search-dialog" ms-controller="search-dialog" class="easyDialog_wrapper" style="display: block; margin: 0px;">
+
+
+
+
+<div id="LoginBox" ms-controller="searchdialog" >
+    <div id="search-dialog"  class="easyDialog_wrapper" style="position: fixed;display: block; margin: 180px;">
         <div class="easyDialog_content">
             <div class="easyDialog_text">
                 <div class="dialog_con"> <a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn">×</a>
                     <h1 class="red_h1">商标查询</h1>
                     <div class="form_wapper">
-                        <form id="domainform"  action="${ctx }/index1.html" method="post" ms-widget="validation" >                            
+                   <form id="domainform"  action="${ctx }/index1.html" method="post" ms-widget="validation" >                            
                             <div class="form_con">
                                 <p class="form_name">商标名称：</p>
                                 <input name="searchContents" id="searchContents" ms-duplex-required="datas.domainInfo.searchContents" type="text" style="border:1px solid #00a6db;">
@@ -152,6 +156,9 @@ $(function() {
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript" src="${ctxStatic }/front/js/searchBrand.js"></script> 
 <script type="text/javascript">
  $(function ($) {
      //弹出登录

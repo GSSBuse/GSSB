@@ -39,7 +39,7 @@
 				<form:input path="sold.id" htmlEscape="false" maxlength="64" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<%-- <div class="control-group">
 			<label class="control-label">父ID：</label>
 			<div class="controls">
 				<form:input path="parentId" htmlEscape="false" maxlength="64" class="input-xlarge "/>
@@ -50,11 +50,13 @@
 			<div class="controls">
 				<form:input path="childId" htmlEscape="false" maxlength="64" class="input-xlarge "/>
 			</div>
-		</div>
+		</div> --%>
 		<div class="control-group">
 			<label class="control-label">评论内容：</label>
 			<div class="controls">
-				<form:input path="comment" htmlEscape="false" maxlength="200" class="input-xlarge required"/>
+				
+				<form:textarea id="comment" path="comment" htmlEscape="false" rows="4" maxlength="200" class="input-xlarge required"/>
+				<sys:ckeditor replace="comment" uploadPath="/sys/gbj/gbjUserSoldComments"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

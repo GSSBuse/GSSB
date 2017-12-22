@@ -22,7 +22,26 @@
 					}
 				}
 			});
+			
+			
+			
+			
+			function getParam(){
+				C1=window.location.href.split("?")[1]; //得到id=楼主
+				
+				alert(C1);
+				$("#buyid").val(C1);
+				}
+			
+			
+			
+			
+			
 		});
+		
+		
+		
+		
 	</script>
 </head>
 <body>
@@ -33,12 +52,12 @@
 	<form:form id="inputForm" modelAttribute="gbjUserBuyComments" action="${ctx}/sys/gbj/gbjUserBuyComments/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
-		 <%--<div class="control-group">
-			<label class="control-label">买标信息ID：</label>
+		 <div class="control-group" >
+			<label class="control-label" >买标信息ID：</label>
 			<div class="controls">
-				<form:input path="buy.id" htmlEscape="false" maxlength="64" class="input-xlarge "/>
+				<form:input path="buy.id" id="buyid" htmlEscape="false" maxlength="64" class="input-xlarge "/>
 			</div>
-		</div> --%>
+		</div>
 		<%-- <div class="control-group">
 			<label class="control-label">父ID：</label>
 			<div class="controls">
@@ -54,8 +73,9 @@
 		<div class="control-group">
 			<label class="control-label">评论内容：</label>
 			<div class="controls">
-				<form:textarea path="comment" htmlEscape="false" rows="4" maxlength="500" class="input-xlarge required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+				<form:textarea id="comment" path="comment" htmlEscape="true" rows="4" maxlength="200" class="input-xlarge required"/>
+				<sys:ckeditor replace="comment" uploadPath="/sys/gbj/gbjUserBuyComments"/>
+				<!-- <span class="help-inline"><font color="red">*</font> </span> -->
 			</div>
 		</div>
 		<div class="control-group">

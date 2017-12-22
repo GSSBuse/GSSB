@@ -90,7 +90,7 @@
 				<form:input path="tag" htmlEscape="false" maxlength="50" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<%-- <div class="control-group">
 			<label class="control-label">点赞数：</label>
 			<div class="controls">
 				<form:input path="upCounts" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
@@ -107,7 +107,7 @@
 			<div class="controls">
 				<form:input path="commentsCounts" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
 			</div>
-		</div>
+		</div> --%>
 		<div class="control-group">
 			<label class="control-label">备注信息：</label>
 			<div class="controls">

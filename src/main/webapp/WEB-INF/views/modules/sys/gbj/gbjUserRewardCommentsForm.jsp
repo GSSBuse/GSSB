@@ -27,7 +27,9 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
+	<shiro:hasPermission name="sys:gbj:gbjUserRewardComments:view">
 		<li><a href="${ctx}/sys/gbj/gbjUserRewardComments/">悬赏信息评论列表</a></li>
+		</shiro:hasPermission>
 		<li class="active"><a href="${ctx}/sys/gbj/gbjUserRewardComments/form?id=${gbjUserRewardComments.id}">悬赏信息评论<shiro:hasPermission name="sys:gbj:gbjUserRewardComments:edit">${not empty gbjUserRewardComments.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gbj:gbjUserRewardComments:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="gbjUserRewardComments" action="${ctx}/sys/gbj/gbjUserRewardComments/save" method="post" class="form-horizontal">
@@ -54,7 +56,9 @@
 		<div class="control-group">
 			<label class="control-label">评论内容：</label>
 			<div class="controls">
-				<form:input path="comment" htmlEscape="false" maxlength="200" class="input-xlarge required"/>
+				
+				<form:textarea id="comment" path="comment" htmlEscape="false" rows="4" maxlength="200" class="input-xlarge required"/>
+				<sys:ckeditor replace="comment" uploadPath="/sys/gbj/gbjUserRewardComments"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

@@ -6,10 +6,10 @@ require(["plugin/validation/avalon.validation", "domReady!"], function() {
 		qq:"",
 		searchContents: ""
 	}
-	alert(test);
+	//alert(test);
 	var validationVM = null;
 	var vm = avalon.define({
-		$id : "search-dialog",
+		$id : "searchdialog",
 		datas : {
 			domainInfo : defaultInfo
 		},

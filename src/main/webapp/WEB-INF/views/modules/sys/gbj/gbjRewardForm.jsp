@@ -91,60 +91,63 @@
 				<form:input path="tag" htmlEscape="false" maxlength="200" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<%-- <div class="control-group">
 			<label class="control-label">支付状态：</label>
 			<div class="controls">
 				<form:radiobuttons path="payStatus" items="${fns:getDictList('gbj_pay_status')}" itemLabel="label" itemValue="value" htmlEscape="false" class=""/>
 			</div>
-		</div>
-		<div class="control-group">
+		</div> --%>
+		<%-- <div class="control-group">
 			<label class="control-label">状态（未发布，已发布，已中标）：</label>
 			<div class="controls">
 				<form:radiobuttons path="status" items="${fns:getDictList('gbj_reward_status')}" itemLabel="label" itemValue="value" htmlEscape="false" class=""/>
 			</div>
-		</div>
-		<div class="control-group">
+		</div> --%>
+		<%-- <div class="control-group">
 			<label class="control-label">支付流水号：</label>
 			<div class="controls">
 				<form:input path="payFlowNumber" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
 			</div>
-		</div>
+		</div> --%>
 		<div class="control-group">
 			<label class="control-label">中标者：</label>
 			<div class="controls">
 				<form:input path="successfulBidder" htmlEscape="false" maxlength="20" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<%-- <div class="control-group">
 			<label class="control-label">撤回标记：</label>
 			<div class="controls">
 				<form:radiobuttons path="frontDelFlag" items="${fns:getDictList('gbj_front_del_flag')}" itemLabel="label" itemValue="value" htmlEscape="false" class=""/>
 			</div>
-		</div>
-		<div class="control-group">
+		</div> --%>
+		<%-- <div class="control-group">
 			<label class="control-label">点赞数：</label>
 			<div class="controls">
-				<form:input path="upCounts" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
+				<form:input path="upCounts" htmlEscape="false" maxlength="20"
+					class="input-xlarge  digits" />
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">查看数：</label>
 			<div class="controls">
-				<form:input path="lookCounts" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
+				<form:input path="lookCounts" htmlEscape="false" maxlength="20"
+					class="input-xlarge  digits" />
 			</div>
-		</div>
+		</div> --%>
 		<div class="control-group">
 			<label class="control-label">备注信息：</label>
 			<div class="controls">
 				<form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="500" class="input-xxlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<%-- <div class="control-group">
 			<label class="control-label">评论数：</label>
 			<div class="controls">
-				<form:input path="commentsCounts" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
+				<form:input path="commentsCounts" htmlEscape="false" maxlength="20"
+					class="input-xlarge  digits" />
 			</div>
-		</div>
+		</div> --%>
 		<div class="form-actions">
 			<shiro:hasPermission name="sys:gbj:gbjReward:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
