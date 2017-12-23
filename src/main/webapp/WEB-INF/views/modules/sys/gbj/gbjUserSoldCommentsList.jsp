@@ -19,7 +19,7 @@
 <body>
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctx}/sys/gbj/gbjUserSoldComments/">卖标信息评论列表</a></li>
-		<shiro:hasPermission name="sys:gbj:gbjUserSoldComments:edit"><li><a href="${ctx}/sys/gbj/gbjUserSoldComments/form">卖标信息评论添加</a></li></shiro:hasPermission>
+		<%-- <shiro:hasPermission name="sys:gbj:gbjUserSoldComments:edit"><li><a href="${ctx}/sys/gbj/gbjUserSoldComments/form">卖标信息评论添加</a></li></shiro:hasPermission> --%>
 	</ul>
 	<form:form id="searchForm" modelAttribute="gbjUserSoldComments" action="${ctx}/sys/gbj/gbjUserSoldComments/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>

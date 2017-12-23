@@ -4,6 +4,7 @@
 
 <select id="findDomainBuyArticleList" resultType="BuyArticleList" parameterType="java.lang.Integer">
         SELECT
+              d.id AS "id",
               d.type_id as "typeId",
               d.mobile as "mobile",
               d.create_date as "createDate",
@@ -11,11 +12,18 @@
               d.description as "description"
         FROM gbj_buy d
         <where>
+               d.id=#{buy_Id} and
                d.del_flag =  0
             ORDER BY d.update_date DESC
             <if test="_parameter != null and _parameter != ''">
                 limit #{counts}
             </if>
         </where>
-    </select>
+    </select> 
+   
+	
+	
+	
+   
+    
     </mapper>

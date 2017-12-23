@@ -14,12 +14,15 @@
 			$("#searchForm").submit();
         	return false;
         }
+		
 	</script>
 </head>
 <body> 
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctx}/sys/gbj/gbjUserBuyComments/form?id=${gbjUserBuyComments.id}">买标信息评论列表</a></li>
-		<shiro:hasPermission name="sys:gbj:gbjUserBuyComments:edit"><li><a href="${ctx}/sys/gbj/gbjUserBuyComments/form">买标信息评论添加</a></li></shiro:hasPermission>
+		<%-- <shiro:hasPermission name="sys:gbj:gbjUserBuyComments:edit">
+			<li><a href="${ctx}/sys/gbj/gbjUserBuyComments/form">买标信息评论添加</a></li>
+		</shiro:hasPermission> --%>
 	</ul>
 	<form:form id="searchForm" modelAttribute="gbjUserBuyComments" action="${ctx}/sys/gbj/gbjUserBuyComments/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>

@@ -22,21 +22,27 @@
 					}
 				}
 			});
-		});
+			
+
+		var c = window.location.href.split("?")[1].substring(8);
+
+					$("#soldid").val(c);
+
+				});
 	</script>
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/sys/gbj/gbjUserSoldComments/">管理卖标评论列表</a></li>
-		<li class="active"><a href="${ctx}/sys/gbj/gbjUserSoldComments/form?id=${gbjUserSoldComments.id}">管理卖标评论<shiro:hasPermission name="sys:gbj:gbjUserSoldComments:edit">${not empty gbjUserSoldComments.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gbj:gbjUserSoldComments:edit">查看</shiro:lacksPermission></a></li>
+		<%-- <li><a href="${ctx}/sys/gbj/gbjUserSoldComments/">卖标评论列表</a></li> --%>
+		<li class="active"><a href="${ctx}/sys/gbj/gbjUserSoldComments/form?id=${gbjUserSoldComments.id}">卖标评论<shiro:hasPermission name="sys:gbj:gbjUserSoldComments:edit">${not empty gbjUserSoldComments.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gbj:gbjUserSoldComments:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="gbjUserSoldComments" action="${ctx}/sys/gbj/gbjUserSoldComments/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
-		<div class="control-group">
+		<div class="control-group" style="visibility:hidden">
 			<label class="control-label">卖标信息ID：</label>
 			<div class="controls">
-				<form:input path="sold.id" htmlEscape="false" maxlength="64" class="input-xlarge "/>
+				<form:input path="sold.id" id="soldid" htmlEscape="false" maxlength="64" class="input-xlarge "/>
 			</div>
 		</div>
 		<%-- <div class="control-group">

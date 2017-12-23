@@ -14,12 +14,17 @@
 			$("#searchForm").submit();
         	return false;
         }
+		
 	</script>
 </head>
 <body>
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctx}/sys/gbj/gbjUserRewardComments/">悬赏信息评论列表</a></li>
-		<shiro:hasPermission name="sys:gbj:gbjUserRewardComments:edit"><li><a href="${ctx}/sys/gbj/gbjUserRewardComments/form">悬赏信息评论添加</a></li></shiro:hasPermission>
+
+		<%-- <shiro:hasPermission name="sys:gbj:gbjUserRewardComments:edit">
+			<li><a
+				href="${ctx}/sys/gbj/gbjUserRewardComments/form?id=${gbjUserRewardComments.rewardId}">悬赏信息评论追加</a></li>
+		</shiro:hasPermission> --%>
 	</ul>
 	<form:form id="searchForm" modelAttribute="gbjUserRewardComments" action="${ctx}/sys/gbj/gbjUserRewardComments/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>

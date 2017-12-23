@@ -17,16 +17,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.bean.AjaxResult;
 import com.thinkgem.jeesite.common.mapper.JsonMapper;
+import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.utils.SendMailUtil;
 import com.thinkgem.jeesite.common.web.BaseController;
-import com.thinkgem.jeesite.modules.paimai.front.bean.FrontLoginUser;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.ArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.BuyArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjSold;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjTouristRequire;
-import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUser;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.RewardArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.SoldArticleList;
@@ -37,20 +36,17 @@ import com.thinkgem.jeesite.modules.sys.service.gbj.GbjRewardService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjSoldService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjTouristRequireService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserBuyCommentsService;
-import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.RewardArticleListService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.SoldArticleListService;
 
 
-@Controller
+@Controller 
 @RequestMapping(value = "${frontPath}")
 public class FrontIndexController extends BaseController{
 		
 	@Autowired
-	private GbjUserService gbjUserService; 								   // 用户 2017/12/23 by cf
-	
-	@Autowired
 	private GbjTouristRequireService gbjTouristRequireService;             // 国商商标查询Service
+	
 	
 	@Autowired
 	private GbjBuyService gbjBuyService;                                  //我要买标信息发布 2017/12/3  by snnu                                
@@ -97,37 +93,7 @@ public class FrontIndexController extends BaseController{
 		return "modules/paimai/front/login";
 	}	
 	
-	@RequestMapping(value = "nameLogin")
-	@ResponseBody
-	public AjaxResult nameLogin(HttpServletRequest request, @RequestParam(value = "username") String username,
-			@RequestParam(value = "passwd") String password) {
-		GbjUser userCondition = new GbjUser();
-		userCondition.setUsername(username);
-		userCondition.setPassword(password);
-		
-		List<GbjUser> findedUsers;
-		try {
-			findedUsers = this.gbjUserService.findList(userCondition);
-		} catch (Exception e) {
-			logger.error("查询用户出错", e);
-			return AjaxResult.makeError("登录出错");
-		}
-		if (findedUsers == null || findedUsers.isEmpty()) {
-			return AjaxResult.makeError("用户名或密码错误");
-		}
-		
-		GbjUser userEntity = findedUsers.get(0);
-		
-		FrontLoginUser loginUser = new FrontLoginUser();
-		loginUser.setId(userEntity.getId());
-		loginUser.setName(userEntity.getName());
-		loginUser.setUsername(userEntity.getUsername());
-		loginUser.setMobile(userEntity.getMobile());
-		loginUser.setEmail(userEntity.getEmail());
-		
-		request.getSession().setAttribute("login_user", loginUser);
-		return AjaxResult.makeSuccess("登录成功");
-	}
+	
 	
 	/**
 	 * 联系我们页面
@@ -159,6 +125,13 @@ public class FrontIndexController extends BaseController{
 	@RequestMapping(value= {"gbjbuysingle"})
 	public String gbjbuysingle(Model model) {
 		return "modules/paimai/front/gbjbuysingle";
+	}	
+	/**
+	 * 卖标信息详细一览页面     snnu  12.23
+	 */
+	@RequestMapping(value= {"gbjsoldsingle"})
+	public String gbjsoldsingle(Model model) {
+		return "modules/paimai/front/gbjsoldsingle";
 	}	
 	/**
 	 * 咨询买标一览页面
@@ -204,14 +177,15 @@ public class FrontIndexController extends BaseController{
 			
 			//STEP2 发送邮件  TODO
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("subject", "测试标题");
-			map.put("content", "测试内容");
+			map.put("SearchContents", gbjTouristRequire.getSearchContents());
+			map.put("Name", gbjTouristRequire.getName());
+			map.put("Mobile", gbjTouristRequire.getMobile());
+			map.put("Qq", gbjTouristRequire.getQq());
 			String toMailAddr = "928335288@qq.com";
 			String subject = "国商商标查询";
 			String templatePath = "mailtemplate/test.ftl";
-			String message = JsonMapper.toJsonString(gbjTouristRequire);
 		    SendMailUtil.sendFtlMail(toMailAddr, subject,templatePath, map);			
-			
+			 
 			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
 			
 			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
@@ -392,12 +366,12 @@ public class FrontIndexController extends BaseController{
 	 */
 	@RequestMapping(value = "polling/ArticleBuyData")
 	@ResponseBody
-	public AjaxResult ArticleBuyData( @RequestParam("count") String count) {
+	public AjaxResult ArticleBuyData( @RequestParam("count") String count, @RequestParam("id") String buy_Id) {
 		
 		//取得最新的我要买标信息
 		List<BuyArticleList> pageDomainBuyArticleList = new ArrayList<BuyArticleList>();
 		try {
-			pageDomainBuyArticleList = buyarticleListService.findDomainBuyArticleList(count);
+			pageDomainBuyArticleList = buyarticleListService.findDomainBuyArticleList(count,buy_Id);
 		   	 
 			AjaxResult ar = AjaxResult.makeSuccess("");
 			ar.getData().put("ArticleBuyData", pageDomainBuyArticleList);

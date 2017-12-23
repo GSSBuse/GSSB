@@ -126,9 +126,14 @@
 					<a href="${ctx}/sys/gbj/gbjReward/withdraw?id=${gbjReward.id}" onclick="return confirmx('确认要撤回该悬赏信息吗？', this.href)">撤回</a>
 				</shiro:hasPermission>
 					
+					
 					<shiro:hasPermission name="sys:gbj:gbjUserRewardComments:view">
-					<a href="${ctx}/sys/gbj/gbjUserRewardComments/getRewardCommentsListbyid?reward_Id=${gbjReward.id} ">评论管理</a>
+					<a href="${ctx}/sys/gbj/gbjUserRewardComments/getRewardCommentsListbyid?reward_Id=${gbjReward.id} ">查看评论</a>
 				</shiro:hasPermission>	
+				
+				<shiro:hasPermission name="sys:gbj:gbjUserRewardComments:view">
+					<a href="${ctx}/sys/gbj/gbjUserRewardComments/form?reward_Id=${gbjReward.id} ">评论追加</a>
+				</shiro:hasPermission>
 					
 					</td>
 				</tr>

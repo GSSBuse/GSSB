@@ -22,26 +22,31 @@
 					}
 				}
 			});
+			
+			var c = window.location.href.split("?")[1].substring(10);
+
+			$("#rewardid").val(c);
+			
 		});
 	</script>
 </head>
 <body>
 	<ul class="nav nav-tabs">
 	<shiro:hasPermission name="sys:gbj:gbjUserRewardComments:view">
-		<li><a href="${ctx}/sys/gbj/gbjUserRewardComments/">悬赏信息评论列表</a></li>
+		<%-- <li><a href="${ctx}/sys/gbj/gbjUserRewardComments/">悬赏信息评论列表</a></li> --%>
 		</shiro:hasPermission>
 		<li class="active"><a href="${ctx}/sys/gbj/gbjUserRewardComments/form?id=${gbjUserRewardComments.id}">悬赏信息评论<shiro:hasPermission name="sys:gbj:gbjUserRewardComments:edit">${not empty gbjUserRewardComments.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gbj:gbjUserRewardComments:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="gbjUserRewardComments" action="${ctx}/sys/gbj/gbjUserRewardComments/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
-		<div class="control-group">
+		<div class="control-group" >
 			<label class="control-label">悬赏信息ID：</label>
 			<div class="controls">
-				<form:input path="reward.id" htmlEscape="false" maxlength="64" class="input-xlarge "/>
+				<form:input path="reward.id" id="rewardid" htmlEscape="false" maxlength="64" class="input-xlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
+		<%-- <div class="control-group">
 			<label class="control-label">父ID：</label>
 			<div class="controls">
 				<form:input path="parentId" htmlEscape="false" maxlength="64" class="input-xlarge "/>
@@ -52,7 +57,7 @@
 			<div class="controls">
 				<form:input path="childId" htmlEscape="false" maxlength="64" class="input-xlarge "/>
 			</div>
-		</div>
+		</div> --%>
 		<div class="control-group">
 			<label class="control-label">评论内容：</label>
 			<div class="controls">

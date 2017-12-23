@@ -23,40 +23,30 @@
 				}
 			});
 			
+			var c = window.location.href.split("?")[1].substring(7);
 			
-			
-			
-			function getParam(){
-				C1=window.location.href.split("?")[1]; //得到id=楼主
-				
-				alert(C1);
-				$("#buyid").val(C1);
-				}
-			
-			
-			
+			$("#buyid").val(c);
 			
 			
 		});
-		
-		
 		
 		
 	</script>
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/sys/gbj/gbjUserBuyComments/ ">买标信息评论列表</a></li>
+		<%-- <li><a href="${ctx}/sys/gbj/gbjUserBuyComments/ ">买标信息评论列表</a></li> --%>
 		<li class="active"><a href="${ctx}/sys/gbj/gbjUserBuyComments/form?id=${gbjUserBuyComments.id}">买标信息评论<shiro:hasPermission name="sys:gbj:gbjUserBuyComments:edit">${not empty gbjUserBuyComments.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gbj:gbjUserBuyComments:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="gbjUserBuyComments" action="${ctx}/sys/gbj/gbjUserBuyComments/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
-		 <div class="control-group" >
+		 <div class="control-group" style="visibility:hidden">
 			<label class="control-label" >买标信息ID：</label>
 			<div class="controls">
 				<form:input path="buy.id" id="buyid" htmlEscape="false" maxlength="64" class="input-xlarge "/>
 			</div>
+			
 		</div>
 		<%-- <div class="control-group">
 			<label class="control-label">父ID：</label>

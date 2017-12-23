@@ -10,7 +10,7 @@
                 <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>                
         </head>
 
-        <body ms-controller="index1">
+        <body ms-controller="index1"> 
                 <%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
                 
                  <%@ include file="/WEB-INF/views/include/frontIndexBanner.jsp"%>
@@ -60,7 +60,9 @@
                                                        <h3 class="category">买标信息</h3>
                                                        <ul class="articles">
                                                               <li class="article-entry standard" ms-repeat-el="datas.domainBuyList" >
-                                                                 <h4><a href="${ctx }/gbjbuysingle.html" >{{el.title}}</a></h4>
+                                                                 <h4><a href="" ms-attr-title="el.title"  onclick="return false;" ms-click="goToSingleDomainbuy($index)">{{el.title}}</a></h4>
+                                                                 
+                                                                 
                                                                  <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="查看该分类">商标   &amp; 餐饮</a></span>
                                                                  <span class="like-count">66</span>
                                                         </li>

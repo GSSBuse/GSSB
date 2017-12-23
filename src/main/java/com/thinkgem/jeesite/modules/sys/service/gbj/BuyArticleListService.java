@@ -19,9 +19,9 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 public class BuyArticleListService extends CrudService<BuyArticleListDao, BuyArticleList> {
 	@Autowired
 	BuyArticleListDao buyarticleListdao;
-	public List<BuyArticleList> findDomainBuyArticleList(@Param(value="counts") String count) {
-		return buyarticleListdao.findDomainBuyArticleList(Integer.parseInt(count));
+	public List<BuyArticleList> findDomainBuyArticleList(@Param(value="counts") String count, @Param(value="id") String buy_Id) {
+		return buyarticleListdao.findDomainBuyArticleList(Integer.parseInt(count), buy_Id);
 	}
-	
+	 
 }
 

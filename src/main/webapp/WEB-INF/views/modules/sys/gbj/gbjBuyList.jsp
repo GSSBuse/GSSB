@@ -14,8 +14,6 @@
 			$("#searchForm").submit();
         	return false;
         }
-		
-		
 	</script>
 </head>
 
@@ -70,9 +68,9 @@
 				<th>查看数</th>
 				<th>评论数</th>
 				<th>创建时间</th>
-				<th>备注信息</th>
+				<th>备注</th>
 				
-				<th>发布撤回状态</th>
+				<th>发布撤回</th>
 				<shiro:hasPermission name="sys:gbj:gbjBuy:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -141,8 +139,15 @@
 			
 			
 				<shiro:hasPermission name="sys:gbj:gbjUserBuyComments:view">
-					<a href="${ctx}/sys/gbj/gbjUserBuyComments/getBuyCommentsListbyid?buy_Id=${gbjBuy.id} ">评论管理</a>
-				</shiro:hasPermission>	
+					<a href="${ctx}/sys/gbj/gbjUserBuyComments/getBuyCommentsListbyid?buy_Id=${gbjBuy.id} ">查看评论</a>
+				</shiro:hasPermission>
+				 
+				 
+				<shiro:hasPermission name="sys:gbj:gbjUserBuyComments:view">
+					<a href="${ctx}/sys/gbj/gbjUserBuyComments/form?buy_Id=${gbjBuy.id} ">评论追加</a>
+				</shiro:hasPermission>
+				
+					
 				</td>
 			</tr>
 		</c:forEach>

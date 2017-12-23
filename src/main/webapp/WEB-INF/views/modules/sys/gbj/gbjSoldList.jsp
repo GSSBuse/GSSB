@@ -17,6 +17,7 @@
 	</script>
 </head> 
 <body>
+
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctx}/sys/gbj/gbjSold/">卖标信息管理列表</a></li>
 		<shiro:hasPermission name="sys:gbj:gbjSold:edit"><li><a href="${ctx}/sys/gbj/gbjSold/form">卖标信息管理添加</a></li></shiro:hasPermission>
@@ -60,8 +61,8 @@
 				<th>查看数</th>
 				<th>评论数</th>
 				<th>创建时间</th>
-				<th>备注信息</th>
-				<th>发布撤回状态</th>
+				<th>备注</th>
+				<th>发布撤回</th>
 			
 				<shiro:hasPermission name="sys:gbj:gbjSold:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
@@ -130,8 +131,14 @@
 				</shiro:hasPermission>
 				
 				<shiro:hasPermission name="sys:gbj:gbjUserSoldComments:view">	
-					<a href="${ctx}/sys/gbj/gbjUserSoldComments/getSoldCommentsListbyid?sold_Id=${gbjSold.id}">评论管理</a>
+					<a href="${ctx}/sys/gbj/gbjUserSoldComments/getSoldCommentsListbyid?sold_Id=${gbjSold.id}">查看评论</a>
 				</shiro:hasPermission>
+				
+				<shiro:hasPermission name="sys:gbj:gbjUserBuyComments:view">
+					<a href="${ctx}/sys/gbj/gbjUserSoldComments/form?sold_Id=${gbjSold.id} ">评论追加</a>
+				</shiro:hasPermission>
+				
+				
 				</td>
 			</tr>
 		</c:forEach>
