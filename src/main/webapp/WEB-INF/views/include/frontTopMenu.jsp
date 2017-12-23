@@ -8,9 +8,17 @@
             <span class="f-l pic"><a href="#">国标商标最新商标发布，年终打5折！</a></span>
         </div>
         <div class="top-right f-r">
-                                        咨询电话：029-12345678/87654321
-            <span><a class="tc" href="#">登录</a> | <a class="td" href="#">注册</a></span> 
-            <span><a class="tc" href="#">登录</a> | <a class="td" href="#">个人中心</a></span>   
+        	<span>咨询电话：029-12345678/87654321</span>
+        	<c:choose>
+        		<c:when test="${!empty login_user.username}">
+	        		<span>${login_user.username}，您好</span>
+					| <span><a class="td" href="#">个人中心</a></span>
+        		</c:when>
+        		<c:otherwise>
+        			<span><a class="tc" href="#">登录</a>
+        			| <a class="td" href="#">注册</a></span>
+        		</c:otherwise>
+        	</c:choose>
             <a href="#">加入收藏</a><span></a>
         </div>
     </div>
@@ -110,7 +118,6 @@ $(function(){
 
 
 <!-- Start of 登录框 -->
-<div id="gray"></div>
 <div class="popup" id="popup">
     <div class="top_nav" id='top_nav'>
                 <div align="center">
@@ -119,11 +126,11 @@ $(function(){
             </div>
     <div class="form-box fr loginV2"  style="display:block;">
          <ul class="form-tab clearfix">
-<!--              <li class="tab-li"><a href="javascript:;" ></i>微信登录</a></li> -->
+			<!-- <li class="tab-li"><a href="javascript:;" ></i>微信登录</a></li> -->
              <li class="tab-li cur"><a href="javascript:;" >账号登录</a></li>
          </ul>
          <div class="form-con">
-             <div class="weixin-login" style="display:none;">
+             <!-- <div class="weixin-login" style="display:none;">
                  <div class="wx-box clearfix">
                      <a href="javascript:;" class="wx-img-box">
                          <img class="wx-qrCode" src="${ctxStatic }/images/ewm.jpg" id="qrCodeImg">
@@ -135,7 +142,7 @@ $(function(){
                  </div>
                  <p class="wx-text">微信扫一扫  快速登录</p>
                  <p class="wx-help"><a href="javascript:;" class="help-a">如何使用？</a></p>
-             </div>
+             </div> -->
              <div class="login-normal" style="display:block;">
                  <form id="nameLoginForm" method="post" autocomplete="off" onsubmit="return nameLoginCheck();">
                      <div class="form-error" style=""><i></i><label class="text"></label></div>
@@ -273,12 +280,10 @@ $(function(){
      //窗口效果
      //点击登录class为tc 显示
      $(".tc").click(function(){
-         $("#gray").show();
          $("#popup").show();//查找ID为popup的DIV show()显示#gray
          tc_center();
      });
      $(".td").click(function(){
-         $("#gray").show();
          $("#popup").show();//查找ID为popup的DIV show()显示#gray
          tc_center();
          $('.loginV2').hide();
@@ -287,7 +292,6 @@ $(function(){
      });
      //点击关闭按钮
      $("a.guanbi").click(function(){
-         $("#gray").hide();
          $("#popup").hide();//查找ID为popup的DIV hide()隐藏
      })
 
@@ -365,6 +369,25 @@ $(function(){
                 return false;
             }
         }
+        
+        $.ajax({
+			url : ctx + "/nameLogin.json",
+			type : "POST",
+			data : {
+				username : loginName,
+				passwd : password
+			},
+        	dataType : 'json',
+			success : function(data) {
+				alert(data);
+				return true;
+			},
+			error : function(data) {
+				alert(data.status + " : " + data.statusText + " : " + data.responseText);
+				return false;
+			}
+		});
+        
         return true;
     }
     

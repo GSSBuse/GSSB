@@ -51,7 +51,7 @@ public class AuctionScheduleService implements Constant {
 	 * 每隔1分钟触发一次
 	 */
 	@SuppressWarnings("unused")
-	@Scheduled(cron = "0 0/1 * * * ?")
+	//@Scheduled(cron = "0 0/1 * * * ?")
 	public void auctionResultsSchedule() throws ServiceException{
 		//域名状态检测begin
 		// TODO 流拍状态设置，以下三步待检
