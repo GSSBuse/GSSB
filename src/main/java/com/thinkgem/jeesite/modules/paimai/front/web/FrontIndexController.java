@@ -144,6 +144,43 @@ public class FrontIndexController extends BaseController{
 	}
 	
 	/**
+	 * 帐号登录
+	 */
+	@RequestMapping(value = "register")
+	@ResponseBody
+	public AjaxResult register(HttpServletRequest request, @RequestParam(value = "mobile") String mobile,
+			@RequestParam(value = "passwd") String password) {
+		GbjUser userCondition = new GbjUser();
+		userCondition.setUsername(mobile);
+		
+		List<GbjUser> findedUsers;
+		try {
+			findedUsers = this.gbjUserService.findList(userCondition);
+		} catch (Exception e) {
+			logger.error("查询用户出错", e);
+			return AjaxResult.makeError("注册出错");
+		}
+		if (findedUsers != null && !findedUsers.isEmpty()) {
+			return AjaxResult.makeError("用户名已被使用");
+		}
+		
+		GbjUser userEntity = new GbjUser();
+		
+		userEntity.setUsername(mobile);
+		userEntity.setPassword(password);
+		userEntity.setMobile(mobile);
+		
+		try {
+			this.gbjUserService.save(userEntity);
+		} catch (Exception e) {
+			logger.error("保存用户出错", e);
+			return AjaxResult.makeError("注册出错");
+		}
+		
+		return AjaxResult.makeSuccess("注册成功");
+	}
+	
+	/**
 	 * 联系我们页面
 	 */
 	@RequestMapping(value= {"contact"})

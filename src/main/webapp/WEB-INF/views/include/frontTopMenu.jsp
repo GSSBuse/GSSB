@@ -240,7 +240,7 @@ $(function(){
                  <div class="form-error" style=""><i></i><label class="text"></label></div>
                  <dl class="clearfix">
                      <dt>手机号：</dt>
-                     <dd><input name="mobile" type="text" id="partnerPhone" autocomplete="off" class="input-text mobile" maxlength="11" onblur="mobileCheck(this);"><span class="placeholder">请输入手机号</span></dd>
+                     <dd><input type="text" name="mobile" id="nomalMobile" autocomplete="off" class="input-text mobile" maxlength="11" onblur="mobileCheck(this);"><span class="placeholder">请输入手机号</span></dd>
                  </dl>
                  
                  <dl class="top1 clearfix">
@@ -390,6 +390,7 @@ $(function(){
             }
         }
         
+        var ajaxResult;
         $.ajax({
 			url : ctx + "/nameLogin.json",
 			type : "POST",
@@ -400,14 +401,24 @@ $(function(){
         	dataType : 'json',
         	async : false,
 			success : function(data) {
-				return true;
+				if (data.type == 'success') {
+					return true;
+				} else {
+					showError(data.msg);
+					ajaxResult = false;
+					return false;
+				}
 			},
 			error : function(data) {
 				showError(data.responseText);
+				ajaxResult = false;
 				return false;
 			}
 		});
         
+        if (ajaxResult == false) {
+        	return false;
+        }
         return true;
     }
     
@@ -433,44 +444,64 @@ $(function(){
 
     //注册
     function registerCheck(){
-    	var mobile = $("#nameLoginForm").find("#partnerPhone").eq(0).val();
-        var password = $("#nameLoginForm").find("#normalPassword").eq(0).val();
+    	var mobile = $("#registerForm").find("#nomalMobile").eq(0).val();
+        var password = $("#registerForm").find("#normalPassword").eq(0).val();
+        var rePassword = $("#registerForm").find("#reNormalPassword").eq(0).val();
         if($(".tips ").is(":visible")){
             return false;
         }
-        if(loginName == null  || loginName == ""){
-            showError("请输入用户名");
+        if(mobile == null  || mobile == ""){
+            showError("请输入手机号");
             return false;
         }
         if(password == null  || password == ""){
             showError("请输入密码");
             return false;
         }
-        if($("#normalYzm")  && $("#nameLoginForm").find("#normalYzm").length > 0 ){
-            if($("#normalYzm").val() == "" || $("#normalYzm").val() == null){
-                showError("请输入验证码");
-                return false;
-            }
+        if(rePassword == null  || rePassword == ""){
+            showError("请再次输入密码");
+            return false;
         }
+        if(password != rePassword){
+        	showError("两次输入密码不一致");
+            return false;
+        }
+        //if($("#normalYzm")  && $("#registerBox").find("#normalYzm").length > 0 ){
+        //    if($("#normalYzm").val() == "" || $("#normalYzm").val() == null){
+        //        showError("请输入验证码");
+        //        return false;
+        //    }
+        //}
         
+        var ajaxResult;
         $.ajax({
-			url : ctx + "/nameLogin.json",
+			url : ctx + "/register.json",
 			type : "POST",
 			data : {
-				username : loginName,
+				mobile : mobile,
 				passwd : password
 			},
         	dataType : 'json',
+        	async : false,
 			success : function(data) {
-				alert(data);
-				return true;
+				if (data.type == 'success') {
+					return true;
+				} else {
+					showError(data.msg);
+					ajaxResult = false;
+					return false;
+				}
 			},
 			error : function(data) {
-				alert(data.status + " : " + data.statusText + " : " + data.responseText);
+				showError(data.responseText);
+				ajaxResult = false;
 				return false;
 			}
 		});
         
+        if (ajaxResult == false) {
+        	return false;
+        }
         return true;
     }
     
@@ -485,7 +516,7 @@ $(function(){
     }
   
     function mobileCheck(obj){
-        if(!(_mobile_reg).test($("#partnerPhone").val())){
+        if(!(_mobile_reg).test($("#nomalMobile").val())){
             showError("请填写正确的手机号");
             return;
         }else{
