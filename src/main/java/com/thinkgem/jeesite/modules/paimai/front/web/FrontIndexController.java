@@ -17,15 +17,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.bean.AjaxResult;
 import com.thinkgem.jeesite.common.mapper.JsonMapper;
-import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.utils.SendMailUtil;
 import com.thinkgem.jeesite.common.web.BaseController;
+import com.thinkgem.jeesite.modules.paimai.front.bean.FrontLoginUser;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.ArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.BuyArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjSold;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjTouristRequire;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUser;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.RewardArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.SoldArticleList;
@@ -36,6 +37,7 @@ import com.thinkgem.jeesite.modules.sys.service.gbj.GbjRewardService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjSoldService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjTouristRequireService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserBuyCommentsService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.RewardArticleListService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.SoldArticleListService;
 
@@ -44,6 +46,9 @@ import com.thinkgem.jeesite.modules.sys.service.gbj.SoldArticleListService;
 @RequestMapping(value = "${frontPath}")
 public class FrontIndexController extends BaseController{
 		
+	@Autowired
+	private GbjUserService gbjUserService;
+	
 	@Autowired
 	private GbjTouristRequireService gbjTouristRequireService;             // 国商商标查询Service
 	
@@ -93,7 +98,50 @@ public class FrontIndexController extends BaseController{
 		return "modules/paimai/front/login";
 	}	
 	
+	/**
+	 * 帐号登录
+	 */
+	@RequestMapping(value = "nameLogin")
+	@ResponseBody
+	public AjaxResult nameLogin(HttpServletRequest request, @RequestParam(value = "username") String username,
+			@RequestParam(value = "passwd") String password) {
+		GbjUser userCondition = new GbjUser();
+		userCondition.setUsername(username);
+		userCondition.setPassword(password);
+		
+		List<GbjUser> findedUsers;
+		try {
+			findedUsers = this.gbjUserService.findList(userCondition);
+		} catch (Exception e) {
+			logger.error("查询用户出错", e);
+			return AjaxResult.makeError("登录出错");
+		}
+		if (findedUsers == null || findedUsers.isEmpty()) {
+			return AjaxResult.makeError("用户名或密码错误");
+		}
+		
+		GbjUser userEntity = findedUsers.get(0);
+		
+		FrontLoginUser loginUser = new FrontLoginUser();
+		loginUser.setId(userEntity.getId());
+		loginUser.setName(userEntity.getName());
+		loginUser.setUsername(userEntity.getUsername());
+		loginUser.setMobile(userEntity.getMobile());
+		loginUser.setEmail(userEntity.getEmail());
+		
+		request.getSession().setAttribute("login_user", loginUser);
+		return AjaxResult.makeSuccess("登录成功");
+	}
 	
+	/**
+	 * 退出登录
+	 */
+	@RequestMapping(value = "logout")
+	@ResponseBody
+	public AjaxResult logout(HttpServletRequest request) {
+		request.getSession().removeAttribute("login_user");
+		return AjaxResult.makeSuccess("退出成功");
+	}
 	
 	/**
 	 * 联系我们页面

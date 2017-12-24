@@ -2,6 +2,12 @@ package com.thinkgem.jeesite.modules.paimai.front.bean;
 
 import java.io.Serializable;
 
+/**
+ * 前台登录用户信息
+ * 
+ * @author chen
+ * @date 2017年12月23日
+ */
 public class FrontLoginUser implements Serializable {
 
 	private static final long serialVersionUID = -3117367988004477240L;

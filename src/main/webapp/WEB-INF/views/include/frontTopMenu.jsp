@@ -12,7 +12,8 @@
         	<c:choose>
         		<c:when test="${!empty login_user.username}">
 	        		<span>${login_user.username}，您好</span>
-					| <span><a class="td" href="#">个人中心</a></span>
+					| <span><a class="icenter" href="#">个人中心</a></span>
+					| <span><a class="logout" href="#">退出</a></span>
         		</c:when>
         		<c:otherwise>
         			<span><a class="tc" href="#">登录</a>
@@ -248,7 +249,7 @@ $(function(){
                  </dl>
                  <dl class="top1 clearfix">
                      <dt>密<em></em>码：</dt>
-                     <dd><input type="password" name="rePassword" id="registerDbPass" class="input-text"><span class="placeholder">请再次输入密码</span></dd>
+                     <dd><input type="password" name="rePassword" id="reNormalPassword" class="input-text"><span class="placeholder">请再次输入密码</span></dd>
                  </dl>
                  <dl class="top1 clearfix">
                      <dt>验证码：</dt>
@@ -282,6 +283,9 @@ $(function(){
      $(".tc").click(function(){
          $("#popup").show();//查找ID为popup的DIV show()显示#gray
          tc_center();
+         $('.loginV2').show();
+         $('.registerBox').hide();
+         $('.form-error').hide();
      });
      $(".td").click(function(){
          $("#popup").show();//查找ID为popup的DIV show()显示#gray
@@ -294,6 +298,22 @@ $(function(){
      $("a.guanbi").click(function(){
          $("#popup").hide();//查找ID为popup的DIV hide()隐藏
      })
+     //点击退出按钮
+     $(".logout").click(function(){
+    	 $.ajax({
+ 			url : ctx + "/logout.json",
+ 			type : "POST",
+         	dataType : 'json',
+ 			success : function(data) {
+ 				window.location.reload();
+ 				return true;
+ 			},
+ 			error : function(data) {
+ 				alert(data.responseText);
+ 				return false;
+ 			}
+ 		});
+     });
 
      //窗口水平居中
      $(window).resize(function(){
@@ -413,7 +433,45 @@ $(function(){
 
     //注册
     function registerCheck(){
-        alert("注册check,TODO");
+    	var mobile = $("#nameLoginForm").find("#partnerPhone").eq(0).val();
+        var password = $("#nameLoginForm").find("#normalPassword").eq(0).val();
+        if($(".tips ").is(":visible")){
+            return false;
+        }
+        if(loginName == null  || loginName == ""){
+            showError("请输入用户名");
+            return false;
+        }
+        if(password == null  || password == ""){
+            showError("请输入密码");
+            return false;
+        }
+        if($("#normalYzm")  && $("#nameLoginForm").find("#normalYzm").length > 0 ){
+            if($("#normalYzm").val() == "" || $("#normalYzm").val() == null){
+                showError("请输入验证码");
+                return false;
+            }
+        }
+        
+        $.ajax({
+			url : ctx + "/nameLogin.json",
+			type : "POST",
+			data : {
+				username : loginName,
+				passwd : password
+			},
+        	dataType : 'json',
+			success : function(data) {
+				alert(data);
+				return true;
+			},
+			error : function(data) {
+				alert(data.status + " : " + data.statusText + " : " + data.responseText);
+				return false;
+			}
+		});
+        
+        return true;
     }
     
     //注册
