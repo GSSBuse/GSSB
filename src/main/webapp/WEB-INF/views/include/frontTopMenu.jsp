@@ -398,12 +398,12 @@ $(function(){
 				passwd : password
 			},
         	dataType : 'json',
+        	async : false,
 			success : function(data) {
-				alert(data);
 				return true;
 			},
 			error : function(data) {
-				alert(data.status + " : " + data.statusText + " : " + data.responseText);
+				showError(data.responseText);
 				return false;
 			}
 		});
