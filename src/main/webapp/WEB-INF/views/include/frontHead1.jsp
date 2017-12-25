@@ -64,4 +64,85 @@
 
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101442633"  charset="utf-8"></script>
 
+ 
+<style type="text/css">
+*{margin: 0px;padding:0;list-style:none;}
+body{font-size:12px;}
+.main{width:800px;position:fixed;top:280px;
+    z-index: 10011;}
+*html .main{position:absolute;top:expression(eval(document.documentElement.scrollTop));margin-top:320px;}
+.main2{
+    background-color: #525252;
+    background: rgba(82,82,82,0.67);
+    width: 780px;
+    height: 150px;
+    /* margin: 0 auto; */
+    position: relative;
+    padding: 10px;
+    text-align: center;
+    }
+.main2 ul li {
+    float: left;
+    margin-left: 50px;
+    margin-right: 50px;
+    text-align: center;    display: list-item;
+}
+.main2 ul li a {
+    color: #fff;
+    font-family: "微软雅黑", Arial;
+    transition: .3s;
+}
+.main2 ul li a img {
+    margin-top: 15px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+.main2 h1 {
+    font-size: 26px;
+    color: #c31b1b;
+    font-family: "微软雅黑", Arial;
+}
+.bar{width:25px;height:105px;position:absolute;right:-25px;background:url("${ctxStatic }/images/mini_bg.png") no-repeat;display:block;}
+</style> 
+<div class="main">
+    <div class="main2"><a href="javascript:" class="bar"></a>
+            <h1 align="left">您可能想知道</h1>
+            <ul>
+                <li><a href="#"><img src="${ctxStatic }/images/footer-1.png">
+                    <p>如何收费</p>
+                    </a></li>
+                <li><a href="#"><img src="${ctxStatic }/images/footer-2.png">
+                    <p>注册流程</p>
+                    </a></li>
+                <li><a href="#"><img src="${ctxStatic }/images/footer-3.png">
+                    <p>注册周期</p>
+                    </a></li>
+                <li><a href="#"><img src="${ctxStatic }/images/footer-4.png">
+                    <p>申请条件</p>
+                    </a></li>
+                <li><a href="#"><img src="${ctxStatic }/images/footer-5.png">
+                    <p>行业分类</p>
+                    </a></li>
+            </ul>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
     
+    $('.main').css('left','-802px');
+    
+    var expanded = true;
+    
+    $('.bar').click(function(){
+        if(expanded){
+            $('.main').animate({left:'0'},500);
+            $('.bar').css('background-position','-25px 0px');
+        }else{
+            $('.main').animate({left:'-802px'},500);
+            $('.bar').css('background-position','-0px 0px');
+        }
+        expanded = !expanded;
+    });
+
+});
+</script>   
