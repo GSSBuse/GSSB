@@ -14,6 +14,7 @@ import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjReward;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjSold;
 import com.thinkgem.jeesite.modules.sys.dao.gbj.GbjBuyDao;
 
 /**
@@ -65,11 +66,12 @@ public class GbjBuyService extends CrudService<GbjBuyDao, GbjBuy> {
 			gbjBuydao.withdraw(gbjBuy);
 		}
 	
+	
 	public List<GbjBuy> findDomainBuyList(@Param(value="counts") String count) {
 		return gbjBuydao.findDomainBuyList(Integer.parseInt(count));
 	}
-	public List<GbjBuy> findDomainArticleBuyList(@Param(value="counts") String count) {
+	/*public List<GbjBuy> findDomainArticleBuyList(@Param(value="counts") String count) {
 		return gbjBuydao.findDomainArticleBuyList(Integer.parseInt(count));
-	}
+	}*/
 	
 }

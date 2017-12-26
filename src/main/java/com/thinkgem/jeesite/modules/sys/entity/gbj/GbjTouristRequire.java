@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 /**
  * 游客查询管理Entity
  * @author snnu
- * @version 2017-12-16
+ * @version 2017-12-26
  */
 public class GbjTouristRequire extends DataEntity<GbjTouristRequire> {
 	

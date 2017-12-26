@@ -7,10 +7,9 @@ public class SoldArticleList  extends DataEntity<SoldArticleList>{
 	private static final long serialVersionUID = 1L;
 	
 	private User user;		// 用户ID
+	private String id;     //检索ID
 	private Integer typeId;		// 国标类型
 	private Long price;		// 预算价格
-	//private Long realprice;		// 实际成交价格
-	//private String linkman;		// 联系人
 	private String mobile;		// 联系人手机号
 	private String description;		// 国标描述
 	private String title;		// 国标标题
@@ -19,6 +18,12 @@ public class SoldArticleList  extends DataEntity<SoldArticleList>{
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public Integer getTypeId() {
 		return typeId;
@@ -32,7 +37,6 @@ public class SoldArticleList  extends DataEntity<SoldArticleList>{
 	public void setPrice(Long price) {
 		this.price = price;
 	}
-	
 	public String getMobile() {
 		return mobile;
 	}

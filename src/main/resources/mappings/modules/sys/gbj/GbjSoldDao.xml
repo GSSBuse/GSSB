@@ -176,6 +176,7 @@
 	</update>
 		<select id="findDomainSoldList" resultType="GbjSold" parameterType="java.lang.Integer">
         SELECT
+        b.id as "id",
               b.type_id as "type",
               b.create_date as "createDate",
               b.title as "title"

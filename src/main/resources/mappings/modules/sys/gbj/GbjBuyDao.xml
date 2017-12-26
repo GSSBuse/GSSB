@@ -178,9 +178,11 @@
 	</update>
 	<select id="findDomainBuyList" resultType="GbjBuy" parameterType="java.lang.Integer">
         SELECT
+              b.id as "id",
               b.type_id as "type",
-              b.create_date as "createDate",
-              b.title as "title"
+              b.create_date as "createDate", 
+              b.title as "title",
+              b.up_counts as "upCounts"
         FROM gbj_buy b
         <where>
                b.del_flag =  0

@@ -37,7 +37,10 @@
 			<li><label>打赏金额：</label>
 				<form:input path="price" htmlEscape="false" maxlength="20" class="input-medium"/>
 			</li>
-			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
+			<li class="btns"><input id="btnSubmit" class="btn btn-primary"
+				type="submit" value="查询" />
+				<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
+				</li>
 			<li class="clearfix"></li>
 		</ul>
 	</form:form>

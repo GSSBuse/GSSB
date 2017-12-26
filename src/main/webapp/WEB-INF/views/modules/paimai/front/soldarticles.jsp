@@ -34,7 +34,8 @@
                                                         <header class="clearfix">
 
                                                                 <h3 class="post-title">
-                                                                        <a href="${ctx }/single.html">{{el.title}}</a>
+                                                                
+                                                                        <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=sold">{{el.title}}</a>
                                                                 </h3>
 
                                                                 <div class="post-meta clearfix">

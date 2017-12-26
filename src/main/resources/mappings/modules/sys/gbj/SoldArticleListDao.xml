@@ -4,6 +4,7 @@
 
 <select id="findDomainSoldArticleList" resultType="SoldArticleList" parameterType="java.lang.Integer">
         SELECT
+              d.id as "id",
               d.type_id as "typeId",
               d.mobile as "mobile",
               d.create_date as "createDate",

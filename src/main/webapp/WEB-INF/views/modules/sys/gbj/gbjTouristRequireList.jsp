@@ -91,7 +91,7 @@
 					<fmt:formatDate value="${gbjTouristRequire.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<td>
-					${fns:getDictLabel(gbjTouristRequire.visitWay, '', '')}
+					${fns:getDictLabel(gbjTouristRequire.visitWay, 'gbj_visit_way', '')}
 				</td>
 				<td>
 					${gbjTouristRequire.visitRemarks}

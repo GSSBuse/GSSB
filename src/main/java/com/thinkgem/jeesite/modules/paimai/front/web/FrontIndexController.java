@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.bean.AjaxResult;
@@ -199,25 +200,60 @@ public class FrontIndexController extends BaseController{
 
 	/**
 	 * 咨询详细一览页面
-	 */
+	 
 	@RequestMapping(value= {"single"})
 	public String single(Model model) {
 		return "modules/paimai/front/single";
+	}	*/
+	/**
+	 * 前台详细一览页面（根据type判断买标、卖标、悬赏）
+	 */
+	@RequestMapping(value= {"single"})
+	public ModelAndView single(@RequestParam("id") String id, @RequestParam("type") String type, Model model) {
+		ModelAndView mav = null;
+		//参数param从前台传递过来
+		//这里把3个single都放到一起了，便于处理，根据type来分是买标、卖标还是悬赏
+		 if("sold".equals(type)) {
+			//如果是卖标，跳转到gbjsoldsingle卖标页面
+			mav = new ModelAndView("modules/paimai/front/gbjsoldsingle");
+			//参数拿到了，就根据参数去数据库里面查询详细
+			GbjSold gbjSoldDetail = gbjSoldService.get(id);
+			//检索出来后就前台元素中去
+			mav.addObject("gbjSoldDetail", gbjSoldDetail);
+		} else if("reward".equals(type)) {
+			//TODO 和上面一样
+			mav = new ModelAndView("modules/paimai/front/gbjrewardsingle");
+			//参数拿到了，就根据参数去数据库里面查询详细
+			GbjReward gbjRewardDetail = gbjRewardService.get(id);
+			//检索出来后就前台元素中去
+			mav.addObject("gbjRewardDetail", gbjRewardDetail);
+		}else if("buy".equals(type)) {
+			//TODO 和上面一样
+			mav = new ModelAndView("modules/paimai/front/gbjbuysingle");
+			//参数拿到了，就根据参数去数据库里面查询详细
+			GbjBuy gbjBuyDetail = gbjBuyService.get(id);
+			//检索出来后就前台元素中去
+			mav.addObject("gbjBuyDetail", gbjBuyDetail);
+		}
+		//然后return跳转到详细页面去
+			
+		return mav;
+		
 	}	
 	/**
 	 * 买标信息详细一览页面     snnu  12.21
-	 */
+	
 	@RequestMapping(value= {"gbjbuysingle"})
 	public String gbjbuysingle(Model model) {
 		return "modules/paimai/front/gbjbuysingle";
-	}	
+	}	 */
 	/**
 	 * 卖标信息详细一览页面     snnu  12.23
 	 */
-	@RequestMapping(value= {"gbjsoldsingle"})
+	/*@RequestMapping(value= {"gbjsoldsingle"})
 	public String gbjsoldsingle(Model model) {
 		return "modules/paimai/front/gbjsoldsingle";
-	}	
+	}	*/
 	/**
 	 * 咨询买标一览页面
 	 */
@@ -243,6 +279,13 @@ public class FrontIndexController extends BaseController{
 	@RequestMapping(value= {"faqs"})
 	public String faqs(Model model) {
 		return "modules/paimai/front/faqs";
+	}
+	/**
+	 * 商标注册说明页面
+	 */
+	@RequestMapping(value= {"registers"})
+	public String registers(Model model) {
+		return "modules/paimai/front/registers";
 	}
 	/**
 	 * 免费查询提交表单
@@ -451,12 +494,12 @@ public class FrontIndexController extends BaseController{
 	 */
 	@RequestMapping(value = "polling/ArticleBuyData")
 	@ResponseBody
-	public AjaxResult ArticleBuyData( @RequestParam("count") String count, @RequestParam("id") String buy_Id) {
+	public AjaxResult ArticleBuyData( @RequestParam("count") String count) {
 		
 		//取得最新的我要买标信息
 		List<BuyArticleList> pageDomainBuyArticleList = new ArrayList<BuyArticleList>();
 		try {
-			pageDomainBuyArticleList = buyarticleListService.findDomainBuyArticleList(count,buy_Id);
+			pageDomainBuyArticleList = buyarticleListService.findDomainBuyArticleList(count);
 		   	 
 			AjaxResult ar = AjaxResult.makeSuccess("");
 			ar.getData().put("ArticleBuyData", pageDomainBuyArticleList);

@@ -20,7 +20,7 @@
         			| <a class="td" href="#">注册</a></span>
         		</c:otherwise>
         	</c:choose>
-            <a href="#">加入收藏</a><span></a>
+            <a href="#">加入收藏</a>
         </div>
     </div>
     <div style="clear:both;"></div>
@@ -39,6 +39,7 @@
                                 <div class="menu-top-menu-container">
                                         <ul id="menu-top-menu" class="clearfix">
                                             <li class="current-menu-item"><a href="${ctx }/index1.html">首页</a></li>
+                                            
                                             <li><a href="#">动态信息</a>                                            
                                                    <ul class="sub-menu" style="z-index:123">
                                                            <li><a href="${ctx }/buyarticles.html">买标</a></li>
@@ -46,14 +47,49 @@
                                                            <li><a href="${ctx }/rewardarticles.html">悬赏起名</a></li>
                                                    </ul>
                                             </li>
-                                            <li><a href="${ctx }/todo.html">商标查询</a></li>
+                                            
                                             <li><a href="${ctx }/articles.html">商标查询</a></li>
+                                            
+                                            <li><a href="${ctx }/registers.html">商标注册</a>
+                                            		<ul class="sub-menu" style="z-index:123;">
+                                            				<li><a href="trademark.jsp">商标许可</a></li>
+                                            				<li><a>商标变更</a></li>
+                                            				<li><a>商标续展</a></li>
+                                            				<li><a>商标补证</a></li>
+                                            				<li><a>为什么要及时注册商标</a></li>
+                                            				<li><a>商标注册的好处</a></li>
+                                            				<li><a>商标注册存在的客观风险</a></li>
+                                            				<li><a>商标注册的时间、程序、费用</a></li>
+                                            		</ul>
+                                            </li>
+                                            
+                                            <li><a href="${ctx }/todo.html">专利服务</a>
+	                                            <ul class="sub-menu" style="z-index:123;">
 
-                                            <li><a href="${ctx }/todo.html">商标注册</a></li>
-                                            <li><a href="${ctx }/todo.html">专利服务</a></li>
+	                                            		<span style="color:gray">国内专利</span>
+	                                            		<li><a href="trademark.jsp">发明专利申请</a></li>
+	                                            		<li><a>实用新型专利申请</a></li>
+	                                            		<li><a>外观设计专利申请</a></li>
+													
+														<span style="color:gray">国际专利</span>
+	                                            		<li><a>PCT途径</a></li>
+	                                            		<li><a>巴黎公约途径</a></li>
+	                                            		<li><a>香港专利申请</a></li>
+	                                            		<li><a>美国专利申请</a></li>
+	                                            	
+														<span style="color:gray">专利管理交易</span>
+	                                            		<li><a>专利实施许可合同备案</a></li>
+	                                            		<li><a>专利著录项目变更</a></li>
+	                                            		<li><a>专利权利恢复</a></li>
+	                                            		<li><a>专利年费代缴</a></li>
+	                                            		<li><a>专利权评价报告</a></li>
+	                                            	
+	                                            </ul>
+                                            </li>
                                             <li><a href="${ctx }/faqs.html">版权登记</a></li>
                                             <li><a href="${ctx }/testimonials.html">国际商标</a></li>
                                             <li><a href="${ctx }/contact.html">法律服务</a></li>
+                                            <li><a href="${ctx }/todo.html">知识产权托管</a></li>
                                         </ul>
                                 </div>
                         </nav>
@@ -273,7 +309,6 @@ $(function(){
              </form>
          </div>
      </div>
-
 </div>
 
     

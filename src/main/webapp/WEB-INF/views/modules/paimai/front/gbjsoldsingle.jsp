@@ -31,9 +31,11 @@
                                                         <li class="active">我想买个小吃店的店名商标</li>
                                                 </ul>
 
-                                                <article class=" type-post format-standard hentry clearfix"  ms-repeat-el="datas.domainBuyArticleList">
+                                                <article class=" type-post format-standard hentry clearfix"  >
 
-                                                        <h1 class="post-title"><a href="#">{{el.title}}</a></h1>
+                                                       <!--  <h1 class="post-title"><a href="#">{{el.title}}</a></h1>
+                                                         -->
+                                                        <h1 class="post-title"><a href=" ">${gbjSoldDetail.title}</a></h1>
 
                                                         <div class="post-meta clearfix">
                                                                 <span class="date">2017/11/28</span>
@@ -45,7 +47,7 @@
                                                        <!--   <p>买标买标悬赏等的详细信息。进入这个页面是需要2个参数，id和type。type绝对去从那个标里面去检索。也可以3个表做个视图（看看有没有共通的字段了要）。然后根据id取得对应的详细信息，包括回复和点赞等信息。分享等我后面再加。
                                                                                                                                                                                 这里暂时不支持富文本的样式显示，只支持一般文本就好了。
                                                         </p>-->
-                                                        <p>{{el.description}}</p>
+                                                        <p>${gbjSoldDetail.description}</p>
 
                                                 </article>
 
@@ -80,19 +82,19 @@
 
                                                                                         <h5 class="author">
                                                                                                 <cite class="fn">
-                                                                                                        <a href="#" rel="external nofollow" class="url">这里头像回头用用户表里面存储的qq或weixin头像和名字</a>
+                                                                                                        <a href="#" rel="external nofollow" class="url">头像和名字</a>
                                                                                                 </cite>
                                                                                                 - <a class="comment-reply-link" href="#">回复</a>
                                                                                         </h5>
 
                                                                                         <p class="date">
-                                                                                                 <time datetime="2013-02-26T13:18:47+00:00">{{ell.commentTime}}</time>
+                                                                                                 <time datetime="2013-02-26T13:18:47+00:00">这里是商标评论内容。</time>
                                                                                         </p>
 
                                                                                 </div><!-- end .comment-meta -->
 
                                                                                 <div class="comment-body" >
-                                                                                        <p>{{ell.comment}}</p>
+                                                                                        <p>这里是商标评论内容。</p>
                                                                                 </div><!-- end of comment-body -->
 
                                                                         </article><!-- end of comment -->
@@ -109,7 +111,7 @@
                                                                                                 <div class="comment-meta">
 
                                                                                                         <h5 class="author">
-                                                                                                                <cite class="fn">头像和名字一样数据库取得</cite>
+                                                                                                                <cite class="fn">头像和名字</cite>
                                                                                                                 - <a class="comment-reply-link" href="#">回复</a>
                                                                                                         </h5>
 
@@ -120,7 +122,7 @@
                                                                                                 </div><!-- end .comment-meta -->
 
                                                                                                 <div class="comment-body">
-                                                                                                        <p>{{ell.comment}}</p>
+                                                                                                        <p>这里是商标评论回复内容。</p>
                                                                                                 </div><!-- end of comment-body -->
 
                                                                                         </article><!-- end of comment -->
@@ -140,7 +142,7 @@
 
                                                                                         <h5 class="author">
                                                                                                 <cite class="fn">
-                                                                                                        <a href="#" rel="external nofollow" class="url">这里头像回头用用户表里面存储的qq或weixin头像和名字</a>
+                                                                                                        <a href="#" rel="external nofollow" class="url">头像和名字</a>
                                                                                                 </cite>
                                                                                                 - <a class="comment-reply-link" href="#">回复</a>
                                                                                         </h5>
@@ -152,7 +154,7 @@
                                                                                 </div><!-- end .comment-meta -->
 
                                                                                 <div class="comment-body">
-                                                                                        <p>这里是回复内容。下面的回复一样，ajax取得数据后重复显示出来表示即可.注意元素的id</p>
+                                                                                        <p>这里是商标评论内容。</p>
                                                                                 </div><!-- end of comment-body -->
 
                                                                         </article><!-- end of comment -->
@@ -171,11 +173,11 @@
                                                                 <form action="#" method="post" id="commentform">
 
 
-                                                                        <p class="comment-notes">登录后可进行评论回复。这里回头我加上qq登录。</p>
+                                                                        <p class="comment-notes">登录后才可进行评论回复</p>
 
 
                                                                         <div>
-                                                                                <label for="comment">Comment</label>
+                                                                                <label for="comment">评论</label>
                                                                                 <textarea class="span8" name="comment" id="comment" cols="58" rows="10"></textarea>
                                                                         </div>
 

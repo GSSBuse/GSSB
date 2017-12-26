@@ -31,9 +31,9 @@
                                                         <li class="active">我想买个小吃店的店名商标</li>
                                                 </ul>
 
-                                                <article class=" type-post format-standard hentry clearfix"  ms-repeat-el="datas.domainBuyArticleList">
+                                                <article class=" type-post format-standard hentry clearfix"  >
 
-                                                        <h1 class="post-title"><a href="#">{{el.title}}</a></h1>
+                                                        <h1 class="post-title"><a href="#">${gbjBuyDetail.title}</a></h1>
 
                                                         <div class="post-meta clearfix">
                                                                 <span class="date">2017/11/28</span>
@@ -45,7 +45,7 @@
                                                        <!--   <p>买标买标悬赏等的详细信息。进入这个页面是需要2个参数，id和type。type绝对去从那个标里面去检索。也可以3个表做个视图（看看有没有共通的字段了要）。然后根据id取得对应的详细信息，包括回复和点赞等信息。分享等我后面再加。
                                                                                                                                                                                 这里暂时不支持富文本的样式显示，只支持一般文本就好了。
                                                         </p>-->
-                                                        <p>{{el.description}}</p>
+                                                        <p>${gbjBuyDetail.description}</p>
 
                                                 </article>
 

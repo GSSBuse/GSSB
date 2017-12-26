@@ -10,5 +10,5 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.BuyArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 @MyBatisDao
 public interface BuyArticleListDao extends CrudDao<BuyArticleList> {
-	public List<BuyArticleList> findDomainBuyArticleList(int count,String buy_Id);
+	public List<BuyArticleList> findDomainBuyArticleList(int count);
 } 

@@ -11,7 +11,7 @@ var vm = avalon.define({
 		//domainBuyList1 : [{title:"test"},{title:"test2"}],
 		//domainSoldList1 : [{title:"test"},{title:"test2"}],//买标信息一览（最新11条，首页只表示最新的）
 		datas : {
-			//domainArticleList : [],//买标信息一览（最新11条，首页只表示最新的）
+			 domainArticleList : [],//买标信息一览（最新11条，首页只表示最新的）
 		     domainBuyArticleList : [],//卖标信息一览（最新11条，首页只表示最新的）
 		     domainBuyCommentsArticleList:[],//评论内容获取
 			//domainRewardList : [],//卖标信息一览（最新11条，首页只表示最新的）
@@ -24,7 +24,7 @@ var vm = avalon.define({
 				id : ""
 			}
 		},
-		//跳转至单个买标信息详细页面
+		/*//跳转至单个买标信息详细页面
 		goToSingleDomainBuy : function(index){
 			window.location.href = ctx + "/gbbuysingle.html?id=" + vm.datas.domainBuyList[index].id;
 		},
@@ -48,7 +48,7 @@ var vm = avalon.define({
 		//跳转至单个悬赏起名一览页面
 		goToSingleDomainname : function(index){
 			window.location.href = ctx + "/gbrewardlists.html";
-		},
+		},*/
 		
 //		showLogin : function (e) {
 //			$("#js_uiLoginBox").show();

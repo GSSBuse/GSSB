@@ -60,11 +60,11 @@
                                                        <h3 class="category">买标信息</h3>
                                                        <ul class="articles">
                                                               <li class="article-entry standard" ms-repeat-el="datas.domainBuyList" >
-                                                                 <h4><a href="" ms-attr-title="el.title"  onclick="return false;" ms-click="goToSingleDomainbuy($index)">{{el.title}}</a></h4>
+                                                                 <h4> <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</a></h4>
                                                                  
                                                                  
                                                                  <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="查看该分类">商标   &amp; 餐饮</a></span>
-                                                                 <span class="like-count">66</span>
+                                                                 <span class="like-count">{{el.upCounts}} &nbsp;</span>
                                                         </li>
                                                               
                                                        </ul>
@@ -75,7 +75,7 @@
                                                        <h3 class="category">卖标信息</h3>
                                                        <ul class="articles">
                                                                <li class="article-entry standard" ms-repeat-el="datas.domainSoldList" >		                                                                
-                                                                 <h4><a href="${ctx }/single.html" >{{el.title}}</a></h4>		                                                                
+                                                                 <h4 > <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=sold">{{el.title}}</a></h4>		                                                                
                                                                  <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="查看该分类">商标   &amp; 餐饮</a></span>
                                                                  <span class="like-count">66</span>
                                                          </li>
@@ -87,7 +87,7 @@
                                                        <h3 class="category">悬赏起名</h3>
                                                        <ul class="articles">
                                                               <li class="article-entry standard" ms-repeat-el="datas.domainRewardList" >		                                                                
-                                                                 <h4><a href="${ctx }/single.html" >{{el.title}}</a>&nbsp;&nbsp;&nbsp;悬赏金额: {{el.price}}元</h4>		                                                                
+                                                                 <h4> <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.title}}</a>&nbsp;&nbsp;&nbsp;悬赏金额: {{el.price}}元</h4>		                                                                
                                                                  <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="查看该分类">商标   &amp; 餐饮</a></span>
                                                                  <span class="like-count">66</span>
                                                          </li>

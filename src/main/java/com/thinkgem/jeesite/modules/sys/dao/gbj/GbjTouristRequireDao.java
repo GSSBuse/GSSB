@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjTouristRequire;
 /**
  * 游客查询管理DAO接口
  * @author snnu
- * @version 2017-12-16
+ * @version 2017-12-26
  */
 @MyBatisDao
 public interface GbjTouristRequireDao extends CrudDao<GbjTouristRequire> {

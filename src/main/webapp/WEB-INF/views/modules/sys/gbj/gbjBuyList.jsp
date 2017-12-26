@@ -26,9 +26,9 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
-			<li><label>用户名：</label>
-				<form:input path="user.username" htmlEscape="false" maxlength="200" class="input-medium"/>
-			</li>
+			<%-- <li><label>用户名：</label>
+				<form:input path="user.id" htmlEscape="false" maxlength="200" class="input-medium"/>
+			</li> --%>
 			<li><label>真实姓名：</label>
 				<form:input path="realname" htmlEscape="false" maxlength="200" class="input-medium"/>
 			</li>
@@ -47,8 +47,12 @@
 			<li><label>国标标题：</label>
 				<form:input path="title" htmlEscape="false" maxlength="200" class="input-medium"/>
 			</li>
-			
-			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
+
+			<li class="btns"><input id="btnSubmit" class="btn btn-primary"
+				type="submit" value="查询" />
+				<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
+				</li>
+
 			<li class="clearfix"></li>
 		</ul>
 	</form:form>

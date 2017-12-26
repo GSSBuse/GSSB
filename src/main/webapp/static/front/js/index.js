@@ -58,7 +58,7 @@ var vm = avalon.define({
 	});
 
 	// 初始化动作
-	$(function(){
+	$(function(){      
 		avalon.scan();
 		//TODO
 	});
@@ -82,7 +82,7 @@ var vm = avalon.define({
 			}
 		);
 	}
-	interval_gbbuy_status_check();
+	 ();
 	
 	// 轮询卖标信息一览数据
 	var interval_gbsold_status_check = function() {

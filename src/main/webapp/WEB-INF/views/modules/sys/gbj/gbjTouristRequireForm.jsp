@@ -66,15 +66,15 @@
 		<div class="control-group">
 			<label class="control-label">邮箱：</label>
 			<div class="controls">
-				<form:input path="email" htmlEscape="false" maxlength="200" class="input-xlarge required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+				<form:input path="email" htmlEscape="false" maxlength="200" class="input-xlarge "/>
+				
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">QQ：</label>
 			<div class="controls">
-				<form:input path="qq" htmlEscape="false" maxlength="200" class="input-xlarge required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+				<form:input path="qq" htmlEscape="false" maxlength="200" class="input-xlarge "/>
+				
 			</div>
 		</div>
 		<div class="control-group">
@@ -88,7 +88,7 @@
 			<div class="controls">
 				<form:select path="visitWay" class="input-xlarge ">
 					<form:option value="" label=""/>
-					<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+					<form:options items="${fns:getDictList('gbj_visit_way')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
 			</div>
 		</div>
