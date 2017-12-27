@@ -33,6 +33,12 @@ public class GbjUserBuyCommentsService extends CrudService<GbjUserBuyCommentsDao
 		return super.get(id);
 	}
 	
+	public  List<GbjUserBuyComments> getFrontCommentsList(String id) {
+		return gbjUserBuyCommentsDao.getFrontCommentsList(id);
+	}
+	
+	
+	
 	public List<GbjUserBuyComments> findList(GbjUserBuyComments gbjUserBuyComments) {
 		return super.findList(gbjUserBuyComments);
 	}

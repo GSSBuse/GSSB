@@ -34,7 +34,7 @@
                                                         <header class="clearfix">
 
                                                                 <h3 class="post-title">
-                                                                        <a href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.title}}</a>
+                                                                        <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.title}}</a>
                                                                         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                                                                         <a href="">悬赏金额:</a>
                                                                         <a href="">{{el.price}}元</a>

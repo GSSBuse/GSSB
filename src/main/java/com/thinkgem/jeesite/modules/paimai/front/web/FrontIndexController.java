@@ -232,8 +232,10 @@ public class FrontIndexController extends BaseController{
 			mav = new ModelAndView("modules/paimai/front/gbjbuysingle");
 			//参数拿到了，就根据参数去数据库里面查询详细
 			GbjBuy gbjBuyDetail = gbjBuyService.get(id);
+			GbjUserBuyComments gbjUserBuyCommentsDetail=gbjUserBuyCommentsService.get(id);
 			//检索出来后就前台元素中去
 			mav.addObject("gbjBuyDetail", gbjBuyDetail);
+			mav.addObject("gbjUserBuyCommentsDetail", gbjUserBuyCommentsDetail);
 		}
 		//然后return跳转到详细页面去
 			

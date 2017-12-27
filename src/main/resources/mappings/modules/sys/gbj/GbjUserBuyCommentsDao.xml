@@ -33,6 +33,14 @@
 		WHERE a.buy_id = #{buy_Id}
 		 
 	</select>
+	<select id="getFrontCommentsList" resultType="GbjUserBuyComments">
+		SELECT 
+			<include refid="gbjUserBuyCommentsColumns"/>
+		FROM gbj_user_buy_comments a
+		<include refid="gbjUserBuyCommentsJoins"/>
+		WHERE a.buy_id = #{id}
+		 
+	</select>
     
     
 	<select id="get" resultType="GbjUserBuyComments">

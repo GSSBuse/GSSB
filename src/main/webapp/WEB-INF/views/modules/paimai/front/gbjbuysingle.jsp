@@ -39,7 +39,7 @@
                                                                 <span class="date">2017/11/28</span>
                                                                 <span class="category"><a href="#">商标 &amp; 餐饮</a></span>
                                                                 <span class="comments"><a href="#">3个回复</a></span>
-                                                                <span class="like-count">66</span>
+                                                                <span class="like-count">${gbjBuyDetail.upCounts}&nbsp;</span>                                                            
                                                         </div><!-- end of post meta -->
 
                                                        <!--   <p>买标买标悬赏等的详细信息。进入这个页面是需要2个参数，id和type。type绝对去从那个标里面去检索。也可以3个表做个视图（看看有没有共通的字段了要）。然后根据id取得对应的详细信息，包括回复和点赞等信息。分享等我后面再加。
@@ -52,7 +52,7 @@
                                                 <div class="like-btn">
 
                                                         <form id="like-it-form" action="#" method="post">
-                                                                <span class="like-it ">66</span>
+                                                                <!-- <span class="like-it ">66</span> -->
                                                                 <input type="hidden" name="post_id" value="这里是该条信息的id，提交这个表单">
                                                                 <input type="hidden" name="action" value="like_it">
                                                         </form>
@@ -92,7 +92,7 @@
                                                                                 </div><!-- end .comment-meta -->
 
                                                                                 <div class="comment-body" >
-                                                                                        <p>{{ell.comment}}</p>
+                                                                                        <p>${gbjUserBuyCommentsDetail.comment}</p>
                                                                                 </div><!-- end of comment-body -->
 
                                                                         </article><!-- end of comment -->
