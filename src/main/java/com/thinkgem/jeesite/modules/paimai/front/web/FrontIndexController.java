@@ -1,6 +1,7 @@
 package com.thinkgem.jeesite.modules.paimai.front.web;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -357,22 +358,25 @@ public class FrontIndexController extends BaseController{
  	*/
 	@RequestMapping(value= {"comments"})  
 	@ResponseBody
-	public AjaxResult comments(Model model, GbjUserBuyComments gbjUserBuyComments, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-		
-		model.addAttribute("domainInfoJson", JsonMapper.toJsonString(gbjUserBuyComments));
-		try{
-			
+	public AjaxResult comments(HttpServletRequest request, 
+			@RequestParam(value = "id") String id,
+			@RequestParam(value = "comment") String comment) {
+		GbjUserBuyComments gbjUserBuyComments = new GbjUserBuyComments();
+		GbjBuy gbjBuy = new GbjBuy();
+		try{			
 			
 			//STEP1  提交查询信息，保存到数据库
-			//gbjBuyService.save(gbjBuy);
+			gbjUserBuyComments.setBuy(gbjBuyService.get(id));			
+			gbjUserBuyComments.setComment(comment);			
+			//gbjUserBuyComments.setCreateBy("当前用户”);			
+			gbjUserBuyComments.setCreateDate(new Date());			
+			
 			gbjUserBuyCommentsService.save(gbjUserBuyComments);
 		
-			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
 			
 			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
 		} catch (Exception e) {
-			logger.error(e.getMessage());
-			addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
+			logger.error(e.getMessage());			
 			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
 		}
 		

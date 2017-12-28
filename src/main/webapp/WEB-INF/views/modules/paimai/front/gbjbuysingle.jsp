@@ -193,7 +193,7 @@ $(document).ready(function(){
                                                                 </div>
 
                                                             
-                                                                <form action="${ctx }/single.html?id={{el.id}}&type=buy" method="post" id="domainform" ms-widget="validation">
+                                                                <form  method="post" id="commentform" onsubmit="return commentSubmit();">
 
 
                                                                         <p class="comment-notes">登录后可进行评论回复。这里回头我加上qq登录。</p>
@@ -201,7 +201,8 @@ $(document).ready(function(){
 
                                                                         <div>
                                                                                 <label for="comment">Comment</label>
-                                                                                <textarea class="span8" name="comment" id="comment" ms-duplex-required="datas.domainInfo.comment"  cols="58"   rows="10"></textarea>
+                                                                                 <input name="id" type="hidden" id="id" value="${gbjBuyDetail.id}">
+                                                                                <textarea class="span8" name="comment" id="comment"  cols="58"   rows="10"></textarea>
                                                                         </div>
 
                                                                         <div>
