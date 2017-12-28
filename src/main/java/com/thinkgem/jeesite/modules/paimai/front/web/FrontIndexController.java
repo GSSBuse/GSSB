@@ -232,7 +232,7 @@ public class FrontIndexController extends BaseController{
 			mav = new ModelAndView("modules/paimai/front/gbjbuysingle");
 			//参数拿到了，就根据参数去数据库里面查询详细
 			GbjBuy gbjBuyDetail = gbjBuyService.get(id);
-			GbjUserBuyComments gbjUserBuyCommentsDetail=gbjUserBuyCommentsService.get(id);
+			List<GbjUserBuyComments> gbjUserBuyCommentsDetail=gbjUserBuyCommentsService.getFrontCommentsList(id);
 			//检索出来后就前台元素中去
 			mav.addObject("gbjBuyDetail", gbjBuyDetail);
 			mav.addObject("gbjUserBuyCommentsDetail", gbjUserBuyCommentsDetail);
@@ -340,6 +340,32 @@ public class FrontIndexController extends BaseController{
 			
 			//STEP1  提交查询信息，保存到数据库
 			gbjBuyService.save(gbjBuy);
+		
+			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+			
+			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
+			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+		}
+		
+	}
+	/**
+	 * 我要买标评论提交信息提交   2017/12/27  
+	 * by snnu
+ 	*/
+	@RequestMapping(value= {"comments"})  
+	@ResponseBody
+	public AjaxResult comments(Model model, GbjUserBuyComments gbjUserBuyComments, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		
+		model.addAttribute("domainInfoJson", JsonMapper.toJsonString(gbjUserBuyComments));
+		try{
+			
+			
+			//STEP1  提交查询信息，保存到数据库
+			//gbjBuyService.save(gbjBuy);
+			gbjUserBuyCommentsService.save(gbjUserBuyComments);
 		
 			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
 			

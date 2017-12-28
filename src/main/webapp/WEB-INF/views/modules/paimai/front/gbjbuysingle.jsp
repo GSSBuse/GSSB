@@ -9,6 +9,7 @@
                 <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>
         </head>
 <script type="text/javascript" src="${ctxStatic }/front/js/Article.js"></script>
+<script type="text/javascript" src="${ctxStatic }/front/js/comments.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -87,7 +88,7 @@ $(document).ready(function(){
 
                                                 </div> --%>
 
-                                                <section id="comments" ms-repeat-ell="datas.domainBuyCommentsArticleList">
+                                                <section id="comments" >
 
                                                         <h3 id="comments-title">评论内容</h3>
 
@@ -110,7 +111,7 @@ $(document).ready(function(){
                                                                                         </h5>
 
                                                                                         <p class="date">
-                                                                                                 <time datetime="2013-02-26T13:18:47+00:00">{{ell.commentTime}}</time>
+                                                                                                 <time datetime="2013-02-26T13:18:47+00:00"></time>
                                                                                         </p>
 
                                                                                 </div><!-- end .comment-meta -->
@@ -144,7 +145,7 @@ $(document).ready(function(){
                                                                                                 </div><!-- end .comment-meta -->
 
                                                                                                 <div class="comment-body">
-                                                                                                        <p>{{ell.comment}}</p>
+                                                                                                        <p></p>
                                                                                                 </div><!-- end of comment-body -->
 
                                                                                         </article><!-- end of comment -->
@@ -183,7 +184,7 @@ $(document).ready(function(){
                                                                 </li>
                                                         </ol>
 
-                                                        <div id="respond">
+                                                        <div id="respond" ms-controller="comments"   >
 
                                                                 <h3>评论回复</h3>
 
@@ -191,8 +192,8 @@ $(document).ready(function(){
                                                                         <a rel="nofollow" id="cancel-comment-reply-link" href="#" style="display:none;">Click here to cancel reply.</a>
                                                                 </div>
 
-
-                                                                <form action="#" method="post" id="commentform">
+                                                            
+                                                                <form action="${ctx }/single.html?id={{el.id}}&type=buy" method="post" id="domainform" ms-widget="validation">
 
 
                                                                         <p class="comment-notes">登录后可进行评论回复。这里回头我加上qq登录。</p>
@@ -200,7 +201,7 @@ $(document).ready(function(){
 
                                                                         <div>
                                                                                 <label for="comment">Comment</label>
-                                                                                <textarea class="span8" name="comment" id="comment" cols="58" rows="10"></textarea>
+                                                                                <textarea class="span8" name="comment" id="comment" ms-duplex-required="datas.domainInfo.comment"  cols="58"   rows="10"></textarea>
                                                                         </div>
 
                                                                         <div>
@@ -208,9 +209,8 @@ $(document).ready(function(){
                                                                         </div>
 
                                                                 </form>
-
+                                                             
                                                         </div>
-
                                                 </section><!-- end of comments -->
 
                                         </div>
