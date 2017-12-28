@@ -351,6 +351,32 @@ public class FrontIndexController extends BaseController{
 		}
 		
 	}
+	
+	
+	@RequestMapping(value= {"upcounts"})  
+	@ResponseBody
+	public AjaxResult upcounts(Model model, GbjBuy gbjBuy, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		
+		
+		model.addAttribute("domainInfo1", JsonMapper.toJsonString(gbjBuy));
+		try{
+			
+			System.out.print("zzzzz");
+			//STEP1  提交查询信息，保存到数据库
+			gbjBuyService.updateCount(gbjBuy);
+		
+			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+			
+			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
+			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+		}
+		
+	}
+	
+	
 	/**
 	 * 我要卖标信息提交   2017/12/5 
 	 * by snnu
@@ -578,6 +604,13 @@ public class FrontIndexController extends BaseController{
 			return AjaxResult.makeError("");
 		}
 	}
+	
+	/*@RequestMapping(value="/test")
+	@ResponseBody
+	public String test(@RequestParam("id") String id,@RequestParam("count") int  count) {
+		System.out.println("id = " + id);
+		return "id= " + id;
+	}*/
 	
 	
 	

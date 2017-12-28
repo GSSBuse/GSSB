@@ -156,6 +156,14 @@
 		WHERE id = #{id}
 	</update>
 	
+	
+	<update id="updateCount">
+		UPDATE gbj_buy SET 	
+			up_counts = #{upCounts}
+			
+		WHERE id = #{id}
+	</update>
+	
 	<!-- 更新数据库发布买标信息 -->
 	<update id="release">
 		UPDATE gbj_buy SET 

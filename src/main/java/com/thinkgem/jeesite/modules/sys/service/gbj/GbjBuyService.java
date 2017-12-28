@@ -50,6 +50,15 @@ public class GbjBuyService extends CrudService<GbjBuyDao, GbjBuy> {
 		super.delete(gbjBuy);
 	}
 	
+	
+	
+	@Transactional(readOnly = false)
+	public void updateCount(GbjBuy gbjBuy) {
+		
+		//System.out.print("service");
+		gbjBuydao.updateCount(gbjBuy);
+	}
+	
 	//发布买标信息
 		@Transactional(readOnly = false)
 		public void release(GbjBuy gbjBuy) {

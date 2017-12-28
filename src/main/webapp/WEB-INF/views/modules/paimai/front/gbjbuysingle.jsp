@@ -9,6 +9,23 @@
                 <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>
         </head>
 <script type="text/javascript" src="${ctxStatic }/front/js/Article.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+
+	       /*  var c = window.location.href.split("?")[1].substring(3,35);
+	       
+	        $("#buyid").val(c);
+	        
+	        alert($("#buyid").val()); */
+	         //   $('#like-it-form').ajaxSubmit(options);
+	    
+ });  
+
+</script>
+
+
         <body ms-controller="articles">
                 <%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
                 <div class="about">
@@ -35,11 +52,17 @@
 
                                                         <h1 class="post-title"><a href="#">${gbjBuyDetail.title}</a></h1>
 
-                                                        <div class="post-meta clearfix">
+                                                        <div class="post-meta clearfix like-btn" ms-controller="upcounts" >
                                                                 <span class="date">2017/11/28</span>
                                                                 <span class="category"><a href="#">商标 &amp; 餐饮</a></span>
                                                                 <span class="comments"><a href="#">3个回复</a></span>
-                                                                <span class="like-count">${gbjBuyDetail.upCounts}&nbsp;</span>                                                            
+                                                                
+                                                         <form id="like-it-form"  action="#" method="post">
+                                                                <span class="like-it">${gbjBuyDetail.upCounts}</span>
+                                                                <input type="hidden" name="id" id="buyid" /> 
+                                                                
+                                                            
+                                                        </form>                                                            
                                                         </div><!-- end of post meta -->
 
                                                        <!--   <p>买标买标悬赏等的详细信息。进入这个页面是需要2个参数，id和type。type绝对去从那个标里面去检索。也可以3个表做个视图（看看有没有共通的字段了要）。然后根据id取得对应的详细信息，包括回复和点赞等信息。分享等我后面再加。
@@ -49,19 +72,20 @@
 
                                                 </article>
 
-                                                <div class="like-btn">
+                                                <%-- <div class="like-btn">
 
                                                         <form id="like-it-form" action="#" method="post">
-                                                                <!-- <span class="like-it ">66</span> -->
+                                                                <span class="like-it " >${gbjBuyDetail.upCounts}</span>
                                                                 <input type="hidden" name="post_id" value="这里是该条信息的id，提交这个表单">
                                                                 <input type="hidden" name="action" value="like_it">
                                                         </form>
 
+
                                                         <span class="tags">
-                                                                <strong>标签:&nbsp;&nbsp;</strong><a href="#" rel="tag">餐饮</a>, <a href="#" rel="tag">商标</a>, <a href="#" rel="tag">小吃</a>
+                                                                 <strong>标签:&nbsp;&nbsp;</strong><a href="#" rel="tag">餐饮</a>, <a href="#" rel="tag">商标</a>, <a href="#" rel="tag">小吃</a>
                                                         </span>
 
-                                                </div>
+                                                </div> --%>
 
                                                 <section id="comments" ms-repeat-ell="datas.domainBuyCommentsArticleList">
 
@@ -92,7 +116,7 @@
                                                                                 </div><!-- end .comment-meta -->
 
                                                                                 <div class="comment-body" >
-                                                                                        <p>${gbjUserBuyCommentsDetail.comment}</p>
+                                                                                        <p>${gbjUserBuyCommentsDetail[0].comment}</p>
                                                                                 </div><!-- end of comment-body -->
 
                                                                         </article><!-- end of comment -->

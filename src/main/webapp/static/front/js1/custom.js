@@ -219,6 +219,27 @@ jQuery(document).ready(function(e) {
     /* ---------------------------------------------------- */
     /*	Like Button JS
      /* ---------------------------------------------------- */
+		
+		/*$('#test').click(function(){
+			alert("in");
+			data = {
+	        		"id":"111"
+	        }
+	        
+	        $.ajax({
+	        	  type: 'POST',
+	        	  url: "/test.json",
+	        	  data: data,
+	        	  success: function(data){
+	        		 console.log("success " + data )
+	        	  },
+	        	  error : function(data) {    
+	                  console.log("error: " + data)  
+	             },
+	        	  dataType: "json"
+	        	});
+		});*/
+		
     $('#like-it-form .like-it').click(function(){
         var likeButton = $(this);
         var likeHtml = likeButton.html();
@@ -226,7 +247,110 @@ jQuery(document).ready(function(e) {
         likeNum++;
         likeButton.html(likeNum);
 
+        
+        var c = window.location.href.split("?")[1].substring(3,35);
+	       
+        $("#buyid").val(c);
+        
+        alert("aaa");
+     
+        var defaultInfo = {
+        		
+        		"id" : $("#buyid").val(), 
+        		"upCount" : "likeNum"
+        		
+        	}
+        alert("gggg");
+        var vm = avalon.define({
+        	
+        	
+        	
+    		$id : "upcounts",
+    		datas : {
+    			domainInfo1: defaultInfo
+    		},
+    		validation: {
+    			validationHooks:{},
+    			onInit: function(v) {
+                    validationVM = v
+                },
+                onReset: function(e, data) {
+                    data.valueResetor && data.valueResetor()
+                    avalon(this).removeClass("error success")
+                    removeError(this)
+                },
+                resetInFocus: false,
+                onError: function(reasons) {
+                    reasons.forEach(function(reason) {
+                        avalon(this).removeClass("success").addClass("error")
+                        showError(this, reason)
+                    }, this)
+                },
+                onSuccess: function() {
+                    avalon(this).removeClass("error").addClass("success")
+                    removeError(this)
+                },
+                onValidateAll: function(reasons) {
+                    reasons.forEach(function(reason) {
+                        avalon(reason.element).removeClass("success").addClass("error")
+                        showError(reason.element, reason)
+                    })
+                    if (reasons.length === 0) {
+                    	alert("hhhh");
+                        $.ajax({
+    						url: ctx + "/upcounts.json",
+    						data: vm.datas.domainInfo1,
+    						type: "POST",
+    						success: function (resp) {
+    							if (resp.type == "success") {
+    								//$.jBox.tip("提交成功",'success',{opacity:0});
+    								/*setTimeout(function(){
+    									window.location.href = ctx + "/buyarticles.html";
+    								}, 1000);*/
+    							} else {
+    								//$.jBox.error(resp.msg, '错误', {border:5}); 
+    								$("#submit").attr("disabled", false);
+    							}
+    						}
+    					});
+                    }
+                }
+            }
+    	});
+    	avalon.scan();
+        
+        
+       /* $.ajax({
+        	  type: 'POST',
+        	  url: ctx + "/upcounts.json",
+        	  data: data,
+        	  success: function(data){
+        		  if (data == 1){
+                      vm.message = "保存成功！";
+         	         dialogVm.toggle = true;
+         	         voiceVm.taxTpyesFlag = true;	                        	  
+             	 voiceVm.getVoiceInfo();         							   
+                    }else{
+             		vm.message = "保存失败！";
+            			dialogVm.toggle = true;
+             		 }
+        	  },
+        	  error : function(data) {    
+                  console.log("error: " + data)  
+             },
+        	  dataType: "json"
+        	});
+      */
+//        var data = voiceVm.invoiceInfo.$model;
+      
+        
+        
+        
+        
          //   $('#like-it-form').ajaxSubmit(options);
+      
+      
+      
     });
 
 

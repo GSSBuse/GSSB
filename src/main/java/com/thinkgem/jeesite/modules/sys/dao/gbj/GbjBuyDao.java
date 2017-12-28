@@ -20,6 +20,7 @@ public interface GbjBuyDao extends CrudDao<GbjBuy> {
 	public List<GbjBuy> findDomainBuyList(int count);
 	public List<GbjBuy> findDomainArticleBuyList(int count);
 	
+	public int updateCount(GbjBuy gbjBuy);
 	//发布买标信息
 	public int release(GbjBuy gbjBuy);
 		
