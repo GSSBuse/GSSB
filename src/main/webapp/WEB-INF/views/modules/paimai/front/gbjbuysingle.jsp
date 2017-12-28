@@ -92,7 +92,7 @@ $(document).ready(function(){
 
                                                         <h3 id="comments-title">评论内容</h3>
 
-                                                        <ol class="commentlist" >
+                                                        <ol class="commentlist" ms-repeat-ell="datas.domainBuyCommentsArticleList"  >
 
                                                                 <li class="comment even thread-even depth-1" id="li-comment-2">
                                                                         <article id="comment-2">
@@ -116,9 +116,9 @@ $(document).ready(function(){
 
                                                                                 </div><!-- end .comment-meta -->
 
-                                                                                <div class="comment-body" >
-                                                                                        <p>${gbjUserBuyCommentsDetail[0].comment}</p>
-                                                                                </div><!-- end of comment-body -->
+                                                                                <div class="comment-body"   >
+                                                                                    <p>{{ell.comment}}</p>
+                                                                                    </div><!-- end of comment-body -->
 
                                                                         </article><!-- end of comment -->
 
