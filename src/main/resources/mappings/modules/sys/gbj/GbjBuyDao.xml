@@ -122,7 +122,7 @@
 			#{price},
 			#{mobile},
 			#{tag},
-			#{upCounts},
+			"0",
 			#{createBy.id},
 			#{lookCounts},
 			#{updateBy.id},
@@ -156,10 +156,10 @@
 		WHERE id = #{id}
 	</update>
 	
-	
+	<!-- 买标点赞 -->
 	<update id="updateCount">
 		UPDATE gbj_buy SET 	
-			up_counts = #{upCounts}
+			up_counts = up_counts+1
 			
 		WHERE id = #{id}
 	</update>

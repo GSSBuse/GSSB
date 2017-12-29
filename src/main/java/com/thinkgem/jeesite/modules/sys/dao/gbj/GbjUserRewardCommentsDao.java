@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserRewardComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserSoldComments;
 
@@ -19,4 +20,5 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserSoldComments;
 public interface GbjUserRewardCommentsDao extends CrudDao<GbjUserRewardComments> {
 	//根据reward_id查询卖标评论信息
 		public List<GbjUserRewardComments>  getCommentsList(String reward_Id);
+		 public List<GbjUserRewardComments> findDomainArticleRewardCommentsList(String id);
 }

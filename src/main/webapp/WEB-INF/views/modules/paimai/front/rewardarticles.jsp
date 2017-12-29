@@ -45,8 +45,11 @@
                                                                         <span class="date">{{el.createDate}}</span>
                                                                         <span class="category"><a href="#" title="查询该标签所有内容">{{el.typeId}} &amp;&amp;&amp; 餐饮</a></span>
                                                                         <span class="comments"><a href="#">3个回复</a></span>
-                                                                        <span class="like-count">66</span>
+                                                                       <a
+											ms-attr-href="${ctx}/single.html?id={{el.id}}&type=reward"><span class="like-count" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{el.upCounts}}
+										</span></a>
                                                                 </div><!-- end of post meta -->
+
 
                                                         </header>
 

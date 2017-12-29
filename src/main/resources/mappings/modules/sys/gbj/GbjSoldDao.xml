@@ -119,7 +119,7 @@
 			#{price},
 			#{mobile},
 			#{tag},
-			#{upCounts},
+			"0",
 			#{lookCounts},
 			#{createBy.id},
 			#{frontDelFlag},
@@ -190,5 +190,11 @@
             </if>
         </where>
     </select>
-	
+	<!-- 卖标点赞 -->
+	<update id="updateCount">
+		UPDATE gbj_sold SET 	
+			up_counts = up_counts + 1
+			
+		WHERE id = #{id}
+	</update>
 </mapper>

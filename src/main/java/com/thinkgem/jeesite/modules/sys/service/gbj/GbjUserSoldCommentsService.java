@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
@@ -61,5 +62,7 @@ public class GbjUserSoldCommentsService extends CrudService<GbjUserSoldCommentsD
 	public void delete(GbjUserSoldComments gbjUserSoldComments) {
 		super.delete(gbjUserSoldComments);
 	}
-	
+	public List<GbjUserSoldComments> findDomainArticleSoldCommentsList(@RequestParam("id") String  id) {
+		return gbjUserSoldCommentsDao.findDomainArticleSoldCommentsList(id);
+	}
 }

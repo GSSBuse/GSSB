@@ -19,6 +19,9 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjSold;
 public interface GbjSoldDao extends CrudDao<GbjSold> {
 	public List<GbjSold> findDomainSoldList(int count);
 	
+	
+	//卖标点赞
+	public int updateCount(GbjSold gbjSold);
 	//发布卖标信息
 	public int release(GbjSold gbjSold);
 			

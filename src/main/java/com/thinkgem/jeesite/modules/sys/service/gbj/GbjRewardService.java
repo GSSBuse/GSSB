@@ -50,7 +50,13 @@ public class GbjRewardService extends CrudService<GbjRewardDao, GbjReward> {
 		super.delete(gbjReward);
 	}
 	
-	
+	//悬赏点赞
+	@Transactional(readOnly = false)
+	public void updateCount(GbjReward gbjReward) {
+		
+		//System.out.print("service");
+		gbjRewarddao.updateCount(gbjReward);
+	}
 	//发布悬赏信息
 			@Transactional(readOnly = false)
 			public void release(GbjReward gbjReward) {

@@ -13,6 +13,13 @@ public class RewardArticleList  extends DataEntity<RewardArticleList>{
 	private String mobile;		// 联系人手机号
 	private String description;		// 国标描述
 	private String title;		// 国标标题
+	private Long upCounts;		// 点赞数
+	public Long getUpCounts() {
+		return upCounts;
+	}
+	public void setUpCounts(Long upCounts) {
+		this.upCounts = upCounts;
+	}
 	public User getUser() {
 		return user;
 	}

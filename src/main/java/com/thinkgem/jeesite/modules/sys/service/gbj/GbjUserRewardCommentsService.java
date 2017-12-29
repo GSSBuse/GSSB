@@ -8,9 +8,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserRewardComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserSoldComments;
 import com.thinkgem.jeesite.modules.sys.dao.gbj.GbjUserRewardCommentsDao;
@@ -58,5 +60,7 @@ public class GbjUserRewardCommentsService extends CrudService<GbjUserRewardComme
 	public void delete(GbjUserRewardComments gbjUserRewardComments) {
 		super.delete(gbjUserRewardComments);
 	}
-	
+	public List<GbjUserRewardComments> findDomainArticleRewardCommentsList(@RequestParam("id") String  id) {
+		return gbjUserRewardCommentsDao.findDomainArticleRewardCommentsList(id);
+	}
 }

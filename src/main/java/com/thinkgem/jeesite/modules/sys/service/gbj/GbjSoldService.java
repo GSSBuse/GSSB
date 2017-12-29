@@ -48,6 +48,15 @@ public class GbjSoldService extends CrudService<GbjSoldDao, GbjSold> {
 		super.delete(gbjSold);
 	}
 	
+	
+	//卖标点赞
+			@Transactional(readOnly = false)
+			public void updateCount(GbjSold gbjSold) {
+				
+				//System.out.print("service");
+				gbjSolddao.updateCount(gbjSold);
+			}
+	
 	//发布卖标信息
 			@Transactional(readOnly = false)
 			public void release(GbjSold gbjSold) {

@@ -9,6 +9,7 @@
                 <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>
         </head>
 <script type="text/javascript" src="${ctxStatic }/front/js/Article.js"></script>
+<script type="text/javascript" src="${ctxStatic }/front/js/soldupcounts.js"></script>
         <body ms-controller="articles">
                 <%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
                 <div class="about">
@@ -37,39 +38,30 @@
                                                          -->
                                                         <h1 class="post-title"><a href=" ">${gbjSoldDetail.title}</a></h1>
 
-                                                        <div class="post-meta clearfix">
-                                                                <span class="date">2017/11/28</span>
-                                                                <span class="category"><a href="#">商标 &amp; 餐饮</a></span>
-                                                                <span class="comments"><a href="#">3个回复</a></span>
-                                                                <span class="like-count">${gbjSoldDetail.upCounts}</span>
-                                                        </div><!-- end of post meta -->
+                                                        <div class="post-meta clearfix like-btn" ms-controller="upcounts">
+							                             <span class="date">2017/11/28</span> <span class="category"><a
+								                             href="#">商标 &amp; 餐饮</a></span> <span class="comments"><a
+								                        href="#">3个回复</a></span>
+							                             <form id="like-it-form" action="#" method="post">
+								                      <span class="like-it">${gbjSoldDetail.upCounts}</span> <input
+									                     type="hidden" name="id" id="soldid" />
+
+
+							                                </form>
+						                               </div>
+
 
                                                        <!--   <p>买标买标悬赏等的详细信息。进入这个页面是需要2个参数，id和type。type绝对去从那个标里面去检索。也可以3个表做个视图（看看有没有共通的字段了要）。然后根据id取得对应的详细信息，包括回复和点赞等信息。分享等我后面再加。
                                                                                                                                                                                 这里暂时不支持富文本的样式显示，只支持一般文本就好了。
                                                         </p>-->
-                                                        <p>${gbjSoldDetail.description}</p>
+                                                       <h3> <p>${gbjSoldDetail.description}</p></h3>
 
                                                 </article>
-
-                                                <div class="like-btn">
-
-                                                        <form id="like-it-form" action="#" method="post">
-                                                                <span class="like-it ">66</span>
-                                                                <input type="hidden" name="post_id" value="这里是该条信息的id，提交这个表单">
-                                                                <input type="hidden" name="action" value="like_it">
-                                                        </form>
-
-                                                        <span class="tags">
-                                                                <strong>标签:&nbsp;&nbsp;</strong><a href="#" rel="tag">餐饮</a>, <a href="#" rel="tag">商标</a>, <a href="#" rel="tag">小吃</a>
-                                                        </span>
-
-                                                </div>
-
-                                                <section id="comments" ms-repeat-ell="datas.domainBuyCommentsArticleList">
+                                                <section id="comments"  >
 
                                                         <h3 id="comments-title">评论内容</h3>
 
-                                                        <ol class="commentlist" >
+                                                        <ol class="commentlist"   ms-repeat-ell="datas.domainSoldCommentsArticleList" >
 
                                                                 <li class="comment even thread-even depth-1" id="li-comment-2">
                                                                         <article id="comment-2">
@@ -82,20 +74,20 @@
 
                                                                                         <h5 class="author">
                                                                                                 <cite class="fn">
-                                                                                                        <a href="#" rel="external nofollow" class="url">头像和名字</a>
+                                                                                                        <a href="#" rel="external nofollow" class="url">这里头像回头用用户表里面存储的qq或weixin头像和名字</a>
                                                                                                 </cite>
-                                                                                                - <a class="comment-reply-link" href="#">回复</a>
+                                                                                                <a class="comment-reply-link" href="#">回复</a>
                                                                                         </h5>
 
                                                                                         <p class="date">
-                                                                                                 <time datetime="2013-02-26T13:18:47+00:00">这里是商标评论内容。</time>
+                                                                                                 <time datetime="2013-02-26T13:18:47+00:00"></time>
                                                                                         </p>
 
                                                                                 </div><!-- end .comment-meta -->
 
-                                                                                <div class="comment-body" >
-                                                                                        <p>这里是商标评论内容。</p>
-                                                                                </div><!-- end of comment-body -->
+                                                                                <div class="comment-body"   >
+                                                                                    <p>{{ell.comment}}</p>
+                                                                                    </div><!-- end of comment-body -->
 
                                                                         </article><!-- end of comment -->
 
@@ -111,7 +103,7 @@
                                                                                                 <div class="comment-meta">
 
                                                                                                         <h5 class="author">
-                                                                                                                <cite class="fn">头像和名字</cite>
+                                                                                                                <cite class="fn">头像和名字一样数据库取得</cite>
                                                                                                                 - <a class="comment-reply-link" href="#">回复</a>
                                                                                                         </h5>
 
@@ -122,7 +114,7 @@
                                                                                                 </div><!-- end .comment-meta -->
 
                                                                                                 <div class="comment-body">
-                                                                                                        <p>这里是商标评论回复内容。</p>
+                                                                                                        <p></p>
                                                                                                 </div><!-- end of comment-body -->
 
                                                                                         </article><!-- end of comment -->
@@ -131,37 +123,10 @@
                                                                         </ul>
                                                                 </li>
 
-                                                                <li class="comment even thread-odd thread-alt depth-1" id="li-comment-4">
-                                                                        <article id="comment-4">
-
-                                                                                <a href="#">
-                                                                                        <img alt="" src="http://1.gravatar.com/avatar/50a7625001317a58444a20ece817aeca?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G" class="avatar avatar-60 photo" height="60" width="60">
-                                                                                </a>
-
-                                                                                <div class="comment-meta">
-
-                                                                                        <h5 class="author">
-                                                                                                <cite class="fn">
-                                                                                                        <a href="#" rel="external nofollow" class="url">头像和名字</a>
-                                                                                                </cite>
-                                                                                                - <a class="comment-reply-link" href="#">回复</a>
-                                                                                        </h5>
-
-                                                                                        <p class="date">
-                                                                                                 <time datetime="2013-02-26T13:18:47+00:00">2017/11/28 13:18:56</time>
-                                                                                        </p>
-
-                                                                                </div><!-- end .comment-meta -->
-
-                                                                                <div class="comment-body">
-                                                                                        <p>这里是商标评论内容。</p>
-                                                                                </div><!-- end of comment-body -->
-
-                                                                        </article><!-- end of comment -->
-                                                                </li>
+                                                                
                                                         </ol>
 
-                                                        <div id="respond">
+                                                        <div id="respond"    >
 
                                                                 <h3>评论回复</h3>
 
@@ -169,16 +134,18 @@
                                                                         <a rel="nofollow" id="cancel-comment-reply-link" href="#" style="display:none;">Click here to cancel reply.</a>
                                                                 </div>
 
+                                                            
+                                                                <form  method="post" id="commentform" onsubmit="return commentSubmit();">
 
-                                                                <form action="#" method="post" id="commentform">
 
-
-                                                                        <p class="comment-notes">登录后才可进行评论回复</p>
+                                                                        <p class="comment-notes">登录后可进行评论回复。这里回头我加上qq登录。</p>
 
 
                                                                         <div>
-                                                                                <label for="comment">评论</label>
-                                                                                <textarea class="span8" name="comment" id="comment" cols="58" rows="10"></textarea>
+                                                                                <label for="comment">Comment</label>
+                                                                                <input name="title" type="hidden" id="title" value="${gbjSoldDetail.title}">
+                                                                                 <input name="id" type="hidden" id="id" value="${gbjSoldDetail.id}">
+                                                                                <textarea class="span8" name="comment" id="comment"  cols="58"   rows="10"></textarea>
                                                                         </div>
 
                                                                         <div>
@@ -186,11 +153,9 @@
                                                                         </div>
 
                                                                 </form>
-
+                                                             
                                                         </div>
-
                                                 </section><!-- end of comments -->
-
                                         </div>
                                         <!-- end of page content -->
 

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.activiti.engine.impl.util.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +31,8 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjSold;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjTouristRequire;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUser;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserRewardComments;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserSoldComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.RewardArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.SoldArticleList;
 import com.thinkgem.jeesite.modules.sys.service.gbj.ArticleListService;
@@ -39,7 +42,9 @@ import com.thinkgem.jeesite.modules.sys.service.gbj.GbjRewardService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjSoldService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjTouristRequireService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserBuyCommentsService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserRewardCommentsService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserSoldCommentsService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.RewardArticleListService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.SoldArticleListService;
 
@@ -75,7 +80,12 @@ public class FrontIndexController extends BaseController{
 	private RewardArticleListService rewardarticleListService; //悬赏信息发布 2017/12/15 by snnu
 	
 	@Autowired
-	private GbjUserBuyCommentsService gbjUserBuyCommentsService;//评论信息展示2017/12/21 by snnu
+	private GbjUserBuyCommentsService gbjUserBuyCommentsService;//买标评论信息展示2017/12/21 by snnu
+	
+	@Autowired
+	private GbjUserSoldCommentsService gbjUserSoldCommentsService;//卖标评论信息展示2017/12/29 by snnu
+	@Autowired
+	private GbjUserRewardCommentsService gbjUserRewardCommentsService;//悬赏评论信息展示2017/12/29 by snnu
 	/**
 	 * 网站首页
 	 
@@ -233,10 +243,11 @@ public class FrontIndexController extends BaseController{
 			mav = new ModelAndView("modules/paimai/front/gbjbuysingle");
 			//参数拿到了，就根据参数去数据库里面查询详细
 			GbjBuy gbjBuyDetail = gbjBuyService.get(id);
-			List<GbjUserBuyComments> gbjUserBuyCommentsDetail=gbjUserBuyCommentsService.getFrontCommentsList(id);
+			//List<GbjUserBuyComments> gbjUserBuyCommentsDetail=gbjUserBuyCommentsService.getFrontCommentsList(id);
 			//检索出来后就前台元素中去
 			mav.addObject("gbjBuyDetail", gbjBuyDetail);
-			mav.addObject("gbjUserBuyCommentsDetail", gbjUserBuyCommentsDetail);
+		//	JSONArray jsonObject=JSONArray.fromObject(gbjUserBuyCommentsDetail);
+		//	mav.addObject("gbjUserBuyCommentsDetail", jsonObject);
 		}
 		//然后return跳转到详细页面去
 			
@@ -245,11 +256,11 @@ public class FrontIndexController extends BaseController{
 	}	
 	/**
 	 * 买标信息详细一览页面     snnu  12.21
-	
+	*/
 	@RequestMapping(value= {"gbjbuysingle"})
 	public String gbjbuysingle(Model model) {
 		return "modules/paimai/front/gbjbuysingle";
-	}	 */
+	}	 
 	/**
 	 * 卖标信息详细一览页面     snnu  12.23
 	 */
@@ -374,10 +385,10 @@ public class FrontIndexController extends BaseController{
 			gbjUserBuyCommentsService.save(gbjUserBuyComments);
 		
 			
-			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+			return AjaxResult.makeSuccess("您很棒，评论成功！");
 		} catch (Exception e) {
 			logger.error(e.getMessage());			
-			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+			return AjaxResult.makeError("失败【"+e.getMessage()+"】");
 		}
 		
 	}
@@ -619,12 +630,12 @@ public class FrontIndexController extends BaseController{
 	 */
 	@RequestMapping(value = "polling/ArticleBuyCommentsData")
 	@ResponseBody
-	public AjaxResult ArticleBuyCommentsData( @RequestParam("count") String count) {
+	public AjaxResult ArticleBuyCommentsData(@RequestParam("id") String  id) {
 		
 		//单个买标信息和评论信息
 		List<GbjUserBuyComments> pageDomainBuyCommentsArticleList = new ArrayList<GbjUserBuyComments>();
 		try {
-			pageDomainBuyCommentsArticleList = gbjUserBuyCommentsService.findDomainArticleBuyCommentsList(count );
+			pageDomainBuyCommentsArticleList = gbjUserBuyCommentsService.findDomainArticleBuyCommentsList(id);
 		   	 
 			AjaxResult ar = AjaxResult.makeSuccess("");
 			ar.getData().put("ArticleBuyCommentsData", pageDomainBuyCommentsArticleList);
@@ -635,6 +646,52 @@ public class FrontIndexController extends BaseController{
 		}
 	}
 	
+	
+	/**
+	 * 获取页面显示单个賣标信息和评论信息    by snnu 2017/12/29
+	 * @param ArticleSoldCommentsData
+	 * @return 单个买标信息和评论信息
+	 */
+	@RequestMapping(value = "polling/ArticleSoldCommentsData")
+	@ResponseBody
+	public AjaxResult ArticleSoldCommentsData(@RequestParam("id") String  id) {
+		
+		//单个买标信息和评论信息
+		List<GbjUserSoldComments> pageDomainSoldCommentsArticleList = new ArrayList<GbjUserSoldComments>();
+		try {
+			pageDomainSoldCommentsArticleList = gbjUserSoldCommentsService.findDomainArticleSoldCommentsList(id);
+		   	 
+			AjaxResult ar = AjaxResult.makeSuccess("");
+			ar.getData().put("ArticleSoldCommentsData", pageDomainSoldCommentsArticleList);
+			return ar;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AjaxResult.makeError("");
+		}
+	}
+	
+	/**
+	 * 获取页面显示单个悬赏信息和评论信息    by snnu 2017/12/29
+	 * @param ArticleSoldCommentsData
+	 * @return 单个买标信息和评论信息
+	 */
+	@RequestMapping(value = "polling/ArticleRewardCommentsData")
+	@ResponseBody
+	public AjaxResult ArticleRewardCommentsData(@RequestParam("id") String  id) {
+		
+		//单个买标信息和评论信息
+		List<GbjUserRewardComments> pageDomainRewardCommentsArticleList = new ArrayList<GbjUserRewardComments>();
+		try {
+			pageDomainRewardCommentsArticleList = gbjUserRewardCommentsService.findDomainArticleRewardCommentsList(id);
+		   	 
+			AjaxResult ar = AjaxResult.makeSuccess("");
+			ar.getData().put("ArticleRewardCommentsData", pageDomainRewardCommentsArticleList);
+			return ar;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AjaxResult.makeError("");
+		}
+	}
 	/*@RequestMapping(value="/test")
 	@ResponseBody
 	public String test(@RequestParam("id") String id,@RequestParam("count") int  count) {
@@ -643,5 +700,72 @@ public class FrontIndexController extends BaseController{
 	}*/
 	
 	
+	
+	
+	//买标点赞
+		@RequestMapping(value= {"buyupcounts"})  
+		@ResponseBody
+		public AjaxResult buyupcounts(Model model, GbjBuy gbjBuy, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+						/*model.addAttribute("domainInfo1", JsonMapper.toJsonString(gbjBuy));*/
+			try{
+				
+				//STEP1  提交查询信息，保存到数据库
+				gbjBuyService.updateCount(gbjBuy);
+			
+				addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+				
+				return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+				addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
+				return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+			}
+			
+		}
+		
+		//卖标点赞
+				@RequestMapping(value= {"soldupcounts"})  
+				@ResponseBody
+				public AjaxResult soldupcounts(Model model, GbjSold gbjSold, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+					
+					
+					/*model.addAttribute("domainInfo1", JsonMapper.toJsonString(gbjBuy));*/
+					try{
+						
+						//STEP1  提交查询信息，保存到数据库
+						gbjSoldService.updateCount(gbjSold);
+					
+						addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+						
+						return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+					} catch (Exception e) {
+						logger.error(e.getMessage());
+						addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
+						return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+					}
+					
+				}
+				//悬赏点赞
+				@RequestMapping(value= {"rewardupcounts"})  
+				@ResponseBody
+				public AjaxResult rewardupcounts(Model model, GbjReward gbjReward, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+					
+					
+					/*model.addAttribute("domainInfo1", JsonMapper.toJsonString(gbjBuy));*/
+					try{
+						
+						//STEP1  提交查询信息，保存到数据库
+						gbjRewardService.updateCount(gbjReward);
+					
+						addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+						
+						return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+					} catch (Exception e) {
+						logger.error(e.getMessage());
+						addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
+						return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+					}
+					
+				}
 	
 }

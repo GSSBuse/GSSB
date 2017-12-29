@@ -128,5 +128,12 @@
 			del_flag = #{DEL_FLAG_DELETE}
 		WHERE id = #{id}
 	</update>
-	
+	<select id="findDomainArticleRewardCommentsList" resultType="GbjUserRewardComments" >
+        SELECT 
+			<include refid="gbjUserRewardCommentsColumns"/>
+		FROM gbj_user_reward_comments a
+		<include refid="gbjUserRewardCommentsJoins"/>
+		WHERE a.reward_id = #{id}
+		 
+    </select>
 </mapper>

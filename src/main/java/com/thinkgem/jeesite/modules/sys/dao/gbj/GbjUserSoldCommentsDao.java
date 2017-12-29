@@ -20,4 +20,5 @@ public interface GbjUserSoldCommentsDao extends CrudDao<GbjUserSoldComments> {
 	
 	//根据sold_id查询卖标评论信息
 	public List<GbjUserSoldComments>  getCommentsList(String sold_Id);
+	public List<GbjUserSoldComments> findDomainArticleSoldCommentsList(String id);
 }

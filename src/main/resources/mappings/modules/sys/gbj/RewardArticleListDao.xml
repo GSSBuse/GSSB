@@ -10,7 +10,8 @@
               d.mobile as "mobile",
               d.create_date as "createDate",
               d.title as "title",
-              d.description as "description"
+              d.description as "description",
+              d.up_counts as "upCounts"
         FROM gbj_reward d
         <where>
                d.del_flag =  0

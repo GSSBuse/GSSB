@@ -22,5 +22,5 @@ public interface GbjUserBuyCommentsDao extends CrudDao<GbjUserBuyComments> {
 	 public List<GbjUserBuyComments>  getCommentsList(String buy_Id);
 	 public List<GbjUserBuyComments>  getFrontCommentsList(String id);
 	 //
-	 public List<GbjUserBuyComments> findDomainArticleBuyCommentsList(int count);
+	 public List<GbjUserBuyComments> findDomainArticleBuyCommentsList(String id);
 }

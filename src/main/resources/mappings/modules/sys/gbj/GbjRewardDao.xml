@@ -129,7 +129,7 @@
 			#{updateBy.id},
 			#{frontDelFlag},
 			#{updateDate},
-			#{upCounts},
+			"0",
 			#{createDate},
 			#{lookCounts},
 			#{remarks},
@@ -201,6 +201,12 @@
             </if>
         </where>
     </select>
-	
+	<!-- 悬赏点赞 -->
+	<update id="updateCount">
+		UPDATE gbj_reward SET 	
+			up_counts = up_counts + 1
+			
+		WHERE id = #{id}
+	</update>
 	
 </mapper>

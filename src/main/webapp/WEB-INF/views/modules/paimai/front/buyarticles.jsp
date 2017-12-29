@@ -10,6 +10,7 @@
         </head>
 <script type="text/javascript" src="${ctxStatic }/front/js/Articlebuy.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/gbBuy.js"></script>
+<script type="text/javascript" src="${ctxStatic }/front/js/buyupcounts.js"></script>
         <body ms-controller="buyarticles"> 
                 <%@ include file="/WEB-INF/views/include/frontMenu.jsp"%>
                 <div class="about">
@@ -40,12 +41,17 @@
                                                                         <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</a>
                                                                 </h3>
 
-                                                                <div class="post-meta clearfix">
-                                                                        <span class="date">{{el.createDate}}</span>
-                                                                        <span class="category"><a href="#" title="查询该标签所有内容">{{el.typeId}} &amp;&amp;&amp; 餐饮</a></span>
-                                                                        <span class="comments"><a href="#">3个回复</a></span>
-                                                                        <span class="like-count"><a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.upCounts}}</a> &nbsp;</span>
-                                                                </div><!-- end of post meta -->
+                                                               <div class="post-meta clearfix ">
+										<span class="date">{{el.createDate}}</span> <span
+											class="category"><a href="#" title="查询该标签所有内容">{{el.typeId}}
+												&amp;&amp;&amp; 餐饮</a></span> <span class="comments"><a href="#">3个回复</a></span>
+
+										<a ms-attr-href="${ctx}/single.html?id={{el.id}}&type=buy"><span
+											class="like-count">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{el.upCounts}}
+										</span></a>
+
+
+									</div><!-- end of post meta -->
 
                                                         </header>
 

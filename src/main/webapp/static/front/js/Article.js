@@ -13,7 +13,9 @@ var vm = avalon.define({
 		datas : {
 			 domainArticleList : [],//买标信息一览（最新11条，首页只表示最新的）
 		     domainBuyArticleList : [],//卖标信息一览（最新11条，首页只表示最新的）
-		     domainBuyCommentsArticleList:[],//评论内容获取
+		    domainBuyCommentsArticleList:[],//评论内容获取
+		    domainSoldCommentsArticleList:[],//评论内容获取
+		    domainRewardCommentsArticleList:[],
 			//domainRewardList : [],//卖标信息一览（最新11条，首页只表示最新的）
 			timeStamp: 0,
 			tmp : {
@@ -107,13 +109,20 @@ var interval_ArticleBuy_status_check = function() {
 	
 	//评论内容展示
 var interval_ArticleBuyComments_status_check = function() {
-		
+	
+	var x = window.location.href.split("?")[1].substring(3,35);
+	
+		//alert(x);
 		var count = 11;//首页最多显示11条
-		
+		var id= x;
+		//var id = null;
+		//var id="${gbjBuyDetail.id}";
+		//alert("${gbjBuyDetail.id}");
 		$.post(
 			"polling/ArticleBuyCommentsData.json",
 			{
-				count : count         //参数1，检索的limit条数
+				count : count ,   //参数1，检索的limit条数
+				id    :   id
 			},
 			function(res) {
 				if (res.type == "success") {					
@@ -126,3 +135,61 @@ var interval_ArticleBuyComments_status_check = function() {
 	}
 	interval_ArticleBuyComments_status_check();
 	
+	//買標评论内容展示
+	var interval_ArticleSoldComments_status_check = function() {
+		
+		var y = window.location.href.split("?")[1].substring(3,35);
+		
+			//alert(x);
+			var count = 11;//首页最多显示11条
+			var id= y;
+			//var id = null;
+			//var id="${gbjBuyDetail.id}";
+			//alert("${gbjBuyDetail.id}");
+			$.post(
+				"polling/ArticleSoldCommentsData.json",
+				{
+					count : count ,   //参数1，检索的limit条数
+					id    :   id
+				},
+				function(res) {
+					if (res.type == "success") {					
+						vm.datas.domainSoldCommentsArticleList.clear();
+						vm.datas.domainSoldCommentsArticleList.pushArray(res.data.ArticleSoldCommentsData);
+						timeout_ArticleSoldComments = setTimeout(interval_ArticleSoldComments_status_check, 30000); //30秒自动刷新一次
+					}
+				}
+			);
+		}
+		interval_ArticleSoldComments_status_check();
+		
+		//悬赏评论内容展示
+		var interval_ArticleRewardComments_status_check = function() {
+			
+			var z = window.location.href.split("?")[1].substring(3,35);
+			
+				//alert(x);
+				var count = 11;//首页最多显示11条
+				var id= z;
+				//var id = null;
+				//var id="${gbjBuyDetail.id}";
+				//alert("${gbjBuyDetail.id}");
+				$.post(
+					"polling/ArticleRewardCommentsData.json",
+					{
+						count : count ,   //参数1，检索的limit条数
+						id    :   id
+					},
+					function(res) {
+						if (res.type == "success") {					
+							vm.datas.domainRewardCommentsArticleList.clear();
+							vm.datas.domainRewardCommentsArticleList.pushArray(res.data.ArticleRewardCommentsData);
+							timeout_ArticleRewardComments = setTimeout(interval_ArticleRewardComments_status_check, 30000); //30秒自动刷新一次
+						}
+					}
+				);
+			}
+			interval_ArticleRewardComments_status_check();
+			
+		
+			
