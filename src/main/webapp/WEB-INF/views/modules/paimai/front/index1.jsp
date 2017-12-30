@@ -9,7 +9,20 @@
         <head>
                 <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>                
         </head>
-
+        
+<script type="text/javascript">
+	 $(document).ready(function(){
+		if($('#gbjType').text() == '0'){
+			$('#gbjType').text('国商商标');
+		}
+		if($('#gbjType').text() == '1'){
+			$('#gbjType').text('国商专利');
+		}
+		if($('#gbjType').text() == '2'){
+			$('#gbjType').text('国商版权');
+		}
+	}); 
+</script>
         <body ms-controller="index1"> 
                 <%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
                 
@@ -60,9 +73,9 @@
                                                        <h3 class="category">买标信息</h3>
                                                        <ul class="articles">
                                                               <li class="article-entry standard" ms-repeat-el="datas.domainBuyList" >
-                                                                 <h4> <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</a></h4>
+                                                                 <h4> <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</h4>
                                                                 
-                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="查看该分类">商标   &amp; 餐饮</a></span>
+                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp; {{el.type}}   &amp; 餐饮</a></span>
                                                                  <span class="like-count"><a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.upCounts}}</a> &nbsp;</span>
                                                         </li>
                                                               
@@ -87,7 +100,7 @@
                                                        <ul class="articles">
                                                               <li class="article-entry standard" ms-repeat-el="datas.domainRewardList" >		                                                                
                                                                  <h4> <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.title}}</a>&nbsp;&nbsp;&nbsp;悬赏金额: {{el.price}}元</h4>		                                                                
-                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="查看该分类">商标   &amp; 餐饮</a></span>
+                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="查看该分类">{{el.type}}   &amp; 餐饮</a></span>
                                                                  <span class="like-count"><a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.upCounts}}</a> &nbsp;</span>
                                                          </li>
                                                        </ul>

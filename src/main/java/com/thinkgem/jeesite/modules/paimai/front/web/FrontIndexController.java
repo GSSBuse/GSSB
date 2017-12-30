@@ -109,6 +109,14 @@ public class FrontIndexController extends BaseController{
 		model.addAttribute("userinfo", "test");
 		return "modules/paimai/front/login";
 	}	
+	/**
+	 * 个人中心
+	 */
+	/*@RequestMapping(value= {"personalcenter"})
+	public String personalcenter(Model model, HttpServletRequest request) {
+		model.addAttribute("userinfo", "test");
+		return "modules/paimai/front/personalcenter";
+	}	*/
 	
 	/**
 	 * 帐号登录
@@ -208,7 +216,25 @@ public class FrontIndexController extends BaseController{
 	public String articles(Model model) {
 		return "modules/paimai/front/articles";
 	}	
-
+  
+	/**
+	 * 个人中心详细一览页面（根据）
+	 */
+	@RequestMapping(value= {"personalcenter"})
+	public ModelAndView personalcenter(@RequestParam("id") String id,Model model) {
+		ModelAndView mav = null;
+		//参数param从前台传递过来
+		//这里把3个single都放到一起了，便于处理，根据type来分是买标、卖标还是悬赏
+		  {
+			  GbjUser gbjUserDetail = gbjUserService.get(id);
+			//如果是卖标，跳转到gbjsoldsingle卖标页面
+			mav = new ModelAndView("modules/paimai/front/personalcenter");
+			//参数拿到了，就根据参数去数据库里面查询详细
+			//检索出来后就前台元素中去
+			mav.addObject("gbjUserDetail",gbjUserDetail);
+		return mav;
+	}	
+	}
 	/**
 	 * 咨询详细一览页面
 	 

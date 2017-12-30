@@ -22,7 +22,6 @@
 			success : function(data) {
 				if (data.type == 'success') {
 					
-					
 				} else {
 					showError(data.msg);
 					ajaxResult = false;
@@ -34,7 +33,7 @@
 				ajaxResult = false;
 				return false;
 			}
-		});window.location.href = ctx + "/single.html?id=id&type=buy";
+		});
         
         if (ajaxResult == false) {
         	return false;
