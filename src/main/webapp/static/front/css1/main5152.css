@@ -142,7 +142,7 @@ span.tag-line {
   left: auto;
 }
 .main-nav .responsive-nav {
-  display: block;
+  display: none;
 }
 
 .top {
@@ -216,7 +216,7 @@ span.tag-line {
     width:auto; 
     height:auto;
     background-color:#fff;
-    position:absolute;
+    position:fixed;
     z-index:100;
     border:1px solid #ebeaea;
     top:96px;
@@ -1511,7 +1511,7 @@ a#scroll-top:hover {
     display: none;
   }
   .main-nav .responsive-nav {
-    display: block;
+    display: none;
     width: 85%;
     margin: 10px auto;
     padding: auto;

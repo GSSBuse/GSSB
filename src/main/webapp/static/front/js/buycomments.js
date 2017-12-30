@@ -12,7 +12,7 @@
         
         var ajaxResult;
         $.ajax({
-			url : ctx + "/comments.json",
+			url : ctx + "/buycomments.json",
 			type : "POST",
 			data : {
 				id : id,

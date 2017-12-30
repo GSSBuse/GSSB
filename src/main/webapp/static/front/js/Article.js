@@ -13,9 +13,10 @@ var vm = avalon.define({
 		datas : {
 			 domainArticleList : [],//买标信息一览（最新11条，首页只表示最新的）
 		     domainBuyArticleList : [],//卖标信息一览（最新11条，首页只表示最新的）
-		    domainBuyCommentsArticleList:[],//评论内容获取
-		    domainSoldCommentsArticleList:[],//评论内容获取
-		    domainRewardCommentsArticleList:[],
+		     domainBuyCommentsArticleList:[],//评论内容获取
+		     domainSoldCommentsArticleList:[],//评论内容获取
+		     domainRewardCommentsArticleList:[],
+		     domainGbjUserCommentsList:[],
 			//domainRewardList : [],//卖标信息一览（最新11条，首页只表示最新的）
 			timeStamp: 0,
 			tmp : {
@@ -191,5 +192,33 @@ var interval_ArticleBuyComments_status_check = function() {
 			}
 			interval_ArticleRewardComments_status_check();
 			
-		
+			//用户评论内容展示
+			var interval_ArticleComments_status_check = function() {
+				
+				var z = window.location.href.split("?")[1].substring(3,35);
+				
+					//alert(x);
+					var count = 11;//首页最多显示11条
+					var id= z;
+					//var id = null;
+					//var id="${gbjBuyDetail.id}";
+					//alert("${gbjBuyDetail.id}");
+					$.post(
+						"polling/CommentsData.json",
+						{
+							count : count ,   //参数1，检索的limit条数
+							id    :   id
+						},
+						function(res) {
+							if (res.type == "success") {					
+								vm.datas.domainCommentsArticleList.clear();
+								vm.datas.domainCommentsArticleList.pushArray(res.data.CommentsData);
+								timeout_ArticleComments = setTimeout(interval_ArticleComments_status_check, 30000); //30秒自动刷新一次
+							}
+						}
+					);
+				}
+				interval_ArticleComments_status_check();
+			
+			
 			

@@ -8,7 +8,8 @@ require(["plugin/validation/avalon.validation", "domReady!"], function() {
 	var defaultInfo = {
 		realname: "",
 		mobile: "",
-		title: ""
+		title: "",
+		user_id:""
 	}
 	
 	var validationVM = null;

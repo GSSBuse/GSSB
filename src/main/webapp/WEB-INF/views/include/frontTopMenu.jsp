@@ -20,7 +20,7 @@
 
 				</c:when>
 				<c:otherwise>
-					<span id="loginspan"><a class="tc" href="#">登录</a> | <a
+					<span ><a class="tc" href="#" id="loginspan">登录</a> | <a
 						class="td" href="#">注册</a></span>
 				</c:otherwise>
 			</c:choose>
@@ -52,46 +52,86 @@
 								<li><a href="${ctx }/rewardarticles.html">悬赏起名</a></li>
 							</ul></li>
 
-						<li><a href="${ctx }/articles.html">商标查询</a></li>
-
-						<li><a href="${ctx }/registers.html">商标注册</a>
-							<ul class="sub-menu" style="z-index: 123;">
-								<li><a href="trademark.jsp">商标许可</a></li>
-								<li><a>商标变更</a></li>
-								<li><a>商标续展</a></li>
-								<li><a>商标补证</a></li>
-								<li><a>为什么要及时注册商标</a></li>
-								<li><a>商标注册的好处</a></li>
-								<li><a>商标注册存在的客观风险</a></li>
-								<li><a>商标注册的时间、程序、费用</a></li>
-							</ul></li>
-
-						<li><a href="${ctx }/todo.html">专利服务</a>
-							<ul class="sub-menu" style="z-index: 123;">
-
-								<span style="color: gray">国内专利</span>
-								<li><a href="trademark.jsp">发明专利申请</a></li>
-								<li><a>实用新型专利申请</a></li>
-								<li><a>外观设计专利申请</a></li>
-
-								<span style="color: gray">国际专利</span>
-								<li><a>PCT途径</a></li>
-								<li><a>巴黎公约途径</a></li>
-								<li><a>香港专利申请</a></li>
-								<li><a>美国专利申请</a></li>
-
-								<span style="color: gray">专利管理交易</span>
-								<li><a>专利实施许可合同备案</a></li>
-								<li><a>专利著录项目变更</a></li>
-								<li><a>专利权利恢复</a></li>
-								<li><a>专利年费代缴</a></li>
-								<li><a>专利权评价报告</a></li>
-
-							</ul></li>
-						<li><a href="${ctx }/faqs.html">版权登记</a></li>
-						<li><a href="${ctx }/testimonials.html">国际商标</a></li>
-						<li><a href="${ctx }/contact.html">法律服务</a></li>
-						<li><a href="${ctx }/todo.html">知识产权托管</a></li>
+						<li><a href="${ctx }/static_search.html">商标查询</a></li>
+                                            
+                                            <li><a href="${ctx }/static_trademark.html">商标注册</a>
+                                            	<ul class="sub-menu" style="z-index:123">
+	                                            	<li><a href="${ctx }/static_trademark.html">商标注册</a></li>
+	                                                <li><a href="${ctx }/static_trademark1.html">商标许可</a></li>
+	                                                <li><a href="${ctx }/static_trademark2.html">商标变更</a></li>
+	                                                <li><a href="${ctx }/static_trademark3.html">商标续展</a></li>
+	                                                <li><a href="${ctx }/static_trademark4.html">商标补证</a></li>
+													
+	                                                <li><a href="${ctx }/static_qa0.html">为什么要及时注册商标</a></li>
+	                                                <li><a href="${ctx }/static_qa1.html">商标注册的好处</a></li>
+	                                                <li><a href="${ctx }/static_qa2.html">商标注册存在的客观风险</a></li>
+	                                                <li><a href="${ctx }/static_qa3.html">商标注册的时间、程序、费用</a></li>
+	                                             </ul>
+                                            </li>
+                                            
+                                            <li><a href="${ctx }/static_patent0.html">专利服务</a>
+                                            	<ul class="sub-menu" style="z-index:123">
+	                                            	<li><a href="${ctx }/static_patent0.html">发明专利申请</a></li>
+	                                                <li><a href="${ctx }/static_patent1.html">实用新型专利申请</a></li>
+	                                                <li><a href="${ctx }/static_patent2.html">外观设计专利申请</a></li>
+	                                                
+	                                                <li><a href="${ctx }/static_patent3.html">PCT途径</a></li>
+	                                                <li><a href="${ctx }/static_patent4.html">巴黎公约途径</a></li>
+	                                                <li><a href="${ctx }/static_patent5.html">香港专利申请</a></li>
+													<li><a href="${ctx }/static_patent6.html">美国专利申请</a></li>
+													
+	                                                <li><a href="${ctx }/static_patent7.html">专利实施许可合同备案</a></li>
+	                                                <li><a href="${ctx }/static_patent8.html">专利著录项目变更</a></li>
+	                                                <li><a href="${ctx }/static_patent9.html">专利权利恢复</a></li>
+	                                                <li><a href="${ctx }/static_patent10.html">专利年费代缴</a></li>
+	                                                <li><a href="${ctx }/static_patent11.html">专利权评价报告</a></li>
+	                                                
+	                                                <li><a href="${ctx }/static_patent12.html">国内专利维权</a></li>
+	                                                <li><a href="${ctx }/static_patent13.html">专利无效宣告</a></li>
+	                                                <li><a href="${ctx }/static_patent14.html">专利无效答辩</a></li>
+	                                               
+	                                                <li><a href="${ctx }/static_patent15.html">专利申请攻略</a></li>
+	                                                <li><a href="${ctx }/static_patent16.html">专利申请的风险</a></li>
+	                                                <li><a href="${ctx }/static_patent17.html">专利授权需要多久</a></li>
+	                                                <li><a href="${ctx }/static_patent18.html">授权需要的条件</a></li>	                                                
+	                                             </ul>                                            
+                                            </li>
+                                            <li><a href="${ctx }/static_copyright.html">版权登记</a></li>
+                                            <li><a href="${ctx }/static_international0.html">国际商标</a>
+                                            	<ul class="sub-menu" style="z-index:123">
+	                                            	<li><a href="${ctx }/static_international0.html">单国注册</a></li>
+	                                                <li><a href="${ctx }/static_international1.html">欧盟注册</a></li>
+	                                                <li><a href="${ctx }/static_international2.html">马德里注册</a></li>
+	                                                <li><a href="${ctx }/static_international3.html">非洲知识产权组织注册</a></li>
+	                                                <li><a href="${ctx }/static_international4.html">国际案件</a></li>
+	                                                <li><a href="${ctx }/static_international5.html">国际监测</a></li>
+	                                                
+	                                                <li><a href="${ctx }/static_international6.html">涉外商标注册的必要性</a></li>
+	                                                <li><a href="${ctx }/static_international7.html">商标国际注册的方式</a></li>
+	                                                <li><a href="${ctx }/static_international8.html">商标国际注册的注意事项</a></li>
+	                                                <li><a href="${ctx }/static_international9.html">商标国际注册的费用构成</a></li>
+	                                             </ul>                                            
+                                            </li>
+                                            <li><a href="${ctx }/static_lawservice0.html">法律服务</a>
+                                            	<ul class="sub-menu" style="z-index:123">
+	                                            	<li><a href="${ctx }/static_lawservice0.html">驳回复审</a></li>
+	                                                <li><a href="${ctx }/static_lawservice1.html">异议申请</a></li>
+	                                                <li><a href="${ctx }/static_lawservice2.html">商标答辩</a></li>
+	                                                <li><a href="${ctx }/static_lawservice3.html">异议复审</a></li>
+	                                                <li><a href="${ctx }/static_lawservice4.html">争议申请</a></li>
+	                                                <li><a href="${ctx }/static_lawservice5.html">行政诉讼</a></li>
+	                                                
+	                                                <li><a href="${ctx }/static_lawservice6.html">商标侵权诉讼</a></li>
+	                                                <li><a href="${ctx }/static_lawservice7.html">驰名商标</a></li>
+	                                                <li><a href="${ctx }/static_lawservice8.html">著名商标</a></li>
+	                                                <li><a href="${ctx }/static_lawservice9.html">证明商标</a></li>
+	                                                <li><a href="${ctx }/static_lawservice10.html">集体商标</a></li>
+	                                                <li><a href="${ctx }/static_lawservice11.html">商标监测</a></li>
+	                                                <li><a href="${ctx }/static_lawservice12.html">为什么要驳回复审申请</a></li>
+	                                                <li><a href="${ctx }/static_lawservice13.html">商标被异议为何要做答</a></li>	                                             
+	                                             </ul>                                            
+                                            </li>
+                                            <li><a href="${ctx }/static_knowledge.html">知识产权托管</a></li>
 					</ul>
 				</div>
 			</nav>

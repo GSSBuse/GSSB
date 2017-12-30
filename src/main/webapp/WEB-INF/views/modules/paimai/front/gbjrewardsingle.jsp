@@ -1,42 +1,50 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
-        <!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en-US"> <![endif]-->
-        <!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="en-US"> <![endif]-->
-        <!--[if IE 8]>    <html class="lt-ie9" lang="en-US"> <![endif]-->
-        <!--[if gt IE 8]><!--> <html lang="en-US"> <!--<![endif]-->
-        <head>
-                <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>
-        </head>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en-US"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="en-US"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9" lang="en-US"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>
+</head>
 <script type="text/javascript" src="${ctxStatic }/front/js/Article.js"></script>
-<script type="text/javascript" src="${ctxStatic }/front/js/rewardupcounts.js"></script>
-        <body ms-controller="articles">
-                <%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
-                <div class="about">
-                     <div class="container">
-                        <h1>买标信息<span class="m_1"><br>最新发布的买标信息，如有兴趣请联系123456789</span></h1>
-                    </div>
-                </div>
+<script type="text/javascript" src="${ctxStatic }/front/js/rewardcomments.js"></script>
+<script type="text/javascript"
+	src="${ctxStatic }/front/js/rewardupcounts.js"></script>
+<body ms-controller="articles">
+	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
+	<div class="about">
+		<div class="container">
+			<h1>
+				买标信息<span class="m_1"><br>最新发布的买标信息，如有兴趣请联系123456789</span>
+			</h1>
+		</div>
+	</div>
 
-                <!-- Start of Page Container -->
-                <div class="page-container">
-                        <div class="container">
-                                <div class="row">
+	<!-- Start of Page Container -->
+	<div class="page-container">
+		<div class="container">
+			<div class="row">
 
-                                        <!-- start of page content -->
-                                        <div class="span8 page-content" >
+				<!-- start of page content -->
+				<div class="span8 page-content">
 
-                                                <ul class="breadcrumb">
-                                                        <li><a href="#">国标商标</a><span class="divider">/</span></li>
-                                                        <li><a href="#">商标 &amp; 餐饮</a> <span class="divider">/</span></li>
-                                                        <li class="active">我想买个小吃店的店名商标</li>
-                                                </ul>
+					<ul class="breadcrumb">
+						<li><a href="#">国标商标</a><span class="divider">/</span></li>
+						<li><a href="#">商标 &amp; 餐饮</a> <span class="divider">/</span></li>
+						<li class="active">我想买个小吃店的店名商标</li>
+					</ul>
 
-                                                <article class=" type-post format-standard hentry clearfix"  >
+					<article class=" type-post format-standard hentry clearfix">
 
-                                                        <h1 class="post-title"><a href="#">${gbjRewardDetail.title}</a></h1>
+						<h1 class="post-title">
+							<a href="#">${gbjRewardDetail.title}</a>
+						</h1>
 
-                                                       <div class="post-meta clearfix like-btn" ms-controller="upcounts">
+						<div class="post-meta clearfix like-btn" ms-controller="upcounts">
 							<span class="date">2017/11/28</span> <span class="category"><a
 								href="#">商标 &amp; 餐饮</a></span> <span class="comments"><a
 								href="#">3个回复</a></span>
@@ -47,156 +55,564 @@
 							</form>
 						</div>
 
-                                                       <!--   <p>买标买标悬赏等的详细信息。进入这个页面是需要2个参数，id和type。type绝对去从那个标里面去检索。也可以3个表做个视图（看看有没有共通的字段了要）。然后根据id取得对应的详细信息，包括回复和点赞等信息。分享等我后面再加。
+						<!--   <p>买标买标悬赏等的详细信息。进入这个页面是需要2个参数，id和type。type绝对去从那个标里面去检索。也可以3个表做个视图（看看有没有共通的字段了要）。然后根据id取得对应的详细信息，包括回复和点赞等信息。分享等我后面再加。
                                                                                                                                                                                 这里暂时不支持富文本的样式显示，只支持一般文本就好了。
                                                         </p>-->
-                                                        <p>${gbjRewardDetail.description}</p>
+						<p>${gbjRewardDetail.description}</p>
 
-                                                </article>
+					</article>
+					<section id="comments">
 
+						<h3 id="comments-title">评论内容</h3>
 
-                                                <section id="comments"  >
+						<ol class="commentlist"
+							ms-repeat-ell="datas.domainRewardCommentsArticleList">
 
-                                                        <h3 id="comments-title">评论内容</h3>
+							<li class="comment even thread-even depth-1" id="li-comment-2">
+								<article id="comment-2">
 
-                                                        <ol class="commentlist"   ms-repeat-ell="datas.domainRewardCommentsArticleList" >
+									<a href="#"> <img alt=""
+										src="http://1.gravatar.com/avatar/50a7625001317a58444a20ece817aeca?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G"
+										class="avatar avatar-60 photo" height="60" width="60">
+									</a>
 
-                                                                <li class="comment even thread-even depth-1" id="li-comment-2">
-                                                                        <article id="comment-2">
+									<div class="comment-meta">
 
-                                                                                <a href="#">
-                                                                                        <img alt="" src="http://1.gravatar.com/avatar/50a7625001317a58444a20ece817aeca?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G" class="avatar avatar-60 photo" height="60" width="60">
-                                                                                </a>
+										<h5 class="author">
+											<cite class="fn"> <a href="#" rel="external nofollow"
+												class="url">这里头像回头用用户表里面存储的qq或weixin头像和名字</a>
+											</cite> <a class="comment-reply-link" href="#">回复</a>
+										</h5>
 
-                                                                                <div class="comment-meta">
+										<p class="date">
+											<time datetime="2013-02-26T13:18:47+00:00"></time>
+										</p>
 
-                                                                                        <h5 class="author">
-                                                                                                <cite class="fn">
-                                                                                                        <a href="#" rel="external nofollow" class="url">这里头像回头用用户表里面存储的qq或weixin头像和名字</a>
-                                                                                                </cite>
-                                                                                                <a class="comment-reply-link" href="#">回复</a>
-                                                                                        </h5>
+									</div>
+									<!-- end .comment-meta -->
 
-                                                                                        <p class="date">
-                                                                                                 <time datetime="2013-02-26T13:18:47+00:00"></time>
-                                                                                        </p>
+									<div class="comment-body">
+										<p>{{ell.comment}}</p>
+									</div>
+									<!-- end of comment-body -->
 
-                                                                                </div><!-- end .comment-meta -->
+								</article>
+								<!-- end of comment -->
 
-                                                                                <div class="comment-body"   >
-                                                                                    <p>{{ell.comment}}</p>
-                                                                                    </div><!-- end of comment-body -->
+								<ul class="children">
 
-                                                                        </article><!-- end of comment -->
+									<li
+										class="comment byuser comment-author-saqib-sarwar bypostauthor odd alt depth-2"
+										id="li-comment-3">
+										<article id="comment-3">
 
-                                                                        <ul class="children">
+											<a href="#"> <img alt=""
+												src="http://0.gravatar.com/avatar/2df5eab0988aa5ff219476b1d27df755?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G"
+												class="avatar avatar-60 photo" height="60" width="60">
+											</a>
 
-                                                                                <li class="comment byuser comment-author-saqib-sarwar bypostauthor odd alt depth-2" id="li-comment-3">
-                                                                                        <article id="comment-3">
+											<div class="comment-meta">
 
-                                                                                                <a href="#">
-                                                                                                        <img alt="" src="http://0.gravatar.com/avatar/2df5eab0988aa5ff219476b1d27df755?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G" class="avatar avatar-60 photo" height="60" width="60">
-                                                                                                </a>
+												<h5 class="author">
+													<cite class="fn">头像和名字一样数据库取得</cite> - <a
+														class="comment-reply-link" href="#">回复</a>
+												</h5>
 
-                                                                                                <div class="comment-meta">
+												<p class="date">
+													<time datetime="2013-02-26T13:20:14+00:00">February
+														26, 2013 at 1:20 pm</time>
+												</p>
 
-                                                                                                        <h5 class="author">
-                                                                                                                <cite class="fn">头像和名字一样数据库取得</cite>
-                                                                                                                - <a class="comment-reply-link" href="#">回复</a>
-                                                                                                        </h5>
+											</div>
+											<!-- end .comment-meta -->
 
-                                                                                                        <p class="date">
-                                                                                                                <time datetime="2013-02-26T13:20:14+00:00">February 26, 2013 at 1:20 pm</time>
-                                                                                                        </p>
+											<div class="comment-body">
+												<p></p>
+											</div>
+											<!-- end of comment-body -->
 
-                                                                                                </div><!-- end .comment-meta -->
+										</article>
+										<!-- end of comment -->
 
-                                                                                                <div class="comment-body">
-                                                                                                        <p></p>
-                                                                                                </div><!-- end of comment-body -->
-
-                                                                                        </article><!-- end of comment -->
-
-                                                                                </li>
-                                                                        </ul>
-                                                                </li>
-
-                                                                
-                                                        </ol>
-
-                                                        <div id="respond"    >
-
-                                                                <h3>评论回复</h3>
-
-                                                                <div class="cancel-comment-reply">
-                                                                        <a rel="nofollow" id="cancel-comment-reply-link" href="#" style="display:none;">Click here to cancel reply.</a>
-                                                                </div>
-
-                                                            
-                                                                <form  method="post" id="commentform" onsubmit="return commentSubmit();">
+									</li>
+								</ul>
+							</li>
 
 
-                                                                        <p class="comment-notes">登录后可进行评论回复。这里回头我加上qq登录。</p>
+						</ol>
+
+						<div id="respond">
+
+							<h3>评论回复</h3>
+
+							<div class="cancel-comment-reply">
+								<a rel="nofollow" id="cancel-comment-reply-link" href="#"
+									style="display: none;">Click here to cancel reply.</a>
+							</div>
 
 
-                                                                        <div>
-                                                                                <label for="comment">Comment</label>
-                                                                                <input name="title" type="hidden" id="title" value="${gbjSoldDetail.title}">
-                                                                                 <input name="id" type="hidden" id="id" value="${gbjSoldDetail.id}">
-                                                                                <textarea class="span8" name="comment" id="comment"  cols="58"   rows="10"></textarea>
-                                                                        </div>
-
-                                                                        <div>
-                                                                                <input class="btn" name="submit" type="submit" id="submit"  value="提交评论">
-                                                                        </div>
-
-                                                                </form>
-                                                             
-                                                        </div>
-                                                </section><!-- end of comments -->
-
-                                        </div>
-                                        <!-- end of page content -->
+							<form method="post" id="commentform"
+								onsubmit="return commentSubmit();">
 
 
-                                        <!-- start of sidebar -->
-                                        <aside class="span4 page-sidebar">
-                                                <%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
-                                        </aside>
-                                        <!-- end of sidebar -->
-                                </div>
-                        </div>
-                </div>
-                <!-- End of Page Container -->
+								<p class="comment-notes">登录后可进行评论回复。这里回头我加上qq登录。</p>
 
-                <!-- Start of Footer -->
-                <%@ include file="/WEB-INF/views/include/frontFooter.jsp"%> 
-                <!-- End of Footer -->
 
-                <a href="#top" id="scroll-top"></a>
-        </body>
-        
-        
-    <!--qq登录用 -->
-    <script>
-        QC.Login({
-            //btnId：插入按钮的节点id，必选
-            btnId:"qqLoginBtn",
-            //用户需要确认的scope授权项，可选，默认all
-            scope:"all",
-            //按钮尺寸，可用值[A_XL| A_L| A_M| A_S|  B_M| B_S| C_S]，可选，默认B_S
-            size: "B_M"
-        }, function(reqData, opts){//登录成功
-            //根据返回数据，更换按钮显示状态方法
-            console.log(reqData);//查看返回数据
-            QC.Login.getMe(function(openId, accessToken){//获取用户的openId
-                console.log('QQOPENID:'+openId);
-                //thirdparty(null,null,reqData.figureurl_qq_1,reqData.nickname,1,openId);
-                $("#userimgId").attr('src',reqData.figureurl_qq_1); 
-                $('#username').html(reqData.nickname);
-                //QC.Login.signOut();//退出QQ登录调用事件
-            });
+								<div>
+									<label for="comment">Comment</label> 
+									<input name="parentId"
+										type="hidden" id="parentId" value="${login_user.id}">
+									<input name="id" type="hidden" id="id"
+										value="${gbjRewardDetail.id}">
+									<textarea class="span8" name="comment" id="comment" cols="58"
+										rows="10"></textarea>
+								</div>
+
+								<div>
+									<input class="btn" name="submit" type="submit" id="submit"
+										value="提交评论">
+								</div>
+
+							</form>
+
+						</div>
+					</section>
+					<!-- end of comments -->
+
+				</div>
+				<!-- end of page content -->
+
+
+				<!-- start of sidebar -->
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
+				<!-- end of sidebar -->
+			</div>
+		</div>
+	</div>
+	<!-- End of Page Container -->
+
+	<!-- Start of Footer -->
+	<%@ include file="/WEB-INF/views/include/frontFooter.jsp"%>
+	<!-- End of Footer -->
+
+	<a href="#top" id="scroll-top"></a>
+	<script type="text/javascript"> <!--我要买标弹出框js -->
+
+	$('#comment').focus(function(){
+		var x = $('#loginspan').text();
+		
+		if(x == "登录"){
+		
+	         $("#popup").show();//查找ID为popup的DIV show()显示#gray
+	         tc_center();
+	         $('.loginV2').show();
+	         $('.registerBox').hide();
+	         $('.form-error').hide();
+	    
+	     $(".td").click(function(){
+	         $("#popup").show();//查找ID为popup的DIV show()显示#gray
+	         tc_center();
+	         $('.loginV2').hide();
+	         $('.registerBox').show();
+	         $('.form-error').hide();
+	     });
+	     //点击关闭按钮
+	     $("a.guanbi").click(function(){
+	         $("#popup").hide();//查找ID为popup的DIV hide()隐藏
+	     })
+	     //点击退出按钮
+	     $(".logout").click(function(){
+	    	 $.ajax({
+	 			url : ctx + "/logout.json",
+	 			type : "POST",
+	         	dataType : 'json',
+	 			success : function(data) {
+	 				window.location.reload();
+	 				return true;
+	 			},
+	 			error : function(data) {
+	 				alert(data.responseText);
+	 				return false;
+	 			}
+	 		});
+	     });
+
+	     //窗口水平居中
+	     $(window).resize(function(){
+	         tc_center();
+	     });
+
+	     function tc_center(){
+	         var _top=($(window).height()-$(".popup").height())/2;
+	         var _left=($(window).width()-$(".popup").width())/2;
+	         
+	         $(".popup").css({top:_top,left:_left});
+	     }   
+	     }
+		else{
+	    return true;
+		}
+	
+	})
+	
+	
+
+</script>
+	
+	
+	
+	//下面全是和登录相关的js
+<script type="text/javascript">
+     $(document).ready(function(){ 
+
+         $(".top_nav").mousedown(function(e){ 
+             $(this).css("cursor","move");//改变鼠标指针的形状 
+             var offset = $(this).offset();//DIV在页面的位置 
+             var x = e.pageX - offset.left;//获得鼠标指针离DIV元素左边界的距离 
+             var y = e.pageY - offset.top;//获得鼠标指针离DIV元素上边界的距离 
+             $(document).bind("mousemove",function(ev){ //绑定鼠标的移动事件，因为光标在DIV元素外面也要有效果，所以要用doucment的事件，而不用DIV元素的事件 
+             
+                 $(".popup").stop();//加上这个之后 
+                 
+                 var _x = ev.pageX - x;//获得X轴方向移动的值 
+                 var _y = ev.pageY - y;//获得Y轴方向移动的值 
+             
+                 $(".popup").animate({left:_x+"px",top:_y+"px"},10); 
+             }); 
+
+         }); 
+
+         $(document).mouseup(function() { 
+             $(".popup").css("cursor","default"); 
+             $(this).unbind("mousemove"); 
+         });
+     }) 
+     </script>
+
+
+
+<script type="text/javascript">
+    var _wx_server_qr_code_count = 0;
+    var _wx_server_qr_code_loaded = false;
+    var _qr_code_limited = '';
+    var _qr_code_wait_time = 20;
+    var flashQrCodeWaitingTimer = null;
+    var getQrCodeStatusTimer = null;
+    var getQrCodeTimer = null;
+    var _mobile_regu =/^1[3|4|5|8][0-9]\d{4,8}$/; 
+    var _mobile_reg = new RegExp(_mobile_regu);
+    
+    //帐号密码登录
+    function nameLoginCheck(){
+        var loginName = $("#nameLoginForm").find("#normalUser").eq(0).val();
+        var password = $("#nameLoginForm").find("#normalPassword").eq(0).val();
+        if($(".tips ").is(":visible")){
+            return false;
         }
-    );
+        if(loginName == null  || loginName == ""){
+            showError("请输入用户名");
+            return false;
+        }
+        if(password == null  || password == ""){
+            showError("请输入密码");
+            return false;
+        }
+        if($("#normalYzm")  && $("#nameLoginForm").find("#normalYzm").length > 0 ){
+            if($("#normalYzm").val() == "" || $("#normalYzm").val() == null){
+                showError("请输入验证码");
+                return false;
+            }
+        }
+        
+        var ajaxResult;
+        $.ajax({
+			url : ctx + "/nameLogin.json",
+			type : "POST",
+			data : {
+				username : loginName,
+				passwd : password
+			},
+        	dataType : 'json',
+        	async : false,
+			success : function(data) {
+				if (data.type == 'success') {
+					return true;
+				} else {
+					showError(data.msg);
+					ajaxResult = false;
+					return false;
+				}
+			},
+			error : function(data) {
+				showError(data.responseText);
+				ajaxResult = false;
+				return false;
+			}
+		});
+        
+        if (ajaxResult == false) {
+        	return false;
+        }
+        return true;
+    }
+    
+    //手机登陆验证
+    function mobileLoginCheck(){
+        var mobile = $("#mobileLoginForm").find("#partnerPhone").eq(0).val();
+        var captch = $("#mobileLoginForm").find("#partnerYzm").eq(0).val();
+        var code = $("#mobileLoginForm").find("#partnerJym").eq(0).val();
+        if(mobile == null || mobile == '' || !(_mobile_reg).test(mobile)){
+            showError("请填写正确的手机号");
+            return false;
+        }
+        if(captch == null || captch == "" || captch == undefined){
+            showError("请填写验证码");
+            return false;
+        }
+        if(code == null || code == ""){
+            showError("请填写校验码");
+            return false;
+        }
+        return true;
+    }
+
+    //注册
+    function registerCheck(){
+    	var mobile = $("#registerForm").find("#nomalMobile").eq(0).val();
+        var password = $("#registerForm").find("#normalPassword").eq(0).val();
+        var rePassword = $("#registerForm").find("#reNormalPassword").eq(0).val();
+        if($(".tips ").is(":visible")){
+            return false;
+        }
+        if(mobile == null  || mobile == ""){
+            showError("请输入手机号");
+            return false;
+        }
+        if(password == null  || password == ""){
+            showError("请输入密码");
+            return false;
+        }
+        if(rePassword == null  || rePassword == ""){
+            showError("请再次输入密码");
+            return false;
+        }
+        if(password != rePassword){
+        	showError("两次输入密码不一致");
+            return false;
+        }
+        //if($("#normalYzm")  && $("#registerBox").find("#normalYzm").length > 0 ){
+        //    if($("#normalYzm").val() == "" || $("#normalYzm").val() == null){
+        //        showError("请输入验证码");
+        //        return false;
+        //    }
+        //}
+        
+        var ajaxResult;
+        $.ajax({
+			url : ctx + "/register.json",
+			type : "POST",
+			data : {
+				mobile : mobile,
+				passwd : password
+			},
+        	dataType : 'json',
+        	async : false,
+			success : function(data) {
+				if (data.type == 'success') {
+					return true;
+				} else {
+					showError(data.msg);
+					ajaxResult = false;
+					return false;
+				}
+			},
+			error : function(data) {
+				showError(data.responseText);
+				ajaxResult = false;
+				return false;
+			}
+		});
+        
+        if (ajaxResult == false) {
+        	return false;
+        }
+        return true;
+    }
+    
+    //注册
+    function iagreeChange(){
+        if(!$('#iagree').is(':checked')) {
+            showError("请选择同意协议");
+            return;
+        }else{
+            closeError();
+        }
+    }
+  
+    function mobileCheck(obj){
+        if(!(_mobile_reg).test($("#nomalMobile").val())){
+            showError("请填写正确的手机号");
+            return;
+        }else{
+            closeError();
+        }
+    }
+    
+    //发送短信
+    function sendSms(obj){
+        alert("信息已发送");
+    }
+    
+    function captchCheck(obj){
+        if(!(_mobile_reg).test($("#partnerPhone").val())){
+            showError("请填写正确的手机号");
+            return;
+        }
+        var captch = $(obj).val();
+        if(captch == '' || captch == null){
+            showError("请填写验证码");
+        }else{
+            checkCaptch(captch,
+                        function(){
+                            if(!$("#smsSendButton").hasClass("sending")){
+                                $("#smsSendButton").removeClass("disabled");
+                            }
+                             closeError();
+                        },function(){
+                            showError("验证码错误");
+                             $("#smsSendButton").addClass("disabled");
+                        }
+            );
+        }
+    }
+    
+    $(function(){
+        $(".form-tab li").on("click",function(){
+            var index = $(this).index();
+            $(this).addClass("cur").siblings().removeClass("cur");
+            $(".form-con>div").hide().eq(index).show();
+            if(index == 0){
+                $(".form-foot").hide();           
+            }else{
+                $(".form-foot").show();
+            }
+            $(".form-error").hide();
+        });
+        $(".weixin-login .help-a").hover(
+            function(){
+                $(".wx-img-box,.wx-image").stop();
+                $(this).parents(".weixin-login").find(".wx-img-box").animate({"marginLeft":"15px"},300,function(){
+                    $(this).parents(".weixin-login").find(".wx-image").animate({"opacity":1},300);
+                });
+            },
+            function(){
+                $(".wx-img-box,.wx-image").stop();
+                $(this).parents(".weixin-login").find(".wx-image").stop().animate({"opacity":0},300,function(){
+                    $(this).parents(".weixin-login").find(".wx-img-box").animate({"marginLeft":"110px"},300);
+                });
+            }
+        );
+    
+        
+    });
+    
+    $('.jia_foot_open').click(function(){
+        $('.footnone').slideToggle();
+        $(this).find('i').toggleClass('footnow');
+    });
+    $('.register').click(function(){
+        $('.loginV2').hide();
+        $('.registerBox').show();
+        $('.form-error').hide();
+    });
+
+    $('.phoneLogin').click(function(){
+        $('.loginV2').hide();
+        $('.shortLogin').show();
+        $('.form-error').hide();
+    });
+    $('.backLogin').click(function(){
+         $('.login-normal').show();
+        $('.loginV2').show();
+        $('.registerBox').hide();
+        $('.shortLogin').hide();
+        $('.form-error').hide();
+    });
+    //开启错误提示
+    function showError(error){
+        $(".form-error").find("label").html(error);
+        $(".form-error").show();
+    }
+</script>
+
+
+
+
+
+<!--qq登录用 -->
+<script>
+      function qqlogin(){
+            QC.Login({}, function (reqData, opts) {//登录成功
+                getInfo();
+            }, function (opts) {
+                alert('注销成功');
+            }
+            );
+            QC.Login.showPopup({
+                   appId:"101442633",
+                   redirectURI:"http://localhost:8182/gssb/index.html"
+                });
+        }
+        
+      function getInfo() {
+            if(QC.Login.check()){
+                QC.api("get_user_info")
+                    .success(function(s){//成功回调
+                        QC.Login.getMe(function(openId, accessToken){
+                            
+                            var _data={loginName:s.data.nickname,openId:openId,otype:1,token:accessToken};
+                            console.log(_data);
+                            $.ajax({
+                                url:ctx +"/qqlogin.ajax",
+                                type:"POST",
+                                data:_data,
+                                dataType:'json',
+                                success:function(result) {
+                                    if(result.code==200){              
+                                        //登录成功 ,跳转回前一个页面
+                                        window.location.href=ctx + '/';
+                                    }else{
+                                       if(result.code==101){
+//                                       $("#openId").val(result.openId);
+//                                       console.info(result);
+//                                       $("#loginName_qw").val(result.loginName);   
+//                                        var fm=document.getElementById("qqcheckForm");  
+//                                       // fm.action="";
+//                                        fm.submit(); 
+                                        }
+//                                      这里跳转到一个补充手机号注册流程的页面。 openid也保存到数据库中   
+                                    }
+                                }
+                            });
+//                          qq授权后台处理思路：通过点击qq登录，登录成功后回调，在回调中通过 QC.api("get_user_info")获取登录后的信息，
+//                                                                  在后台通过qq的openid来查询数据库，若是库中有值，则直接进入登录成功流程，若是没有值则跳转到手机号注册流程。
+                        })
+                    })
+                    .error(function(f){//失败回调
+                        alert("获取用户信息失败！登录失败！");
+                        location.href = "/";
+                    })
+                    .complete(function(c){//完成请求回调
+                          alert("获取用户信息完成！");
+                    });
+            }else{
+                alert("请先登录qq！");
+                location.href = ctx + '/';
+            }
+        }
   </script>
+</body>
+<!--qq登录用 -->
 </html>

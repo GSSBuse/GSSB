@@ -31,6 +31,7 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjSold;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjTouristRequire;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUser;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserRewardComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserSoldComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.RewardArticleList;
@@ -42,6 +43,7 @@ import com.thinkgem.jeesite.modules.sys.service.gbj.GbjRewardService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjSoldService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjTouristRequireService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserBuyCommentsService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserCommentsService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserRewardCommentsService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserSoldCommentsService;
@@ -86,6 +88,9 @@ public class FrontIndexController extends BaseController{
 	private GbjUserSoldCommentsService gbjUserSoldCommentsService;//卖标评论信息展示2017/12/29 by snnu
 	@Autowired
 	private GbjUserRewardCommentsService gbjUserRewardCommentsService;//悬赏评论信息展示2017/12/29 by snnu
+	
+	@Autowired
+	private GbjUserCommentsService gbjUserCommentsService;//悬赏评论信息展示2017/12/29 by snnu
 	/**
 	 * 网站首页
 	 
@@ -109,6 +114,10 @@ public class FrontIndexController extends BaseController{
 		model.addAttribute("userinfo", "test");
 		return "modules/paimai/front/login";
 	}	
+	
+	
+	
+	
 	/**
 	 * 个人中心
 	 */
@@ -374,8 +383,6 @@ public class FrontIndexController extends BaseController{
 		
 		model.addAttribute("domainInfo1Json", JsonMapper.toJsonString(gbjBuy));
 		try{
-			
-			
 			//STEP1  提交查询信息，保存到数据库
 			gbjBuyService.save(gbjBuy);
 		
@@ -393,9 +400,9 @@ public class FrontIndexController extends BaseController{
 	 * 我要买标评论提交信息提交   2017/12/27  
 	 * by snnu
  	*/
-	@RequestMapping(value= {"comments"})  
+	@RequestMapping(value= {"buycomments"})  
 	@ResponseBody
-	public AjaxResult comments(HttpServletRequest request, 
+	public AjaxResult buycomments(HttpServletRequest request, 
 			@RequestParam(value = "id") String id,
 			@RequestParam(value = "comment") String comment,
 			@RequestParam(value = "parentId") String parentId) {
@@ -420,7 +427,71 @@ public class FrontIndexController extends BaseController{
 		
 	}
 	
+	/**
+	 * 我要卖标评论提交信息提交   2017/12/27  
+	 * by snnu
+ 	*/
+	@RequestMapping(value= {"soldcomments"})  
+	@ResponseBody
+	public AjaxResult soldcomments(HttpServletRequest request, 
+			@RequestParam(value = "id") String id,
+			@RequestParam(value = "comment") String comment,
+			@RequestParam(value = "parentId") String parentId) {
+		GbjUserSoldComments gbjUserSoldComments = new GbjUserSoldComments();
+		GbjSold gbjSold = new GbjSold();
+		try{			
+			logger.info(parentId);
+			//STEP1  提交查询信息，保存到数据库
+			gbjUserSoldComments.setSold(gbjSoldService.get(id));			
+			gbjUserSoldComments.setComment(comment);			
+			gbjUserSoldComments.setParentId(parentId);			
+			gbjUserSoldComments.setCreateDate(new Date());			
+			
+			gbjUserSoldCommentsService.save(gbjUserSoldComments);
+		
+			
+			return AjaxResult.makeSuccess("您很棒，评论成功！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());			
+			return AjaxResult.makeError("失败【"+e.getMessage()+"】");
+		}
+		
+	}
+	/**
+	 * 我要卖标评论提交信息提交   2017/12/27  
+	 * by snnu
+ 	*/
+	@RequestMapping(value= {"rewardcomments"})  
+	@ResponseBody
+	public AjaxResult rewardcomments(HttpServletRequest request, 
+			@RequestParam(value = "id") String id,
+			@RequestParam(value = "comment") String comment,
+			@RequestParam(value = "parentId") String parentId) {
+		GbjUserRewardComments gbjUserRewardComments = new GbjUserRewardComments();
+		GbjReward gbjReward = new GbjReward();
+		try{			
+			logger.info(parentId);
+			//STEP1  提交查询信息，保存到数据库
+			gbjUserRewardComments.setReward(gbjRewardService.get(id));			
+			gbjUserRewardComments.setComment(comment);			
+			gbjUserRewardComments.setParentId(parentId);			
+			gbjUserRewardComments.setCreateDate(new Date());			
+			
+			gbjUserRewardCommentsService.save(gbjUserRewardComments);
+		
+			
+			return AjaxResult.makeSuccess("您很棒，评论成功！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());			
+			return AjaxResult.makeError("失败【"+e.getMessage()+"】");
+		}
+		
+	}
 	
+	/**
+	 * 我要卖标信息提交   2017/12/5 
+	 * by snnu
+	 */
 	@RequestMapping(value= {"upcounts"})  
 	@ResponseBody
 	public AjaxResult upcounts(Model model, GbjBuy gbjBuy, HttpServletRequest request, RedirectAttributes redirectAttributes) {
@@ -650,6 +721,31 @@ public class FrontIndexController extends BaseController{
 			return AjaxResult.makeError("");
 		}
 	} 
+	
+	
+	/**
+	 * 获取用户评论信息    by snnu 2017/12/30
+	 * @param CommentsData
+	 * @return 评论信息
+	 */
+	@RequestMapping(value = "polling/CommentsData")
+	@ResponseBody
+	public AjaxResult CommentsData(@RequestParam("id") String  id) {
+		
+		//单个买标信息和评论信息
+		List<GbjUserComments> pageDomainCommentsArticleList = new ArrayList<GbjUserComments>();
+		try {
+			pageDomainCommentsArticleList = gbjUserCommentsService.findDomainGbjUserCommentsList(id);
+		   	 
+			AjaxResult ar = AjaxResult.makeSuccess("");
+			ar.getData().put("ArticleBuyCommentsData", pageDomainCommentsArticleList);
+			return ar;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AjaxResult.makeError("");
+		}
+	}
+	
 	/**
 	 * 获取页面显示单个买标信息和评论信息    by snnu 2017/12/21
 	 * @param ArticleBuyCommentsData
@@ -794,5 +890,287 @@ public class FrontIndexController extends BaseController{
 					}
 					
 				}
-	
+				/*
+				 * 静态页面
+				 * */
+				@RequestMapping(value= {"static_trademark"})
+				public String static_trademark(Model model) {
+					return "modules/paimai/front/static_trademark";
+				}
+				
+				@RequestMapping(value= {"static_trademark1"})
+				public String static_trademark1(Model model) {
+					return "modules/paimai/front/static_trademark1";
+				}
+				
+				@RequestMapping(value= {"static_trademark2"})
+				public String static_trademark2(Model model) {
+					return "modules/paimai/front/static_trademark2";
+				}
+				
+				@RequestMapping(value= {"static_trademark3"})
+				public String static_trademark3(Model model) {
+					return "modules/paimai/front/static_trademark3";
+				}
+				
+				@RequestMapping(value= {"static_trademark4"})
+				public String static_trademark4(Model model) {
+					return "modules/paimai/front/static_trademark4";
+				}
+				
+				@RequestMapping(value= {"static_qa0"})
+				public String static_qa0(Model model) {
+					return "modules/paimai/front/static_qa0";
+				}
+				
+				@RequestMapping(value= {"static_qa1"})
+				public String static_qa1(Model model) {
+					return "modules/paimai/front/static_qa1";
+				}
+				
+				@RequestMapping(value= {"static_qa2"})
+				public String static_qa2(Model model) {
+					return "modules/paimai/front/static_qa2";
+				}
+				
+				@RequestMapping(value= {"static_qa3"})
+				public String static_qa3(Model model) {
+					return "modules/paimai/front/static_qa3";
+				}
+				
+				@RequestMapping(value= {"static_patent0"})
+				public String static_patent0(Model model) {
+					return "modules/paimai/front/static_patent0";
+				}
+				
+				@RequestMapping(value= {"static_patent1"})
+				public String static_patent1(Model model) {
+					return "modules/paimai/front/static_patent1";
+				}
+				
+				@RequestMapping(value= {"static_patent2"})
+				public String static_patent2(Model model) {
+					return "modules/paimai/front/static_patent2";
+				}
+				
+				@RequestMapping(value= {"static_patent3"})
+				public String static_patent3(Model model) {
+					return "modules/paimai/front/static_patent3";
+				}
+				
+				@RequestMapping(value= {"static_patent4"})
+				public String static_patent4(Model model) {
+					return "modules/paimai/front/static_patent4";
+				}
+				
+				@RequestMapping(value= {"static_patent5"})
+				public String static_patent5(Model model) {
+					return "modules/paimai/front/static_patent5";
+				}
+				
+				@RequestMapping(value= {"static_patent6"})
+				public String static_patent6(Model model) {
+					return "modules/paimai/front/static_patent6";
+				}
+				
+				@RequestMapping(value= {"static_patent7"})
+				public String static_patent7(Model model) {
+					return "modules/paimai/front/static_patent7";
+				}
+				
+				@RequestMapping(value= {"static_patent8"})
+				public String static_patent8(Model model) {
+					return "modules/paimai/front/static_patent8";
+				}
+				
+				@RequestMapping(value= {"static_patent9"})
+				public String static_patent9(Model model) {
+					return "modules/paimai/front/static_patent9";
+				}
+				
+				@RequestMapping(value= {"static_patent10"})
+				public String static_patent10(Model model) {
+					return "modules/paimai/front/static_patent10";
+				}
+				
+				@RequestMapping(value= {"static_patent11"})
+				public String static_patent11(Model model) {
+					return "modules/paimai/front/static_patent11";
+				}
+				
+				@RequestMapping(value= {"static_patent12"})
+				public String static_patent12(Model model) {
+					return "modules/paimai/front/static_patent12";
+				}
+				
+				@RequestMapping(value= {"static_patent13"})
+				public String static_patent13(Model model) {
+					return "modules/paimai/front/static_patent13";
+				}
+				
+				@RequestMapping(value= {"static_patent14"})
+				public String static_patent14(Model model) {
+					return "modules/paimai/front/static_patent14";
+				}
+				
+				@RequestMapping(value= {"static_patent15"})
+				public String static_patent15(Model model) {
+					return "modules/paimai/front/static_patent15";
+				}
+				
+				@RequestMapping(value= {"static_patent16"})
+				public String static_patent16(Model model) {
+					return "modules/paimai/front/static_patent16";
+				}
+				
+				@RequestMapping(value= {"static_patent17"})
+				public String static_patent17(Model model) {
+					return "modules/paimai/front/static_patent17";
+				}
+				
+				@RequestMapping(value= {"static_patent18"})
+				public String static_patent18(Model model) {
+					return "modules/paimai/front/static_patent18";
+				}
+				
+				@RequestMapping(value= {"static_patent19"})
+				public String static_patent19(Model model) {
+					return "modules/paimai/front/static_patent19";
+				}
+				
+				@RequestMapping(value= {"static_international0"})
+				public String static_international0(Model model) {
+					return "modules/paimai/front/static_international0";
+				}
+				
+				@RequestMapping(value= {"static_international1"})
+				public String static_international1(Model model) {
+					return "modules/paimai/front/static_international1";
+				}
+				
+				@RequestMapping(value= {"static_international2"})
+				public String static_international2(Model model) {
+					return "modules/paimai/front/static_international2";
+				}
+				
+				@RequestMapping(value= {"static_international3"})
+				public String static_international3(Model model) {
+					return "modules/paimai/front/static_international3";
+				}
+				
+				@RequestMapping(value= {"static_international4"})
+				public String static_international4(Model model) {
+					return "modules/paimai/front/static_international4";
+				}
+				
+				@RequestMapping(value= {"static_international5"})
+				public String static_international5(Model model) {
+					return "modules/paimai/front/static_international5";
+				}
+				
+				@RequestMapping(value= {"static_international6"})
+				public String static_international6(Model model) {
+					return "modules/paimai/front/static_international6";
+				}
+				
+				@RequestMapping(value= {"static_international7"})
+				public String static_international7(Model model) {
+					return "modules/paimai/front/static_international7";
+				}
+				
+				@RequestMapping(value= {"static_international8"})
+				public String static_international8(Model model) {
+					return "modules/paimai/front/static_international8";
+				}
+				
+				@RequestMapping(value= {"static_international9"})
+				public String static_international9(Model model) {
+					return "modules/paimai/front/static_international9";
+				}
+				
+				@RequestMapping(value= {"static_lawservice0"})
+				public String static_lawservice0(Model model) {
+					return "modules/paimai/front/static_lawservice0";
+				}
+				
+				@RequestMapping(value= {"static_lawservice1"})
+				public String static_lawservice1(Model model) {
+					return "modules/paimai/front/static_lawservice1";
+				}
+				
+				@RequestMapping(value= {"static_lawservice2"})
+				public String static_lawservice2(Model model) {
+					return "modules/paimai/front/static_lawservice2";
+				}
+				
+				@RequestMapping(value= {"static_lawservice3"})
+				public String static_lawservice3(Model model) {
+					return "modules/paimai/front/static_lawservice3";
+				}
+				
+				@RequestMapping(value= {"static_lawservice4"})
+				public String static_lawservice4(Model model) {
+					return "modules/paimai/front/static_lawservice4";
+				}
+				
+				@RequestMapping(value= {"static_lawservice5"})
+				public String static_lawservice5(Model model) {
+					return "modules/paimai/front/static_lawservice5";
+				}
+				
+				@RequestMapping(value= {"static_lawservice6"})
+				public String static_lawservice6(Model model) {
+					return "modules/paimai/front/static_lawservice6";
+				}
+				
+				@RequestMapping(value= {"static_lawservice7"})
+				public String static_lawservice7(Model model) {
+					return "modules/paimai/front/static_lawservice7";
+				}
+				
+				
+				@RequestMapping(value= {"static_lawservice8"})
+				public String static_lawservice8(Model model) {
+					return "modules/paimai/front/static_lawservice8";
+				}
+				
+				@RequestMapping(value= {"static_lawservice9"})
+				public String static_lawservice9(Model model) {
+					return "modules/paimai/front/static_lawservice9";
+				}
+				
+				@RequestMapping(value= {"static_lawservice10"})
+				public String static_lawservice10(Model model) {
+					return "modules/paimai/front/static_lawservice10";
+				}
+				
+				@RequestMapping(value= {"static_lawservice11"})
+				public String static_lawservice11(Model model) {
+					return "modules/paimai/front/static_lawservice11";
+				}
+				
+				@RequestMapping(value= {"static_lawservice12"})
+				public String static_lawservice12(Model model) {
+					return "modules/paimai/front/static_lawservice12";
+				}
+				
+				@RequestMapping(value= {"static_lawservice13"})
+				public String static_lawservice13(Model model) {
+					return "modules/paimai/front/static_lawservice13";
+				}
+				
+				@RequestMapping(value= {"static_knowledge"})
+				public String static_knowledge(Model model) {
+					return "modules/paimai/front/static_knowledge";
+				}
+				
+				@RequestMapping(value= {"static_copyright"})
+				public String static_copyright(Model model) {
+					return "modules/paimai/front/static_copyright";
+				}
+				
+				@RequestMapping(value= {"static_search"})
+				public String static_search(Model model) {
+					return "modules/paimai/front/static_search";
+				}
 }
