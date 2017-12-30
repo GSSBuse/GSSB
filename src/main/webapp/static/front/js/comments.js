@@ -1,6 +1,7 @@
     function commentSubmit(){
         var id = $("#commentform").find("#id").eq(0).val();
         var comment = $("#commentform").find("#comment").eq(0).val();
+        var parentId = $("#commentform").find("#parentId").eq(0).val();
         if($(".tips ").is(":visible")){
             return false;
         }
@@ -15,7 +16,8 @@
 			type : "POST",
 			data : {
 				id : id,
-				comment : comment
+				comment : comment,
+				parentId:parentId
 			},
         	dataType : 'json',
         	async : false,

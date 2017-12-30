@@ -397,15 +397,16 @@ public class FrontIndexController extends BaseController{
 	@ResponseBody
 	public AjaxResult comments(HttpServletRequest request, 
 			@RequestParam(value = "id") String id,
-			@RequestParam(value = "comment") String comment) {
+			@RequestParam(value = "comment") String comment,
+			@RequestParam(value = "parentId") String parentId) {
 		GbjUserBuyComments gbjUserBuyComments = new GbjUserBuyComments();
 		GbjBuy gbjBuy = new GbjBuy();
 		try{			
-			
+			logger.info(parentId);
 			//STEP1  提交查询信息，保存到数据库
 			gbjUserBuyComments.setBuy(gbjBuyService.get(id));			
 			gbjUserBuyComments.setComment(comment);			
-			//gbjUserBuyComments.setCreateBy("当前用户”);			
+			gbjUserBuyComments.setParentId(parentId);			
 			gbjUserBuyComments.setCreateDate(new Date());			
 			
 			gbjUserBuyCommentsService.save(gbjUserBuyComments);

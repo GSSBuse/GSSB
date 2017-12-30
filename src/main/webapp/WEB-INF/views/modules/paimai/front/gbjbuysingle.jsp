@@ -155,11 +155,13 @@
 
 							<form method="post" id="commentform"
 								onsubmit="return commentSubmit();">
-								<p class="comment-notes">登录后可进行评论回复。这里回头我加上qq登录。</p>
+								<p class="comment-notes">${login_user.id}登录后可进行评论回复。这里回头我加上qq登录。</p>
 								<div>
-									<label for="comment">${login_user.id}</label> 
+									<label for="comment"></label> 
 									<input name="id" type="hidden" id="id"
 										value="${gbjBuyDetail.id}">
+										<input name="parentId" type="hidden" id="parentId"
+										value="${login_user.id}">
 									<textarea class="span8" name="comment" id="comment" cols="58"
 										rows="10"></textarea>
 								</div>
