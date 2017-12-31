@@ -9,6 +9,7 @@ require(["plugin/validation/avalon.validation", "domReady!"], function() {
 		realname: "",
 		mobile: "",
 		title: "",
+		price:"10",
 		user_id:""
 	}
 	

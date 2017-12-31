@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.gbj.GbjUserCommentsDao">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.gbj.GbjUserCommentsDao"  >
 <sql id="gbjUserCommentsColumns">
 		a.id AS "id",
 		a.buy_id AS "buy.id",
@@ -13,13 +13,13 @@
 		a.update_by AS "updateBy.id",
 		a.update_date AS "updateDate",
 		a.remarks AS "remarks",
-		a.del_flag AS "delFlag",
-		b.title AS "buy.title"
+		a.del_flag AS "delFlag"
+		
 	</sql>
 	<sql id="gbjUserCommentsJoins">
 	LEFT JOIN gbj_user b ON b.id = a.parent_id
 	</sql>
-    <select id="findDomainUserCommentsList" resultType="GbjUserComments" >
+    <select id="findDomainGbjUserCommentsList" resultType="GbjUserComments" >
         SELECT 
 			<include refid="gbjUserCommentsColumns"/>
 		FROM gbj_user_comments a

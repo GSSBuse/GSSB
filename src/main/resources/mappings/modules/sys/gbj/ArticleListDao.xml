@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thinkgem.jeesite.modules.sys.dao.gbj.ArticleListDao">
-
-<select id="findDomainArticleList" resultType="ArticleList" parameterType="java.lang.Integer">
+    <select id="findDomainArticleList" resultType="ArticleList" parameterType="java.lang.Integer">
         SELECT
-              c.type_id as "typeId",
-              c.mobile as "mobile",
-              c.create_date as "createDate",
-              c.title as "title",
-              c.description as "description"
-        FROM gbj c
+              d.id as "id",
+              d.type_id as "typeId",
+              d.mobile as "mobile",
+              d.create_date as "createDate",
+              d.title as "title",
+              d.description as "description",
+              d.up_counts as "upCounts"
+        FROM gbj d
         <where>
-               c.del_flag =  0
-            ORDER BY c.update_date DESC
+               d.del_flag =  0
+               AND d.front_del_flag = 1
+            ORDER BY d.update_date DESC
             <if test="_parameter != null and _parameter != ''">
                 limit #{counts}
             </if>
         </where>
-    </select>
+    </select> 
     
-    </mapper>
+</mapper>

@@ -122,7 +122,7 @@
 			"0",
 			#{lookCounts},
 			#{createBy.id},
-			#{frontDelFlag},
+			"0",
 			#{commentsCounts},
 			#{updateBy.id},
 			#{updateDate},
@@ -184,6 +184,7 @@
         FROM gbj_sold b
         <where>
                b.del_flag =  0
+               AND b.front_del_flag = 1
             ORDER BY b.update_date DESC
             <if test="_parameter != null and _parameter != ''">
                 limit #{counts}

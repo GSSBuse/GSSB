@@ -127,7 +127,7 @@
 			#{payFlowNumber},
 			#{successfulBidder},
 			#{updateBy.id},
-			#{frontDelFlag},
+			"0",
 			#{updateDate},
 			"0",
 			#{createDate},
@@ -195,6 +195,7 @@
         FROM gbj_reward b
         <where>
                b.del_flag =  0
+               AND front_del_flag = 1
             ORDER BY b.update_date DESC
             <if test="_parameter != null and _parameter != ''">
                 limit #{counts}

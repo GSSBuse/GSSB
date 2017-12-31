@@ -12,4 +12,6 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.RewardArticleList;
 @MyBatisDao
 public interface RewardArticleListDao extends CrudDao<RewardArticleList> {
 	public List<RewardArticleList> findDomainRewardArticleList(int count);
+
+	public List<RewardArticleList> findDomainUserRewardArticleList(String id);
 }

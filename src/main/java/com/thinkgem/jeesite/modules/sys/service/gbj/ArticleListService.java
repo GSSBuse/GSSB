@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thinkgem.jeesite.common.service.CrudService;
 import com.thinkgem.jeesite.modules.sys.dao.gbj.ArticleListDao;
@@ -17,7 +18,7 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 public class ArticleListService extends CrudService<ArticleListDao, ArticleList> {
 	@Autowired
 	ArticleListDao articleListdao;
-	public List<ArticleList> findDomainArticleList(@Param(value="counts") String count) {
+	public List<ArticleList> findDomainArticleList(@RequestParam("count") String count) {
 		return articleListdao.findDomainArticleList(Integer.parseInt(count));
 	}
 

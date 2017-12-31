@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thinkgem.jeesite.modules.sys.dao.gbj.SoldArticleListDao">
-
+<sql id="gbjSoldColumns">
+		a.id AS "id",
+		a.user_id AS "user.id",
+		a.type_id AS "typeId",
+		a.title AS "title",
+		a.description AS "description",
+		a.price AS "price",
+		a.mobile AS "mobile",
+		a.tag AS "tag",
+		a.up_counts AS "upCounts",
+		a.create_by AS "createBy.id",
+		a.look_counts AS "lookCounts",
+		a.update_by AS "updateBy.id",
+		a.comments_counts AS "commentsCounts",
+		a.front_del_flag AS "frontDelFlag",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	<sql id="gbjSoldJoins">
+	LEFT JOIN gbj_user b ON b.id = a.user_id
+	</sql>
+    <select id="findDomainUserSoldArticleList" resultType="SoldArticleList" >
+        SELECT 
+			<include refid="gbjSoldColumns"/>
+		FROM gbj_sold  a
+		<include refid="gbjSoldJoins"/>
+		WHERE a.user_id = #{id}
+		<!-- <where>
+           c.del_flag =  0
+            ORDER BY c.update_date DESC
+            <if test="_parameter != null and _parameter != ''">
+                limit #{counts}
+            </if>
+        </where> -->
+    </select>
 <select id="findDomainSoldArticleList" resultType="SoldArticleList" parameterType="java.lang.Integer">
         SELECT
               d.id as "id",
@@ -14,6 +50,7 @@
         FROM gbj_sold d
         <where>
                d.del_flag =  0
+               AND d.front_del_flag = 1
             ORDER BY d.update_date DESC
             <if test="_parameter != null and _parameter != ''">
                 limit #{counts}

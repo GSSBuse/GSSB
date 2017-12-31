@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<script type="text/javascript" src="${ctxStatic }/front/js/Article.js"></script>
 <br/>
 <br/><br/>
 <section class="widget">
@@ -43,38 +43,20 @@
                 <a href="#" class="btn btn-mini">就好</a>
         </div>
 </section>
-<section class="widget">
-        <h3 class="title">最新留言</h3>
-        <ul id="recentcomments">
-                <li class="recentcomments"><a href="#" rel="external nofollow" class="url">大河</a> on <a href="#">我想给小吃店起个名字</a></li>
-                <li class="recentcomments"><a href="#" rel="external nofollow" class="url">大河</a> on <a href="#">我想给小吃店起个名字</a></li>
-                <li class="recentcomments"><a href="#" rel="external nofollow" class="url">大河</a> on <a href="#">我想给小吃店起个名字</a></li>
-                <li class="recentcomments"><a href="#" rel="external nofollow" class="url">大河</a> on <a href="#">这里一样循环取得留言信息然后ms-repeat循环，最多5条好了</a></li>
+<section class="widget" ms-controller="articles">
+        <h3 class="title">最新评论</h3>
+        <ul id="recentcomments" ms-repeat-el="datas.domainArticleList">
+                <li class="recentcomments"><a href="#" rel="external nofollow" class="url">大河</a> on <a href="#">{{el.title}}</a></li>
         </ul>
 </section>
 
-<section class="widget">
+<section class="widget"  ms-controller="articles" >
         <h3 class="title">最新交易信息</h3>
-        <ul class="articles">
+        <ul class="articles" ms-repeat-el="datas.domainArticleList">
                 <li class="article-entry standard">
-                        <h4><a href="${ctx }/single.html">这里是买卖标悬赏综合信息，最新的几条显示出来</a></h4>
-                        <span class="article-meta">YYYY/MM/DD <a href="#" title="查看该分类">类别   &amp; 行业分类</a></span>
-                        <span class="like-count">66</span>
-                </li>
-                <li class="article-entry standard">
-                        <h4><a href="${ctx }/single.html">这里是买卖标悬赏综合信息，最新的几条显示出来</a></h4>
-                        <span class="article-meta">YYYY/MM/DD <a href="#" title="查看该分类">类别   &amp; 行业分类</a></span>
-                        <span class="like-count">66</span>
-                </li>
-                <li class="article-entry video">
-                        <h4><a href="${ctx }/single.html">这里是买卖标悬赏综合信息，最新的几条显示出来</a></h4>
-                        <span class="article-meta">YYYY/MM/DD <a href="#" title="查看该分类">类别   &amp; 行业分类</a></span>
-                        <span class="like-count">66</span>
-                </li>
-                <li class="article-entry image">
-                        <h4><a href="${ctx }/single.html">这里是买卖标悬赏综合信息，最新的几条显示出来</a></h4>
-                        <span class="article-meta">YYYY/MM/DD <a href="#" title="查看该分类">类别   &amp; 行业分类</a></span>
-                        <span class="like-count">66</span>
+                        <h4><a href="${ctx }/single.html">{{el.title}}</a></h4>
+                        <span class="article-meta">{{el.createDate}} <a href="#" title="查看该分类">类别   &amp; 行业分类</a></span>
+                        <span class="like-count">{{el.upCounts}}</span>
                 </li>
         </ul>
 </section>

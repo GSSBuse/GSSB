@@ -12,4 +12,6 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.SoldArticleList;
 @MyBatisDao
 public interface SoldArticleListDao extends CrudDao<SoldArticleList> {
 	public List<SoldArticleList> findDomainSoldArticleList(int count);
+
+	public List<SoldArticleList> findDomainUserSoldArticleList(String id);
 }

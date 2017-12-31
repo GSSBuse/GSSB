@@ -9,11 +9,18 @@ public class ArticleList  extends DataEntity<ArticleList>{
 	private User user;		// 用户ID
 	private Integer typeId;		// 国标类型
 	private Long price;		// 预算价格
-	private Long realprice;		// 实际成交价格
-	private String linkman;		// 联系人
+	//private Long realprice;		// 实际成交价格
+	private String realname;		// 联系人
 	private String mobile;		// 联系人手机号
 	private String description;		// 国标描述
 	private String title;		// 国标标题
+	private String id;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public User getUser() {
 		return user;
 	}
@@ -32,18 +39,18 @@ public class ArticleList  extends DataEntity<ArticleList>{
 	public void setPrice(Long price) {
 		this.price = price;
 	}
-	public Long getRealprice() {
+	public String getRealname() {
+		return realname;
+	}
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
+	/*public Long getRealprice() {
 		return realprice;
 	}
 	public void setRealprice(Long realprice) {
 		this.realprice = realprice;
-	}
-	public String getLinkman() {
-		return linkman;
-	}
-	public void setLinkman(String linkman) {
-		this.linkman = linkman;
-	}
+	}*/
 	public String getMobile() {
 		return mobile;
 	}

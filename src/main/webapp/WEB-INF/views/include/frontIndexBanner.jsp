@@ -82,18 +82,26 @@ $(function() {
 					$(".registbox>li").removeClass("registlihover");
                     $(".registbox>li").eq(index).addClass("registlihover");
                     $(".registInfo>li").hide();
+                    
+                    $('#typeId').val(index);
+                    
+                    
 				});
 			});
 		</script>
         <div class="search-box fr margintop20">
                 <div class="serch-bg"> </div>
                 <div class="serch-border">
-                    <input type="text" value="请输入您想申请的商标、版权、专利名称" id="indexSearchInput">
-                    <a href="javascript:void(0);"   id="indexSearch" class="button">
-                        <div class="serch-botton"> 查询能否注册 </div>
-                    </a>
-                    <div style="clear:both"></div>
-                </div>
+				<input type="text" value="请输入您想申请的商标、版权、专利名称" id="indexSearchInput"
+					onfocus="if (value =='请输入您想申请的商标、版权、专利名称'){value =''}"
+					onblur="if (value ==''){value='请输入您想申请的商标、版权、专利名称'}">
+					 
+					<a href="javascript:void(0);" id="indexSearch" class="button">
+					<div class="serch-botton">查询能否注册</div>
+				</a>
+				<div style="clear: both"></div>
+			</div>
+
                 <div class="scroll-box">
 		             <ul>
 		              <li>王先生 139582****1001 成功查询商标</li>
@@ -131,6 +139,12 @@ $(function() {
                                 <p class="form_name">商标名称：</p>
                                 <input name="searchContents" id="searchContents" ms-duplex-required="datas.domainInfo.searchContents" type="text" style="border:1px solid #00a6db;">
                             </div>
+                            
+                            <div class="form_con" style="display:none">
+                                <p class="form_name">商标类型：</p>
+                                <input name="typeId" id="typeId" ms-duplex-required="datas.domainInfo.typeId" type="text" style="border:1px solid #00a6db;">
+                            </div>
+                            
                             <div class="form_con">
                                 <p class="form_name"><span>*</span>联系人姓名：</p>
                                 <input name="name" id="name" ms-duplex-required="datas.domainInfo.name" type="text" style="border:1px solid #00a6db;">

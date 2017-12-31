@@ -24,7 +24,7 @@
 						class="td" href="#">注册</a></span>
 				</c:otherwise>
 			</c:choose>
-			<a href="#">加入收藏</a>
+			
 		</div>
 	</div>
 	<div style="clear: both;"></div>

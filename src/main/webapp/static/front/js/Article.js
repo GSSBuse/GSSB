@@ -11,12 +11,16 @@ var vm = avalon.define({
 		//domainBuyList1 : [{title:"test"},{title:"test2"}],
 		//domainSoldList1 : [{title:"test"},{title:"test2"}],//买标信息一览（最新11条，首页只表示最新的）
 		datas : {
-			 domainArticleList : [],//买标信息一览（最新11条，首页只表示最新的）
-		     domainBuyArticleList : [],//卖标信息一览（最新11条，首页只表示最新的）
-		     domainBuyCommentsArticleList:[],//评论内容获取
-		     domainSoldCommentsArticleList:[],//评论内容获取
-		     domainRewardCommentsArticleList:[],
-		     domainGbjUserCommentsList:[],
+			 domainArticleList : [],//sidebar信息一览（最新5条）12.31
+			
+			
+			 domainUserBuyArticleList : [],//个人中心买标信息一览（最新11条，首页只表示最新的）12.31
+			 domainUserSoldArticleList : [],//个人中心卖标信息一览（最新11条，首页只表示最新的 12.31
+			 domainUserRewardArticleList : [],//个人中心悬赏信息一览（最新11条，首页只表示最新的 12.31
+		     domainBuyCommentsArticleList:[],//买标评论内容获取
+		     domainSoldCommentsArticleList:[],//卖标评论内容获取
+		     domainRewardCommentsArticleList:[],//悬赏评论内容获取
+		    // domainCommentsArticleList:[],
 			//domainRewardList : [],//卖标信息一览（最新11条，首页只表示最新的）
 			timeStamp: 0,
 			tmp : {
@@ -27,92 +31,112 @@ var vm = avalon.define({
 				id : ""
 			}
 		},
-		/*//跳转至单个买标信息详细页面
-		goToSingleDomainBuy : function(index){
-			window.location.href = ctx + "/gbbuysingle.html?id=" + vm.datas.domainBuyList[index].id;
-		},
-		//跳转至单个卖标信息详细页面
-		goToSingleDomainSold : function(index){
-			window.location.href = ctx + "/gbsoldsingle.html?id=" + vm.datas.domainSoldList[index].id;
-		},
-		//跳转至单个悬赏起名详细页面
-		goToSingleDomainReward : function(index){
-			window.location.href = ctx + "/gbrewardsingle.html?id=" + vm.datas.domainRewardList[index].id;
-		},
-
-		//跳转至查看买标信息一览页面
-		goToSingleDomainname : function(index){
-			window.location.href = ctx + "/gbbuylists.html";
-		},
-		//跳转至单个卖标信息一览页面
-		goToSingleDomainname : function(index){
-			window.location.href = ctx + "/gbsoldlists.html";
-		},
-		//跳转至单个悬赏起名一览页面
-		goToSingleDomainname : function(index){
-			window.location.href = ctx + "/gbrewardlists.html";
-		},*/
-		
-//		showLogin : function (e) {
-//			$("#js_uiLoginBox").show();
-//			e.stopPropagation();
-//			e.preventDefault();
-//			return false;
-//		}
 	});
-
 	// 初始化动作
 	$(function(){
 		avalon.scan();
 		//TODO
 	});
 	
-	// 轮询买标信息一览数据
-	var interval_Article_status_check = function() {
-		
-		var count = 6;//首页最多显示11条
+	//sidebar信息一览（最新5条）12.31
+	var interval_GbjArticle_status_check = function() {
+		//var v = window.location.href.split("?")[1].substring(3,35);
+		//alert(u);
+		var count = 5;//首页最多显示11条
+		//var id= v;
 		
 		$.post(
-			"polling/ArticleData.json",
+			"polling/GbjArticle.json",
 			{
-				count : count         //参数1，检索的limit条数
+				count : count        //参数1，检索的limit条数
+			//	id:id
 			},
 			function(res) {
 				if (res.type == "success") {					
 					vm.datas.domainArticleList.clear();
-					vm.datas.domainArticleList.pushArray(res.data.ArticleData);
-					timeout_Article = setTimeout(interval_Article_status_check, 30000); //30秒自动刷新一次
+					vm.datas.domainArticleList.pushArray(res.data.GbjArticle);
+					timeout_GbjArticle = setTimeout(interval_GbjArticle_status_check, 30000); //30秒自动刷新一次
 				}
 			}
 		);
 	}
-	interval_Article_status_check();
+	interval_GbjArticle_status_check();
 	
-var interval_ArticleBuy_status_check = function() {
-		
-		var count = 11;//首页最多显示11条
+	// 轮询个人中心买标信息一览数据
+	var interval_UserBuyArticle_status_check = function() {
+		var v = window.location.href.split("?")[1].substring(3,35);
+		//alert(u);
+		var count = 20;//首页最多显示11条
+		var id= v;
 		
 		$.post(
-			"polling/ArticleBuyData.json",
+			"polling/UserBuyArticleData.json",
 			{
-				count : count         //参数1，检索的limit条数
+				count : count ,        //参数1，检索的limit条数
+				id:id
 			},
 			function(res) {
 				if (res.type == "success") {					
-					vm.datas.domainBuyArticleList.clear();
-					vm.datas.domainBuyArticleList.pushArray(res.data.ArticleBuyData);
-					timeout_ArticleBuy = setTimeout(interval_ArticleBuy_status_check, 30000); //30秒自动刷新一次
+					vm.datas.domainUserBuyArticleList.clear();
+					vm.datas.domainUserBuyArticleList.pushArray(res.data.UserBuyArticleData);
+					timeout_UserBuyArticle = setTimeout(interval_UserBuyArticle_status_check, 30000); //30秒自动刷新一次
 				}
 			}
 		);
 	}
-	interval_ArticleBuy_status_check();
+	interval_UserBuyArticle_status_check();
+	
+	// 轮询个人中心卖标信息一览数据
+	var interval_UserSoldArticle_status_check = function() {
+		var v = window.location.href.split("?")[1].substring(3,35);
+		//alert(u);
+		var count = 20;//首页最多显示11条
+		var id= v;
+		
+		$.post(
+			"polling/UserSoldArticleData.json",
+			{
+				count : count ,        //参数1，检索的limit条数
+				id:id
+			},
+			function(res) {
+				if (res.type == "success") {					
+					vm.datas.domainUserSoldArticleList.clear();
+					vm.datas.domainUserSoldArticleList.pushArray(res.data.UserSoldArticleData);
+					timeout_UserSoldArticle = setTimeout(interval_UserSoldArticle_status_check, 30000); //30秒自动刷新一次
+				}
+			}
+		);
+	}
+	interval_UserSoldArticle_status_check();
+	
+	// 轮询个人中心悬赏信息一览数据
+	var interval_UserRewardArticle_status_check = function() {
+		var v = window.location.href.split("?")[1].substring(3,35);
+		//alert(u);
+		var count = 20;//首页最多显示11条
+		var id= v;
+		
+		$.post(
+			"polling/UserRewardArticleData.json",
+			{
+				count : count ,        //参数1，检索的limit条数
+				id:id
+			},
+			function(res) {
+				if (res.type == "success") {					
+					vm.datas.domainUserRewardArticleList.clear();
+					vm.datas.domainUserRewardArticleList.pushArray(res.data.UserRewardArticleData);
+					timeout_UserRewardArticle = setTimeout(interval_UserRewardArticle_status_check, 30000); //30秒自动刷新一次
+				}
+			}
+		);
+	}
+	interval_UserRewardArticle_status_check();
 	
 	//评论内容展示
 var interval_ArticleBuyComments_status_check = function() {
-	
 	var x = window.location.href.split("?")[1].substring(3,35);
-	
 		//alert(x);
 		var count = 11;//首页最多显示11条
 		var id= x;
@@ -138,9 +162,7 @@ var interval_ArticleBuyComments_status_check = function() {
 	
 	//買標评论内容展示
 	var interval_ArticleSoldComments_status_check = function() {
-		
 		var y = window.location.href.split("?")[1].substring(3,35);
-		
 			//alert(x);
 			var count = 11;//首页最多显示11条
 			var id= y;
@@ -166,9 +188,7 @@ var interval_ArticleBuyComments_status_check = function() {
 		
 		//悬赏评论内容展示
 		var interval_ArticleRewardComments_status_check = function() {
-			
 			var z = window.location.href.split("?")[1].substring(3,35);
-			
 				//alert(x);
 				var count = 11;//首页最多显示11条
 				var id= z;
@@ -194,12 +214,10 @@ var interval_ArticleBuyComments_status_check = function() {
 			
 			//用户评论内容展示
 			var interval_ArticleComments_status_check = function() {
-				
-				var z = window.location.href.split("?")[1].substring(3,35);
-				
-					//alert(x);
-					var count = 11;//首页最多显示11条
-					var id= z;
+				var u = window.location.href.split("?")[1].substring(3,35);
+					//alert(u);
+					var count = 20;//首页最多显示11条
+					var id= u;
 					//var id = null;
 					//var id="${gbjBuyDetail.id}";
 					//alert("${gbjBuyDetail.id}");
@@ -212,7 +230,7 @@ var interval_ArticleBuyComments_status_check = function() {
 						function(res) {
 							if (res.type == "success") {					
 								vm.datas.domainCommentsArticleList.clear();
-								vm.datas.domainCommentsArticleList.pushArray(res.data.CommentsData);
+								vm.datas.domainCommentsArticleList.pushArray(res.data.ArticleCommentsData);
 								timeout_ArticleComments = setTimeout(interval_ArticleComments_status_check, 30000); //30秒自动刷新一次
 							}
 						}

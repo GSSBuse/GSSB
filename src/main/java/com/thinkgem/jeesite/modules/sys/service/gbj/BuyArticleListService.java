@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thinkgem.jeesite.common.service.CrudService;
 import com.thinkgem.jeesite.modules.sys.dao.gbj.ArticleListDao;
@@ -21,6 +22,11 @@ public class BuyArticleListService extends CrudService<BuyArticleListDao, BuyArt
 	BuyArticleListDao buyarticleListdao;
 	public List<BuyArticleList> findDomainBuyArticleList(@Param(value="counts") String count) {
 		return buyarticleListdao.findDomainBuyArticleList(Integer.parseInt(count));
+	}
+	
+	//个人中心获取个人买标信息
+	public List<BuyArticleList> findDomainUserBuyArticleList(@RequestParam("id") String id) {
+		return buyarticleListdao.findDomainUserBuyArticleList(id);
 	}
 	 
 }

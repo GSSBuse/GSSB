@@ -17,7 +17,13 @@
 	src="${ctxStatic }/front/js/buyupcounts.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		if ($('#gbjType').text() == '0') {
+		
+		//var x = "xxxxxxxxxxxxx";
+		
+		//$('user_id').val("zzzzzzzzzzz");
+		//alert($('user_id').val());
+		
+		/* if ($('#gbjType').text() == '0') {
 			$('#gbjType').text('商标');
 		}
 		if ($('#gbjType').text() == '1') {
@@ -25,7 +31,7 @@
 		}
 		if ($('#gbjType').text() == '2') {
 			$('#gbjType').text('版权');
-		}
+		} */
 	});
 </script>
 
@@ -38,7 +44,6 @@
 			</h1>
 		</div>
 	</div>
-
 	<!-- Start of Page Container -->
 	<div class="page-container">
 		<div class="container">
@@ -50,19 +55,14 @@
 						<h1 class="post-title">
 							<a href="#">买标全部交易信息</a>
 						</h1>
-
-
 						<hr>
 					</article>
 					<article class="format-standard type-post hentry clearfix"
 						ms-repeat-el="datas.domainBuyArticleList">
-
 						<header class="clearfix">
-
 							<h3 class="post-title">
 								<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</a>
 							</h3>
-
 							<div class="post-meta clearfix ">
 								<span class="date">{{el.createDate}}</span> <span
 									class="category"><a href="#" title="查询该标签所有内容"
@@ -72,30 +72,20 @@
 									ms-attr-href="${ctx}/single.html?id={{el.id}}&type=buy"><span
 									class="like-count">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{el.upCounts}}
 								</span></a>
-
-
 							</div>
 							<!-- end of post meta -->
-
 						</header>
-
 						<p>
 							{{el.description}}<a class="readmore-link" href="#">查看全部</a>
 						</p>
-
 					</article>
-
-
 					<div id="pagination">
 						<a href="#" class="btn active">1</a> <a href="#" class="btn">2</a>
 						<a href="#" class="btn">3</a> <a href="#" class="btn">下一页 ></a> <a
 							href="#" class="btn">最后一页 >></a>
 					</div>
-
 				</div>
 				<!-- end of page content -->
-
-
 				<!-- start of sidebar -->
 				<aside class="span4 page-sidebar">
 					<div class="row-fluid top-cats" style="text-align: right;">
@@ -131,7 +121,7 @@
 			<h1 class="post-title">
 				<a href="#">我要买标</a>
 			</h1>
-			<p class="comment-notes">${login_user.id}请输入您需要发布的信息。专业顾问人工查询，结果分析更准确！</p>
+			<p class="comment-notes">请输入您需要发布的信息。专业顾问人工查询，结果分析更准确！</p>
 
 			<div>
 				<label for="title">商标名称 *</label> <input class="span4" type="text"
@@ -139,11 +129,12 @@
 					ms-duplex-required="datas.domainInfo1.title">
 					
 			</div>
-			<div style="display:none;">
+			 <div>
 				<label for="mobile">用户id</label>
-				 <input name="user_id"  id="user_id" value="${login_user.id}"
+				 <input class="span4" name="user_id" type="text"  id="user_id" 
+				 value="${login_user.id}"
 				 ms-duplex="datas.domainInfo1.user_id" >
-			</div>
+			</div> 
 			<div>
 				<label for="mobile">联系电话 *</label> <input class="span4" type="text"
 					name="mobile" id="mobile"

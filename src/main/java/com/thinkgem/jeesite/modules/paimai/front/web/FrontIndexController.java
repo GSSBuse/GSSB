@@ -285,10 +285,9 @@ public class FrontIndexController extends BaseController{
 		//	mav.addObject("gbjUserBuyCommentsDetail", jsonObject);
 		}
 		//然后return跳转到详细页面去
-			
 		return mav;
-		
 	}	
+	
 	/**
 	 * 买标信息详细一览页面     snnu  12.21
 	*/
@@ -396,6 +395,86 @@ public class FrontIndexController extends BaseController{
 		}
 		
 	}
+	
+	/**
+	 * 我要卖标信息提交   2017/12/5 
+	 * by snnu
+	 */
+	@RequestMapping(value= {"upcounts"})  
+	@ResponseBody
+	public AjaxResult upcounts(Model model, GbjBuy gbjBuy, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		
+		
+		model.addAttribute("domainInfo1", JsonMapper.toJsonString(gbjBuy));
+		try{
+			
+			System.out.print("zzzzz");
+			//STEP1  提交查询信息，保存到数据库
+			gbjBuyService.updateCount(gbjBuy);
+		
+			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+			
+			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
+			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+		}
+		
+	}
+	
+	
+	/**
+	 * 我要卖标信息提交   2017/12/5 
+	 * by snnu
+	 */
+	@RequestMapping(value= {"gbsold"})  
+	@ResponseBody
+	public AjaxResult gbsold(Model model, GbjSold gbjSold, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		
+		model.addAttribute("domainInfo2Json", JsonMapper.toJsonString(gbjSold));
+		try{
+			
+			
+			//STEP1  提交查询信息，保存到数据库
+			gbjSoldService.save(gbjSold);
+		
+			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+			
+			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
+			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+		}
+		
+	}	
+	/**
+	 * 悬赏起名信息提交   2017/12/5  
+	 * by snnu
+ 	*/
+	@RequestMapping(value= {"gbreward"})  
+	@ResponseBody
+	public AjaxResult gbreward(Model model, GbjReward gbjReward, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		
+		model.addAttribute("domainInfo3Json", JsonMapper.toJsonString(gbjReward));
+		try{
+			
+			
+			//STEP1  提交查询信息，保存到数据库
+			gbjRewardService.save(gbjReward);
+		
+			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+			
+			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
+			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+		}
+		
+	}
+	
 	/**
 	 * 我要买标评论提交信息提交   2017/12/27  
 	 * by snnu
@@ -489,84 +568,6 @@ public class FrontIndexController extends BaseController{
 	}
 	
 	/**
-	 * 我要卖标信息提交   2017/12/5 
-	 * by snnu
-	 */
-	@RequestMapping(value= {"upcounts"})  
-	@ResponseBody
-	public AjaxResult upcounts(Model model, GbjBuy gbjBuy, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-		
-		
-		model.addAttribute("domainInfo1", JsonMapper.toJsonString(gbjBuy));
-		try{
-			
-			System.out.print("zzzzz");
-			//STEP1  提交查询信息，保存到数据库
-			gbjBuyService.updateCount(gbjBuy);
-		
-			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
-			
-			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
-			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
-		}
-		
-	}
-	
-	
-	/**
-	 * 我要卖标信息提交   2017/12/5 
-	 * by snnu
-	 */
-	@RequestMapping(value= {"gbsold"})  
-	@ResponseBody
-	public AjaxResult gbsold(Model model, GbjSold gbjSold, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-		
-		model.addAttribute("domainInfo2Json", JsonMapper.toJsonString(gbjSold));
-		try{
-			
-			
-			//STEP1  提交查询信息，保存到数据库
-			gbjSoldService.save(gbjSold);
-		
-			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
-			
-			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
-			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
-		}
-		
-	}	
-	/**
-	 * 悬赏起名信息提交   2017/12/5  
-	 * by snnu
- 	*/
-	@RequestMapping(value= {"gbreward"})  
-	@ResponseBody
-	public AjaxResult gbreward(Model model, GbjReward gbjReward, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-		
-		model.addAttribute("domainInfo3Json", JsonMapper.toJsonString(gbjReward));
-		try{
-			
-			
-			//STEP1  提交查询信息，保存到数据库
-			gbjRewardService.save(gbjReward);
-		
-			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
-			
-			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
-			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
-		}
-		
-	}
-	/**
 	 * 获取页面显示我要买标信息的最新数据
 	 * @param domainBuyIdList
 	 * @return 我要买标的最新数据
@@ -633,27 +634,73 @@ public class FrontIndexController extends BaseController{
 		}
 	} 
 	/**
-	 * 获取页面显示全部信息的最新数据
+	 * 获取页面显示个人中心的买标信息的最新数据   01
 	 * @param domainIdList
 	 * @return 全部的最新数据
 	 */
-	@RequestMapping(value = "polling/ArticleData")
+	@RequestMapping(value = "polling/UserBuyArticleData")
 	@ResponseBody
-	public AjaxResult ArticleData( @RequestParam("count") String count) {
+	public AjaxResult UserBuyArticleData( @RequestParam("id") String id) {
 		
 		//取得最新全部的信息
-		List<ArticleList> pageDomainArticleList = new ArrayList<ArticleList>();
+		List<BuyArticleList> pageDomainUserBuyArticleList = new ArrayList<BuyArticleList>();
 		try {
-			pageDomainArticleList = articleListService.findDomainArticleList(count);
+			pageDomainUserBuyArticleList = buyarticleListService.findDomainUserBuyArticleList(id);
 		   	 
 			AjaxResult ar = AjaxResult.makeSuccess("");
-			ar.getData().put("ArticleData", pageDomainArticleList);
+			ar.getData().put("UserBuyArticleData", pageDomainUserBuyArticleList);
 			return ar;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return AjaxResult.makeError("");
 		}
 	} 
+	/**
+	 * 获取页面显示个人中心的卖标信息的最新数据  02
+	 * @param domainIdList
+	 * @return 全部的最新数据
+	 */
+	@RequestMapping(value = "polling/UserSoldArticleData")
+	@ResponseBody
+	public AjaxResult UserSoldArticleData( @RequestParam("id") String id) {
+		
+		//取得最新全部的信息
+		List<SoldArticleList> pageDomainUserSoldArticleList = new ArrayList<SoldArticleList>();
+		try {
+			pageDomainUserSoldArticleList = soldarticleListService.findDomainUserSoldArticleList(id);
+		   	 
+			AjaxResult ar = AjaxResult.makeSuccess("");
+			ar.getData().put("UserSoldArticleData", pageDomainUserSoldArticleList);
+			return ar;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AjaxResult.makeError("");
+		}
+	} 
+	/**
+	 * 获取页面显示个人中心的悬赏信息的最新数据  03
+	 * @param domainIdList
+	 * @return 全部的最新数据
+	 */
+	@RequestMapping(value = "polling/UserRewardArticleData")
+	@ResponseBody
+	public AjaxResult UserRewardArticleData( @RequestParam("id") String id) {
+		
+		//取得最新全部的信息
+		List<RewardArticleList> pageDomainUserRewardArticleList = new ArrayList<RewardArticleList>();
+		try {
+			pageDomainUserRewardArticleList = rewardarticleListService.findDomainUserRewardArticleList(id);
+		   	 
+			AjaxResult ar = AjaxResult.makeSuccess("");
+			ar.getData().put("UserRewardArticleData", pageDomainUserRewardArticleList);
+			return ar;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AjaxResult.makeError("");
+		}
+	} 
+	
+	
 	/**
 	 * 获取页面显示我要买标信息的全部信息
 	 * @param domainBuyIdList
@@ -738,7 +785,30 @@ public class FrontIndexController extends BaseController{
 			pageDomainCommentsArticleList = gbjUserCommentsService.findDomainGbjUserCommentsList(id);
 		   	 
 			AjaxResult ar = AjaxResult.makeSuccess("");
-			ar.getData().put("ArticleBuyCommentsData", pageDomainCommentsArticleList);
+			ar.getData().put("ArticleCommentsData", pageDomainCommentsArticleList);
+			return ar;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AjaxResult.makeError("");
+		}
+	}
+	
+	/**
+	 * 获sidebar信息一览（最新5条）12.31   by snnu 
+	 * @param CommentsData
+	 * @return 评论信息
+	 */
+	@RequestMapping(value = "polling/GbjArticle")
+	@ResponseBody
+	public AjaxResult GbjArticle(@RequestParam("count") String count) {
+		
+		//单个买标信息和评论信息
+		List<ArticleList> pageDomainArticleList = new ArrayList<ArticleList>();
+		try {
+			pageDomainArticleList = articleListService.findDomainArticleList(count);
+		   	 
+			AjaxResult ar = AjaxResult.makeSuccess("");
+			ar.getData().put("GbjArticle", pageDomainArticleList);
 			return ar;
 		} catch (Exception e) {
 			e.printStackTrace();
