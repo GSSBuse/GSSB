@@ -28,41 +28,45 @@
 			<div class="row">
 
 				<!-- start of page content -->
-				<div id="list-menu" class="menuA">
-					<ul style="width: 400px;">
-						<li class="check"><a>业务详情</a></li>
-						<li><a>流程费用</a></li>
-						<li><a>国商优势</a></li>
-						<li><a>成功案例</a></li>
-					</ul>
-				</div>
-				<br>
-				<div class="menuB">
-					<div class="one" style="display: block;">
-						<article>
+				<div class="span8 page-content">
 
-							<h2>专利无效答辩 </h2>
-							<p>根据《专利法》及《专利法实施细则》的规定，进入专利权无效宣告程序后，专利复审委员会将专利权无效宣告请求书和有关文件的副本送交专利权人，要求专利权人在指定的期限内陈述意见。</p>
-							
-							<h2>必要性</h2>
-							<p>（一）答辩是专利遭遇他人提出无效宣告请求时的最佳选择。</p>
-							<p>（二）答辩是专利法赋予当事人的法定权利，同时也是当事人向专利复审委反驳对方观点的唯一途径。</p>
-							<p>（三）专利复审委对案件都进行书面审理和口头审理相结合的审查方式，不答辩无疑将增加对方无效宣告的成功机率，答辩无疑将增加我方成功的机率。</p>							
-						</article>
+					<div id="list-menu" class="menuA">
+						<ul style="width: 400px;">
+							<li class="check"><a>业务详情</a></li>
+							<li><a>流程费用</a></li>
+							<li><a>国商优势</a></li>
+							<li><a>成功案例</a></li>
+						</ul>
 					</div>
-					<div class="one">
-						
+					<br>
+					<div class="menuB">
+						<div class="one" style="display: block;">
+							<article>
+
+								<h2>专利无效答辩</h2>
+								<p>根据《专利法》及《专利法实施细则》的规定，进入专利权无效宣告程序后，专利复审委员会将专利权无效宣告请求书和有关文件的副本送交专利权人，要求专利权人在指定的期限内陈述意见。</p>
+
+								<h2>必要性</h2>
+								<p>（一）答辩是专利遭遇他人提出无效宣告请求时的最佳选择。</p>
+								<p>（二）答辩是专利法赋予当事人的法定权利，同时也是当事人向专利复审委反驳对方观点的唯一途径。</p>
+								<p>（三）专利复审委对案件都进行书面审理和口头审理相结合的审查方式，不答辩无疑将增加对方无效宣告的成功机率，答辩无疑将增加我方成功的机率。</p>
+							</article>
+						</div>
+						<div class="one"></div>
+						<div class="one">
+							<img src="http://www.shangbiaozongju.com/images/zlys1.jpg">
+							<img src="http://www.shangbiaozongju.com/images/zlys2.jpg">
+							<img src="http://www.shangbiaozongju.com/images/zlys3.jpg">
+						</div>
+						<div class="one"></div>
 					</div>
-					<div class="one">
-						<img src="http://www.shangbiaozongju.com/images/zlys1.jpg">
-						<img src="http://www.shangbiaozongju.com/images/zlys2.jpg">
-						<img src="http://www.shangbiaozongju.com/images/zlys3.jpg">
-					</div>
-					<div class="one"></div>
+
 				</div>
 				<!-- end of page content -->
 
-
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
 			</div>
 		</div>

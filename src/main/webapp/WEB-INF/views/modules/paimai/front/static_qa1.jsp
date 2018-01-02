@@ -28,28 +28,36 @@
 			<div class="row">
 
 				<!-- start of page content -->
-				<div>
-					<div style="width: 800px; margin: 0 auto;">
+				<div class="span8 page-content">
+					<div style="width: 700px; margin: 0 auto;">
 						<h2 style="text-align: center; margin-top: 10px;">商标注册的好处</h2>
 						<div
 							style="border-bottom: 1px solid #eee; text-align: center; padding: 5px 0px;">发布时间:2014-06-23
 							09:39:01</div>
 						<div>
-							<p style="margin: 0px; padding: 0px; color: rgb(69, 69, 69); font-family: tahoma, helvetica, arial; font-size: 14px; line-height: 21px;">
-							商标注册是商标使用人取得商标专用权的前提和条件，只有经核准注册的商标，才受法律保护。商标注册原则是确定商标专用权的基本准则，不同的注册原则的选择，是各国立法者在这一个问题中对法律的确定性和法律的公正性二者关系进行权衡的结果。作者认为中国应适用“注册在先为主，兼顾使用”的注册原则。商标注册申请是商标使用的基础，在商标注册申请过程中，灵活地运用商标注册策略，对保护商标及商标权，开拓国内外市场有着非常重要作用。根据中国现状，建议国家工商管理部门采取必要措施促进商标注册，切实保护商标所有人的权益。<br>  商标注册的好处<br>  1、 便于消费者认牌购物。 <br>  2、 商标注册人拥有商标专用权, 受法律保护。<br>  3、 通过商标注册，可以创立品牌，抢先占领市场。<br>  4、 商标是一种无形资产，可对其价值进行评估。 <br>  5、 商标可以通过转让，许可给他人使用，或质押来转换实现其价值。 <br>  6、 商标还是办理质检、卫检、条码等的必备条件。 <br>  7、 地方各级工商局通过对商标的管理来监督商品和服务的质量。
+							<p
+								style="margin: 0px; padding: 0px; color: rgb(69, 69, 69); font-family: tahoma, helvetica, arial; font-size: 14px; line-height: 21px;">
+								商标注册是商标使用人取得商标专用权的前提和条件，只有经核准注册的商标，才受法律保护。商标注册原则是确定商标专用权的基本准则，不同的注册原则的选择，是各国立法者在这一个问题中对法律的确定性和法律的公正性二者关系进行权衡的结果。作者认为中国应适用“注册在先为主，兼顾使用”的注册原则。商标注册申请是商标使用的基础，在商标注册申请过程中，灵活地运用商标注册策略，对保护商标及商标权，开拓国内外市场有着非常重要作用。根据中国现状，建议国家工商管理部门采取必要措施促进商标注册，切实保护商标所有人的权益。<br>
+								商标注册的好处<br> 1、 便于消费者认牌购物。 <br> 2、 商标注册人拥有商标专用权, 受法律保护。<br>
+								3、 通过商标注册，可以创立品牌，抢先占领市场。<br> 4、 商标是一种无形资产，可对其价值进行评估。 <br>
+								5、 商标可以通过转让，许可给他人使用，或质押来转换实现其价值。 <br> 6、
+								商标还是办理质检、卫检、条码等的必备条件。 <br> 7、 地方各级工商局通过对商标的管理来监督商品和服务的质量。
 							</p>
 
 						</div>
 					</div>
 				</div>
 				<br>
-
-				<!-- end of page content -->
-
-
-
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 			</div>
+			<!-- end of page content -->
+
+
+
 		</div>
+	</div>
 	</div>
 	<!-- End of Page Container -->
 

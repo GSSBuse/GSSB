@@ -28,38 +28,41 @@
 			<div class="row">
 
 				<!-- start of page content -->
-				<div id="list-menu" class="menuA">
-					<ul style="width: 400px;">
-						<li class="check"><a>业务详情</a></li>
-						<li><a>流程费用</a></li>
-						<li><a>国商优势</a></li>
-						<li><a>成功案例</a></li>
-					</ul>
-				</div>
-				<br>
-				<div class="menuB">
-					<div class="one" style="display: block;">
-						<article>
+				<div class="span8 page-content">
+					<div id="list-menu" class="menuA">
+						<ul style="width: 400px;">
+							<li class="check"><a>业务详情</a></li>
+							<li><a>流程费用</a></li>
+							<li><a>国商优势</a></li>
+							<li><a>成功案例</a></li>
+						</ul>
+					</div>
+					<br>
+					<div class="menuB">
+						<div class="one" style="display: block;">
+							<article>
 
-							<h2>专利著录项目变更</h2>
-							<p>当申请人或者专利权人的名称、地址发生变化，或者发明人发生变化时，或者专利代理机构、联系人等发生变化时，依据《专利法》的规定，需要向国家专利局等相关部门提供相关证明材料，办理相应的手续。</p>
-								
-							<h3>必要性</h3>
-							<p>当申请人或者专利权人的名称、地址发生变化，或者发明人发生变化时，或者专利代理机构、联系人等发生变化时，依据《专利法》的规定，需要向国家专利局等相关部门提供相关证明材料，办理相应的手续。</p>					
-						</article>
+								<h2>专利著录项目变更</h2>
+								<p>当申请人或者专利权人的名称、地址发生变化，或者发明人发生变化时，或者专利代理机构、联系人等发生变化时，依据《专利法》的规定，需要向国家专利局等相关部门提供相关证明材料，办理相应的手续。</p>
+
+								<h3>必要性</h3>
+								<p>当申请人或者专利权人的名称、地址发生变化，或者发明人发生变化时，或者专利代理机构、联系人等发生变化时，依据《专利法》的规定，需要向国家专利局等相关部门提供相关证明材料，办理相应的手续。</p>
+							</article>
+						</div>
+						<div class="one"></div>
+						<div class="one">
+							<img src="http://www.shangbiaozongju.com/images/zlys1.jpg">
+							<img src="http://www.shangbiaozongju.com/images/zlys2.jpg">
+							<img src="http://www.shangbiaozongju.com/images/zlys3.jpg">
+						</div>
+						<div class="one"></div>
 					</div>
-					<div class="one">
-						
-					</div>
-					<div class="one">
-						<img src="http://www.shangbiaozongju.com/images/zlys1.jpg">
-						<img src="http://www.shangbiaozongju.com/images/zlys2.jpg">
-						<img src="http://www.shangbiaozongju.com/images/zlys3.jpg">
-					</div>
-					<div class="one"></div>
 				</div>
 				<!-- end of page content -->
 
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
 
 			</div>

@@ -28,46 +28,51 @@
 			<div class="row">
 
 				<!-- start of page content -->
-				<div id="list-menu" class="menuA">
-					<ul style="width: 400px;">
-						<li class="check"><a>业务详情</a></li>
-						<li><a>流程费用</a></li>
-						<li><a>国商优势</a></li>
-						<li><a>成功案例</a></li>
-					</ul>
-				</div>
-				<br>
-				<div class="menuB">
-					<div class="one" style="display: block;">
-						<article>
+				<div class="span8 page-content">
 
-							<h2>专利无效宣告 </h2>
-							<p>根据《专利法》以及《专利法实施细则》的相关规定，自国务院专利行政部门公告授予专利权之日起，任何单位或者个人认为该专利权的授予不符合本法有关规定的，可以请求专利复审委员会宣告该专利权无效。</p>
-							
-							<p>专利复审委员会对宣告专利权无效的请求应当及时审查和作出决定，并通知请求人和专利权人。宣告专利权无效的决定，由国务院专利行政部门登记和公告。</p>
-							
-							<p>宣告无效的专利权视为自始即不存在。</p>
-							<h2>必要性</h2>
-							<p>我国《专利法》规定，发明创造必须具有新颖性、创造性、实用性，公知技术是不能获得专利权的。专利实质审查中，由于具体技术的复杂性和文献检索的局限性，或者是由于实用新型和外观专利未经实质审查而授权，难免会有个别不具备专利条件的申请被授予了专利权。</p>
-							<p>为此，《专利法》规定了宣告专利无效的程序：</p>
-							<p>任何单位或者个人认为某项专利权的授予不符合有关规定的，可以向国家知识产权局专利复审委员会提交证据，对该项专利进行复审，进而宣告该专利权无效。</p>
-							<p>在实践中，专利无效程序多被专利权的竞争对手，用来反击专利侵权指控。发生专利侵权诉讼时，被告往往转向知识产权局，请求宣告专利权无效，对专利 侵权指控釜底抽薪。对业内特定技术，业者认为专利权产生不正当垄断的，也会 启动专利无效程序。</p>
-							
-						</article>
+					<div id="list-menu" class="menuA">
+						<ul style="width: 400px;">
+							<li class="check"><a>业务详情</a></li>
+							<li><a>流程费用</a></li>
+							<li><a>国商优势</a></li>
+							<li><a>成功案例</a></li>
+						</ul>
 					</div>
-					<div class="one">
-						
+					<br>
+					<div class="menuB">
+						<div class="one" style="display: block;">
+							<article>
+
+								<h2>专利无效宣告</h2>
+								<p>根据《专利法》以及《专利法实施细则》的相关规定，自国务院专利行政部门公告授予专利权之日起，任何单位或者个人认为该专利权的授予不符合本法有关规定的，可以请求专利复审委员会宣告该专利权无效。</p>
+
+								<p>专利复审委员会对宣告专利权无效的请求应当及时审查和作出决定，并通知请求人和专利权人。宣告专利权无效的决定，由国务院专利行政部门登记和公告。</p>
+
+								<p>宣告无效的专利权视为自始即不存在。</p>
+								<h2>必要性</h2>
+								<p>我国《专利法》规定，发明创造必须具有新颖性、创造性、实用性，公知技术是不能获得专利权的。专利实质审查中，由于具体技术的复杂性和文献检索的局限性，或者是由于实用新型和外观专利未经实质审查而授权，难免会有个别不具备专利条件的申请被授予了专利权。</p>
+								<p>为此，《专利法》规定了宣告专利无效的程序：</p>
+								<p>任何单位或者个人认为某项专利权的授予不符合有关规定的，可以向国家知识产权局专利复审委员会提交证据，对该项专利进行复审，进而宣告该专利权无效。</p>
+								<p>在实践中，专利无效程序多被专利权的竞争对手，用来反击专利侵权指控。发生专利侵权诉讼时，被告往往转向知识产权局，请求宣告专利权无效，对专利
+									侵权指控釜底抽薪。对业内特定技术，业者认为专利权产生不正当垄断的，也会 启动专利无效程序。</p>
+
+							</article>
+						</div>
+						<div class="one"></div>
+						<div class="one">
+							<img src="http://www.shangbiaozongju.com/images/zlys1.jpg">
+							<img src="http://www.shangbiaozongju.com/images/zlys2.jpg">
+							<img src="http://www.shangbiaozongju.com/images/zlys3.jpg">
+						</div>
+						<div class="one"></div>
 					</div>
-					<div class="one">
-						<img src="http://www.shangbiaozongju.com/images/zlys1.jpg">
-						<img src="http://www.shangbiaozongju.com/images/zlys2.jpg">
-						<img src="http://www.shangbiaozongju.com/images/zlys3.jpg">
-					</div>
-					<div class="one"></div>
+
 				</div>
 				<!-- end of page content -->
 
-
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
 			</div>
 		</div>

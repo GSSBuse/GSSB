@@ -28,74 +28,80 @@
 			<div class="row">
 
 				<!-- start of page content -->
-				<div id="list-menu" class="menuA">
-					<ul style="width: 400px;">
-						<li class="check"><a>业务详情</a></li>
-						<li><a>流程费用</a></li>
-						<li><a>国商优势</a></li>
-						<li><a>成功案例</a></li>
-					</ul>
-				</div>
-				<br>
-				<div class="menuB">
-					<div class="one" style="display: block;">
-						<article>
+				<div class="span8 page-content">
 
-							<h2>实用新型专利</h2>
-							<p>实用新型专利是专利法保护的专利的三种类型之一，实用新型是指对产品的形状、构造或者其结合所提出的适于实用的新的技术方案，又称小发明或小专利。</p>
-							<h2>必要性:</h2>
-							<p class="qo">国家之所以保护实用新型，目的在于鼓励低成本、研制周期短的小发明的创造，更快的适应经济发展的需要。它的创造性和技术水平较发明专利低，但实用价值大，在专利权审批上采取简化审批程序、缩短保护期限、降低收费标准办法加以保护。</p>
+					<div id="list-menu" class="menuA">
+						<ul style="width: 400px;">
+							<li class="check"><a>业务详情</a></li>
+							<li><a>流程费用</a></li>
+							<li><a>国商优势</a></li>
+							<li><a>成功案例</a></li>
+						</ul>
+					</div>
+					<br>
+					<div class="menuB">
+						<div class="one" style="display: block;">
+							<article>
 
-						</article>
-					</div>
-					<div class="one">
-						<img
-							src="http://www.shangbiaozongju.com/userfiles/20140625070532198.png">
-						<img
-							src="http://www.shangbiaozongju.com/userfiles/20140625070510157.png">
-						<img
-							src="http://www.shangbiaozongju.com/userfiles/20140625070423156.png">
+								<h2>实用新型专利</h2>
+								<p>实用新型专利是专利法保护的专利的三种类型之一，实用新型是指对产品的形状、构造或者其结合所提出的适于实用的新的技术方案，又称小发明或小专利。</p>
+								<h2>必要性:</h2>
+								<p class="qo">国家之所以保护实用新型，目的在于鼓励低成本、研制周期短的小发明的创造，更快的适应经济发展的需要。它的创造性和技术水平较发明专利低，但实用价值大，在专利权审批上采取简化审批程序、缩短保护期限、降低收费标准办法加以保护。</p>
 
-						<table width="100%" cellspacing="1" cellpadding="0" border="0"
-							style="text-align: center">
-							<tbody>
-								<tr id="th"
-									style="color: rgb(255, 255, 255); background: rgb(238, 238, 238);">
-									<th colspan="3"><span style="color: #000;">实用新型、外观设计专利年费</span></th>
-								</tr>
-								<tr id="th"
-									style="color: rgb(255, 255, 255); background: rgb(16, 158, 226);">
-									<td width="50%">对应年度</td>
-									<td width="50%">年费标准</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td width="50%">第1-3年</td>
-									<td width="50%">￥1,900.00</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td>第4-5年</td>
-									<td>￥2,200.00</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td>第6-8年</td>
-									<td>￥2,500.00</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td>第9-10年</td>
-									<td>￥3,300.00</td>
-								</tr>
-							</tbody>
-						</table>
+							</article>
+						</div>
+						<div class="one">
+							<img
+								src="http://www.shangbiaozongju.com/userfiles/20140625070532198.png">
+							<img
+								src="http://www.shangbiaozongju.com/userfiles/20140625070510157.png">
+							<img
+								src="http://www.shangbiaozongju.com/userfiles/20140625070423156.png">
+
+							<table width="100%" cellspacing="1" cellpadding="0" border="0"
+								style="text-align: center">
+								<tbody>
+									<tr id="th"
+										style="color: rgb(255, 255, 255); background: rgb(238, 238, 238);">
+										<th colspan="3"><span style="color: #000;">实用新型、外观设计专利年费</span></th>
+									</tr>
+									<tr id="th"
+										style="color: rgb(255, 255, 255); background: rgb(16, 158, 226);">
+										<td width="50%">对应年度</td>
+										<td width="50%">年费标准</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td width="50%">第1-3年</td>
+										<td width="50%">￥1,900.00</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td>第4-5年</td>
+										<td>￥2,200.00</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td>第6-8年</td>
+										<td>￥2,500.00</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td>第9-10年</td>
+										<td>￥3,300.00</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="one">
+							<img src="http://www.shangbiaozongju.com/images/zlys1.jpg">
+							<img src="http://www.shangbiaozongju.com/images/zlys2.jpg">
+							<img src="http://www.shangbiaozongju.com/images/zlys3.jpg">
+						</div>
+						<div class="one"></div>
 					</div>
-					<div class="one">
-						<img src="http://www.shangbiaozongju.com/images/zlys1.jpg">
-						<img src="http://www.shangbiaozongju.com/images/zlys2.jpg">
-						<img src="http://www.shangbiaozongju.com/images/zlys3.jpg">
-					</div>
-					<div class="one"></div>
+
 				</div>
 				<!-- end of page content -->
-
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
 
 			</div>

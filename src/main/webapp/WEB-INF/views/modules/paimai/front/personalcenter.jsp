@@ -14,7 +14,7 @@
 <body ms-controller="articles">
 
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
-	<div class="about three">
+	<div class="about bg-three">
 		<div class="container">
 			<h1>
 				个人中心<span class="m_1"><br>${gbjUserDetail.username}的个人中心</span>

@@ -28,39 +28,41 @@
 			<div class="row">
 
 				<!-- start of page content -->
-
-				<div style="width:800px; margin:0 auto;">
-					<div class="divtit">帮助中心</div>
-					<h2 style="text-align: center; margin-top: 10px;">专利授权需要多久</h2>
-					<div
-						style="border-bottom: 1px solid #eee; text-align: center; padding: 5px 0px;">发布时间:2014-06-23
-						10:49:28</div>
-					<div>
-						<p></p>
-						<p>
-							<span
-								style="color: rgb(51, 51, 51); font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px;">自专利申请文件递交至专利局之日起，</span>
-						</p>
-						<p>
-							<span
-								style="color: rgb(51, 51, 51); font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px;">发明专利大概需要2年左右授权；</span>
-						</p>
-						<p>
-							<span
-								style="color: rgb(51, 51, 51); font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px;">实用新型专利大概需要6-8个月授权；</span>
-						</p>
-						<p>
-							<span
-								style="color: rgb(51, 51, 51); font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px;">外观设计大概需要4-6个月授权。</span>
-						</p>
-						<p></p>
+				<div class="span8 page-content">
+					<div style="width: 700px; margin: 0 auto;">
+						<div class="divtit">帮助中心</div>
+						<h2 style="text-align: center; margin-top: 10px;">专利授权需要多久</h2>
+						<div
+							style="border-bottom: 1px solid #eee; text-align: center; padding: 5px 0px;">发布时间:2014-06-23
+							10:49:28</div>
+						<div>
+							<p></p>
+							<p>
+								<span
+									style="color: rgb(51, 51, 51); font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px;">自专利申请文件递交至专利局之日起，</span>
+							</p>
+							<p>
+								<span
+									style="color: rgb(51, 51, 51); font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px;">发明专利大概需要2年左右授权；</span>
+							</p>
+							<p>
+								<span
+									style="color: rgb(51, 51, 51); font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px;">实用新型专利大概需要6-8个月授权；</span>
+							</p>
+							<p>
+								<span
+									style="color: rgb(51, 51, 51); font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px;">外观设计大概需要4-6个月授权。</span>
+							</p>
+							<p></p>
+						</div>
 					</div>
 				</div>
 
-
 				<!-- end of page content -->
 
-
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
 			</div>
 		</div>

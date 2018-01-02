@@ -28,33 +28,37 @@
 			<div class="row">
 
 				<!-- start of page content -->
+				<div class="span8 page-content">
 
-				<div style="width: 800px; margin: 0 auto;">
-					<h2 style="text-align: center; margin-top: 10px;">国商所知识产权托管</h2>
-					<p>国商知识产权托管是针对中外企业知识产权事务的首家具有中国特色的整体管理业务，包括制定知识产权管理制度、战略规划、执行方案、搜集情报、知识产权评估及质押融资使用、知识产权变现、知识产权侵权保护和维权等职责，是一种与企业互动的行为方式。
+					<div style="width: 700px; margin: 0 auto;">
+						<h2 style="text-align: center; margin-top: 10px;">国商所知识产权托管</h2>
+						<p>国商知识产权托管是针对中外企业知识产权事务的首家具有中国特色的整体管理业务，包括制定知识产权管理制度、战略规划、执行方案、搜集情报、知识产权评估及质押融资使用、知识产权变现、知识产权侵权保护和维权等职责，是一种与企业互动的行为方式。
 
-						通过“知识产权托管”服务，企业可将知识产权工作全部交由“国商知识产权托管项目组”完成，在节约人力、物力成本的前提下，能使自身的知识产权业务更加专业化。我们会根据客户在知识产权管理方面存在的问题，从企业实际管理的角度出发，为企业量身打造适合企业发展的知识产权整体性的战略规划，提出相应的知识产权发展目标、重点和任务，并给出相应的发展措施，为企业保护自身权益、提高市场占有率、增强市场竞争力、加强自主创新能力提供专业支持。</p>
-					<img src="http://www.shangbiaozongju.com/images/360.jpg"
-						style="width: 680px;">
-					<h2>知识产权托管服务包括：</h2>
-					<ul style="font-size: 13px;">
-						<li>协助贵司制定企业知识产权管理制度；</li>
-						<li>制定企业知识产权战略；</li>
-						<li>企业创新技术管理；</li>
-						<li>品牌战略管理；</li>
-						<li>国外新技术检索与应用；</li>
-						<li>国内竞争对手技术分析；</li>
-						<li>与企业的相互培训；</li>
-						<li>贵司现有知识产权的监控、归纳、整理、授权、许可等；</li>
-						<li>知识产权情报收集与分析；</li>
-						<li>商标、专利、著作权、域名的发掘和申请；</li>
-						<li>商业秘密、技术秘密的管理。</li>
-					</ul>
-					<img src="http://www.shangbiaozongju.com/images/zscq5.jpg"
-						style="width: 680px;"> 
+							通过“知识产权托管”服务，企业可将知识产权工作全部交由“国商知识产权托管项目组”完成，在节约人力、物力成本的前提下，能使自身的知识产权业务更加专业化。我们会根据客户在知识产权管理方面存在的问题，从企业实际管理的角度出发，为企业量身打造适合企业发展的知识产权整体性的战略规划，提出相应的知识产权发展目标、重点和任务，并给出相应的发展措施，为企业保护自身权益、提高市场占有率、增强市场竞争力、加强自主创新能力提供专业支持。</p>
+						<img src="http://www.shangbiaozongju.com/images/360.jpg"
+							style="width: 680px;">
+						<h2>知识产权托管服务包括：</h2>
+						<ul style="font-size: 13px;">
+							<li>协助贵司制定企业知识产权管理制度；</li>
+							<li>制定企业知识产权战略；</li>
+							<li>企业创新技术管理；</li>
+							<li>品牌战略管理；</li>
+							<li>国外新技术检索与应用；</li>
+							<li>国内竞争对手技术分析；</li>
+							<li>与企业的相互培训；</li>
+							<li>贵司现有知识产权的监控、归纳、整理、授权、许可等；</li>
+							<li>知识产权情报收集与分析；</li>
+							<li>商标、专利、著作权、域名的发掘和申请；</li>
+							<li>商业秘密、技术秘密的管理。</li>
+						</ul>
+						<img src="http://www.shangbiaozongju.com/images/zscq5.jpg"
+							style="width: 680px;">
+					</div>
 				</div>
 				<!-- end of page content -->
-
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
 
 			</div>

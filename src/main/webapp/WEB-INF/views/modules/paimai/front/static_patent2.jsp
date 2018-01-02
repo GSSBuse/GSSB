@@ -28,77 +28,83 @@
 			<div class="row">
 
 				<!-- start of page content -->
-				<div id="list-menu" class="menuA">
-					<ul style="width: 400px;">
-						<li class="check"><a>业务详情</a></li>
-						<li><a>流程费用</a></li>
-						<li><a>国商优势</a></li>
-						<li><a>成功案例</a></li>
-					</ul>
-				</div>
-				<br>
-				<div class="menuB">
-					<div class="one" style="display: block;">
-						<article>
+				<div class="span8 page-content">
 
-							<h2>外观专利</h2>
-							<p>外观专利是专利法保护的专利的三种类型之一，外观设计专利是指对产品的形状、图案或者其结合以及色彩与形状、图案的结合所作出的富有美感并适于工业应用的新设计。</p>
-							<p>授予专利权的外观设计，应当不属于现有设计；也没有任何单位或者个人就同样的外观设计在申请日以前向国务院专利行政部门提出过申请，并记载在申请日以后公告的专利文件中。</p>
-							<p>授予专利权的外观设计与现有设计或者现有设计特征的组合相比，应当具有明显区别。</p>
-							<p>授予专利权的外观设计不得与他人在申请日以前已经取得的合法权利相冲突。</p>
-							<h2>必要性:</h2>
-							<p class="qo">外观设计是关于产品外表的装饰性或艺术性的设计。外观设计专利容易实施，投资少，风险小，见效快，所以外观设计专利对企业的发展起重要作用。</p>
+					<div id="list-menu" class="menuA">
+						<ul style="width: 400px;">
+							<li class="check"><a>业务详情</a></li>
+							<li><a>流程费用</a></li>
+							<li><a>国商优势</a></li>
+							<li><a>成功案例</a></li>
+						</ul>
+					</div>
+					<br>
+					<div class="menuB">
+						<div class="one" style="display: block;">
+							<article>
 
-						</article>
+								<h2>外观专利</h2>
+								<p>外观专利是专利法保护的专利的三种类型之一，外观设计专利是指对产品的形状、图案或者其结合以及色彩与形状、图案的结合所作出的富有美感并适于工业应用的新设计。</p>
+								<p>授予专利权的外观设计，应当不属于现有设计；也没有任何单位或者个人就同样的外观设计在申请日以前向国务院专利行政部门提出过申请，并记载在申请日以后公告的专利文件中。</p>
+								<p>授予专利权的外观设计与现有设计或者现有设计特征的组合相比，应当具有明显区别。</p>
+								<p>授予专利权的外观设计不得与他人在申请日以前已经取得的合法权利相冲突。</p>
+								<h2>必要性:</h2>
+								<p class="qo">外观设计是关于产品外表的装饰性或艺术性的设计。外观设计专利容易实施，投资少，风险小，见效快，所以外观设计专利对企业的发展起重要作用。</p>
+
+							</article>
+						</div>
+						<div class="one">
+							<img
+								src="http://www.shangbiaozongju.com/userfiles/20140625070532198.png">
+							<img
+								src="http://www.shangbiaozongju.com/userfiles/20140625070510157.png">
+							<img
+								src="http://www.shangbiaozongju.com/userfiles/20140625070423156.png">
+							<table width="100%" cellspacing="1" cellpadding="0" border="0"
+								style="text-align: center">
+								<tbody>
+									<tr id="th"
+										style="color: rgb(255, 255, 255); background: rgb(238, 238, 238);">
+										<th colspan="3"><span style="color: #000;">实用新型、外观设计专利年费</span></th>
+									</tr>
+									<tr id="th"
+										style="color: rgb(255, 255, 255); background: rgb(16, 158, 226);">
+										<td width="50%">对应年度</td>
+										<td width="50%">年费标准</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td width="50%">第1-3年</td>
+										<td width="50%">￥1,900.00</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td>第4-5年</td>
+										<td>￥2,200.00</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td>第6-8年</td>
+										<td>￥2,500.00</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td>第9-10年</td>
+										<td>￥3,300.00</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="one">
+							<img src="http://www.shangbiaozongju.com/images/zlys1.jpg">
+							<img src="http://www.shangbiaozongju.com/images/zlys2.jpg">
+							<img src="http://www.shangbiaozongju.com/images/zlys3.jpg">
+						</div>
+						<div class="one"></div>
 					</div>
-					<div class="one">
-						<img
-							src="http://www.shangbiaozongju.com/userfiles/20140625070532198.png">
-						<img
-							src="http://www.shangbiaozongju.com/userfiles/20140625070510157.png">
-						<img
-							src="http://www.shangbiaozongju.com/userfiles/20140625070423156.png">
-						<table width="100%" cellspacing="1" cellpadding="0" border="0"
-							style="text-align: center">
-							<tbody>
-								<tr id="th"
-									style="color: rgb(255, 255, 255); background: rgb(238, 238, 238);">
-									<th colspan="3"><span style="color: #000;">实用新型、外观设计专利年费</span></th>
-								</tr>
-								<tr id="th"
-									style="color: rgb(255, 255, 255); background: rgb(16, 158, 226);">
-									<td width="50%">对应年度</td>
-									<td width="50%">年费标准</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td width="50%">第1-3年</td>
-									<td width="50%">￥1,900.00</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td>第4-5年</td>
-									<td>￥2,200.00</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td>第6-8年</td>
-									<td>￥2,500.00</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td>第9-10年</td>
-									<td>￥3,300.00</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="one">
-						<img src="http://www.shangbiaozongju.com/images/zlys1.jpg">
-						<img src="http://www.shangbiaozongju.com/images/zlys2.jpg">
-						<img src="http://www.shangbiaozongju.com/images/zlys3.jpg">
-					</div>
-					<div class="one"></div>
 				</div>
 				<!-- end of page content -->
 
 
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
 			</div>
 		</div>

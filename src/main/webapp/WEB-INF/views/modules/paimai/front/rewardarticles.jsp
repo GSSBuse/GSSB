@@ -15,7 +15,7 @@
 <script type="text/javascript" src="${ctxStatic }/front/js/gbreward.js"></script>
 <body ms-controller="rewardarticles">
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
-	<div class="about two">
+	<div class="about bg-two">
 		<div class="container">
 			<h1>
 				悬赏信息<span class="m_1"><br>最新发布的悬赏信息，如有兴趣请联系123456789</span>

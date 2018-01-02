@@ -28,43 +28,45 @@
 			<div class="row">
 
 				<!-- start of page content -->
+				<div class="span8 page-content">
+					<div style="width: 700px; margin: 0 auto;">
 
-				<div style="width: 800px; margin: 0 auto;">
-
-					<div class="divtit">帮助中心</div>
-					<h2 style="text-align: center; margin-top: 10px;">国际商标注册的方式</h2>
-					<div
-						style="border-bottom: 1px solid #eee; text-align: center; padding: 5px 0px;">发布时间:2014-06-24
-						23:58:05</div>
-					<div>
-						<p></p>
-						<p
-							style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">根据《马德里协定》的要求，商标国际注册应通过原属国的注册当局向国际局提出，商标国际注册申请必须采用共同细则所规定的格式提出，根据共同细则第2条的规定，与国际局之间的通信应按照WIPO总干事根据共同细则第41条的规定所发布的“行政指令”（admininistrative
-							instruction）的要求进行。2005年1月1日生效的行政指令对于提出申请的方式作出了明确的规定。据行政指令第6条规则的规定，有两种可以接受的方式。</p>
-						<p
-							style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
-							<strong style="margin: 0px; padding: 0px;"> 1.书面方式</strong>
-						</p>
-						<p
-							style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
-							行政指令第6条a款规定，除行政指令第11条a款另有规定者外，申请应以打字机或其他机器打印的书面提交防卫有效。</p>
-						<p
-							style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
-							共同细则规定允许用电话传真和电报或用户电报来传递除了国际申请之外的其他文件或通知。</p>
-						<p
-							style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
-							<strong style="margin: 0px; padding: 0px;">2.电子形式</strong>
-						</p>
-						<p
-							style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
-							根据行政指令第11条a款的规定，在国际局和有关原属国的注册当局之间的通信，包括国际申请的提交，可通过国际局与有关注册当局同一的方式使用电子手段。</p>
-						<p></p>
+						<div class="divtit">帮助中心</div>
+						<h2 style="text-align: center; margin-top: 10px;">国际商标注册的方式</h2>
+						<div
+							style="border-bottom: 1px solid #eee; text-align: center; padding: 5px 0px;">发布时间:2014-06-24
+							23:58:05</div>
+						<div>
+							<p></p>
+							<p
+								style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">根据《马德里协定》的要求，商标国际注册应通过原属国的注册当局向国际局提出，商标国际注册申请必须采用共同细则所规定的格式提出，根据共同细则第2条的规定，与国际局之间的通信应按照WIPO总干事根据共同细则第41条的规定所发布的“行政指令”（admininistrative
+								instruction）的要求进行。2005年1月1日生效的行政指令对于提出申请的方式作出了明确的规定。据行政指令第6条规则的规定，有两种可以接受的方式。</p>
+							<p
+								style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
+								<strong style="margin: 0px; padding: 0px;"> 1.书面方式</strong>
+							</p>
+							<p
+								style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
+								行政指令第6条a款规定，除行政指令第11条a款另有规定者外，申请应以打字机或其他机器打印的书面提交防卫有效。</p>
+							<p
+								style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
+								共同细则规定允许用电话传真和电报或用户电报来传递除了国际申请之外的其他文件或通知。</p>
+							<p
+								style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
+								<strong style="margin: 0px; padding: 0px;">2.电子形式</strong>
+							</p>
+							<p
+								style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
+								根据行政指令第11条a款的规定，在国际局和有关原属国的注册当局之间的通信，包括国际申请的提交，可通过国际局与有关注册当局同一的方式使用电子手段。</p>
+							<p></p>
+						</div>
 					</div>
 				</div>
 
-
 				<!-- end of page content -->
-
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
 
 			</div>

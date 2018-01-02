@@ -28,41 +28,43 @@
 			<div class="row">
 
 				<!-- start of page content -->
-				<div id="list-menu" class="menuA">
-					<ul style="width: 400px;">
-						<li class="check"><a>业务详情</a></li>
-						<li><a>流程费用</a></li>
-						<li><a>国商优势</a></li>
-						<li><a>成功案例</a></li>
-					</ul>
-				</div>
-				<br>
-				<div class="menuB">
-					<div class="one" style="display: block;">
-						<article>
+				<div class="span8 page-content">
+					<div id="list-menu" class="menuA">
+						<ul style="width: 400px;">
+							<li class="check"><a>业务详情</a></li>
+							<li><a>流程费用</a></li>
+							<li><a>国商优势</a></li>
+							<li><a>成功案例</a></li>
+						</ul>
+					</div>
+					<br>
+					<div class="menuB">
+						<div class="one" style="display: block;">
+							<article>
 
-							<h2>专利实施许可合同备案</h2>
-							<p>专利实施许可合同备案是指专利行政管理部门或者受其委托的部门对当事人已经缔结并生效的专利实施许可合同加以留存，并对外公示的行为。</p>
-							<p>根据专利法实施细则和国家知识产权第十八号局长令《专利实施许可合同备案管理办法》的规定：专利实施许可合同签订后，当事人(许可方和被许可方)应当在合同生效之日起3个月内到国家知识产权局指定的部门办理备案手续。许可方和被许可方应当共同委托一个具有完全民事行为能力的自然人办理备案手续。</p>
-							<p>当事人办理登记，是专利申请权或者专利权转移生效的要件，而不是转让合同生效的要件。依照合同法的规定，依法成立的转让专利申请权或者转让专利权的合同，自成立时即生效，当事人一方不得以未经登记为由主张合同无效。合同成立后，因未向国务院专利行政部门办理登记手续使转让不生效的，当事人应当依法补办登记手续。</p>
-							
-							<h2>必要性</h2>
-							<p>国家知识产权局出具的专利实施许可合同备案证明是评定高新技术企业、办理 外汇、海关知识产权备案等相关手续的证明文件。</p>
-							<p>专利实施许可合同备案在规范专利许可交易规范、保护专利实施许可当事人的合法权益以及确定专利侵权赔偿数额等方面都起到积极作用。</p>
-						</article>
+								<h2>专利实施许可合同备案</h2>
+								<p>专利实施许可合同备案是指专利行政管理部门或者受其委托的部门对当事人已经缔结并生效的专利实施许可合同加以留存，并对外公示的行为。</p>
+								<p>根据专利法实施细则和国家知识产权第十八号局长令《专利实施许可合同备案管理办法》的规定：专利实施许可合同签订后，当事人(许可方和被许可方)应当在合同生效之日起3个月内到国家知识产权局指定的部门办理备案手续。许可方和被许可方应当共同委托一个具有完全民事行为能力的自然人办理备案手续。</p>
+								<p>当事人办理登记，是专利申请权或者专利权转移生效的要件，而不是转让合同生效的要件。依照合同法的规定，依法成立的转让专利申请权或者转让专利权的合同，自成立时即生效，当事人一方不得以未经登记为由主张合同无效。合同成立后，因未向国务院专利行政部门办理登记手续使转让不生效的，当事人应当依法补办登记手续。</p>
+
+								<h2>必要性</h2>
+								<p>国家知识产权局出具的专利实施许可合同备案证明是评定高新技术企业、办理 外汇、海关知识产权备案等相关手续的证明文件。</p>
+								<p>专利实施许可合同备案在规范专利许可交易规范、保护专利实施许可当事人的合法权益以及确定专利侵权赔偿数额等方面都起到积极作用。</p>
+							</article>
+						</div>
+						<div class="one"></div>
+						<div class="one">
+							<img src="http://www.shangbiaozongju.com/images/zlys1.jpg">
+							<img src="http://www.shangbiaozongju.com/images/zlys2.jpg">
+							<img src="http://www.shangbiaozongju.com/images/zlys3.jpg">
+						</div>
+						<div class="one"></div>
 					</div>
-					<div class="one">
-						
-					</div>
-					<div class="one">
-						<img src="http://www.shangbiaozongju.com/images/zlys1.jpg">
-						<img src="http://www.shangbiaozongju.com/images/zlys2.jpg">
-						<img src="http://www.shangbiaozongju.com/images/zlys3.jpg">
-					</div>
-					<div class="one"></div>
 				</div>
 				<!-- end of page content -->
-
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
 
 			</div>

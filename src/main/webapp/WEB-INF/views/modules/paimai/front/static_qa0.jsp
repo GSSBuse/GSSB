@@ -28,10 +28,12 @@
 			<div class="row">
 
 				<!-- start of page content -->
-				<div>
-					<div style="width:800px; margin:0 auto;">
-						<h2 style="text-align:center;margin-top:10px;">为什么要及时注册商标</h2>
-						<div style="border-bottom:1px solid #eee;text-align:center;padding:5px 0px;">发布时间:2014-06-23 09:39:01</div>
+				<div class="span8 page-content">
+					<div style="width: 700px; margin: 0 auto;">
+						<h2 style="text-align: center; margin-top: 10px;">为什么要及时注册商标</h2>
+						<div
+							style="border-bottom: 1px solid #eee; text-align: center; padding: 5px 0px;">发布时间:2014-06-23
+							09:39:01</div>
 						<p>
 							<span
 								style="color: rgb(69, 69, 69); font-family: tahoma, helvetica, arial; font-size: 14px; line-height: 21px;">在使用商标过程中最好让商标经过注册，取得商标权，受到法律保护。法律之所以允许使用未注册商标，并不是鼓励使用未注册商标，而是考虑到商标注册需要经过一定程序和花费一定的时间。</span>
@@ -88,7 +90,9 @@
 				<br>
 
 				<!-- end of page content -->
-
+				<aside class="span4 page-sidebar" style="margin-left:30px;">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
 
 			</div>

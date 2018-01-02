@@ -28,46 +28,51 @@
 			<div class="row">
 
 				<!-- start of page content -->
-				<div id="list-menu" class="menuA">
-					<ul style="width: 400px;">
-						<li class="check"><a>业务详情</a></li>
-						<li><a>流程费用</a></li>
-						<li><a>国商优势</a></li>
-						<li><a>成功案例</a></li>
-					</ul>
-				</div>
-				<br>
-				<div class="menuB">
-					<div class="one" style="display: block;">
-						<article>
+				<div class="span8 page-content">
 
-							<h2>专利权评价报告</h2>
-							<p>专利权评价报告是国家知识产权局根据专利权人或者利害关系人的请求，在实用新型或者外观设计被授予专利权后对相关实用新型或外观设计专利进行检索，并就该专利是否符合专利法及其实施细则规定的授权条件进行分析和评价，作出专利权评价报告，是一种官方出具的较权威专利质量评价。</p>
-							<p>专利侵权纠纷涉及实用新型专利或者外观设计专利的，人民法院或者管理专利工作的部门可以要求专利权人或者利害关系人出具由国务院专利行政部门对相关实用新型或者外观设计进行检索、分析和评价后作出的专利权评价报告，作为审理、处理专利侵权纠纷的证据。</p>
+					<div id="list-menu" class="menuA">
+						<ul style="width: 400px;">
+							<li class="check"><a>业务详情</a></li>
+							<li><a>流程费用</a></li>
+							<li><a>国商优势</a></li>
+							<li><a>成功案例</a></li>
+						</ul>
+					</div>
+					<br>
+					<div class="menuB">
+						<div class="one" style="display: block;">
+							<article>
 
-							<h2>必要性:</h2>
-							<p class="qo">无论是对于应对专利侵权纠纷，还是支撑专利推广，专利权评价报告都具有非常重要的作用，具体如下：</p>
-							<p class="qo">（一）专利权评价报告是人民法院或者管理专利工作的部门判断是否中止审理、处理程序依据。</p>
-							<p class="qo">（二）专利权评价报告是人民法院或者管理专利工作的部门审理、处理专利侵权纠纷中判断是否侵权依据。</p>
-							<p class="qo">根据《专利法》第六十一条第二款规定，专利侵权纠纷涉及实用新型专利 或者外观设计专利的，人民法院或者管理专利工作的部门可以要求专利权人或者利害关系人出具由国务院专利行政部门对相关实用新型或者外观设计进行检索、分析和评价后作出的专利权评价报告，作为审理、处理专利侵权纠纷的证据。</p>
-							<p class="qo">（三）专利权评价报告是专利权人专利推广中证明专利“含金量”的依据。</p>
-							<p class="qo">由于未经实质审查即可授权，实用新型和外观专利多被认为稳定性不强，“含金量”不高。而如果获得了专利局下发的正面的专利权评价报告，则相当于该专利获得了国家专利局的再一次权威认可，专利的稳定性和含金量将会得到进一步认可。</p>
-							<p class="qo">（四）专利权评价报告是权利人应对专利侵权的必要准备。</p>
+								<h2>专利权评价报告</h2>
+								<p>专利权评价报告是国家知识产权局根据专利权人或者利害关系人的请求，在实用新型或者外观设计被授予专利权后对相关实用新型或外观设计专利进行检索，并就该专利是否符合专利法及其实施细则规定的授权条件进行分析和评价，作出专利权评价报告，是一种官方出具的较权威专利质量评价。</p>
+								<p>专利侵权纠纷涉及实用新型专利或者外观设计专利的，人民法院或者管理专利工作的部门可以要求专利权人或者利害关系人出具由国务院专利行政部门对相关实用新型或者外观设计进行检索、分析和评价后作出的专利权评价报告，作为审理、处理专利侵权纠纷的证据。</p>
 
-						</article>
+								<h2>必要性:</h2>
+								<p class="qo">无论是对于应对专利侵权纠纷，还是支撑专利推广，专利权评价报告都具有非常重要的作用，具体如下：</p>
+								<p class="qo">（一）专利权评价报告是人民法院或者管理专利工作的部门判断是否中止审理、处理程序依据。</p>
+								<p class="qo">（二）专利权评价报告是人民法院或者管理专利工作的部门审理、处理专利侵权纠纷中判断是否侵权依据。</p>
+								<p class="qo">根据《专利法》第六十一条第二款规定，专利侵权纠纷涉及实用新型专利
+									或者外观设计专利的，人民法院或者管理专利工作的部门可以要求专利权人或者利害关系人出具由国务院专利行政部门对相关实用新型或者外观设计进行检索、分析和评价后作出的专利权评价报告，作为审理、处理专利侵权纠纷的证据。</p>
+								<p class="qo">（三）专利权评价报告是专利权人专利推广中证明专利“含金量”的依据。</p>
+								<p class="qo">由于未经实质审查即可授权，实用新型和外观专利多被认为稳定性不强，“含金量”不高。而如果获得了专利局下发的正面的专利权评价报告，则相当于该专利获得了国家专利局的再一次权威认可，专利的稳定性和含金量将会得到进一步认可。</p>
+								<p class="qo">（四）专利权评价报告是权利人应对专利侵权的必要准备。</p>
+
+							</article>
+						</div>
+						<div class="one"></div>
+						<div class="one">
+							<img src="http://www.shangbiaozongju.com/images/zlys1.jpg">
+							<img src="http://www.shangbiaozongju.com/images/zlys2.jpg">
+							<img src="http://www.shangbiaozongju.com/images/zlys3.jpg">
+						</div>
+						<div class="one"></div>
 					</div>
-					<div class="one">
-						
-					</div>
-					<div class="one">
-						<img src="http://www.shangbiaozongju.com/images/zlys1.jpg">
-						<img src="http://www.shangbiaozongju.com/images/zlys2.jpg">
-						<img src="http://www.shangbiaozongju.com/images/zlys3.jpg">
-					</div>
-					<div class="one"></div>
+
 				</div>
 				<!-- end of page content -->
-
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
 
 			</div>

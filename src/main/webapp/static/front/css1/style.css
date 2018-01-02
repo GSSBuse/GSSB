@@ -798,15 +798,15 @@ ul.footer_social li a i:hover{
   min-height:300px;
 }
 
-.one{
+.bg-one{
 	background: url(../../images/banner01.jpg)no-repeat;
 }
 
-.two{
+.bg-two{
 	background: url(../../images/banner02.jpg)no-repeat;
 }
 
-.three{
+.bg-three{
 	background: url(../../images/banner03.jpg)no-repeat;
 }
 

@@ -28,71 +28,78 @@
 			<div class="row">
 
 				<!-- start of page content -->
-				<div id="list-menu" class="menuA">
-					<ul style="width: 400px;">
-						<li class="check"><a>业务详情</a></li>
-						<li><a>流程费用</a></li>
-						<li><a>国商优势</a></li>
-						<li><a>成功案例</a></li>
-					</ul>
+				<div class="span8 page-content">
+
+					<div id="list-menu" class="menuA">
+						<ul style="width: 400px;">
+							<li class="check"><a>业务详情</a></li>
+							<li><a>流程费用</a></li>
+							<li><a>国商优势</a></li>
+							<li><a>成功案例</a></li>
+						</ul>
+					</div>
+					<br>
+					<div class="menuB">
+						<div class="one" style="display: block;">
+							<article>
+
+								<h2>什么是驰名商标？</h2>
+								<p>驰名商标是指经过有权机关依照法律程序认定为“驰名商标”的商标。</p>
+								<p>我国法律对驰名商标的解释（司法解释）内容：</p>
+								<p>驰名商标是在中国为相关公众广为知晓并享有较高声誉的商标。</p>
+								<h2>驰名商标必要性:</h2>
+								<span class="ll1">01</span>有利于获得更大范围和更强力度的法律保护:
+								（1）有权禁止他人在一定范围的非类似商品、服务上注册或使用驰名商标及其近似商 标；
+								（2）在立案调查假冒商标犯罪案件时，不受立案金额的限制；
+								（3）驰名商标权利人提起侵权认定时，行政和司法机关判定商标近似的可能性更大； （4）防止其它公司将驰名商标作为公司名称登记注册。<br>
+								<br> <span class="ll1">02</span>驰名商标认定后不但将提高产品、服务的信任度，也能够提升品牌的经济价值:使用驰名商标的产品或者服务代表着更高的品质和信誉，更容易使消费者信任；同时，
+								驰名商标因其全国性的知名度和显著性而具有更大的经济价值，众多案例已经证明，
+								驰名商标本身所具有的市场价值甚至会超过企业固定资产的价值。<br> <br> <span
+									class="ll1">03</span>驰名商标认定后可以获得政府的资金奖励:各地政府为鼓励企业将品牌做大做强，均会出台政策鼓励企业申报驰名商标，因此企
+								业认定驰名不但有利于企业发展，还能够直接获得资金奖励。<br>
+
+							</article>
+						</div>
+						<div class="one">
+							<img
+								src="http://www.shangbiaozongju.com/userfiles/20140630020035135.png">
+						</div>
+						<div class="one">
+
+							<span class="ll1">1</span>确定案件详情之后会第一时间组织专家律师团队进行分析探讨，第一时间与客户沟通准备相应的法律团队优势的文件资料。<br>
+							<br> <span class="ll1">2</span>、优秀的律师服务团队，专业的客服人员随时与客户保持沟通，强大的后台服务团队让客户的商标在时刻保持权利至上。<br>
+							<br> <span class="ll1">3</span>完全托管式服务 <br> <br> <span
+								class="ll1">4</span>针对每个案件的不同情况本所会根据每个案件的特别情况制定方案，组织针对特定方案的法律服务团队。<br>
+							<br> <span class="ll1">5</span>证书下达后使用的过程会持续跟踪服务，保证在证书下达后能够正确使用和即时维护客户自身的权利。7X24小时在线400客服随时接听和解决客服知识产权需求。<br>
+							<br> <span class="ll1">6</span>所有客户知识产权项目都会纳入360度服务计划。<br>
+							<br>
+
+							<p style="text-align: center;">
+								<img src="http://www.shangbiaozongju.com/images/flys2.jpg"
+									style="width: 680px;">
+							</p>
+							<p style="text-align: center;">
+								<img src="http://www.shangbiaozongju.com/images/flys3.jpg"
+									style="width: 680px;">
+							</p>
+							<p style="text-align: center;">
+								<img src="http://www.shangbiaozongju.com/images/flys4.jpg"
+									style="width: 680px;">
+							</p>
+
+						</div>
+					</div>
+					<div class="one"></div>
 				</div>
-				<br>
-				<div class="menuB">
-					<div class="one" style="display: block;">
-						<article>
-
-							<h2>什么是驰名商标？</h2>
-							<p>驰名商标是指经过有权机关依照法律程序认定为“驰名商标”的商标。</p>
-							<p>我国法律对驰名商标的解释（司法解释）内容：</p>
-							<p>驰名商标是在中国为相关公众广为知晓并享有较高声誉的商标。</p>
-							<h2>驰名商标必要性:</h2>
-							<span class="ll1">01</span>有利于获得更大范围和更强力度的法律保护: （1）有权禁止他人在一定范围的非类似商品、服务上注册或使用驰名商标及其近似商 标； （2）在立案调查假冒商标犯罪案件时，不受立案金额的限制； （3）驰名商标权利人提起侵权认定时，行政和司法机关判定商标近似的可能性更大； （4）防止其它公司将驰名商标作为公司名称登记注册。<br> <br>
-							<span class="ll1">02</span>驰名商标认定后不但将提高产品、服务的信任度，也能够提升品牌的经济价值:使用驰名商标的产品或者服务代表着更高的品质和信誉，更容易使消费者信任；同时， 驰名商标因其全国性的知名度和显著性而具有更大的经济价值，众多案例已经证明， 驰名商标本身所具有的市场价值甚至会超过企业固定资产的价值。<br>
-							<br> <span class="ll1">03</span>驰名商标认定后可以获得政府的资金奖励:各地政府为鼓励企业将品牌做大做强，均会出台政策鼓励企业申报驰名商标，因此企 业认定驰名不但有利于企业发展，还能够直接获得资金奖励。<br>
-
-						</article>
-					</div>
-					<div class="one">
-						<img
-							src="http://www.shangbiaozongju.com/userfiles/20140630020035135.png">
-					</div>
-					<div class="one">
-
-						<span class="ll1">1</span>确定案件详情之后会第一时间组织专家律师团队进行分析探讨，第一时间与客户沟通准备相应的法律团队优势的文件资料。<br> <br>
+				<!-- end of page content -->
 
 
-						<span class="ll1">2</span>、优秀的律师服务团队，专业的客服人员随时与客户保持沟通，强大的后台服务团队让客户的商标在时刻保持权利至上。<br> <br>
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
-
-						<span class="ll1">3</span>完全托管式服务 <br> <br>
-						
-						<span class="ll1">4</span>针对每个案件的不同情况本所会根据每个案件的特别情况制定方案，组织针对特定方案的法律服务团队。<br> <br>
-
-
-						<span class="ll1">5</span>证书下达后使用的过程会持续跟踪服务，保证在证书下达后能够正确使用和即时维护客户自身的权利。7X24小时在线400客服随时接听和解决客服知识产权需求。<br> <br>
-
-						<span class="ll1">6</span>所有客户知识产权项目都会纳入360度服务计划。<br> <br>
-
-						<p style="text-align: center;">
-							<img src="http://www.shangbiaozongju.com/images/flys2.jpg" style="width: 680px;">
-						</p>
-						<p style="text-align: center;">
-							<img src="http://www.shangbiaozongju.com/images/flys3.jpg" style="width: 680px;">
-						</p>
-						<p style="text-align: center;">
-							<img src="http://www.shangbiaozongju.com/images/flys4.jpg" style="width: 680px;">
-						</p>
-
-					</div>
-				</div>
-				<div class="one"></div>
 			</div>
-			<!-- end of page content -->
-
-
-
 		</div>
-	</div>
 	</div>
 	<!-- End of Page Container -->
 

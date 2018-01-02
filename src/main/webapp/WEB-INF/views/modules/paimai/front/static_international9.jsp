@@ -28,28 +28,31 @@
 			<div class="row">
 
 				<!-- start of page content -->
+				<div class="span8 page-content">
 
-				<div style="width: 800px; margin: 0 auto;">
-					<div class="divtit">帮助中心</div>
-					<h2 style="text-align: center; margin-top: 10px;">国际商标注册的费用构成</h2>
-					<div
-						style="border-bottom: 1px solid #eee; text-align: center; padding: 5px 0px;">发布时间:2014-06-25
-						00:00:30</div>
-					<div>
-						<p></p>
-						<p>
-							<span
-								style="color: rgb(51, 51, 51); font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px;">
-								国际商标注册费用分为两部分，一是国外/地区官费及律师代理费，二是我方代理费。国外每个国家/地区的官费都是一定的，律师代理费因各个事务所的大小、诚信度和专业度等不同而有所不同。按照各国法律规定，在国外/地区注册商标必须委托当地律师办理。与当地律师事务所联系一般都是通过网络、传真、电话等方式，为了安全、可靠，所委托的律师大小、诚信度和专业度就非常重要。</span>
-						</p>
-						<p></p>
+					<div style="width: 700px; margin: 0 auto;">
+						<div class="divtit">帮助中心</div>
+						<h2 style="text-align: center; margin-top: 10px;">国际商标注册的费用构成</h2>
+						<div
+							style="border-bottom: 1px solid #eee; text-align: center; padding: 5px 0px;">发布时间:2014-06-25
+							00:00:30</div>
+						<div>
+							<p></p>
+							<p>
+								<span
+									style="color: rgb(51, 51, 51); font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px;">
+									国际商标注册费用分为两部分，一是国外/地区官费及律师代理费，二是我方代理费。国外每个国家/地区的官费都是一定的，律师代理费因各个事务所的大小、诚信度和专业度等不同而有所不同。按照各国法律规定，在国外/地区注册商标必须委托当地律师办理。与当地律师事务所联系一般都是通过网络、传真、电话等方式，为了安全、可靠，所委托的律师大小、诚信度和专业度就非常重要。</span>
+							</p>
+							<p></p>
+						</div>
 					</div>
+
 				</div>
-
-
 				<!-- end of page content -->
 
-
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
 			</div>
 		</div>

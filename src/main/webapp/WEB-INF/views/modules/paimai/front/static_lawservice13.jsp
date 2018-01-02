@@ -28,28 +28,31 @@
 			<div class="row">
 
 				<!-- start of page content -->
-
-				<div style="width: 800px; margin: 0 auto;">
-					<div class="divtit">帮助中心</div>
-					<h2 style="text-align: center; margin-top: 10px;">商标被异议复审为何要做答辩</h2>
-					<div
-						style="border-bottom: 1px solid #eee; text-align: center; padding: 5px 0px;">发布时间:2014-06-25
-						00:01:40</div>
-					<div>
-						<p></p>
-						<p>&nbsp;</p>
-						<ul
-							style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; list-style: none; color: rgb(51, 51, 51); line-height: 20px; background-color: rgb(252, 252, 252);">
-							<li style="margin: 0px; padding: 0px;"><a
-								href="http://www.chofn.com/helpcenter/common/lawservice/409.html"
-								style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); text-decoration: none;">商标被异议复审为何要做答辩</a></li>
-						</ul>
-						<p></p>
+				<div class="span8 page-content">
+					<div style="width: 700px; margin: 0 auto;">
+						<div class="divtit">帮助中心</div>
+						<h2 style="text-align: center; margin-top: 10px;">商标被异议复审为何要做答辩</h2>
+						<div
+							style="border-bottom: 1px solid #eee; text-align: center; padding: 5px 0px;">发布时间:2014-06-25
+							00:01:40</div>
+						<div>
+							<p></p>
+							<p>&nbsp;</p>
+							<ul
+								style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; list-style: none; color: rgb(51, 51, 51); line-height: 20px; background-color: rgb(252, 252, 252);">
+								<li style="margin: 0px; padding: 0px;"><a
+									href="http://www.chofn.com/helpcenter/common/lawservice/409.html"
+									style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); text-decoration: none;">商标被异议复审为何要做答辩</a></li>
+							</ul>
+							<p></p>
+						</div>
 					</div>
 				</div>
 				<!-- end of page content -->
 
-
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
 			</div>
 		</div>

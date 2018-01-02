@@ -28,69 +28,71 @@
 			<div class="row">
 
 				<!-- start of page content -->
-				<div id="list-menu" class="menuA">
-					<ul style="width: 400px;">
-						<li class="check"><a>业务详情</a></li>
-						<li><a>流程费用</a></li>
-						<li><a>国商优势</a></li>
-						<li><a>成功案例</a></li>
-					</ul>
+				<div class="span8 page-content">
+					<div id="list-menu" class="menuA">
+						<ul style="width: 400px;">
+							<li class="check"><a>业务详情</a></li>
+							<li><a>流程费用</a></li>
+							<li><a>国商优势</a></li>
+							<li><a>成功案例</a></li>
+						</ul>
+					</div>
+					<br>
+					<div class="menuB">
+						<div class="one" style="display: block;">
+							<article>
+
+								<h2>什么是集体商标？</h2>
+								<p>《商标法》对集体商标的定义：“本法所称集体商标是指以团体、协会或者其他组织名义注册，供该
+									组织成员在商事活动中使用，以表明使用者在该组织中的成员资格的标志。”</p>
+
+								<h2>集体商标必要性：</h2>
+								<span class="ll1">01</span>集体商标的注册有利于创造该集体的信誉、扩大影响，集体商标的使用本身具有广告效益，
+								有利于取得规模经济效益，扩大品牌的国内及国际市场的影响力。<br> <br> <span
+									class="ll1">02</span>集体商标的注册能够在不改变单个成员身份的条件下，通过共同使用统一的商标把所有单个
+								成员的生产经营能力有效组合起来，形成数量优势，节约成本，取得规模效应并保护产业。<br>
+
+							</article>
+						</div>
+						<div class="one">
+							<img
+								src="http://www.shangbiaozongju.com/userfiles/20140630021651101.png">
+						</div>
+						<div class="one">
+
+							<span class="ll1">1</span>确定案件详情之后会第一时间组织专家律师团队进行分析探讨，第一时间与客户沟通准备相应的法律团队优势的文件资料。<br>
+							<br> <span class="ll1">2</span>、优秀的律师服务团队，专业的客服人员随时与客户保持沟通，强大的后台服务团队让客户的商标在时刻保持权利至上。<br>
+							<br> <span class="ll1">3</span>完全托管式服务 <br> <br> <span
+								class="ll1">4</span>针对每个案件的不同情况本所会根据每个案件的特别情况制定方案，组织针对特定方案的法律服务团队。<br>
+							<br> <span class="ll1">5</span>证书下达后使用的过程会持续跟踪服务，保证在证书下达后能够正确使用和即时维护客户自身的权利。7X24小时在线400客服随时接听和解决客服知识产权需求。<br>
+							<br> <span class="ll1">6</span>所有客户知识产权项目都会纳入360度服务计划。<br>
+							<br>
+
+							<p style="text-align: center;">
+								<img src="http://www.shangbiaozongju.com/images/flys2.jpg"
+									style="width: 680px;">
+							</p>
+							<p style="text-align: center;">
+								<img src="http://www.shangbiaozongju.com/images/flys3.jpg"
+									style="width: 680px;">
+							</p>
+							<p style="text-align: center;">
+								<img src="http://www.shangbiaozongju.com/images/flys4.jpg"
+									style="width: 680px;">
+							</p>
+
+						</div>
+					</div>
+					<div class="one"></div>
 				</div>
-				<br>
-				<div class="menuB">
-					<div class="one" style="display: block;">
-						<article>
+				<!-- end of page content -->
 
-							<h2>什么是集体商标？</h2>
-							<p>《商标法》对集体商标的定义：“本法所称集体商标是指以团体、协会或者其他组织名义注册，供该 组织成员在商事活动中使用，以表明使用者在该组织中的成员资格的标志。”</p>
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
-							<h2>集体商标必要性：</h2>
-							<span class="ll1">01</span>集体商标的注册有利于创造该集体的信誉、扩大影响，集体商标的使用本身具有广告效益， 有利于取得规模经济效益，扩大品牌的国内及国际市场的影响力。<br> <br>
-							<span class="ll1">02</span>集体商标的注册能够在不改变单个成员身份的条件下，通过共同使用统一的商标把所有单个 成员的生产经营能力有效组合起来，形成数量优势，节约成本，取得规模效应并保护产业。<br>
-
-						</article>
-					</div>
-					<div class="one">
-						<img
-							src="http://www.shangbiaozongju.com/userfiles/20140630021651101.png">
-					</div>
-					<div class="one">
-
-						<span class="ll1">1</span>确定案件详情之后会第一时间组织专家律师团队进行分析探讨，第一时间与客户沟通准备相应的法律团队优势的文件资料。<br> <br>
-
-
-						<span class="ll1">2</span>、优秀的律师服务团队，专业的客服人员随时与客户保持沟通，强大的后台服务团队让客户的商标在时刻保持权利至上。<br> <br>
-
-
-						<span class="ll1">3</span>完全托管式服务 <br> <br>
-						
-						<span class="ll1">4</span>针对每个案件的不同情况本所会根据每个案件的特别情况制定方案，组织针对特定方案的法律服务团队。<br> <br>
-
-
-						<span class="ll1">5</span>证书下达后使用的过程会持续跟踪服务，保证在证书下达后能够正确使用和即时维护客户自身的权利。7X24小时在线400客服随时接听和解决客服知识产权需求。<br> <br>
-
-						<span class="ll1">6</span>所有客户知识产权项目都会纳入360度服务计划。<br> <br>
-
-						<p style="text-align: center;">
-							<img src="http://www.shangbiaozongju.com/images/flys2.jpg" style="width: 680px;">
-						</p>
-						<p style="text-align: center;">
-							<img src="http://www.shangbiaozongju.com/images/flys3.jpg" style="width: 680px;">
-						</p>
-						<p style="text-align: center;">
-							<img src="http://www.shangbiaozongju.com/images/flys4.jpg" style="width: 680px;">
-						</p>
-
-					</div>
-				</div>
-				<div class="one"></div>
 			</div>
-			<!-- end of page content -->
-
-
-
 		</div>
-	</div>
 	</div>
 	<!-- End of Page Container -->
 

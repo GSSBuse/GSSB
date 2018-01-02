@@ -28,52 +28,56 @@
 			<div class="row">
 
 				<!-- start of page content -->
+				<div class="span8 page-content">
+					<div style="width: 700px; margin: 0 auto;">
 
-				<div style="width: 800px; margin: 0 auto;">
 
+						<div class="divtit">帮助中心</div>
+						<h2 style="text-align: center; margin-top: 10px;">国际商标注册的注意事项</h2>
+						<div
+							style="border-bottom: 1px solid #eee; text-align: center; padding: 5px 0px;">发布时间:2014-06-24
+							23:59:17</div>
+						<div>
+							<p></p>
+							<p
+								style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">1
+								、申请人必须具有一定的主体资格。申请人应在我国有真实有效的工商营业所；如果没有，应在我国境内有住所；如果没有住所，申请人应有我国国籍。非
+								“ 马德里联盟 ”
+								成员国的国民，若在我国有其合资或独资企业，可以通过商标局提出国际注册申请。另外，台湾省的法人或自然人均可通过商标局提出国际注册申请。
+								而香港和澳门特别行政区的法人或自然人目前还不能通过商标局提出国际注册申请。</p>
+							<p
+								style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
+								2 、申请国际注册的商标必须已经在我国启动一定的商标注册申请程序。自 2008 年 9 月 1 日 起
+								，申请人指定保护的国家是纯 “ 马德里协定 ” 成员国的，申请国际注册的商标必须是在我国已经获得注册；申请人指定保护的国家是纯
+								“ 马德里议定书 ”
+								成员国的，或是同属“马德里协定”和“马德里议定书”的成员国，申请国际注册的商标可以是已在我国提出注册申请的商标，也可以是已经注册的商标。</p>
+							<p
+								style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
+								3
+								、国际注册申请应与国家基础注册或基础申请内容一致。国际注册申请人的名义应与国内申请人或注册人的名义完全一致；申请人地址应与国内申请人或注册人的地址完全一致；商标应与国内注册的商标完全相同，包括颜色完全一致；所报的商品和服务应与国内注册的商品和服务相同或者不超过国内申请或注册的商品和服务范围。如果国内申请或注册的是在不同商品或服务类别的同一商标，在申请国际注册时，可提交一份国际注册申请，将国内所报不同类别的商品或服务按类别顺序填写在该国际注册申请书上。</p>
+							<p
+								style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
+								4
+								、符合一定条件的可声明要求优先权。申请人在申请国际注册时，如果与国内提出的商标注册申请相隔时间未超过六个月，那么申请人在提出国际注册申请时，可要求优先权，但应提供国内《受理通知书》复印件。</p>
+							<p
+								style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
+								5 、不予受理的国际注册申请 凡不符合《商标国际注册马德里协定及其议定书共同实施细则》第六条之 1 、 2 、 3
+								或其中一条的，商标局不予受理该商标国际注册申请。</p>
+							<p
+								style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
+								6 、国际注册的有效期满后，如想继续使用的，应当续展注册。</p>
+							<p></p>
+						</div>
 
-					<div class="divtit">帮助中心</div>
-					<h2 style="text-align: center; margin-top: 10px;">国际商标注册的注意事项</h2>
-					<div
-						style="border-bottom: 1px solid #eee; text-align: center; padding: 5px 0px;">发布时间:2014-06-24
-						23:59:17</div>
-					<div>
-						<p></p>
-						<p
-							style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">1
-							、申请人必须具有一定的主体资格。申请人应在我国有真实有效的工商营业所；如果没有，应在我国境内有住所；如果没有住所，申请人应有我国国籍。非
-							“ 马德里联盟 ”
-							成员国的国民，若在我国有其合资或独资企业，可以通过商标局提出国际注册申请。另外，台湾省的法人或自然人均可通过商标局提出国际注册申请。
-							而香港和澳门特别行政区的法人或自然人目前还不能通过商标局提出国际注册申请。</p>
-						<p
-							style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
-							2 、申请国际注册的商标必须已经在我国启动一定的商标注册申请程序。自 2008 年 9 月 1 日 起 ，申请人指定保护的国家是纯
-							“ 马德里协定 ” 成员国的，申请国际注册的商标必须是在我国已经获得注册；申请人指定保护的国家是纯 “ 马德里议定书 ”
-							成员国的，或是同属“马德里协定”和“马德里议定书”的成员国，申请国际注册的商标可以是已在我国提出注册申请的商标，也可以是已经注册的商标。</p>
-						<p
-							style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
-							3
-							、国际注册申请应与国家基础注册或基础申请内容一致。国际注册申请人的名义应与国内申请人或注册人的名义完全一致；申请人地址应与国内申请人或注册人的地址完全一致；商标应与国内注册的商标完全相同，包括颜色完全一致；所报的商品和服务应与国内注册的商品和服务相同或者不超过国内申请或注册的商品和服务范围。如果国内申请或注册的是在不同商品或服务类别的同一商标，在申请国际注册时，可提交一份国际注册申请，将国内所报不同类别的商品或服务按类别顺序填写在该国际注册申请书上。</p>
-						<p
-							style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
-							4
-							、符合一定条件的可声明要求优先权。申请人在申请国际注册时，如果与国内提出的商标注册申请相隔时间未超过六个月，那么申请人在提出国际注册申请时，可要求优先权，但应提供国内《受理通知书》复印件。</p>
-						<p
-							style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
-							5 、不予受理的国际注册申请 凡不符合《商标国际注册马德里协定及其议定书共同实施细则》第六条之 1 、 2 、 3
-							或其中一条的，商标局不予受理该商标国际注册申请。</p>
-						<p
-							style="margin: 0px; padding: 0px; font-family: 微软雅黑, 宋体; font-size: 14px; line-height: 25px; color: rgb(51, 51, 51);">
-							6 、国际注册的有效期满后，如想继续使用的，应当续展注册。</p>
-						<p></p>
 					</div>
-
 				</div>
-
 
 				<!-- end of page content -->
 
 
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
 			</div>
 		</div>

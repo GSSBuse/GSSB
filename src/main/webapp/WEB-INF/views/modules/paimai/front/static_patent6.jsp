@@ -28,140 +28,144 @@
 			<div class="row">
 
 				<!-- start of page content -->
-				<div id="list-menu" class="menuA">
-					<ul style="width: 400px;">
-						<li class="check"><a>业务详情</a></li>
-						<li><a>流程费用</a></li>
-						<li><a>国商优势</a></li>
-						<li><a>成功案例</a></li>
-					</ul>
-				</div>
-				<br>
-				<div class="menuB">
-					<div class="one" style="display: block;">
-						<article>
-
-							<h2>美国专利申请</h2>
-							<h3>1.发明专利(Utility Patent)</h3>
-							<p>申请功能专利的发明创作必须具有某些功能或实用价值。发明专利保护年限为申请日起二十年、分别为注册日起第三年半、七年半及十一年半。需缴纳维持费，共缴纳三次。需要直接进行审查，核准后获颁注册证书并同时公告。</p>
-							<h3>2.新式样专利(Design patent)</h3>
-							<p>申请设计专利的发明创作必须具有创新性(Novelty)及具有对产品特殊(Nonobvious)的装饰或美化作用，(Ornamented
-								or Aesthetic in Nature),但并非一定要具有实用性。其保护年限为注册日起十四年，不需缴纳年费。</p>
-							<h3>3.植物专利(Plant Patent)</h3>
-							<p>申请植物专利的发明创作必须是经过无性生殖或有性生殖培养，而具有创新性(Novelty)及特殊性的职务。单一植物只能有一项专利。</p>
-						</article>
+				<div class="span8 page-content">
+					<div id="list-menu" class="menuA">
+						<ul style="width: 400px;">
+							<li class="check"><a>业务详情</a></li>
+							<li><a>流程费用</a></li>
+							<li><a>国商优势</a></li>
+							<li><a>成功案例</a></li>
+						</ul>
 					</div>
-					<div class="one">
-						<table width="100%" cellspacing="1" cellpadding="0" border="0">
-							<tbody>
-								<tr class="th"
-									style="background: rgb(16, 158, 226); color: rgb(255, 255, 255);">
-									<th colspan="2"
-										style="text-align: center; color: rgb(16, 158, 226);">国际专利官费参考</th>
+					<br>
+					<div class="menuB">
+						<div class="one" style="display: block;">
+							<article>
 
-								</tr>
-								<tr>
-									<td colspan="2">PCT申请国际阶段部分（人民币：元）</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td>传送费</td>
-									<td>500</td>
-								</tr>
-								<tr>
-									<td>检索费</td>
-									<td>2100</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td>附加检索费</td>
-									<td>2100</td>
-								</tr>
-								<tr>
-									<td>优先权文件费</td>
-									<td>150</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td>初步审查费</td>
-									<td>1500</td>
-								</tr>
-								<tr>
-									<td>初步审查附加费</td>
-									<td>1500</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td>单一性异议费</td>
-									<td>200</td>
-								</tr>
-								<tr>
-									<td>副本复制费每页</td>
-									<td>2</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td>后提交费</td>
-									<td>200</td>
-								</tr>
-								<tr>
-									<td>滞纳金</td>
-									<td>按应交费用的50%计收，若低于传送费按传送费收取；若高于基本费按基本费收取。</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td colspan="2">国际申请费</td>
-								</tr>
-								<tr>
-									<td>1.国际申请用纸不超过30页的</td>
-									<td>8858（1330瑞朗）</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td>2.超出30页的部分每页加收</td>
-									<td>100（15瑞朗）</td>
-								</tr>
-								<tr>
-									<td>3.手续费</td>
-									<td>1332（200瑞朗）</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td colspan="2">注：1-3项为国家知识产权局代世界知识产权组织国际局收取的费用，收费标准按2008年6月1日国家外汇管理局公布
-										的外汇牌价折算。</td>
-								</tr>
-								<tr>
-									<td colspan="2">PCT申请进入中国国家阶段部分（人民币：元）</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td>宽限费</td>
-									<td>1000</td>
-								</tr>
-								<tr>
-									<td>改正译文错误手续费（初审阶段）</td>
-									<td>300</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td>改正译文错误手续费（实审阶段）</td>
-									<td>1200</td>
-								</tr>
-								<tr>
-									<td>单一性恢复费</td>
-									<td>900</td>
-								</tr>
-								<tr style="background: rgb(238, 238, 238);">
-									<td>改正优先权要求请求费</td>
-									<td>300</td>
-								</tr>
-								<tr>
-									<td colspan="2">注：进入国内阶段其他收费依照国内申请标准执行。</td>
-								</tr>
+								<h2>美国专利申请</h2>
+								<h3>1.发明专利(Utility Patent)</h3>
+								<p>申请功能专利的发明创作必须具有某些功能或实用价值。发明专利保护年限为申请日起二十年、分别为注册日起第三年半、七年半及十一年半。需缴纳维持费，共缴纳三次。需要直接进行审查，核准后获颁注册证书并同时公告。</p>
+								<h3>2.新式样专利(Design patent)</h3>
+								<p>申请设计专利的发明创作必须具有创新性(Novelty)及具有对产品特殊(Nonobvious)的装饰或美化作用，(Ornamented
+									or Aesthetic in Nature),但并非一定要具有实用性。其保护年限为注册日起十四年，不需缴纳年费。</p>
+								<h3>3.植物专利(Plant Patent)</h3>
+								<p>申请植物专利的发明创作必须是经过无性生殖或有性生殖培养，而具有创新性(Novelty)及特殊性的职务。单一植物只能有一项专利。</p>
+							</article>
+						</div>
+						<div class="one">
+							<table width="100%" cellspacing="1" cellpadding="0" border="0">
+								<tbody>
+									<tr class="th"
+										style="background: rgb(16, 158, 226); color: rgb(255, 255, 255);">
+										<th colspan="2"
+											style="text-align: center; color: rgb(16, 158, 226);">国际专利官费参考</th>
 
-							</tbody>
-						</table>
+									</tr>
+									<tr>
+										<td colspan="2">PCT申请国际阶段部分（人民币：元）</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td>传送费</td>
+										<td>500</td>
+									</tr>
+									<tr>
+										<td>检索费</td>
+										<td>2100</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td>附加检索费</td>
+										<td>2100</td>
+									</tr>
+									<tr>
+										<td>优先权文件费</td>
+										<td>150</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td>初步审查费</td>
+										<td>1500</td>
+									</tr>
+									<tr>
+										<td>初步审查附加费</td>
+										<td>1500</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td>单一性异议费</td>
+										<td>200</td>
+									</tr>
+									<tr>
+										<td>副本复制费每页</td>
+										<td>2</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td>后提交费</td>
+										<td>200</td>
+									</tr>
+									<tr>
+										<td>滞纳金</td>
+										<td>按应交费用的50%计收，若低于传送费按传送费收取；若高于基本费按基本费收取。</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td colspan="2">国际申请费</td>
+									</tr>
+									<tr>
+										<td>1.国际申请用纸不超过30页的</td>
+										<td>8858（1330瑞朗）</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td>2.超出30页的部分每页加收</td>
+										<td>100（15瑞朗）</td>
+									</tr>
+									<tr>
+										<td>3.手续费</td>
+										<td>1332（200瑞朗）</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td colspan="2">注：1-3项为国家知识产权局代世界知识产权组织国际局收取的费用，收费标准按2008年6月1日国家外汇管理局公布
+											的外汇牌价折算。</td>
+									</tr>
+									<tr>
+										<td colspan="2">PCT申请进入中国国家阶段部分（人民币：元）</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td>宽限费</td>
+										<td>1000</td>
+									</tr>
+									<tr>
+										<td>改正译文错误手续费（初审阶段）</td>
+										<td>300</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td>改正译文错误手续费（实审阶段）</td>
+										<td>1200</td>
+									</tr>
+									<tr>
+										<td>单一性恢复费</td>
+										<td>900</td>
+									</tr>
+									<tr style="background: rgb(238, 238, 238);">
+										<td>改正优先权要求请求费</td>
+										<td>300</td>
+									</tr>
+									<tr>
+										<td colspan="2">注：进入国内阶段其他收费依照国内申请标准执行。</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+						<div class="one">
+							<img src="http://www.shangbiaozongju.com/images/zlys1.jpg">
+							<img src="http://www.shangbiaozongju.com/images/zlys2.jpg">
+							<img src="http://www.shangbiaozongju.com/images/zlys3.jpg">
+						</div>
+						<div class="one"></div>
 					</div>
-					<div class="one">
-						<img src="http://www.shangbiaozongju.com/images/zlys1.jpg">
-						<img src="http://www.shangbiaozongju.com/images/zlys2.jpg">
-						<img src="http://www.shangbiaozongju.com/images/zlys3.jpg">
-					</div>
-					<div class="one"></div>
 				</div>
 				<!-- end of page content -->
 
-
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
 			</div>
 		</div>

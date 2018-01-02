@@ -29,7 +29,7 @@
 
 				<!-- start of page content -->
 
-				<div style="width: 800px; margin: 0 auto;">
+				<div class="span8 page-content" style="width: 800px; margin: 0 auto;">
 
 					<img src="http://www.shangbiaozongju.com/images/bq1.png"
 						style="width: 680px;"> <img
@@ -38,7 +38,9 @@
 				</div>
 				<!-- end of page content -->
 
-
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
 			</div>
 		</div>

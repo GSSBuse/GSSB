@@ -28,6 +28,7 @@
 			<div class="row">
 
 				<!-- start of page content -->
+				 <div class="span8 page-content">
 				<div id="list-menu" class="menuA">
 					<ul style="width: 400px;">
 						<li class="check"><a>业务详情</a></li>
@@ -88,7 +89,9 @@
 			</div>
 			<!-- end of page content -->
 
-
+                                        <aside class="span4 page-sidebar">
+                                                <%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+                                        </aside>
 
 		</div>
 	</div>

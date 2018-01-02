@@ -28,8 +28,8 @@
 			<div class="row">
 
 				<!-- start of page content -->
-
-					<div style="width:800px; margin:0 auto;">
+				<div class="span8 page-content">
+					<div style="width: 700px; margin: 0 auto;">
 						<div class="divtit">帮助中心</div>
 						<h2 style="text-align: center; margin-top: 10px;">商标被异议复审为何要做答辩</h2>
 						<div
@@ -47,8 +47,11 @@
 							<p></p>
 						</div>
 					</div>
+				</div>
 				<!-- end of page content -->
-
+				<aside class="span4 page-sidebar">
+					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+				</aside>
 
 
 			</div>

@@ -28,8 +28,8 @@
 			<div class="row">
 
 				<!-- start of page content -->
-				<div>
-					<div style="width: 800px; margin: 0 auto;">
+				<div class="span8 page-content">
+					<div style="width: 700px; margin: 0 auto;">
 						<h2 style="text-align: center; margin-top: 10px;">商标注册存在的客观风险</h2>
 						<div
 							style="border-bottom: 1px solid #eee; text-align: center; padding: 5px 0px;">发布时间:2014-06-23
@@ -67,6 +67,9 @@
 
 				<!-- end of page content -->
 
+                                        <aside class="span4 page-sidebar">
+                                                <%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
+                                        </aside>
 
 
 			</div>
