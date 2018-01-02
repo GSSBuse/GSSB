@@ -79,7 +79,48 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
 			dao.update(entity);
 		}
 	}
-	
+	/**
+	 * 保存数据（插入或更新） snnu 2018.1.1
+	 * @param entity
+	 */
+	@Transactional(readOnly = false)
+	public void saveBuy(T entity) {
+		if (entity.getIsNewRecord()){
+			entity.preInsert();
+			dao.insertUserID(entity);
+		}else{
+			entity.preUpdate();
+			dao.update(entity);
+		}
+	}
+	/**
+	 * 保存数据（插入或更新） snnu 2018.1.1
+	 * @param entity
+	 */
+	@Transactional(readOnly = false)
+	public void saveSold(T entity) {
+		if (entity.getIsNewRecord()){
+			entity.preInsert();
+			dao.insertUserID(entity);
+		}else{
+			entity.preUpdate();
+			dao.update(entity);
+		}
+	}
+	/**
+	 * 保存数据（插入或更新） snnu 2018.1.1
+	 * @param entity
+	 */
+	@Transactional(readOnly = false)
+	public void saveReward(T entity) {
+		if (entity.getIsNewRecord()){
+			entity.preInsert();
+			dao.insertUserID(entity);
+		}else{
+			entity.preUpdate();
+			dao.update(entity);
+		}
+	}
 	/**
 	 * 删除数据
 	 * @param entity

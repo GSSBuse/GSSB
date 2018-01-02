@@ -372,109 +372,114 @@ public class FrontIndexController extends BaseController{
 		}
 		
 	}
+	
+	
 	/**
-	 * 我要买标信息提交   2017/12/3  
+	 * 我要买标信息提交   2018/1/1
 	 * by snnu
  	*/
 	@RequestMapping(value= {"gbBuy"})  
 	@ResponseBody
-	public AjaxResult gbBuy(Model model, GbjBuy gbjBuy, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-		
-		model.addAttribute("domainInfo1Json", JsonMapper.toJsonString(gbjBuy));
-		try{
+	public AjaxResult gbBuy(HttpServletRequest request, 
+			@RequestParam(value = "id") String id,
+			@RequestParam(value = "title") String title,
+			@RequestParam(value = "mobile") String mobile,
+			@RequestParam(value = "realname") String realname) {
+		//GbjUserBuyComments gbjUserBuyComments = new GbjUserBuyComments();
+		GbjBuy gbjBuy = new GbjBuy();
+		GbjUser gbjUser=new GbjUser();
+		try{			
+			logger.info(id);
 			//STEP1  提交查询信息，保存到数据库
-			gbjBuyService.save(gbjBuy);
-		
-			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+			gbjBuy.setUser(gbjUserService.get(id));
+			gbjBuy.setUser_id(id);
+			gbjBuy.setRealname(realname);			
+			gbjBuy.setTitle(title);			
+			gbjBuy.setMobile(mobile);
+			gbjBuy.setCreateDate(new Date());
 			
-			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+			gbjBuyService.saveBuy(gbjBuy);
+		
+			
+			return AjaxResult.makeSuccess("您很棒，评论成功！");
 		} catch (Exception e) {
-			logger.error(e.getMessage());
-			addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
-			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+			logger.error(e.getMessage());			
+			return AjaxResult.makeError("失败【"+e.getMessage()+"】");
 		}
 		
 	}
-	
 	/**
-	 * 我要卖标信息提交   2017/12/5 
-	 * by snnu
-	 */
-	@RequestMapping(value= {"upcounts"})  
-	@ResponseBody
-	public AjaxResult upcounts(Model model, GbjBuy gbjBuy, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-		
-		
-		model.addAttribute("domainInfo1", JsonMapper.toJsonString(gbjBuy));
-		try{
-			
-			System.out.print("zzzzz");
-			//STEP1  提交查询信息，保存到数据库
-			gbjBuyService.updateCount(gbjBuy);
-		
-			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
-			
-			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
-			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
-		}
-		
-	}
-	
-	
-	/**
-	 * 我要卖标信息提交   2017/12/5 
-	 * by snnu
-	 */
-	@RequestMapping(value= {"gbsold"})  
-	@ResponseBody
-	public AjaxResult gbsold(Model model, GbjSold gbjSold, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-		
-		model.addAttribute("domainInfo2Json", JsonMapper.toJsonString(gbjSold));
-		try{
-			
-			
-			//STEP1  提交查询信息，保存到数据库
-			gbjSoldService.save(gbjSold);
-		
-			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
-			
-			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
-			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
-		}
-		
-	}	
-	/**
-	 * 悬赏起名信息提交   2017/12/5  
+	 * 我要卖标信息提交   2018/1/1
 	 * by snnu
  	*/
-	@RequestMapping(value= {"gbreward"})  
+	@RequestMapping(value= {"gbSold"})  
 	@ResponseBody
-	public AjaxResult gbreward(Model model, GbjReward gbjReward, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-		
-		model.addAttribute("domainInfo3Json", JsonMapper.toJsonString(gbjReward));
-		try{
-			
-			
+	public AjaxResult gbSold(HttpServletRequest request, 
+			@RequestParam(value = "id") String id,
+			@RequestParam(value = "title") String title,
+			@RequestParam(value = "mobile") String mobile,
+			@RequestParam(value = "realname") String realname) {
+		//GbjUserBuyComments gbjUserBuyComments = new GbjUserBuyComments();
+		GbjSold gbjSold = new GbjSold();
+		GbjUser gbjUser=new GbjUser();
+		try{			
+			logger.info(id);
 			//STEP1  提交查询信息，保存到数据库
-			gbjRewardService.save(gbjReward);
-		
-			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+			gbjSold.setUser(gbjUserService.get(id));
+			gbjSold.setUser_id(id);
+			gbjSold.setRealname(realname);			
+			gbjSold.setTitle(title);			
+			gbjSold.setMobile(mobile);
+			gbjSold.setCreateDate(new Date());
 			
-			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+			gbjSoldService.saveSold(gbjSold);
+		
+			
+			return AjaxResult.makeSuccess("您很棒，评论成功！");
 		} catch (Exception e) {
-			logger.error(e.getMessage());
-			addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
-			return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+			logger.error(e.getMessage());			
+			return AjaxResult.makeError("失败【"+e.getMessage()+"】");
 		}
 		
 	}
-	
+	/**
+	 * 我要卖标信息提交   2018/1/1
+	 * by snnu
+ 	*/
+	@RequestMapping(value= {"gbReward"})  
+	@ResponseBody
+	public AjaxResult gbReward(HttpServletRequest request, 
+			@RequestParam(value = "id") String id,
+			@RequestParam(value = "title") String title,
+			@RequestParam(value = "mobile") String mobile,
+			@RequestParam(value = "realname") String realname,
+			@RequestParam(value = "price") Long price,
+			@RequestParam(value = "description") String description) {
+		//GbjUserBuyComments gbjUserBuyComments = new GbjUserBuyComments();
+		GbjReward gbjReward = new GbjReward();
+		GbjUser gbjUser=new GbjUser();
+		try{			
+			logger.info(id);
+			//STEP1  提交查询信息，保存到数据库
+			gbjReward.setUser(gbjUserService.get(id));
+			gbjReward.setUser_id(id);
+			gbjReward.setRealname(realname);			
+			gbjReward.setTitle(title);
+			gbjReward.setDescription(description);
+			gbjReward.setPrice(price);
+			gbjReward.setMobile(mobile);
+			gbjReward.setCreateDate(new Date());
+			
+			gbjRewardService.saveReward(gbjReward);
+		
+			
+			return AjaxResult.makeSuccess("您很棒，评论成功！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());			
+			return AjaxResult.makeError("失败【"+e.getMessage()+"】");
+		}
+		
+	}
 	/**
 	 * 我要买标评论提交信息提交   2017/12/27  
 	 * by snnu
@@ -537,7 +542,7 @@ public class FrontIndexController extends BaseController{
 		
 	}
 	/**
-	 * 我要卖标评论提交信息提交   2017/12/27  
+	 * 我要悬赏评论提交信息提交   2017/12/27  
 	 * by snnu
  	*/
 	@RequestMapping(value= {"rewardcomments"})  
@@ -1243,4 +1248,105 @@ public class FrontIndexController extends BaseController{
 				public String static_search(Model model) {
 					return "modules/paimai/front/static_search";
 				}
+				/**
+				 * 我要买标信息提交   2017/12/3  
+				 * by snnu
+			 	*/
+				/*@RequestMapping(value= {"gbBuy"})  
+				@ResponseBody
+				public AjaxResult gbBuy(Model model, GbjBuy gbjBuy, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+					
+					model.addAttribute("domainInfo1Json", JsonMapper.toJsonString(gbjBuy));
+					try{
+						//STEP1  提交查询信息，保存到数据库
+						gbjBuyService.saveBuy(gbjBuy);
+					
+						addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+						
+						return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+					} catch (Exception e) {
+						logger.error(e.getMessage());
+						addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
+						return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+					}
+					
+				}*/
+				/**
+				 * 我要卖标信息提交   2017/12/5 
+				 * by snnu
+				 */
+				/*@RequestMapping(value= {"upcounts"})  
+				@ResponseBody
+				public AjaxResult upcounts(Model model, GbjBuy gbjBuy, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+					
+					
+					model.addAttribute("domainInfo1", JsonMapper.toJsonString(gbjBuy));
+					try{
+						
+						System.out.print("zzzzz");
+						//STEP1  提交查询信息，保存到数据库
+						gbjBuyService.updateCount(gbjBuy);
+					
+						addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+						
+						return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+					} catch (Exception e) {
+						logger.error(e.getMessage());
+						addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
+						return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+					}
+					
+				}*/
+				
+				/**
+				 * 我要卖标信息提交   2017/12/5 
+				 * by snnu
+				 */
+				/*@RequestMapping(value= {"gbsold"})  
+				@ResponseBody
+				public AjaxResult gbsold(Model model, GbjSold gbjSold, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+					
+					model.addAttribute("domainInfo2Json", JsonMapper.toJsonString(gbjSold));
+					try{
+						
+						
+						//STEP1  提交查询信息，保存到数据库
+						gbjSoldService.save(gbjSold);
+					
+						addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+						
+						return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+					} catch (Exception e) {
+						logger.error(e.getMessage());
+						addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
+						return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+					}
+					
+				}	*/
+				/**
+				 * 悬赏起名信息提交   2017/12/5  
+				 * by snnu
+			 	*/
+				/*@RequestMapping(value= {"gbreward"})  
+				@ResponseBody
+				public AjaxResult gbreward(Model model, GbjReward gbjReward, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+					
+					model.addAttribute("domainInfo3Json", JsonMapper.toJsonString(gbjReward));
+					try{
+						
+						
+						//STEP1  提交查询信息，保存到数据库
+						gbjRewardService.save(gbjReward);
+					
+						addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+						
+						return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+					} catch (Exception e) {
+						logger.error(e.getMessage());
+						addMessage(redirectAttributes, "提交查询成功失败【"+e.getMessage()+"】");
+						return AjaxResult.makeError("提交查询成功失败【"+e.getMessage()+"】");
+					}
+					
+				}
+				*/
 }

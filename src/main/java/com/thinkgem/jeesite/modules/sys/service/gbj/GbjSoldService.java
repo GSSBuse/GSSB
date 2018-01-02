@@ -42,6 +42,10 @@ public class GbjSoldService extends CrudService<GbjSoldDao, GbjSold> {
 	public void save(GbjSold gbjSold) {
 		super.save(gbjSold);
 	}
+	@Transactional(readOnly = false)
+	public void saveSold(GbjSold gbjSold) {
+		super.saveSold(gbjSold);
+	}
 	
 	@Transactional(readOnly = false)
 	public void delete(GbjSold gbjSold) {

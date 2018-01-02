@@ -46,8 +46,9 @@
 
 						<div class="post-meta clearfix like-btn" ms-controller="upcounts">
 							<span class="date">2017/11/28</span> <span class="category"><a
-								href="#">商标 &amp; 餐饮</a></span> <span class="comments"><a
-								href="#">3个回复</a></span>
+								href="#">商标 &amp; 餐饮</a></span> 
+								<!-- <span class="comments"><a
+								href="#">3个回复</a></span> -->
 							<form id="like-it-form" action="#" method="post">
 								<span class="like-it">${gbjRewardDetail.upCounts}</span> <input
 									type="hidden" name="id" id="rewardid" />

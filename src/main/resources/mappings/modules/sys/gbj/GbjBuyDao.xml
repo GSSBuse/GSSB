@@ -135,6 +135,51 @@
 		)
 	</insert>
 	
+	<insert id="insertUserID">
+		INSERT INTO gbj_buy(
+			id,
+			user_id,
+			realname,
+			type_id,
+			title,
+			description,
+			price,
+			mobile,
+			tag,
+			up_counts,
+			create_by,
+			look_counts,
+			update_by,
+			comments_counts,
+			front_del_flag,
+			create_date,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{user_id},
+			#{realname},
+			#{typeId},
+			#{title},
+			#{description},
+			#{price},
+			#{mobile},
+			#{tag},
+			"0",
+			#{createBy.id},
+			#{lookCounts},
+			#{updateBy.id},
+			#{commentsCounts},
+			"0",
+			#{createDate},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	
 	<update id="update">
 		UPDATE gbj_buy SET 	
 			user_id = #{user.id},

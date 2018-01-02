@@ -44,7 +44,11 @@ public class GbjBuyService extends CrudService<GbjBuyDao, GbjBuy> {
 	public void save(GbjBuy gbjBuy) {
 		super.save(gbjBuy);
 	}
-	
+	//插入用户id的发布信息 by snnu 2018.1.1
+	@Transactional(readOnly = false)
+	public void saveBuy(GbjBuy gbjBuy) {
+		super.saveBuy(gbjBuy);
+	}
 	@Transactional(readOnly = false)
 	public void delete(GbjBuy gbjBuy) {
 		super.delete(gbjBuy);

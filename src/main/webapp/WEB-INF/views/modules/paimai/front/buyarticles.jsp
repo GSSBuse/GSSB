@@ -66,17 +66,20 @@
 							<div class="post-meta clearfix ">
 								<span class="date">{{el.createDate}}</span> <span
 									class="category"><a href="#" title="查询该标签所有内容"
-									id="gbjType">{{el.typeId}}</a> &amp;&amp;&amp;<a href="#"
-									title="查询该标签所有内容"> 餐饮</a></span> <span class="comments"><a
-									href="#">3个回复</a></span> <a
-									ms-attr-href="${ctx}/single.html?id={{el.id}}&type=buy"><span
+									id="gbjType">商标</a> &amp;&amp;&amp;<a href="#"
+									title="查询该标签所有内容"> 餐饮</a></span>
+									<!--  <span class="comments"><a
+									href="#">3个回复</a></span>  -->
+									<a ms-attr-href="${ctx}/single.html?id={{el.id}}&type=buy"><span
 									class="like-count">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{el.upCounts}}
 								</span></a>
 							</div>
 							<!-- end of post meta -->
 						</header>
 						<p>
-							{{el.description}}<a class="readmore-link" href="#">查看全部</a>
+							<h4>
+							{{el.description}}<!-- <a class="readmore-link" href="#">查看全部</a> -->
+							</h4>
 						</p>
 					</article>
 					<div id="pagination">
@@ -107,15 +110,49 @@
 	<!-- Start of Footer -->
 	<%@ include file="/WEB-INF/views/include/frontFooter.jsp"%>
 	<!-- End of Footer -->
-
 	<a href="#top" id="scroll-top"></a>
 	<div id="buy-dialog-bg"
 		style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1; display: none;"></div>
-	<div id="buy-dialog" ms-controller="buy-dialog"
-		style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
-		<div id="close-dialog1"
-			style="position: absolute; right: -10px; top: -14px; width: 24px; height: 24px; text-align: center; font-size: 25px; border: 2px solid #d2d1d1; border-radius: 50%; background-color: #fff; color: #e71a1a; cursor: pointer;">×</div>
-		<form id="domainform" action="${ctx }/buyarticles.html" method="post"
+	<div id="buy-dialog"  style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
+		<div id="close-dialog1" style="position: absolute; right: -10px; top: -14px; width: 24px; height: 24px; text-align: center; font-size: 25px; border: 2px solid #d2d1d1; border-radius: 50%; background-color: #fff; color: #e71a1a; cursor: pointer;">×</div>
+		        <form method="post" id="buyform" onsubmit="return buySubmit();" action="${ctx }/buyarticles.html"
+		        	class="form-horizontal" style="padding: 20px 30px; margin: 0;"
+		        >
+		        <h1 class="post-title">
+				<a href="#">我要买标</a>
+			</h1>
+			<p class="comment-notes">请输入您需要发布的信息。专业顾问人工查询，结果分析更准确！</p>
+			<div class="form-error" style="color:#FF0000">
+					<i></i><label class="text"></label>
+				</div>
+				<div class="form-success" style="color:#FF0000">
+					<i></i><label class="text"></label>
+				</div>
+								<div>
+				                 <label for="title">商标名称 *</label> 
+				                 <input class="span4" type="text" name="title" id="title"  >
+				                 <input name="id" type="hidden" id="id"
+										value="${login_user.id}">
+		                       </div>
+		                       <div>
+				                 <label for="title">联系电话 *</label> 
+				                 <input class="span4" type="text" name="mobile" id="mobile" >
+		                       </div>
+		                       <div>
+				                 <label for="title">联系人 *</label> 
+				                 <input class="span4" type="text" name="realname" id="realname" >
+		                       </div>
+		                       
+								<div class="payment-sendbtns">
+									<input  class="btn" name="submit" type="submit" id="submit"
+										value="提交查询">
+								</div>
+							</form>
+	</div>
+	
+	
+	
+	<%-- <form id="domainform" action="${ctx }/buyarticles.html" method="post"
 			ms-widget="validation" class="form-horizontal"
 			style="padding: 20px 30px; margin: 0;">
 			<h1 class="post-title">
@@ -151,8 +188,16 @@
 				<input class="btn" name="submit" type="submit" id="submit01"
 					value="提交查询">
 			</div>
-		</form>
-	</div>
+		</form> --%>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<script type="text/javascript"> <!--我要买标弹出框js -->
 function show1(){

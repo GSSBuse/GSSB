@@ -17,7 +17,7 @@ public class GbjBuy extends DataEntity<GbjBuy> {
 	
 	private static final long serialVersionUID = 1L;
 	private GbjUser user;		// 用户ID
-	private String user_id;		// 真实姓名
+	private String user_id;		// user_id
 	private String realname;		// 真实姓名
 	private String typeId;		// 国标类型
 	private String title;		// 国标标题

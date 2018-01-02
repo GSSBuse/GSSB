@@ -1,16 +1,73 @@
+function buySubmit(){
+        var id = $("#buyform").find("#id").eq(0).val();
+        var title = $("#buyform").find("#title").eq(0).val();
+        var mobile = $("#buyform").find("#mobile").eq(0).val();
+        var realname = $("#buyform").find("#realname").eq(0).val();
+        if($(".tips ").is(":visible")){
+            return false;
+        }
+        if(title == null  || title == ""){
+            showError("请输入商标名称");
+            return false;
+        }
+        if(mobile == null  || mobile == ""){
+            showError("请输入联系电话");
+            return false;
+        }
+        if(realname == null  || realname == ""){
+            showError("请输入联系人");
+            return false;
+        }
+        var ajaxResult;
+        $.ajax({
+			url : ctx + "/gbBuy.json",
+			type : "POST",
+			data : {
+				id : id,
+				title : title,
+				mobile : mobile,
+				realname : realname
+			},
+        	dataType : 'json',
+        	async : false,
+			success : function(data) {
+				if (data.type == 'success') {
+					showSuccess("发布成功！请等待审核！");
+				} else {
+					showError(data.msg);
+					ajaxResult = false;
+					return false;
+				}
+			},
+			error : function(data) {
+				showError(data.responseText);
+				ajaxResult = false;
+				return false;
+			}
+		});
+        
+        if (ajaxResult == false) {
+        	return false;
+        }
+        return true;
+    }
+function showSuccess(success) {
+	$(".form-success").find("label").html(success);
+	$(".form-success").show();
+}
 
 /**
  * 买标信息
  */
  
-require(["plugin/validation/avalon.validation", "domReady!"], function() {
+/*require(["plugin/validation/avalon.validation", "domReady!"], function() {
 	var now = new Date();
 	var defaultInfo = {
 		realname: "",
 		mobile: "",
 		title: "",
 		price:"10",
-		user_id:""
+		user_id:'d31a81fa72c745a998401713a1e43f0f'
 	}
 	
 	var validationVM = null;
@@ -83,4 +140,4 @@ require(["plugin/validation/avalon.validation", "domReady!"], function() {
 		r.text(reason.message);
 		$(el).after(r);
 	}
-});
+});*/

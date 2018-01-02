@@ -56,6 +56,15 @@ public interface CrudDao<T> extends BaseDao {
 	 */
 	public int insert(T entity);
 	
+	
+	/**
+	 * 插入数据 snnu 2018.1.1
+	 * @param entity
+	 * @return
+	 */
+	public int insertUserID(T entity);
+	
+	
 	/**
 	 * 更新数据
 	 * @param entity

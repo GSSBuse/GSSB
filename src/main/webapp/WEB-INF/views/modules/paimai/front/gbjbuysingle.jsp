@@ -53,12 +53,14 @@
 
 						<h1 class="post-title">
 							<a href="#">${gbjBuyDetail.title}</a>
+							
 						</h1>
 
 						<div class="post-meta clearfix like-btn" ms-controller="upcounts">
-							<span class="date">2017/11/28</span> <span class="category"><a
-								href="#">商标 &amp; 餐饮</a></span> <span class="comments"><a
-								href="#">3个回复</a></span>
+							<span class="date">2017/12/27</span> <span class="category"><a
+								href="#">商标 &amp; 餐饮</a></span> 
+								<!-- <span class="comments"><a
+								href="#">3个回复</a></span> -->
 
 							<form id="like-it-form" action="#" method="post">
 								<span class="like-it">${gbjBuyDetail.upCounts}</span> <input
@@ -151,9 +153,10 @@
 								<a rel="nofollow" id="cancel-comment-reply-link" href="#"
 									style="display: none;">Click here to cancel reply.</a>
 							</div>
-
-
-							<form method="post" id="commentform"
+							     <div class="form-error" style="color:#ff0000">
+					              <i></i><label class="text"></label>
+				                </div>
+							<form method="post" id="commentform"  action="${ctx }/single.html?id=${gbjBuyDetail.id}&type=buy"
 								onsubmit="return commentSubmit();">
 								<p class="comment-notes">登录后可进行评论回复。这里回头我加上qq登录。</p>
 								<div>

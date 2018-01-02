@@ -20,7 +20,7 @@ var vm = avalon.define({
 		     domainBuyCommentsArticleList:[],//买标评论内容获取
 		     domainSoldCommentsArticleList:[],//卖标评论内容获取
 		     domainRewardCommentsArticleList:[],//悬赏评论内容获取
-		    // domainCommentsArticleList:[],
+		    domainCommentsArticleList:[],
 			//domainRewardList : [],//卖标信息一览（最新11条，首页只表示最新的）
 			timeStamp: 0,
 			tmp : {

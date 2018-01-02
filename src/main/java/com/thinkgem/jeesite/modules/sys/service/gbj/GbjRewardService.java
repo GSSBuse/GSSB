@@ -44,6 +44,10 @@ public class GbjRewardService extends CrudService<GbjRewardDao, GbjReward> {
 	public void save(GbjReward gbjReward) {
 		super.save(gbjReward);
 	}
+	@Transactional(readOnly = false)
+	public void saveReward(GbjReward gbjReward) {
+		super.saveReward(gbjReward);
+	}
 	
 	@Transactional(readOnly = false)
 	public void delete(GbjReward gbjReward) {

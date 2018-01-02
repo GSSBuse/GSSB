@@ -19,7 +19,7 @@
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
 	<div class="about">
 		<div class="container">
-			<h1>商标注册</h1>
+			<h1>非洲知识产权组织注册</h1>
 		</div>
 	</div>
 	<!-- Start of Page Container -->

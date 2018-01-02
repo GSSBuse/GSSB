@@ -75,7 +75,7 @@
                                                               <li class="article-entry standard" ms-repeat-el="datas.domainBuyList" >
                                                                  <h4> <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</h4>
                                                                 
-                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp; {{el.type}}   &amp; 餐饮</a></span>
+                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp; 商标   &amp; 餐饮</a></span>
                                                                  <span class="like-count"><a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.upCounts}}</a> &nbsp;</span>
                                                         </li>
                                                               
@@ -88,7 +88,7 @@
                                                        <ul class="articles">
                                                                <li class="article-entry standard" ms-repeat-el="datas.domainSoldList" >		                                                                
                                                                  <h4 > <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=sold">{{el.title}}</a></h4>		                                                                
-                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="查看该分类">商标   &amp; 餐饮</a></span>
+                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="查看该分类">版权   &amp; 餐饮</a></span>
                                                                  <span class="like-count"><a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=sold">{{el.upCounts}}</a> &nbsp;</span>
                                                          </li>
                                                        </ul>
@@ -100,7 +100,7 @@
                                                        <ul class="articles">
                                                               <li class="article-entry standard" ms-repeat-el="datas.domainRewardList" >		                                                                
                                                                  <h4> <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.title}}</a>&nbsp;&nbsp;&nbsp;悬赏金额: {{el.price}}元</h4>		                                                                
-                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="查看该分类">{{el.type}}   &amp; 餐饮</a></span>
+                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="查看该分类">专利 &amp; 餐饮</a></span>
                                                                  <span class="like-count"><a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.upCounts}}</a> &nbsp;</span>
                                                          </li>
                                                        </ul>

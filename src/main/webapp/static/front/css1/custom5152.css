@@ -39,7 +39,7 @@ background-color:#f0b70c;
 }
 
 #top .primary-color, a, #cancel-comment-reply-link, .blog-tags a:hover, .relThumb a:hover strong, .flex_column h1, .flex_column h2, .flex_column h3, .flex_column h4, .flex_column h5, .flex_column h6, #top #wrap_all .tweet-text a, #top #js_sort_items a.active_sort, .callout a:hover{
-color:#f0b70c;
+color:rgb(27,107,177);
 }
 
 #top .primary-border, div .main_menu ul:first-child > li.current-menu-item > a, div .main_menu ul:first-child > li.current_page_item > a, div .button, input[type="submit"], #submit, #top .main_menu .menu ul, .info_text_header{

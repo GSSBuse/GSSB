@@ -797,6 +797,21 @@ ul.footer_social li a i:hover{
   background-position: center;
   min-height:300px;
 }
+
+.one{
+	background: url(../../images/banner01.jpg)no-repeat;
+}
+
+.two{
+	background: url(../../images/banner02.jpg)no-repeat;
+}
+
+.three{
+	background: url(../../images/banner03.jpg)no-repeat;
+}
+
+
+
 .about h1{
   color: #fff;
   font-weight: 800;

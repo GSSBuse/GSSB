@@ -17,7 +17,7 @@ public class GbjReward extends DataEntity<GbjReward> {
 	
 	private static final long serialVersionUID = 1L;
 	private GbjUser user;
-	
+	private String user_id;		// user_id
 	private String realname;		// 真实姓名
 	private String typeId;		// 国标类型
 	private String title;		// 标题
@@ -52,7 +52,14 @@ public class GbjReward extends DataEntity<GbjReward> {
 	public void setUser(GbjUser user) {
 		this.user = user;
 	}
-	
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
 	
 	public GbjReward(GbjUser userId) {
 		this.user = userId;

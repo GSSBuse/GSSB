@@ -18,6 +18,7 @@ public class GbjSold extends DataEntity<GbjSold> {
 	
 	private static final long serialVersionUID = 1L;
 	private GbjUser user;		// 用户ID
+	private String user_id;		// user_id
 	private String realname;		// 真实姓名
 	private String typeId;		// 国标类型
 	private String title;		// 国标标题
@@ -48,7 +49,14 @@ public class GbjSold extends DataEntity<GbjSold> {
 	public void setUser(GbjUser user) {
 		this.user = user;
 	}
-	
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
 	
 	public GbjSold(GbjUser userId) {
 		this.user = userId;
