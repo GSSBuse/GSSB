@@ -359,7 +359,7 @@ margin:0;
 .serch-bg { background-color: #fff; filter: alpha(opacity=30); background: #007fd72e; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; height: 90px;*margin-left:-10px; }
 .serch-border { border: 1px solid #FFF; height: 58px; overflow: hidden; position: relative; margin-top: -85px;margin-left: 10px;margin-right: 10px;}
 .serch-border input { color: #999; font-size: 14px; background-color: #FFF; height: 58px; line-height: 58px; border: none 0; width: 85%; padding-left: 10px; float: left; }
-.serch-botton { background-image: url("../../images/search01.png"); background-repeat: no-repeat; background-position: 14px center; padding-left: 45px; background-color: #00a6db; font-size: 16px; float: left; width: 10%; height: 58px; color: #FFF; line-height: 58px; }
+.serch-botton { background-image: url("../../images/search01.png"); background-repeat: no-repeat; background-position: 14px center; padding-left: 45px; background-color: #00a6db; font-size: 16px; float: left; width: 15%; height: 58px; color: #FFF; line-height: 58px; }
 
 .easyDialog_wrapper { width: 500px; color: #444; border: 3px solid rgba(0,0,0,0); -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4); -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4); box-shadow: 0 0 10px rgba(0,0,0,0.4); display: none; font-family: "Microsoft yahei", Arial; }
 .easyDialog_wrapper .easyDialog_content { background: #fff; }

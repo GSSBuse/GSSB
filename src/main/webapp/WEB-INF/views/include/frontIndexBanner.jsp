@@ -92,12 +92,12 @@ $(function() {
         <div class="search-box fr margintop20">
                 <div class="serch-bg"> </div>
                 <div class="serch-border">
-				<input type="text" value="请输入您想申请的商标、版权、专利名称" id="indexSearchInput"
+				<input type="text" style="box-sizing: border-box; " value="请输入您想申请的商标、版权、专利名称" id="indexSearchInput"
 					onfocus="if (value =='请输入您想申请的商标、版权、专利名称'){value =''}"
 					onblur="if (value ==''){value='请输入您想申请的商标、版权、专利名称'}">
 					 
 					<a href="javascript:void(0);" id="indexSearch" class="button">
-					<div class="serch-botton">查询能否注册</div>
+					<div class="serch-botton" style="box-sizing: border-box; ">查询能否注册</div>
 				</a>
 				<div style="clear: both"></div>
 			</div>
