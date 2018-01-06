@@ -11,6 +11,7 @@
 <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>
 </head>
 <script type="text/javascript" src="${ctxStatic }/front/js/Article.js"></script>
+<script type="text/javascript" src="${ctxStatic }/front/js/changepersonal.js"></script>
 <body ms-controller="articles">
 
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
@@ -40,6 +41,9 @@
 						<ul class="tabs-nav">
 							<li class="active"><h4 style="height: 50px;">
 									<a href="#">我的信息</a>
+								</h4></li>
+								<li><h4>
+									<a href="#">修改个人信息</a>
 								</h4></li>
 							<li><h4>
 									<a href="#">我发布过的买标信息</a>
@@ -104,6 +108,182 @@
 									</tbody>
 								</table>
 							</div>
+							<script type="text/javascript">
+							 
+							  function showError(error){
+								   $('.form-error').hide();
+							        $(".form-error").find("label").html(error);
+							        $(".form-error").show();
+							    }
+							</script>
+							<div class="tab-content">
+							<form method="post" id="change">
+								<table class="setting-profile-table"
+									style="width: 400px; margin-left: 100px;">
+									<tbody>
+										<tr style="height: 35px; font-size: 16px;">
+											<th style="text-align: right; width: 100px;">用户名：</th>
+											<td class="line30"><label class="profile-gender"
+												for="passport-sex-1" style="padding-left: 20px;">
+												<input  type="text" name="username" id="username"  value="${gbjUserDetail.username}"
+												  onfocus="if (value =='${gbjUserDetail.username}'){value =''}"
+					                             onblur="if (value ==''){value='${gbjUserDetail.username}'}"
+												 >
+												<input name="id" type="hidden" id="id" value="${login_user.id}"></label>
+										</tr>
+
+										<tr style="height: 35px; font-size: 16px;">
+											<th style="text-align: right; width: 100px;">真实姓名：</th>
+											<td class="line30"><label class="profile-gender"
+												for="passport-sex-1" style="padding-left: 20px;">
+												<input  type="text" name="name" id="name" value="${gbjUserDetail.name}"
+												 onfocus="if (value =='${gbjUserDetail.name}'){value =''}"
+					                             onblur="if (value ==''){value='${gbjUserDetail.name}'}"
+												 ></label>
+												
+										</tr>
+
+										<tr style="height: 35px; font-size: 16px;">
+											<th style="text-align: right; width: 100px;">手机号码：</th>
+											<td class="line30"><label class="profile-gender"
+												for="passport-sex-1" style="padding-left: 20px;">
+												<input  type="text" name="mobile" id="mobile" value="${gbjUserDetail.mobile}"
+												 onfocus="if (value =='${gbjUserDetail.mobile}'){value =''}"
+					                             onblur="if (value ==''){value='${gbjUserDetail.mobile}'}"
+												 ></label>
+												
+										</tr>
+										<tr style="height: 35px; font-size: 16px;">
+											<th style="text-align: right; width: 100px;">邮 箱：</th>
+											<td class="line30"><label class="profile-gender"
+												for="passport-sex-1" style="padding-left: 20px;">
+												<input  type="text" name="email" id="email" value="${gbjUserDetail.email}"
+												 onfocus="if (value =='${gbjUserDetail.email}'){value =''}"
+					                             onblur="if (value ==''){value='${gbjUserDetail.email}'}"
+												 ></label>
+											
+										</tr>
+										<tr style="height: 35px; font-size: 16px;">
+											<th style="text-align: right; width: 100px;">Q Q：</th>
+											<td class="line30"><label class="profile-gender"
+												for="passport-sex-1" style="padding-left: 20px;">
+												<input  type="text" name="qq" id="qq" value="${gbjUserDetail.qq}"
+												 onfocus="if (value =='${gbjUserDetail.qq}'){value =''}"
+					                             onblur="if (value ==''){value='${gbjUserDetail.qq}'}"
+												 ></label>
+												
+										</tr>
+										<tr style="height: 35px; font-size: 16px;">
+											<th style="text-align: right; width: 100px;">微 信 号：</th>
+											<td class="line30"><label class="profile-gender"
+												for="passport-sex-1" style="padding-left: 20px;">
+												<input  type="text" name="wechat" id="wechat" value="${gbjUserDetail.wechat}"
+												 onfocus="if (value =='${gbjUserDetail.wechat}'){value =''}"
+					                             onblur="if (value ==''){value='${gbjUserDetail.wechat}'}"
+												 ></label>
+												
+										</tr>
+										<tr style="height: 35px; font-size: 16px;">
+											<th style="text-align: right; width: 100px;">支 付 宝：</th>
+											<td class="line30"><label class="profile-gender"
+												for="passport-sex-1" style="padding-left: 20px;">
+												<input  type="text" name="payway" id="payway"  value="${gbjUserDetail.payway}"
+												 onfocus="if (value =='${gbjUserDetail.payway}'){value =''}"
+					                             onblur="if (value ==''){value='${gbjUserDetail.payway}'}"
+												></label>
+											
+										</tr>
+										<tr style="height: 35px; font-size: 16px;">
+											<th style="text-align: right; width: 100px;"></th>
+											<td class="line30"><label class="profile-gender"
+												for="passport-sex-1" style="padding-left: 20px;">
+												<input class="btn" onclick="changeSubmit();" name="change" type="button" id="change" value="修改"></label>
+										</tr>
+									</tbody>
+								</table>
+								</form>
+							</div>
+							<%-- <div class="tab-content">
+							 <div class="form-error" style="color:#ff0000">
+					              <i></i><label class="text"></label>
+				                </div>
+							<form method="post" id="change">
+								<table class="setting-profile-table" style="width: 400px; margin-left: 100px;">
+									<tbody>
+									<tr style="height: 35px; font-size: 16px;">
+											<th style="text-align: right; width: 100px;">用户名：</th>
+											<td class="line30"><label class="profile-gender"
+												for="passport-sex-1" style="padding-left: 20px;">${gbjUserDetail.username}</label>
+										</tr>
+										<tr style="height: 35px; font-size: 25px;">
+											<th style="text-align: center; width: 150px;">用户名</th>
+											<td class="line30">
+											<label class="profile-gender" for="passport-sex-1" style="padding-left: 20px;">
+											 <input  type="text" name="username" id="username"  >
+											 <input name="id" type="hidden" id="id" value="${login_user.id}">
+											</label>
+											</td>
+										</tr>
+										<tr style="height: 35px; font-size: 25px;">
+											<th style="text-align: center; width: 150px;">真实姓名</th>
+											<td class="line30">
+											<label class="profile-gender" for="passport-sex-1" style="padding-left: 20px;">
+											 <input  type="text" name="name" id="name" value="${gbjUserDetail.name}" 
+											 onfocus="if (value =='${gbjUserDetail.name}'){value =''}"
+					                                onblur="if (value ==''){value='${gbjUserDetail.name}'}"
+											  >
+											</label>
+											</td>
+										</tr>
+										<!-- <tr style="height: 35px; font-size: 25px;">
+											<th style="text-align: center; width: 150px;">手机号码</th>
+											<td class="line30">
+											<label class="profile-gender" for="passport-sex-1" style="padding-left: 20px;">
+											 <input class="span4" type="text" name="username" id="username" value="" >
+											</label>
+											</td>
+										</tr>
+										<tr style="height: 35px; font-size: 25px;">
+											<th style="text-align: center; width: 150px;">邮箱</th>
+											<td class="line30">
+											<label class="profile-gender" for="passport-sex-1" style="padding-left: 20px;">
+											 <input class="span4" type="text" name="username" id="username"  value="">
+											</label>
+											</td>
+										</tr>
+										<tr style="height: 35px; font-size: 25px;">
+											<th style="text-align: center; width: 150px;">QQ</th>
+											<td class="line30">
+											<label class="profile-gender" for="passport-sex-1" style="padding-left: 20px;">
+											 <input class="span4" type="text" name="username" id="username" value="" >
+											</label>
+											</td>
+										</tr>
+										<tr style="height: 35px; font-size: 25px;">
+											<th style="text-align: center; width: 150px;">微信号</th>
+											<td class="line30">
+											<label class="profile-gender" for="passport-sex-1" style="padding-left: 20px;">
+											 <input class="span4" type="text" name="username" id="username" value="">
+											</label>
+											</td>
+										</tr>
+										<tr style="height: 35px; font-size: 25px;">
+											<th style="text-align: center; width: 150px;">支付宝</th>
+											<td class="line30">
+											<label class="profile-gender" for="passport-sex-1" style="padding-left: 20px;">
+											 <input class="span4" type="text" name="username" id="username" value="" >
+											</label>
+											</td>
+										</tr> -->
+										<tr style="height: 35px; font-size: 25px;">
+										<div class="payment-sendbtns">
+									<input class="btn" onclick="changeSubmit();" name="change" type="button" id="change" value="修改">
+								       </div>
+								        </tr>
+									</tbody>
+								</table>
+								 </form>
+							</div> --%>
 
 							<!--            我发布的买标信息。        by snnu   2017.12.31           -->
 							<div class="tab-content">

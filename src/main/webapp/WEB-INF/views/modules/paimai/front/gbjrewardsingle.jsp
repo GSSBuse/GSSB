@@ -81,12 +81,12 @@
 
 										<h5 class="author">
 											<cite class="fn"> <a href="#" rel="external nofollow"
-												class="url">这里头像回头用用户表里面存储的qq或weixin头像和名字</a>
-											</cite> <a class="comment-reply-link" href="#">回复</a>
+												class="url">{{ell.parentId}}</a>
+											</cite> <a class="comment-reply-link" href="#"></a>
 										</h5>
 
 										<p class="date">
-											<time datetime="2013-02-26T13:18:47+00:00"></time>
+											<time datetime="2013-02-26T13:18:47+00:00">{{ell.createDate}}</time>
 										</p>
 
 									</div>
@@ -100,7 +100,7 @@
 								</article>
 								<!-- end of comment -->
 
-								<ul class="children">
+								<!-- <ul class="children">
 
 									<li
 										class="comment byuser comment-author-saqib-sarwar bypostauthor odd alt depth-2"
@@ -125,18 +125,18 @@
 												</p>
 
 											</div>
-											<!-- end .comment-meta -->
+											end .comment-meta
 
 											<div class="comment-body">
 												<p></p>
 											</div>
-											<!-- end of comment-body -->
+											end of comment-body
 
 										</article>
-										<!-- end of comment -->
+										end of comment
 
 									</li>
-								</ul>
+								</ul> -->
 							</li>
 
 
@@ -150,15 +150,12 @@
 								<a rel="nofollow" id="cancel-comment-reply-link" href="#"
 									style="display: none;">Click here to cancel reply.</a>
 							</div>
+                                <div class="form-error" style="color:#ff0000">
+					              <i></i><label class="text"></label>
+				                </div>
 
-
-							<form method="post" id="commentform"
-								onsubmit="return commentSubmit();">
-
-
-								<p class="comment-notes">登录后可进行评论回复。这里回头我加上qq登录。</p>
-
-
+							<form method="post" id="commentform">
+								<p class="comment-notes"></p>
 								<div>
 									<label for="comment">Comment</label> 
 									<input name="parentId"
@@ -168,9 +165,8 @@
 									<textarea class="span8" name="comment" id="comment" cols="58"
 										rows="10"></textarea>
 								</div>
-
 								<div>
-									<input class="btn" name="submit" type="submit" id="submit"
+									<input class="btn" name="submit" type="button" id="submit" onclick="commentSubmit();"
 										value="提交评论">
 								</div>
 

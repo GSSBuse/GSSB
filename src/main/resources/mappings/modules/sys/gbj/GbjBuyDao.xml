@@ -232,7 +232,7 @@
 	<select id="findDomainBuyList" resultType="GbjBuy" parameterType="java.lang.Integer">
         SELECT
               b.id as "id",
-              b.type_id as "type",
+              b.type_id as "typeId",
               b.create_date as "createDate", 
               b.title as "title",
               b.up_counts as "upCounts"
@@ -261,5 +261,21 @@
             </if>
         </where>
     </select>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	
 </mapper>

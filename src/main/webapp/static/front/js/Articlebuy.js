@@ -7,8 +7,7 @@ pageData = window.pageData?window.pageData:[];
 
 var vm = avalon.define({
 		$id : "buyarticles",
-		test: "tst",
-		
+		//test: "tst",
 		//domainBuyList1 : [{title:"test"},{title:"test2"}],
 		//domainSoldList1 : [{title:"test"},{title:"test2"}],//买标信息一览（最新11条，首页只表示最新的）
 		datas : {
@@ -24,8 +23,6 @@ var vm = avalon.define({
 				id : ""
 			}
 		},
-		
-		
 //		showLogin : function (e) {
 //			$("#js_uiLoginBox").show();
 //			e.stopPropagation();
@@ -39,12 +36,9 @@ var vm = avalon.define({
 		avalon.scan();
 		//TODO
 	});
-	
 	// 轮询买标信息一览数据
 var interval_ArticleBuy_status_check = function() {
-		
 		var count = 11;//首页最多显示11条
-		
 		$.post(
 			"polling/ArticleBuyData.json",
 			{
@@ -52,7 +46,7 @@ var interval_ArticleBuy_status_check = function() {
 			},
 			function(res) {
 				if (res.type == "success") {					
-					vm.datas.domainBuyArticleList.clear();
+				    vm.datas.domainBuyArticleList.clear();
 					vm.datas.domainBuyArticleList.pushArray(res.data.ArticleBuyData);
 					timeout_ArticleBuy = setTimeout(interval_ArticleBuy_status_check, 30000); //30秒自动刷新一次
 				}

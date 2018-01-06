@@ -11,9 +11,7 @@ var vm = avalon.define({
 		//domainBuyList1 : [{title:"test"},{title:"test2"}],
 		//domainSoldList1 : [{title:"test"},{title:"test2"}],//买标信息一览（最新11条，首页只表示最新的）
 		datas : {
-			 domainArticleList : [],//sidebar信息一览（最新5条）12.31
-			
-			
+			 //domainArticleList : [],//sidebar信息一览（最新5条）12.31
 			 domainUserBuyArticleList : [],//个人中心买标信息一览（最新11条，首页只表示最新的）12.31
 			 domainUserSoldArticleList : [],//个人中心卖标信息一览（最新11条，首页只表示最新的 12.31
 			 domainUserRewardArticleList : [],//个人中心悬赏信息一览（最新11条，首页只表示最新的 12.31
@@ -39,7 +37,7 @@ var vm = avalon.define({
 	});
 	
 	//sidebar信息一览（最新5条）12.31
-	var interval_GbjArticle_status_check = function() {
+	/*var interval_GbjArticle_status_check = function() {
 		//var v = window.location.href.split("?")[1].substring(3,35);
 		//alert(u);
 		var count = 5;//首页最多显示11条
@@ -60,7 +58,7 @@ var vm = avalon.define({
 			}
 		);
 	}
-	interval_GbjArticle_status_check();
+	interval_GbjArticle_status_check();*/
 	
 	// 轮询个人中心买标信息一览数据
 	var interval_UserBuyArticle_status_check = function() {

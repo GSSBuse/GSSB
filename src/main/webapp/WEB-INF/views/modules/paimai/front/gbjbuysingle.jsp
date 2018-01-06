@@ -87,12 +87,12 @@
 
 										<h5 class="author">
 											<cite class="fn"> <a href="#" rel="external nofollow"
-												class="url">这里头像回头用用户表里面存储的qq或weixin头像和名字</a>
+												class="url">{{ell.parentId}}</a>
 											</cite> - <a class="comment-reply-link" href="#">回复</a>
 										</h5>
 
 										<p class="date">
-											<time datetime="2013-02-26T13:18:47+00:00"></time>
+											<time datetime="2013-02-26T13:18:47+00:00">{{ell.createDate}}</time>
 										</p>
 
 									</div>
@@ -103,7 +103,7 @@
 								</article>
 								<!-- end of comment -->
 
-								<ul class="children">
+								<!-- <ul class="children">
 
 									<li
 										class="comment byuser comment-author-saqib-sarwar bypostauthor odd alt depth-2"
@@ -128,27 +128,22 @@
 												</p>
 
 											</div>
-											<!-- end .comment-meta -->
+											end .comment-meta
 
 											<div class="comment-body">
 												<p></p>
 											</div>
-											<!-- end of comment-body -->
+											end of comment-body
 
 										</article>
-										<!-- end of comment -->
+										end of comment
 
 									</li>
-								</ul>
+								</ul> -->
 							</li>
-
-
 						</ol>
-
 						<div id="respond">
-
 							<h3>评论回复</h3>
-
 							<div class="cancel-comment-reply">
 								<a rel="nofollow" id="cancel-comment-reply-link" href="#"
 									style="display: none;">Click here to cancel reply.</a>
@@ -156,9 +151,8 @@
 							     <div class="form-error" style="color:#ff0000">
 					              <i></i><label class="text"></label>
 				                </div>
-							<form method="post" id="commentform"  action="${ctx }/single.html?id=${gbjBuyDetail.id}&type=buy"
-								onsubmit="return commentSubmit();">
-								<p class="comment-notes">登录后可进行评论回复。这里回头我加上qq登录。</p>
+							<form method="post" id="commentform" >
+								<p class="comment-notes"></p>
 								<div>
 									<label for="comment"></label> 
 									<input name="id" type="hidden" id="id"
@@ -169,8 +163,7 @@
 										rows="10"></textarea>
 								</div>
 								<div>
-									<input class="btn" name="submit" type="submit" id="submit"
-										value="提交评论">
+									<input class="btn" onclick="commentSubmit();" name="submit" type="button" id="submit" value="提交评论">
 								</div>
 							</form>
 						</div>
@@ -183,6 +176,24 @@
 
 				<!-- start of sidebar -->
 				<aside class="span4 page-sidebar">
+				     <section id="comments">
+						<h3 id="comments-title"></h3>
+						<ol class="commentlist">
+							<li class="comment even thread-even depth-1" id="li-comment-2">
+								<article id="comment-2">
+									<a href="#"> <img alt=""
+										src="http://1.gravatar.com/avatar/50a7625001317a58444a20ece817aeca?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G"
+										class="avatar avatar-60 photo" height="60" width="60">
+									</a>
+										<h2 class="author">
+										${gbjBuyDetail.user.username}
+										</h2>
+									<!-- end of comment-body -->
+								</article>
+								<!-- end of comment -->
+							</li>
+						</ol>
+					</section>
 					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
 				</aside>
 				<!-- end of sidebar -->

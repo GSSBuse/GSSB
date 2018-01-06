@@ -92,12 +92,12 @@ $(function() {
         <div class="search-box fr margintop20">
                 <div class="serch-bg"> </div>
                 <div class="serch-border">
-				<input type="text" value="请输入您想申请的商标、版权、专利名称" id="indexSearchInput"
+				<input type="text" style="box-sizing: border-box; " value="请输入您想申请的商标、版权、专利名称" id="indexSearchInput"
 					onfocus="if (value =='请输入您想申请的商标、版权、专利名称'){value =''}"
 					onblur="if (value ==''){value='请输入您想申请的商标、版权、专利名称'}">
 					 
 					<a href="javascript:void(0);" id="indexSearch" class="button">
-					<div class="serch-botton">查询能否注册</div>
+					<div class="serch-botton" style="box-sizing: border-box; ">查询能否注册</div>
 				</a>
 				<div style="clear: both"></div>
 			</div>
@@ -128,7 +128,7 @@ $(function() {
 
 
 <div id="LoginBox" ms-controller="searchdialog" >
-    <div id="search-dialog"  class="easyDialog_wrapper" style="position: fixed;display: block; margin: 180px;">
+    <div id="search-dialog"  class="easyDialog_wrapper" style="position: fixed;display: block; margin: 70px 180px 180px 180px;">
         <div class="easyDialog_content">
             <div class="easyDialog_text">
                 <div class="dialog_con"> <a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn">×</a>

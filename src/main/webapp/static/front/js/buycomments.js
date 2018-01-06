@@ -23,7 +23,7 @@
         	async : false,
 			success : function(data) {
 				if (data.type == 'success') {
-					
+					location.reload();
 				} else {
 					showError(data.msg);
 					ajaxResult = false;

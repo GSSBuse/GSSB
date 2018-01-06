@@ -145,7 +145,7 @@
 		FROM gbj_user_buy_comments a
 		<include refid="gbjUserBuyCommentsJoins"/>
 		WHERE a.buy_id = #{id}
-		 
+		 ORDER BY a.create_date DESC
     </select>
 	
 </mapper>

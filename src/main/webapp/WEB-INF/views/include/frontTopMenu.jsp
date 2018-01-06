@@ -131,7 +131,7 @@
 	                                                <li><a href="${ctx }/static_lawservice13.html">商标被异议为何要做答</a></li>	                                             
 	                                             </ul>                                            
                                             </li>
-                                            <li><a href="${ctx }/static_knowledge.html">知识产权托管</a></li>
+                                            
 					</ul>
 				</div>
 			</nav>

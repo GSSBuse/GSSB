@@ -10,31 +10,32 @@
 <head>
 <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>
 </head>
-<script type="text/javascript"
-	src="${ctxStatic }/front/js/Articlebuy.js"></script>
+<script type="text/javascript" src="${ctxStatic }/front/js/Articlebuy.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/gbBuy.js"></script>
-<script type="text/javascript"
-	src="${ctxStatic }/front/js/buyupcounts.js"></script>
+<script type="text/javascript" src="${ctxStatic }/front/js/buyupcounts.js"></script>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-		//var x = "xxxxxxxxxxxxx";
 		
-		//$('user_id').val("zzzzzzzzzzz");
+		/* var x=document.getElementById("gbjType");
 		//alert($('user_id').val());
+		alert(x.innerHTML);
 		
-		/* if ($('#gbjType').text() == '0') {
-			$('#gbjType').text('商标');
-		}
-		if ($('#gbjType').text() == '1') {
-			$('#gbjType').text('专利');
-		}
-		if ($('#gbjType').text() == '2') {
-			$('#gbjType').text('版权');
-		} */
+		alert($('#gbjType').text());
+		
+			if ($('#gbjType').text() == '0') {
+				$('#gbjType').text('商标');
+			}
+			if ($('#gbjType').text() == '1') {
+				$('#gbjType').text('专利');
+			}
+			if ($('#gbjType').text() == '2') {
+				$('#gbjType').text('版权');
+			}  
+		*/
 	});
 </script>
-
 <body ms-controller="buyarticles">
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
 	<div class="about">
@@ -49,7 +50,7 @@
 		<div class="container">
 			<div class="row">
 				<!-- start of page content -->
-				<div class="span8 main-listing">
+				<div class="span8 main-listing" >
 					<div class="span12 page-content"></div>
 					<article class=" page type-page hentry clearfix">
 						<h1 class="post-title">
@@ -57,8 +58,7 @@
 						</h1>
 						<hr>
 					</article>
-					<article class="format-standard type-post hentry clearfix"
-						ms-repeat-el="datas.domainBuyArticleList">
+					<article class="format-standard type-post hentry clearfix" ms-repeat-el="datas.domainBuyArticleList">
 						<header class="clearfix">
 							<h3 class="post-title">
 								<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</a>
@@ -66,7 +66,7 @@
 							<div class="post-meta clearfix ">
 								<span class="date">{{el.createDate}}</span> <span
 									class="category"><a href="#" title="查询该标签所有内容"
-									id="gbjType">商标</a> &amp;&amp;&amp;<a href="#"
+									id="gbjType" >{{el.typeId}}</a> &amp;&amp;&amp;<a href="#"
 									title="查询该标签所有内容"> 餐饮</a></span>
 									<!--  <span class="comments"><a
 									href="#">3个回复</a></span>  -->
@@ -83,9 +83,11 @@
 						</p>
 					</article>
 					<div id="pagination">
-						<a href="#" class="btn active">1</a> <a href="#" class="btn">2</a>
-						<a href="#" class="btn">3</a> <a href="#" class="btn">下一页 ></a> <a
-							href="#" class="btn">最后一页 >></a>
+						 <a ms-attr-href="${ctx }/buyarticles.html?page=1" class="btn active">1</a>
+						 <a href="#" class="btn">2</a>
+						 <a href="#" class="btn">3</a> 
+						 <a href="#" class="btn">下一页 ></a>
+						 <a href="#" class="btn">最后一页 >></a>
 					</div>
 				</div>
 				<!-- end of page content -->
@@ -149,9 +151,6 @@
 								</div>
 							</form>
 	</div>
-	
-	
-	
 	<%-- <form id="domainform" action="${ctx }/buyarticles.html" method="post"
 			ms-widget="validation" class="form-horizontal"
 			style="padding: 20px 30px; margin: 0;">
@@ -189,16 +188,6 @@
 					value="提交查询">
 			</div>
 		</form> --%>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	<script type="text/javascript"> <!--我要买标弹出框js -->
 function show1(){
 	

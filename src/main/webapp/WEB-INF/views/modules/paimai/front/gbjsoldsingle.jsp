@@ -35,7 +35,7 @@
 					<ul class="breadcrumb">
 						<li><a href="#">国标商标</a><span class="divider">/</span></li>
 						<li><a href="#">商标 &amp; 餐饮</a> <span class="divider">/</span></li>
-						<li class="active">我想买个小吃店的店名商标</li>
+						<li class="active">${gbjSoldDetail.title}</li>
 					</ul>
 
 					<article class=" type-post format-standard hentry clearfix">
@@ -87,12 +87,12 @@
 
 										<h5 class="author">
 											<cite class="fn"> <a href="#" rel="external nofollow"
-												class="url">这里头像回头用用户表里面存储的qq或weixin头像和名字</a>
+												class="url"> {{ell.parentId}}</a>
 											</cite> <a class="comment-reply-link" href="#">回复</a>
 										</h5>
 
 										<p class="date">
-											<time datetime="2013-02-26T13:18:47+00:00"></time>
+											<time datetime="2013-02-26T13:18:47+00:00">{{ell.createDate}}</time>
 										</p>
 
 									</div>
@@ -105,62 +105,22 @@
 
 								</article>
 								<!-- end of comment -->
-
-								<ul class="children">
-
-									<li
-										class="comment byuser comment-author-saqib-sarwar bypostauthor odd alt depth-2"
-										id="li-comment-3">
-										<article id="comment-3">
-
-											<a href="#"> <img alt=""
-												src="http://0.gravatar.com/avatar/2df5eab0988aa5ff219476b1d27df755?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G"
-												class="avatar avatar-60 photo" height="60" width="60">
-											</a>
-
-											<div class="comment-meta">
-
-												<h5 class="author">
-													<cite class="fn">头像和名字一样数据库取得</cite> - <a
-														class="comment-reply-link" href="#">回复</a>
-												</h5>
-
-												<p class="date">
-													<time datetime="2013-02-26T13:20:14+00:00">February
-														26, 2013 at 1:20 pm</time>
-												</p>
-
-											</div>
-											<!-- end .comment-meta -->
-
-											<div class="comment-body">
-												<p></p>
-											</div>
-											<!-- end of comment-body -->
-
-										</article>
-										<!-- end of comment -->
-
-									</li>
-								</ul>
 							</li>
 
 
 						</ol>
 
 						<div id="respond">
-
 							<h3>评论回复</h3>
-
 							<div class="cancel-comment-reply">
 								<a rel="nofollow" id="cancel-comment-reply-link" href="#"
 									style="display: none;">Click here to cancel reply.</a>
 							</div>
-
-
-							<form method="post" id="commentform"
-								onsubmit="return commentSubmit();">
-								<p class="comment-notes"> 登录后可进行评论回复。这里回头我加上qq登录。</p>
+							<div class="form-error" style="color:#ff0000">
+					              <i></i><label class="text"></label>
+				                </div>
+							<form method="post" id="commentform" >
+								<p class="comment-notes"> </p>
 								<div>
 									<label for="comment">Comment</label> 
 									<input name="parentId"
@@ -171,7 +131,7 @@
 										rows="10"></textarea>
 								</div>
 								<div>
-									<input class="btn" name="submit" type="submit" id="submit"
+									<input class="btn" onclick="commentSubmit();"  name="submit" type="button" id="submit"
 										value="提交评论">
 								</div>
 							</form>

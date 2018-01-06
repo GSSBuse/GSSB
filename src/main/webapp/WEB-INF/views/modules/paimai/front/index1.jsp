@@ -12,6 +12,9 @@
         
 <script type="text/javascript">
 	 $(document).ready(function(){
+		 //alert($('#gbjType').innerHTML());
+		 
+		 
 		if($('#gbjType').text() == '0'){
 			$('#gbjType').text('国商商标');
 		}
@@ -48,7 +51,7 @@
                                                        <img src="${ctxStatic }/images/service3.png"/>
                                                </section>
                                             </a>
-                                            <a href="#">
+                                            <a href="${ctx }/newbuyarticles.html">
                                                <section class="span3">
                                                        <img src="${ctxStatic }/images/service4.png"/>
                                                </section>
@@ -73,9 +76,9 @@
                                                        <h3 class="category">买标信息</h3>
                                                        <ul class="articles">
                                                               <li class="article-entry standard" ms-repeat-el="datas.domainBuyList" >
-                                                                 <h4> <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</h4>
+                                                                 <h4> <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</a></h4>
                                                                 
-                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp; 商标   &amp; 餐饮</a></span>
+                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp; <span id="gbjType"><a href="#" >{{el.typeId}}</a> </span>   &amp; 餐饮</span>
                                                                  <span class="like-count"><a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.upCounts}}</a> &nbsp;</span>
                                                         </li>
                                                               

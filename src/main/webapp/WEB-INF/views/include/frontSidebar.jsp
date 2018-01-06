@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script type="text/javascript" src="${ctxStatic }/front/js/Article.js"></script>
+<%-- <script type="text/javascript" src="${ctxStatic }/front/js/sidebar.js"></script> --%>
 <br/>
 <br/><br/>
 <section class="widget">
@@ -43,14 +43,14 @@
                 <a href="#" class="btn btn-mini">就好</a>
         </div>
 </section>
-<section class="widget" ms-controller="articles">
+<%-- <section class="widget" ms-controller="sidebar">
         <h3 class="title">最新评论</h3>
         <ul id="recentcomments" ms-repeat-el="datas.domainArticleList">
-                <li class="recentcomments"><a href="#" rel="external nofollow" class="url">大河</a> on <a href="#">{{el.title}}</a></li>
+                <li class="recentcomments"><a href="#" rel="external nofollow" class="url">张三</a> on <a href="#">{{el.title}}</a></li>
         </ul>
 </section>
 
-<section class="widget"  ms-controller="articles" >
+<section class="widget"  ms-controller="sidebar" >
         <h3 class="title">最新交易信息</h3>
         <ul class="articles" ms-repeat-el="datas.domainArticleList">
                 <li class="article-entry standard">
@@ -59,4 +59,4 @@
                         <span class="like-count">{{el.upCounts}}</span>
                 </li>
         </ul>
-</section>
+</section> --%>
