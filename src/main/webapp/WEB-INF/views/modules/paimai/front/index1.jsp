@@ -66,7 +66,7 @@
 									<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</a>
 								</h4> <span class="article-meta">{{el.createDate}}
 									&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" title="查询该标签所有内容"
-									 class="Type">{{el.typeId}}</a>
+									 class="Type">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a>
 									&amp; <a
 									ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy" >{{el.tag}}</a>
 							</span> <span class="like-count"><a
