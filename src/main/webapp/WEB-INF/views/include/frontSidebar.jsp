@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- <script type="text/javascript" src="${ctxStatic }/front/js/sidebar.js"></script> --%>
+
+<script type="text/javascript" src="${ctxStatic }/front/js/tag.js"></script>
 <br/>
 <br/><br/>
 <section class="widget">
@@ -16,31 +18,41 @@
         <h3 class="title">分类</h3>
         
         <div align="center">
+                                           <a href="${ctx }/buyarticles.html" >
+                                               
+                                                       <img style="width:30%;" src="${ctxStatic }/images/service1.png"/>
+                                               
+                                            </a>
+                                            <a href="${ctx }/soldarticles.html" img style="width:30%;">
+                                               
+                                                       <img style="width:30%;" src="${ctxStatic }/images/service2.png"/>
+                                               
+                                            </a>
+                                            <a href="${ctx }/rewardarticles.html" img style="width:30%;">
+                                               
+                                                       <img style="width:30%;" src="${ctxStatic }/images/service3.png"/>
+                                               
+                                            </a>
+                                            
+                                       </div>
+        
+        
+       <%--  <div align="center">
 		        <a href="#"><img style="width:30%;" src="${ctxStatic }/images/service1.png"/></a>
                 <a href="#"><img style="width:30%;" src="${ctxStatic }/images/service2.png"/></a>
                 <a href="#"><img style="width:30%;" src="${ctxStatic }/images/service3.png"/></a>
-        </div>
+        </div> --%>
 </section>
 
-<section class="widget">
+<section class="widget" ms-controller="tag">
         <h3 class="title">标签</h3>
         <div class="tagcloud">
-                <a href="#" class="btn btn-mini">餐饮</a>
-                <a href="#" class="btn btn-mini">唱歌</a>
-                <a href="#" class="btn btn-mini">美术</a>
-                <a href="#" class="btn btn-mini">娱乐</a>
-                <a href="#" class="btn btn-mini">专利</a>
-                <a href="#" class="btn btn-mini">版权</a>
-                <a href="#" class="btn btn-mini">数据库</a>
-                <a href="#" class="btn btn-mini">设置</a>
-                <a href="#" class="btn btn-mini">的</a>
-                <a href="#" class="btn btn-mini">标签</a>
-                <a href="#" class="btn btn-mini">这里</a>
-                <a href="#" class="btn btn-mini">查询</a>
-                <a href="#" class="btn btn-mini">出来后</a>
-                <a href="#" class="btn btn-mini">循环</a>
-                <a href="#" class="btn btn-mini">显示</a>
-                <a href="#" class="btn btn-mini">就好</a>
+        
+        <ul class="btn btn-mini" ms-repeat-el="datas.domainTagList">
+                <li class="recentcomments"><a href="#" rel="external nofollow" class="url">{{el.tagName}}</a>
+        </ul>
+        
+               
         </div>
 </section>
 <%-- <section class="widget" ms-controller="sidebar">

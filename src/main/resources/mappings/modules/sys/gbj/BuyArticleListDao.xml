@@ -39,6 +39,7 @@
               d.id as "id",
               d.type_id as "typeId",
               d.mobile as "mobile",
+              d.tag as "tag",
               d.create_date as "createDate",
               d.title as "title",
               d.description as "description",

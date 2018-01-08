@@ -44,8 +44,8 @@
 							</h3>
 							<div class="post-meta clearfix">
 								<span class="date">{{el.createDate}}</span> <span
-									class="category"><a href="#" title="查询该标签所有内容">商标
-										&amp;&amp;&amp; 餐饮</a></span> 
+									class="category"><a href="#" title="查询该标签所有内容" class="gbjType">{{el.typeId}}</a>
+										&amp;&amp;&amp; <a href="#" title="查询该标签所有内容">{{el.tag}}</a></span> 
 										<!-- <span class="comments"><a href="#">3个回复</a></span> -->
 								<a ms-attr-href="${ctx}/single.html?id={{el.id}}&type=reward"><span
 									class="like-count">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{el.upCounts}}
@@ -163,6 +163,23 @@
 					value="提交查询">
 			</div>
 		</form> --%>
+		
+		<script type="text/javascript">
+	$(document).ready(function(){
+		$(".gbjType").each(function() {
+			if($(this).text() == "0"){
+				$(this).text("商标") ;
+			}
+			if($(this).text() == "1"){
+				$(this).text("专利");
+			}
+			if($(this).text() == "2"){
+				$(this).text("版权") ;
+			}
+		});
+	});
+</script>
+		
 	<script type="text/javascript">
 	<!--我要买标弹出框js -->
 		function show3() {

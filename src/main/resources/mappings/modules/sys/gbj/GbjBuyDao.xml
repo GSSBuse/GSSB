@@ -234,6 +234,7 @@
               b.id as "id",
               b.type_id as "typeId",
               b.create_date as "createDate", 
+              b.tag as "tag",
               b.title as "title",
               b.up_counts as "upCounts"
         FROM gbj_buy b
@@ -248,7 +249,7 @@
     </select>
 	<select id="findDomainArticleBuyList" resultType="GbjBuy" parameterType="java.lang.Integer">
         SELECT
-              b.type_id as "type",
+              b.type_id as "typeId",
               b.create_date as "createDate",
               b.title as "title"
         FROM gbj_buy b

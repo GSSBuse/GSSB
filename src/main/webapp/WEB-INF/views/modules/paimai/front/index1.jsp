@@ -10,22 +10,7 @@
                 <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>                
         </head>
         
-<script type="text/javascript">
-	 $(document).ready(function(){
-		 //alert($('#gbjType').innerHTML());
-		 
-		 
-		if($('#gbjType').text() == '0'){
-			$('#gbjType').text('国商商标');
-		}
-		if($('#gbjType').text() == '1'){
-			$('#gbjType').text('国商专利');
-		}
-		if($('#gbjType').text() == '2'){
-			$('#gbjType').text('国商版权');
-		}
-	}); 
-</script>
+
         <body ms-controller="index1"> 
                 <%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
                 
@@ -72,26 +57,50 @@
                                        
                                        <!-- Basic Home Page Template -->
                                        <div class="row separator">
-                                               <section class="span4 articles-list">
-                                                       <h3 class="category">买标信息</h3>
-                                                       <ul class="articles">
-                                                              <li class="article-entry standard" ms-repeat-el="datas.domainBuyList" >
-                                                                 <h4> <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</a></h4>
-                                                                
-                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp; <span id="gbjType"><a href="#" >{{el.typeId}}</a> </span>   &amp; 餐饮</span>
-                                                                 <span class="like-count"><a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.upCounts}}</a> &nbsp;</span>
-                                                        </li>
-                                                              
-                                                       </ul>
-                                                       <a class="faq_but1 but3" href="${ctx }/buyarticles.html">更多</a>
-                                               </section>
+                   <section class="span4 articles-list">
+						<h3 class="category">买标信息</h3>
+						<ul class="articles">
+							<li class="article-entry standard"
+								ms-repeat-el="datas.domainBuyList">
+								<h4>
+									<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</a>
+								</h4> <span class="article-meta">{{el.createDate}}
+									&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" title="查询该标签所有内容"
+									 class="Type">{{el.typeId}}</a>
+									&amp; <a
+									ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy" >{{el.tag}}</a>
+							</span> <span class="like-count"><a
+									ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.upCounts}}</a>
+									&nbsp;</span>
+							</li>
+
+						</ul>
+						<a class="faq_but1 but3" href="${ctx }/buyarticles.html">更多</a>
+					</section>
+					<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$(".Type").each(function() {
+			if($(this).text() == "0"){
+				$(this).text("商标") ;
+			}
+			if($(this).text() == "1"){
+				$(this).text("专利");
+			}
+			if($(this).text() == "2"){
+				$(this).text("版权") ;
+			}
+		});
+	});
+</script>
 
                                                <section class="span4 articles-list">
                                                        <h3 class="category">卖标信息</h3>
                                                        <ul class="articles">
                                                                <li class="article-entry standard" ms-repeat-el="datas.domainSoldList" >		                                                                
                                                                  <h4 > <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=sold">{{el.title}}</a></h4>		                                                                
-                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="查看该分类">版权   &amp; 餐饮</a></span>
+                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a
+									ms-attr-href="${ctx }/single.html?id={{el.id}}type=sold" class="gbjType">{{el.typeId}}</a>   &amp; <a ms-attr-href="${ctx }/single.html?id={{el.id}}type=sold">{{el.tag}}</a></span>
                                                                  <span class="like-count"><a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=sold">{{el.upCounts}}</a> &nbsp;</span>
                                                          </li>
                                                        </ul>
@@ -103,7 +112,9 @@
                                                        <ul class="articles">
                                                               <li class="article-entry standard" ms-repeat-el="datas.domainRewardList" >		                                                                
                                                                  <h4> <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.title}}</a>&nbsp;&nbsp;&nbsp;悬赏金额: {{el.price}}元</h4>		                                                                
-                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="查看该分类">专利 &amp; 餐饮</a></span>
+                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a
+									ms-attr-href="${ctx }/single.html?id={{el.id}}type=reward" class="gbjType">{{el.typeId}}</a> &amp; <a
+									ms-attr-href="${ctx }/single.html?id={{el.id}}type=reward" >{{el.tag}}</a></span>
                                                                  <span class="like-count"><a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.upCounts}}</a> &nbsp;</span>
                                                          </li>
                                                        </ul>
@@ -365,6 +376,10 @@
                 <!-- End of Footer -->
 
                 <a href="#top" id="scroll-top"></a>
+                
+
+                
+                
 <script type="text/javascript"> <!--我要买标弹出框js -->
 function show1(){
     document.getElementById("buy-dialog").style.display="block";

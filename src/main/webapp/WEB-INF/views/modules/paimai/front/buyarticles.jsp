@@ -14,28 +14,7 @@
 <script type="text/javascript" src="${ctxStatic }/front/js/gbBuy.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/buyupcounts.js"></script>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		
-		
-		/* var x=document.getElementById("gbjType");
-		//alert($('user_id').val());
-		alert(x.innerHTML);
-		
-		alert($('#gbjType').text());
-		
-			if ($('#gbjType').text() == '0') {
-				$('#gbjType').text('商标');
-			}
-			if ($('#gbjType').text() == '1') {
-				$('#gbjType').text('专利');
-			}
-			if ($('#gbjType').text() == '2') {
-				$('#gbjType').text('版权');
-			}  
-		*/
-	});
-</script>
+
 <body ms-controller="buyarticles">
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
 	<div class="about">
@@ -66,8 +45,8 @@
 							<div class="post-meta clearfix ">
 								<span class="date">{{el.createDate}}</span> <span
 									class="category"><a href="#" title="查询该标签所有内容"
-									id="gbjType" >{{el.typeId}}</a> &amp;&amp;&amp;<a href="#"
-									title="查询该标签所有内容"> 餐饮</a></span>
+									class="gbjType" >{{el.typeId}}</a> &amp;&amp;&amp;<a href="#"
+									title="查询该标签所有内容">{{el.tag}}</a></span>
 									<!--  <span class="comments"><a
 									href="#">3个回复</a></span>  -->
 									<a ms-attr-href="${ctx}/single.html?id={{el.id}}&type=buy"><span
@@ -612,6 +591,20 @@ $('#close-dialog1').click(function(){
         }
   </script>
 	
-	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$(".gbjType").each(function() {
+			if($(this).text() == "0"){
+				$(this).text("商标") ;
+			}
+			if($(this).text() == "1"){
+				$(this).text("专利");
+			}
+			if($(this).text() == "2"){
+				$(this).text("版权") ;
+			}
+		});
+	});
+</script>
 </body>
 </html>
