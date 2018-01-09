@@ -20,8 +20,11 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	 var x= ${gbjBuycount};
+	 var y=Math.ceil(x/6);//由总条数除以每页数目得到总页数
+	 //alert(y);
 	 $("#demo1").jqPaginator({
-	        totalPages: ${gbjBuycount},
+	        totalPages: y,
 	        visiblePages: 10,
 	        currentPage: 1,
 	        first: '<li class="first"><a href="${ctx }/buyarticles.html">First<\/a><\/li>',
