@@ -128,7 +128,7 @@ $(function() {
 
 
 <div id="LoginBox" ms-controller="searchdialog" >
-    <div id="search-dialog"  class="easyDialog_wrapper" style="position: fixed;display: block; margin: 180px;">
+    <div id="search-dialog"  class="easyDialog_wrapper" style="position: fixed;display: block; margin: 70px 180px 180px 180px;">
         <div class="easyDialog_content">
             <div class="easyDialog_text">
                 <div class="dialog_con"> <a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn">×</a>

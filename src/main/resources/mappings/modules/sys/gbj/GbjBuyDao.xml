@@ -124,7 +124,7 @@
 			#{tag},
 			"0",
 			#{createBy.id},
-			#{lookCounts},
+			"0",
 			#{updateBy.id},
 			#{commentsCounts},
 			"0",
@@ -168,7 +168,7 @@
 			#{tag},
 			"0",
 			#{createBy.id},
-			#{lookCounts},
+			"0",
 			#{updateBy.id},
 			#{commentsCounts},
 			"0",
@@ -220,6 +220,15 @@
 	<update id="withdraw">
 		UPDATE gbj_buy SET 
 			front_del_flag = 0
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 查看数 -->
+	<update id="upDateLook">
+		UPDATE gbj_buy SET 	
+			look_counts = look_counts + 1
+			
 		WHERE id = #{id}
 	</update>
 	

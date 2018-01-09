@@ -120,7 +120,7 @@
 			#{mobile},
 			#{tag},
 			"0",
-			#{lookCounts},
+			"0",
 			#{createBy.id},
 			"0",
 			#{commentsCounts},
@@ -164,7 +164,7 @@
 			#{mobile},
 			#{tag},
 			"0",
-			#{lookCounts},
+			"0",
 			#{createBy.id},
 			"0",
 			#{commentsCounts},
@@ -218,6 +218,16 @@
 			del_flag = #{DEL_FLAG_DELETE}
 		WHERE id = #{id}
 	</update>
+	
+		<!-- 查看数 -->
+	<update id="upDateLook">
+		UPDATE gbj_sold SET 	
+			look_counts = look_counts + 1
+			
+		WHERE id = #{id}
+	</update>
+	
+	
 		<select id="findDomainSoldList" resultType="GbjSold" parameterType="java.lang.Integer">
         SELECT
         b.id as "id",

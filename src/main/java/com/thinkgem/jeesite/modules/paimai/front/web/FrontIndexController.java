@@ -307,6 +307,9 @@ public class FrontIndexController extends BaseController {
 			mav = new ModelAndView("modules/paimai/front/gbjsoldsingle");
 			// 参数拿到了，就根据参数去数据库里面查询详细
 			GbjSold gbjSoldDetail = gbjSoldService.get(id);
+
+			gbjSoldService.upDateLook(id);
+
 			// 检索出来后就前台元素中去
 			mav.addObject("gbjSoldDetail", gbjSoldDetail);
 		} else if ("reward".equals(type)) {
@@ -314,6 +317,8 @@ public class FrontIndexController extends BaseController {
 			mav = new ModelAndView("modules/paimai/front/gbjrewardsingle");
 			// 参数拿到了，就根据参数去数据库里面查询详细
 			GbjReward gbjRewardDetail = gbjRewardService.get(id);
+
+			gbjRewardService.upDateLook(id);
 			// 检索出来后就前台元素中去
 			mav.addObject("gbjRewardDetail", gbjRewardDetail);
 		} else if ("buy".equals(type)) {
@@ -321,6 +326,7 @@ public class FrontIndexController extends BaseController {
 			mav = new ModelAndView("modules/paimai/front/gbjbuysingle");
 			// 参数拿到了，就根据参数去数据库里面查询详细
 			GbjBuy gbjBuyDetail = gbjBuyService.get(id);
+			gbjBuyService.upDateLook(id);
 			// List<GbjUserBuyComments>
 			// gbjUserBuyCommentsDetail=gbjUserBuyCommentsService.getFrontCommentsList(id);
 			// 检索出来后就前台元素中去

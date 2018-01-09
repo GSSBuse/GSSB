@@ -14,19 +14,7 @@
 <script type="text/javascript" src="${ctxStatic }/front/js/buycomments.js"></script>
 <script type="text/javascript"
 	src="${ctxStatic }/front/js/buyupcounts.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		if ($('#gbjType').text() == '0') {
-			$('#gbjType').text('国商商标');
-		}
-		if ($('#gbjType').text() == '1') {
-			$('#gbjType').text('国商专利');
-		}
-		if ($('#gbjType').text() == '2') {
-			$('#gbjType').text('国商版权');
-		}
-	});
-</script>
+
 <body ms-controller="articles">
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
 	<div class="about">
@@ -57,10 +45,10 @@
 						</h1>
 
 						<div class="post-meta clearfix like-btn" ms-controller="upcounts">
-							<span class="date">2017/12/27</span> <span class="category"><a
-								href="#">商标 &amp; 餐饮</a></span> 
-								<!-- <span class="comments"><a
-								href="#">3个回复</a></span> -->
+							<span class="date">${gbjBuyDetail.createDate}</span> <span class="category"><a
+								href="#" class="gbjType">${gbjBuyDetail.typeId }</a></span> 
+							<span class="comments"><a
+								href="#">${gbjBuyDetail.lookCounts}</a></span>
 
 							<form id="like-it-form" action="#" method="post">
 								<span class="like-it">${gbjBuyDetail.upCounts}</span> <input
@@ -622,6 +610,24 @@
             }
         }
   </script>
+  
+  <script type="text/javascript">
+	$(document).ready(function(){
+		$(".gbjType").each(function() {
+			if($(this).text() == "0"){
+				$(this).text("商标") ;
+			}
+			if($(this).text() == "1"){
+				$(this).text("专利");
+			}
+			if($(this).text() == "2"){
+				$(this).text("版权") ;
+			}
+		});
+	});
+</script>
+  
+  
 </body>
 
 

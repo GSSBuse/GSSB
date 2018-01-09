@@ -236,6 +236,15 @@
 		WHERE id = #{id}
 	</update>
 	
+		<!-- 查看数 -->
+	<update id="upDateLook">
+		UPDATE gbj_reward SET 	
+			look_counts = look_counts + 1
+			
+		WHERE id = #{id}
+	</update>
+	
+	
 	<select id="findDomainRewardList" resultType="GbjReward" parameterType="java.lang.Integer">
         SELECT
         	  b.id as "id",

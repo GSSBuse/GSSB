@@ -45,10 +45,10 @@
 						</h1>
 
 						<div class="post-meta clearfix like-btn" ms-controller="upcounts">
-							<span class="date">2017/11/28</span> <span class="category"><a
-								href="#">商标 &amp; 餐饮</a></span> 
-								<!-- <span class="comments"><a
-								href="#">3个回复</a></span> -->
+							<span class="date">${gbjRewardDetail.createDate}</span> <span class="category"><a
+								href="#" class="gbjType">${gbjRewardDetail.typeId}</a></span> 
+								<span class="comments"><a
+								href="#">${gbjRewardDetail.lookCounts}</a></span>
 							<form id="like-it-form" action="#" method="post">
 								<span class="like-it">${gbjRewardDetail.upCounts}</span> <input
 									type="hidden" name="id" id="rewardid" />
@@ -610,6 +610,24 @@
             }
         }
   </script>
+  
+    <script type="text/javascript">
+	$(document).ready(function(){
+		$(".gbjType").each(function() {
+			if($(this).text() == "0"){
+				$(this).text("商标") ;
+			}
+			if($(this).text() == "1"){
+				$(this).text("专利");
+			}
+			if($(this).text() == "2"){
+				$(this).text("版权") ;
+			}
+		});
+	});
+</script>
+  
+  
 </body>
 <!--qq登录用 -->
 </html>
