@@ -15,6 +15,15 @@ public class BuyArticleList extends DataEntity<BuyArticleList> {
 	private String description; // 国标描述
 	private String title; // 国标标题
 	private Long upCounts; // 点赞数
+	private int count; // 总条数
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+
+	}
 
 	public Long getUpCounts() {
 		return upCounts;

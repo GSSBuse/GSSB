@@ -5,7 +5,7 @@
  
 pageData = window.pageData?window.pageData:[];
 
-var vm = avalon.define({
+var vm11 = avalon.define({
 		$id : "articles",
 		test: "tst",
 		//domainBuyList1 : [{title:"test"},{title:"test2"}],
@@ -75,8 +75,8 @@ var vm = avalon.define({
 			},
 			function(res) {
 				if (res.type == "success") {					
-					vm.datas.domainUserBuyArticleList.clear();
-					vm.datas.domainUserBuyArticleList.pushArray(res.data.UserBuyArticleData);
+					vm11.datas.domainUserBuyArticleList.clear();
+					vm11.datas.domainUserBuyArticleList.pushArray(res.data.UserBuyArticleData);
 					timeout_UserBuyArticle = setTimeout(interval_UserBuyArticle_status_check, 30000); //30秒自动刷新一次
 				}
 			}
@@ -99,8 +99,8 @@ var vm = avalon.define({
 			},
 			function(res) {
 				if (res.type == "success") {					
-					vm.datas.domainUserSoldArticleList.clear();
-					vm.datas.domainUserSoldArticleList.pushArray(res.data.UserSoldArticleData);
+					vm11.datas.domainUserSoldArticleList.clear();
+					vm11.datas.domainUserSoldArticleList.pushArray(res.data.UserSoldArticleData);
 					timeout_UserSoldArticle = setTimeout(interval_UserSoldArticle_status_check, 30000); //30秒自动刷新一次
 				}
 			}
@@ -123,8 +123,8 @@ var vm = avalon.define({
 			},
 			function(res) {
 				if (res.type == "success") {					
-					vm.datas.domainUserRewardArticleList.clear();
-					vm.datas.domainUserRewardArticleList.pushArray(res.data.UserRewardArticleData);
+					vm11.datas.domainUserRewardArticleList.clear();
+					vm11.datas.domainUserRewardArticleList.pushArray(res.data.UserRewardArticleData);
 					timeout_UserRewardArticle = setTimeout(interval_UserRewardArticle_status_check, 30000); //30秒自动刷新一次
 				}
 			}
@@ -149,8 +149,8 @@ var interval_ArticleBuyComments_status_check = function() {
 			},
 			function(res) {
 				if (res.type == "success") {					
-					vm.datas.domainBuyCommentsArticleList.clear();
-					vm.datas.domainBuyCommentsArticleList.pushArray(res.data.ArticleBuyCommentsData);
+					vm11.datas.domainBuyCommentsArticleList.clear();
+					vm11.datas.domainBuyCommentsArticleList.pushArray(res.data.ArticleBuyCommentsData);
 					timeout_ArticleBuyComments = setTimeout(interval_ArticleBuyComments_status_check, 30000); //30秒自动刷新一次
 				}
 			}
@@ -175,8 +175,8 @@ var interval_ArticleBuyComments_status_check = function() {
 				},
 				function(res) {
 					if (res.type == "success") {					
-						vm.datas.domainSoldCommentsArticleList.clear();
-						vm.datas.domainSoldCommentsArticleList.pushArray(res.data.ArticleSoldCommentsData);
+						vm11.datas.domainSoldCommentsArticleList.clear();
+						vm11.datas.domainSoldCommentsArticleList.pushArray(res.data.ArticleSoldCommentsData);
 						timeout_ArticleSoldComments = setTimeout(interval_ArticleSoldComments_status_check, 30000); //30秒自动刷新一次
 					}
 				}
@@ -201,8 +201,8 @@ var interval_ArticleBuyComments_status_check = function() {
 					},
 					function(res) {
 						if (res.type == "success") {					
-							vm.datas.domainRewardCommentsArticleList.clear();
-							vm.datas.domainRewardCommentsArticleList.pushArray(res.data.ArticleRewardCommentsData);
+							vm11.datas.domainRewardCommentsArticleList.clear();
+							vm11.datas.domainRewardCommentsArticleList.pushArray(res.data.ArticleRewardCommentsData);
 							timeout_ArticleRewardComments = setTimeout(interval_ArticleRewardComments_status_check, 30000); //30秒自动刷新一次
 						}
 					}
@@ -227,8 +227,8 @@ var interval_ArticleBuyComments_status_check = function() {
 						},
 						function(res) {
 							if (res.type == "success") {					
-								vm.datas.domainCommentsArticleList.clear();
-								vm.datas.domainCommentsArticleList.pushArray(res.data.ArticleCommentsData);
+								vm11.datas.domainCommentsArticleList.clear();
+								vm11.datas.domainCommentsArticleList.pushArray(res.data.ArticleCommentsData);
 								timeout_ArticleComments = setTimeout(interval_ArticleComments_status_check, 30000); //30秒自动刷新一次
 							}
 						}

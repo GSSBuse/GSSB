@@ -13,8 +13,29 @@
 <script type="text/javascript" src="${ctxStatic }/front/js/Articlebuy.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/gbBuy.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/buyupcounts.js"></script>
+<script type="text/javascript" src="${ctxStatic }/front/js/jquery.min.js"></script>
+<script type="text/javascript" src="${ctxStatic }/front/js/jqPaginator.js"></script>
+  <link type="text/css" rel="stylesheet" href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css"/>
+<%-- <script type="text/javascript" src="${ctxStatic }/front/js/common.js"></script> --%>
 
+<script type="text/javascript">
+$(document).ready(function(){
+	 $("#demo1").jqPaginator({
+	        totalPages: ${gbjBuycount},
+	        visiblePages: 10,
+	        currentPage: 1,
+	        first: '<li class="first"><a href="${ctx }/buyarticles.html">First<\/a><\/li>',
+	        prev: '<li class="prev"><a href="${ctx }/buyarticles.html?page=1">Previous<\/a><\/li>',
+	        next: '<li class="next"><a href="${ctx }/buyarticles.html?page=2">Next<\/a><\/li>',
+	        last: '<li class="last"><a href="${ctx }/buyarticles.html?page=3">Last<\/a><\/li>',
+	        page: '<li class="page"><a href="${ctx }/buyarticles.html?page=4">{{page}}<\/a><\/li>',
+	        onPageChange: function (n) {
+	            $("#demo1-text").html("当前第" + n + "页");
+	        }
+	    });
+	});
 
+</script>
 <body ms-controller="buyarticles">
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
 	<div class="about">
@@ -61,11 +82,24 @@
 							</h4>
 						</p>
 					</article>
+					<h3>Bootstrap风格的分页</h3>
+            <div class="demo">
+                <p id="demo1-text"></p>
+                <ul id="demo1" class="pagination"></ul>
+            </div>
+            
+					
 					<div id="pagination">
-						 <a ms-attr-href="${ctx }/buyarticles.html?page=1" class="btn active">1</a>
-						 <a href="#" class="btn">2</a>
-						 <a href="#" class="btn">3</a> 
-						 <a href="#" class="btn">下一页 ></a>
+						 <a href="${ctx }/buyarticles.html?page=1" class="btn active">1</a>
+						 <a href="${ctx }/buyarticles.html?page=2" class="btn active">2</a>
+						 <a href="${ctx }/buyarticles.html?page=3" class="btn active">3</a>
+						 <a href="${ctx }/buyarticles.html?page=4" class="btn active">4</a> 
+						 <a href="${ctx }/buyarticles.html?page=5" class="btn active">5</a>
+						 <a href="${ctx }/buyarticles.html?page=6" class="btn active">6</a>
+						 <a href="${ctx }/buyarticles.html?page=7" class="btn active">7</a>
+						 <a href="${ctx }/buyarticles.html?page=8" class="btn active">8</a>
+						 <a href="${ctx }/buyarticles.html?page=9" class="btn active">9</a>
+						 <a href="#" class="btn">${gbjBuycount}</a>
 						 <a href="#" class="btn">最后一页 >></a>
 					</div>
 				</div>

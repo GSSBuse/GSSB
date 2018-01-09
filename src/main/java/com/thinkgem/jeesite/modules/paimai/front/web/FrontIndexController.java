@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.thinkgem.jeesite.common.bean.AjaxResult;
 import com.thinkgem.jeesite.common.mapper.JsonMapper;
 import com.thinkgem.jeesite.common.utils.SendMailUtil;
+import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.paimai.front.bean.FrontLoginUser;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.ArticleList;
@@ -277,15 +278,15 @@ public class FrontIndexController extends BaseController {
 		ModelAndView mav = null;
 		// 参数param从前台传递过来
 		// 这里把3个single都放到一起了，便于处理，根据type来分是买标、卖标还是悬赏
-		{
-			GbjUser gbjUserDetail = gbjUserService.get(id);
-			// 如果是卖标，跳转到gbjsoldsingle卖标页面
-			mav = new ModelAndView("modules/paimai/front/personalcenter");
-			// 参数拿到了，就根据参数去数据库里面查询详细
-			// 检索出来后就前台元素中去
-			mav.addObject("gbjUserDetail", gbjUserDetail);
-			return mav;
-		}
+
+		GbjUser gbjUserDetail = gbjUserService.get(id);
+		// 如果是卖标，跳转到gbjsoldsingle卖标页面
+		mav = new ModelAndView("modules/paimai/front/personalcenter");
+		// 参数拿到了，就根据参数去数据库里面查询详细
+		// 检索出来后就前台元素中去
+		mav.addObject("gbjUserDetail", gbjUserDetail);
+		return mav;
+
 	}
 
 	/**
@@ -358,8 +359,15 @@ public class FrontIndexController extends BaseController {
 	 * 咨询买标一览页面
 	 */
 	@RequestMapping(value = { "buyarticles" })
-	public String buyarticles(Model model) {
-		return "modules/paimai/front/buyarticles";
+	public ModelAndView buyarticles(Model model) {
+
+		ModelAndView mav = null;
+		mav = new ModelAndView("modules/paimai/front/buyarticles");
+		int gbjBuycount = buyarticleListService.findDomainBuyArticlePageCount();
+
+		mav.addObject("gbjBuycount", gbjBuycount);
+		return mav;
+
 	}
 
 	/**
@@ -794,12 +802,18 @@ public class FrontIndexController extends BaseController {
 	 */
 	@RequestMapping(value = "polling/ArticleBuyData")
 	@ResponseBody
-	public AjaxResult ArticleBuyData(@RequestParam("count") String count) {
+	public AjaxResult ArticleBuyData(@RequestParam("count") String count, @RequestParam("page") String page) {
 
-		// 取得最新的我要买标信息
+		if (page == null || "".equals(page) || !StringUtils.isNumeric(page)) {
+			page = "1"; // 不存在或者不是数字是默认第一页
+		}
+		int start = Integer.parseInt(count) * (Integer.parseInt(page) - 1);
+		int end = Integer.parseInt(count);
+
+		// 取得我要买标信息
 		List<BuyArticleList> pageDomainBuyArticleList = new ArrayList<BuyArticleList>();
 		try {
-			pageDomainBuyArticleList = buyarticleListService.findDomainBuyArticleList(count);
+			pageDomainBuyArticleList = buyarticleListService.findDomainBuyArticleList(start, end);
 
 			AjaxResult ar = AjaxResult.makeSuccess("");
 			ar.getData().put("ArticleBuyData", pageDomainBuyArticleList);
