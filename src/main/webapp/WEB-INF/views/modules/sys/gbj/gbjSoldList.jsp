@@ -127,11 +127,11 @@
 				</shiro:hasPermission>
 				
 				<shiro:hasPermission name="sys:gbj:gbjSold:edit">
-					<a href="${ctx}/sys/gbj/gbjSold/release?id=${gbjSold.id}" onclick="return confirmx('确认要发布该卖标信息吗？', this.href)">发布</a>
+					<a class="fabu" href="${ctx}/sys/gbj/gbjSold/release?id=${gbjSold.id}" onclick="return confirmx('确认要发布该卖标信息吗？', this.href)">${gbjSold.frontDelFlag}</a>
 				</shiro:hasPermission>
 				
 				<shiro:hasPermission name="sys:gbj:gbjSold:edit">
-					<a href="${ctx}/sys/gbj/gbjSold/withdraw?id=${gbjSold.id}" onclick="return confirmx('确认要撤回该卖标信息吗？', this.href)">撤回</a>
+					<a class="chehui" href="${ctx}/sys/gbj/gbjSold/withdraw?id=${gbjSold.id}" onclick="return confirmx('确认要撤回该卖标信息吗？', this.href)">${gbjSold.frontDelFlag}</a>
 				</shiro:hasPermission>
 				
 				<shiro:hasPermission name="sys:gbj:gbjUserSoldComments:view">	
@@ -141,6 +141,36 @@
 				<shiro:hasPermission name="sys:gbj:gbjUserBuyComments:view">
 					<a href="${ctx}/sys/gbj/gbjUserSoldComments/form?sold_Id=${gbjSold.id} ">评论追加</a>
 				</shiro:hasPermission>
+				
+				<script type="text/javascript">
+				$(document).ready(function() {
+					
+					
+					$('.fabu').each(function(){
+						if($(this).text() == '1'){
+							$(this).attr("style","display:none;");
+							
+						}
+						if($(this).text() == '0'){
+							$(this).attr("style","display:;");
+							$(this).text('发布');
+						}
+						
+					}); 
+					$('.chehui').each(function(){
+						if($(this).text() == '0'){
+							$(this).attr("style","display:none;");
+							
+						}
+						if($(this).text() == '1'){
+							$(this).attr("style","display:;");
+							$(this).text('撤回');
+						}
+						
+					});
+					
+				});
+				</script> 
 				
 				
 				</td>

@@ -9,7 +9,7 @@ require(["plugin/validation/avalon.validation", "domReady!"], function() {
 	}
 	//alert(test);
 	var validationVM = null;
-	var vm = avalon.define({
+	var vmsearch = avalon.define({
 		$id : "searchdialog",
 		datas : {
 			domainInfo : defaultInfo
@@ -45,7 +45,7 @@ require(["plugin/validation/avalon.validation", "domReady!"], function() {
                 	//$.jBox.tip("提交处理中",'loading',{opacity:0});
                     $.ajax({
 						url: ctx + "/searchBrand.json",
-						data: vm.datas.domainInfo,
+						data: vmsearch.datas.domainInfo,
 						type: "POST",
 						success: function (resp) {
 							if (resp.type == "success") {

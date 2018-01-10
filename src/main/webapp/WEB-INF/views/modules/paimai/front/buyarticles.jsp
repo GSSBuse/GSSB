@@ -15,29 +15,42 @@
 <script type="text/javascript" src="${ctxStatic }/front/js/buyupcounts.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/jquery.min.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/jqPaginator.js"></script>
-  <link type="text/css" rel="stylesheet" href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css"/>
+<link type="text/css" rel="stylesheet" href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css"/>
+<link href="http://cdn.staticfile.org/highlight.js/7.3/styles/github.min.css" rel="stylesheet" type="text/css" media="all"/>
+
 <%-- <script type="text/javascript" src="${ctxStatic }/front/js/common.js"></script> --%>
 
 <script type="text/javascript">
+var if_firstime=true;
 $(document).ready(function(){
 	 var x= ${gbjBuycount};
-	 var y=Math.ceil(x/6);//由总条数除以每页数目得到总页数
+	 var pageSize=11;
+	 var y=Math.ceil(x/pageSize);//由总条数除以每页数目得到总页数
+	 var z=1;
+	 if(GetQueryString("page")!=null && !isNaN(GetQueryString("page"))){
+		 z=parseInt(GetQueryString("page"));
+	 }
 	 //alert(y);
-	 $("#demo1").jqPaginator({
+	 $("#demo2").jqPaginator({
 	        totalPages: y,
 	        visiblePages: 10,
-	        currentPage: 1,
-	        first: '<li class="first"><a href="${ctx }/buyarticles.html">First<\/a><\/li>',
-	        prev: '<li class="prev"><a href="${ctx }/buyarticles.html?page=1">Previous<\/a><\/li>',
-	        next: '<li class="next"><a href="${ctx }/buyarticles.html?page=2">Next<\/a><\/li>',
-	        last: '<li class="last"><a href="${ctx }/buyarticles.html?page=3">Last<\/a><\/li>',
-	        page: '<li class="page"><a href="${ctx }/buyarticles.html?page=4">{{page}}<\/a><\/li>',
+	        currentPage: z,
+	       /*  first: '<li class="first"><a href="${ctx }/buyarticles.html">首页<\/a><\/li>',
+	        prev: '<li class="prev"><a href="${ctx }/buyarticles.html?page=1">上一页<\/a><\/li>',
+	        next: '<li class="next"><a href="${ctx }/buyarticles.html?page=2">下一页<\/a><\/li>',
+	        last: '<li class="last"><a href="${ctx }/buyarticles.html?page=3">末页<\/a><\/li>',
+	        page: '<li class="page"><a href="${ctx }/buyarticles.html?page=4">{{page}}<\/a><\/li>', */ 
 	        onPageChange: function (n) {
-	            $("#demo1-text").html("当前第" + n + "页");
+	            $("#demo2-text").html("当前第" + n + "页");
+	            if(if_firstime){
+	            	if_firstime=false;
+	            }
+	            else if(!if_firstime){
+	            	window.location.href="${ctx }/buyarticles.html?page="+n;
+	            }
 	        }
 	    });
 	});
-
 </script>
 <body ms-controller="buyarticles">
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
@@ -85,26 +98,10 @@ $(document).ready(function(){
 							</h4>
 						</p>
 					</article>
-					<h3>Bootstrap风格的分页</h3>
-            <div class="demo">
-                <p id="demo1-text"></p>
-                <ul id="demo1" class="pagination"></ul>
+            <div class="demo customBootstrap">
+                <p id="demo2-text"></p>
+                <ul id="demo2" class="pagination"></ul>
             </div>
-            
-					
-					<div id="pagination">
-						 <a href="${ctx }/buyarticles.html?page=1" class="btn active">1</a>
-						 <a href="${ctx }/buyarticles.html?page=2" class="btn active">2</a>
-						 <a href="${ctx }/buyarticles.html?page=3" class="btn active">3</a>
-						 <a href="${ctx }/buyarticles.html?page=4" class="btn active">4</a> 
-						 <a href="${ctx }/buyarticles.html?page=5" class="btn active">5</a>
-						 <a href="${ctx }/buyarticles.html?page=6" class="btn active">6</a>
-						 <a href="${ctx }/buyarticles.html?page=7" class="btn active">7</a>
-						 <a href="${ctx }/buyarticles.html?page=8" class="btn active">8</a>
-						 <a href="${ctx }/buyarticles.html?page=9" class="btn active">9</a>
-						 <a href="#" class="btn">${gbjBuycount}</a>
-						 <a href="#" class="btn">最后一页 >></a>
-					</div>
 				</div>
 				<!-- end of page content -->
 				<!-- start of sidebar -->

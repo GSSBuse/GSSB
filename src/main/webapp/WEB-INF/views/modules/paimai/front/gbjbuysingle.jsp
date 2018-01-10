@@ -14,7 +14,12 @@
 <script type="text/javascript" src="${ctxStatic }/front/js/buycomments.js"></script>
 <script type="text/javascript"
 	src="${ctxStatic }/front/js/buyupcounts.js"></script>
+<script type="text/javascript">
+function fck(){
+	document.getElementById("div").style.display="block";
+}
 
+</script>
 <body ms-controller="articles">
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
 	<div class="about">
@@ -76,8 +81,9 @@
 										<h5 class="author">
 											<cite class="fn"> <a href="#" rel="external nofollow"
 												class="url">{{ell.parentId}}</a>
-											</cite> - <a class="comment-reply-link" href="#">回复</a>
+											</cite> - <a class="comment-reply-link" onclick="javascript:fck();">回复</a>
 										</h5>
+										
 
 										<p class="date">
 											<time datetime="2013-02-26T13:18:47+00:00">{{ell.createDate}}</time>
@@ -87,6 +93,9 @@
 									<div class="comment-body">
 										<p>{{ell.comment}}</p>
 									</div>
+									<div id="div" style="display:none;">
+										   <textarea rows="5" cols="100"></textarea>
+										</div>
 									<!-- end of comment-body -->
 								</article>
 								<!-- end of comment -->

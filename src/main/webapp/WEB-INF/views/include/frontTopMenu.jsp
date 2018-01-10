@@ -447,7 +447,7 @@
 			type : "POST",
 			dataType : 'json',
 			success : function(data) {
-				window.location.reload();
+				window.location.href="${ctx }/index1.html"
 				return true;
 			},
 			error : function(data) {

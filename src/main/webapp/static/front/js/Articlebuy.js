@@ -40,7 +40,7 @@ var vm1 = avalon.define({
 var interval_ArticleBuy_status_check = function() {
 	
 	    
-		var count = 6;//首页最多显示11条
+		var count = 11;//首页最多显示11条
 		var page =  GetQueryString("page");
 		$.post(
 			"polling/ArticleBuyData.json",

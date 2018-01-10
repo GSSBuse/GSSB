@@ -122,11 +122,11 @@
 							onclick="return confirmx('确认要删除该悬赏信息管理吗？', this.href)">删除</a>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="sys:gbj:gbjReward:edit">
-					<a href="${ctx}/sys/gbj/gbjReward/release?id=${gbjReward.id}" onclick="return confirmx('确认要发布该悬赏信息吗？', this.href)">发布</a>
+					<a class="fabu" href="${ctx}/sys/gbj/gbjReward/release?id=${gbjReward.id}" onclick="return confirmx('确认要发布该悬赏信息吗？', this.href)">${gbjReward.frontDelFlag}</a>
 				</shiro:hasPermission>
 				
 				<shiro:hasPermission name="sys:gbj:gbjReward:edit">
-					<a href="${ctx}/sys/gbj/gbjReward/withdraw?id=${gbjReward.id}" onclick="return confirmx('确认要撤回该悬赏信息吗？', this.href)">撤回</a>
+					<a class="chehui" href="${ctx}/sys/gbj/gbjReward/withdraw?id=${gbjReward.id}" onclick="return confirmx('确认要撤回该悬赏信息吗？', this.href)">${gbjReward.frontDelFlag}</a>
 				</shiro:hasPermission>
 					
 					
@@ -137,6 +137,36 @@
 				<shiro:hasPermission name="sys:gbj:gbjUserRewardComments:view">
 					<a href="${ctx}/sys/gbj/gbjUserRewardComments/form?reward_Id=${gbjReward.id} ">评论追加</a>
 				</shiro:hasPermission>
+					
+					<script type="text/javascript">
+				$(document).ready(function() {
+					
+					
+					$('.fabu').each(function(){
+						if($(this).text() == '1'){
+							$(this).attr("style","display:none;");
+							
+						}
+						if($(this).text() == '0'){
+							$(this).attr("style","display:;");
+							$(this).text('发布');
+						}
+						
+					}); 
+					$('.chehui').each(function(){
+						if($(this).text() == '0'){
+							$(this).attr("style","display:none;");
+							
+						}
+						if($(this).text() == '1'){
+							$(this).attr("style","display:;");
+							$(this).text('撤回');
+						}
+						
+					});
+					
+				});
+				</script> 
 					
 					</td>
 				</tr>
