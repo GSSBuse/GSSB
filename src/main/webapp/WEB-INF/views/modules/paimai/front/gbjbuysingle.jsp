@@ -92,16 +92,15 @@ function fck(){
 									</div>
 									<div class="comment-body">
 										<p>{{ell.comment}}</p>
+										
 									</div>
-									<div id="div" style="display:none;">
-										   <textarea rows="5" cols="100"></textarea>
-										</div>
+									
 									<!-- end of comment-body -->
 								</article>
+								
 								<!-- end of comment -->
 
-								<!-- <ul class="children">
-
+								 <ul class="children">
 									<li
 										class="comment byuser comment-author-saqib-sarwar bypostauthor odd alt depth-2"
 										id="li-comment-3">
@@ -125,18 +124,16 @@ function fck(){
 												</p>
 
 											</div>
-											end .comment-meta
-
+											 <div id="div" style="display:none;">
+										   <textarea rows="5" cols="100"></textarea>
+									    </div>
+											
 											<div class="comment-body">
 												<p></p>
 											</div>
-											end of comment-body
-
 										</article>
-										end of comment
-
 									</li>
-								</ul> -->
+								</ul> 
 							</li>
 						</ol>
 						<div id="respond">

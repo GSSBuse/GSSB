@@ -13,19 +13,14 @@
 <script type="text/javascript" src="${ctxStatic }/front/js/Articlebuy.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/gbBuy.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/buyupcounts.js"></script>
-<script type="text/javascript" src="${ctxStatic }/front/js/jquery.min.js"></script>
-<script type="text/javascript" src="${ctxStatic }/front/js/jqPaginator.js"></script>
-<link type="text/css" rel="stylesheet" href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css"/>
-<link href="http://cdn.staticfile.org/highlight.js/7.3/styles/github.min.css" rel="stylesheet" type="text/css" media="all"/>
-
+<script type="text/javascript" src="${ctxStatic }/front/js/common.js"></script>
 <%-- <script type="text/javascript" src="${ctxStatic }/front/js/common.js"></script> --%>
-
 <script type="text/javascript">
 var if_firstime=true;
 $(document).ready(function(){
-	 var x= ${gbjBuycount};
+	 var totalcounts= ${gbjBuycount};
 	 var pageSize=11;
-	 var y=Math.ceil(x/pageSize);//由总条数除以每页数目得到总页数
+	 var y=Math.ceil((totalcounts)/pageSize);//由总条数除以每页数目得到总页数
 	 var z=1;
 	 if(GetQueryString("page")!=null && !isNaN(GetQueryString("page"))){
 		 z=parseInt(GetQueryString("page"));
@@ -35,11 +30,6 @@ $(document).ready(function(){
 	        totalPages: y,
 	        visiblePages: 10,
 	        currentPage: z,
-	       /*  first: '<li class="first"><a href="${ctx }/buyarticles.html">首页<\/a><\/li>',
-	        prev: '<li class="prev"><a href="${ctx }/buyarticles.html?page=1">上一页<\/a><\/li>',
-	        next: '<li class="next"><a href="${ctx }/buyarticles.html?page=2">下一页<\/a><\/li>',
-	        last: '<li class="last"><a href="${ctx }/buyarticles.html?page=3">末页<\/a><\/li>',
-	        page: '<li class="page"><a href="${ctx }/buyarticles.html?page=4">{{page}}<\/a><\/li>', */ 
 	        onPageChange: function (n) {
 	            $("#demo2-text").html("当前第" + n + "页");
 	            if(if_firstime){
@@ -82,8 +72,8 @@ $(document).ready(function(){
 							<div class="post-meta clearfix ">
 								<span class="date">{{el.createDate}}</span> <span
 									class="category"><a href="#" title="查询该标签所有内容"
-									class="gbjType" >{{el.typeId}}</a> &amp;&amp;&amp;<a href="#"
-									title="查询该标签所有内容">{{el.tag}}</a></span>
+									class="gbjType" >{{el.typeId}}</a> <!-- &amp;&amp;&amp;<a href="#"
+									title="查询该标签所有内容">{{el.tag}}</a> --></span>
 									<!--  <span class="comments"><a
 									href="#">3个回复</a></span>  -->
 									<a ms-attr-href="${ctx}/single.html?id={{el.id}}&type=buy"><span
@@ -98,10 +88,11 @@ $(document).ready(function(){
 							</h4>
 						</p>
 					</article>
-            <div class="demo customBootstrap">
-                <p id="demo2-text"></p>
-                <ul id="demo2" class="pagination"></ul>
-            </div>
+					<!-- 分页实现 -->
+                            <div class="demo customBootstrap">
+                             <p id="demo2-text"></p>
+                              <ul id="demo2" class="pagination"></ul>
+                            </div>
 				</div>
 				<!-- end of page content -->
 				<!-- start of sidebar -->

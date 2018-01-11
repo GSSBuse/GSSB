@@ -45,7 +45,7 @@
 							<div class="post-meta clearfix">
 								<span class="date">{{el.createDate}}</span> <span
 									class="category"><a href="#" title="查询该标签所有内容" class="gbjType">{{el.typeId}}</a>
-										&amp;&amp;&amp; <a href="#" title="查询该标签所有内容">{{el.tag}}</a></span> 
+										<!-- &amp;&amp;&amp; <a href="#" title="查询该标签所有内容">{{el.tag}}</a> --></span> 
 										<!-- <span class="comments"><a href="#">3个回复</a></span> -->
 								<a ms-attr-href="${ctx}/single.html?id={{el.id}}&type=reward"><span
 									class="like-count">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{el.upCounts}}

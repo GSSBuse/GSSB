@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- <script type="text/javascript" src="${ctxStatic }/front/js/sidebar.js"></script> --%>
 
-<script type="text/javascript" src="${ctxStatic }/front/js/tag.js"></script>
+
 <br/>
 <br/><br/>
 <section class="widget">
@@ -45,11 +45,13 @@
 </section>
 
 <section class="widget" ms-controller="tag">
-        <h3 class="title">标签</h3>
+        <h3 class="title">国标类型</h3>
         <div class="tagcloud">
         
-        <ul class="btn btn-mini" ms-repeat-el="datas.domainTagList">
-                <li class="recentcomments"><a href="#" rel="external nofollow" class="url">{{el.tagName}}</a>
+        <ul class="btn btn-mini" >
+                <li class="recentcomments"><a href="#" rel="external nofollow" class="url">商标</a><a href="#" rel="external nofollow" class="url">专利</a>
+                <a href="#" rel="external nofollow" class="url">版权</a></li>
+               
         </ul>
         
                

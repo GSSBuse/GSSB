@@ -24,8 +24,11 @@
 			});
 			
 			var c = window.location.href.split("?")[1].substring(10);
-
-			$("#rewardid").val(c);
+			var x = $("#insertOrUpdate").text();
+			
+			if(x == "悬赏信息评论添加"){
+				$("#rewardid").val(c);
+			}
 			
 		});
 	</script>
@@ -35,7 +38,7 @@
 	<shiro:hasPermission name="sys:gbj:gbjUserRewardComments:view">
 		<%-- <li><a href="${ctx}/sys/gbj/gbjUserRewardComments/">悬赏信息评论列表</a></li> --%>
 		</shiro:hasPermission>
-		<li class="active"><a href="${ctx}/sys/gbj/gbjUserRewardComments/form?id=${gbjUserRewardComments.id}">悬赏信息评论<shiro:hasPermission name="sys:gbj:gbjUserRewardComments:edit">${not empty gbjUserRewardComments.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gbj:gbjUserRewardComments:edit">查看</shiro:lacksPermission></a></li>
+		<li class="active"><a id="insertOrUpdate" href="${ctx}/sys/gbj/gbjUserRewardComments/form?id=${gbjUserRewardComments.id}">悬赏信息评论<shiro:hasPermission name="sys:gbj:gbjUserRewardComments:edit">${not empty gbjUserRewardComments.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gbj:gbjUserRewardComments:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="gbjUserRewardComments" action="${ctx}/sys/gbj/gbjUserRewardComments/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
@@ -70,9 +73,10 @@
 		<div class="control-group">
 			<label class="control-label">评论时间：</label>
 			<div class="controls">
-				<input name="commentTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
+				<input name="commentTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate required"
 					value="<fmt:formatDate value="${gbjUserRewardComments.commentTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
 					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+					<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">

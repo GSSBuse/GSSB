@@ -25,16 +25,22 @@
 			
 
 		var c = window.location.href.split("?")[1].substring(8);
-
-					$("#soldid").val(c);
-
-				});
+		
+		
+		
+		var x = $("#insertOrUpdate").text();
+		
+		if(x == "卖标信息评论添加"){
+			$("#soldid").val(c);
+		}
+					
+		});
 	</script>
 </head>
 <body>
 	<ul class="nav nav-tabs">
 		<%-- <li><a href="${ctx}/sys/gbj/gbjUserSoldComments/">卖标评论列表</a></li> --%>
-		<li class="active"><a href="${ctx}/sys/gbj/gbjUserSoldComments/form?id=${gbjUserSoldComments.id}">卖标评论<shiro:hasPermission name="sys:gbj:gbjUserSoldComments:edit">${not empty gbjUserSoldComments.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gbj:gbjUserSoldComments:edit">查看</shiro:lacksPermission></a></li>
+		<li class="active"><a id="insertOrUpdate" href="${ctx}/sys/gbj/gbjUserSoldComments/form?id=${gbjUserSoldComments.id}">卖标信息评论<shiro:hasPermission name="sys:gbj:gbjUserSoldComments:edit">${not empty gbjUserSoldComments.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gbj:gbjUserSoldComments:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="gbjUserSoldComments" action="${ctx}/sys/gbj/gbjUserSoldComments/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>

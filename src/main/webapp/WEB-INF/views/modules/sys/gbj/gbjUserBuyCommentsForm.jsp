@@ -25,8 +25,11 @@
 			
 			var c = window.location.href.split("?")[1].substring(7);
 			
-			$("#buyid").val(c);
+			var x = $("#insertOrUpdate").text();
 			
+			if(x == "买标信息评论添加"){
+				$("#buyid").val(c);
+			}
 			
 		});
 		
@@ -36,7 +39,7 @@
 <body>
 	<ul class="nav nav-tabs">
 		<%-- <li><a href="${ctx}/sys/gbj/gbjUserBuyComments/ ">买标信息评论列表</a></li> --%>
-		<li class="active"><a href="${ctx}/sys/gbj/gbjUserBuyComments/form?id=${gbjUserBuyComments.id}">买标信息评论<shiro:hasPermission name="sys:gbj:gbjUserBuyComments:edit">${not empty gbjUserBuyComments.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gbj:gbjUserBuyComments:edit">查看</shiro:lacksPermission></a></li>
+		<li class="active"><a id="insertOrUpdate" href="${ctx}/sys/gbj/gbjUserBuyComments/form?id=${gbjUserBuyComments.id}">买标信息评论<shiro:hasPermission name="sys:gbj:gbjUserBuyComments:edit">${not empty gbjUserBuyComments.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gbj:gbjUserBuyComments:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="gbjUserBuyComments" action="${ctx}/sys/gbj/gbjUserBuyComments/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
@@ -71,9 +74,10 @@
 		<div class="control-group">
 			<label class="control-label">评论时间：</label>
 			<div class="controls">
-				<input name="commentTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
+				<input name="commentTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate required"
 					value="<fmt:formatDate value="${gbjUserBuyComments.commentTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
 					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+					<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">

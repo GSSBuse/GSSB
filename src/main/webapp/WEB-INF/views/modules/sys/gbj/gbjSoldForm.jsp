@@ -22,13 +22,24 @@
 					}
 				}
 			});
+			
+			var x = $("#insertOrUpdate").text();
+			
+			 if(x == "卖标信息管理添加"){
+				/* $("#userName").attr("style","visibility:hidden;");*/
+				 
+				$("#userIdInput").val("f3e9b86259614079b176430b0886fc31");
+				$("#userNameInput").val("后台管理人员");
+			} 
+			
+			
 		});
 	</script>
 </head>
 <body>
 	<ul class="nav nav-tabs">
 		<li><a href="${ctx}/sys/gbj/gbjSold/">卖标信息管理列表</a></li>
-		<li class="active"><a href="${ctx}/sys/gbj/gbjSold/form?id=${gbjSold.id}">卖标信息管理<shiro:hasPermission name="sys:gbj:gbjSold:edit">${not empty gbjSold.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gbj:gbjSold:edit">查看</shiro:lacksPermission></a></li>
+		<li class="active"><a id="insertOrUpdate" href="${ctx}/sys/gbj/gbjSold/form?id=${gbjSold.id}">卖标信息管理<shiro:hasPermission name="sys:gbj:gbjSold:edit">${not empty gbjSold.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gbj:gbjSold:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="gbjSold" action="${ctx}/sys/gbj/gbjSold/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
@@ -36,7 +47,14 @@
 		<div class="control-group" style="visibility:hidden">
 			<label class="control-label">用户ID：</label>
 			<div class="controls">
-				<form:input path="user.id" value="f3e9b86259614079b176430b0886fc31"  htmlEscape="false" maxlength="200" class="input-xlarge required"/>
+				<form:input path="user.id" id="userIdInput"  htmlEscape="false" maxlength="200" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
+			</div>
+		</div>
+		<div class="control-group" >
+			<label class="control-label">用户名：</label>
+			<div class="controls">
+				<form:input path="user.username" id="userNameInput" readonly="true"  htmlEscape="false" maxlength="200" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

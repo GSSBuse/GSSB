@@ -9,26 +9,26 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thinkgem.jeesite.common.service.CrudService;
-import com.thinkgem.jeesite.modules.sys.dao.gbj.ArticleListDao;
-import com.thinkgem.jeesite.modules.sys.dao.gbj.BuyArticleListDao;
-import com.thinkgem.jeesite.modules.sys.dao.gbj.GbjBuyDao;
 import com.thinkgem.jeesite.modules.sys.dao.gbj.SoldArticleListDao;
-import com.thinkgem.jeesite.modules.sys.entity.gbj.ArticleList;
-import com.thinkgem.jeesite.modules.sys.entity.gbj.BuyArticleList;
-import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.SoldArticleList;
+
 @Service
 @Transactional(readOnly = true)
 public class SoldArticleListService extends CrudService<SoldArticleListDao, SoldArticleList> {
 	@Autowired
 	SoldArticleListDao soldarticleListdao;
-	public List<SoldArticleList> findDomainSoldArticleList(@Param(value="counts") String count) {
-		return soldarticleListdao.findDomainSoldArticleList(Integer.parseInt(count));
+
+	public List<SoldArticleList> findDomainSoldArticleList(@Param(value = "start") int start,
+			@Param(value = "end") int end) {
+		return soldarticleListdao.findDomainSoldArticleList(start, end);
 	}
+
 	public List<SoldArticleList> findDomainUserSoldArticleList(@RequestParam("id") String id) {
 		// TODO Auto-generated method stub
 		return soldarticleListdao.findDomainUserSoldArticleList(id);
 	}
-	
-}
 
+	public int findDomainSoldArticlePageCount() {
+		return soldarticleListdao.findDomainSoldArticlePageCount();
+	}
+}

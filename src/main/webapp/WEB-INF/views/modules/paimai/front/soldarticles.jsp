@@ -10,9 +10,36 @@
 <head>
 <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>
 </head>
-<script type="text/javascript"
-	src="${ctxStatic }/front/js/Articlesold.js"></script>
+<script type="text/javascript" src="${ctxStatic }/front/js/Articlesold.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/gbsold.js"></script>
+<script type="text/javascript" src="${ctxStatic }/front/js/common.js"></script>
+<script type="text/javascript">
+var if_firstime=true;
+$(document).ready(function(){
+	 var totalcounts= ${gbjSoldcount};
+	 var pageSize=11;
+	 var y=Math.ceil((totalcounts)/pageSize);//由总条数除以每页数目得到总页数
+	 var z=1;
+	 if(GetQueryString("page")!=null && !isNaN(GetQueryString("page"))){
+		 z=parseInt(GetQueryString("page"));
+	 }
+	 //alert(y);
+	 $("#demo2").jqPaginator({
+	        totalPages: y,
+	        visiblePages: 10,
+	        currentPage: z,
+	        onPageChange: function (n) {
+	            $("#demo2-text").html("当前第" + n + "页");
+	            if(if_firstime){
+	            	if_firstime=false;
+	            }
+	            else if(!if_firstime){
+	            	window.location.href="${ctx }/soldarticles.html?page="+n;
+	            }
+	        }
+	    });
+	});
+</script>
 <body ms-controller="soldarticles">
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
 	<div class="about bg-one">
@@ -48,7 +75,7 @@
 							<div class="post-meta clearfix">
 								<span class="date">{{el.createDate}}</span> <span
 									class="category"><a href="#" title="查询该标签所有内容" class="gbjType">{{el.typeId}}</a>
-										&amp;&amp;&amp; <a href="#" title="查询该标签所有内容">{{el.tag}}</a></span> 
+										<!-- &amp;&amp;&amp; <a href="#" title="查询该标签所有内容">{{el.tag}}</a> --></span> 
 										<!-- <span class="comments"><a href="#">3个回复</a></span> -->
 								<a ms-attr-href="${ctx}/single.html?id={{el.id}}&type=sold"><span
 									class="like-count">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{el.upCounts}}
@@ -65,14 +92,11 @@
 						</p>
 
 					</article>
-
-
-					<div id="pagination">
-						<a href="#" class="btn active">1</a> <a href="#" class="btn">2</a>
-						<a href="#" class="btn">3</a> <a href="#" class="btn">下一页 ></a> <a
-							href="#" class="btn">最后一页 >></a>
-					</div>
-
+					<!-- 分页实现 -->
+                            <div class="demo customBootstrap">
+                             <p id="demo2-text"></p>
+                              <ul id="demo2" class="pagination"></ul>
+                            </div>
 				</div>
 				<!-- end of page content -->
 

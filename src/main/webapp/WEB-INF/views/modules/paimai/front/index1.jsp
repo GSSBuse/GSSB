@@ -67,8 +67,8 @@
 								</h4> <span class="article-meta">{{el.createDate}}
 									&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" title="查询该标签所有内容"
 									 class="Type">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a>
-									&amp; <a
-									ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy" >{{el.tag}}</a>
+									<%-- &amp; <a
+									ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy" >{{el.tag}}</a> --%>
 							</span> <span class="like-count"><a
 									ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.upCounts}}</a>
 									&nbsp;</span>
@@ -83,7 +83,7 @@
                                                                <li class="article-entry standard" ms-repeat-el="datas.domainSoldList" >		                                                                
                                                                  <h4 > <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=sold">{{el.title}}</a></h4>		                                                                
                                                                  <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a
-									ms-attr-href="${ctx }/single.html?id={{el.id}}type=sold" class="gbjType">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a>   &amp; <a ms-attr-href="${ctx }/single.html?id={{el.id}}type=sold">{{el.tag}}</a></span>
+									ms-attr-href="${ctx }/single.html?id={{el.id}}type=sold" class="gbjType">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a>   <%-- &amp; <a ms-attr-href="${ctx }/single.html?id={{el.id}}type=sold">{{el.tag}}</a> --%></span>
                                                                  <span class="like-count"><a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=sold">{{el.upCounts}}</a> &nbsp;</span>
                                                          </li>
                                                        </ul>
@@ -96,8 +96,8 @@
                                                               <li class="article-entry standard" ms-repeat-el="datas.domainRewardList" >		                                                                
                                                                  <h4> <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.title}}</a>&nbsp;&nbsp;&nbsp;悬赏金额: {{el.price}}元</h4>		                                                                
                                                                  <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;<a
-									ms-attr-href="${ctx }/single.html?id={{el.id}}type=reward" class="gbjType">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a> &amp; <a
-									ms-attr-href="${ctx }/single.html?id={{el.id}}type=reward" >{{el.tag}}</a></span>
+									ms-attr-href="${ctx }/single.html?id={{el.id}}type=reward" class="gbjType">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a> <%-- &amp; <a
+									ms-attr-href="${ctx }/single.html?id={{el.id}}type=reward" >{{el.tag}}</a> --%></span>
                                                                  <span class="like-count"><a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.upCounts}}</a> &nbsp;</span>
                                                          </li>
                                                        </ul>

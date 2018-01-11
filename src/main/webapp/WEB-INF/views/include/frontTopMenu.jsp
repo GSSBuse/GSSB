@@ -3,6 +3,7 @@
 <script type="text/javascript"
 	src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
 	data-appid="101442633" charset="utf-8"></script>
+	<script type="text/javascript" src="${ctxStatic }/front/js/jqPaginator.js"></script>
 <div class="top">
 	<div class="mainWidth top-notic">
 		<div class="top-left f-l">

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.gbj.GbjBusinessNumberDao">
+    
+	<sql id="gbjBusinessNumberColumns">
+		a.id AS "id",
+		a.shangbiao_number AS "shangbiaoNumber",
+		a.business_number AS "businessNumber",
+		a.banquan_number AS "banquanNumber",
+		a.zhuanli_number AS "zhuanliNumber"
+	</sql>
+	
+	<sql id="gbjBusinessNumberJoins">
+	</sql>
+    
+	<select id="get" resultType="GbjBusinessNumber">
+		SELECT 
+			<include refid="gbjBusinessNumberColumns"/>
+		FROM gbj_business_number a
+		<include refid="gbjBusinessNumberJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="GbjBusinessNumber">
+		SELECT 
+			<include refid="gbjBusinessNumberColumns"/>
+		FROM gbj_business_number a
+		<include refid="gbjBusinessNumberJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="GbjBusinessNumber">
+		SELECT 
+			<include refid="gbjBusinessNumberColumns"/>
+		FROM gbj_business_number a
+		<include refid="gbjBusinessNumberJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO gbj_business_number(
+			id,
+			shangbiao_number,
+			business_number,
+			banquan_number,
+			zhuanli_number
+		) VALUES (
+			#{id},
+			#{shangbiaoNumber},
+			#{businessNumber},
+			#{banquanNumber},
+			#{zhuanliNumber}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE gbj_business_number SET 	
+			shangbiao_number = #{shangbiaoNumber},
+			business_number = #{businessNumber},
+			banquan_number = #{banquanNumber},
+			zhuanli_number = #{zhuanliNumber}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM gbj_business_number
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

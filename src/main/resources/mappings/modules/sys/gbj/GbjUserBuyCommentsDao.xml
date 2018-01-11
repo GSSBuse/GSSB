@@ -31,6 +31,7 @@
 		FROM gbj_user_buy_comments a
 		<include refid="gbjUserBuyCommentsJoins"/>
 		WHERE a.buy_id = #{buy_Id}
+		AND a.del_flag = "0"
 		 
 	</select>
 	<select id="getFrontCommentsList" resultType="GbjUserBuyComments">
@@ -39,6 +40,7 @@
 		FROM gbj_user_buy_comments a
 		<include refid="gbjUserBuyCommentsJoins"/>
 		WHERE a.buy_id = #{id}
+		AND a.del_flag = "0"
 		 
 	</select>
     
@@ -49,6 +51,7 @@
 		FROM gbj_user_buy_comments a
 		<include refid="gbjUserBuyCommentsJoins"/>
 		WHERE a.id = #{id}
+		AND a.del_flag = "0"
 	</select>
 	
 	<select id="findList" resultType="GbjUserBuyComments">
@@ -145,6 +148,7 @@
 		FROM gbj_user_buy_comments a
 		<include refid="gbjUserBuyCommentsJoins"/>
 		WHERE a.buy_id = #{id}
+		AND a.del_flag = "0"
 		 ORDER BY a.create_date DESC
     </select>
 	

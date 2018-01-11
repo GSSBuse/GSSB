@@ -355,36 +355,6 @@ public class FrontIndexController extends BaseController {
 	 * @RequestMapping(value= {"gbjsoldsingle"}) public String gbjsoldsingle(Model
 	 * model) { return "modules/paimai/front/gbjsoldsingle"; }
 	 */
-	/**
-	 * 咨询买标一览页面
-	 */
-	@RequestMapping(value = { "buyarticles" })
-	public ModelAndView buyarticles(Model model) {
-
-		ModelAndView mav = null;
-		mav = new ModelAndView("modules/paimai/front/buyarticles");
-		int gbjBuycount = buyarticleListService.findDomainBuyArticlePageCount();
-
-		mav.addObject("gbjBuycount", gbjBuycount);
-		return mav;
-
-	}
-
-	/**
-	 * 咨询卖标一览页面
-	 */
-	@RequestMapping(value = { "soldarticles" })
-	public String soldarticles(Model model) {
-		return "modules/paimai/front/soldarticles";
-	}
-
-	/**
-	 * 咨询悬赏一览页面
-	 */
-	@RequestMapping(value = { "rewardarticles" })
-	public String rewardarticles(Model model) {
-		return "modules/paimai/front/rewardarticles";
-	}
 
 	/**
 	 * 咨询淘金客一览页面
@@ -795,6 +765,42 @@ public class FrontIndexController extends BaseController {
 	}
 
 	/**
+	 * 咨询买标一览页面
+	 */
+	@RequestMapping(value = { "buyarticles" })
+	public ModelAndView buyarticles(Model model) {
+		ModelAndView mav = null;
+		mav = new ModelAndView("modules/paimai/front/buyarticles");
+		int gbjBuycount = buyarticleListService.findDomainBuyArticlePageCount();
+		mav.addObject("gbjBuycount", gbjBuycount);
+		return mav;
+	}
+
+	/**
+	 * 咨询卖标一览页面
+	 */
+	@RequestMapping(value = { "soldarticles" })
+	public ModelAndView soldarticles(Model model) {
+		ModelAndView mav = null;
+		mav = new ModelAndView("modules/paimai/front/soldarticles");
+		int gbjSoldcount = soldarticleListService.findDomainSoldArticlePageCount();
+		mav.addObject("gbjSoldcount", gbjSoldcount);
+		return mav;
+	}
+
+	/**
+	 * 咨询悬赏一览页面
+	 */
+	@RequestMapping(value = { "rewardarticles" })
+	public ModelAndView rewardarticles(Model model) {
+		ModelAndView mav = null;
+		mav = new ModelAndView("modules/paimai/front/rewardarticles");
+		int gbjRewardcount = rewardarticleListService.findDomainRewardArticlePageCount();
+		mav.addObject("gbjRewardcount", gbjRewardcount);
+		return mav;
+	}
+
+	/**
 	 * 获取页面显示我要买标信息的全部信息
 	 * 
 	 * @param domainBuyIdList
@@ -832,12 +838,18 @@ public class FrontIndexController extends BaseController {
 	 */
 	@RequestMapping(value = "polling/ArticleSoldData")
 	@ResponseBody
-	public AjaxResult ArticleSoldData(@RequestParam("count") String count) {
+	public AjaxResult ArticleSoldData(@RequestParam("count") String count, @RequestParam("page") String page) {
+
+		if (page == null || "".equals(page) || !StringUtils.isNumeric(page)) {
+			page = "1"; // 不存在或者不是数字是默认第一页
+		}
+		int start = Integer.parseInt(count) * (Integer.parseInt(page) - 1);
+		int end = Integer.parseInt(count);
 
 		// 取得最新的我要卖标信息
 		List<SoldArticleList> pageDomainSoldArticleList = new ArrayList<SoldArticleList>();
 		try {
-			pageDomainSoldArticleList = soldarticleListService.findDomainSoldArticleList(count);
+			pageDomainSoldArticleList = soldarticleListService.findDomainSoldArticleList(start, end);
 
 			AjaxResult ar = AjaxResult.makeSuccess("");
 			ar.getData().put("ArticleSoldData", pageDomainSoldArticleList);
@@ -856,12 +868,18 @@ public class FrontIndexController extends BaseController {
 	 */
 	@RequestMapping(value = "polling/ArticleRewardData")
 	@ResponseBody
-	public AjaxResult ArticleRewardData(@RequestParam("count") String count) {
+	public AjaxResult ArticleRewardData(@RequestParam("count") String count, @RequestParam("page") String page) {
+
+		if (page == null || "".equals(page) || !StringUtils.isNumeric(page)) {
+			page = "1"; // 不存在或者不是数字是默认第一页
+		}
+		int start = Integer.parseInt(count) * (Integer.parseInt(page) - 1);
+		int end = Integer.parseInt(count);
 
 		// 取得最新的我要悬赏信息
 		List<RewardArticleList> pageDomainRewardArticleList = new ArrayList<RewardArticleList>();
 		try {
-			pageDomainRewardArticleList = rewardarticleListService.findDomainRewardArticleList(count);
+			pageDomainRewardArticleList = rewardarticleListService.findDomainRewardArticleList(start, end);
 
 			AjaxResult ar = AjaxResult.makeSuccess("");
 			ar.getData().put("ArticleRewardData", pageDomainRewardArticleList);

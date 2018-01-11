@@ -55,12 +55,18 @@
         <where>
                d.del_flag =  0
                AND d.front_del_flag = 1
-            ORDER BY d.update_date DESC
-            <if test="_parameter != null and _parameter != ''">
-                limit #{counts}
-            </if>
+            ORDER BY d.create_date DESC
+            limit #{start},#{end}
         </where>
-        
-        
     </select>
+    <select id="findDomainRewardArticlePageCount" resultType="int" >
+        SELECT
+              count(*) AS count
+        FROM gbj_reward d
+        <where>
+               d.del_flag =  0
+               AND d.front_del_flag = 1
+        </where>
+    </select> 
+    
     </mapper>

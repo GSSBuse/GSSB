@@ -9,26 +9,26 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thinkgem.jeesite.common.service.CrudService;
-import com.thinkgem.jeesite.modules.sys.dao.gbj.ArticleListDao;
-import com.thinkgem.jeesite.modules.sys.dao.gbj.BuyArticleListDao;
-import com.thinkgem.jeesite.modules.sys.dao.gbj.GbjBuyDao;
 import com.thinkgem.jeesite.modules.sys.dao.gbj.RewardArticleListDao;
-import com.thinkgem.jeesite.modules.sys.entity.gbj.ArticleList;
-import com.thinkgem.jeesite.modules.sys.entity.gbj.BuyArticleList;
-import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBuy;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.RewardArticleList;
+
 @Service
 @Transactional(readOnly = true)
 public class RewardArticleListService extends CrudService<RewardArticleListDao, RewardArticleList> {
 	@Autowired
 	RewardArticleListDao rewardarticleListdao;
-	public List<RewardArticleList> findDomainRewardArticleList(@Param(value="counts") String count) {
-		return rewardarticleListdao.findDomainRewardArticleList(Integer.parseInt(count));
+
+	public List<RewardArticleList> findDomainRewardArticleList(@Param(value = "start") int start,
+			@Param(value = "end") int end) {
+		return rewardarticleListdao.findDomainRewardArticleList(start, end);
 	}
+
 	public List<RewardArticleList> findDomainUserRewardArticleList(@RequestParam("id") String id) {
 		// TODO Auto-generated method stub
 		return rewardarticleListdao.findDomainUserRewardArticleList(id);
 	}
-	
-}
 
+	public int findDomainRewardArticlePageCount() {
+		return rewardarticleListdao.findDomainRewardArticlePageCount();
+	}
+}

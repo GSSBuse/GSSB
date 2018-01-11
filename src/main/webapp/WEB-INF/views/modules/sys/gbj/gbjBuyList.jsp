@@ -67,7 +67,7 @@
 				<th>国标描述</th>
 				<th>预算价格</th>
 				<th>联系人手机号</th>
-				<th>标签</th>
+				<!-- <th>标签</th> -->
 				<th>点赞数</th>
 				<th>查看数</th>
 				<th>评论数</th>
@@ -102,9 +102,9 @@
 				<td>
 					${gbjBuy.mobile}
 				</td>
-				<td>
+				<%-- <td>
 					${gbjBuy.tag}
-				</td>
+				</td> --%>
 				<td>
 					${gbjBuy.upCounts}
 				</td>
