@@ -60,7 +60,8 @@ $(function() {
            <img src="${ctxStatic }/images/b7.jpg" alt="" />
        </li>
    </ul>
-   <div style="position:absolute; bottom:10px; padding:10px; width:60%; left: 20%; ">
+   <div style="position:absolute; bottom:10px; padding:10px; width:60%; left: 20%; background: #ffffff26;
+    border-radius: 5px;">
 		<ul class="registbox">
 			<li>
 				<p>商标注册</p>
@@ -100,20 +101,22 @@ $(function() {
 					<div class="serch-botton" style="box-sizing: border-box; ">查询能否注册</div>
 				</a>
 				<div style="clear: both"></div>
-			</div>
+			    </div>
 
                 <div class="scroll-box">
 		             <ul>
-		              <li>王先生 139582****1001 成功查询商标</li>
-		              <li>王先生 139582****1002 成功查询商标</li>
-		              <li>王先生 139582****1003 成功查询商标</li>
-		              <li>王先生 139582****1004 成功查询商标</li>
-		              <li>王先生 139582****1005 成功查询商标</li>
-		              <li>王先生 139582****1006 成功查询商标</li>
-		              <li>王先生 139582****1007 成功查询商标</li>
-		              <li>王先生 139582****1008 成功查询商标</li>
-		              <li>王先生 139582****1009 成功查询商标</li>
-		              <li>王先生 139582****1010 成功查询商标</li>
+		              <li>历史商标交易记录${GbjBusinessNumber.shangbiaoNumber}</li>
+		              <li>历史版权交易记录${GbjBusinessNumber.businessNumber}</li>
+		              <li>历史专利交易记录${GbjBusinessNumber.banquanNumber}</li>
+		              <li>历史商标交易记录${GbjBusinessNumber.zhuanliNumber}</li>
+		              <li>历史版权交易记录${GbjBusinessNumber.zhuanliNumber}</li>
+		              <li>历史专利交易记录${GbjBusinessNumber.banquanNumber}</li>
+		              <li>历史商标交易记录${GbjBusinessNumber.banquanNumber}</li>
+		              <li>历史版权交易记录${GbjBusinessNumber.banquanNumber}</li>
+		              <li>历史专利交易记录${GbjBusinessNumber.banquanNumber}</li>
+		              <li>历史商标交易记录${GbjBusinessNumber.banquanNumber}</li>
+		              <li>历史版权交易记录${GbjBusinessNumber.banquanNumber}</li>
+		              <li>历史专利交易记录${GbjBusinessNumber.banquanNumber}</li>
 		             </ul>
 		        </div>
         </div>

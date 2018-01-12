@@ -9,10 +9,12 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBusinessNumber;
 
 /**
  * 历史交易量DAO接口
+ * 
  * @author snnu
  * @version 2018-01-11
  */
 @MyBatisDao
 public interface GbjBusinessNumberDao extends CrudDao<GbjBusinessNumber> {
-	
+
+	public GbjBusinessNumber findDomainBusinessNumber();
 }

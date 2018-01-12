@@ -96,7 +96,7 @@ span.tag-line {
   padding: 16px 14px 18px;
 }
 .main-nav div > ul > li a {
-  font-family: "微软雅黑", Arial;
+  font-family: "寰蒋闆呴粦", Arial;
   font-size: 16px;
   color: #395996;
 }
@@ -194,7 +194,7 @@ span.tag-line {
 /* Header - banner ---------------------------------------------------------------------------------------------------*/
 .registInfo { height: 270px; }
 .registInfo li { padding: 35px 50px; }
-.registInfo li>h1 { text-align: center; color: #fff; font-size: 40px; line-height: 80px; font-family: "微软雅黑", Arial; }
+.registInfo li>h1 { text-align: center; color: #fff; font-size: 40px; line-height: 80px; font-family: "寰蒋闆呴粦", Arial; }
 .registInfo li>h1 span { width: 60px; height: 60px; display: inline-block; background: #c33408; text-align: center; line-height: 60px; border-radius: 60px; font-weight: normal; }
 .registInfo li>h6 { text-align: center; color: #fff; font-size: 17px; font-weight: normal; margin: 0; line-height: 50px; border-bottom: 1px solid #fea100; width: 480px; margin: 0 auto; }
 .registInfo li>p { text-align: center; color: #fff; font-size: 17px; font-weight: normal; margin: 0; line-height: 40px; }
@@ -202,12 +202,12 @@ span.tag-line {
 .registInfo li.gat>p { line-height: 30px; }
 .choose-title { text-align: center; font-size: 14px; color: #fefefe; font-weight: normal; line-height: 30px; }
 .registbox { overflow: hidden; height: auto; padding-top: 15px; width: 500px; margin: 0 auto; position: relative; }
-.registbox>li { height: 40px; float: left;  color: #ff0000; font-size: 16px; text-align: center; border: 1px solid #ffffff; cursor: pointer; position: relative; }
+.registbox>li { height: 40px; float: left;  color: #ff0000; font-size: 16px; text-align: center; border: 1px solid #ffffff; cursor: pointer; position: relative; letter-spacing:5px;}
 .registbox>li:hover { }
-.registbox>li>p { font-size: 14px; background-color: #ff8000;color: #ffffff; line-height: 40px; width: 125px; }
+.registbox>li>p { font-size: 17px; background-color: #ff8000;color: #ffffff; line-height: 40px; width: 135px; }
 .registbox>a:hover { float: left; border: 1px solid #ff0000; }
-.registbox .registlihover { border: 1px solid #00a6db; color: #ff0000; }
-.registbox .registlihover>p {background-color: #00a6db; color: #fff; }
+.registbox .registlihover { color: #ff0000; }
+.registbox .registlihover>p {background-color: #fff; color: #ff8000; }
 
 
 #gray{width:100%;height:100%;background:rgba(0,0,0,0.3);position:fixed;top:0px;display:none;z-index:99;}
@@ -250,7 +250,7 @@ span.tag-line {
 }
 
 h3.search-header {
-  font-family: "微软雅黑", Arial;
+  font-family: "寰蒋闆呴粦", Arial;
   font-weight: bold;
   font-size: 36px;
   color: #fff;
@@ -258,7 +258,7 @@ h3.search-header {
 }
 
 p.search-tag-line {
-  font-family: "微软雅黑", Arial;
+  font-family: "寰蒋闆呴粦", Arial;
   font-style: italic;
   font-size: 18px;
   line-height: 28px;
@@ -271,7 +271,7 @@ form.search-form {
   text-align: center;
 }
 form.search-form .input-common, form.search-form input.search-term,form.search-form select.select-term, form.search-form input.search-btn {
-  font-family: "微软雅黑", Arial;
+  font-family: "寰蒋闆呴粦", Arial;
   box-shadow: none;
   border-radius: 0;
   display: inline-block;
@@ -330,12 +330,15 @@ form.search-form input.search-btn:hover {
     height:16px;
     display:inline-block;
     overflow:hidden;
-    margin: auto;
+    margin: 5px auto auto auto;
+        margin-top: 11px;
 }
 .scroll-box ul {
     list-style:none;
     width:100%;
     height:100%;
+    font-size: 13px;
+    letter-spacing: 0.5px;
 }
 .scroll-box ul li {
 	float:right; 
@@ -343,8 +346,9 @@ form.search-form input.search-btn:hover {
     height:20px;
     text-align:center;
     color: #ffffff;
+    margin-left: 5px;
 }
-/*弹出框*/
+/*寮瑰嚭妗�*/
 .mask { margin: 0; padding: 0; border: none; width: 100%; height: 100%; background: #333; opacity: 0.6; filter: alpha(opacity=60); z-index: 9999; position: fixed; top: 0; left: 0; display: none; }
 #LoginBox { position: absolute; left: 22%; top: -1%; z-index: 10000; display: none; }
 button::-moz-focus-inner {
@@ -353,9 +357,9 @@ padding:0;
 margin:0;
 }
 
-.search-box { padding: 5px; position: relative; }
-.serch-bg { background-color: #fff; filter: alpha(opacity=30); background: #007fd72e; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; height: 90px;*margin-left:-10px; }
-.serch-border { border: 1px solid #FFF; height: 58px; overflow: hidden; position: relative; margin-top: -85px;margin-left: 10px;margin-right: 10px;}
+.search-box { padding: 5px; position: relative; margin-top: -12px;}
+.serch-bg { background-color: #fff; filter: alpha(opacity=30); background: #007fd700; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; height: 90px;*margin-left:-10px; }
+.serch-border { border-radius:5px; height: 58px; overflow: hidden; position: relative; margin-top: -85px;margin-left: 10px;margin-right: 10px;}
 .serch-border input { color: #999; font-size: 14px; background-color: #FFF; height: 58px; line-height: 58px; border: none 0; width: 80%; padding-left: 10px; float: left; }
 .serch-botton { background-image: url("../../images/search01.png"); background-repeat: no-repeat; background-position: 14px center; padding-left: 45px; background-color: #00a6db; font-size: 16px; float: left; width: 20%; height: 58px; color: #FFF; line-height: 58px; }
 
@@ -1023,7 +1027,7 @@ h1.search-title span {
   color: #666565;
   font-size: 14px;
   line-height: 22px;
-  font-family: "微软雅黑", Arial;
+  font-family: "寰蒋闆呴粦", Arial;
   font-weight: 600;
   margin: 0;
 }

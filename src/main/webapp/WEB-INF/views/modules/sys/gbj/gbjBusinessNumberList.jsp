@@ -34,9 +34,10 @@
 		<thead>
 			<tr>
 				<th>商标交易量</th>
-				<th>交易数量</th>
+				
 				<th>版权交易量</th>
 				<th>专利交易量</th>
+				<th>总交易数量</th>
 				<shiro:hasPermission name="sys:gbj:gbjBusinessNumber:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -46,14 +47,15 @@
 				<td><a href="${ctx}/sys/gbj/gbjBusinessNumber/form?id=${gbjBusinessNumber.id}">
 					${gbjBusinessNumber.shangbiaoNumber}
 				</a></td>
-				<td>
-					${gbjBusinessNumber.businessNumber}
-				</td>
+				
 				<td>
 					${gbjBusinessNumber.banquanNumber}
 				</td>
 				<td>
 					${gbjBusinessNumber.zhuanliNumber}
+				</td>
+				<td>
+					${gbjBusinessNumber.businessNumber}
 				</td>
 				<shiro:hasPermission name="sys:gbj:gbjBusinessNumber:edit"><td>
     				<a href="${ctx}/sys/gbj/gbjBusinessNumber/form?id=${gbjBusinessNumber.id}">修改</a>

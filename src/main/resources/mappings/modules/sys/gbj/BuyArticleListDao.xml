@@ -42,6 +42,7 @@
               d.tag as "tag",
               d.create_date as "createDate",
               d.title as "title",
+              d.look_counts AS "lookCounts",
               d.description as "description",
               d.create_date AS "createDate",
               d.front_del_flag AS "frontDelFlag",

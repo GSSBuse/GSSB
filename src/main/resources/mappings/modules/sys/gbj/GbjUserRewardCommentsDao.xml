@@ -20,8 +20,13 @@
 	
 	<sql id="gbjUserRewardCommentsJoins">
 	LEFT JOIN gbj_reward b ON b.id = a.reward_id
+	LEFT JOIN gbj_user c ON c.id = a.parent_id
 	</sql>
-    
+	<sql id="gbjUserJoins">
+	LEFT JOIN gbj_reward b ON b.id = a.reward_id
+	LEFT JOIN gbj_user c ON c.id = a.child_id 
+	</sql>
+	
     <!-- 根据reward_id 查询评论列表 -->
     <select id="getCommentsList" resultType="GbjUserRewardComments">
 		SELECT 
@@ -137,6 +142,17 @@
 		<include refid="gbjUserRewardCommentsJoins"/>
 		WHERE a.reward_id = #{id}
 		AND a.del_flag = "0"
-		 
+		 AND a.child_id is null
+		ORDER BY a.create_date DESC
+    </select>
+     <select id="findDomainArticleRewardReplyCommentsList" resultType="GbjUserRewardComments" >
+        SELECT 
+			<include refid="gbjUserRewardCommentsColumns"/>
+		FROM gbj_user_reward_comments a
+		<include refid="gbjUserJoins"/>
+		WHERE a.reward_id = #{id}
+		AND a.del_flag = "0"
+		AND a.child_id is not null
+		ORDER BY a.create_date DESC
     </select>
 </mapper>

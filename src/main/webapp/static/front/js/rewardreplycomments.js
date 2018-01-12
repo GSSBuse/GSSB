@@ -1,7 +1,8 @@
-    function commentSubmit(){
-        var id = $("#commentform").find("#id").eq(0).val();
-        var comment = $("#commentform").find("#comment").eq(0).val();
-        var parentId = $("#commentform").find("#parentId").eq(0).val();
+    function rewardreplySubmit(){
+        var id = $("#replyform").find("#ids").eq(0).val();
+        var comment = $("#replyform").find("#comment").eq(0).val();
+        var parentId = $("#replyform").find("#parentId").eq(0).val();
+        var childId = $("#replyform").find("#childId").eq(0).val();
         if($(".tips ").is(":visible")){
             return false;
         }
@@ -9,15 +10,15 @@
             showError("请输入评论");
             return false;
         }
-        
         var ajaxResult;
         $.ajax({
-			url : ctx + "/buycomments.json",
+			url : ctx + "/rewardreplycomments.json",
 			type : "POST",
 			data : {
 				id : id,
 				comment : comment,
-				parentId:parentId
+				parentId:parentId,
+				childId:childId
 			},
         	dataType : 'json',
         	async : false,
@@ -42,6 +43,4 @@
         }
         return true;
     }
-    
-   
     

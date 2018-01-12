@@ -15,14 +15,19 @@
 		a.update_date AS "updateDate",
 		a.remarks AS "remarks",
 		a.del_flag AS "delFlag",
-		b.title AS "buy.title"
+		b.title AS "buy.title",
+		c.username AS "user.username"
 	</sql>
 	
 	
 	<sql id="gbjUserBuyCommentsJoins">
 	LEFT JOIN gbj_buy b ON b.id = a.buy_id
+	LEFT JOIN gbj_user c ON c.id = a.parent_id 
 	</sql>
-	
+	<sql id="gbjUserJoins">
+	LEFT JOIN gbj_buy b ON b.id = a.buy_id
+	LEFT JOIN gbj_user c ON c.id = a.child_id 
+	</sql>
 	
 	<!-- 根据buy_id 查询评论列表 -->
     <select id="getCommentsList" resultType="GbjUserBuyComments">
@@ -41,7 +46,7 @@
 		<include refid="gbjUserBuyCommentsJoins"/>
 		WHERE a.buy_id = #{id}
 		AND a.del_flag = "0"
-		 
+		
 	</select>
     
     
@@ -149,7 +154,17 @@
 		<include refid="gbjUserBuyCommentsJoins"/>
 		WHERE a.buy_id = #{id}
 		AND a.del_flag = "0"
+		AND a.child_id is null
+		ORDER BY a.create_date DESC
+    </select>
+	<select id="findDomainArticleBuyReplyCommentsList" resultType="GbjUserBuyComments" >
+        SELECT 
+			<include refid="gbjUserBuyCommentsColumns"/>
+		FROM gbj_user_buy_comments a
+		<include refid="gbjUserJoins"/>
+		WHERE a.buy_id = #{id}
+		AND a.del_flag = "0"
+		AND a.child_id is not null
 		 ORDER BY a.create_date DESC
     </select>
-	
 </mapper>

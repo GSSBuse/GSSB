@@ -67,4 +67,8 @@ public class GbjUserBuyCommentsService extends CrudService<GbjUserBuyCommentsDao
 		return gbjUserBuyCommentsDao.findDomainArticleBuyCommentsList(id);
 	}
 
+	public List<GbjUserBuyComments> findDomainArticleBuyReplyCommentsList(@RequestParam("id") String id) {
+		return gbjUserBuyCommentsDao.findDomainArticleBuyReplyCommentsList(id);
+	}
+
 }

@@ -12,13 +12,10 @@
 </head>
 <script type="text/javascript" src="${ctxStatic }/front/js/Article.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/buycomments.js"></script>
+<script type="text/javascript" src="${ctxStatic }/front/js/buyreplycomments.js"></script>
 <script type="text/javascript"
 	src="${ctxStatic }/front/js/buyupcounts.js"></script>
 <script type="text/javascript">
-function fck(){
-	document.getElementById("div").style.display="block";
-}
-
 </script>
 <body ms-controller="articles">
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
@@ -38,8 +35,8 @@ function fck(){
 
 					<ul class="breadcrumb">
 						<li><a href="#">国标商标</a><span class="divider">/</span></li>
-						<li><a href="#">商标 &amp; 餐饮</a> <span class="divider">/</span></li>
-						<li class="active">我想买个小吃店的店名商标</li>
+						<li><a href="#" class="gbjType">${gbjBuyDetail.typeId }</a> <span class="divider">/</span></li>
+						<li class="active">${gbjBuyDetail.title}</li>
 					</ul>
 
 					<article class=" type-post format-standard hentry clearfix">
@@ -61,17 +58,14 @@ function fck(){
 
 							</form>
 						</div>
-						<p>${gbjBuyDetail.description}</p>
+						<p><h5>${gbjBuyDetail.description}</h5></p>
 					</article>
 					<section id="comments">
 						<h3 id="comments-title">评论内容</h3>
-						<ol class="commentlist"
-							ms-repeat-ell="datas.domainBuyCommentsArticleList">
-
+						<ol class="commentlist">
 							<li class="comment even thread-even depth-1" id="li-comment-2">
-								<article id="comment-2">
-
-									<a href="#"> <img alt=""
+								<article id="comment-2" ms-repeat-ell="datas.domainBuyCommentsArticleList">
+									<a > <img alt=""
 										src="http://1.gravatar.com/avatar/50a7625001317a58444a20ece817aeca?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G"
 										class="avatar avatar-60 photo" height="60" width="60">
 									</a>
@@ -79,9 +73,9 @@ function fck(){
 									<div class="comment-meta">
 
 										<h5 class="author">
-											<cite class="fn"> <a href="#" rel="external nofollow"
-												class="url">{{ell.parentId}}</a>
-											</cite> - <a class="comment-reply-link" onclick="javascript:fck();">回复</a>
+											<cite class="fn"> 
+											<a href="#" rel="external nofollow" class="url">{{ell.user.username}}</a>
+											</cite>--<a  href="#reply-dialog" onclick="show1()">回复</a>
 										</h5>
 										
 
@@ -91,45 +85,39 @@ function fck(){
 
 									</div>
 									<div class="comment-body">
-										<p>{{ell.comment}}</p>
+										<p><h5>{{ell.comment}}</h5></p>
 										
 									</div>
 									
 									<!-- end of comment-body -->
 								</article>
-								
+	
 								<!-- end of comment -->
 
-								 <ul class="children">
+								 <ul class="children" >
 									<li
 										class="comment byuser comment-author-saqib-sarwar bypostauthor odd alt depth-2"
 										id="li-comment-3">
-										<article id="comment-3">
+										<article id="comment-3" ms-repeat-children="datas.domainBuyReplyCommentsArticleList">
 
-											<a href="#"> <img alt=""
-												src="http://0.gravatar.com/avatar/2df5eab0988aa5ff219476b1d27df755?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G"
+											<a > <img alt=""
+												src="http://www.mf08s.com/y/q/UploadFiles_q/20121005/2012100507413841.jpg"
 												class="avatar avatar-60 photo" height="60" width="60">
 											</a>
 
 											<div class="comment-meta">
 
 												<h5 class="author">
-													<cite class="fn">头像和名字一样数据库取得</cite> - <a
-														class="comment-reply-link" href="#">回复</a>
+													<cite class="fn">{{children.user.username}}</cite>
 												</h5>
 
 												<p class="date">
-													<time datetime="2013-02-26T13:20:14+00:00">February
-														26, 2013 at 1:20 pm</time>
+													<time datetime="2013-02-26T13:20:14+00:00">{{children.createDate}}</time>
 												</p>
 
 											</div>
-											 <div id="div" style="display:none;">
-										   <textarea rows="5" cols="100"></textarea>
-									    </div>
-											
 											<div class="comment-body">
-												<p></p>
+												<p><h6>{{children.comment}}</h6></p>
 											</div>
 										</article>
 									</li>
@@ -175,7 +163,7 @@ function fck(){
 						<ol class="commentlist">
 							<li class="comment even thread-even depth-1" id="li-comment-2">
 								<article id="comment-2">
-									<a href="#"> <img alt=""
+									<a > <img alt=""
 										src="http://1.gravatar.com/avatar/50a7625001317a58444a20ece817aeca?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G"
 										class="avatar avatar-60 photo" height="60" width="60">
 									</a>
@@ -201,8 +189,29 @@ function fck(){
 	<!-- End of Footer -->
 
 	<a href="#top" id="scroll-top"></a>
+	<div id="reply-dialog-bg"
+		style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1; display: none;"></div>
+	<div id="reply-dialog"  style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
+		<div id="close-dialog1" style="position: absolute; right: -10px; top: -14px; width: 24px; height: 24px; text-align: center; font-size: 25px; border: 2px solid #d2d1d1; border-radius: 50%; background-color: #fff; color: #e71a1a; cursor: pointer;">×</div>
+		        <form method="post" id="replyform" >
+								<p class="comment-notes"></p>
+								<div>
+									<label for="comment"></label> 
+									<input name="ids" type="hidden" id="ids"
+										value="${gbjBuyDetail.id}">
+										<input name="childId" type="hidden" id="childId"
+										value="${login_user.id}">
+										<input name="parentId" type="hidden" id="parentId"
+										value='add49fac74cb476f80709be1cee3c47a'>
+									<textarea class="span8" name="comment" id="comment" cols="58"
+										rows="10"></textarea>
+								</div>
+								<div>
+									<input class="btn" onclick="buyreplySubmit();" name="submit" type="button" id="submit" value="提交评论">
+								</div>
+							</form>
+	</div>
 	<script type="text/javascript"> <!--我要买标弹出框js -->
-
 	$('#comment').focus(function(){
 		var x = $('#loginspan').text();
 		
@@ -260,16 +269,78 @@ function fck(){
 	
 	})
 	
-	
+	function show1(){
+	   //alert(obj.tagName);
+		//alert($(obj).prev().tagName);
+		var x = $('#loginspan').text();
+		if(x == "登录"){
+	         $("#popup").show();//查找ID为popup的DIV show()显示#gray
+	         tc_center();
+	         $('.loginV2').show();
+	         $('.registerBox').hide();
+	         $('.form-error').hide();
+	     $(".td").click(function(){
+	         $("#popup").show();//查找ID为popup的DIV show()显示#gray
+	         tc_center();
+	         $('.loginV2').hide();
+	         $('.registerBox').show();
+	         $('.form-error').hide();
+	     });
+	     //点击关闭按钮
+	     $("a.guanbi").click(function(){
+	         $("#popup").hide();//查找ID为popup的DIV hide()隐藏
+	     })
+	     //点击退出按钮
+	     $(".logout").click(function(){
+	    	 $.ajax({
+	 			url : ctx + "/logout.json",
+	 			type : "POST",
+	         	dataType : 'json',
+	 			success : function(data) {
+	 				window.location.reload();
+	 				return true;
+	 			},
+	 			error : function(data) {
+	 				alert(data.responseText);
+	 				return false;
+	 			}
+	 		});
+	     });
 
+	     //窗口水平居中
+	     $(window).resize(function(){
+	         tc_center();
+	     });
+
+	     function tc_center(){
+	         var _top=($(window).height()-$(".popup").height())/2;
+	         var _left=($(window).width()-$(".popup").width())/2;
+	         
+	         $(".popup").css({top:_top,left:_left});
+	     }   
+	     }
+		else{
+	    document.getElementById("reply-dialog").style.display="block";
+	    document.getElementById("reply-dialog-bg").style.display = 'block';
+		}
+	}
+	         
+	function hide(){
+	    document.getElementById("reply-dialog").style.display="none";
+	    document.getElementById("reply-dialog-bg").style.display = 'none';
+	}
+	// 点击弹窗背景关闭当前弹窗
+	$('#reply-dialog-bg').click(function(){
+		$('#reply-dialog,#reply-dialog-bg').hide();
+	});
+	// 点击弹窗的关闭按钮关闭当前弹窗
+	$('#close-dialog1').click(function(){
+	    $('#reply-dialog,#reply-dialog-bg').hide();
+	});
 </script>
-	
-	
-	
 	//下面全是和登录相关的js
 <script type="text/javascript">
      $(document).ready(function(){ 
-
          $(".top_nav").mousedown(function(e){ 
              $(this).css("cursor","move");//改变鼠标指针的形状 
              var offset = $(this).offset();//DIV在页面的位置 

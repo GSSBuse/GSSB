@@ -39,12 +39,7 @@
 				<form:input path="shangbiaoNumber" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
 			</div>
 		</div>
-		<div class="control-group">
-			<label class="control-label">交易数量：</label>
-			<div class="controls">
-				<form:input path="businessNumber" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
-			</div>
-		</div>
+		
 		<div class="control-group">
 			<label class="control-label">版权交易量：</label>
 			<div class="controls">
@@ -55,6 +50,12 @@
 			<label class="control-label">专利交易量：</label>
 			<div class="controls">
 				<form:input path="zhuanliNumber" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">总交易数量：</label>
+			<div class="controls">
+				<form:input path="businessNumber" htmlEscape="false" maxlength="20" class="input-xlarge  digits"/>
 			</div>
 		</div>
 		<div class="form-actions">

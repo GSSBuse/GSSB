@@ -71,9 +71,11 @@ $(document).ready(function(){
 							</h3>
 							<div class="post-meta clearfix ">
 								<span class="date">{{el.createDate}}</span> <span
-									class="category"><a href="#" title="查询该标签所有内容"
-									class="gbjType" >{{el.typeId}}</a> <!-- &amp;&amp;&amp;<a href="#"
+									class="category"><a  title="查询该标签所有内容"
+									 >{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a> <!-- &amp;&amp;&amp;<a href="#"
 									title="查询该标签所有内容">{{el.tag}}</a> --></span>
+									<span class="comments"><a
+								href="#">{{el.lookCounts}}</a></span>
 									<!--  <span class="comments"><a
 									href="#">3个回复</a></span>  -->
 									<a ms-attr-href="${ctx}/single.html?id={{el.id}}&type=buy"><span
@@ -155,43 +157,7 @@ $(document).ready(function(){
 								</div>
 							</form>
 	</div>
-	<%-- <form id="domainform" action="${ctx }/buyarticles.html" method="post"
-			ms-widget="validation" class="form-horizontal"
-			style="padding: 20px 30px; margin: 0;">
-			<h1 class="post-title">
-				<a href="#">我要买标</a>
-			</h1>
-			<p class="comment-notes">请输入您需要发布的信息。专业顾问人工查询，结果分析更准确！</p>
-
-			<div>
-				<label for="title">商标名称 *</label> <input class="span4" type="text"
-					name="title" id="title"
-					ms-duplex-required="datas.domainInfo1.title">
-					
-			</div>
-			 <div>
-				<label for="mobile">用户id</label>
-				 <input class="span4" name="user_id" type="text"  id="user_id" 
-				 value="${login_user.id}"
-				 ms-duplex="datas.domainInfo1.user_id" >
-			</div> 
-			<div>
-				<label for="mobile">联系电话 *</label> <input class="span4" type="text"
-					name="mobile" id="mobile"
-					ms-duplex-required="datas.domainInfo1.mobile">
-			</div>
-			<div>
-				<label for="mobile">联系人*</label> <input class="span4" type="text"
-					name="realname" id="realname"
-					ms-duplex-required="datas.domainInfo1.realname">
-			</div>
-
-
-			<div class="payment-sendbtns">
-				<input class="btn" name="submit" type="submit" id="submit01"
-					value="提交查询">
-			</div>
-		</form> --%>
+	
 	<script type="text/javascript"> <!--我要买标弹出框js -->
 function show1(){
 	

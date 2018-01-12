@@ -84,5 +84,9 @@
 		DELETE FROM gbj_business_number
 		WHERE id = #{id}
 	</update>
-	
+	 <select id="findDomainBusinessNumber" resultType="GbjBusinessNumber" >
+       SELECT 
+			<include refid="gbjBusinessNumberColumns"/>
+		FROM gbj_business_number a
+    </select> 
 </mapper>

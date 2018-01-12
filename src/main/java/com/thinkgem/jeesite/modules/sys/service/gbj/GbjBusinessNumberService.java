@@ -5,16 +5,18 @@ package com.thinkgem.jeesite.modules.sys.service.gbj;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
-import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBusinessNumber;
 import com.thinkgem.jeesite.modules.sys.dao.gbj.GbjBusinessNumberDao;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBusinessNumber;
 
 /**
  * 历史交易量Service
+ * 
  * @author snnu
  * @version 2018-01-11
  */
@@ -22,26 +24,33 @@ import com.thinkgem.jeesite.modules.sys.dao.gbj.GbjBusinessNumberDao;
 @Transactional(readOnly = true)
 public class GbjBusinessNumberService extends CrudService<GbjBusinessNumberDao, GbjBusinessNumber> {
 
+	@Autowired
+	GbjBusinessNumberDao gbjBusinessNumberDao;
+
 	public GbjBusinessNumber get(String id) {
 		return super.get(id);
 	}
-	
+
 	public List<GbjBusinessNumber> findList(GbjBusinessNumber gbjBusinessNumber) {
 		return super.findList(gbjBusinessNumber);
 	}
-	
+
 	public Page<GbjBusinessNumber> findPage(Page<GbjBusinessNumber> page, GbjBusinessNumber gbjBusinessNumber) {
 		return super.findPage(page, gbjBusinessNumber);
 	}
-	
+
 	@Transactional(readOnly = false)
 	public void save(GbjBusinessNumber gbjBusinessNumber) {
 		super.save(gbjBusinessNumber);
 	}
-	
+
 	@Transactional(readOnly = false)
 	public void delete(GbjBusinessNumber gbjBusinessNumber) {
 		super.delete(gbjBusinessNumber);
 	}
-	
+
+	public GbjBusinessNumber findDomainBusinessNumber() {
+		return gbjBusinessNumberDao.findDomainBusinessNumber();
+	}
+
 }

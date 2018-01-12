@@ -74,7 +74,7 @@ $(document).ready(function(){
 							</h3>
 							<div class="post-meta clearfix">
 								<span class="date">{{el.createDate}}</span> <span
-									class="category"><a href="#" title="查询该标签所有内容" class="gbjType">{{el.typeId}}</a>
+									class="category"><a  title="查询该标签所有内容" >{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a>
 										<!-- &amp;&amp;&amp; <a href="#" title="查询该标签所有内容">{{el.tag}}</a> --></span> 
 										<!-- <span class="comments"><a href="#">3个回复</a></span> -->
 								<a ms-attr-href="${ctx}/single.html?id={{el.id}}&type=sold"><span

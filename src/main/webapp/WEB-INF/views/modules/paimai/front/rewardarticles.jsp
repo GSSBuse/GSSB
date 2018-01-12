@@ -13,6 +13,33 @@
 <script type="text/javascript"
 	src="${ctxStatic }/front/js/Articlereward.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/gbreward.js"></script>
+<script type="text/javascript">
+var if_firstime=true;
+$(document).ready(function(){
+	 var totalcounts= ${gbjRewardcount};
+	 var pageSize=11;
+	 var y=Math.ceil((totalcounts)/pageSize);//由总条数除以每页数目得到总页数
+	 var z=1;
+	 if(GetQueryString("page")!=null && !isNaN(GetQueryString("page"))){
+		 z=parseInt(GetQueryString("page"));
+	 }
+	 //alert(y);
+	 $("#demo2").jqPaginator({
+	        totalPages: y,
+	        visiblePages: 10,
+	        currentPage: z,
+	        onPageChange: function (n) {
+	            $("#demo2-text").html("当前第" + n + "页");
+	            if(if_firstime){
+	            	if_firstime=false;
+	            }
+	            else if(!if_firstime){
+	            	window.location.href="${ctx }/rewardarticles.html?page="+n;
+	            }
+	        }
+	    });
+	});
+</script>
 <body ms-controller="rewardarticles">
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
 	<div class="about bg-two">
@@ -44,7 +71,7 @@
 							</h3>
 							<div class="post-meta clearfix">
 								<span class="date">{{el.createDate}}</span> <span
-									class="category"><a href="#" title="查询该标签所有内容" class="gbjType">{{el.typeId}}</a>
+									class="category"><a  title="查询该标签所有内容" >{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a>
 										<!-- &amp;&amp;&amp; <a href="#" title="查询该标签所有内容">{{el.tag}}</a> --></span> 
 										<!-- <span class="comments"><a href="#">3个回复</a></span> -->
 								<a ms-attr-href="${ctx}/single.html?id={{el.id}}&type=reward"><span
@@ -59,11 +86,11 @@
 							</h4>
 						</p>
 					</article>
-					<div id="pagination">
-						<a href="#" class="btn active">1</a> <a href="#" class="btn">2</a>
-						<a href="#" class="btn">3</a> <a href="#" class="btn">下一页 ></a> <a
-							href="#" class="btn">最后一页 >></a>
-					</div>
+					<!-- 分页实现 -->
+                            <div class="demo customBootstrap">
+                             <p id="demo2-text"></p>
+                              <ul id="demo2" class="pagination"></ul>
+                            </div>
 				</div>
 				<!-- end of page content -->
 				<!-- start of sidebar -->

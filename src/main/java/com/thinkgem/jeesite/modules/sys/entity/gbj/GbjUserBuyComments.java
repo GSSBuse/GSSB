@@ -19,23 +19,30 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 public class GbjUserBuyComments extends DataEntity<GbjUserBuyComments> {
 
 	private static final long serialVersionUID = 1L;
-	/*
-	 * private GbjUser user; // 用户ID
-	 * 
-	 * public GbjUser getUser() { return user; }
-	 * 
-	 * public void getUser(GbjUser user) { this.user = user; }
-	 * 
-	 * public void setUser(GbjUser user) { this.user = user; }
-	 * 
-	 * public GbjUserBuyComments(GbjUser parentId) { this.user = parentId; }
-	 */
 	private GbjBuy buy;
 	private String buyId; // 买标信息ID
 	private String parentId; // 父ID
 	private String childId; // 子ID
 	private String comment; // 评论内容
 	private Date commentTime; // 评论时间
+
+	private GbjUser user; // 用户ID
+
+	public GbjUser getUser() {
+		return user;
+	}
+
+	public void getUser(GbjUser user) {
+		this.user = user;
+	}
+
+	public void setUser(GbjUser user) {
+		this.user = user;
+	}
+
+	public GbjUserBuyComments(GbjUser userId) {
+		this.user = userId;
+	}
 
 	public GbjUserBuyComments() {
 		super();
