@@ -715,6 +715,7 @@ ul.articles .article-entry {
 }
 ul.articles .article-entry.standard {
   background: url("../../images/standard.png") no-repeat 0 3px;
+  border-bottom: 1px solid #86868652;
 }
 ul.articles .article-entry.video {
   background: url("../../images/video.png") no-repeat 0 3px;
@@ -746,11 +747,11 @@ ul.articles li.article-entry:last-child {
 }
 .article-entry .like-count {
   position: absolute;
-  bottom: 0px;
+  bottom: 8px;
   right: 0px;
   line-height: 18px;
   font-weight: 600;
-  padding: 3px 5px 3px 20px;
+  padding: 5px 5px 3px 20px;
   border: 1px solid #f2f2f2;
   border-bottom: none;
   background: url("../../images/like.png") no-repeat 6px 8px;

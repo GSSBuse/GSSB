@@ -142,7 +142,8 @@ var interval_ArticleBuyReplyComments_status_check = function() {
 	var x = window.location.href.split("?")[1].substring(3,35);
 		//alert(x);
 		var count = 11;//首页最多显示11条
-		var id= x;
+		var id=x ;
+		//var toId='4827051ac1044cdaa36e247c2abd494f';//暂时屏蔽掉 了，因为会出现错误。
 		//var id = null;
 		//var id="${gbjBuyDetail.id}";
 		//alert("${gbjBuyDetail.id}");
@@ -150,7 +151,8 @@ var interval_ArticleBuyReplyComments_status_check = function() {
 			"polling/ArticleBuyReplyCommentsData.json",
 			{
 				count : count ,   //参数1，检索的limit条数
-				id    :   id
+				id    :   id     //参数:检索买标信息id
+				//toId  :  toId     //参数:检索评论信息id
 			},
 			function(res) {
 				if (res.type == "success") {					

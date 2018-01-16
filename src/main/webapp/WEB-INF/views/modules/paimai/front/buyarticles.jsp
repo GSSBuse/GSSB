@@ -13,8 +13,6 @@
 <script type="text/javascript" src="${ctxStatic }/front/js/Articlebuy.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/gbBuy.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/buyupcounts.js"></script>
-<script type="text/javascript" src="${ctxStatic }/front/js/common.js"></script>
-<%-- <script type="text/javascript" src="${ctxStatic }/front/js/common.js"></script> --%>
 <script type="text/javascript">
 var if_firstime=true;
 $(document).ready(function(){

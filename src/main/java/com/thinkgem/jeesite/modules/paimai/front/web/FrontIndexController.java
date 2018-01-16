@@ -33,6 +33,7 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjTag;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjTouristRequire;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUser;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyCommentsReply;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserRewardComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserSoldComments;
@@ -46,6 +47,7 @@ import com.thinkgem.jeesite.modules.sys.service.gbj.GbjRewardService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjSoldService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjTagService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjTouristRequireService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserBuyCommentsReplyService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserBuyCommentsService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserCommentsService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserRewardCommentsService;
@@ -106,6 +108,9 @@ public class FrontIndexController extends BaseController {
 	private GbjTagService gbjTagService;
 	@Autowired
 	private GbjBusinessNumberService gbjBusinessNumberService;
+
+	@Autowired
+	GbjUserBuyCommentsReplyService gbjUserBuyCommentsReplyService;
 
 	/**
 	 * 网站首页
@@ -551,93 +556,6 @@ public class FrontIndexController extends BaseController {
 	}
 
 	/**
-	 * 回复我要买标评论提交信息提交 2018/1/12 by snnu
-	 */
-	@RequestMapping(value = { "soldreplycomments" })
-	@ResponseBody
-	public AjaxResult soldreplycomments(HttpServletRequest request, @RequestParam(value = "id") String id,
-			@RequestParam(value = "comment") String comment, @RequestParam(value = "parentId") String parentId,
-			@RequestParam(value = "childId") String childId) {
-		GbjUserSoldComments gbjUserSoldComments = new GbjUserSoldComments();
-		GbjSold gbjSold = new GbjSold();
-		try {
-			logger.info(parentId);
-			// STEP1 提交查询信息，保存到数据库
-			gbjUserSoldComments.setSold(gbjSoldService.get(id));
-			gbjUserSoldComments.setComment(comment);
-			gbjUserSoldComments.setParentId(parentId);
-			gbjUserSoldComments.setChildId(childId);
-			gbjUserSoldComments.setCreateDate(new Date());
-
-			gbjUserSoldCommentsService.save(gbjUserSoldComments);
-
-			return AjaxResult.makeSuccess("您很棒，评论成功！");
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			return AjaxResult.makeError("失败【" + e.getMessage() + "】");
-		}
-
-	}
-
-	/**
-	 * 回复我要买标评论提交信息提交 2018/1/12 by snnu
-	 */
-	@RequestMapping(value = { "rewardreplycomments" })
-	@ResponseBody
-	public AjaxResult rewardreplycomments(HttpServletRequest request, @RequestParam(value = "id") String id,
-			@RequestParam(value = "comment") String comment, @RequestParam(value = "parentId") String parentId,
-			@RequestParam(value = "childId") String childId) {
-		GbjUserRewardComments gbjUserRewardComments = new GbjUserRewardComments();
-		GbjReward gbjReward = new GbjReward();
-		try {
-			logger.info(parentId);
-			// STEP1 提交查询信息，保存到数据库
-			gbjUserRewardComments.setReward(gbjRewardService.get(id));
-			gbjUserRewardComments.setComment(comment);
-			gbjUserRewardComments.setParentId(parentId);
-			gbjUserRewardComments.setChildId(childId);
-			gbjUserRewardComments.setCreateDate(new Date());
-
-			gbjUserRewardCommentsService.save(gbjUserRewardComments);
-
-			return AjaxResult.makeSuccess("您很棒，评论成功！");
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			return AjaxResult.makeError("失败【" + e.getMessage() + "】");
-		}
-
-	}
-
-	/**
-	 * 回复我要买标评论提交信息提交 2018/1/12 by snnu
-	 */
-	@RequestMapping(value = { "buyreplycomments" })
-	@ResponseBody
-	public AjaxResult buyreplycomments(HttpServletRequest request, @RequestParam(value = "id") String id,
-			@RequestParam(value = "comment") String comment, @RequestParam(value = "parentId") String parentId,
-			@RequestParam(value = "childId") String childId) {
-		GbjUserBuyComments gbjUserBuyComments = new GbjUserBuyComments();
-		GbjBuy gbjBuy = new GbjBuy();
-		try {
-			logger.info(parentId);
-			// STEP1 提交查询信息，保存到数据库
-			gbjUserBuyComments.setBuy(gbjBuyService.get(id));
-			gbjUserBuyComments.setComment(comment);
-			gbjUserBuyComments.setParentId(parentId);
-			gbjUserBuyComments.setChildId(childId);
-			gbjUserBuyComments.setCreateDate(new Date());
-
-			gbjUserBuyCommentsService.save(gbjUserBuyComments);
-
-			return AjaxResult.makeSuccess("您很棒，评论成功！");
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			return AjaxResult.makeError("失败【" + e.getMessage() + "】");
-		}
-
-	}
-
-	/**
 	 * 我要卖标评论提交信息提交 2017/12/27 by snnu
 	 */
 	@RequestMapping(value = { "soldcomments" })
@@ -679,6 +597,96 @@ public class FrontIndexController extends BaseController {
 			gbjUserRewardComments.setReward(gbjRewardService.get(id));
 			gbjUserRewardComments.setComment(comment);
 			gbjUserRewardComments.setParentId(parentId);
+			gbjUserRewardComments.setCreateDate(new Date());
+
+			gbjUserRewardCommentsService.save(gbjUserRewardComments);
+
+			return AjaxResult.makeSuccess("您很棒，评论成功！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return AjaxResult.makeError("失败【" + e.getMessage() + "】");
+		}
+
+	}
+
+	/**
+	 * 回复我要买标评论提交信息提交 2018/1/12 by snnu
+	 */
+	@RequestMapping(value = { "buyreplycomments" })
+	@ResponseBody
+	public AjaxResult buyreplycomments(HttpServletRequest request, @RequestParam(value = "buyId") String buyId,
+			@RequestParam(value = "replyComments") String replyComments, @RequestParam(value = "userId") String userId,
+			@RequestParam(value = "toId") String toId) {
+		// GbjUserBuyComments gbjUserBuyComments = new GbjUserBuyComments();
+		GbjUserBuyCommentsReply gbjUserBuyCommentsReply = new GbjUserBuyCommentsReply();
+		GbjBuy gbjBuy = new GbjBuy();
+		try {
+			// logger.info(parentId);
+			// STEP1 提交查询信息，保存到数据库
+			// gbjUserBuyCommentsReply.setBuy(gbjBuyService.get(id));
+			gbjUserBuyCommentsReply.setBuyId(buyId);
+			gbjUserBuyCommentsReply.setReplyComments(replyComments);
+			gbjUserBuyCommentsReply.setUserId(userId);
+			gbjUserBuyCommentsReply.setToId(toId);
+			gbjUserBuyCommentsReply.setCreateDate(new Date());
+
+			// gbjUserBuyCommentsService.save(gbjUserBuyComments);
+			gbjUserBuyCommentsReplyService.save(gbjUserBuyCommentsReply);
+
+			return AjaxResult.makeSuccess("您很棒，评论成功！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return AjaxResult.makeError("失败【" + e.getMessage() + "】");
+		}
+
+	}
+
+	/**
+	 * 回复我要卖标评论提交信息提交 2018/1/13 by snnu
+	 */
+	@RequestMapping(value = { "soldreplycomments" })
+	@ResponseBody
+	public AjaxResult soldreplycomments(HttpServletRequest request, @RequestParam(value = "id") String id,
+			@RequestParam(value = "comment") String comment, @RequestParam(value = "parentId") String parentId,
+			@RequestParam(value = "childId") String childId) {
+		GbjUserSoldComments gbjUserSoldComments = new GbjUserSoldComments();
+		GbjSold gbjSold = new GbjSold();
+		try {
+			logger.info(parentId);
+			// STEP1 提交查询信息，保存到数据库
+			gbjUserSoldComments.setSold(gbjSoldService.get(id));
+			gbjUserSoldComments.setComment(comment);
+			gbjUserSoldComments.setParentId(parentId);
+			gbjUserSoldComments.setChildId(childId);
+			gbjUserSoldComments.setCreateDate(new Date());
+
+			gbjUserSoldCommentsService.save(gbjUserSoldComments);
+
+			return AjaxResult.makeSuccess("您很棒，评论成功！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return AjaxResult.makeError("失败【" + e.getMessage() + "】");
+		}
+
+	}
+
+	/**
+	 * 回复我要悬赏评论提交信息提交 2018/1/13 by snnu
+	 */
+	@RequestMapping(value = { "rewardreplycomments" })
+	@ResponseBody
+	public AjaxResult rewardreplycomments(HttpServletRequest request, @RequestParam(value = "id") String id,
+			@RequestParam(value = "comment") String comment, @RequestParam(value = "parentId") String parentId,
+			@RequestParam(value = "childId") String childId) {
+		GbjUserRewardComments gbjUserRewardComments = new GbjUserRewardComments();
+		GbjReward gbjReward = new GbjReward();
+		try {
+			logger.info(parentId);
+			// STEP1 提交查询信息，保存到数据库
+			gbjUserRewardComments.setReward(gbjRewardService.get(id));
+			gbjUserRewardComments.setComment(comment);
+			gbjUserRewardComments.setParentId(parentId);
+			gbjUserRewardComments.setChildId(childId);
 			gbjUserRewardComments.setCreateDate(new Date());
 
 			gbjUserRewardCommentsService.save(gbjUserRewardComments);
@@ -1118,9 +1126,10 @@ public class FrontIndexController extends BaseController {
 	public AjaxResult ArticleBuyReplyCommentsData(@RequestParam("id") String id) {
 
 		// 单个买标信息和评论信息
-		List<GbjUserBuyComments> pageDomainBuyReplyCommentsArticleList = new ArrayList<GbjUserBuyComments>();
+		List<GbjUserBuyCommentsReply> pageDomainBuyReplyCommentsArticleList = new ArrayList<GbjUserBuyCommentsReply>();
 		try {
-			pageDomainBuyReplyCommentsArticleList = gbjUserBuyCommentsService.findDomainArticleBuyReplyCommentsList(id);
+			pageDomainBuyReplyCommentsArticleList = gbjUserBuyCommentsReplyService
+					.findDomainArticleBuyReplyCommentsList(id);
 
 			AjaxResult ar = AjaxResult.makeSuccess("");
 			ar.getData().put("ArticleBuyReplyCommentsData", pageDomainBuyReplyCommentsArticleList);

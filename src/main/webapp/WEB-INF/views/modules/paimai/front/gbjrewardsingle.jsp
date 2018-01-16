@@ -12,8 +12,8 @@
 </head>
 <script type="text/javascript" src="${ctxStatic }/front/js/Article.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/rewardcomments.js"></script>
-<script type="text/javascript"
-	src="${ctxStatic }/front/js/rewardupcounts.js"></script>
+<script type="text/javascript" src="${ctxStatic }/front/js/rewardreplycomments.js"></script>
+<script type="text/javascript" src="${ctxStatic }/front/js/rewardupcounts.js"></script>
 <body ms-controller="articles">
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
 	<div class="about">
@@ -59,7 +59,7 @@
 						<!--   <p>买标买标悬赏等的详细信息。进入这个页面是需要2个参数，id和type。type绝对去从那个标里面去检索。也可以3个表做个视图（看看有没有共通的字段了要）。然后根据id取得对应的详细信息，包括回复和点赞等信息。分享等我后面再加。
                                                                                                                                                                                 这里暂时不支持富文本的样式显示，只支持一般文本就好了。
                                                         </p>-->
-						<p>${gbjRewardDetail.description}</p>
+						<p><h5>${gbjRewardDetail.description}</h5></p>
 
 					</article>
 					<section id="comments">
@@ -81,8 +81,8 @@
 
 										<h5 class="author">
 											<cite class="fn"> <a href="#" rel="external nofollow"
-												class="url">{{ell.parentId}}</a>
-											</cite> <a class="comment-reply-link" href="#"></a>
+												class="url">{{ell.user.username}}</a>
+											</cite>-<a href="#reply-dialog" onclick="show1()">回复</a>
 										</h5>
 
 										<p class="date">
@@ -93,13 +93,13 @@
 									<!-- end .comment-meta -->
 
 									<div class="comment-body">
-										<p>{{ell.comment}}</p>
+										<p><h5>{{ell.comment}}</h5></p>
 									</div>
 									<!-- end of comment-body -->
 
 								</article>
 								<!-- end of comment -->
- <ul class="children" >
+                                 <ul class="children" >
 									<li
 										class="comment byuser comment-author-saqib-sarwar bypostauthor odd alt depth-2"
 										id="li-comment-3">
@@ -147,7 +147,7 @@
 							<form method="post" id="commentform">
 								<p class="comment-notes"></p>
 								<div>
-									<label for="comment">Comment</label> 
+									<label for="comment"></label> 
 									<input name="parentId"
 										type="hidden" id="parentId" value="${login_user.id}">
 									<input name="id" type="hidden" id="id"
@@ -172,6 +172,24 @@
 
 				<!-- start of sidebar -->
 				<aside class="span4 page-sidebar">
+				<section id="comments">
+						<h3 id="comments-title"></h3>
+						<ol class="commentlist">
+							<li class="comment even thread-even depth-1" id="li-comment-2">
+								<article id="comment-2">
+									<a > <img alt=""
+										src="http://1.gravatar.com/avatar/50a7625001317a58444a20ece817aeca?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G"
+										class="avatar avatar-60 photo" height="60" width="60">
+									</a>
+										<h2 class="author">
+										${gbjRewardDetail.user.username}
+										</h2>
+									<!-- end of comment-body -->
+								</article>
+								<!-- end of comment -->
+							</li>
+						</ol>
+					</section>
 					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
 				</aside>
 				<!-- end of sidebar -->
@@ -189,16 +207,16 @@
 		style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1; display: none;"></div>
 	<div id="reply-dialog"  style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
 		<div id="close-dialog1" style="position: absolute; right: -10px; top: -14px; width: 24px; height: 24px; text-align: center; font-size: 25px; border: 2px solid #d2d1d1; border-radius: 50%; background-color: #fff; color: #e71a1a; cursor: pointer;">×</div>
-		        <form method="post" id="replyform" >
+		                    <form method="post" id="replyform" >
 								<p class="comment-notes"></p>
 								<div>
 									<label for="comment"></label> 
 									<input name="ids" type="hidden" id="ids"
-										value="${gbjrewardDetail.id}">
+										value="${gbjRewardDetail.id}">
 										<input name="childId" type="hidden" id="childId"
 										value="${login_user.id}">
 										<input name="parentId" type="hidden" id="parentId"
-										value='add49fac74cb476f80709be1cee3c47a'>
+										value='84365953a7fc4054a6f3fd383cefee3b'>
 									<textarea class="span8" name="comment" id="comment" cols="58"
 										rows="10"></textarea>
 								</div>

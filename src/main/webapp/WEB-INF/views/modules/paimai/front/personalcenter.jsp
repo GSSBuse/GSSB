@@ -12,8 +12,8 @@
 </head>
 <script type="text/javascript" src="${ctxStatic }/front/js/Article.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/changepersonal.js"></script>
+<script type="text/javascript" src="${ctxStatic }/front/js/jqPaginator.js"></script>
 <body ms-controller="articles">
-
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
 	<div class="about bg-three">
 		<div class="container">
@@ -203,88 +203,6 @@
 								</table>
 								</form>
 							</div>
-							<%-- <div class="tab-content">
-							 <div class="form-error" style="color:#ff0000">
-					              <i></i><label class="text"></label>
-				                </div>
-							<form method="post" id="change">
-								<table class="setting-profile-table" style="width: 400px; margin-left: 100px;">
-									<tbody>
-									<tr style="height: 35px; font-size: 16px;">
-											<th style="text-align: right; width: 100px;">用户名：</th>
-											<td class="line30"><label class="profile-gender"
-												for="passport-sex-1" style="padding-left: 20px;">${gbjUserDetail.username}</label>
-										</tr>
-										<tr style="height: 35px; font-size: 25px;">
-											<th style="text-align: center; width: 150px;">用户名</th>
-											<td class="line30">
-											<label class="profile-gender" for="passport-sex-1" style="padding-left: 20px;">
-											 <input  type="text" name="username" id="username"  >
-											 <input name="id" type="hidden" id="id" value="${login_user.id}">
-											</label>
-											</td>
-										</tr>
-										<tr style="height: 35px; font-size: 25px;">
-											<th style="text-align: center; width: 150px;">真实姓名</th>
-											<td class="line30">
-											<label class="profile-gender" for="passport-sex-1" style="padding-left: 20px;">
-											 <input  type="text" name="name" id="name" value="${gbjUserDetail.name}" 
-											 onfocus="if (value =='${gbjUserDetail.name}'){value =''}"
-					                                onblur="if (value ==''){value='${gbjUserDetail.name}'}"
-											  >
-											</label>
-											</td>
-										</tr>
-										<!-- <tr style="height: 35px; font-size: 25px;">
-											<th style="text-align: center; width: 150px;">手机号码</th>
-											<td class="line30">
-											<label class="profile-gender" for="passport-sex-1" style="padding-left: 20px;">
-											 <input class="span4" type="text" name="username" id="username" value="" >
-											</label>
-											</td>
-										</tr>
-										<tr style="height: 35px; font-size: 25px;">
-											<th style="text-align: center; width: 150px;">邮箱</th>
-											<td class="line30">
-											<label class="profile-gender" for="passport-sex-1" style="padding-left: 20px;">
-											 <input class="span4" type="text" name="username" id="username"  value="">
-											</label>
-											</td>
-										</tr>
-										<tr style="height: 35px; font-size: 25px;">
-											<th style="text-align: center; width: 150px;">QQ</th>
-											<td class="line30">
-											<label class="profile-gender" for="passport-sex-1" style="padding-left: 20px;">
-											 <input class="span4" type="text" name="username" id="username" value="" >
-											</label>
-											</td>
-										</tr>
-										<tr style="height: 35px; font-size: 25px;">
-											<th style="text-align: center; width: 150px;">微信号</th>
-											<td class="line30">
-											<label class="profile-gender" for="passport-sex-1" style="padding-left: 20px;">
-											 <input class="span4" type="text" name="username" id="username" value="">
-											</label>
-											</td>
-										</tr>
-										<tr style="height: 35px; font-size: 25px;">
-											<th style="text-align: center; width: 150px;">支付宝</th>
-											<td class="line30">
-											<label class="profile-gender" for="passport-sex-1" style="padding-left: 20px;">
-											 <input class="span4" type="text" name="username" id="username" value="" >
-											</label>
-											</td>
-										</tr> -->
-										<tr style="height: 35px; font-size: 25px;">
-										<div class="payment-sendbtns">
-									<input class="btn" onclick="changeSubmit();" name="change" type="button" id="change" value="修改">
-								       </div>
-								        </tr>
-									</tbody>
-								</table>
-								 </form>
-							</div> --%>
-
 							<!--            我发布的买标信息。        by snnu   2017.12.31           -->
 							<div class="tab-content">
 								<article class="format-standard type-post hentry clearfix"
@@ -299,6 +217,11 @@
 										<!-- end of post meta -->
 									</header>
 								</article>
+								<!--  分页代码
+								  <div class="demo customBootstrap">
+                                    <p id="demo2-text"></p>
+                                  <ul id="demo2" class="pagination"></ul>
+                                  </div>  -->
 							</div>
 							<!--            我发布的卖标信息。        by snnu   2017.12.31           -->
 							<div class="tab-content">

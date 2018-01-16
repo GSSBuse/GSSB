@@ -15,7 +15,8 @@
 		a.update_date AS "updateDate",
 		a.remarks AS "remarks",
 		a.del_flag AS "delFlag",
-		b.title AS "sold.title"
+		b.title AS "sold.title",
+		c.username AS "user.username"
 	</sql>
 	
 	

@@ -1,12 +1,12 @@
     function buyreplySubmit(){
-        var id = $("#replyform").find("#ids").eq(0).val();
-        var comment = $("#replyform").find("#comment").eq(0).val();
-        var parentId = $("#replyform").find("#parentId").eq(0).val();
-        var childId = $("#replyform").find("#childId").eq(0).val();
+        var buyId = $("#replyform").find("#buyId").eq(0).val();
+        var replyComments = $("#replyform").find("#replyComments").eq(0).val();
+        var toId = $("#replyform").find("#toId").eq(0).val();
+        var userId = $("#replyform").find("#userId").eq(0).val();
         if($(".tips ").is(":visible")){
             return false;
         }
-        if(comment == null  || comment == ""){
+        if(replyComments == null  || comment == ""){
             showError("请输入评论");
             return false;
         }
@@ -15,10 +15,10 @@
 			url : ctx + "/buyreplycomments.json",
 			type : "POST",
 			data : {
-				id : id,
-				comment : comment,
-				parentId:parentId,
-				childId:childId
+				buyId : buyId,
+				replyComments : replyComments,
+				toId:toId,
+				userId:userId
 			},
         	dataType : 'json',
         	async : false,

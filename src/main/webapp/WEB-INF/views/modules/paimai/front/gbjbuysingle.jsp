@@ -62,9 +62,9 @@
 					</article>
 					<section id="comments">
 						<h3 id="comments-title">评论内容</h3>
-						<ol class="commentlist">
+						<ol class="commentlist" ms-repeat-ell="datas.domainBuyCommentsArticleList">
 							<li class="comment even thread-even depth-1" id="li-comment-2">
-								<article id="comment-2" ms-repeat-ell="datas.domainBuyCommentsArticleList">
+								<article id="comment-2" >
 									<a > <img alt=""
 										src="http://1.gravatar.com/avatar/50a7625001317a58444a20ece817aeca?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G"
 										class="avatar avatar-60 photo" height="60" width="60">
@@ -117,7 +117,7 @@
 
 											</div>
 											<div class="comment-body">
-												<p><h6>{{children.comment}}</h6></p>
+												<p><h6>{{children.replyComments}}</h6></p>
 											</div>
 										</article>
 									</li>
@@ -197,13 +197,13 @@
 								<p class="comment-notes"></p>
 								<div>
 									<label for="comment"></label> 
-									<input name="ids" type="hidden" id="ids"
+									<input name="buyId" type="hidden" id="buyId"
 										value="${gbjBuyDetail.id}">
-										<input name="childId" type="hidden" id="childId"
+										<input name="userId" type="hidden" id="userId"
 										value="${login_user.id}">
-										<input name="parentId" type="hidden" id="parentId"
-										value='add49fac74cb476f80709be1cee3c47a'>
-									<textarea class="span8" name="comment" id="comment" cols="58"
+										<input name="toId" type="hidden" id="toId"
+										value='4827051ac1044cdaa36e247c2abd494f'>
+									<textarea class="span8" name="replyComments" id="replyComments" cols="58"
 										rows="10"></textarea>
 								</div>
 								<div>

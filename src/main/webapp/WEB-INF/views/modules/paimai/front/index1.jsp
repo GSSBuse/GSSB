@@ -10,7 +10,8 @@
                 <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>                
         </head>
         
-
+<link rel="stylesheet" type="text/css" href="//as.zbjimg.com/??/static/as-common/global/global_d80dcf1.css"/>
+<link rel="stylesheet" type="text/css" href="//as.zbjimg.com/??/static/as-ipr-www/widget/2017index/mod_banner_e95bfaf.css,"/>
         <body ms-controller="index1"> 
                 <%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
                 
@@ -46,6 +47,7 @@
                         </div>
                 </div>                
                 <!-- End of 主营业务模块 -->
+                
                 
                 <!-- Start of 动态信息 -->                        
                 <div class="about_grid1">

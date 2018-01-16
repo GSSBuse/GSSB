@@ -59,15 +59,10 @@
 
 							</form>
 						</div>
-
-
 						<!--   <p>买标买标悬赏等的详细信息。进入这个页面是需要2个参数，id和type。type绝对去从那个标里面去检索。也可以3个表做个视图（看看有没有共通的字段了要）。然后根据id取得对应的详细信息，包括回复和点赞等信息。分享等我后面再加。
                                                                                                                                                                                 这里暂时不支持富文本的样式显示，只支持一般文本就好了。
                                                         </p>-->
-						<h3>
-							<p>${gbjSoldDetail.description}</p>
-						</h3>
-
+							<p><h5>${gbjSoldDetail.description}</h5></p>
 					</article>
 					<section id="comments">
 
@@ -88,7 +83,7 @@
 
 										<h5 class="author">
 											<cite class="fn"> <a href="#" rel="external nofollow"
-												class="url"> {{ell.parentId}}</a>
+												class="url"> {{ell.user.username}}</a>
 											</cite> -<a href="#reply-dialog" onclick="show1()">回复</a>
 										</h5>
 
@@ -100,7 +95,7 @@
 									<!-- end .comment-meta -->
 
 									<div class="comment-body">
-										<p>{{ell.comment}}</p>
+										<p><h5>{{ell.comment}}</h5></p>
 									</div>
 									<!-- end of comment-body -->
 
@@ -151,7 +146,7 @@
 							<form method="post" id="commentform" >
 								<p class="comment-notes"> </p>
 								<div>
-									<label for="comment">Comment</label> 
+									<label for="comment"></label> 
 									<input name="parentId"
 										type="hidden" id="parentId" value="${login_user.id}">
 									<input name="id" type="hidden" id="id"
@@ -173,6 +168,24 @@
 
 				<!-- start of sidebar -->
 				<aside class="span4 page-sidebar">
+				<section id="comments">
+						<h3 id="comments-title"></h3>
+						<ol class="commentlist">
+							<li class="comment even thread-even depth-1" id="li-comment-2">
+								<article id="comment-2">
+									<a > <img alt=""
+										src="http://1.gravatar.com/avatar/50a7625001317a58444a20ece817aeca?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G"
+										class="avatar avatar-60 photo" height="60" width="60">
+									</a>
+										<h2 class="author">
+										${gbjSoldDetail.user.username}
+										</h2>
+									<!-- end of comment-body -->
+								</article>
+								<!-- end of comment -->
+							</li>
+						</ol>
+					</section>
 					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
 				</aside>
 				<!-- end of sidebar -->
