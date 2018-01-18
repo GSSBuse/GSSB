@@ -36,7 +36,9 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserBuyCommentsReply;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserRewardComments;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserRewardCommentsReply;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserSoldComments;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserSoldCommentsReply;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.RewardArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.SoldArticleList;
 import com.thinkgem.jeesite.modules.sys.service.gbj.ArticleListService;
@@ -50,8 +52,10 @@ import com.thinkgem.jeesite.modules.sys.service.gbj.GbjTouristRequireService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserBuyCommentsReplyService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserBuyCommentsService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserCommentsService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserRewardCommentsReplyService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserRewardCommentsService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserSoldCommentsReplyService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserSoldCommentsService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.RewardArticleListService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.SoldArticleListService;
@@ -111,6 +115,10 @@ public class FrontIndexController extends BaseController {
 
 	@Autowired
 	GbjUserBuyCommentsReplyService gbjUserBuyCommentsReplyService;
+	@Autowired
+	GbjUserSoldCommentsReplyService gbjUserSoldCommentsReplyService;
+	@Autowired
+	GbjUserRewardCommentsReplyService gbjUserRewardCommentsReplyService;
 
 	/**
 	 * 网站首页
@@ -655,21 +663,21 @@ public class FrontIndexController extends BaseController {
 	 */
 	@RequestMapping(value = { "soldreplycomments" })
 	@ResponseBody
-	public AjaxResult soldreplycomments(HttpServletRequest request, @RequestParam(value = "id") String id,
-			@RequestParam(value = "comment") String comment, @RequestParam(value = "parentId") String parentId,
-			@RequestParam(value = "childId") String childId) {
-		GbjUserSoldComments gbjUserSoldComments = new GbjUserSoldComments();
+	public AjaxResult soldreplycomments(HttpServletRequest request, @RequestParam(value = "soldId") String soldId,
+			@RequestParam(value = "replyComments") String replyComments, @RequestParam(value = "toId") String toId,
+			@RequestParam(value = "userId") String userId) {
+		GbjUserSoldCommentsReply gbjUserSoldCommentsReply = new GbjUserSoldCommentsReply();
 		GbjSold gbjSold = new GbjSold();
 		try {
-			logger.info(parentId);
+			// logger.info(parentId);
 			// STEP1 提交查询信息，保存到数据库
-			gbjUserSoldComments.setSold(gbjSoldService.get(id));
-			gbjUserSoldComments.setComment(comment);
-			gbjUserSoldComments.setParentId(parentId);
-			gbjUserSoldComments.setChildId(childId);
-			gbjUserSoldComments.setCreateDate(new Date());
+			gbjUserSoldCommentsReply.setSoldId(soldId);
+			gbjUserSoldCommentsReply.setReplyComments(replyComments);
+			gbjUserSoldCommentsReply.setUserId(userId);
+			gbjUserSoldCommentsReply.setToId(toId);
+			gbjUserSoldCommentsReply.setCreateDate(new Date());
 
-			gbjUserSoldCommentsService.save(gbjUserSoldComments);
+			gbjUserSoldCommentsReplyService.save(gbjUserSoldCommentsReply);
 
 			return AjaxResult.makeSuccess("您很棒，评论成功！");
 		} catch (Exception e) {
@@ -684,21 +692,21 @@ public class FrontIndexController extends BaseController {
 	 */
 	@RequestMapping(value = { "rewardreplycomments" })
 	@ResponseBody
-	public AjaxResult rewardreplycomments(HttpServletRequest request, @RequestParam(value = "id") String id,
-			@RequestParam(value = "comment") String comment, @RequestParam(value = "parentId") String parentId,
-			@RequestParam(value = "childId") String childId) {
-		GbjUserRewardComments gbjUserRewardComments = new GbjUserRewardComments();
+	public AjaxResult rewardreplycomments(HttpServletRequest request, @RequestParam(value = "rewardId") String rewardId,
+			@RequestParam(value = "replyComments") String replyComments, @RequestParam(value = "userId") String userId,
+			@RequestParam(value = "toId") String toId) {
+		GbjUserRewardCommentsReply gbjUserRewardCommentsReply = new GbjUserRewardCommentsReply();
 		GbjReward gbjReward = new GbjReward();
 		try {
-			logger.info(parentId);
+			// logger.info(parentId);
 			// STEP1 提交查询信息，保存到数据库
-			gbjUserRewardComments.setReward(gbjRewardService.get(id));
-			gbjUserRewardComments.setComment(comment);
-			gbjUserRewardComments.setParentId(parentId);
-			gbjUserRewardComments.setChildId(childId);
-			gbjUserRewardComments.setCreateDate(new Date());
+			gbjUserRewardCommentsReply.setRewardId(rewardId);
+			gbjUserRewardCommentsReply.setReplyComments(replyComments);
+			gbjUserRewardCommentsReply.setUserId(userId);
+			gbjUserRewardCommentsReply.setToId(toId);
+			gbjUserRewardCommentsReply.setCreateDate(new Date());
 
-			gbjUserRewardCommentsService.save(gbjUserRewardComments);
+			gbjUserRewardCommentsReplyService.save(gbjUserRewardCommentsReply);
 
 			return AjaxResult.makeSuccess("您很棒，评论成功！");
 		} catch (Exception e) {
@@ -1087,9 +1095,9 @@ public class FrontIndexController extends BaseController {
 	public AjaxResult ArticleSoldReplyCommentsData(@RequestParam("id") String id) {
 
 		// 单个买标信息和评论信息
-		List<GbjUserSoldComments> pageDomainSoldReplyCommentsArticleList = new ArrayList<GbjUserSoldComments>();
+		List<GbjUserSoldCommentsReply> pageDomainSoldReplyCommentsArticleList = new ArrayList<GbjUserSoldCommentsReply>();
 		try {
-			pageDomainSoldReplyCommentsArticleList = gbjUserSoldCommentsService
+			pageDomainSoldReplyCommentsArticleList = gbjUserSoldCommentsReplyService
 					.findDomainArticleSoldReplyCommentsList(id);
 
 			AjaxResult ar = AjaxResult.makeSuccess("");
@@ -1112,9 +1120,9 @@ public class FrontIndexController extends BaseController {
 	public AjaxResult ArticleRewardReplyCommentsData(@RequestParam("id") String id) {
 
 		// 单个买标信息和评论信息
-		List<GbjUserRewardComments> pageDomainRewardReplyCommentsArticleList = new ArrayList<GbjUserRewardComments>();
+		List<GbjUserRewardCommentsReply> pageDomainRewardReplyCommentsArticleList = new ArrayList<GbjUserRewardCommentsReply>();
 		try {
-			pageDomainRewardReplyCommentsArticleList = gbjUserRewardCommentsService
+			pageDomainRewardReplyCommentsArticleList = gbjUserRewardCommentsReplyService
 					.findDomainArticleRewardReplyCommentsList(id);
 
 			AjaxResult ar = AjaxResult.makeSuccess("");

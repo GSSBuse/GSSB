@@ -20,7 +20,7 @@
 	<div class="about">
 		<div class="container">
 			<h1>
-				买标信息<span class="m_1"><br>最新发布的买标信息，如有兴趣请联系123456789</span>
+				卖标信息<span class="m_1"><br>最新发布的卖标信息，如有兴趣请联系123456789</span>
 			</h1>
 		</div>
 	</div>
@@ -84,7 +84,7 @@
 										<h5 class="author">
 											<cite class="fn"> <a href="#" rel="external nofollow"
 												class="url"> {{ell.user.username}}</a>
-											</cite> -<a href="#reply-dialog" onclick="show1()">回复</a>
+											</cite> -<a href="#reply-dialog" onclick="show1(this)">回复</a><p class="ellb" style="display: none">{{ell.id}}</p>
 										</h5>
 
 										<p class="date">
@@ -101,13 +101,13 @@
 
 								</article>
 								<!-- end of comment -->
-								 <ul class="children" >
-									<li
+								 <ul  class="children" ms-repeat-data="datas.domainSoldReplyCommentsArticleList" >
+								      
+									<li ms-if="ell.id==data.toId"
 										class="comment byuser comment-author-saqib-sarwar bypostauthor odd alt depth-2"
 										id="li-comment-3">
-										<article id="comment-3" ms-repeat-children="datas.domainSoldReplyCommentsArticleList">
-
-											<a > <img alt=""
+										<article id="comment-3">
+											<a> <img alt=""
 												src="http://www.mf08s.com/y/q/UploadFiles_q/20121005/2012100507413841.jpg"
 												class="avatar avatar-60 photo" height="60" width="60">
 											</a>
@@ -115,20 +115,22 @@
 											<div class="comment-meta">
 
 												<h5 class="author">
-													<cite class="fn">{{children.user.username}}</cite>
+													<cite class="fn">{{data.user.username}}</cite>
 												</h5>
 
 												<p class="date">
-													<time datetime="2013-02-26T13:20:14+00:00">{{children.createDate}}</time>
+													<time datetime="2013-02-26T13:20:14+00:00">{{data.createDate}}</time>
 												</p>
 
 											</div>
 											<div class="comment-body">
-												<p><h6>{{children.comment}}</h6></p>
+												<p>
+												<h6>{{data.replyComments}}</h6>
+												</p>
 											</div>
 										</article>
 									</li>
-								</ul> 
+								</ul>
 							</li>
 
 
@@ -208,13 +210,13 @@
 								<p class="comment-notes"></p>
 								<div>
 									<label for="comment"></label> 
-									<input name="ids" type="hidden" id="ids"
+									<input name="soldId" type="hidden" id="soldId"
 										value="${gbjSoldDetail.id}">
-										<input name="childId" type="hidden" id="childId"
+										<input name="userId" type="hidden" id="userId"
 										value="${login_user.id}">
-										<input name="parentId" type="hidden" id="parentId"
-										value='add49fac74cb476f80709be1cee3c47a'>
-									<textarea class="span8" name="comment" id="comment" cols="58"
+										<input name="toId" type="hidden" id="toId"
+										value=''>
+									<textarea class="span8" name="replyComments" id="replyComments" cols="58"
 										rows="10"></textarea>
 								</div>
 								<div>
@@ -280,9 +282,13 @@
 		}
 	
 	})
-	function show1(){
+	function show1(obj){
 	   //alert(obj.tagName);
 		//alert($(obj).prev().tagName);
+		var pp = obj.nextSibling;
+		var cnt = pp.innerText;
+		//alert(cnt);
+		document.getElementById("toId").setAttribute("value", cnt);
 		var x = $('#loginspan').text();
 		if(x == "登录"){
 	         $("#popup").show();//查找ID为popup的DIV show()显示#gray

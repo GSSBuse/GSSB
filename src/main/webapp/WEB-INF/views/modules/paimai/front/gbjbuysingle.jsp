@@ -11,8 +11,10 @@
 <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>
 </head>
 <script type="text/javascript" src="${ctxStatic }/front/js/Article.js"></script>
-<script type="text/javascript" src="${ctxStatic }/front/js/buycomments.js"></script>
-<script type="text/javascript" src="${ctxStatic }/front/js/buyreplycomments.js"></script>
+<script type="text/javascript"
+	src="${ctxStatic }/front/js/buycomments.js"></script>
+<script type="text/javascript"
+	src="${ctxStatic }/front/js/buyreplycomments.js"></script>
 <script type="text/javascript"
 	src="${ctxStatic }/front/js/buyupcounts.js"></script>
 <script type="text/javascript">
@@ -35,7 +37,8 @@
 
 					<ul class="breadcrumb">
 						<li><a href="#">国标商标</a><span class="divider">/</span></li>
-						<li><a href="#" class="gbjType">${gbjBuyDetail.typeId }</a> <span class="divider">/</span></li>
+						<li><a href="#" class="gbjType">${gbjBuyDetail.typeId }</a> <span
+							class="divider">/</span></li>
 						<li class="active">${gbjBuyDetail.title}</li>
 					</ul>
 
@@ -43,14 +46,13 @@
 
 						<h1 class="post-title">
 							<a href="#">${gbjBuyDetail.title}</a>
-							
+
 						</h1>
 
 						<div class="post-meta clearfix like-btn" ms-controller="upcounts">
-							<span class="date">${gbjBuyDetail.createDate}</span> <span class="category"><a
-								href="#" class="gbjType">${gbjBuyDetail.typeId }</a></span> 
-							<span class="comments"><a
-								href="#">${gbjBuyDetail.lookCounts}</a></span>
+							<span class="date">${gbjBuyDetail.createDate}</span> <span
+								class="category"><a href="#" class="gbjType">${gbjBuyDetail.typeId }</a></span>
+							<span class="comments"><a href="#">${gbjBuyDetail.lookCounts}</a></span>
 
 							<form id="like-it-form" action="#" method="post">
 								<span class="like-it">${gbjBuyDetail.upCounts}</span> <input
@@ -58,14 +60,17 @@
 
 							</form>
 						</div>
-						<p><h5>${gbjBuyDetail.description}</h5></p>
+						<p>
+						<h5>${gbjBuyDetail.description}</h5>
+						</p>
 					</article>
 					<section id="comments">
 						<h3 id="comments-title">评论内容</h3>
-						<ol class="commentlist" ms-repeat-ell="datas.domainBuyCommentsArticleList" >
+						<ol class="commentlist"
+							ms-repeat-ell="datas.domainBuyCommentsArticleList">
 							<li class="comment even thread-even depth-1" id="li-comment-2">
-								<article id="comment-2" >
-									<a > <img alt=""
+								<article id="comment-2">
+									<a> <img alt=""
 										src="http://1.gravatar.com/avatar/50a7625001317a58444a20ece817aeca?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G"
 										class="avatar avatar-60 photo" height="60" width="60">
 									</a>
@@ -73,32 +78,30 @@
 									<div class="comment-meta">
 
 										<h5 class="author">
-											<cite class="fn"> 
-											<a href="#" rel="external nofollow" class="url">{{ell.user.username}}</a>
-											</cite>--<a   href="#reply-dialog"  onclick="show1(this)">回复</a><p class="ellb" style="display:none">{{ell.id}}</p>
+											<cite class="fn"> <a href="#" rel="external nofollow"
+												class="url">{{ell.user.username}}</a>
+											</cite>--<a href="#reply-dialog" onclick="show1(this)">回复</a><p class="ellb" style="display: none">{{ell.id}}</p>
 										</h5>
-										
-
 										<p class="date">
 											<time datetime="2013-02-26T13:18:47+00:00">{{ell.createDate}}</time>
 										</p>
 
 									</div>
 									<div class="comment-body">
-										<p><h5>{{ell.comment}}</h5></p>
-										
+										<p>
+										<h5>{{ell.comment}}</h5>
+										</p>
 									</div>
 									<!-- end of comment-body -->
-								</article>
-								<!-- end of comment -->
-								 
-								 <ul  class="children" ms-repeat-data="datas.domainBuyReplyCommentsArticleList" >
-									
-									<li
+								</article> <!-- end of comment -->
+
+								<ul  class="children" ms-repeat-data="datas.domainBuyReplyCommentsArticleList" >
+								      
+									<li ms-if="ell.id==data.toId"
 										class="comment byuser comment-author-saqib-sarwar bypostauthor odd alt depth-2"
 										id="li-comment-3">
-										<article id="comment-3"  >
-											<a > <img alt=""
+										<article id="comment-3">
+											<a> <img alt=""
 												src="http://www.mf08s.com/y/q/UploadFiles_q/20121005/2012100507413841.jpg"
 												class="avatar avatar-60 photo" height="60" width="60">
 											</a>
@@ -106,7 +109,7 @@
 											<div class="comment-meta">
 
 												<h5 class="author">
-													<cite  class="fn" >{{data.user.username}}||{{ell.id}}||{{data.toId}}</cite>
+													<cite class="fn">{{data.user.username}}</cite>
 												</h5>
 
 												<p class="date">
@@ -115,37 +118,14 @@
 
 											</div>
 											<div class="comment-body">
-												<p><h6>{{data.replyComments}}</h6></p>
+												<p>
+												<h6>{{data.replyComments}}</h6>
+												</p>
 											</div>
-											
-									<!-- <script type="text/javascript">
-									
-											$(document).ready(function() {
-												//alert($('.ellb').text());
-												
-											$('.commentlist').each(function(){
-												
-											if($('.toid').text() != $('.ellb').text()){
-												
-												$('.children').attr("style","display:none;");
-												
-											}
-											if($('.toid').text() == $('.ellb').text()){
-												alert($('.toid').text());
-												$('.children').attr("style","display:;");
-												
-											}
-					
-											}); 
-										
-											}); 
-									</script> -->
-											
-											
 										</article>
 									</li>
 								</ul>
-								
+
 							</li>
 						</ol>
 						<div id="respond">
@@ -154,22 +134,22 @@
 								<a rel="nofollow" id="cancel-comment-reply-link" href="#"
 									style="display: none;">Click here to cancel reply.</a>
 							</div>
-							     <div class="form-error" style="color:#ff0000">
-					              <i></i><label class="text"></label>
-				                </div>
-							<form method="post" id="commentform" >
+							<div class="form-error" style="color: #ff0000">
+								<i></i><label class="text"></label>
+							</div>
+							<form method="post" id="commentform">
 								<p class="comment-notes"></p>
 								<div>
-									<label for="comment"></label> 
-									<input name="id" type="hidden" id="id"
-										value="${gbjBuyDetail.id}">
-										<input name="parentId" type="hidden" id="parentId"
+									<label for="comment"></label> <input name="id" type="hidden"
+										id="id" value="${gbjBuyDetail.id}"> <input
+										name="parentId" type="hidden" id="parentId"
 										value="${login_user.id}">
 									<textarea class="span8" name="comment" id="comment" cols="58"
 										rows="10"></textarea>
 								</div>
 								<div>
-									<input class="btn" onclick="commentSubmit();" name="submit" type="button" id="submit" value="提交评论">
+									<input class="btn" onclick="commentSubmit();" name="submit"
+										type="button" id="submit" value="提交评论">
 								</div>
 							</form>
 						</div>
@@ -182,21 +162,18 @@
 
 				<!-- start of sidebar -->
 				<aside class="span4 page-sidebar">
-				     <section id="comments">
+					<section id="comments">
 						<h3 id="comments-title"></h3>
 						<ol class="commentlist">
 							<li class="comment even thread-even depth-1" id="li-comment-2">
 								<article id="comment-2">
-									<a > <img alt=""
+									<a> <img alt=""
 										src="http://1.gravatar.com/avatar/50a7625001317a58444a20ece817aeca?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G"
 										class="avatar avatar-60 photo" height="60" width="60">
 									</a>
-										<h2 class="author">
-										${gbjBuyDetail.user.username}
-										</h2>
+									<h2 class="author">${gbjBuyDetail.user.username}</h2>
 									<!-- end of comment-body -->
-								</article>
-								<!-- end of comment -->
+								</article> <!-- end of comment -->
 							</li>
 						</ol>
 					</section>
@@ -215,25 +192,25 @@
 	<a href="#top" id="scroll-top"></a>
 	<div id="reply-dialog-bg"
 		style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1; display: none;"></div>
-	<div id="reply-dialog"  style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
-		<div id="close-dialog1" style="position: absolute; right: -10px; top: -14px; width: 24px; height: 24px; text-align: center; font-size: 25px; border: 2px solid #d2d1d1; border-radius: 50%; background-color: #fff; color: #e71a1a; cursor: pointer;">×</div>
-		        <form method="post" id="replyform" >
-								<p class="comment-notes"></p>
-								<div>
-									<label for="comment"></label> 
-									<input name="buyId" type="hidden" id="buyId"
-										value="${gbjBuyDetail.id}">
-										<input name="userId" type="hidden" id="userId"
-										value="${login_user.id}">
-										<input name="toId" type="hidden" id="toId"
-										value=''>
-									<textarea class="span8" name="replyComments" id="replyComments" cols="58"
-										rows="10"></textarea>
-								</div>
-								<div>
-									<input class="btn" onclick="buyreplySubmit();" name="submit" type="button" id="submit" value="提交评论">
-								</div>
-							</form>
+	<div id="reply-dialog"
+		style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
+		<div id="close-dialog1"
+			style="position: absolute; right: -10px; top: -14px; width: 24px; height: 24px; text-align: center; font-size: 25px; border: 2px solid #d2d1d1; border-radius: 50%; background-color: #fff; color: #e71a1a; cursor: pointer;">×</div>
+		<form method="post" id="replyform">
+			<p class="comment-notes"></p>
+			<div>
+				<label for="comment"></label> <input name="buyId" type="hidden"
+					id="buyId" value="${gbjBuyDetail.id}"> <input name="userId"
+					type="hidden" id="userId" value="${login_user.id}"> <input
+					name="toId" type="hidden" id="toId" value=''>
+				<textarea class="span8" name="replyComments" id="replyComments"
+					cols="58" rows="10"></textarea>
+			</div>
+			<div>
+				<input class="btn" onclick="buyreplySubmit();" name="submit"
+					type="button" id="submit" value="提交评论">
+			</div>
+		</form>
 	</div>
 	<script type="text/javascript"> <!--我要买标弹出框js -->
 	$('#comment').focus(function(){
@@ -367,7 +344,7 @@
 	});
 </script>
 	//下面全是和登录相关的js
-<script type="text/javascript">
+	<script type="text/javascript">
      $(document).ready(function(){ 
          $(".top_nav").mousedown(function(e){ 
              $(this).css("cursor","move");//改变鼠标指针的形状 
@@ -395,7 +372,7 @@
 
 
 
-<script type="text/javascript">
+	<script type="text/javascript">
     var _wx_server_qr_code_count = 0;
     var _wx_server_qr_code_loaded = false;
     var _qr_code_limited = '';
@@ -653,8 +630,8 @@
 
 
 
-<!--qq登录用 -->
-<script>
+	<!--qq登录用 -->
+	<script>
       function qqlogin(){
             QC.Login({}, function (reqData, opts) {//登录成功
                 getInfo();
@@ -715,8 +692,8 @@
             }
         }
   </script>
-  
-  <script type="text/javascript">
+
+	<script type="text/javascript">
 	$(document).ready(function(){
 		$(".gbjType").each(function() {
 			if($(this).text() == "0"){
@@ -731,8 +708,27 @@
 		});
 	});
 </script>
-  
-  
+<!-- <script type="text/javascript">
+											$(document).ready(function() {
+												//alert($('.ellb').text());
+												
+											$('.commentlist').each(function(){
+												
+											if($('.toid').text() != $('.ellb').text()){
+												
+												$('.children').attr("style","display:none;");
+												
+											}
+											if($('.toid').text() == $('.ellb').text()){
+												alert($('.toid').text());
+												$('.children').attr("style","display:;");
+												
+											}
+					
+											}); 
+										
+											}); 
+									</script> -->
 </body>
 
 
