@@ -60,7 +60,7 @@ $(function() {
            <img src="${ctxStatic }/images/b7.jpg" alt="" />
        </li>
    </ul>
-   <div style="position:absolute; bottom:10px; padding:10px; width:60%; left: 20%; background: #ffffff26;
+   <div style="position:absolute; bottom:85px; padding:10px; width:60%; left: 20%; background: #ffffff26;
     border-radius: 5px;">
 		<ul class="registbox">
 			<li>

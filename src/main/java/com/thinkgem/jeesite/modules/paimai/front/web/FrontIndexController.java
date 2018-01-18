@@ -303,6 +303,15 @@ public class FrontIndexController extends BaseController {
 	}
 
 	/**
+	 * 登录注册
+	 */
+	@RequestMapping(value = { "personaluserbuy" })
+	public String personaluserbuy(Model model) {
+
+		return "modules/paimai/front/personaluserbuy";
+	}
+
+	/**
 	 * 咨询详细一览页面
 	 * 
 	 * @RequestMapping(value= {"single"}) public String single(Model model) { return
@@ -1052,9 +1061,11 @@ public class FrontIndexController extends BaseController {
 	public AjaxResult ArticleBuyCommentsData(@RequestParam("id") String id) {
 
 		// 单个买标信息和评论信息
-		List<GbjUserBuyComments> pageDomainBuyCommentsArticleList = new ArrayList<GbjUserBuyComments>();
+		// List<GbjUserBuyComments> pageDomainBuyCommentsArticleList = new
+		// ArrayList<GbjUserBuyComments>();
 		try {
-			pageDomainBuyCommentsArticleList = gbjUserBuyCommentsService.findDomainArticleBuyCommentsList(id);
+			List<GbjUserBuyComments> pageDomainBuyCommentsArticleList = gbjUserBuyCommentsService
+					.findDomainArticleBuyCommentsList(id);
 
 			AjaxResult ar = AjaxResult.makeSuccess("");
 			ar.getData().put("ArticleBuyCommentsData", pageDomainBuyCommentsArticleList);

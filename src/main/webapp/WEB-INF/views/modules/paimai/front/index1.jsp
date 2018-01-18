@@ -7,7 +7,8 @@
         <!--[if IE 8]>    <html class="lt-ie9" lang="en-US"> <![endif]-->
         <!--[if gt IE 8]><!--> <html lang="en-US"> <!--<![endif]-->
         <head>
-                <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>                
+                <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%> 
+              
         </head>
         
 <link rel="stylesheet" type="text/css" href="//as.zbjimg.com/??/static/as-common/global/global_d80dcf1.css"/>
@@ -18,101 +19,143 @@
                  <%@ include file="/WEB-INF/views/include/frontIndexBanner.jsp"%>
                 
                 <!-- Start of 主营业务模块 -->
-                <div class="page-container">
-                        <div class="container">
-                               <div class="span12 page-content">
-                                       <div class="row-fluid top-cats" style="text-align: center;">
-                                           <a href="${ctx }/buyarticles.html" >
-                                               <section class="span3">
-                                                       <img src="${ctxStatic }/images/service1.png"/>
-                                               </section>
-                                            </a>
-                                            <a href="${ctx }/soldarticles.html" >
-                                               <section class="span3">
-                                                       <img src="${ctxStatic }/images/service2.png"/>
-                                               </section>
-                                            </a>
-                                            <a href="${ctx }/rewardarticles.html" >
-                                               <section class="span3">
-                                                       <img src="${ctxStatic }/images/service3.png"/>
-                                               </section>
-                                            </a>
-                                            <a href="${ctx }/newbuyarticles.html">
-                                               <section class="span3">
-                                                       <img src="${ctxStatic }/images/service4.png"/>
-                                               </section>
-                                            </a>
-                                       </div>
-                               </div>
-                        </div>
+                <div class="index-page-container">
+                       <div id="main-content">
+		<div id="li-menu">
+			<ul>
+				<li class="li-menu-content"><div class="test div-check"><h1>买</h1></div></li>
+				<li class="li-menu-content"><div class="test"><h1>卖</h1></div></li>
+				<li class="li-menu-content"><div class="test"><h1>悬</h1></div></li>
+				<li class="li-menu-content"><div class="test"><h1>淘</h1></div></li>
+			</ul>
+		</div>
+		
+		<div class="dy-content check">
+		
+		<a href="${ctx }/buyarticles.html">
+			<div class="dy-each-first dy-buy">
+				<h2>我要买标</h2>
+				<img alt="" src="${ctxStatic }/images/bag.png"/>
+			</div>
+		</a>	
+			<div class="dy-each" ms-repeat-el="datas.domainBuyList">			
+				<h4>
+					<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</a>
+				</h4>
+				<span class="article-meta">		
+					<a  title="查询该标签所有内容" class="Type">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a><br>
+					{{el.createDate}}
+					<%-- &amp; <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy" >{{el.tag}}</a> --%>
+				</span> <br>
+				
+				<span class="like-count">
+                	<img src="${ctxStatic }/images/like.png"/>
+                	<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.upCounts}}</a>
+                </span>
+				
+				
+			</div>
+			
+			<a href="${ctx }/buyarticles.html">
+			<div class="dy-each dy-last">
+				<h3>>>查看更多</h3>
+				
+			</div>
+			</a>
+			
+			
+
+		</div>
+		
+		<div class="dy-content">
+		
+		<a href="${ctx }/soldarticles.html">
+			<div class="dy-each-first dy-sold">
+				<h2>我要卖标</h2>
+				<img alt="" src="${ctxStatic }/images/bag1.png"/>
+			</div>
+		</a>
+		
+			
+			<div class="dy-each" ms-repeat-el="datas.domainSoldList">
+				<h4> 
+					<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=sold">{{el.title}}</a>
+				</h4>		                                                                
+                <span class="article-meta"> 
+                	<a class="gbjType">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a><br>  
+                	{{el.createDate}} 
+                	<%-- &amp; <a ms-attr-href="${ctx }/single.html?id={{el.id}}type=sold">{{el.tag}}</a> --%>
+                </span>
+                <span class="like-count">
+                	<img src="${ctxStatic }/images/like.png"/>
+                	<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=sold">{{el.upCounts}}</a>
+                </span>
+            </div>
+
+			<a href="${ctx }/soldarticles.html">
+			<div class="dy-each dy-last">
+				<h3>>>查看更多</h3>
+				
+			</div>
+			</a>
+		</div>
+
+		
+		<div class="dy-content">
+		
+		<a href="${ctx }/rewardarticles.html">
+			<div class="dy-each-first dy-reword">
+				<h2>悬赏起名</h2>
+				<img alt="" src="${ctxStatic }/images/bag2.png"/>
+			</div>
+		</a>
+		
+			
+			<div class="dy-each" ms-repeat-el="datas.domainRewardList"	>
+			  <h4>
+			  	<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.title}}</a><br>
+			  	悬赏金额: {{el.price}}元
+			  </h4>		                                                                
+              <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;
+              	<a class="gbjType">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a> 
+              	<%-- &amp; <a ms-attr-href="${ctx }/single.html?id={{el.id}}type=reward" >{{el.tag}}</a> --%></span>
+              
+              <span class="like-count">
+                	<img src="${ctxStatic }/images/like.png"/>
+                	<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.upCounts}}</a>
+                </span>
+              
+              
+			</div>
+
+
+			<a href="${ctx }/rewardarticles.html">
+			<div class="dy-each dy-last">
+				<h3>>>查看更多</h3>
+				
+			</div>
+			</a>
+			
+		</div>
+
+
+		<a href="${ctx }/buyarticles.html">
+		<div class="dy-content">
+			<div class="dy-each-first">444</div>
+			<div class="dy-each"></div>
+
+			<div class="dy-each"></div>
+		</div>
+	</div>
                 </div>                
                 <!-- End of 主营业务模块 -->
                 
                 
                 <!-- Start of 动态信息 -->                        
-                <div class="about_grid1">
-                        <div class="container" > 
-                               <h4 class="tz-title-5 tzcolor-blue">
-                                   <p class="tzweight_Bold"><span class="m_20">动态信息<br></span>dynamic information</p>
-                               </h4>                         
-                               <div class="span12 page-content" >   
-                                       
-                                       <!-- Basic Home Page Template -->
-                                       <div class="row separator">
-                   <section class="span4 articles-list">
-						<h3 class="category">买标信息</h3>
-						<ul class="articles">
-							<li class="article-entry standard"
-								ms-repeat-el="datas.domainBuyList">
-								<h4>
-									<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</a>
-								</h4> <span class="article-meta">{{el.createDate}}
-									&nbsp;&nbsp;&nbsp;&nbsp; <a  title="查询该标签所有内容"
-									 class="Type">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a>
-									<%-- &amp; <a
-									ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy" >{{el.tag}}</a> --%>
-							</span> <span class="like-count"><a
-									ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.upCounts}}</a>
-									&nbsp;</span>
-							</li>
-
-						</ul>
-						<a class="faq_but1 but3" href="${ctx }/buyarticles.html">更多</a>
-					</section>
-                                               <section class="span4 articles-list">
-                                                       <h3 class="category">卖标信息</h3>
-                                                       <ul class="articles">
-                                                               <li class="article-entry standard" ms-repeat-el="datas.domainSoldList" >		                                                                
-                                                                 <h4 > <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=sold">{{el.title}}</a></h4>		                                                                
-                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;
-                                                                 <a class="gbjType">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a>   <%-- &amp; <a ms-attr-href="${ctx }/single.html?id={{el.id}}type=sold">{{el.tag}}</a> --%></span>
-                                                                 <span class="like-count"><a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=sold">{{el.upCounts}}</a> &nbsp;</span>
-                                                         </li>
-                                                       </ul>
-                                                       <a class="faq_but1 but3" href="${ctx }/soldarticles.html">更多</a>
-                                               </section>
-                                               
-                                               <section class="span4 articles-list">
-                                                       <h3 class="category">悬赏起名</h3>
-                                                       <ul class="articles">
-                                                              <li class="article-entry standard" ms-repeat-el="datas.domainRewardList" >		                                                                
-                                                                 <h4> <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.title}}</a>&nbsp;&nbsp;&nbsp;悬赏金额: {{el.price}}元</h4>		                                                                
-                                                                 <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;
-                                                                 <a class="gbjType">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a> <%-- &amp; <a
-									ms-attr-href="${ctx }/single.html?id={{el.id}}type=reward" >{{el.tag}}</a> --%></span>
-                                                                 <span class="like-count"><a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.upCounts}}</a> &nbsp;</span>
-                                                         </li>
-                                                       </ul>
-                                                       <a class="faq_but1 but3" href="${ctx }/rewardarticles.html">更多</a>
-                                               </section>
-                                       </div>
-                               </div>
-                        </div>
-                </div>
                 <!-- End of Page 动态信息 -->
                 
                 <!-- Start of 广告banner-->
-                <div style="padding-bottom:10px;">
+                <div style="padding-bottom:10px; margin-top: 544px;">
                     <img src="${ctxStatic }/images/split1.png" style="width:100%"/>
                 </div>
                 <!-- End of Page 广告banner-->
@@ -362,7 +405,37 @@
 
                 <a href="#top" id="scroll-top"></a>
                 
+<script type="text/javascript">
+		var tabList = document.getElementsByClassName("li-menu-content");
+		var tabCon = document.getElementsByClassName("dy-content");
 
+		var tabDivCur = new Array();
+		tabDivCur[0] = tabList[0].firstChild;
+		tabDivCur[1] = tabList[1].firstChild;
+		tabDivCur[2] = tabList[2].firstChild;
+		tabDivCur[3] = tabList[3].firstChild;
+		
+		for(i=0;i<tabList.length;i++){
+			(function(){
+				var t = i;
+				
+				tabList[t].onmouseover = function(){
+
+					for(o=0;o<tabCon.length;o++){
+						tabCon[o].className = "dy-content";
+						tabDivCur[o].className = "test";
+						
+						if(t==o){
+							tabCon[o].className += " check";
+							tabDivCur[t].className += " div-check";
+						}
+					}
+					
+				}
+				
+			})()
+		}
+	</script>
                 
                 
 <script type="text/javascript"> <!--我要买标弹出框js -->

@@ -17,12 +17,15 @@
 		a.del_flag AS "delFlag",
 		b.title AS "buy.title",
 		c.username AS "user.username"
+		
+		<!-- d.to_id AS "toId" -->
 	</sql>
 	
 	
 	<sql id="gbjUserBuyCommentsJoins">
 	LEFT JOIN gbj_buy b ON b.id = a.buy_id
 	LEFT JOIN gbj_user c ON c.id = a.parent_id 
+	<!-- INNER JOIN  gbj_user_buy_comments_reply d ON a.id=d.to_id -->
 	</sql>
 	<sql id="gbjUserJoins">
 	LEFT JOIN gbj_buy b ON b.id = a.buy_id
@@ -157,7 +160,7 @@
 		AND a.child_id is null
 		ORDER BY a.create_date DESC
     </select>
-	<select id="findDomainArticleBuyReplyCommentsList" resultType="GbjUserBuyComments" >
+	<!-- <select id="findDomainArticleBuyReplyCommentsList" resultType="GbjUserBuyComments" >
         SELECT 
 			<include refid="gbjUserBuyCommentsColumns"/>
 		FROM gbj_user_buy_comments a
@@ -166,5 +169,5 @@
 		AND a.del_flag = "0"
 		AND a.child_id is not null
 		 ORDER BY a.create_date DESC
-    </select>
+    </select> -->
 </mapper>

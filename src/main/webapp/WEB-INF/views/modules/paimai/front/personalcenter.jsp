@@ -34,6 +34,7 @@
 
 						<h1 class="post-title">
 							<a href="#">个人中心</a>
+							<a href="${ctx }/personaluserbuy.html?id=${login_user.id}">我发布过的买标信息</a>
 						</h1>
 
 						<hr>
@@ -46,13 +47,13 @@
 									<a href="#">修改个人信息</a>
 								</h4></li>
 							<li><h4>
-									<a href="#">我发布过的买标信息</a>
+									<a href="${ctx }/personaluserbuy.html?id=${login_user.id}">我发布过的买标信息</a>
 								</h4></li>
 							<li><h4>
-									<a href="#">我发布过的卖标信息</a>
+									<a href="${ctx }/personalusersold.html?id=${login_user.id}">我发布过的卖标信息</a>
 								</h4></li>
 							<li><h4>
-									<a href="#">我发布过的悬赏信息</a>
+									<a href="${ctx }/personaluserreward.html?id=${login_user.id}">我发布过的悬赏信息</a>
 								</h4></li>
 							<li><h4>
 									<a href="#">我评论过的信息</a>
@@ -204,7 +205,7 @@
 								</form>
 							</div>
 							<!--            我发布的买标信息。        by snnu   2017.12.31           -->
-							<div class="tab-content">
+							<%-- <div class="tab-content">
 								<article class="format-standard type-post hentry clearfix"
 									ms-repeat-el="datas.domainUserBuyArticleList">
 									<header class="clearfix">
@@ -268,7 +269,7 @@
 										<!-- end of post meta -->
 									</header>
 								</article>
-							</div>
+							</div> --%>
 
 						</div>
 

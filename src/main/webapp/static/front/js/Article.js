@@ -142,7 +142,7 @@ var interval_ArticleBuyReplyComments_status_check = function() {
 	var x = window.location.href.split("?")[1].substring(3,35);
 		//alert(x);
 		var count = 11;//首页最多显示11条
-		var id=x ;
+		var id= x;
 		//var toId='4827051ac1044cdaa36e247c2abd494f';//暂时屏蔽掉 了，因为会出现错误。
 		//var id = null;
 		//var id="${gbjBuyDetail.id}";

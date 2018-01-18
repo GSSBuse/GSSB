@@ -62,7 +62,7 @@
 					</article>
 					<section id="comments">
 						<h3 id="comments-title">评论内容</h3>
-						<ol class="commentlist" ms-repeat-ell="datas.domainBuyCommentsArticleList">
+						<ol class="commentlist" ms-repeat-ell="datas.domainBuyCommentsArticleList" >
 							<li class="comment even thread-even depth-1" id="li-comment-2">
 								<article id="comment-2" >
 									<a > <img alt=""
@@ -75,7 +75,7 @@
 										<h5 class="author">
 											<cite class="fn"> 
 											<a href="#" rel="external nofollow" class="url">{{ell.user.username}}</a>
-											</cite>--<a  href="#reply-dialog" onclick="show1()">回复</a>
+											</cite>--<a   href="#reply-dialog"  onclick="show1(this)">回复</a><p class="ellb" style="display:none">{{ell.id}}</p>
 										</h5>
 										
 
@@ -88,18 +88,16 @@
 										<p><h5>{{ell.comment}}</h5></p>
 										
 									</div>
-									
 									<!-- end of comment-body -->
 								</article>
-	
 								<!-- end of comment -->
-
-								 <ul class="children" >
+								 
+								 <ul  class="children" ms-repeat-data="datas.domainBuyReplyCommentsArticleList" >
+									
 									<li
 										class="comment byuser comment-author-saqib-sarwar bypostauthor odd alt depth-2"
 										id="li-comment-3">
-										<article id="comment-3" ms-repeat-children="datas.domainBuyReplyCommentsArticleList">
-
+										<article id="comment-3"  >
 											<a > <img alt=""
 												src="http://www.mf08s.com/y/q/UploadFiles_q/20121005/2012100507413841.jpg"
 												class="avatar avatar-60 photo" height="60" width="60">
@@ -108,20 +106,46 @@
 											<div class="comment-meta">
 
 												<h5 class="author">
-													<cite class="fn">{{children.user.username}}</cite>
+													<cite  class="fn" >{{data.user.username}}||{{ell.id}}||{{data.toId}}</cite>
 												</h5>
 
 												<p class="date">
-													<time datetime="2013-02-26T13:20:14+00:00">{{children.createDate}}</time>
+													<time datetime="2013-02-26T13:20:14+00:00">{{data.createDate}}</time>
 												</p>
 
 											</div>
 											<div class="comment-body">
-												<p><h6>{{children.replyComments}}</h6></p>
+												<p><h6>{{data.replyComments}}</h6></p>
 											</div>
+											
+									<!-- <script type="text/javascript">
+									
+											$(document).ready(function() {
+												//alert($('.ellb').text());
+												
+											$('.commentlist').each(function(){
+												
+											if($('.toid').text() != $('.ellb').text()){
+												
+												$('.children').attr("style","display:none;");
+												
+											}
+											if($('.toid').text() == $('.ellb').text()){
+												alert($('.toid').text());
+												$('.children').attr("style","display:;");
+												
+											}
+					
+											}); 
+										
+											}); 
+									</script> -->
+											
+											
 										</article>
 									</li>
-								</ul> 
+								</ul>
+								
 							</li>
 						</ol>
 						<div id="respond">
@@ -202,7 +226,7 @@
 										<input name="userId" type="hidden" id="userId"
 										value="${login_user.id}">
 										<input name="toId" type="hidden" id="toId"
-										value='4827051ac1044cdaa36e247c2abd494f'>
+										value=''>
 									<textarea class="span8" name="replyComments" id="replyComments" cols="58"
 										rows="10"></textarea>
 								</div>
@@ -269,9 +293,13 @@
 	
 	})
 	
-	function show1(){
+	function show1(obj){
 	   //alert(obj.tagName);
 		//alert($(obj).prev().tagName);
+		var pp = obj.nextSibling;
+		var cnt = pp.innerText;
+		//alert(cnt);
+		document.getElementById("toId").setAttribute("value", cnt);
 		var x = $('#loginspan').text();
 		if(x == "登录"){
 	         $("#popup").show();//查找ID为popup的DIV show()显示#gray

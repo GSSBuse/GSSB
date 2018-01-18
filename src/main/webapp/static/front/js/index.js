@@ -66,7 +66,7 @@ var vm = avalon.define({
 	// 轮询买标信息一览数据
 	var interval_gbbuy_status_check = function() {
 		
-		var count = 6;//首页最多显示11条
+		var count = 7;//首页最多显示11条
 		
 		$.post(
 			"polling/gbbuyData.json",
@@ -87,7 +87,7 @@ var vm = avalon.define({
 	// 轮询卖标信息一览数据
 	var interval_gbsold_status_check = function() {
 		//TODO
-          var count = 6;//首页最多显示11条
+          var count = 7;//首页最多显示11条
 		$.post(
 			"polling/gbsoldData.json",
 			{
@@ -107,7 +107,7 @@ var vm = avalon.define({
 	// 轮询悬赏信息一览数据
 	var interval_gbreward_status_check = function() {
 		//TODO
-		 var count = 6;//首页最多显示11条
+		 var count = 7;//首页最多显示11条
 			$.post(
 				"polling/gbrewardData.json",
 				{

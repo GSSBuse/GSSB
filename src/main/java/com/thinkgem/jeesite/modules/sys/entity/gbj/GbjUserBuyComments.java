@@ -25,7 +25,9 @@ public class GbjUserBuyComments extends DataEntity<GbjUserBuyComments> {
 	private String childId; // 子ID
 	private String comment; // 评论内容
 	private Date commentTime; // 评论时间
-
+	private GbjUserBuyCommentsReply toId;
+	private GbjUserBuyCommentsReply userId;
+	private GbjUserBuyCommentsReply replyComments;
 	private GbjUser user; // 用户ID
 
 	public GbjUser getUser() {
@@ -117,6 +119,30 @@ public class GbjUserBuyComments extends DataEntity<GbjUserBuyComments> {
 
 	public void setCommentTime(Date commentTime) {
 		this.commentTime = commentTime;
+	}
+
+	public GbjUserBuyCommentsReply getToId() {
+		return toId;
+	}
+
+	public void setToId(GbjUserBuyCommentsReply toId) {
+		this.toId = toId;
+	}
+
+	public GbjUserBuyCommentsReply getUserId() {
+		return userId;
+	}
+
+	public void setUserId(GbjUserBuyCommentsReply userId) {
+		this.userId = userId;
+	}
+
+	public GbjUserBuyCommentsReply getReplyComments() {
+		return replyComments;
+	}
+
+	public void setReplyComments(GbjUserBuyCommentsReply replyComments) {
+		this.replyComments = replyComments;
 	}
 
 }

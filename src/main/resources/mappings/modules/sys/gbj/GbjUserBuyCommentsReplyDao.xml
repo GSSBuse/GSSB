@@ -16,6 +16,7 @@
 		a.remarks AS "remarks",
 		a.del_flag AS "delFlag",
 		c.username AS "user.username"
+		
 	</sql>
 	
 	
