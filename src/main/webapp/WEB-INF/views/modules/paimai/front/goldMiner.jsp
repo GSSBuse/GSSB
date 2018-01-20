@@ -32,7 +32,7 @@
 	<div class="about">
 		<div class="container">
 			<h1>
-				买标信息<span class="m_1"><br>最新发布的买标信息，如有兴趣请联系123456789</span>
+				淘金客<span class="m_1"><br>最新淘金客，如有兴趣请联系123456789</span>
 			</h1>
 		</div>
 	</div>
@@ -45,90 +45,50 @@
 					<div class="span12 page-content"></div>
 					<article class=" page type-page hentry clearfix">
 						<h1 class="post-title">
-							<a href="#">买标全部交易信息</a>
+							<a href="#">淘金客</a>
 						</h1>
 						<hr>
 					</article>
-		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
-		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
-	       <table id="contentTable" class="table table-striped table-bordered table-condensed">
-		  <thead>
-			<tr>
-				<th>用户名</th>
-				<th>真实姓名</th>
-				<th>国标类型</th>
-				<th>国标标题</th>
-				<th>国标描述</th>
-				<th>预算价格</th>
-				<th>联系人手机号</th>
-				<th>标签</th>
-				<th>点赞数</th>
-				<th>查看数</th>
-				<th>评论数</th>
-				<th>创建时间</th>
-				<th>备注</th>
-			</tr>
-		</thead>
-		<tbody>
-		<c:forEach items="${page.list}" var="gbjBuy">
-			<tr>
-				<td>
-					${gbjBuy.user.username}
-				</td>
-				<td>
-					${gbjBuy.realname}
-				</td>
-				<td>
-					${fns:getDictLabel(gbjBuy.typeId, 'gbjBuy_type_id', '')}
-				</td>
-				<td>
-					${gbjBuy.title}
-				</td>
-				<td>
-					${gbjBuy.description}
-				</td>
-				<td>
-					${gbjBuy.price}
-				</td>
-				<td>
-					${gbjBuy.mobile}
-				</td>
-				<td>
-					${gbjBuy.tag}
-				</td>
-				<td>
-					${gbjBuy.upCounts}
-				</td>
-				<td>
-					${gbjBuy.lookCounts}
-				</td>
-				<td>
-					${gbjBuy.commentsCounts}
-				</td>
-				<td>
-					<fmt:formatDate value="${gbjBuy.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-				</td>
-				<td>
-					${gbjBuy.remarks}
-				</td>
-			</tr>
-		</c:forEach>
-		</tbody>
-	</table>
-	<div class="pagination">${page}</div>
 				</div>
+				
 				<!-- end of page content -->
 				<!-- start of sidebar -->
+				<!-- JiaThis Button BEGIN -->
+
+
+<!-- JiaThis Button END -->
 				<aside class="span4 page-sidebar">
-					<div class="row-fluid top-cats" style="text-align: right;">
+				<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32" >
+	<a class="jiathis_button_tsina" id="zjc"></a>
+	<a class="jiathis_button_tqq" id="zjc"></a>
+	<a class="jiathis_button_weixin" ></a>
+	<a class="jiathis_button_cqq" ></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+	  $("#zjc").addEventListener('click', function() {
+		  alert("zzzzzzz");}, false);
+  });
+
+</script>
+
+
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+			
+					<%-- <div class="row-fluid top-cats" style="text-align: right;">
 						<a href="#buy-dialog" onclick="show1()">
 							<section class="span6">
-								<img src="${ctxStatic }/images/btn1.png"
+								<img src="${ctxStatic }/images/share.png"
 									style="margin-left: 30px; width: 220px;" />
 
 							</section>
 						</a>
-					</div>
+					</div> --%>
 					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
 				</aside>
 				<!-- end of sidebar -->
@@ -140,83 +100,6 @@
 	<!-- Start of Footer -->
 	<%@ include file="/WEB-INF/views/include/frontFooter.jsp"%>
 	<!-- End of Footer -->
-	<a href="#top" id="scroll-top"></a>
-	<div id="buy-dialog-bg"
-		style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1; display: none;"></div>
-	<div id="buy-dialog"
-		style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
-		<div id="close-dialog1"
-			style="position: absolute; right: -10px; top: -14px; width: 24px; height: 24px; text-align: center; font-size: 25px; border: 2px solid #d2d1d1; border-radius: 50%; background-color: #fff; color: #e71a1a; cursor: pointer;">×</div>
-		<form method="post" id="buyform" onsubmit="return buySubmit();"
-			action="${ctx }/buyarticles.html" class="form-horizontal"
-			style="padding: 20px 30px; margin: 0;">
-			<h1 class="post-title">
-				<a href="#">我要买标</a>
-			</h1>
-			<p class="comment-notes">请输入您需要发布的信息。专业顾问人工查询，结果分析更准确！</p>
-			<div class="form-error" style="color: #FF0000">
-				<i></i><label class="text"></label>
-			</div>
-			<div class="form-success" style="color: #FF0000">
-				<i></i><label class="text"></label>
-			</div>
-			<div>
-				<label for="title">商标名称 *</label> <input class="span4" type="text"
-					name="title" id="title"> <input name="id" type="hidden"
-					id="id" value="${login_user.id}">
-			</div>
-			<div>
-				<label for="title">联系电话 *</label> <input class="span4" type="text"
-					name="mobile" id="mobile">
-			</div>
-			<div>
-				<label for="title">联系人 *</label> <input class="span4" type="text"
-					name="realname" id="realname">
-			</div>
-
-			<div class="payment-sendbtns">
-				<input class="btn" name="submit" type="submit" id="submit"
-					value="提交查询">
-			</div>
-		</form>
-	</div>
-	<%-- <form id="domainform" action="${ctx }/buyarticles.html" method="post"
-			ms-widget="validation" class="form-horizontal"
-			style="padding: 20px 30px; margin: 0;">
-			<h1 class="post-title">
-				<a href="#">我要买标</a>
-			</h1>
-			<p class="comment-notes">请输入您需要发布的信息。专业顾问人工查询，结果分析更准确！</p>
-
-			<div>
-				<label for="title">商标名称 *</label> <input class="span4" type="text"
-					name="title" id="title"
-					ms-duplex-required="datas.domainInfo1.title">
-					
-			</div>
-			 <div>
-				<label for="mobile">用户id</label>
-				 <input class="span4" name="user_id" type="text"  id="user_id" 
-				 value="${login_user.id}"
-				 ms-duplex="datas.domainInfo1.user_id" >
-			</div> 
-			<div>
-				<label for="mobile">联系电话 *</label> <input class="span4" type="text"
-					name="mobile" id="mobile"
-					ms-duplex-required="datas.domainInfo1.mobile">
-			</div>
-			<div>
-				<label for="mobile">联系人*</label> <input class="span4" type="text"
-					name="realname" id="realname"
-					ms-duplex-required="datas.domainInfo1.realname">
-			</div>
-
-
-			<div class="payment-sendbtns">
-				<input class="btn" name="submit" type="submit" id="submit01"
-					value="提交查询">
-			</div>
-		</form> --%>
 	<script type="text/javascript">
 	<!--我要买标弹出框js -->
 		function show1() {

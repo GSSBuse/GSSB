@@ -127,7 +127,7 @@ $(document).ready(function(){
 
 	<a href="#top" id="scroll-top"></a>
 	<div id="sold-dialog-bg" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1; display: none;"></div>
-	  <div id="sold-dialog" style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
+	   <div id="sold-dialog" style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
 		<div id="close-dialog2" style="position: absolute; right: -10px; top: -14px; width: 24px; height: 24px; text-align: center; font-size: 25px; border: 2px solid #d2d1d1; border-radius: 50%; background-color: #fff; color: #e71a1a; cursor: pointer;">×</div>
 		 <form method="post" id="soldform" onsubmit="return soldSubmit();" action="${ctx }/soldarticles.html"
 		        	class="form-horizontal" style="padding: 20px 30px; margin: 0;">
@@ -143,22 +143,22 @@ $(document).ready(function(){
 				</div>
 								<div>
 				                 <label for="title">商标名称 *</label> 
-				                 <input class="span4" type="text" name="title" id="title"  >
+				                 <input class="spn4 form-control" type="text" name="title" id="title"  style="width: 320px;">
 				                 <input name="id" type="hidden" id="id"
 										value="${login_user.id}">
 		                       </div>
 		                       <div>
 				                 <label for="mobile">联系电话 *</label> 
-				                 <input class="span4" type="text" name="mobile" id="mobile" >
+				                 <input class="spn4 form-control" type="text" name="mobile" id="mobile" style="width: 320px;">
 		                       </div>
 		                       <div>
 				                 <label for="linkman">联系人 *</label> 
-				                 <input class="span4" type="text" name="realname" id="realname" >
+				                 <input class="spn4 form-control" type="text" name="realname" id="realname" style="width: 320px;">
 		                       </div>
 		                       
 								<div class="payment-sendbtns">
 									<input  class="btn" name="submit" type="submit" id="submit"
-										value="提交查询">
+										value="提交查询" style="height: 50px;">
 								</div>
 							</form>
 	</div>

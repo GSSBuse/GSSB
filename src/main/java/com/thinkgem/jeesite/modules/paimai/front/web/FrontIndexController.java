@@ -389,9 +389,9 @@ public class FrontIndexController extends BaseController {
 	/**
 	 * 咨询淘金客一览页面
 	 */
-	@RequestMapping(value = { "newbuyarticles" })
+	@RequestMapping(value = { "goldMiner" })
 	public String newbuyarticles(Model model) {
-		return "modules/paimai/front/newbuyarticles";
+		return "modules/paimai/front/goldMiner";
 	}
 
 	/**
@@ -517,9 +517,8 @@ public class FrontIndexController extends BaseController {
 	@RequestMapping(value = { "gbReward" })
 	@ResponseBody
 	public AjaxResult gbReward(HttpServletRequest request, @RequestParam(value = "id") String id,
-			@RequestParam(value = "title") String title, @RequestParam(value = "mobile") String mobile,
-			@RequestParam(value = "realname") String realname, @RequestParam(value = "price") Long price,
-			@RequestParam(value = "description") String description) {
+			@RequestParam(value = "mobile") String mobile, @RequestParam(value = "realname") String realname,
+			@RequestParam(value = "price") Long price, @RequestParam(value = "description") String description) {
 		// GbjUserBuyComments gbjUserBuyComments = new GbjUserBuyComments();
 		GbjReward gbjReward = new GbjReward();
 		GbjUser gbjUser = new GbjUser();
@@ -529,7 +528,6 @@ public class FrontIndexController extends BaseController {
 			gbjReward.setUser(gbjUserService.get(id));
 			gbjReward.setUser_id(id);
 			gbjReward.setRealname(realname);
-			gbjReward.setTitle(title);
 			gbjReward.setDescription(description);
 			gbjReward.setPrice(price);
 			gbjReward.setMobile(mobile);

@@ -65,7 +65,7 @@ $(document).ready(function(){
 						ms-repeat-el="datas.domainRewardArticleList">
 						<header class="clearfix">
 							<h3 class="post-title">
-								<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.title}}</a>
+								<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.description}}</a>
 								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <a href="">悬赏金额:</a> <a
 									href="">{{el.price}}元</a>
 							</h3>
@@ -80,11 +80,11 @@ $(document).ready(function(){
 							</div>
 							<!-- end of post meta -->
 						</header>
-						<p>
+						<!-- <p>
 							<h4>
-							{{el.description}}<!-- <a class="readmore-link" href="#">查看全部</a> -->
+							{{el.description}}<a class="readmore-link" href="#">查看全部</a>
 							</h4>
-						</p>
+						</p> -->
 					</article>
 					<!-- 分页实现 -->
                             <div class="demo customBootstrap">
@@ -131,33 +131,36 @@ $(document).ready(function(){
 				<div class="form-success" style="color:#FF0000">
 					<i></i><label class="text"></label>
 				</div>
-								<div>
+								<!--<div>
 				                 <label for="title">起名标题 *</label> 
-				                 <input class="span4" type="text" name="title" id="title"  >
+				                 <input class="spn4 form-control" type="text" name="title" id="title"  style="width: 320px;">
 				                 <input name="id" type="hidden" id="id"
 										value="${login_user.id}">
-		                       </div>
+		                       </div> -->
 		                       <div>
 				                 <label for="description">起名需求 *</label> 
-				                 <input class="span4" type="text" name="description" id="description" >
-		                       </div>
+				                 <!-- <input class="spn4 form-control" type="text" name="description" id="description" style="width: 320px;"> -->
+		                       	 <textarea class="spn4 form-control" name="description" id="description" style="width: 320px;"></textarea>
+		                       	 <input name="id" type="hidden" id="id"
+										value="${login_user.id}">
+		                       </div><br>
 		                       <div>
 				                 <label for="price">打赏金额 *</label> 
-				                 <input class="span4" type="text" name="price" id="price" >
-		                       </div>
+				                 <input class="spn4 form-control" type="text" name="price" id="price" style="width: 320px;">
+		                       </div><br>
 		                       <div>
 				                 <label for="linkman">联系人 *</label> 
-				                 <input class="span4" type="text" name="realname" id="realname" >
-		                       </div>
+				                 <input class="spn4 form-control" type="text" name="realname" id="realname" style="width: 320px;">
+		                       </div><br>
 		                       <div>
 				                 <label for="mobile">联系电话 *</label> 
-				                 <input class="span4" type="text" name="mobile" id="mobile" >
+				                 <input class="spn4 form-control" type="text" name="mobile" id="mobile" style="width: 320px;">
 		                       </div>
 		                       
 		                       
 								<div class="payment-sendbtns">
 									<input  class="btn" name="submit" type="submit" id="submit"
-										value="提交查询">
+										value="提交查询" style="height: 50px;">
 								</div>
 							</form>
 	</div>

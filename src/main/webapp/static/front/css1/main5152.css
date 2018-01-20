@@ -619,6 +619,29 @@ font-family : Trebuchet MS; }
 	
 /*----dy end-----------*/
 
+/*----dialog-form start-----------*/
+
+.form-horizontal .form-group{
+	margin-left: 0px;
+}
+
+#buy-dialog-first{
+	margin-left:0px;
+}
+
+#buy-dialog input{
+	height: 13px;
+}
+#sold-dialog input{
+	height: 13px;
+}
+#reward-dialog input{
+	height: 13px;
+}
+/*----dialog-form end-----------*/
+
+
+
 /* WordPress Core --------------------------------------------------------------------------------------------------- */
 .alignnone {
   margin: 5px 0 20px;

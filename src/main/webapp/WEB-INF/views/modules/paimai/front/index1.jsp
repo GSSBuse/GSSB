@@ -139,7 +139,7 @@
 		</div>
 
 
-		<a href="${ctx }/buyarticles.html">
+		<a href="${ctx }/goldMiner.html?UserId=${login_user.id}">
 		<div class="dy-content">
 			<div class="dy-each-first">444</div>
 			<div class="dy-each"></div>

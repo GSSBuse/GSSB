@@ -8,10 +8,6 @@ function rewardSubmit(){
         if($(".tips ").is(":visible")){
             return false;
         }
-        if(title == null  || title == ""){
-            showError("请输入起名标题");
-            return false;
-        }
         if(description == null  || description == ""){
             showError("请输入起名需求");
             return false;
@@ -34,7 +30,6 @@ function rewardSubmit(){
 			type : "POST",
 			data : {
 				id : id,
-				title : title,
 				mobile : mobile,
 				realname : realname,
 				price:price,
