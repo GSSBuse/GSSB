@@ -13,6 +13,8 @@
 <script type="text/javascript"
 	src="${ctxStatic }/front/js/Articlereward.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/gbreward.js"></script>
+<script type="text/javascript" src="${ctxStatic }/front/payjs/qrcode.js"></script>
+
 <script type="text/javascript">
 var if_firstime=true;
 $(document).ready(function(){
@@ -156,14 +158,35 @@ $(document).ready(function(){
 				                 <label for="mobile">联系电话 *</label> 
 				                 <input class="spn4 form-control" type="text" name="mobile" id="mobile" style="width: 320px;">
 		                       </div>
-		                       
-		                       
-								<div class="payment-sendbtns">
+
+								<div align="center" id="qrcode" style="display:none">
+									<p>请您先扫码付款</p>
+								</div>
+
+
+			<div class="payment-sendbtns">
 									<input  class="btn" name="submit" type="submit" id="submit"
 										value="提交查询" style="height: 50px;">
 								</div>
 							</form>
 	</div>
+	
+	//支付
+	<script>
+ 	//这个地址是Demo.java生成的code_url,这个很关键
+	var url = "weixin://wxpay/bizpayurl?pr=bO5Y5ge";
+	
+	//参数1表示图像大小，取值范围1-10；参数2表示质量，取值范围'L','M','Q','H'
+	var qr = qrcode(10, 'M');
+	qr.addData(url);
+	qr.make();
+	var dom=document.createElement('DIV');
+	dom.innerHTML = qr.createImgTag();
+	var element=document.getElementById("qrcode");
+	element.appendChild(dom);
+ </script>
+	
+	
 	<%-- <form id="domainform" action="${ctx }/index1.html" method="post" ms-widget="validation" style="padding: 20px 30px; margin: 0;">
 			<h1 class="post-title">
 				<a href="#">悬赏起名</a>

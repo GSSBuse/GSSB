@@ -1,64 +1,82 @@
 function rewardSubmit(){
-        var id = $("#rewardform").find("#id").eq(0).val();
-        var title = $("#rewardform").find("#title").eq(0).val();
-        var mobile = $("#rewardform").find("#mobile").eq(0).val();
-        var realname = $("#rewardform").find("#realname").eq(0).val();
-        var description = $("#rewardform").find("#description").eq(0).val();
-        var price = $("#rewardform").find("#price").eq(0).val();
-        if($(".tips ").is(":visible")){
-            return false;
-        }
-        if(description == null  || description == ""){
-            showError("请输入起名需求");
-            return false;
-        }
-        if(price == null  || price == ""){
-            showError("请输入悬赏金额");
-            return false;
-        }
-        if(realname == null  || realname == ""){
-            showError("请输入联系人");
-            return false;
-        }
-        if(mobile == null  || mobile == ""){
-            showError("请输入联系电话");
-            return false;
-        }
-        var ajaxResult;
-        $.ajax({
-			url : ctx + "/gbReward.json",
-			type : "POST",
-			data : {
-				id : id,
-				mobile : mobile,
-				realname : realname,
-				price:price,
-				description:description
-			},
-        	dataType : 'json',
-        	async : false,
-			success : function(data) {
-				if (data.type == 'success') {
-					showSuccess("提交成功！请等待审核！");
-				} else {
-					showError(data.msg);
-					ajaxResult = false;
-					return false;
-				}
-			},
-			error : function(data) {
-				showError(data.responseText);
-				ajaxResult = false;
-				return false;
-			}
-		});
-        
-        if (ajaxResult == false) {
-        	return false;
-        }
-        return true;
-    }
+	
+	
+		/*$("#qrcode").css("display","block");*/
+		$("#qrcode").attr("style", "display:block;");
+		
+		$("#price").attr("readonly","readonly");
+		
+		return false;
+		//$("#submit").removeAttr("onclick");
+	
+		var x = 1;
+		var y = 2;
+		if(x == y){
+			 var id = $("#rewardform").find("#id").eq(0).val();
+		        var title = $("#rewardform").find("#title").eq(0).val();
+		        var mobile = $("#rewardform").find("#mobile").eq(0).val();
+		        var realname = $("#rewardform").find("#realname").eq(0).val();
+		        var description = $("#rewardform").find("#description").eq(0).val();
+		        var price = $("#rewardform").find("#price").eq(0).val();
+		        if($(".tips ").is(":visible")){
+		            return false;
+		        }
+		        if(description == null  || description == ""){
+		            showError("请输入起名需求");
+		            return false;
+		        }
+		        if(price == null  || price == ""){
+		            showError("请输入悬赏金额");
+		            return false;
+		        }
+		        if(realname == null  || realname == ""){
+		            showError("请输入联系人");
+		            return false;
+		        }
+		        if(mobile == null  || mobile == ""){
+		            showError("请输入联系电话");
+		            return false;
+		        }
+		        var ajaxResult;
+		        $.ajax({
+					url : ctx + "/gbReward.json",
+					type : "POST",
+					data : {
+						id : id,
+						mobile : mobile,
+						realname : realname,
+						price:price,
+						description:description
+					},
+		        	dataType : 'json',
+		        	async : false,
+					success : function(data) {
+						if (data.type == 'success') {
+							showSuccess("提交成功！请等待审核！");
+						} else {
+							showError(data.msg);
+							ajaxResult = false;
+							return false;
+						}
+					},
+					error : function(data) {
+						showError(data.responseText);
+						ajaxResult = false;
+						return false;
+					}
+				});
+		        
+		        if (ajaxResult == false) {
+		        	return false;
+		        }
+		        return true;
+		    }
+		}
+	
+		
 
+	
+       
 
 /**
  * 悬赏信息
