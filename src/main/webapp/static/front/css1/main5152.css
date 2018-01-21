@@ -1484,13 +1484,14 @@ input[type=text].error,
 .tabs-nav {
   list-style: none;
   overflow: hidden;
-  width: 100%;
+  width: 200px;
+  float:left;
   margin: 0px;
   padding-left: 0px;
 }
 
 .tabs-nav li {
-  float: left;
+  width:205px;
   line-height: 32px;
   margin: 0;
   overflow: hidden;
@@ -1498,6 +1499,10 @@ input[type=text].error,
   position: relative;
   border-bottom: none;
   background: none;
+}
+
+.tabs-nav li h4{
+	margin:0;
 }
 
 .tabs-nav li.active {
@@ -1539,7 +1544,8 @@ input[type=text].error,
   border: 1px solid #efefef;
   margin: -1px 0 20px;
   overflow: hidden;
-  width: 100%;
+  width: 800px;
+  float: left;
 }
 
 .tabs-container .tab-content {

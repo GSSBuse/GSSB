@@ -49,6 +49,89 @@
 						</h1>
 						<hr>
 					</article>
+										<div>
+					<h3>公司简介：</h3>
+					<p style="font-size:15px;">中华人民共和国国务院国家工商行政管理总局批准设立，中华人民共和国国家工商行政管理总局商标局领导的国字头商标注册备案机构。秉承“国家品牌计划：国家平台，创造国家品牌的服务理念”。服务好全国各单位及国际各单位在华的品牌注册工作。 全体工作人员将以全心全意为广大单位服务的工作要求来完成习主席所提出的中国梦所赋予的神圣使命！</p>
+					<br>
+				<div class="team_box1">
+				            <div class="col-md-3 thumb_1">
+				                <img src="/gssb/static/images/pic4.jpg" class="img-responsive" alt="">
+				                <div class="team_desc">
+				                    <div class="team_desc-left">
+				                        <h3>XXX品牌商标</h3>
+				                    </div>
+				                    <div class="clearfix"> </div>
+				                </div>
+				            </div>
+				            <div class="col-md-3 thumb_1">
+				                <img src="/gssb/static/images/pic5.jpg" class="img-responsive" alt="">
+				                <div class="team_desc">
+				                    <div class="team_desc-left">
+                                        <h3>XXX品牌商标</h3>
+                                    </div>
+				                    <div class="clearfix"> </div>
+				                </div>
+				            </div>
+				            <div class="col-md-3 thumb_1">
+				                <img src="/gssb/static/images/pic6.jpg" class="img-responsive" alt="">
+				                <div class="team_desc">
+				                    <div class="team_desc-left">
+                                        <h3>XXX品牌商标</h3>
+                                    </div>
+				                    <div class="clearfix"> </div>
+				                </div>
+				            </div>
+				            <div class="col-md-3 thumb_1">
+				                <img src="/gssb/static/images/pic7.jpg" class="img-responsive" alt="">
+				                <div class="team_desc">
+				                    <div class="team_desc-left">
+                                        <h3>XXX品牌商标</h3>
+                                    </div>
+				                    <div class="clearfix"> </div>
+				                </div>
+				            </div>
+				            <div class="clearfix"> </div>
+				           </div>
+				           <div class="team_box2">
+				            <div class="col-md-3 thumb_1">
+				                <img src="/gssb/static/images/pic8.jpg" class="img-responsive" alt="">
+				                <div class="team_desc">
+				                    <div class="team_desc-left">
+                                        <h3>XXX品牌商标</h3>
+                                    </div>
+				                    <div class="clearfix"> </div>
+				                </div>
+				            </div>
+				            <div class="col-md-3 thumb_1">
+				                <img src="/gssb/static/images/pic9.jpg" class="img-responsive" alt="">
+				                <div class="team_desc">
+				                    <div class="team_desc-left">
+                                        <h3>XXX品牌商标</h3>
+                                    </div>
+				                    <div class="clearfix"> </div>
+				                </div>
+				            </div>
+				            <div class="col-md-3 thumb_1">
+				                <img src="/gssb/static/images/pic10.jpg" class="img-responsive" alt="">
+				                <div class="team_desc">
+				                    <div class="team_desc-left">
+                                        <h3>XXX品牌商标</h3>
+                                    </div>
+				                    <div class="clearfix"> </div>
+				                </div>
+				            </div>
+				            <div class="col-md-3 thumb_1">
+				                <img src="/gssb/static/images/pic11.jpg" class="img-responsive" alt="">
+				                <div class="team_desc">
+				                    <div class="team_desc-left">
+                                        <h3>XXX品牌商标</h3>
+                                    </div>
+				                    <div class="clearfix"> </div>
+				                </div>
+				            </div>
+				            <div class="clearfix"> </div>
+				           </div>
+			</div>
 				</div>
 				
 				<!-- end of page content -->
