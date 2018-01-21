@@ -212,7 +212,7 @@
 			</div>
 		</form>
 	</div>
-	<script type="text/javascript"> <!--我要买标弹出框js -->
+	<script type="text/javascript"> <!--评论控制js -->
 	$('#comment').focus(function(){
 		var x = $('#loginspan').text();
 		

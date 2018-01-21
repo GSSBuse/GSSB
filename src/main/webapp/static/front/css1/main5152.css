@@ -616,6 +616,19 @@ font-family : Trebuchet MS; }
 		text-decoration:none;
 	}
 	
+	#main-content .dy-content .gold-find ul{
+		margin-left:50px;
+		margin-top:20px;
+		overflow:hidden;
+		height:300px;
+	}
+	
+	#main-content .dy-content .gold-find ul li{
+		margin-top:5px;
+		font-size:17px;
+	}
+	
+	
 	
 /*----dy end-----------*/
 

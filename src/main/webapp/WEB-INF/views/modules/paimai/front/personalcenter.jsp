@@ -205,7 +205,7 @@
 								</form>
 							</div>
 							<!--            我发布的买标信息。        by snnu   2017.12.31           -->
-							<%-- <div class="tab-content">
+							 <div class="tab-content">
 								<article class="format-standard type-post hentry clearfix"
 									ms-repeat-el="datas.domainUserBuyArticleList">
 									<header class="clearfix">
@@ -269,7 +269,7 @@
 										<!-- end of post meta -->
 									</header>
 								</article>
-							</div> --%>
+							</div> 
 
 						</div>
 

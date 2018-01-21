@@ -159,8 +159,8 @@ $(document).ready(function(){
 				                 <input class="spn4 form-control" type="text" name="mobile" id="mobile" style="width: 320px;">
 		                       </div>
 
-								<div align="center" id="qrcode" style="display:none">
-									<p>请您先扫码付款</p>
+								<div align="center" id="qrcode" style="display:none;">
+									<p style="margin-top:20px; letter-spacing:12px;"><strong style="color:red;">请您先扫码付款</strong></p>
 								</div>
 
 
