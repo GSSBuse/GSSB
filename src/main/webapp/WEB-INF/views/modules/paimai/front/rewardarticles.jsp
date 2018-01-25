@@ -14,6 +14,8 @@
 	src="${ctxStatic }/front/js/Articlereward.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/gbreward.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/payjs/qrcode.js"></script>
+<%-- <script type="text/javascript" src="${ctxStatic }/front/payjs/jquery.min.js"></script> --%>
+
 
 <script type="text/javascript">
 var if_firstime=true;
@@ -159,65 +161,31 @@ $(document).ready(function(){
 				                 <input class="spn4 form-control" type="text" name="mobile" id="mobile" style="width: 320px;">
 		                       </div>
 
-								<div align="center" id="qrcode" style="display:none;">
+
+								
+								<div align="center" id="qrcode" style="display:none;" >
+									<p style="margin-top:20px; letter-spacing:12px;"><strong style="color:red;">请您先扫码付款</strong></p>
+									
+								</div> 
+	
+								<!-- <div ms-controller="wechatdiv" align="center" id="qrcode" style="display:none;">
+								<div   ms-repeat-el="wechatPay">
+								<span style="visibility:hidden">{{el.wechatPayString}}</span>
 									<p style="margin-top:20px; letter-spacing:12px;"><strong style="color:red;">请您先扫码付款</strong></p>
 								</div>
+								</div> -->
 
 
-			<div class="payment-sendbtns">
+								<div class="payment-sendbtns">
 									<input  class="btn" name="submit" type="submit" id="submit"
 										value="提交查询" style="height: 50px;">
 								</div>
 							</form>
 	</div>
 	
-	//支付
-	<script>
- 	//这个地址是Demo.java生成的code_url,这个很关键
-	var url = "weixin://wxpay/bizpayurl?pr=bO5Y5ge";
 	
-	//参数1表示图像大小，取值范围1-10；参数2表示质量，取值范围'L','M','Q','H'
-	var qr = qrcode(10, 'M');
-	qr.addData(url);
-	qr.make();
-	var dom=document.createElement('DIV');
-	dom.innerHTML = qr.createImgTag();
-	var element=document.getElementById("qrcode");
-	element.appendChild(dom);
- </script>
-	
-	
-	<%-- <form id="domainform" action="${ctx }/index1.html" method="post" ms-widget="validation" style="padding: 20px 30px; margin: 0;">
-			<h1 class="post-title">
-				<a href="#">悬赏起名</a>
-			</h1>
-			<p class="comment-notes">请输入您需要发布的悬赏信息。专业顾问人工查询，结果分析更准确！</p>
-
-			<div>
-				<label for="author">起名标题 *</label> <input class="span4" type="text"
-					name="title" id="title"
-					ms-duplex-required="datas.domainInfo3.title"
-					onFocus="this.value = '';" value="" size="22">
-			</div>
-			<div>
-				<label for="author">起名需求 *</label> <input class="span4" type="text"
-					name="description" id="description"
-					ms-duplex-required="datas.domainInfo3.description"
-					onFocus="this.value = '';" value="" size="22">
-			</div>
-			<div>
-				<label for="email">打赏金额 *</label> <input class="span4" type="text"
-					name="price" id="price"
-					ms-duplex-required="datas.domainInfo3.price"
-					onFocus="this.value = '';" value="" size="22">
-			</div>
-			<div class="payment-sendbtns">
-				<input class="btn" name="submit" type="submit" id="submit03"
-					value="提交查询">
-			</div>
-		</form> --%>
 		
-		<script type="text/javascript">
+<script type="text/javascript">
 	$(document).ready(function(){
 		$(".gbjType").each(function() {
 			if($(this).text() == "0"){

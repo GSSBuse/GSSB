@@ -23,6 +23,7 @@ import com.thinkgem.jeesite.common.utils.SendMailUtil;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.paimai.front.bean.FrontLoginUser;
+import com.thinkgem.jeesite.modules.sys.dao.gbj.WxPayDto;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.ArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.BuyArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBusinessNumber;
@@ -59,6 +60,7 @@ import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserSoldCommentsReplyServ
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserSoldCommentsService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.RewardArticleListService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.SoldArticleListService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.WechatPayService;
 
 @Controller
 @RequestMapping(value = "${frontPath}")
@@ -1190,6 +1192,32 @@ public class FrontIndexController extends BaseController {
 		}
 	}
 
+	//微信支付二维码生成
+	
+		@RequestMapping(value = "polling/wechatPay")
+		@ResponseBody
+		public AjaxResult wechatPay(@RequestParam("body") String bodys,@RequestParam("orderId") String orderIds,
+				@RequestParam("totalFee") String totalFees) {
+			WxPayDto tpWxPayDto = new WxPayDto();
+	    	tpWxPayDto.setBody(bodys);  //商品信息
+	    	tpWxPayDto.setTotalFee(totalFees); //金额
+	    	tpWxPayDto.setOrderId(orderIds);  //订单号用userId
+	    	tpWxPayDto.setSpbillCreateIp("127.0.0.1");  //订单生成的机器 IP
+	    	
+			
+			try {
+				String wechatPayString = WechatPayService.getCodeurl(tpWxPayDto);
+
+				logger.info(wechatPayString);
+				AjaxResult ar = AjaxResult.makeSuccess("");
+				ar.getData().put("wechatPay", wechatPayString);
+				return ar;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return AjaxResult.makeError("");
+			}
+		}
+	
 	/**
 	 * 获取页面显示单个悬赏信息和评论信息 by snnu 2017/12/29
 	 * 

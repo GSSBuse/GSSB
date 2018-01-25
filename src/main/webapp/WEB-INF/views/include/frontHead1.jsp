@@ -104,7 +104,7 @@ body{font-size:12px;}
 }
 .bar{width:25px;height:105px;position:absolute;right:-25px;background:url("${ctxStatic }/images/mini_bg.png") no-repeat;display:block;}
 </style> 
-<div class="main">
+<%-- <div class="main">
     <div class="main2"><a href="javascript:" class="bar"></a>
             <h1 align="left">您可能想知道</h1>
             <ul>
@@ -145,4 +145,4 @@ $(function(){
     });
 
 });
-</script>   
+</script> --%>

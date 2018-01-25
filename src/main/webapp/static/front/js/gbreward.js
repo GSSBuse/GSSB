@@ -1,10 +1,43 @@
 function rewardSubmit(){
 	
 	
-		/*$("#qrcode").css("display","block");*/
 		$("#qrcode").attr("style", "display:block;");
 		
 		$("#price").attr("readonly","readonly");
+		
+		/*var url = "weixin://wxpay/bizpayurl?pr=bO5Y5ge";*/
+		
+		var url = "";
+		
+		var bodys = 'd488f29e54d94fa69821060fe08e9a50';
+		
+		var totalFees = $("#price").val();
+		var orderIds = 'f3e9b86259614079b176430b0886fc31';
+		
+		$.post(
+				"polling/wechatPay.json",
+				{
+					bodys : bodys,
+					totalFees : totalFees,
+					orderIds : orderIds
+				},
+		    	function(res){
+					if(res.type == "success"){
+						url = res.data.wechatPay;
+					}
+				}
+			);
+		
+		
+		//参数1表示图像大小，取值范围1-10；参数2表示质量，取值范围'L','M','Q','H'
+		var qr = qrcode(10, 'M');
+		qr.addData(url);
+		qr.make();
+		var dom=document.createElement('DIV');
+		dom.innerHTML = qr.createImgTag();
+		var element=document.getElementById("qrcode");
+		element.appendChild(dom);
+		
 		
 		return false;
 		//$("#submit").removeAttr("onclick");
