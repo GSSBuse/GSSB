@@ -301,6 +301,7 @@ public class FrontIndexController extends BaseController {
 		// 这里把3个single都放到一起了，便于处理，根据type来分是买标、卖标还是悬赏
 
 		GbjUser gbjUserDetail = gbjUserService.get(id);
+		gbjBuyService.shanchu(id);
 		// 如果是卖标，跳转到gbjsoldsingle卖标页面
 		mav = new ModelAndView("modules/paimai/front/personalcenter");
 		// 参数拿到了，就根据参数去数据库里面查询详细
@@ -310,6 +311,14 @@ public class FrontIndexController extends BaseController {
 
 	}
 
+	/**
+	 * 删除个人中心买标信息
+	 *//*
+		 * @RequestMapping(value = { "frontdelete" }) public ModelAndView
+		 * frontdelete(@RequestParam("id") String id, Model model) {
+		 * BuyArticleListService.frontdelete(id); return new
+		 * ModelAndView("modules/paimai/front/personalcenter"); }
+		 */
 	/**
 	 * 登录注册
 	 */

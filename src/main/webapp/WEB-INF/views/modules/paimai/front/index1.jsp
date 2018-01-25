@@ -33,8 +33,8 @@
 		<div class="dy-content check">
 		
 		<a href="${ctx }/buyarticles.html">
-			<div class="dy-each-first dy-buy">
-				<h2>我要买标</h2>
+			<div class="dy-each-first dy-buy" id="dy-buy-first">
+				<h2 style="color:white;">我要买标</h2>
 				<img alt="" src="${ctxStatic }/images/bag.png"/>
 			</div>
 		</a>	
@@ -70,8 +70,8 @@
 		<div class="dy-content">
 		
 		<a href="${ctx }/soldarticles.html">
-			<div class="dy-each-first dy-sold">
-				<h2>我要卖标</h2>
+			<div class="dy-each-first dy-sold" id="dy-sold-first">
+				<h2 style="color:white;">我要卖标</h2>
 				<img alt="" src="${ctxStatic }/images/bag1.png"/>
 			</div>
 		</a>
@@ -104,8 +104,8 @@
 		<div class="dy-content">
 		
 		<a href="${ctx }/rewardarticles.html">
-			<div class="dy-each-first dy-reword">
-				<h2>悬赏起名</h2>
+			<div class="dy-each-first dy-reword" id="dy-reward-first">
+				<h2 style="color:white;">悬赏起名</h2>
 				<img alt="" src="${ctxStatic }/images/bag2.png"/>
 			</div>
 		</a>
@@ -163,6 +163,7 @@
 	</div>
                 </div>                
                 <!-- End of 主营业务模块 -->
+                
                 <!-- Start of 动态信息 -->  
                 <!-- End of Page 动态信息 -->
                 
@@ -174,10 +175,9 @@
                 
                 <!-- Start of 客户之声-->
 				<div class="about_grid1">
+				<img src="${ctxStatic }/images/split2.png" style="width:100%;margin-bottom:10px;">
 				    <div class="container">
-				        <h4 class="tz-title-4 tzcolor-blue" style="text-align:center">
-				            <p class="tzweight_Bold"><span class="m_2">客户之声</span></p>
-				        </h4>
+				        
 				        <div class="wmuSlider example1">
 				            <div class="wmuSliderWrapper">
 				                <article style="position: absolute; width: 100%; opacity: 0;"> 
@@ -187,8 +187,9 @@
 				                                    <img src="${ctxStatic }/images/s3.jpg" class="img-responsive" alt=""/>
 				                                </li>
 				                                <li class="grid-1_right">
-				                                    <p>好，很好，非常好。谢谢，感谢，非常感谢！！！！！！！！！！！！！！！！！！！！！！！！！</p>
-				                                    <h4>--<br><span class="m_10">客户1</span></h4>
+				                                	<h4>--<br><span class="m_10">胡老板</span></h4>
+				                                    <p style="font-style: normal; color: #0000007a;font-size: 15px;">非常好，真的十分靠谱，解决了我的燃眉之急。服务十分专业，进度跟的很紧，我觉得很不错！</p>
+				                                    
 				                                </li>
 				                                <div class="clearfix"> </div>
 				                            </ul>
@@ -201,8 +202,9 @@
 				                                    <img src="${ctxStatic }/images/s4.jpg" class="img-responsive" alt=""/>
 				                                </li>
 				                                <li class="grid-1_right">
-				                                    <p>我只有一句话，非常不错，买了个打商标。。。。。。。。。。。。。。。</p>
-				                                    <h4>--<br><span class="m_10">客户2</span></h4>
+				                                	<h4>--<br><span class="m_10">蔡老板</span></h4>
+				                                    <p style="font-style: normal; color: #0000007a;font-size: 15px;">我在这里买了一个商标，服务进度跟进很及时，效率很高，而且做得很棒，体验很不错。我觉得可以推荐给朋友们！！</p>
+				                                    
 				                                </li>
 				                                <div class="clearfix"> </div>
 				                            </ul>
@@ -215,8 +217,9 @@
 				                                    <img src="${ctxStatic }/images/s2.jpg" class="img-responsive" alt=""/>
 				                                </li>
 				                                <li class="grid-1_right">
-				                                    <p>我只有一句话，非常不错，买了个打商标。。。。。。。。。。。。。。。</p>
-				                                    <h4>--<br><span class="m_10">客户3</span></h4>
+				                                	<h4>--<br><span class="m_10">王先生</span></h4>
+				                                    <p style="font-style: normal; color: #0000007a;font-size: 15px;">买了一个大商标，我觉得很不错，这里的服务很周到，也很耐心，自己基本没怎么操心。我给打五分！</p>
+				                                    
 				                                </li>
 				                                <div class="clearfix"> </div>
 				                            </ul>
@@ -239,11 +242,9 @@
                 
                 <!-- Start of 合作案例-->
                 <div class="about_grid">
+                <img src="${ctxStatic }/images/split3.png" style="width:100%;margin-bottom:10px;">
 				    <div class="container">
-				        <h4 class="tz-title-4 tzcolor-blue" style="text-align:center">
-				            <p class="tzweight_Bold"><span class="m_2">合作案例<br></span></p>
-				        </h4>
-				        <div class="box5">
+				        <div class="box5" style="padding-left: 120px;">
 				          <div class="team_box1">
 				            <div class="col-md-3 thumb_1">
 				                <img src="${ctxStatic }/images/pic4.jpg" class="img-responsive" alt=""/>

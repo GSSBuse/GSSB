@@ -175,7 +175,7 @@
 
                                                                         <div>
                                                                                 <label for="comment">Comment</label>
-                                                                                <textarea class="span8" name="comment" id="comment" cols="58" rows="10"></textarea>
+                                                                                <textarea class="span8" name="comment" id="comment" cols="58" rows="10" style="border: 1px solid #cacaca;"></textarea>
                                                                         </div>
 
                                                                         <div>

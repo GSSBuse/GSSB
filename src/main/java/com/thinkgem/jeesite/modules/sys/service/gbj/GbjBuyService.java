@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
@@ -60,6 +61,12 @@ public class GbjBuyService extends CrudService<GbjBuyDao, GbjBuy> {
 	@Transactional(readOnly = false)
 	public void delete(GbjBuy gbjBuy) {
 		super.delete(gbjBuy);
+	}
+
+	// 删除前台
+	@Transactional(readOnly = false)
+	public void shanchu(@RequestParam("id") String id) {
+		gbjBuydao.shanchu(id);
 	}
 
 	@Transactional(readOnly = false)

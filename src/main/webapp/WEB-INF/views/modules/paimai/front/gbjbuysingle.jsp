@@ -35,12 +35,6 @@
 				<!-- start of page content -->
 				<div class="span8 page-content">
 
-					<ul class="breadcrumb">
-						<li><a href="#">国标商标</a><span class="divider">/</span></li>
-						<li><a href="#" class="gbjType">${gbjBuyDetail.typeId }</a> <span
-							class="divider">/</span></li>
-						<li class="active">${gbjBuyDetail.title}</li>
-					</ul>
 
 					<article class=" type-post format-standard hentry clearfix">
 
@@ -48,13 +42,23 @@
 							<a href="#">${gbjBuyDetail.title}</a>
 
 						</h1>
-
+						<div class="jiathis_style_32x32" >
+							<a class="jiathis_button_tsina" id="zjc"></a>
+							<a class="jiathis_button_tqq" id="zjc"></a>
+							<a class="jiathis_button_weixin" ></a>
+							<a class="jiathis_button_cqq" ></a>
+							<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+							<a class="jiathis_counter_style"></a>
+						</div>
+						<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+						<br><br><br>
 						<div class="post-meta clearfix like-btn" ms-controller="upcounts">
-							<span class="date">${gbjBuyDetail.createDate}</span> <span
+						
+							<span id="time" class="date" dateFormate="yyyy-MM-dd">${gbjBuyDetail.createDate}</span> <span
 								class="category"><a href="#" class="gbjType">${gbjBuyDetail.typeId }</a></span>
-							<span class="comments"><a href="#">${gbjBuyDetail.lookCounts}</a></span>
+							<span class="comments">浏览次数：<a href="#">${gbjBuyDetail.lookCounts}</a></span>
 
-							<form id="like-it-form" action="#" method="post">
+							<form id="like-it-form" action="#" method="post" style="display: inline; float: right;">
 								<span class="like-it">${gbjBuyDetail.upCounts}</span> <input
 									type="hidden" name="id" id="buyid" />
 
@@ -66,7 +70,7 @@
 					</article>
 					<section id="comments">
 						<h3 id="comments-title">评论内容</h3>
-						<ol class="commentlist"
+						<p id="no-comments">暂无评论</p><ol class="commentlist"
 							ms-repeat-ell="datas.domainBuyCommentsArticleList">
 							<li class="comment even thread-even depth-1" id="li-comment-2">
 								<article id="comment-2">
@@ -83,7 +87,7 @@
 											</cite>--<a href="#reply-dialog" onclick="show1(this)">回复</a><p class="ellb" style="display: none">{{ell.id}}</p>
 										</h5>
 										<p class="date">
-											<time datetime="2013-02-26T13:18:47+00:00">{{ell.createDate}}</time>
+											<time>{{ell.createDate}}</time>
 										</p>
 
 									</div>
@@ -145,11 +149,12 @@
 										name="parentId" type="hidden" id="parentId"
 										value="${login_user.id}">
 									<textarea class="span8" name="comment" id="comment" cols="58"
-										rows="10"></textarea>
+										rows="10" style="border: 1px solid #cacaca; border-radius: 5px; margin-top: -38px;"></textarea>
 								</div>
-								<div>
+								<br>
+								<div >
 									<input class="btn" onclick="commentSubmit();" name="submit"
-										type="button" id="submit" value="提交评论">
+										type="button" id="submit" value="提交评论" style="margin-top:10px;">
 								</div>
 							</form>
 						</div>
@@ -162,21 +167,6 @@
 
 				<!-- start of sidebar -->
 				<aside class="span4 page-sidebar">
-					<section id="comments">
-						<h3 id="comments-title"></h3>
-						<ol class="commentlist">
-							<li class="comment even thread-even depth-1" id="li-comment-2">
-								<article id="comment-2">
-									<a> <img alt=""
-										src="http://1.gravatar.com/avatar/50a7625001317a58444a20ece817aeca?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G"
-										class="avatar avatar-60 photo" height="60" width="60">
-									</a>
-									<h2 class="author">${gbjBuyDetail.user.username}</h2>
-									<!-- end of comment-body -->
-								</article> <!-- end of comment -->
-							</li>
-						</ol>
-					</section>
 					<%@ include file="/WEB-INF/views/include/frontSidebar.jsp"%>
 				</aside>
 				<!-- end of sidebar -->
@@ -204,11 +194,11 @@
 					type="hidden" id="userId" value="${login_user.id}"> <input
 					name="toId" type="hidden" id="toId" value=''>
 				<textarea class="span8" name="replyComments" id="replyComments"
-					cols="58" rows="10"></textarea>
+					cols="40" rows="10" style="border: 1px solid #cacaca; border-radius: 5px; margin-top: 16px; margin-left: 20px; margin-right: 20px;"></textarea>
 			</div>
 			<div>
 				<input class="btn" onclick="buyreplySubmit();" name="submit"
-					type="button" id="submit" value="提交评论">
+					type="button" id="submit" value="提交评论" style="float: right; margin-right: 20px; margin-bottom: 12px;">
 			</div>
 		</form>
 	</div>
@@ -693,7 +683,7 @@
         }
   </script>
 
-	<script type="text/javascript">
+<script type="text/javascript">
 	$(document).ready(function(){
 		$(".gbjType").each(function() {
 			if($(this).text() == "0"){
@@ -706,6 +696,49 @@
 				$(this).text("版权") ;
 			}
 		});
+	});
+</script>
+
+<script type="text/javascript">
+//判断是否有评论
+	$(document).ready(function(){
+		if($("#li-comment-2").length>0){
+			$("#no-comments").css("display","none");
+		}else{
+			$("#no-comments").css("display","block");
+		} 
+	});
+</script>
+
+<script type="text/javascript">
+//更改日期格式
+	$(document).ready(function(){
+		var cnt = $('#time').text().toString();
+		var len = cnt.length;
+		var year;
+		var month;
+		var date;
+		var h_m_s;
+
+		var mon = [['Jan','01'],['Feb','02'],[' Mar','03'],
+				   ['Apr','04'],['May','05'],['Jun','06'],
+				   ['Jul','07'],['Aug','08'],['Sep','09'],
+				   ['Oct','10'],['Nov','11'],['Dec','12']];
+		var ans;
+		year = cnt.substring(24,28);
+		//alert(cnt.substring(4,7));
+		month = cnt.substring(4,7)
+		for(var i=0; i<12; i++){
+			//alert(i);
+			if(mon[i][0] == month){
+				month = mon[i][1].toString();
+				break;
+			}
+		}
+		date = cnt.substring(8,10);
+		h_m_s = cnt.substring(11,20);
+		ans = year.concat('-',month,'-',date,' ',h_m_s);
+		$('#time').html(ans);
 	});
 </script>
 <!-- <script type="text/javascript">

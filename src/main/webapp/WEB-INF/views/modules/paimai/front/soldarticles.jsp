@@ -14,8 +14,15 @@
 <script type="text/javascript" src="${ctxStatic }/front/js/gbsold.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/common.js"></script>
 <script type="text/javascript">
+//标题太长，则用省略号。
+	$(document).ready(function(){
+		alert("lalal ");
+	});
+</script>
+<script type="text/javascript">
 var if_firstime=true;
 $(document).ready(function(){
+
 	 var totalcounts= ${gbjSoldcount};
 	 var pageSize=11;
 	 var y=Math.ceil((totalcounts)/pageSize);//由总条数除以每页数目得到总页数
@@ -70,7 +77,8 @@ $(document).ready(function(){
 
 							<h3 class="post-title">
 
-								<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=sold">{{el.title}}</a>
+								<a class="buyarticles-title" ms-attr-href="${ctx }/single.html?id={{el.id}}&type=sold">
+								{{el.title}}</a>
 							</h3>
 							<div class="post-meta clearfix">
 								<span class="date">{{el.createDate}}</span> <span
@@ -107,7 +115,7 @@ $(document).ready(function(){
 						<a href="#sold-dialog" onclick="show2()">
 							<section class="span6">
 								<img src="${ctxStatic }/images/btn2.png"
-									style="margin-left: 30px; width: 220px;" />
+									style="width: 203%;" />
 
 							</section>
 						</a>
@@ -259,7 +267,6 @@ $(document).ready(function(){
 	//下面全是和登录相关的js
 	<script type="text/javascript">
 		$(document).ready(function() {
-
 			$(".top_nav").mousedown(function(e) {
 				$(this).css("cursor", "move");//改变鼠标指针的形状 
 				var offset = $(this).offset();//DIV在页面的位置 
@@ -632,5 +639,7 @@ $(document).ready(function(){
 			}
 		}
 	</script>
+	
+
 </body>
 </html>

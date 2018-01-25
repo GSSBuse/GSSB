@@ -108,19 +108,19 @@ body{font-size:12px;}
     <div class="main2"><a href="javascript:" class="bar"></a>
             <h1 align="left">您可能想知道</h1>
             <ul>
-                <li><a href="#"><img src="${ctxStatic }/images/footer-1.png">
+                <li><a href="${ctx }/static_trademark.html"><img src="${ctxStatic }/images/footer-1.png">
                     <p>如何收费</p>
                     </a></li>
-                <li><a href="#"><img src="${ctxStatic }/images/footer-2.png">
+                <li><a href="${ctx }/static_trademark1.html"><img src="${ctxStatic }/images/footer-2.png">
                     <p>注册流程</p>
                     </a></li>
-                <li><a href="#"><img src="${ctxStatic }/images/footer-3.png">
+                <li><a href="${ctx }/static_trademark2.html"><img src="${ctxStatic }/images/footer-3.png">
                     <p>注册周期</p>
                     </a></li>
-                <li><a href="#"><img src="${ctxStatic }/images/footer-4.png">
+                <li><a href="${ctx }/static_trademark3.html"><img src="${ctxStatic }/images/footer-4.png">
                     <p>申请条件</p>
                     </a></li>
-                <li><a href="#"><img src="${ctxStatic }/images/footer-5.png">
+                <li><a href="${ctx }/static_trademark4.html"><img src="${ctxStatic }/images/footer-5.png">
                     <p>行业分类</p>
                     </a></li>
             </ul>

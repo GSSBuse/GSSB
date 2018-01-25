@@ -96,7 +96,7 @@ span.tag-line {
   padding: 16px 14px 18px;
 }
 .main-nav div > ul > li a {
-  font-family: "寰蒋闆呴粦", Arial;
+  font-family: "瀵邦喛钂嬮梿鍛寸拨", Arial;
   font-size: 16px;
   color: #395996;
 }
@@ -194,7 +194,7 @@ span.tag-line {
 /* Header - banner ---------------------------------------------------------------------------------------------------*/
 .registInfo { height: 270px; }
 .registInfo li { padding: 35px 50px; }
-.registInfo li>h1 { text-align: center; color: #fff; font-size: 40px; line-height: 80px; font-family: "寰蒋闆呴粦", Arial; }
+.registInfo li>h1 { text-align: center; color: #fff; font-size: 40px; line-height: 80px; font-family: "瀵邦喛钂嬮梿鍛寸拨", Arial; }
 .registInfo li>h1 span { width: 60px; height: 60px; display: inline-block; background: #c33408; text-align: center; line-height: 60px; border-radius: 60px; font-weight: normal; }
 .registInfo li>h6 { text-align: center; color: #fff; font-size: 17px; font-weight: normal; margin: 0; line-height: 50px; border-bottom: 1px solid #fea100; width: 480px; margin: 0 auto; }
 .registInfo li>p { text-align: center; color: #fff; font-size: 17px; font-weight: normal; margin: 0; line-height: 40px; }
@@ -250,7 +250,7 @@ span.tag-line {
 }
 
 h3.search-header {
-  font-family: "寰蒋闆呴粦", Arial;
+  font-family: "瀵邦喛钂嬮梿鍛寸拨", Arial;
   font-weight: bold;
   font-size: 36px;
   color: #fff;
@@ -258,7 +258,7 @@ h3.search-header {
 }
 
 p.search-tag-line {
-  font-family: "寰蒋闆呴粦", Arial;
+  font-family: "瀵邦喛钂嬮梿鍛寸拨", Arial;
   font-style: italic;
   font-size: 18px;
   line-height: 28px;
@@ -271,7 +271,7 @@ form.search-form {
   text-align: center;
 }
 form.search-form .input-common, form.search-form input.search-term,form.search-form select.select-term, form.search-form input.search-btn {
-  font-family: "寰蒋闆呴粦", Arial;
+  font-family: "瀵邦喛钂嬮梿鍛寸拨", Arial;
   box-shadow: none;
   border-radius: 0;
   display: inline-block;
@@ -348,7 +348,7 @@ form.search-form input.search-btn:hover {
     color: #ffffff;
     margin-left: 5px;
 }
-/*寮瑰嚭妗�*/
+/*瀵懓鍤锟�*/
 .mask { margin: 0; padding: 0; border: none; width: 100%; height: 100%; background: #333; opacity: 0.6; filter: alpha(opacity=60); z-index: 9999; position: fixed; top: 0; left: 0; display: none; }
 #LoginBox { position: absolute; left: 22%; top: -1%; z-index: 10000; display: none; }
 button::-moz-focus-inner {
@@ -431,14 +431,16 @@ font-family : Trebuchet MS; }
 
 	.index-page-container{
 		position: absolute;
-    	width:1583px;
+    	width:100%;
     	left:0;
     	right:0;
     	margin:-55px auto 0;
 	}
+	
 	#main-content{
 		width:100%;
 	}
+
 	#main-content .test{
 	    margin-left: 20px;
 	    width: 120px;
@@ -469,8 +471,8 @@ font-family : Trebuchet MS; }
 		margin:0 auto;
 	}
 	#main-content #li-menu ul li{
-		margin-left: 60px;
-    	margin-right: 60px;
+		margin-left: 6%;
+    	margin-right: 5%;
 	}
 	#main-content #li-menu ul li div:hover{
 		background-color:#f86539;
@@ -482,6 +484,23 @@ font-family : Trebuchet MS; }
 		box-shadow: 2px 2px 2px #888888;
 	}
 
+	#main-content #dy-buy-first{
+		background-image:url("../../images/01-bg.jpg");
+		background-repeat: no-repeat;
+		background-size: 100% 100%;  
+	}
+	
+	#main-content #dy-sold-first{
+		background-image:url("../../images/02-bg.jpg");
+		background-repeat: no-repeat;
+		background-size: 100% 100%;  
+	}
+	
+	#main-content #dy-reward-first{
+		background-image:url("../../images/03-bg.jpg");
+		background-repeat: no-repeat;
+		background-size: 100% 100%;  
+	}
 	#main-content #li-menu ul li .div-check h1{
 		color: white;
 	}
@@ -498,7 +517,7 @@ font-family : Trebuchet MS; }
 	}
 	#main-content h2{
 		font-size: 49px;
-    	margin: 41px 0 12px 43px;
+    	margin: 41px 0 12px 29px;
     	letter-spacing: 14px;
     	color: #717171;
     	width:274px;
@@ -537,7 +556,7 @@ font-family : Trebuchet MS; }
 	    height: 50%;
 	    background-color: #f0f5f8;
 	    float: left;
-	    margin-left: 12px;
+	    margin-left: 9px;
 	    margin-right: 2px;
 		border-radius: 12px;
 	}
@@ -551,7 +570,7 @@ font-family : Trebuchet MS; }
 	}
 	
 	#main-content .dy-buy img{
-		width:93px;
+		width:85px;
 		margin:0 ;
 		float:right;
 		top:20px;
@@ -560,7 +579,7 @@ font-family : Trebuchet MS; }
 	}
 	
 	#main-content .dy-sold img{
-		width:93px;
+		width:85px;
 		margin:0 ;
 		float:right;
 		top:20px;
@@ -569,7 +588,7 @@ font-family : Trebuchet MS; }
 	}
 	
 	#main-content .dy-reword img{
-		width:93px;
+		width:85px;
 		margin:0 ;
 		float:right;
 		top:20px;
@@ -593,7 +612,7 @@ font-family : Trebuchet MS; }
 	}
 	
 	#main-content .dy-content .dy-each .like-count{
-		margin-left: 203px;
+		margin-left: 183px;
 		height: 16px;
 		overflow:hidden;
 		display: block;
@@ -616,19 +635,24 @@ font-family : Trebuchet MS; }
 		text-decoration:none;
 	}
 	
-	#main-content .dy-content .gold-find ul{
-		margin-left:50px;
-		margin-top:20px;
-		overflow:hidden;
-		height:300px;
+	#main-content .dy-content div:hover{
+		box-shadow: 2px 2px 2px #b0afaf;
 	}
 	
-	#main-content .dy-content .gold-find ul li{
-		margin-top:5px;
-		font-size:17px;
-	}
-	
-	
+	@media screen and (max-width: 1441px) { 
+		#main-content .dy-buy img{
+			display:none;
+		}
+		#main-content .dy-sold img{
+			display:none;
+		}
+		#main-content .dy-reword img{
+			display:none;
+		}
+		#main-content .dy-content .dy-each .like-count{
+			display:none;
+		}
+	} 
 	
 /*----dy end-----------*/
 
@@ -652,8 +676,6 @@ font-family : Trebuchet MS; }
 	height: 13px;
 }
 /*----dialog-form end-----------*/
-
-
 
 /* WordPress Core --------------------------------------------------------------------------------------------------- */
 .alignnone {
@@ -1256,7 +1278,7 @@ h1.search-title span {
   color: #666565;
   font-size: 14px;
   line-height: 22px;
-  font-family: "寰蒋闆呴粦", Arial;
+  font-family: "瀵邦喛钂嬮梿鍛寸拨", Arial;
   font-weight: 600;
   margin: 0;
 }
@@ -1497,14 +1519,13 @@ input[type=text].error,
 .tabs-nav {
   list-style: none;
   overflow: hidden;
-  width: 200px;
-  float:left;
+  width: 100%;
   margin: 0px;
   padding-left: 0px;
 }
 
 .tabs-nav li {
-  width:205px;
+  float: left;
   line-height: 32px;
   margin: 0;
   overflow: hidden;
@@ -1512,10 +1533,6 @@ input[type=text].error,
   position: relative;
   border-bottom: none;
   background: none;
-}
-
-.tabs-nav li h4{
-	margin:0;
 }
 
 .tabs-nav li.active {
@@ -1557,8 +1574,7 @@ input[type=text].error,
   border: 1px solid #efefef;
   margin: -1px 0 20px;
   overflow: hidden;
-  width: 800px;
-  float: left;
+  width: 100%;
 }
 
 .tabs-container .tab-content {

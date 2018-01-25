@@ -67,7 +67,7 @@ $(document).ready(function(){
 						ms-repeat-el="datas.domainRewardArticleList">
 						<header class="clearfix">
 							<h3 class="post-title">
-								<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.description}}</a>
+								<a class="buyarticles-title" ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.description}}</a>
 								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <a href="">悬赏金额:</a> <a
 									href="">{{el.price}}元</a>
 							</h3>
@@ -101,7 +101,7 @@ $(document).ready(function(){
 						<a href="#reward-dialog" onclick="show3()">
 							<section class="span6">
 								<img src="${ctxStatic }/images/btn3.png"
-									style="margin-left: 30px; width: 220px;" />
+									style="width: 203%;" />
 
 							</section>
 						</a>
@@ -688,5 +688,25 @@ $(document).ready(function(){
 			}
 		}
 	</script>
+	
+	<script type="text/javascript">
+//标题太长，则用省略号。
+	function infoSub(thisClass,needLeng){
+										
+		var id = document.getElementsByClassName(thisClass);
+		var length = id.length;
+		for(var i=0; i<length; i++){
+			var nowLeng = id[i].innerHTML.length;
+			if(nowLeng > needLeng){
+				var nowWord = id[i].innerHTML.substr(0,needLeng)+'...';
+				id[i].innerHTML = nowWord;
+			}
+		}
+		
+	}
+	$(document).ready(function(){
+		infoSub('buyarticles-title',20);
+	})
+</script>
 </body>
 </html>

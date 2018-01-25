@@ -14,20 +14,7 @@
         </div>
 </section>
 
-<section class="widget">
-        <h3 class="title">分类</h3>
-        <div align="center">
-                                           <a href="${ctx }/buyarticles.html" >
-                                                       <img style="width:30%;" src="${ctxStatic }/images/service1.png"/>
-                                            </a>
-                                            <a href="${ctx }/soldarticles.html" img style="width:30%;">
-                                                       <img style="width:30%;" src="${ctxStatic }/images/service2.png"/>
-                                            </a>
-                                            <a href="${ctx }/rewardarticles.html" img style="width:30%;">
-                                                       <img style="width:30%;" src="${ctxStatic }/images/service3.png"/>
-                                            </a>
-                                       </div>
-</section><br><br><br>
+<br><br><br>
 <section class="widget" >
         <h3 class="title">预留其他业务需求</h3>
         <div align="center">

@@ -65,7 +65,7 @@ $(document).ready(function(){
 					<article class="format-standard type-post hentry clearfix" ms-repeat-el="datas.domainBuyArticleList">
 						<header class="clearfix">
 							<h3 class="post-title">
-								<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</a>
+								<a class="buyarticles-title" ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</a>
 							</h3>
 							<div class="post-meta clearfix ">
 								<span class="date">{{el.createDate}}</span> <span
@@ -100,7 +100,7 @@ $(document).ready(function(){
 					<div class="row-fluid top-cats" style="text-align: right;">
 						<a href="#buy-dialog" onclick="show1()">
 							<section class="span6">
-								<img src="${ctxStatic }/images/btn1.png" style="margin-left: 30px; width: 220px;"/>
+								<img src="${ctxStatic }/images/btn1.png" style="width: 203%;"/>
 								
 							</section>
 						</a>
@@ -591,6 +591,27 @@ $('#close-dialog1').click(function(){
 			}
 		});
 	});
+</script>
+
+
+<script type="text/javascript">
+//标题太长，则用省略号。
+	function infoSub(thisClass,needLeng){
+										
+		var id = document.getElementsByClassName(thisClass);
+		var length = id.length;
+		for(var i=0; i<length; i++){
+			var nowLeng = id[i].innerHTML.length;
+			if(nowLeng > needLeng){
+				var nowWord = id[i].innerHTML.substr(0,needLeng)+'...';
+				id[i].innerHTML = nowWord;
+			}
+		}
+		
+	}
+	$(document).ready(function(){
+		infoSub('buyarticles-title',20);
+	})
 </script>
 </body>
 </html>

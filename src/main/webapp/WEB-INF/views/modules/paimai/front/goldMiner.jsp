@@ -47,7 +47,17 @@
 						<h1 class="post-title">
 							<a href="#">淘金客</a>
 						</h1>
-						<hr>
+						
+						<div class="jiathis_style_32x32" >
+							<a class="jiathis_button_tsina" id="zjc"></a>
+							<a class="jiathis_button_tqq" id="zjc"></a>
+							<a class="jiathis_button_weixin" ></a>
+							<a class="jiathis_button_cqq" ></a>
+							<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+							<a class="jiathis_counter_style"></a>
+						</div>
+
+			<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
 					</article>
 										<div>
 					<h3>公司简介：</h3>
@@ -142,25 +152,7 @@
 <!-- JiaThis Button END -->
 				<aside class="span4 page-sidebar">
 				<!-- JiaThis Button BEGIN -->
-<div class="jiathis_style_32x32" >
-	<a class="jiathis_button_tsina" id="zjc"></a>
-	<a class="jiathis_button_tqq" id="zjc"></a>
-	<a class="jiathis_button_weixin" ></a>
-	<a class="jiathis_button_cqq" ></a>
-	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	<a class="jiathis_counter_style"></a>
-</div>
 
-<script type="text/javascript">
-  $(document).ready(function(){
-	  $("#zjc").addEventListener('click', function() {
-		  alert("zzzzzzz");}, false);
-  });
-
-</script>
-
-
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
 <!-- JiaThis Button END -->
 			
 					<%-- <div class="row-fluid top-cats" style="text-align: right;">

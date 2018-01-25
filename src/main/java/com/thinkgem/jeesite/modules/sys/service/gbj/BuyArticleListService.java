@@ -28,6 +28,14 @@ public class BuyArticleListService extends CrudService<BuyArticleListDao, BuyArt
 		return buyarticleListdao.findDomainUserBuyArticleList(id);
 	}
 
+	/*
+	 * public static void frontdelete(@RequestParam("id") String id) { try {
+	 * SqlMapClient.delete("frontdelete", id); } catch (SQLException e) {
+	 * e.printStackTrace(); }
+	 * 
+	 * }
+	 */
+
 	public int findDomainBuyArticlePageCount() {
 		return buyarticleListdao.findDomainBuyArticlePageCount();
 	}

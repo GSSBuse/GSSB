@@ -66,7 +66,7 @@ $('#like-it-form .like-it').click(function(){
         var likeHtml = likeButton.html();
         var likeNum = parseInt(likeHtml, 10);
         likeNum += 1;
-        
+        $(this).unbind('click');
         likeButton.html(likeNum);
 
         
@@ -75,10 +75,8 @@ $('#like-it-form .like-it').click(function(){
         $("#soldid").val(c);
         
         
-        $('#like-it-form .like-it').bind('click', function() {
-		    $(this).unbind('click');
-		    alert("该用户已经点过赞!");
-		});
+		
+
         
         
         $.ajax({

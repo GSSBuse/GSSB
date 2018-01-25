@@ -272,7 +272,11 @@
         </where>
     </select>
     
-    
+    <update id="shanchu">
+		UPDATE gbj_buy SET 
+			del_flag = 1
+		WHERE id = #{id}
+	</update>
     
     
     

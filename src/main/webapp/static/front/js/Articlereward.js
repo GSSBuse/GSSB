@@ -40,7 +40,7 @@ var interval_ArticleReward_status_check = function() {
 				if (res.type == "success") {					
 					vmreward.datas.domainRewardArticleList.clear();
 					vmreward.datas.domainRewardArticleList.pushArray(res.data.ArticleRewardData);
-					timeout_ArticleReward = setTimeout(interval_ArticleReward_status_check, 30000); //30秒自动刷新一次
+					timeout_ArticleReward = setTimeout(interval_ArticleReward_status_check, 3000000); //30秒自动刷新一次
 				}
 			}
 		);

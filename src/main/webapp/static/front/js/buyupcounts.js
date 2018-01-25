@@ -65,17 +65,13 @@ jQuery(document).ready(function(e) {
 			var likeNum = parseInt(likeHtml, 10);
 			likeNum += 1;
 
+			$(this).unbind('click');
 			likeButton.html(likeNum);
 
 			var c = window.location.href.split("?")[1].substring(3, 35);
 
 			$("#buyid").val(c);
 			
-			$('#like-it-form .like-it').bind('click', function() {
-			    $(this).unbind('click');
-			    alert("该用户已经点过赞!");
-			});
-
 			$.ajax({
 				url : ctx + "/buyupcounts.json",
 				type : "POST",

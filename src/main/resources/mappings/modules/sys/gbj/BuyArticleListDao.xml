@@ -31,6 +31,8 @@
 		FROM gbj_buy  a
 		<include refid="gbjBuyJoins"/>
 		WHERE a.user_id = #{id} 
+		 AND a.front_del_flag = 1
+		 AND a.del_flag=0
 		 ORDER BY a.create_date DESC
     </select>
 
@@ -65,4 +67,10 @@
                AND d.front_del_flag = 1
         </where>
     </select> 
+    <!-- <delete id="frontdelete">
+    delete from gbj_buy where id=#{id}	
+    
+    </delete> -->
+    
+    
     </mapper>
