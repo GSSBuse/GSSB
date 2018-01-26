@@ -1196,17 +1196,13 @@ public class FrontIndexController extends BaseController {
 	
 		@RequestMapping(value = "polling/wechatPay")
 		@ResponseBody
-		public AjaxResult wechatPay(@RequestParam("body") String bodys,@RequestParam("orderId") String orderIds,
-				@RequestParam("totalFee") String totalFees) {
-			WxPayDto tpWxPayDto = new WxPayDto();
-	    	tpWxPayDto.setBody(bodys);  //商品信息
-	    	tpWxPayDto.setTotalFee(totalFees); //金额
-	    	tpWxPayDto.setOrderId(orderIds);  //订单号用userId
-	    	tpWxPayDto.setSpbillCreateIp("127.0.0.1");  //订单生成的机器 IP
+		public AjaxResult wechatPay(@RequestParam("bodys") String bodys,
+				@RequestParam("totalFees") String totalFees) {
+			
 	    	
 			
 			try {
-				String wechatPayString = WechatPayService.getCodeurl(tpWxPayDto);
+				String wechatPayString = WechatPayService.getCodeurl(bodys,totalFees);
 
 				logger.info(wechatPayString);
 				AjaxResult ar = AjaxResult.makeSuccess("");
@@ -1323,6 +1319,12 @@ public class FrontIndexController extends BaseController {
 
 	}
 
+	//支付成功跳转页面
+	@RequestMapping(value = { "wxpayresult" })
+	public String wxpayresult(Model model) {
+		return "modules/paimai/front/wxpayresult";
+	}
+	
 	/*
 	 * 静态页面
 	 */

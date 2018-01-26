@@ -1,43 +1,80 @@
 function rewardSubmit(){
+	 var id = $("#rewardform").find("#id").eq(0).val();
+     var title = $("#rewardform").find("#title").eq(0).val();
+     var mobile = $("#rewardform").find("#mobile").eq(0).val();
+     var realname = $("#rewardform").find("#realname").eq(0).val();
+     var description = $("#rewardform").find("#description").eq(0).val();
+     var price = $("#rewardform").find("#price").eq(0).val();
+     if($(".tips ").is(":visible")){
+         return false;
+     }
+     if(description == null  || description == ""){
+         showError("请输入起名需求");
+         return false;
+     }
+     if(price == null  || price == ""){
+         showError("请输入悬赏金额");
+         return false;
+     }
+     if(realname == null  || realname == ""){
+         showError("请输入联系人");
+         return false;
+     }
+     if(mobile == null  || mobile == ""){
+         showError("请输入联系电话");
+         return false;
+     }
+	
 	
 	
 		$("#qrcode").attr("style", "display:block;");
-		
 		$("#price").attr("readonly","readonly");
-		
-		/*var url = "weixin://wxpay/bizpayurl?pr=bO5Y5ge";*/
-		
-		var url = "";
-		
-		var bodys = 'd488f29e54d94fa69821060fe08e9a50';
-		
+		var wxurl = "";
+		var bodys = "悬赏金额支付";
 		var totalFees = $("#price").val();
-		var orderIds = 'f3e9b86259614079b176430b0886fc31';
-		
-		$.post(
-				"polling/wechatPay.json",
-				{
-					bodys : bodys,
-					totalFees : totalFees,
-					orderIds : orderIds
-				},
-		    	function(res){
-					if(res.type == "success"){
-						url = res.data.wechatPay;
-					}
+		$.ajax({
+ 			url : ctx + "/polling/wechatPay.json",
+ 			type : "POST",
+ 			data : {
+ 				bodys : bodys,
+				totalFees : totalFees
+			
+			},
+        	dataType : 'json',
+        	async : false,
+			success : function(res) {
+				if (res.type == 'success') {
+					wxurl = res.data.wechatPay;
+				} else {					
+					// 错误消息处理
+					return false;
 				}
-			);
-		
-		
-		//参数1表示图像大小，取值范围1-10；参数2表示质量，取值范围'L','M','Q','H'
-		var qr = qrcode(10, 'M');
-		qr.addData(url);
-		qr.make();
-		var dom=document.createElement('DIV');
-		dom.innerHTML = qr.createImgTag();
-		var element=document.getElementById("qrcode");
-		element.appendChild(dom);
-		
+			},
+			error : function(res) {				
+				// 错误消息处理
+				return false;
+			}
+		});
+
+		if(wxurl == ""){
+			//没有正确生成url，就返回，页面上可以提示错误消息
+			alert("请您刷新页面重新输入!");
+			return false;
+		}
+		else{
+			
+			$("#submit").unbind("onclick");
+			
+			//参数1表示图像大小，取值范围1-10；参数2表示质量，取值范围'L','M','Q','H'
+			var qr = qrcode(10, 'M');
+			qr.addData(wxurl);
+			qr.make();
+			var dom=document.createElement('DIV');
+			dom.innerHTML = qr.createImgTag();
+			var element=document.getElementById("qrcode");
+			element.appendChild(dom);
+			
+		}
 		
 		return false;
 		//$("#submit").removeAttr("onclick");
@@ -45,31 +82,7 @@ function rewardSubmit(){
 		var x = 1;
 		var y = 2;
 		if(x == y){
-			 var id = $("#rewardform").find("#id").eq(0).val();
-		        var title = $("#rewardform").find("#title").eq(0).val();
-		        var mobile = $("#rewardform").find("#mobile").eq(0).val();
-		        var realname = $("#rewardform").find("#realname").eq(0).val();
-		        var description = $("#rewardform").find("#description").eq(0).val();
-		        var price = $("#rewardform").find("#price").eq(0).val();
-		        if($(".tips ").is(":visible")){
-		            return false;
-		        }
-		        if(description == null  || description == ""){
-		            showError("请输入起名需求");
-		            return false;
-		        }
-		        if(price == null  || price == ""){
-		            showError("请输入悬赏金额");
-		            return false;
-		        }
-		        if(realname == null  || realname == ""){
-		            showError("请输入联系人");
-		            return false;
-		        }
-		        if(mobile == null  || mobile == ""){
-		            showError("请输入联系电话");
-		            return false;
-		        }
+			
 		        var ajaxResult;
 		        $.ajax({
 					url : ctx + "/gbReward.json",

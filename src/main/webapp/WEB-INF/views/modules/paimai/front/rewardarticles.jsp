@@ -14,7 +14,7 @@
 	src="${ctxStatic }/front/js/Articlereward.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/gbreward.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/payjs/qrcode.js"></script>
-<%-- <script type="text/javascript" src="${ctxStatic }/front/payjs/jquery.min.js"></script> --%>
+<script type="text/javascript" src="${ctxStatic }/front/payjs/jquery.min.js"></script>
 
 
 <script type="text/javascript">

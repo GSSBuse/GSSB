@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.thinkgem.jeesite.common.wx.WeChat;
 import com.thinkgem.jeesite.modules.sys.dao.gbj.WxPayDto;
 
 import com.utils.GetWxOrderno;
@@ -28,22 +29,27 @@ public class WechatPayService {
 		//openId 是微信用户针对公众号的标识，授权的部分这里不解释
 		private static String openId = "";
 		//微信支付成功后通知地址 必须要求80端口并且地址不能带参数
-		private static String notifyurl = "http://www.hoowa.cn/page";	
+		private static String notifyurl = "http://www.hoowa.cn/gssb/wxpayresult";	
 
-    public static  String getCodeurl(WxPayDto tpWxPayDto){
+    public static  String getCodeurl(@RequestParam("bodys") String bodys,
+			@RequestParam("totalFees") String totalFees){
 	
-    	
-    	
+    	/*WxPayDto tpWxPayDto = new WxPayDto();
+    	tpWxPayDto.setBody(body);  //商品信息
+    	tpWxPayDto.setTotalFee(totalFee); //金额
+    	tpWxPayDto.setOrderId(orderId);  //订单号用userId
+    	tpWxPayDto.setSpbillCreateIp("127.0.0.1");  //订单生成的机器 IP
+*/    	
     	// 1 参数
     			// 订单号
-    			String orderId = tpWxPayDto.getOrderId();
+    			String orderId = WeChat.tradeNumber("pay");
     			// 附加数据 原样返回
     			String attach = "";
     			// 总金额以分为单位，不带小数点
-    			String totalFee = getMoney(tpWxPayDto.getTotalFee());
+    			String totalFee = getMoney(totalFees);
     			
     			// 订单生成的机器 IP
-    			String spbill_create_ip = tpWxPayDto.getSpbillCreateIp();
+    			String spbill_create_ip = "127.0.0.1";
     			// 这里notify_url是 支付完成后微信发给该链接信息，可以判断会员是否支付成功，改变订单状态等。
     			String notify_url = notifyurl;
     			String trade_type = "NATIVE";
@@ -54,7 +60,7 @@ public class WechatPayService {
     			String nonce_str = getNonceStr();
 
     			// 商品描述根据情况修改
-    			String body = tpWxPayDto.getBody();
+    			String body = bodys;
 
     			// 商户订单号
     			String out_trade_no = orderId;
