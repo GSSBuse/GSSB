@@ -178,7 +178,7 @@
 	
 	<update id="update">
 		UPDATE gbj_sold SET 	
-			user_id = #{user.id},
+			user_id = #{user_id},
 			realname = #{realname},
 			type_id = #{typeId},
 			title = #{title},
@@ -186,10 +186,7 @@
 			price = #{price},
 			mobile = #{mobile},
 			tag = #{tag},
-			up_counts = #{upCounts},
-			look_counts = #{lookCounts},
 			create_by = #{createBy.id},
-			front_del_flag = #{frontDelFlag},
 			comments_counts = #{commentsCounts},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},
@@ -251,6 +248,11 @@
 		UPDATE gbj_sold SET 	
 			up_counts = up_counts + 1
 			
+		WHERE id = #{id}
+	</update>
+	<update id="shanchu">
+		UPDATE gbj_sold SET 
+			del_flag = 1
 		WHERE id = #{id}
 	</update>
 </mapper>

@@ -31,13 +31,9 @@
 		FROM gbj_reward  a
 		<include refid="gbjRewardJoins"/>
 		WHERE a.user_id = #{id}
-		<!-- <where>
-           c.del_flag =  0
-            ORDER BY c.update_date DESC
-            <if test="_parameter != null and _parameter != ''">
-                limit #{counts}
-            </if>
-        </where> -->
+		AND a.front_del_flag = 1
+		 AND a.del_flag=0
+		 ORDER BY a.create_date DESC
     </select>
 
 <select id="findDomainRewardArticleList" resultType="RewardArticleList" parameterType="java.lang.Integer">
@@ -68,5 +64,4 @@
                AND d.front_del_flag = 1
         </where>
     </select> 
-    
     </mapper>

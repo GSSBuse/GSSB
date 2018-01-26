@@ -458,11 +458,11 @@ font-family : Trebuchet MS; }
     	padding-bottom: 30px;
     	margin-top: 0;
     	font-size: 50px;
+    	cursor:pointer;
 	}
 
 	#main-content #li-menu{
 		display: inline-block;
-
 		width:100%;
 	}
 
@@ -470,10 +470,12 @@ font-family : Trebuchet MS; }
 		width: 1065px;
 		margin:0 auto;
 	}
+	
 	#main-content #li-menu ul li{
 		margin-left: 6%;
     	margin-right: 5%;
 	}
+	
 	#main-content #li-menu ul li div:hover{
 		background-color:#f86539;
 		box-shadow: 2px 2px 2px #888888;
@@ -546,9 +548,14 @@ font-family : Trebuchet MS; }
 		height:50%;
 		background-color:#f0f5f8;
 		float:left;
-		border:1px solid white;
 		margin-left: 6.5px;
 		border-radius: 15px;
+	}
+	
+	#main-content .dy-content .dy-each a {
+		width: 100%;
+		height: 100%;
+		text-decoration: none;
 	}
 
 	#main-content .dy-content .dy-each-first{
@@ -599,8 +606,11 @@ font-family : Trebuchet MS; }
 	#main-content .dy-content .dy-each h4{
 		margin-top: 27px;
     	margin-left: 18px;
-    	font-size: 20px;
     	margin-bottom: 23px;
+	}
+	
+	#main-content .dy-content .dy-each h4 span {
+    	font-size: 20px;		
 	}
 	
 	#main-content .dy-content .dy-each .article-meta{
@@ -635,8 +645,18 @@ font-family : Trebuchet MS; }
 		text-decoration:none;
 	}
 	
-	#main-content .dy-content div:hover{
+	#main-content .dy-content dy-each:hover {
 		box-shadow: 2px 2px 2px #b0afaf;
+		color: 20px;
+	}
+	
+	#main-content .gold-find{
+		overflow:hidden;
+	}
+	#main-content .gold-find .list-group li{
+		margin-top:15px;
+		margin-left:54px;
+		font-size: 15px;
 	}
 	
 	@media screen and (max-width: 1441px) { 

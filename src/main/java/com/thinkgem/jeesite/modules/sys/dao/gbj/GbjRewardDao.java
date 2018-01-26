@@ -29,4 +29,7 @@ public interface GbjRewardDao extends CrudDao<GbjReward> {
 	public int withdraw(GbjReward gbjReward);
 
 	public void upDateLook(String id);
+
+	// 删除个人中心悬赏信息方法
+	public void shanchu(String id);
 }

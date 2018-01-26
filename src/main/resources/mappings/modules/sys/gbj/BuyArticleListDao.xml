@@ -33,7 +33,7 @@
 		WHERE a.user_id = #{id} 
 		 AND a.front_del_flag = 1
 		 AND a.del_flag=0
-		 ORDER BY a.create_date DESC
+		 ORDER BY a.create_date DESC  
     </select>
 
 <select id="findDomainBuyArticleList" resultType="BuyArticleList" parameterType="java.lang.Integer">

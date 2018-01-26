@@ -182,7 +182,7 @@
 	
 	<update id="update">
 		UPDATE gbj_buy SET 	
-			user_id = #{user.id},
+			user_id = #{user_id},
 			realname = #{realname},
 			type_id = #{typeId},
 			title = #{title},
@@ -190,8 +190,6 @@
 			price = #{price},
 			mobile = #{mobile},
 			tag = #{tag},
-			up_counts = #{upCounts},
-			look_counts = #{lookCounts},
 			update_by = #{updateBy.id},
 			comments_counts = #{commentsCounts},
 			create_date = #{createDate},
@@ -277,19 +275,4 @@
 			del_flag = 1
 		WHERE id = #{id}
 	</update>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-	
 </mapper>

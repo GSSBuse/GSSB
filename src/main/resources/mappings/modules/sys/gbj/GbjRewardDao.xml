@@ -192,7 +192,7 @@
 	
 	<update id="update">
 		UPDATE gbj_reward SET 	
-			user_id = #{user.id},
+			user_id = #{user_id},
 			realname = #{realname},
 			type_id = #{typeId},
 			title = #{title},
@@ -268,8 +268,11 @@
 	<update id="updateCount">
 		UPDATE gbj_reward SET 	
 			up_counts = up_counts + 1
-			
 		WHERE id = #{id}
 	</update>
-	
+	<update id="shanchu">
+		UPDATE gbj_reward SET 
+			del_flag = 1
+		WHERE id = #{id}
+	</update>
 </mapper>

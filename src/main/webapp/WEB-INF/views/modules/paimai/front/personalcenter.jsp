@@ -6,7 +6,7 @@
 <!--[if IE 8]>    <html class="lt-ie9" lang="en-US"> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html lang="en-US">
-<!--<![endif]-->
+<!--<![endif]-->  
 <head>
 <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>
 </head>
@@ -228,10 +228,12 @@
 											<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</a>
 											
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<a href="#change-dialog" onclick="show1(this)">修改</a><p class="ellb" style="display: none">{{el.id}}</p>
-											<a href="javascript:void(0)" ms-click="$remove">删除</a>
-											
-					                         <a ms-attr-href="${ctx}/personalcenter.html?id={{el.id}}" >删除</a>
+											<a href="#changebuy-dialog" onclick="showbuy(this)">修改</a><p class="ellb" style="display: none">{{el.id}}</p>
+											<%-- <a href="javascript:void(0)" ms-click="$remove">删除</a>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					                         <a ms-attr-href="${ctx}/personalcenter.html?id={{el.id}}" >删除</a> --%>
+					                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					                         <a href="#deletebuy-dialog" onclick="showbuydelete(this)">删除</a><p class="ellb" style="display: none">{{el.id}}</p>
 										</h3>
 										<div class="post-meta clearfix ">
 											<span class="date">{{el.createDate}}</span>
@@ -245,13 +247,18 @@
                                   <ul id="demo2" class="pagination"></ul>
                                   </div>  -->
 							</div>
-							
-							<div id="change-dialog-bg"
-		style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1; display: none;"></div>
-	<div id="change-dialog"  style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
-		<div id="close-dialog1" style="position: absolute; right: -10px; top: -14px; width: 24px; height: 24px; text-align: center; font-size: 25px; border: 2px solid #d2d1d1; border-radius: 50%; background-color: #fff; color: #e71a1a; cursor: pointer;">×</div>
+							<script type="text/javascript">
+							  function showError(error){
+								   $('.form-error').hide();
+							        $(".form-error").find("label").html(error);
+							        $(".form-error").show();
+							    }
+							</script>
+	<div id="changebuy-dialog-bg" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1; display: none;"></div>
+	<div id="changebuy-dialog"  style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
+		<div id="close-dialogbuy" style="position: absolute; right: -10px; top: -14px; width: 24px; height: 24px; text-align: center; font-size: 25px; border: 2px solid #d2d1d1; border-radius: 50%; background-color: #fff; color: #e71a1a; cursor: pointer;">×</div>
 		  <form method="post" id="changebuy" 
-		        	class="form-horizontal" style="padding: 20px 30px; margin: 0;">
+		        	style="padding: 20px 30px; margin: 0;">
 		        <h1 class="post-title">
 					<a href="#">修改买标信息</a>
 				</h1>
@@ -266,7 +273,7 @@
 					<label for="title">商标名称 *</label> 
 					<input class="spn4 form-control" type="text" name="title" id="title"   style="width: 320px;">
 					<input name="user_id" type="hidden" id="user_id" value="${login_user.id}">
-					<input name="id" type="hidden" id="id" value="">
+					<input name="idbuy" type="hidden" id="idbuy" value="">
 			    </div>
 			    <div>
 					<label for="title">联系电话 *</label> 
@@ -278,7 +285,27 @@
 			    </div>
 			                       
 				<div class="payment-sendbtns">
-					<input  class="btn" name="changebuySubmit" type="submit" id="changebuySubmit" onclick="changebuySubmit();" value="提交修改" style="height: 50px;">
+					<input  class="btn" name="changebuy" type="button" id="changebuy" onclick="changebuySubmit();" value="提交修改" style="height: 50px;">
+				</div>
+			</form> 
+	</div>
+	
+	
+	<div id="deletebuy-dialog-bg" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1; display: none;"></div>
+	<div id="deletebuy-dialog"  style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
+		<div id="close-dialogbuydelete" style="position: absolute; right: -10px; top: -14px; width: 24px; height: 24px; text-align: center; font-size: 25px; border: 2px solid #d2d1d1; border-radius: 50%; background-color: #fff; color: #e71a1a; cursor: pointer;">×</div>
+		  <form method="post" id="deletebuydialog"  style="padding: 20px 30px; margin: 0;">
+				<div class="form-error" style="color:#FF0000">
+						<i></i><label class="text"></label>
+				</div>
+				<div class="form-success" style="color:#FF0000">
+					<i></i><label class="text"></label>
+				</div>
+				<div class="form-group" >
+					<input name="idbuydelete" type="hidden" id="idbuydelete" value="">
+			    </div>
+				<div class="payment-sendbtns">
+					<input  class="btn" name="deletebuydialog" type="button" id="deletebuydialog" onclick="deletebuydialogSubmit();" value="确定删除？" style="height: 50px;">
 				</div>
 			</form> 
 	</div>
@@ -290,6 +317,13 @@
 									<header class="clearfix">
 										<h3 class="post-title">
 											<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=sold">{{el.title}}</a>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<a href="#changesold-dialog" onclick="showsold(this)">修改</a><p class="ellb" style="display: none">{{el.id}}</p>
+											<%-- <a href="javascript:void(0)" ms-click="$remove">删除</a>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					                         <a ms-attr-href="${ctx}/personalcenter.html?id={{el.id}}" >删除</a> --%>
+					                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					                         <a href="#deletesold-dialog" onclick="showsolddelete(this)">删除</a><p class="ellb" style="display: none">{{el.id}}</p>
 										</h3>
 										<div class="post-meta clearfix ">
 											<span class="date">{{el.createDate}}</span>
@@ -298,6 +332,63 @@
 									</header>
 								</article>
 							</div>
+							
+<div id="changesold-dialog-bg" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1; display: none;"></div>
+	<div id="changesold-dialog"  style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
+		<div id="close-dialogsold" style="position: absolute; right: -10px; top: -14px; width: 24px; height: 24px; text-align: center; font-size: 25px; border: 2px solid #d2d1d1; border-radius: 50%; background-color: #fff; color: #e71a1a; cursor: pointer;">×</div>
+		  <form method="post" id="changesold" 
+		        	style="padding: 20px 30px; margin: 0;">
+		        <h1 class="post-title">
+					<a href="#">修改卖标信息</a>
+				</h1>
+				<p class="comment-notes">请输入您需要修改的信息。</p>
+				<div class="form-error" style="color:#FF0000">
+						<i></i><label class="text"></label>
+				</div>
+				<div class="form-success" style="color:#FF0000">
+					<i></i><label class="text"></label>
+				</div>
+				<div class="form-group" >
+					<label for="title">商标名称 *</label> 
+					<input class="spn4 form-control" type="text" name="title" id="title"   style="width: 320px;">
+					<input name="user_id" type="hidden" id="user_id" value="${login_user.id}">
+					<input name="idsold" type="hidden" id="idsold" value="">
+			    </div>
+			    <div>
+					<label for="title">联系电话 *</label> 
+					<input class="spn4 form-control" type="text" name="mobile" id="mobile" style="width: 320px;">
+			    </div><br>
+			    <div>
+					<label for="title">联系人 *</label> 
+					<input class="spn4 form-control" type="text" name="realname" id="realname" style="width: 320px;">
+			    </div>
+			                       
+				<div class="payment-sendbtns">
+					<input  class="btn" name="changesold" type="button" id="changesold" onclick="changesoldSubmit();" value="提交修改" style="height: 50px;">
+				</div>
+			</form> 
+	</div>
+	
+	
+	<div id="deletesold-dialog-bg" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1; display: none;"></div>
+	<div id="deletesold-dialog"  style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
+		<div id="close-dialogsolddelete" style="position: absolute; right: -10px; top: -14px; width: 24px; height: 24px; text-align: center; font-size: 25px; border: 2px solid #d2d1d1; border-radius: 50%; background-color: #fff; color: #e71a1a; cursor: pointer;">×</div>
+		  <form method="post" id="deletesolddialog"  style="padding: 20px 30px; margin: 0;">
+				<div class="form-error" style="color:#FF0000">
+						<i></i><label class="text"></label>
+				</div>
+				<div class="form-success" style="color:#FF0000">
+					<i></i><label class="text"></label>
+				</div>
+				<div class="form-group" >
+					<input name="idsolddelete" type="hidden" id="idsolddelete" value="">
+			    </div>
+				<div class="payment-sendbtns">
+					<input  class="btn" name="deletesolddialog" type="button" id="deletesolddialog" onclick="deletesolddialogSubmit();" value="确定删除？" style="height: 50px;">
+				</div>
+			</form> 
+	</div>
+							
 							<!--            我发布的悬赏信息。        by snnu   2017.12.31           -->
 							<div class="tab-content">
 								<article class="format-standard type-post hentry clearfix"
@@ -306,6 +397,13 @@
 										<h3 class="post-title">
 											<a
 												ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.title}}</a>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<a href="#changereward-dialog" onclick="showreward(this)">修改</a><p class="ellb" style="display: none">{{el.id}}</p>
+											<%-- <a href="javascript:void(0)" ms-click="$remove">删除</a>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					                         <a ms-attr-href="${ctx}/personalcenter.html?id={{el.id}}" >删除</a> --%>
+					                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					                         <a href="#deletereward-dialog" onclick="showrewarddelete(this)">删除</a><p class="ellb" style="display: none">{{el.id}}</p>
 										</h3>
 										<div class="post-meta clearfix ">
 											<span class="date">{{el.createDate}}</span>
@@ -314,6 +412,69 @@
 									</header>
 								</article>
 							</div>
+							
+							
+							
+							<div id="changereward-dialog-bg" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1; display: none;"></div>
+	<div id="changereward-dialog"  style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
+		<div id="close-dialogreward" style="position: absolute; right: -10px; top: -14px; width: 24px; height: 24px; text-align: center; font-size: 25px; border: 2px solid #d2d1d1; border-radius: 50%; background-color: #fff; color: #e71a1a; cursor: pointer;">×</div>
+		  <form method="post" id="changereward" 
+		        	style="padding: 20px 30px; margin: 0;">
+		        <h1 class="post-title">
+					<a href="#">修改悬赏信息</a>
+				</h1>
+				<p class="comment-notes">请输入您需要修改的信息。</p>
+				<div class="form-error" style="color:#FF0000">
+						<i></i><label class="text"></label>
+				</div>
+				<div class="form-success" style="color:#FF0000">
+					<i></i><label class="text"></label>
+				</div>
+				<div class="form-group" >
+					<label for="title">商标名称 *</label> 
+					<input class="spn4 form-control" type="text" name="title" id="title"   style="width: 320px;">
+					<input name="user_id" type="hidden" id="user_id" value="${login_user.id}">
+					<input name="idreward" type="hidden" id="idreward" value="">
+			    </div>
+			    <div>
+					<label for="title">联系电话 *</label> 
+					<input class="spn4 form-control" type="text" name="mobile" id="mobile" style="width: 320px;">
+			    </div><br>
+			    <div>
+					<label for="title">联系人 *</label> 
+					<input class="spn4 form-control" type="text" name="realname" id="realname" style="width: 320px;">
+			    </div>
+			                       
+				<div class="payment-sendbtns">
+					<input  class="btn" name="changereward" type="button" id="changereward" onclick="changerewardSubmit();" value="提交修改" style="height: 50px;">
+				</div>
+			</form> 
+	</div>
+	
+	
+	<div id="deletereward-dialog-bg" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1; display: none;"></div>
+	<div id="deletereward-dialog"  style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
+		<div id="close-dialogrewarddelete" style="position: absolute; right: -10px; top: -14px; width: 24px; height: 24px; text-align: center; font-size: 25px; border: 2px solid #d2d1d1; border-radius: 50%; background-color: #fff; color: #e71a1a; cursor: pointer;">×</div>
+		  <form method="post" id="deleterewarddialog"  style="padding: 20px 30px; margin: 0;">
+				<div class="form-error" style="color:#FF0000">
+						<i></i><label class="text"></label>
+				</div>
+				<div class="form-success" style="color:#FF0000">
+					<i></i><label class="text"></label>
+				</div>
+				<div class="form-group" >
+					<input name="idrewarddelete" type="hidden" id="idrewarddelete" value="">
+			    </div>
+				<div class="payment-sendbtns">
+					<input  class="btn" name="deleterewarddialog" type="button" id="deleterewarddialog" onclick="deleterewarddialogSubmit();" value="确定删除？" style="height: 50px;">
+				</div>
+			</form> 
+	</div>
+							
+							
+							
+							
+							
 							<!--            我评论的信息。        by snnu   2017.12.31           -->
 							<div class="tab-content">
 								<article class="format-standard type-post hentry clearfix"
@@ -340,28 +501,153 @@
 	</div>
 	<!-- End of Page Container -->
 <script type="text/javascript">
-
-function show1(obj){
+//修改买标信息js 01
+function showbuy(obj){
    //alert(obj.tagName);
 	//alert($(obj).prev().tagName);
 	var pp = obj.nextSibling;
 	var cnt = pp.innerText;
 	//alert(cnt);
-	document.getElementById("id").setAttribute("value", cnt);
-	document.getElementById("change-dialog").style.display="block";
-	document.getElementById("change-dialog-bg").style.display = 'block';
+	document.getElementById("idbuy").setAttribute("value", cnt);
+	document.getElementById("changebuy-dialog").style.display="block";
+	document.getElementById("changebuy-dialog-bg").style.display = 'block';
 }
 function hide(){
-    document.getElementById("change-dialog").style.display="none";
-    document.getElementById("change-dialog-bg").style.display = 'none';
+    document.getElementById("changebuy-dialog").style.display="none";
+    document.getElementById("changebuy-dialog-bg").style.display = 'none';
 }
 // 点击弹窗背景关闭当前弹窗
-$('#change-dialog-bg').click(function(){
-	$('#change-dialog,#change-dialog-bg').hide();
+$('#changebuy-dialog-bg').click(function(){
+	$('#changebuy-dialog,#changebuy-dialog-bg').hide();
 });
 // 点击弹窗的关闭按钮关闭当前弹窗
-$('#close-dialog1').click(function(){
-    $('#change-dialog,#change-dialog-bg').hide();
+$('#close-dialogbuy').click(function(){
+    $('#changebuy-dialog,#changebuy-dialog-bg').hide();
+});
+</script>
+<script type="text/javascript">
+//修改卖标信息js 02
+function showsold(obj){
+   //alert(obj.tagName);
+	//alert($(obj).prev().tagName);
+	var pp = obj.nextSibling;
+	var cnt = pp.innerText;
+	//alert(cnt);
+	document.getElementById("idsold").setAttribute("value", cnt);
+	document.getElementById("changesold-dialog").style.display="block";
+	document.getElementById("changesold-dialog-bg").style.display = 'block';
+}
+function hide(){
+    document.getElementById("changesold-dialog").style.display="none";
+    document.getElementById("changesold-dialog-bg").style.display = 'none';
+}
+// 点击弹窗背景关闭当前弹窗
+$('#changesold-dialog-bg').click(function(){
+	$('#changesold-dialog,#changesold-dialog-bg').hide();
+});
+// 点击弹窗的关闭按钮关闭当前弹窗
+$('#close-dialogsold').click(function(){
+    $('#changesold-dialog,#changesold-dialog-bg').hide();
+});
+</script>
+<script type="text/javascript">
+//修改悬赏信息js 03
+function showreward(obj){
+   //alert(obj.tagName);
+	//alert($(obj).prev().tagName);
+	var pp = obj.nextSibling;
+	var cnt = pp.innerText;
+	//alert(cnt);
+	document.getElementById("idreward").setAttribute("value", cnt);
+	document.getElementById("changereward-dialog").style.display="block";
+	document.getElementById("changereward-dialog-bg").style.display = 'block';
+}
+function hide(){
+    document.getElementById("changereward-dialog").style.display="none";
+    document.getElementById("changereward-dialog-bg").style.display = 'none';
+}
+// 点击弹窗背景关闭当前弹窗
+$('#changereward-dialog-bg').click(function(){
+	$('#changereward-dialog,#changereward-dialog-bg').hide();
+});
+// 点击弹窗的关闭按钮关闭当前弹窗
+$('#close-dialogreward').click(function(){
+    $('#changereward-dialog,#changereward-dialog-bg').hide();
+});
+</script>
+<script type="text/javascript">
+//删除买标信息js  001
+function showbuydelete(obj){
+   //alert(obj.tagName);
+	//alert($(obj).prev().tagName);
+	var pp = obj.nextSibling;
+	var cnt = pp.innerText;
+	//alert(cnt);
+	document.getElementById("idbuydelete").setAttribute("value", cnt);
+	document.getElementById("deletebuy-dialog").style.display="block";
+	document.getElementById("deletebuy-dialog-bg").style.display = 'block';
+}
+function hide(){
+    document.getElementById("deletebuy-dialog").style.display="none";
+    document.getElementById("deletebuy-dialog-bg").style.display = 'none';
+}
+// 点击弹窗背景关闭当前弹窗
+$('#deletebuy-dialog-bg').click(function(){
+	$('#deletebuy-dialog,#deletebuy-dialog-bg').hide();
+});
+// 点击弹窗的关闭按钮关闭当前弹窗
+$('#close-dialogbuydelete').click(function(){
+    $('#deletebuy-dialog,#deletebuy-dialog-bg').hide();
+});
+</script>
+<script type="text/javascript">
+//删除卖标信息js 002
+function showsolddelete(obj){
+   //alert(obj.tagName);
+	//alert($(obj).prev().tagName);
+	var pp = obj.nextSibling;
+	var cnt = pp.innerText;
+	//alert(cnt);
+	document.getElementById("idsolddelete").setAttribute("value", cnt);
+	document.getElementById("deletesold-dialog").style.display="block";
+	document.getElementById("deletesold-dialog-bg").style.display = 'block';
+}
+function hide(){
+    document.getElementById("deletesold-dialog").style.display="none";
+    document.getElementById("deletesold-dialog-bg").style.display = 'none';
+}
+// 点击弹窗背景关闭当前弹窗
+$('#deletesold-dialog-bg').click(function(){
+	$('#deletesold-dialog,#deletesold-dialog-bg').hide();
+});
+// 点击弹窗的关闭按钮关闭当前弹窗
+$('#close-dialogsolddelete').click(function(){
+    $('#deletesold-dialog,#deletesold-dialog-bg').hide();
+});
+</script>
+<script type="text/javascript">
+//删除悬赏信息js 003
+function showrewarddelete(obj){
+   //alert(obj.tagName);
+	//alert($(obj).prev().tagName);
+	var pp = obj.nextSibling;
+	var cnt = pp.innerText;
+	//alert(cnt);
+	document.getElementById("idrewarddelete").setAttribute("value", cnt);
+	document.getElementById("deletereward-dialog").style.display="block";
+	document.getElementById("deletereward-dialog-bg").style.display = 'block';
+}
+function hide(){
+    document.getElementById("deletereward-dialog").style.display="none";
+    document.getElementById("deletereward-dialog-bg").style.display = 'none';
+}
+// 点击弹窗背景关闭当前弹窗
+$('#deletereward-dialog-bg').click(function(){
+	$('#deletereward-dialog,#deletereward-dialog-bg').hide();
+});
+// 点击弹窗的关闭按钮关闭当前弹窗
+$('#close-dialogrewarddelete').click(function(){
+    $('#deletereward-dialog,#deletereward-dialog-bg').hide();
 });
 </script>
 	<!-- Start of Footer -->

@@ -13,7 +13,7 @@
         
 <link rel="stylesheet" type="text/css" href="//as.zbjimg.com/??/static/as-common/global/global_d80dcf1.css"/>
 <link rel="stylesheet" type="text/css" href="//as.zbjimg.com/??/static/as-ipr-www/widget/2017index/mod_banner_e95bfaf.css,"/>
-        <body ms-controller="index1"> 
+        <body ms-controller="index1" style="overflow-x: hidden;"> 
                 <%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
                 
                  <%@ include file="/WEB-INF/views/include/frontIndexBanner.jsp"%>
@@ -37,24 +37,27 @@
 				<h2 style="color:white;">我要买标</h2>
 				<img alt="" src="${ctxStatic }/images/bag.png"/>
 			</div>
-		</a>	
-			<div class="dy-each" ms-repeat-el="datas.domainBuyList">			
-				<h4>
-					<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.title}}</a>
-				</h4>
-				<span class="article-meta">		
-					<a  title="查询该标签所有内容" class="Type">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a><br>
-					{{el.createDate}}
-					<%-- &amp; <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy" >{{el.tag}}</a> --%>
-				</span> <br>
-				
-				<span class="like-count">
-                	<img src="${ctxStatic }/images/like.png"/>
-                	<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.upCounts}}</a>
-                </span>
-				
-				
-			</div>
+		</a>
+		
+		<div class="dy-each"  ms-repeat-el="datas.domainBuyList">
+			<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">
+				<div >			
+					<h4>
+						 <span>{{el.title}}</span>
+					</h4>
+					<span class="article-meta">		
+						<span  title="查询该标签所有内容" class="Type">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</span><br>
+						{{el.createDate}}
+						<%-- &amp; <a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy" >{{el.tag}}</a> --%>
+					</span> <br>
+					
+					<span class="like-count">
+	                	<img src="${ctxStatic }/images/like.png"/>
+	                	<span ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">{{el.upCounts}}</span>
+	                </span>
+				</div>
+			</a>
+		</div>	
 			
 			<a href="${ctx }/buyarticles.html">
 			<div class="dy-each dy-last">
@@ -76,21 +79,24 @@
 			</div>
 		</a>
 		
-			
-			<div class="dy-each" ms-repeat-el="datas.domainSoldList">
+		<div class="dy-each"  ms-repeat-el="datas.domainBuyList">
+			<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=buy">			
+			<div>
 				<h4> 
-					<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=sold">{{el.title}}</a>
+					<span>{{el.title}}</span>
 				</h4>		                                                                
                 <span class="article-meta"> 
-                	<a class="gbjType">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a><br>  
+                	<span class="gbjType">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</span><br>  
                 	{{el.createDate}} 
                 	<%-- &amp; <a ms-attr-href="${ctx }/single.html?id={{el.id}}type=sold">{{el.tag}}</a> --%>
                 </span>
                 <span class="like-count">
                 	<img src="${ctxStatic }/images/like.png"/>
-                	<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=sold">{{el.upCounts}}</a>
+                	<span>{{el.upCounts}}</span>
                 </span>
             </div>
+            </a>
+		</div>
 
 			<a href="${ctx }/soldarticles.html">
 			<div class="dy-each dy-last">
@@ -110,25 +116,25 @@
 			</div>
 		</a>
 		
-			
-			<div class="dy-each" ms-repeat-el="datas.domainRewardList"	>
+		<div class="dy-each" ms-repeat-el="datas.domainRewardList">
+			<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">
+			<div>
 			  <h4>
-			  	<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.title}}</a><br>
+			  	<span>{{el.title}}</span><br>
 			  	悬赏金额: {{el.price}}元
 			  </h4>		                                                                
               <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;
-              	<a class="gbjType">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a> 
+              	<span class="gbjType">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</span> 
               	<%-- &amp; <a ms-attr-href="${ctx }/single.html?id={{el.id}}type=reward" >{{el.tag}}</a> --%></span>
               
               <span class="like-count">
                 	<img src="${ctxStatic }/images/like.png"/>
-                	<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.upCounts}}</a>
-                </span>
-              
-              
+                	<span>{{el.upCounts}}</span>
+                </span>  
 			</div>
-
-
+			</a>
+		</div>
+			
 			<a href="${ctx }/rewardarticles.html">
 			<div class="dy-each dy-last">
 				<h3>>>查看更多</h3>
@@ -244,81 +250,57 @@
                 <div class="about_grid">
                 <img src="${ctxStatic }/images/split3.png" style="width:100%;margin-bottom:10px;">
 				    <div class="container">
-				        <div class="box5" style="padding-left: 120px;">
+				        <div class="box5">
 				          <div class="team_box1">
 				            <div class="col-md-3 thumb_1">
-				                <img src="${ctxStatic }/images/pic4.jpg" class="img-responsive" alt=""/>
+				                <img src="${ctxStatic }/images/pic4.jpg" class="img-responsive" alt="" style="margin: 0 auto;"/>
 				                <div class="team_desc">
-				                    <div class="team_desc-left">
-				                        <h3>XXX品牌商标</h3>
-				                    </div>
-				                    <div class="clearfix"> </div>
+				                    <h3>西安音乐学院</h3>
 				                </div>
 				            </div>
 				            <div class="col-md-3 thumb_1">
-				                <img src="${ctxStatic }/images/pic5.jpg" class="img-responsive" alt=""/>
+				                <img src="${ctxStatic }/images/pic5.jpg" class="img-responsive" alt="" style="margin: 0 auto;"/>
 				                <div class="team_desc">
-				                    <div class="team_desc-left">
-                                        <h3>XXX品牌商标</h3>
-                                    </div>
-				                    <div class="clearfix"> </div>
+                                    <h3>陕西唐都水泥制品有限责任公司</h3>
 				                </div>
 				            </div>
 				            <div class="col-md-3 thumb_1">
-				                <img src="${ctxStatic }/images/pic6.jpg" class="img-responsive" alt=""/>
+				                <img src="${ctxStatic }/images/pic6.jpg" class="img-responsive" alt="" style="margin: 0 auto;"/>
 				                <div class="team_desc">
-				                    <div class="team_desc-left">
-                                        <h3>XXX品牌商标</h3>
-                                    </div>
-				                    <div class="clearfix"> </div>
+                                    <h3>西安工业大学</h3>
 				                </div>
 				            </div>
 				            <div class="col-md-3 thumb_1">
-				                <img src="${ctxStatic }/images/pic7.jpg" class="img-responsive" alt=""/>
+				                <img src="${ctxStatic }/images/pic7.jpg" class="img-responsive" alt="" style="margin: 0 auto;"/>
 				                <div class="team_desc">
-				                    <div class="team_desc-left">
-                                        <h3>XXX品牌商标</h3>
-                                    </div>
-				                    <div class="clearfix"> </div>
+                                    <h3>西安明珠食品有限公司</h3>
 				                </div>
 				            </div>
 				            <div class="clearfix"> </div>
 				           </div>
 				           <div class="team_box2">
 				            <div class="col-md-3 thumb_1">
-				                <img src="${ctxStatic }/images/pic8.jpg" class="img-responsive" alt=""/>
+				                <img src="${ctxStatic }/images/pic8.jpg" class="img-responsive" alt="" style="margin: 0 auto;"/>
 				                <div class="team_desc">
-				                    <div class="team_desc-left">
-                                        <h3>XXX品牌商标</h3>
-                                    </div>
-				                    <div class="clearfix"> </div>
+                                    <h3>陕西万象灵动有限公司</h3>
 				                </div>
 				            </div>
 				            <div class="col-md-3 thumb_1">
-				                <img src="${ctxStatic }/images/pic9.jpg" class="img-responsive" alt=""/>
+				                <img src="${ctxStatic }/images/pic9.jpg" class="img-responsive" alt="" style="margin: 0 auto;"/>
 				                <div class="team_desc">
-				                    <div class="team_desc-left">
-                                        <h3>XXX品牌商标</h3>
-                                    </div>
-				                    <div class="clearfix"> </div>
+                                    <h3>陕西振丰科工贸有限公司</h3>
 				                </div>
 				            </div>
 				            <div class="col-md-3 thumb_1">
-				                <img src="${ctxStatic }/images/pic10.jpg" class="img-responsive" alt=""/>
+				                <img src="${ctxStatic }/images/pic10.jpg" class="img-responsive" alt="" style="margin: 0 auto;"/>
 				                <div class="team_desc">
-				                    <div class="team_desc-left">
-                                        <h3>XXX品牌商标</h3>
-                                    </div>
-				                    <div class="clearfix"> </div>
+                                    <h3>西安华讯微电子有限公司</h3>
 				                </div>
 				            </div>
 				            <div class="col-md-3 thumb_1">
-				                <img src="${ctxStatic }/images/pic11.jpg" class="img-responsive" alt=""/>
+				                <img src="${ctxStatic }/images/pic11.jpg" class="img-responsive" alt="" style="margin: 0 auto;"/>
 				                <div class="team_desc">
-				                    <div class="team_desc-left">
-                                        <h3>XXX品牌商标</h3>
-                                    </div>
-				                    <div class="clearfix"> </div>
+                                    <h3>西部电影频道</h3>
 				                </div>
 				            </div>
 				            <div class="clearfix"> </div>
@@ -406,6 +388,7 @@
 	         $('.registerBox').hide();
 	         $('.form-error').hide();
 	     $(".td").click(function(){
+	    	 $("#shortLogin").hide();
 	         $("#popup").show();//查找ID为popup的DIV show()显示#gray
 	         tc_center();
 	         $('.loginV2').hide();
@@ -492,6 +475,7 @@
     
     //帐号密码登录
     function nameLoginCheck(){
+    	$("#shortLogin").hide();
         var loginName = $("#nameLoginForm").find("#normalUser").eq(0).val();
         var password = $("#nameLoginForm").find("#normalPassword").eq(0).val();
         if($(".tips ").is(":visible")){
@@ -547,6 +531,7 @@
     
     //手机登陆验证
     function mobileLoginCheck(){
+    	
         var mobile = $("#mobileLoginForm").find("#partnerPhone").eq(0).val();
         var captch = $("#mobileLoginForm").find("#partnerYzm").eq(0).val();
         var code = $("#mobileLoginForm").find("#partnerJym").eq(0).val();
@@ -567,6 +552,7 @@
 
     //注册
     function registerCheck(){
+    	$("#shortLogin").hide();
     	var mobile = $("#registerForm").find("#nomalMobile").eq(0).val();
         var password = $("#registerForm").find("#normalPassword").eq(0).val();
         var rePassword = $("#registerForm").find("#reNormalPassword").eq(0).val();
@@ -625,6 +611,9 @@
         if (ajaxResult == false) {
         	return false;
         }
+        $("#registerBox").hide();
+        $("#shortLogin").show();
+        
         return true;
     }
     

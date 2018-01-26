@@ -23,7 +23,6 @@ import com.thinkgem.jeesite.common.utils.SendMailUtil;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.paimai.front.bean.FrontLoginUser;
-import com.thinkgem.jeesite.modules.sys.dao.gbj.WxPayDto;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.ArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.BuyArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBusinessNumber;
@@ -128,6 +127,29 @@ public class FrontIndexController extends BaseController {
 	 * @RequestMapping(value= {"", "index"}) public String index(Model model) {
 	 * return "modules/paimai/front/index"; }
 	 */
+
+	// 支付成功跳转页面
+	@RequestMapping(value = { "wxpayresult" })
+	public String wxpayresult(Model model) {
+		return "modules/paimai/frontpayresult";
+	}
+
+	// 微信支付二维码生成
+
+	@RequestMapping(value = "polling/wechatPay")
+	@ResponseBody
+	public AjaxResult wechatPay(@RequestParam("bodys") String bodys, @RequestParam("totalFees") String totalFees) {
+		try {
+			String wechatPayString = WechatPayService.getCodeurl(bodys, totalFees);
+			logger.info(wechatPayString);
+			AjaxResult ar = AjaxResult.makeSuccess("");
+			ar.getData().put("wechatPay", wechatPayString);
+			return ar;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AjaxResult.makeError("");
+		}
+	}
 
 	/**
 	 * 网站首页
@@ -270,6 +292,140 @@ public class FrontIndexController extends BaseController {
 			gbjUserService.save(gbjUser);
 
 			return AjaxResult.makeSuccess("您很棒，评论成功！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return AjaxResult.makeError("失败【" + e.getMessage() + "】");
+		}
+
+	}
+
+	/**
+	 * 个人中心买标信息修改 2018/1/25 by snnu 001
+	 */
+	@RequestMapping(value = { "changebuy" })
+	@ResponseBody
+	public AjaxResult changebuy(HttpServletRequest request, @RequestParam(value = "id") String id,
+			@RequestParam(value = "title") String title, @RequestParam(value = "realname") String realname,
+			@RequestParam(value = "mobile") String mobile, @RequestParam(value = "user_id") String user_id) {
+		// GbjUser gbjUser = new GbjUser();
+		GbjBuy gbjBuy = new GbjBuy();
+		try {
+			// logger.info(parentId);
+			// STEP1 提交查询信息，保存到数据库
+			// gbjUser.setBuy(gbjBuyService.get(id));
+			gbjBuy.setId(id);
+			gbjBuy.setTitle(title);
+			gbjBuy.setMobile(mobile);
+			gbjBuy.setUser_id(user_id);
+			gbjBuy.setRealname(realname);
+			gbjBuy.setCreateDate(new Date());
+			gbjBuyService.saveBuy(gbjBuy);
+			return AjaxResult.makeSuccess("您很棒，修改成功！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return AjaxResult.makeError("失败【" + e.getMessage() + "】");
+		}
+
+	}
+
+	/**
+	 * 个人中心卖标信息修改 2018/1/25 by snnu 002
+	 */
+	@RequestMapping(value = { "changesold" })
+	@ResponseBody
+	public AjaxResult changesold(HttpServletRequest request, @RequestParam(value = "id") String id,
+			@RequestParam(value = "title") String title, @RequestParam(value = "realname") String realname,
+			@RequestParam(value = "mobile") String mobile, @RequestParam(value = "user_id") String user_id) {
+		// GbjUser gbjUser = new GbjUser();
+		GbjSold gbjSold = new GbjSold();
+		try {
+			// logger.info(parentId);
+			// STEP1 提交查询信息，保存到数据库
+			// gbjUser.setBuy(gbjBuyService.get(id));
+			gbjSold.setId(id);
+			gbjSold.setTitle(title);
+			gbjSold.setMobile(mobile);
+			gbjSold.setUser_id(user_id);
+			gbjSold.setRealname(realname);
+			gbjSold.setCreateDate(new Date());
+			gbjSoldService.saveSold(gbjSold);
+			return AjaxResult.makeSuccess("您很棒，修改成功！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return AjaxResult.makeError("失败【" + e.getMessage() + "】");
+		}
+
+	}
+
+	/**
+	 * 个人中心悬赏信息修改 2018/1/25 by snnu 003
+	 */
+	/*
+	 * @RequestMapping(value = { "changereward" })
+	 * 
+	 * @ResponseBody public AjaxResult changereward(HttpServletRequest
+	 * request, @RequestParam(value = "id") String id,
+	 * 
+	 * @RequestParam(value = "title") String title, @RequestParam(value =
+	 * "realname") String realname,
+	 * 
+	 * @RequestParam(value = "mobile") String mobile, @RequestParam(value =
+	 * "user_id") String user_id) { // GbjUser gbjUser = new GbjUser(); GbjBuy
+	 * gbjBuy = new GbjBuy(); try { // logger.info(parentId); // STEP1 提交查询信息，保存到数据库
+	 * // gbjUser.setBuy(gbjBuyService.get(id)); gbjBuy.setId(id);
+	 * gbjBuy.setTitle(title); gbjBuy.setMobile(mobile); gbjBuy.setUser_id(user_id);
+	 * gbjBuy.setRealname(realname); gbjBuy.setCreateDate(new Date());
+	 * gbjBuyService.saveBuy(gbjBuy); return AjaxResult.makeSuccess("您很棒，修改成功！"); }
+	 * catch (Exception e) { logger.error(e.getMessage()); return
+	 * AjaxResult.makeError("失败【" + e.getMessage() + "】"); }
+	 * 
+	 * }
+	 */
+
+	/**
+	 * 个人中心买标信息删除 2018/1/25 by snnu 0001
+	 */
+	@RequestMapping(value = { "deletebuydialog" })
+	@ResponseBody
+	public AjaxResult deletebuydialog(HttpServletRequest request, @RequestParam(value = "id") String id) {
+
+		try {
+			gbjBuyService.shanchu(id);
+			return AjaxResult.makeSuccess("您很棒，删除成功！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return AjaxResult.makeError("失败【" + e.getMessage() + "】");
+		}
+
+	}
+
+	/**
+	 * 个人中心卖标信息删除 2018/1/25 by snnu 0002
+	 */
+	@RequestMapping(value = { "deletesolddialog" })
+	@ResponseBody
+	public AjaxResult deletesolddialog(HttpServletRequest request, @RequestParam(value = "id") String id) {
+
+		try {
+			gbjSoldService.shanchu(id);
+			return AjaxResult.makeSuccess("您很棒，删除成功！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return AjaxResult.makeError("失败【" + e.getMessage() + "】");
+		}
+
+	}
+
+	/**
+	 * 个人中心悬赏信息删除 2018/1/25 by snnu 0003
+	 */
+	@RequestMapping(value = { "deleterewarddialog" })
+	@ResponseBody
+	public AjaxResult deleterewarddialog(HttpServletRequest request, @RequestParam(value = "id") String id) {
+
+		try {
+			gbjRewardService.shanchu(id);
+			return AjaxResult.makeSuccess("您很棒，删除成功！");
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return AjaxResult.makeError("失败【" + e.getMessage() + "】");
@@ -1192,28 +1348,6 @@ public class FrontIndexController extends BaseController {
 		}
 	}
 
-	//微信支付二维码生成
-	
-		@RequestMapping(value = "polling/wechatPay")
-		@ResponseBody
-		public AjaxResult wechatPay(@RequestParam("bodys") String bodys,
-				@RequestParam("totalFees") String totalFees) {
-			
-	    	
-			
-			try {
-				String wechatPayString = WechatPayService.getCodeurl(bodys,totalFees);
-
-				logger.info(wechatPayString);
-				AjaxResult ar = AjaxResult.makeSuccess("");
-				ar.getData().put("wechatPay", wechatPayString);
-				return ar;
-			} catch (Exception e) {
-				e.printStackTrace();
-				return AjaxResult.makeError("");
-			}
-		}
-	
 	/**
 	 * 获取页面显示单个悬赏信息和评论信息 by snnu 2017/12/29
 	 * 
@@ -1319,12 +1453,6 @@ public class FrontIndexController extends BaseController {
 
 	}
 
-	//支付成功跳转页面
-	@RequestMapping(value = { "wxpayresult" })
-	public String wxpayresult(Model model) {
-		return "modules/paimai/front/wxpayresult";
-	}
-	
 	/*
 	 * 静态页面
 	 */

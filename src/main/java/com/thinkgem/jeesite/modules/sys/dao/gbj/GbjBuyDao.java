@@ -31,6 +31,7 @@ public interface GbjBuyDao extends CrudDao<GbjBuy> {
 
 	public void upDateLook(String id);
 
+	// 删除个人中心买标信息方法
 	public void shanchu(String id);
 
 }

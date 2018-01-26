@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
@@ -50,7 +51,7 @@ public class GbjSoldService extends CrudService<GbjSoldDao, GbjSold> {
 		super.save(gbjSold);
 	}
 
-	@Transactional(readOnly = false)
+	@Transactional(readOnly = false) // 自定义save
 	public void saveSold(GbjSold gbjSold) {
 		super.saveSold(gbjSold);
 	}
@@ -58,6 +59,12 @@ public class GbjSoldService extends CrudService<GbjSoldDao, GbjSold> {
 	@Transactional(readOnly = false)
 	public void delete(GbjSold gbjSold) {
 		super.delete(gbjSold);
+	}
+
+	// 删除前台
+	@Transactional(readOnly = false)
+	public void shanchu(@RequestParam("id") String id) {
+		gbjSolddao.shanchu(id);
 	}
 
 	// 卖标点赞
