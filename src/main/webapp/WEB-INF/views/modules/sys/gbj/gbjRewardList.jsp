@@ -35,7 +35,7 @@
 				</form:select>
 			</li>
 			<li><label>打赏金额：</label>
-				<form:input path="price" htmlEscape="false" maxlength="20" class="input-medium"/>
+				<form:input path="totalFee" htmlEscape="false" maxlength="20" class="input-medium"/>
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary"
 				type="submit" value="查询" />
@@ -55,7 +55,7 @@
 				<th>起名需求</th>
 				<th>打赏金额</th>
 				<th>手机号码</th>
-				<th>支付状态</th>
+				<!-- <th>支付状态</th> -->
 				<th>状态</th>
 				<th>支付流水号</th>
 				<th>中标者</th>
@@ -86,17 +86,17 @@
 					${gbjReward.description}
 				</td>
 				<td>
-					${gbjReward.price}
+					${gbjReward.totalFee}
 				</td>
 				<td>
 					${gbjReward.mobile}
 				</td>
-				<td>
+				<%-- <td>
 					${fns:getDictLabel(gbjReward.payStatus, 'gbj_pay_status', '')}
 				</td>
 				<td>
 					${fns:getDictLabel(gbjReward.status, 'gbj_reward_status', '')}
-				</td>
+				</td> --%>
 				<td>
 					${gbjReward.payFlowNumber}
 				</td>

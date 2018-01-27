@@ -70,7 +70,7 @@ $(document).ready(function(){
 							<h3 class="post-title">
 								<a class="buyarticles-title" ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.description}}</a>
 								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <a href="">悬赏金额:</a> <a
-									href="">{{el.price}}元</a>
+									href="">{{el.totalFee}}元</a>
 							</h3>
 							<div class="post-meta clearfix">
 								<span class="date">{{el.createDate}}</span> <span

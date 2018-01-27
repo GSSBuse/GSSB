@@ -76,9 +76,34 @@ function rewardSubmit(){
 			
 		}
 		
-		return false;
-		//$("#submit").removeAttr("onclick");
-	
+		/*
+		
+		var results = "";
+		$.ajax({
+ 			url : ctx + "/wxpayresult.json",
+ 			type : "POST",
+ 			data : {
+ 				id:id
+			},
+        	dataType : 'json',
+        	async : false,
+			success : function(res) {
+				if (res.type == 'success') {
+					results = res.data.wxpayresult;
+				} else {					
+					// 错误消息处理
+					return false;
+				}
+			},
+			error : function(res) {				
+				// 错误消息处理
+				return false;
+			}
+		});
+		alert(results);*/
+		
+		
+		
 		var x = 1;
 		var y = 2;
 		if(x == y){
@@ -91,7 +116,7 @@ function rewardSubmit(){
 						id : id,
 						mobile : mobile,
 						realname : realname,
-						price:price,
+						totalFee:totalFee,
 						description:description
 					},
 		        	dataType : 'json',

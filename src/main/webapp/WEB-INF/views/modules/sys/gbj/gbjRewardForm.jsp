@@ -90,7 +90,7 @@
 		<div class="control-group">
 			<label class="control-label">打赏金额：</label>
 			<div class="controls">
-				<form:input path="price" htmlEscape="false" maxlength="20" class="input-xlarge required digits"/>
+				<form:input path="totalFee" htmlEscape="false" maxlength="20" class="input-xlarge required digits"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

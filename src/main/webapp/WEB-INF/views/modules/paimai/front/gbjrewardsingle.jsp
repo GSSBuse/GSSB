@@ -95,8 +95,15 @@
 									</div>
 									<!-- end .comment-meta -->
 
-									<div class="comment-body">
-										<p><h5>{{ell.comment}}</h5></p>
+									<div class="comment-body like-btn">
+										<p><h5>{{ell.comment}}</h5> 
+										<form id="like-it-form" action="#" method="post" style="display: inline; float: right;">
+								<span class="like-it" >11</span> <input
+									type="hidden" name="id" id="rewardid" />
+
+							</form>
+										</p>
+										
 									</div>
 									<!-- end of comment-body -->
 
@@ -124,7 +131,7 @@
 												</p>
 
 											</div>
-											<div class="comment-body">
+											<div class="comment-body ">
 												<p>
 												<h6>{{data.replyComments}}</h6>
 												</p>

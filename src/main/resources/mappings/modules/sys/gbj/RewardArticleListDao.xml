@@ -3,23 +3,30 @@
 <mapper namespace="com.thinkgem.jeesite.modules.sys.dao.gbj.RewardArticleListDao">
 
 <sql id="gbjRewardColumns">
-		a.id AS "id",
+			a.id AS "id",
 		a.user_id AS "user.id",
+		a.realname AS "realname",
 		a.type_id AS "typeId",
 		a.title AS "title",
 		a.description AS "description",
-		a.price AS "price",
+		a.transactionId AS "transactionId",
+		a.totalFee AS "totalFee",
+		a.resultCode AS "resultCode",
+		a.timeEnd AS "timeEnd",
 		a.mobile AS "mobile",
 		a.tag AS "tag",
-		a.up_counts AS "upCounts",
 		a.create_by AS "createBy.id",
-		a.look_counts AS "lookCounts",
+		a.status AS "status",
+		a.pay_flow_number AS "payFlowNumber",
+		a.successful_bidder AS "successfulBidder",
 		a.update_by AS "updateBy.id",
-		a.comments_counts AS "commentsCounts",
 		a.front_del_flag AS "frontDelFlag",
-		a.create_date AS "createDate",
 		a.update_date AS "updateDate",
+		a.up_counts AS "upCounts",
+		a.create_date AS "createDate",
+		a.look_counts AS "lookCounts",
 		a.remarks AS "remarks",
+		a.comments_counts AS "commentsCounts",
 		a.del_flag AS "delFlag"
 	</sql>
 	<sql id="gbjRewardJoins">
@@ -39,7 +46,7 @@
 <select id="findDomainRewardArticleList" resultType="RewardArticleList" parameterType="java.lang.Integer">
         SELECT
         	  d.id as "id",
-        	  d.price AS "price",
+        	  d.totalFee AS "totalFee",
               d.type_id as "typeId",
               d.mobile as "mobile",
               d.tag as "tag",

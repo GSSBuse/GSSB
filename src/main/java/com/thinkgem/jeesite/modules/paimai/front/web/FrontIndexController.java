@@ -1,5 +1,8 @@
 package com.thinkgem.jeesite.modules.paimai.front.web;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -7,11 +10,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,7 +27,10 @@ import com.thinkgem.jeesite.common.mapper.JsonMapper;
 import com.thinkgem.jeesite.common.utils.SendMailUtil;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
+import com.thinkgem.jeesite.common.wx.WeChat;
+import com.thinkgem.jeesite.common.wx.bean.PayResult;
 import com.thinkgem.jeesite.modules.paimai.front.bean.FrontLoginUser;
+import com.thinkgem.jeesite.modules.sys.entity.dy.DyWxpayResult;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.ArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.BuyArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBusinessNumber;
@@ -41,6 +49,7 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserSoldComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserSoldCommentsReply;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.RewardArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.SoldArticleList;
+import com.thinkgem.jeesite.modules.sys.service.dy.DyWxpayResultService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.ArticleListService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.BuyArticleListService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjBusinessNumberService;
@@ -121,6 +130,8 @@ public class FrontIndexController extends BaseController {
 	@Autowired
 	GbjUserRewardCommentsReplyService gbjUserRewardCommentsReplyService;
 
+
+	
 	/**
 	 * 网站首页
 	 * 
@@ -151,6 +162,9 @@ public class FrontIndexController extends BaseController {
 		}
 	}
 
+	
+	
+	
 	/**
 	 * 网站首页
 	 */
@@ -685,10 +699,9 @@ public class FrontIndexController extends BaseController {
 	@ResponseBody
 	public AjaxResult gbReward(HttpServletRequest request, @RequestParam(value = "id") String id,
 			@RequestParam(value = "mobile") String mobile, @RequestParam(value = "realname") String realname,
-			@RequestParam(value = "price") Long price, @RequestParam(value = "description") String description) {
+			@RequestParam(value = "totalFee") Long totalFee, @RequestParam(value = "description") String description) {
 		// GbjUserBuyComments gbjUserBuyComments = new GbjUserBuyComments();
 		GbjReward gbjReward = new GbjReward();
-		GbjUser gbjUser = new GbjUser();
 		try {
 			logger.info(id);
 			// STEP1 提交查询信息，保存到数据库
@@ -696,7 +709,7 @@ public class FrontIndexController extends BaseController {
 			gbjReward.setUser_id(id);
 			gbjReward.setRealname(realname);
 			gbjReward.setDescription(description);
-			gbjReward.setPrice(price);
+			gbjReward.setTotalFee(totalFee);
 			gbjReward.setMobile(mobile);
 			gbjReward.setCreateDate(new Date());
 
@@ -706,6 +719,47 @@ public class FrontIndexController extends BaseController {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return AjaxResult.makeError("失败【" + e.getMessage() + "】");
+		}
+
+	}
+
+	
+	/**
+	 * 微信支付成功返回调用
+	 */
+	@RequestMapping(value = {"wxpayresult"},method={RequestMethod.POST})
+	@ResponseBody
+	public int wxpayresult(Model model,HttpServletRequest req,HttpServletResponse res,@RequestParam(value = "id") String id) {
+
+		
+		logger.debug("成功进入支付处理程序");
+		GbjReward gbjReward = new GbjReward();
+		try {	
+			PayResult payResult = WeChat.payResult(req);			
+			if(payResult.getReturn_code() != null && payResult.getResult_code().equals("SUCCESS")) {
+				gbjReward.setUser(gbjUserService.get(id));
+				gbjReward.setResultCode("success");
+				gbjReward.setTransactionId(payResult.getTransaction_id());
+				SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+				gbjReward.setTimeEnd(df.parse(payResult.getTime_end()));
+
+				gbjRewardService.saveReward(gbjReward);
+				
+				/*String result = "success";
+				AjaxResult ar = AjaxResult.makeSuccess("");
+				ar.getData().put("wxpayresult", result);*/
+
+				logger.debug("success");
+				return 1;
+			}
+			else {
+				return 0;
+			}
+			
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return 0;
 		}
 
 	}
