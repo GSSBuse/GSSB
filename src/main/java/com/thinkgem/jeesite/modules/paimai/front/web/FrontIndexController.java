@@ -294,7 +294,7 @@ public class FrontIndexController extends BaseController {
 			gbjUser.setName(name);
 			gbjUser.setCreateDate(new Date());
 
-			gbjUserService.save(gbjUser);
+			gbjUserService.updateinfo(gbjUser);
 
 			return AjaxResult.makeSuccess("您很棒，评论成功！");
 		} catch (Exception e) {

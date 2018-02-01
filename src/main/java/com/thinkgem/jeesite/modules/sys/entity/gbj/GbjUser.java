@@ -25,6 +25,15 @@ public class GbjUser extends DataEntity<GbjUser> {
 	private String wechat; // 微信
 	private String qq; // QQ
 	private String payway; // 支付宝
+	private String wallet; // 钱包
+
+	public String getWallet() {
+		return wallet;
+	}
+
+	public void setWallet(String wallet) {
+		this.wallet = wallet;
+	}
 
 	public GbjUser() {
 		super();

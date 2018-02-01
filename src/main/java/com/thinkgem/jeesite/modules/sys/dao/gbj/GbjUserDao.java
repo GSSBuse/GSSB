@@ -9,10 +9,13 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUser;
 
 /**
  * 用户信息表DAO接口
+ * 
  * @author snnu
  * @version 2017-12-17
  */
 @MyBatisDao
 public interface GbjUserDao extends CrudDao<GbjUser> {
-	
+
+	public int updateinfo(GbjUser gbjUser);
+
 }

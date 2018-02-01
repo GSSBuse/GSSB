@@ -49,6 +49,7 @@
 				<th>微信</th>
 				<th>QQ</th>
 				<th>支付宝</th>
+				<th>钱包</th>
 				<th>删除标记</th>
 				<shiro:hasPermission name="sys:gbj:gbjUser:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
@@ -76,6 +77,9 @@
 				</td>
 				<td>
 					${gbjUser.payway}
+				</td>
+				<td>
+					${gbjUser.wallet}
 				</td>
 				<td>
 					${fns:getDictLabel(gbjUser.delFlag, 'del_flag', '')}

@@ -13,6 +13,7 @@
 		a.wechat AS "wechat",
 		a.qq AS "qq",
 		a.payway AS "payway",
+		a.wallet AS "wallet",
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
 		a.update_by AS "updateBy.id",
@@ -92,6 +93,7 @@
 			wechat,
 			qq,
 			payway,
+			wallet,
 			create_by,
 			create_date,
 			update_by,
@@ -109,6 +111,7 @@
 			#{wechat},
 			#{qq},
 			#{payway},
+			#{wallet},
 			#{createBy.id},
 			#{createDate},
 			#{updateBy.id},
@@ -129,6 +132,7 @@
 			wechat = #{wechat},
 			qq = #{qq},
 			payway = #{payway},
+			wallet = #{wallet},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},
 			remarks = #{remarks}
@@ -141,4 +145,20 @@
 		WHERE id = #{id}
 	</update>
 	
+	<update id="updateinfo">
+		UPDATE gbj_user SET 	
+			username = #{username},
+			password = #{password},
+			name = #{name},
+			photo=#{photo},
+			mobile = #{mobile},
+			email = #{email},
+			wechat = #{wechat},
+			qq = #{qq},
+			payway = #{payway},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
 </mapper>

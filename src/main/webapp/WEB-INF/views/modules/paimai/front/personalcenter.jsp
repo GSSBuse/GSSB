@@ -107,6 +107,11 @@
 											<td class="line30"><label class="profile-gender"
 												for="passport-sex-1" style="padding-left: 20px;">${gbjUserDetail.payway}</label>
 										</tr>
+										<tr style="height: 35px; font-size: 16px;">
+											<th style="text-align: right; width: 100px;">账户余额：</th>
+											<td class="line30"><label class="profile-gender"
+												for="passport-sex-1" style="padding-left: 20px;">${gbjUserDetail.wallet}</label>
+										</tr>
 
 
 
