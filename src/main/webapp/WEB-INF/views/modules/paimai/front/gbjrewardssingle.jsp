@@ -15,6 +15,7 @@
 <script type="text/javascript" src="${ctxStatic }/front/js/rewardreplycomments.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/rewardupcounts.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/rewardcommentsupcounts.js"></script>
+<script type="text/javascript" src="${ctxStatic }/front/js/xuanshang.js"></script>
 <body ms-controller="articles">
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
 	<div class="about">
@@ -36,7 +37,7 @@
 					<article class=" type-post format-standard hentry clearfix">
 
 						<h1 class="post-title">
-							<a href="#">${gbjRewardDetail.title}</a>
+							<a href="#">${gbjRewardDetail.title}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 悬赏金额:${gbjRewardDetail.totalFee} 元</a>
 						</h1>
 						<div class="jiathis_style_32x32" >
 							<a class="jiathis_button_tsina" id="zjc"></a>
@@ -51,8 +52,8 @@
 						<div class="post-meta clearfix like-btn" ms-controller="upcounts">
 							<span id="time" class="date">${gbjRewardDetail.createDate}</span> <span class="category"><a
 								href="#" class="gbjType">${gbjRewardDetail.typeId}</a></span> 
-								<span class="comments"><a
-								href="#">${gbjRewardDetail.lookCounts}</a></span>
+								<span class="comments"><a href="#">${gbjRewardDetail.lookCounts}</a></span>
+							
 							<form id="like-it-form" action="#" method="post" style="display: inline; float: right;">
 								<span class="like-it" >${gbjRewardDetail.upCounts}</span> <input
 									type="hidden" name="id" id="rewardid" />
@@ -95,13 +96,15 @@
 
 									</div>
 									<!-- end .comment-meta -->
+									
 
 									<div class="comment-body like-btn">
-										<p><h5>{{ell.comment}}</h5> 
-										<form id="like-comment-form" action="#" method="post" style="display: inline; float: right;">
-								         <span class="like-it">{{ell.childId}}</span>
-								       <span type="" style="display:none" name="id" class="rewardcommentsid" >{{ell.id}}</span> 
-							          </form>
+										<p><h5>{{ell.comment}}</h5>
+											<form id="like-comment-form" action="#" method="post" style="display: inline; float: right;">
+									         	<span class="like-it">{{ell.childId}}</span>
+									       		<span type="" style="display:none" name="id" class="rewardcommentsid" >{{ell.id}}</span> 
+								          	</form>
+								          	<a class="tome fuck"  href="#xuanshang" onclick="xuanshang(this)">悬赏给他</a><p  style="display: none">{{ell.user.username}}</p>
 										</p>
 									</div>
 									<!-- end of comment-body -->
@@ -217,6 +220,55 @@
 								</div>
 							</form>
 	</div>
+	
+	<div id="xuanshang-bg" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1; display: none;"></div>
+	<div id="xuanshang"  style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
+		<div id="close-xuanshang" style="position: absolute; right: -10px; top: -14px; width: 24px; height: 24px; text-align: center; font-size: 25px; border: 2px solid #d2d1d1; border-radius: 50%; background-color: #fff; color: #e71a1a; cursor: pointer;">×</div>
+		  <form method="post" id="xuanshang-form"  style="padding: 20px 30px; margin: 0;">
+				<div class="form-error" style="color:#FF0000">
+						<i></i><label class="text"></label>
+				</div>
+				<div class="form-success" style="color:#FF0000; display: none;">
+					<i></i><label class="text"></label>
+				</div>
+				<div class="form-group" style="display: none;">
+					<input name="successfulBidder" type="hidden" id="successfulBidder" value="">
+					<input name="reward-id" type="hidden" id="reward-id" value="${gbjRewardDetail.id}">
+					<input name="totalFee" type="hidden" id="totalFee" value="${gbjRewardDetail.totalFee}">
+			    </div>
+				<div class="payment-sendbtns" style="margin-top: 0">
+					<input  class="btn" name="submit" type="button" id="submit" onclick="xuanshangSubmit();" value="确定悬赏？" style="height: 50px;">
+				</div>
+			</form> 
+	</div>
+	<script type="text/javascript">
+//删除买标信息js  001
+function xuanshang(obj){
+   //alert(obj.tagName);
+	//alert($(obj).prev().tagName);
+	var pp = obj.nextSibling;
+	var cnt = pp.innerText;
+	//alert(cnt);
+	document.getElementById("successfulBidder").setAttribute("value", cnt);
+	document.getElementById("xuanshang").style.display="block";
+	document.getElementById("xuanshang-bg").style.display = 'block';
+}
+function hide(){
+    document.getElementById("xuanshang").style.display="none";
+    document.getElementById("xuanshang-bg").style.display = 'none';
+}
+// 点击弹窗背景关闭当前弹窗
+ $('#xuanshang-bg').click(function(){
+	$('#xuanshang,#xuanshang-bg').hide();
+	
+}); 
+// 点击弹窗的关闭按钮关闭当前弹窗
+$('#close-xuanshang').click(function(){
+    $('#xuanshang,#xuanshang-bg').hide();
+  // location.reload();
+});
+</script>
+	
 	<script type="text/javascript"> <!--我要买标弹出框js -->
 
 	$('#comment').focus(function(){
@@ -768,3 +820,4 @@
 </body>
 <!--qq登录用 -->
 </html>
+/html>

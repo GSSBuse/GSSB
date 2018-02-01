@@ -43,7 +43,7 @@
 	<form:form id="inputForm" modelAttribute="gbjUserRewardComments" action="${ctx}/sys/gbj/gbjUserRewardComments/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
-		<div class="control-group" >
+		<div class="control-group" style="visibility:hidden" >
 			<label class="control-label">悬赏信息ID：</label>
 			<div class="controls">
 				<form:input path="reward.id" id="rewardid" htmlEscape="false" maxlength="64" class="input-xlarge "/>

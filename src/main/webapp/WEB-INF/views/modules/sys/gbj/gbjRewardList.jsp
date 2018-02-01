@@ -50,13 +50,13 @@
 			<tr>
 				<th>用户名</th>
 				<th>真实姓名</th>
-				<th>国标类型</th>
+				<!-- <th>国标类型</th> -->
 				<th>标题</th>
 				<th>起名需求</th>
 				<th>打赏金额</th>
 				<th>手机号码</th>
 				<!-- <th>支付状态</th> -->
-				<th>状态</th>
+				<th>支付状态</th>
 				<th>支付流水号</th>
 				<th>中标者</th>
 				
@@ -76,9 +76,9 @@
 				<td>
 					${gbjReward.realname}
 				</td>
-				<td>
+				<%-- <td>
 					${fns:getDictLabel(gbjReward.typeId, 'gbjBuy_type_id', '')}
-				</td>
+				</td> --%>
 				<td>
 					${gbjReward.title}
 				</td>
@@ -97,6 +97,9 @@
 				<td>
 					${fns:getDictLabel(gbjReward.status, 'gbj_reward_status', '')}
 				</td> --%>
+				<td>
+					${gbjRewawrd.resultCode}
+				</td>
 				<td>
 					${gbjReward.payFlowNumber}
 				</td>

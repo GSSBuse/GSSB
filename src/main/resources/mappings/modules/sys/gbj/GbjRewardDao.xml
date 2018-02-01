@@ -200,9 +200,11 @@
 		)
 	</insert>
 	
+	
+	<!-- 后台悬赏信息修改，user.id可以用，前台个人中心重写update，用user-id -->
 	<update id="update">
 		UPDATE gbj_reward SET 	
-			user_id = #{user_id},
+			user_id = #{user.id},
 			realname = #{realname},
 			type_id = #{typeId},
 			title = #{title},
@@ -282,6 +284,13 @@
 			up_counts = up_counts + 1
 		WHERE id = #{id}
 	</update>
+	<!-- 中标者更新 -->
+	<update id="updatebidder">
+		UPDATE gbj_reward SET 	
+			successful_bidder = #{successfulBidder}
+		WHERE id = #{id}
+	</update>
+	<!-- 个人中心删除悬赏信息 -->
 	<update id="shanchu">
 		UPDATE gbj_reward SET 
 			del_flag = 1

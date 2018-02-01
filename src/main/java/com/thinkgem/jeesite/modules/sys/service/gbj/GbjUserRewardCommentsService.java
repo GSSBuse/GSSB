@@ -68,4 +68,11 @@ public class GbjUserRewardCommentsService extends CrudService<GbjUserRewardComme
 		return gbjUserRewardCommentsDao.findDomainArticleRewardReplyCommentsList(id);
 	}
 
+	// 悬赏评论信息点赞
+	@Transactional(readOnly = false)
+	public void updateCount(GbjUserRewardComments gbjUserRewardComments) {
+		// System.out.print("service");
+		gbjUserRewardCommentsDao.updateCount(gbjUserRewardComments);
+	}
+
 }

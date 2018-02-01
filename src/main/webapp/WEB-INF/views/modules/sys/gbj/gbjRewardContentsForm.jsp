@@ -33,7 +33,7 @@
 	<form:form id="inputForm" modelAttribute="gbjRewardContents" action="${ctx}/sys/gbj/gbjRewardContents/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
-		<div class="control-group">
+		<div class="control-group" >
 			<label class="control-label">用户ID：</label>
 			<div class="controls">
 				<form:input path="userId" htmlEscape="false" maxlength="200" class="input-xlarge "/>

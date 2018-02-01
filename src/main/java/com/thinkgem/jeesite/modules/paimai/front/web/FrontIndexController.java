@@ -1,7 +1,5 @@
 package com.thinkgem.jeesite.modules.paimai.front.web;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +28,6 @@ import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.wx.WeChat;
 import com.thinkgem.jeesite.common.wx.bean.PayResult;
 import com.thinkgem.jeesite.modules.paimai.front.bean.FrontLoginUser;
-import com.thinkgem.jeesite.modules.sys.entity.dy.DyWxpayResult;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.ArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.BuyArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjBusinessNumber;
@@ -49,7 +46,6 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserSoldComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserSoldCommentsReply;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.RewardArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.SoldArticleList;
-import com.thinkgem.jeesite.modules.sys.service.dy.DyWxpayResultService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.ArticleListService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.BuyArticleListService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjBusinessNumberService;
@@ -130,8 +126,6 @@ public class FrontIndexController extends BaseController {
 	@Autowired
 	GbjUserRewardCommentsReplyService gbjUserRewardCommentsReplyService;
 
-
-	
 	/**
 	 * 网站首页
 	 * 
@@ -162,9 +156,6 @@ public class FrontIndexController extends BaseController {
 		}
 	}
 
-	
-	
-	
 	/**
 	 * 网站首页
 	 */
@@ -546,18 +537,51 @@ public class FrontIndexController extends BaseController {
 			// JSONArray
 			// jsonObject=JSONArray.fromObject(gbjUserBuyCommentsDetail);
 			// mav.addObject("gbjUserBuyCommentsDetail", jsonObject);
+		} else if ("rewards".equals(type)) {
+			mav = new ModelAndView("modules/paimai/front/gbjrewardssingle");
+			// 参数拿到了，就根据参数去数据库里面查询详细
+			GbjReward gbjRewardDetail = gbjRewardService.get(id);
+
+			gbjRewardService.upDateLook(id);
+			// 检索出来后就前台元素中去
+			mav.addObject("gbjRewardDetail", gbjRewardDetail);
 		}
 		// 然后return跳转到详细页面去
 		return mav;
 	}
 
 	/**
+	 * 悬赏给他提交信息提交 2012/2/1 by snnu
+	 */
+	@RequestMapping(value = { "xuanshangSubmit" })
+	@ResponseBody
+	public AjaxResult xuanshangSubmit(HttpServletRequest request, @RequestParam(value = "id") String id,
+			@RequestParam(value = "totalFee") String totalFee,
+			@RequestParam(value = "successfulBidder") String successfulBidder) {
+		// GbjUserBuyComments gbjUserBuyComments = new GbjUserBuyComments();
+		GbjReward gbjReward = new GbjReward();
+		try {
+			// STEP1 提交查询信息，保存到数据库
+			gbjReward.setId(id);
+			gbjReward.setSuccessfulBidder(successfulBidder);
+
+			gbjRewardService.updatebidder(gbjReward);
+
+			return AjaxResult.makeSuccess("您很棒，评论成功！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return AjaxResult.makeError("失败【" + e.getMessage() + "】");
+		}
+
+	}
+
+	/**
 	 * 买标信息详细一览页面 snnu 12.21
 	 */
-	@RequestMapping(value = { "gbjbuysingle" })
-	public String gbjbuysingle(Model model) {
-		return "modules/paimai/front/gbjbuysingle";
-	}
+	/*
+	 * @RequestMapping(value = { "gbjbuysingle" }) public String gbjbuysingle(Model
+	 * model) { return "modules/paimai/front/gbjbuysingle"; }
+	 */
 
 	/**
 	 * 卖标信息详细一览页面 snnu 12.23
@@ -723,20 +747,19 @@ public class FrontIndexController extends BaseController {
 
 	}
 
-	
 	/**
 	 * 微信支付成功返回调用
 	 */
-	@RequestMapping(value = {"wxpayresult"},method={RequestMethod.POST})
+	@RequestMapping(value = { "wxpayresult" }, method = { RequestMethod.POST })
 	@ResponseBody
-	public int wxpayresult(Model model,HttpServletRequest req,HttpServletResponse res,@RequestParam(value = "id") String id) {
+	public int wxpayresult(Model model, HttpServletRequest req, HttpServletResponse res,
+			@RequestParam(value = "id") String id) {
 
-		
 		logger.debug("成功进入支付处理程序");
 		GbjReward gbjReward = new GbjReward();
-		try {	
-			PayResult payResult = WeChat.payResult(req);			
-			if(payResult.getReturn_code() != null && payResult.getResult_code().equals("SUCCESS")) {
+		try {
+			PayResult payResult = WeChat.payResult(req);
+			if (payResult.getReturn_code() != null && payResult.getResult_code().equals("SUCCESS")) {
 				gbjReward.setUser(gbjUserService.get(id));
 				gbjReward.setResultCode("success");
 				gbjReward.setTransactionId(payResult.getTransaction_id());
@@ -744,19 +767,18 @@ public class FrontIndexController extends BaseController {
 				gbjReward.setTimeEnd(df.parse(payResult.getTime_end()));
 
 				gbjRewardService.saveReward(gbjReward);
-				
-				/*String result = "success";
-				AjaxResult ar = AjaxResult.makeSuccess("");
-				ar.getData().put("wxpayresult", result);*/
+
+				/*
+				 * String result = "success"; AjaxResult ar = AjaxResult.makeSuccess("");
+				 * ar.getData().put("wxpayresult", result);
+				 */
 
 				logger.debug("success");
 				return 1;
-			}
-			else {
+			} else {
 				return 0;
 			}
-			
-			
+
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return 0;
@@ -1487,7 +1509,6 @@ public class FrontIndexController extends BaseController {
 	@ResponseBody
 	public AjaxResult rewardupcounts(Model model, GbjReward gbjReward, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
-
 		/*
 		 * model.addAttribute("domainInfo1", JsonMapper.toJsonString(gbjBuy));
 		 */
@@ -1495,9 +1516,7 @@ public class FrontIndexController extends BaseController {
 
 			// STEP1 提交查询信息，保存到数据库
 			gbjRewardService.updateCount(gbjReward);
-
 			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
-
 			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -1505,6 +1524,22 @@ public class FrontIndexController extends BaseController {
 			return AjaxResult.makeError("提交查询成功失败【" + e.getMessage() + "】");
 		}
 
+	}
+
+	// 悬赏评论点赞
+	@RequestMapping(value = { "rewardcommentsupcounts" })
+	@ResponseBody
+	public AjaxResult rewardcommentsupcounts(Model model, GbjUserRewardComments gbjUserRewardComments,
+			HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		try {
+			gbjUserRewardCommentsService.updateCount(gbjUserRewardComments);
+			addMessage(redirectAttributes, "提交查询成功，我们会及时联系您！");
+			return AjaxResult.makeSuccess("提交查询成功，我们会及时联系您！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			addMessage(redirectAttributes, "提交查询成功失败【" + e.getMessage() + "】");
+			return AjaxResult.makeError("提交查询成功失败【" + e.getMessage() + "】");
+		}
 	}
 
 	/*

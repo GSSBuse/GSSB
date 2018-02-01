@@ -24,4 +24,6 @@ public interface GbjUserRewardCommentsDao extends CrudDao<GbjUserRewardComments>
 
 	public List<GbjUserRewardComments> findDomainArticleRewardReplyCommentsList(String id);
 
+	public int updateCount(GbjUserRewardComments gbjUserRewardComments);
+
 }

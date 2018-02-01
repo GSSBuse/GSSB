@@ -96,4 +96,10 @@ public class GbjRewardService extends CrudService<GbjRewardDao, GbjReward> {
 		return gbjRewarddao.findDomainRewardList(Integer.parseInt(count));
 	}
 
+	// 更新中标者
+	@Transactional(readOnly = false)
+	public void updatebidder(GbjReward gbjReward) {
+		gbjRewarddao.updatebidder(gbjReward);
+	}
+
 }

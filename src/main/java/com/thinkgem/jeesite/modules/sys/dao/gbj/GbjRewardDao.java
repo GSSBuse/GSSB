@@ -32,4 +32,7 @@ public interface GbjRewardDao extends CrudDao<GbjReward> {
 
 	// 删除个人中心悬赏信息方法
 	public void shanchu(String id);
+
+	// 更新中标者
+	public int updatebidder(GbjReward gbjReward);
 }

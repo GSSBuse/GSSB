@@ -396,7 +396,7 @@
 									<header class="clearfix">
 										<h3 class="post-title">
 											<a
-												ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.title}}</a>
+												ms-attr-href="${ctx }/single.html?id={{el.id}}&type=rewards">{{el.title}}</a>
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<a href="#changereward-dialog" onclick="showreward(this)">修改</a><p class="ellb" style="display: none">{{el.id}}</p>
 											<%-- <a href="javascript:void(0)" ms-click="$remove">删除</a>

@@ -22,7 +22,6 @@ var vm11 = avalon.define({
 		     domainBuyReplyCommentsArticleList:[],
 		     domainSoldReplyCommentsArticleList:[],
 		     domainRewardReplyCommentsArticleList:[],
-			//domainRewardList : [],//卖标信息一览（最新11条，首页只表示最新的）
 			timeStamp: 0,
 			tmp : {
 				currentClientId : null,

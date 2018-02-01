@@ -179,10 +179,10 @@
 		)
 	</insert>
 	
-	
+	<!-- 后台买标信息修改，user.id可以用，前台个人中心重写update，用user-id -->
 	<update id="update">
 		UPDATE gbj_buy SET 	
-			user_id = #{user_id},
+			user_id = #{user.id},
 			realname = #{realname},
 			type_id = #{typeId},
 			title = #{title},
