@@ -9,6 +9,7 @@
 <!--<![endif]-->  
 <head>
 <%@ include file="/WEB-INF/views/include/frontHead1.jsp"%>
+<meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
 </head>
 <script type="text/javascript" src="${ctxStatic }/front/js/Article.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/changepersonal.js"></script>
@@ -43,8 +44,14 @@
 							<li class="active"><h4 style="height: 50px;">
 									<a href="#">我的信息</a>
 								</h4></li>
-								<li><h4>
+							<li><h4>
 									<a href="#">修改个人信息</a>
+								</h4></li>
+								<!-- <li><h4>
+									<a href="#">我的头像</a>
+								</h4></li> -->
+								<li><h4>
+									<a href="#">我的钱包</a>
 								</h4></li>
 							<li><h4>
 									<a href="#">我发布过的买标信息</a>
@@ -107,14 +114,6 @@
 											<td class="line30"><label class="profile-gender"
 												for="passport-sex-1" style="padding-left: 20px;">${gbjUserDetail.payway}</label>
 										</tr>
-										<tr style="height: 35px; font-size: 16px;">
-											<th style="text-align: right; width: 100px;">账户余额：</th>
-											<td class="line30"><label class="profile-gender"
-												for="passport-sex-1" style="padding-left: 20px;">${gbjUserDetail.wallet}</label>
-										</tr>
-
-
-
 									</tbody>
 								</table>
 							</div>
@@ -127,7 +126,7 @@
 							    }
 							</script>
 							<div class="tab-content">
-							<form method="post" id="change">
+							<form method="post" id="change" enctype="multipart/form-data" target="uploadFrame">
 								<table class="setting-profile-table"
 									style="width: 400px; margin-left: 100px;">
 									<tbody>
@@ -135,22 +134,18 @@
 											<th style="text-align: right; width: 100px;">用户名：</th>
 											<td class="line30"><label class="profile-gender"
 												for="passport-sex-1" style="padding-left: 20px;">
-												<input  type="text" name="username" id="username"  value="${gbjUserDetail.username}"
-												  onfocus="if (value =='${gbjUserDetail.username}'){value =''}"
-					                             onblur="if (value ==''){value='${gbjUserDetail.username}'}"
+												<input  type="text" readonly="value" name="username" id="username"  value="${gbjUserDetail.username}"
 												 >
 												<input name="id" type="hidden" id="id" value="${login_user.id}"></label>
 										</tr>
-										<%-- <tr style="height: 35px; font-size: 16px;">
+										 <tr style="height: 35px; font-size: 16px;">
 											<th style="text-align: right; width: 100px;">头像：</th>
 											<td class="line30"><label class="profile-gender"
 												for="passport-sex-1" style="padding-left: 20px;">
-												<input  type="file" name="photo" id="photo" value=""
-												 onfocus="if (value =='${gbjUserDetail.photo}'){value =''}"
-					                             onblur="if (value ==''){value='${gbjUserDetail.photo}'}"
-												 ></label>
+											<input ms-change="choosePositive()" type="file" name="photo" accept="image/png,image/gif,image/jpeg">
+												</label>
 												
-										</tr> --%>
+										</tr> 
 
 
 										<tr style="height: 35px; font-size: 16px;">
@@ -223,6 +218,45 @@
 									</tbody>
 								</table>
 								</form>
+							</div>
+							
+							<!--            头像上传        by snnu   2017.12.31           -->
+							<%--  <div class="tab-content" ms-controller="photo">
+						<form name="accountform" method="post" id="accountform" 
+						 action="" enctype="multipart/form-data" target="uploadFrame">
+											<div class="row uploadingimg">
+												<label >
+													<span>头像:</span>
+													<input type="text" name="id" ms-duplex-id="datas.clientInfo.id" 
+													class="input"   value="${login_user.id}" style="display: none">
+												</label>
+												<label class="col2" >
+													<img id="Image" src="${ctxStatic }/images/1.jpg" width="100" title="正面" alt="正面">
+													<input ms-change="choosePositive()" type="file" name="ImageFile" accept="image/png,image/gif,image/jpeg">
+												</label>
+											</div>
+										<input id="submitChange"  onclick="photo();" type="submit" name="submitbtn" value="提交认证信息">
+							</form>
+					</div> --%>
+								<!--            我的钱包        by snnu   2017.12.31           -->
+							 <div class="tab-content">
+								<table class="setting-profile-table"
+									style="width: 400px; margin-left: 100px;">
+									<tbody>
+										
+										<tr style="height: 35px; font-size: 16px;">
+											<th style="text-align: right; width: 100px;">账户余额：</th>
+											<td class="line30">
+											<label class="profile-gender" for="passport-sex-1" 
+											style="padding-left: 20px;">${gbjUserDetail.wallet}</label>
+											<label class="profile-gender" for="passport-sex-1" 
+											style="padding-left: 20px;"><a>提现</a></label>
+											</td>
+										</tr>
+
+									</tbody>
+								</table>
+								
 							</div>
 							<!--            我发布的买标信息。        by snnu   2017.12.31           -->
 							 <div class="tab-content">

@@ -18,4 +18,6 @@ public interface GbjUserDao extends CrudDao<GbjUser> {
 
 	public int updateinfo(GbjUser gbjUser);
 
+	public int updatewallet(GbjUser gbjUser);
+
 }

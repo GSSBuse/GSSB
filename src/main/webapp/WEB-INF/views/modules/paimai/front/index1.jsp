@@ -117,14 +117,15 @@
 		</a>
 		
 		<div class="dy-each" ms-repeat-el="datas.domainRewardList">
-			<a ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">
+			<a  ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">
 			<div>
 			  <h4>
-			  	<span>{{el.title}}</span><br>
-			  	悬赏金额: {{el.price}}元
+			  	<span>悬赏金额: {{el.totalFee}}元</span>
+			  	<span class="article-meta">>>点击进入查看详细悬赏</span>
+			  	
 			  </h4>		                                                                
               <span class="article-meta">{{el.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;
-              	<span class="gbjType">{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</span> 
+              	<span class="gbjType">悬赏起名</span> 
               	<%-- &amp; <a ms-attr-href="${ctx }/single.html?id={{el.id}}type=reward" >{{el.tag}}</a> --%></span>
               
               <span class="like-count">
@@ -132,8 +133,10 @@
                 	<span>{{el.upCounts}}</span>
                 </span>  
 			</div>
-			</a>
+				</a>
 		</div>
+		
+
 			
 			<a href="${ctx }/rewardarticles.html">
 			<div class="dy-each dy-last">
@@ -820,6 +823,10 @@
 			})()
 		}
 	</script>
+	
+
+	
+	
 <script type="text/javascript" src="${ctxStatic }/front/js/searchBrand.js"></script> 
 <script type="text/javascript" src="${ctxStatic }/front/js/gbBuy.js"></script> 
 <script type="text/javascript" src="${ctxStatic }/front/js/gbsold.js"></script> 

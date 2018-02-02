@@ -44,6 +44,20 @@ $('#like-it-form .like-it').click(function(){
 			});
 		});
 
+		document.getElementById("denglu-dialog-bg").style.display = 'block';
+		
+		// 点击弹窗背景关闭当前弹窗
+			$('#denglu-dialog-bg').click(function() {
+				$('#popup').hide();
+				$('#denglu-dialog-bg').hide();
+			});
+			// 点击弹窗的关闭按钮关闭当前弹窗
+			
+			$("a.guanbi").click(function() {
+				$("#popup").hide();//查找ID为popup的DIV hide()隐藏
+				$('#denglu-dialog-bg').hide();
+			})
+		
 		//窗口水平居中
 		$(window).resize(function() {
 			tc_center();

@@ -11,7 +11,8 @@ public class RewardArticleList extends DataEntity<RewardArticleList> {
 	private Integer typeId; // 国标类型
 	private String tag; // 国标标签
 
-	private Long price; // 预算价格
+	private Long totalFee; // 预算价格
+
 	private String mobile; // 联系人手机号
 	private String description; // 国标描述
 	private String title; // 国标标题
@@ -57,12 +58,12 @@ public class RewardArticleList extends DataEntity<RewardArticleList> {
 		this.tag = tag;
 	}
 
-	public Long getPrice() {
-		return price;
+	public Long getTotalFee() {
+		return totalFee;
 	}
 
-	public void setPrice(Long price) {
-		this.price = price;
+	public void setTotalFee(Long totalFee) {
+		this.totalFee = totalFee;
 	}
 
 	public String getMobile() {

@@ -15,7 +15,7 @@
 <script type="text/javascript" src="${ctxStatic }/front/js/rewardreplycomments.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/rewardupcounts.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/rewardcommentsupcounts.js"></script>
-<body ms-controller="articles">
+<body ms-controller="articles" >
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
 	<div class="about">
 		<div class="container">
@@ -36,7 +36,9 @@
 					<article class=" type-post format-standard hentry clearfix">
 
 						<h1 class="post-title">
-							<a href="#">${gbjRewardDetail.title}</a>
+							<a href="#">${gbjRewardDetail.description}</a>
+							<br><span style="color:#00F">悬赏金额:&nbsp;${gbjRewardDetail.totalFee }</span>
+							<br>中标状态:&nbsp;${gbjRewardDetail.status }
 						</h1>
 						<div class="jiathis_style_32x32" >
 							<a class="jiathis_button_tsina" id="zjc"></a>
@@ -50,7 +52,7 @@
 						<br><br><br>
 						<div class="post-meta clearfix like-btn" ms-controller="upcounts">
 							<span id="time" class="date">${gbjRewardDetail.createDate}</span> <span class="category"><a
-								href="#" class="gbjType">${gbjRewardDetail.typeId}</a></span> 
+								href="#" class="gbjType">悬赏起名</a></span> 
 								<span class="comments"><a
 								href="#">${gbjRewardDetail.lookCounts}</a></span>
 							<form id="like-it-form" action="#" method="post" style="display: inline; float: right;">
@@ -63,13 +65,13 @@
 						<!--   <p>买标买标悬赏等的详细信息。进入这个页面是需要2个参数，id和type。type绝对去从那个标里面去检索。也可以3个表做个视图（看看有没有共通的字段了要）。然后根据id取得对应的详细信息，包括回复和点赞等信息。分享等我后面再加。
                                                                                                                                                                                 这里暂时不支持富文本的样式显示，只支持一般文本就好了。
                                                         </p>-->
-						<p><h5>${gbjRewardDetail.description}</h5></p>
+						<%-- <p><h5>${gbjRewardDetail.description}</h5></p> --%>
 
 					</article>
 					<section id="comments">
 
-						<h3 id="comments-title">评论内容</h3>
-						<p id="no-comments">暂无评论</p>
+						<h3 id="comments-title">起名评论信息</h3>
+						<p id="no-comments">暂无起名评论</p>
 						<ol class="commentlist"
 							ms-repeat-ell="datas.domainRewardCommentsArticleList">
 
@@ -144,7 +146,7 @@
 
 						<div id="respond">
 
-							<h3>评论回复</h3>
+							<h3>我要起名评论</h3>
 
 							<div class="cancel-comment-reply">
 								<a rel="nofollow" id="cancel-comment-reply-link" href="#"
@@ -258,6 +260,20 @@
 	 		});
 	     });
 
+	     document.getElementById("denglu-dialog-bg").style.display = 'block';
+			
+			// 点击弹窗背景关闭当前弹窗
+				$('#denglu-dialog-bg').click(function() {
+					$('#popup').hide();
+					$('#denglu-dialog-bg').hide();
+				});
+				// 点击弹窗的关闭按钮关闭当前弹窗
+				
+				$("a.guanbi").click(function() {
+					$("#popup").hide();//查找ID为popup的DIV hide()隐藏
+					$('#denglu-dialog-bg').hide();
+				})
+	     
 	     //窗口水平居中
 	     $(window).resize(function(){
 	         tc_center();
@@ -318,6 +334,20 @@
 	 		});
 	     });
 
+	     document.getElementById("denglu-dialog-bg").style.display = 'block';
+			
+			// 点击弹窗背景关闭当前弹窗
+				$('#denglu-dialog-bg').click(function() {
+					$('#popup').hide();
+					$('#denglu-dialog-bg').hide();
+				});
+				// 点击弹窗的关闭按钮关闭当前弹窗
+				
+				$("a.guanbi").click(function() {
+					$("#popup").hide();//查找ID为popup的DIV hide()隐藏
+					$('#denglu-dialog-bg').hide();
+				})
+	     
 	     //窗口水平居中
 	     $(window).resize(function(){
 	         tc_center();

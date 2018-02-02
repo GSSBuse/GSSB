@@ -206,10 +206,13 @@
 
 
 <!-- Start of 登录框 -->
+<div id="denglu-dialog-bg"
+		style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1; display: none;"></div>
 <div class="popup" id="popup">
+
 	<div class="top_nav" id='top_nav'>
 		<div align="center">
-			<a class="guanbi"></a>
+			<a class="guanbi" id="guanbi"></a>
 		</div>
 	</div>
 	<div class="form-box fr loginV2" style="display: block;">
@@ -294,6 +297,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<!-- -快捷登录 -->
 	<div class="form-box fr shortLogin" style="display: none;">
 		<h5 class="title">快捷登录</h5>
@@ -418,12 +422,17 @@
 		</div>
 	</div>
 </div>
-
+</div>
 
 <script type="text/javascript">
+
+
 	//窗口效果
 	//点击登录class为tc 显示
 	$(".tc").click(function() {
+		
+		document.getElementById("denglu-dialog-bg").style.display = 'block';
+		
 		$("#popup").show();//查找ID为popup的DIV show()显示#gray
 		tc_center();
 		$('.loginV2').show();
@@ -458,6 +467,20 @@
 		});
 	});
 
+	
+	
+	// 点击弹窗背景关闭当前弹窗
+		$('#denglu-dialog-bg').click(function() {
+			$('#popup').hide();
+			$('#denglu-dialog-bg').hide();
+		});
+		// 点击弹窗的关闭按钮关闭当前弹窗
+		
+		$("a.guanbi").click(function() {
+			$("#popup").hide();//查找ID为popup的DIV hide()隐藏
+			$('#denglu-dialog-bg').hide();
+		})
+	
 	//窗口水平居中
 	$(window).resize(function() {
 		tc_center();

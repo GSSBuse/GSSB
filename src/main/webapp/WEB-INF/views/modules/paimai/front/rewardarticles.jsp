@@ -69,12 +69,12 @@ $(document).ready(function(){
 						<header class="clearfix">
 							<h3 class="post-title">
 								<a class="buyarticles-title" ms-attr-href="${ctx }/single.html?id={{el.id}}&type=reward">{{el.description}}</a>
-								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <a href="">悬赏金额:</a> <a
-									href="">{{el.totalFee}}元</a>
+								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 悬赏金额:
+								<a href="">{{el.totalFee}}</a>元
 							</h3>
 							<div class="post-meta clearfix">
 								<span class="date">{{el.createDate}}</span> <span
-									class="category"><a  title="查询该标签所有内容" >{{el.typeId=='0'?'商标':el.typeId=='1'?'专利':'版权'}}</a>
+									class="category"><a  title="查询该标签所有内容" >悬赏起名</a>
 										<!-- &amp;&amp;&amp; <a href="#" title="查询该标签所有内容">{{el.tag}}</a> --></span> 
 										<!-- <span class="comments"><a href="#">3个回复</a></span> -->
 								<a ms-attr-href="${ctx}/single.html?id={{el.id}}&type=reward"><span
@@ -260,6 +260,22 @@ $(document).ready(function(){
 					});
 				});
 
+				 document.getElementById("denglu-dialog-bg").style.display = 'block';
+				 
+				 
+				 
+				// 点击弹窗背景关闭当前弹窗
+					$('#denglu-dialog-bg').click(function() {
+						$('#popup').hide();
+						$('#denglu-dialog-bg').hide();
+					});
+					// 点击弹窗的关闭按钮关闭当前弹窗
+					
+					$("a.guanbi").click(function() {
+						$("#popup").hide();//查找ID为popup的DIV hide()隐藏
+						$('#denglu-dialog-bg').hide();
+					})
+				 
 				//窗口水平居中
 				$(window).resize(function() {
 					tc_center();

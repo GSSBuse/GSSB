@@ -16,6 +16,9 @@
 <script type="text/javascript" src="${ctxStatic }/front/js/rewardupcounts.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/rewardcommentsupcounts.js"></script>
 <script type="text/javascript" src="${ctxStatic }/front/js/xuanshang.js"></script>
+
+
+
 <body ms-controller="articles">
 	<%@ include file="/WEB-INF/views/include/frontTopMenu.jsp"%>
 	<div class="about">
@@ -38,6 +41,7 @@
 
 						<h1 class="post-title">
 							<a href="#">${gbjRewardDetail.title}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 悬赏金额:${gbjRewardDetail.totalFee} 元</a>
+							&nbsp;&nbsp;&nbsp;&nbsp;中标状态:<span id="zbstatus">${gbjRewardDetail.status}</span>
 						</h1>
 						<div class="jiathis_style_32x32" >
 							<a class="jiathis_button_tsina" id="zjc"></a>
@@ -69,8 +73,8 @@
 					</article>
 					<section id="comments">
 
-						<h3 id="comments-title">评论内容</h3>
-						<p id="no-comments">暂无评论</p>
+						<h3 id="comments-title">起名评论信息</h3>
+						<p id="no-comments">暂无起名评论</p>
 						<ol class="commentlist"
 							ms-repeat-ell="datas.domainRewardCommentsArticleList">
 
@@ -104,7 +108,7 @@
 									         	<span class="like-it">{{ell.childId}}</span>
 									       		<span type="" style="display:none" name="id" class="rewardcommentsid" >{{ell.id}}</span> 
 								          	</form>
-								          	<a class="tome fuck"  href="#xuanshang" onclick="xuanshang(this)">悬赏给他</a><p  style="display: none">{{ell.user.username}}</p>
+								 <a class="tome"  href="#xuanshang" onclick="xuanshang(this)">悬赏给他</a><p  style="display: none">{{ell.user.username}}</p>
 										</p>
 									</div>
 									<!-- end of comment-body -->
@@ -145,7 +149,7 @@
 
 						</ol>
 
-						<div id="respond">
+						<%-- <div id="respond">
 
 							<h3>评论回复</h3>
 
@@ -175,7 +179,7 @@
 
 							</form>
 
-						</div>
+						</div> --%>
 					</section>
 					<!-- end of comments -->
 
@@ -310,6 +314,20 @@ $('#close-xuanshang').click(function(){
 	 		});
 	     });
 
+	     document.getElementById("denglu-dialog-bg").style.display = 'block';
+			
+			// 点击弹窗背景关闭当前弹窗
+				$('#denglu-dialog-bg').click(function() {
+					$('#popup').hide();
+					$('#denglu-dialog-bg').hide();
+				});
+				// 点击弹窗的关闭按钮关闭当前弹窗
+				
+				$("a.guanbi").click(function() {
+					$("#popup").hide();//查找ID为popup的DIV hide()隐藏
+					$('#denglu-dialog-bg').hide();
+				})
+	     
 	     //窗口水平居中
 	     $(window).resize(function(){
 	         tc_center();
@@ -370,6 +388,20 @@ $('#close-xuanshang').click(function(){
 	 		});
 	     });
 
+	     document.getElementById("denglu-dialog-bg").style.display = 'block';
+			
+			// 点击弹窗背景关闭当前弹窗
+				$('#denglu-dialog-bg').click(function() {
+					$('#popup').hide();
+					$('#denglu-dialog-bg').hide();
+				});
+				// 点击弹窗的关闭按钮关闭当前弹窗
+				
+				$("a.guanbi").click(function() {
+					$("#popup").hide();//查找ID为popup的DIV hide()隐藏
+					$('#denglu-dialog-bg').hide();
+				})
+	     
 	     //窗口水平居中
 	     $(window).resize(function(){
 	         tc_center();
@@ -432,8 +464,15 @@ $('#close-xuanshang').click(function(){
              $(".popup").css("cursor","default"); 
              $(this).unbind("mousemove"); 
          });
-     }) 
-     </script>
+         
+         var zbstatus = $("#zbstatus").text();
+        
+         if(zbstatus == "已中标"){
+        	 $(".tome").hide();
+         }
+         
+     }); 
+</script>
 
 
 

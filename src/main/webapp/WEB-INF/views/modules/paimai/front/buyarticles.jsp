@@ -199,6 +199,9 @@ function show1(){
          tc_center();
      });
 
+   /*   document.getElementById("buy-dialog").style.display="block"; */
+     document.getElementById("denglu-dialog-bg").style.display = 'block';
+     
      function tc_center(){
          var _top=($(window).height()-$(".popup").height())/2;
          var _left=($(window).width()-$(".popup").width())/2;

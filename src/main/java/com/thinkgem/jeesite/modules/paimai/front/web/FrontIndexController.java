@@ -1,11 +1,14 @@
 package com.thinkgem.jeesite.modules.paimai.front.web;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,11 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.bean.AjaxResult;
+import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.mapper.JsonMapper;
+import com.thinkgem.jeesite.common.utils.FileUtils;
 import com.thinkgem.jeesite.common.utils.SendMailUtil;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
@@ -274,23 +280,28 @@ public class FrontIndexController extends BaseController {
 	@RequestMapping(value = { "change" })
 	@ResponseBody
 	public AjaxResult change(HttpServletRequest request, @RequestParam(value = "id") String id,
-			@RequestParam(value = "username") String username, @RequestParam(value = "name") String name,
-			@RequestParam(value = "mobile") String mobile, @RequestParam(value = "email") String email,
-			@RequestParam(value = "qq") String qq, @RequestParam(value = "wechat") String wechat,
-			@RequestParam(value = "payway") String payway) {
+			@RequestParam(value = "name") String name, @RequestParam(value = "mobile") String mobile,
+			@RequestParam(value = "email") String email, @RequestParam(value = "qq") String qq,
+			@RequestParam(value = "wechat") String wechat, @RequestParam(value = "payway") String payway,
+			MultipartFile ImageFile) {
 		GbjUser gbjUser = new GbjUser();
 		// GbjBuy gbjBuy = new GbjBuy();
 		try {
 			// logger.info(parentId);
 			// STEP1 提交查询信息，保存到数据库
 			// gbjUser.setBuy(gbjBuyService.get(id));
+			String relativePath = Global.USERFILES_BASE_URL + gbjUser.getId() + "/clientUploads/" + "/";
+			String realPath = Global.getUserfilesBaseDir() + relativePath;
+			FileUtils.createDirectory(realPath);
+			String posFilename = saveFile(ImageFile, realPath);
+			gbjUser.setPhoto(request.getContextPath() + relativePath + posFilename);
 			gbjUser.setId(id);
 			gbjUser.setEmail(email);
 			gbjUser.setMobile(mobile);
 			gbjUser.setPayway(payway);
 			gbjUser.setQq(qq);
 			gbjUser.setWechat(wechat);
-			gbjUser.setUsername(username);
+			// gbjUser.setUsername(username);
 			gbjUser.setName(name);
 			gbjUser.setCreateDate(new Date());
 
@@ -302,6 +313,69 @@ public class FrontIndexController extends BaseController {
 			return AjaxResult.makeError("失败【" + e.getMessage() + "】");
 		}
 
+	}
+
+	/**
+	 * 提交头像页面
+	 */
+	/*
+	 * @RequestMapping(value = { "photo" }, method = { RequestMethod.POST })
+	 * 
+	 * @ResponseBody public AjaxResult idcardAuthPost(HttpServletRequest req, String
+	 * id, MultipartFile ImageFile) { try { GbjUser gbjUser = new GbjUser(); //
+	 * DyClient currentDyClient = //
+	 * dyClientService.get(DySysUtils.getCurrentDyClient().getId()); // 相对文件夹 String
+	 * relativePath = Global.USERFILES_BASE_URL + gbjUser.getId() +
+	 * "/clientUploads/" + "/"; String realPath = Global.getUserfilesBaseDir() +
+	 * relativePath; FileUtils.createDirectory(realPath); // 保存文件 String posFilename
+	 * = saveFile(ImageFile, realPath); gbjUser.setPhoto(req.getContextPath() +
+	 * relativePath + posFilename); gbjUser.setId(id);
+	 * gbjUserService.updateinfo(gbjUser); return
+	 * AjaxResult.makeSuccess("您很棒，评论成功！");
+	 * 
+	 * } catch (Exception e) { logger.error("文件上传失败", e); return
+	 * AjaxResult.makeError("失败【" + e.getMessage() + "】"); //
+	 * jm.addAlert("$.jBox.tip('文件上传失败:" + e.getLocalizedMessage() + "','error');");
+	 * // jm.append("top.$('#submitChange').attr('disabled', false);"); } }
+	 */
+
+	private static final long maxSize = 5 * 1024 * 1024;
+
+	/**
+	 * 保存文件
+	 * 
+	 * @param obj
+	 *            要上传的文件域
+	 * @param file
+	 * @return
+	 */
+	private String saveFile(MultipartFile item, String realPath) throws Exception {
+		String fileName = item.getOriginalFilename();
+		String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+
+		if (item.getSize() > maxSize) { // 检查文件大小
+			throw new Exception("上传文件大小超过限制(5MB)");
+		} else {
+			String newFileName;
+			// if ("".equals(fileName.trim())) {
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+			newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
+			// } else {
+			// newFileName = fileName + "." + fileExt;
+			// }
+			// .../basePath/dirName/yyyyMMdd/yyyyMMddHHmmss_xxx.xxx
+			try {
+				File uploadedFile = new File(realPath, newFileName);
+
+				FileUtils.writeByteArrayToFile(uploadedFile, item.getBytes());
+
+				return newFileName;
+			} catch (IOException e) {
+				throw e;
+			} catch (Exception e) {
+				throw e;
+			}
+		}
 	}
 
 	/**
@@ -557,16 +631,21 @@ public class FrontIndexController extends BaseController {
 	@ResponseBody
 	public AjaxResult xuanshangSubmit(HttpServletRequest request, @RequestParam(value = "id") String id,
 			@RequestParam(value = "totalFee") String totalFee,
-			@RequestParam(value = "successfulBidder") String successfulBidder) {
+			@RequestParam(value = "successfulBidder") String successfulBidder,
+			@RequestParam(value = "status") String status) {
 		// GbjUserBuyComments gbjUserBuyComments = new GbjUserBuyComments();
+		GbjUser gbjUser = new GbjUser();
 		GbjReward gbjReward = new GbjReward();
 		try {
 			// STEP1 提交查询信息，保存到数据库
 			gbjReward.setId(id);
 			gbjReward.setSuccessfulBidder(successfulBidder);
+			gbjReward.setStatus(status);
+			gbjUser.setWallet(totalFee);
+			gbjUser.setUsername(successfulBidder);
 
 			gbjRewardService.updatebidder(gbjReward);
-
+			gbjUserService.updatewallet(gbjUser);
 			return AjaxResult.makeSuccess("您很棒，评论成功！");
 		} catch (Exception e) {
 			logger.error(e.getMessage());

@@ -147,8 +147,7 @@
 	
 	<update id="updateinfo">
 		UPDATE gbj_user SET 	
-			username = #{username},
-			password = #{password},
+			
 			name = #{name},
 			photo=#{photo},
 			mobile = #{mobile},
@@ -160,5 +159,10 @@
 			update_date = #{updateDate},
 			remarks = #{remarks}
 		WHERE id = #{id}
+	</update>
+	<update id="updatewallet">
+		UPDATE gbj_user SET 	
+			wallet = wallet+#{wallet}
+		WHERE username = #{username}
 	</update>
 </mapper>

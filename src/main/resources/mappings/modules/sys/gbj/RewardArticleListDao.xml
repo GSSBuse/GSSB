@@ -3,7 +3,7 @@
 <mapper namespace="com.thinkgem.jeesite.modules.sys.dao.gbj.RewardArticleListDao">
 
 <sql id="gbjRewardColumns">
-			a.id AS "id",
+		a.id AS "id",
 		a.user_id AS "user.id",
 		a.realname AS "realname",
 		a.type_id AS "typeId",
@@ -46,7 +46,7 @@
 <select id="findDomainRewardArticleList" resultType="RewardArticleList" parameterType="java.lang.Integer">
         SELECT
         	  d.id as "id",
-        	  d.totalFee AS "totalFee",
+        	  d.totalFee as "totalFee",
               d.type_id as "typeId",
               d.mobile as "mobile",
               d.tag as "tag",

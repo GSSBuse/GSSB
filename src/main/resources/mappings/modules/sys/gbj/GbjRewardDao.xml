@@ -129,7 +129,7 @@
 			#{mobile},
 			#{tag},
 			#{createBy.id},
-			#{status},
+			"未中标",
 			#{payFlowNumber},
 			#{successfulBidder},
 			#{updateBy.id},
@@ -220,9 +220,7 @@
 			successful_bidder = #{successfulBidder},
 			update_by = #{updateBy.id},
 			front_del_flag = #{frontDelFlag},
-			update_date = #{updateDate},
-			up_counts = #{upCounts},
-			look_counts = #{lookCounts},
+			update_date = #{updateDate},	
 			remarks = #{remarks},
 			comments_counts = #{commentsCounts},
 			del_flag = #{delFlag}
@@ -265,6 +263,7 @@
               b.type_id as "typeId",
               b.totalFee AS "totalFee",
               b.tag AS "tag",
+              b.description AS "description",
               b.create_date as "createDate",
               b.title as "title",
               b.up_counts AS "upCounts"
@@ -287,7 +286,8 @@
 	<!-- 中标者更新 -->
 	<update id="updatebidder">
 		UPDATE gbj_reward SET 	
-			successful_bidder = #{successfulBidder}
+			successful_bidder = #{successfulBidder},
+			status = #{status}
 		WHERE id = #{id}
 	</update>
 	<!-- 个人中心删除悬赏信息 -->
