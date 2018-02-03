@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sys.dao.gbj.GbjWithdrawDao">
+    
+	<sql id="gbjWithdrawColumns">
+		a.id AS "id",
+		a.user_id AS "userId",
+		a.username AS "username",
+		a.money AS "money",
+		a.payway AS "payway",
+		a.wechat AS "wechat",
+		a.pay_time AS "payTime",
+		a.mobile AS "mobile",
+		a.is_success AS "isSuccess",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="gbjWithdrawJoins">
+	</sql>
+    
+	<select id="get" resultType="GbjWithdraw">
+		SELECT 
+			<include refid="gbjWithdrawColumns"/>
+		FROM gbj_withdraw a
+		<include refid="gbjWithdrawJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="GbjWithdraw">
+		SELECT 
+			<include refid="gbjWithdrawColumns"/>
+		FROM gbj_withdraw a
+		<include refid="gbjWithdrawJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="username != null and username != ''">
+				AND a.username = #{username}
+			</if>
+			<if test="payway != null and payway != ''">
+				AND a.payway = #{payway}
+			</if>
+			<if test="wechat != null and wechat != ''">
+				AND a.wechat = #{wechat}
+			</if>
+			<if test="payTime != null and payTime != ''">
+				AND a.pay_time = #{payTime}
+			</if>
+			<if test="isSuccess != null and isSuccess != ''">
+				AND a.is_success = #{isSuccess}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="GbjWithdraw">
+		SELECT 
+			<include refid="gbjWithdrawColumns"/>
+		FROM gbj_withdraw a
+		<include refid="gbjWithdrawJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO gbj_withdraw(
+			id,
+			user_id,
+			username,
+			money,
+			payway,
+			wechat,
+			pay_time,
+			mobile,
+			is_success,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{userId},
+			#{username},
+			#{money},
+			#{payway},
+			#{wechat},
+			#{payTime},
+			#{mobile},
+			#{isSuccess},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE gbj_withdraw SET 	
+			user_id = #{userId},
+			username = #{username},
+			money = #{money},
+			payway = #{payway},
+			wechat = #{wechat},
+			pay_time = #{payTime},
+			mobile = #{mobile},
+			is_success = #{isSuccess},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE gbj_withdraw SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

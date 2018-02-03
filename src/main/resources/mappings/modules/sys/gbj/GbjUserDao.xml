@@ -165,4 +165,9 @@
 			wallet = wallet+#{wallet}
 		WHERE username = #{username}
 	</update>
+	<update id="upwallet">
+		UPDATE gbj_user SET 	
+			wallet = wallet-#{wallet}
+		WHERE id = #{id}
+	</update>
 </mapper>

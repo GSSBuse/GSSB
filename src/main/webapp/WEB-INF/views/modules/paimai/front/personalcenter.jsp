@@ -248,9 +248,9 @@
 											<th style="text-align: right; width: 100px;">账户余额：</th>
 											<td class="line30">
 											<label class="profile-gender" for="passport-sex-1" 
-											style="padding-left: 20px;">${gbjUserDetail.wallet}</label>
+											style="padding-left: 20px;" >${gbjUserDetail.wallet}</label>
 											<label class="profile-gender" for="passport-sex-1" 
-											style="padding-left: 20px;"><a>提现</a></label>
+											style="padding-left: 20px;"><a href="#wallet-dialog" onclick="showwallet(this)">提现</a></label>
 											</td>
 										</tr>
 
@@ -328,6 +328,8 @@
 				</div>
 			</form> 
 	</div>
+	
+	
 	
 	
 	<div id="deletebuy-dialog-bg" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1; display: none;"></div>
@@ -437,7 +439,7 @@
 											<a
 												ms-attr-href="${ctx }/single.html?id={{el.id}}&type=rewards">{{el.title}}</a>
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<a href="#changereward-dialog" onclick="showreward(this)">修改</a><p class="ellb" style="display: none">{{el.id}}</p>
+										<%--	<a href="#changereward-dialog" onclick="showreward(this)">修改</a><p class="ellb" style="display: none">{{el.id}}</p> --%>
 											<%-- <a href="javascript:void(0)" ms-click="$remove">删除</a>
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					                         <a ms-attr-href="${ctx}/personalcenter.html?id={{el.id}}" >删除</a> --%>
@@ -510,10 +512,7 @@
 			</form> 
 	</div>
 							
-							
-							
-							
-							
+	
 							<!--            我评论的信息。        by snnu   2017.12.31           -->
 							<div class="tab-content">
 								<article class="format-standard type-post hentry clearfix"
@@ -538,7 +537,74 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<div id="wallet-dialog-bg" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1; display: none;"></div>
+	<div id="wallet-dialog"  style="position: fixed; background: rgb(249, 249, 249); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: none;">
+		<div id="close-dialogwallet" style="position: absolute; right: -10px; top: -14px; width: 24px; height: 24px; text-align: center; font-size: 25px; border: 2px solid #d2d1d1; border-radius: 50%; background-color: #fff; color: #e71a1a; cursor: pointer;">×</div>
+		  <form method="post" id="walletput" 
+		        	style="padding: 20px 30px; margin: 0;">
+		        <h1 class="post-title">
+					<a href="#">提现申请</a>
+				</h1>
+				<p class="comment-notes">请输入您需要提现的信息</p>
+				<div class="form-error" style="color:#FF0000">
+						<i></i><label class="text"></label>
+				</div>
+				<div class="form-success" style="color:#FF0000">
+					<i></i><label class="text"></label>
+				</div>
+				<div class="form-group" >
+					<label for="title">提现金额*</label> 
+					<input class="spn4 form-control " type="text" name="money" id="money"   style="width: 320px;">
+					<input type="hidden" name="userId"  id="userId" value="${login_user.id}">
+					<input type="hidden" name="user_name"  id="user_name" value="${gbjUserDetail.username}">
+					<input type="hidden" name="zhanghujine" id="zhanghujine" value="${gbjUserDetail.wallet}">
+			    </div>
+			    <div>
+					<label for="title">支付宝账号*</label> 
+					<input class="spn4 form-control" type="text" name="payways" id="payways" style="width: 320px;">
+			    </div><br>
+			    <div>
+					<label for="title">提现成功通知电话*</label> 
+					<input class="spn4 form-control" type="text" name="mobiles" id="mobiles" style="width: 320px;">
+			    </div>
+			                       
+				<div class="payment-sendbtns">
+					<input  class="btn" name="putwallet" type="button" id="putwallet" onclick="putwalletSubmit();" value="提交提现申请" style="height: 50px;color:blue">
+				</div>
+			</form> 
+	</div>
+	
 	<!-- End of Page Container -->
+	
+	
+	<script type="text/javascript">
+//修改买标信息js 01
+function showwallet(obj){
+   //alert(obj.tagName);
+	//alert($(obj).prev().tagName);
+	//var pp = obj.nextSibling;
+	//var cnt = pp.innerText;
+	//alert(cnt);
+	//document.getElementById("user_id").setAttribute("value", cnt);
+	document.getElementById("wallet-dialog").style.display="block";
+	document.getElementById("wallet-dialog-bg").style.display = 'block';
+}
+function hide(){
+    document.getElementById("wallet-dialog").style.display="none";
+    document.getElementById("wallet-dialog-bg").style.display = 'none';
+}
+// 点击弹窗背景关闭当前弹窗
+$('#wallet-dialog-bg').click(function(){
+	$('#wallet-dialog,#wallet-dialog-bg').hide();
+});
+// 点击弹窗的关闭按钮关闭当前弹窗
+$('#close-dialogwallet').click(function(){
+    $('#wallet-dialog,#wallet-dialog-bg').hide();
+});
+</script>
+	
 <script type="text/javascript">
 //修改买标信息js 01
 function showbuy(obj){

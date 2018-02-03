@@ -50,6 +50,7 @@ import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserRewardComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserRewardCommentsReply;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserSoldComments;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUserSoldCommentsReply;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjWithdraw;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.RewardArticleList;
 import com.thinkgem.jeesite.modules.sys.entity.gbj.SoldArticleList;
 import com.thinkgem.jeesite.modules.sys.service.gbj.ArticleListService;
@@ -68,6 +69,7 @@ import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserRewardCommentsService
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserSoldCommentsReplyService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.GbjUserSoldCommentsService;
+import com.thinkgem.jeesite.modules.sys.service.gbj.GbjWithdrawService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.RewardArticleListService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.SoldArticleListService;
 import com.thinkgem.jeesite.modules.sys.service.gbj.WechatPayService;
@@ -131,6 +133,8 @@ public class FrontIndexController extends BaseController {
 	GbjUserSoldCommentsReplyService gbjUserSoldCommentsReplyService;
 	@Autowired
 	GbjUserRewardCommentsReplyService gbjUserRewardCommentsReplyService;
+	@Autowired
+	GbjWithdrawService gbjWithdrawService;
 
 	/**
 	 * 网站首页
@@ -376,6 +380,39 @@ public class FrontIndexController extends BaseController {
 				throw e;
 			}
 		}
+	}
+
+	/**
+	 * 个人中心用户提现 2018/1/25 by snnu 001
+	 */
+	@RequestMapping(value = { "putwallet" })
+	@ResponseBody
+	public AjaxResult putwallet(HttpServletRequest request, @RequestParam(value = "userId") String userId,
+			@RequestParam(value = "username") String username, @RequestParam(value = "money") String money,
+			@RequestParam(value = "payway") String payway, @RequestParam(value = "mobile") String mobile) {
+		GbjUser gbjUser = new GbjUser();
+		GbjWithdraw gbjWithdraw = new GbjWithdraw();
+
+		try {
+			// logger.info(parentId);
+			// STEP1 提交查询信息，保存到数据库
+			// gbjUser.setBuy(gbjBuyService.get(id));
+			gbjWithdraw.setUserId(userId);
+			gbjWithdraw.setUsername(username);
+			gbjWithdraw.setMoney(money);
+			gbjWithdraw.setPayway(payway);
+			gbjWithdraw.setMobile(mobile);
+			gbjWithdraw.setPayTime(new Date());
+			gbjWithdrawService.save(gbjWithdraw);
+			gbjUser.setId(userId);
+			gbjUser.setWallet(money);
+			gbjUserService.upwallet(gbjUser);
+			return AjaxResult.makeSuccess("您很棒，修改成功！");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return AjaxResult.makeError("失败【" + e.getMessage() + "】");
+		}
+
 	}
 
 	/**

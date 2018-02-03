@@ -5,21 +5,14 @@ package com.thinkgem.jeesite.modules.sys.dao.gbj;
 
 import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
-import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjUser;
+import com.thinkgem.jeesite.modules.sys.entity.gbj.GbjWithdraw;
 
 /**
- * 用户信息表DAO接口
- * 
+ * 提现记录表DAO接口
  * @author snnu
- * @version 2017-12-17
+ * @version 2018-02-03
  */
 @MyBatisDao
-public interface GbjUserDao extends CrudDao<GbjUser> {
-
-	public int updateinfo(GbjUser gbjUser);
-
-	public int updatewallet(GbjUser gbjUser);
-
-	public int upwallet(GbjUser gbjUser);
-
+public interface GbjWithdrawDao extends CrudDao<GbjWithdraw> {
+	
 }

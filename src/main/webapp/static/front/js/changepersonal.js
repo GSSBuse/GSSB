@@ -51,7 +51,91 @@ function changeSubmit(){
         return true;
     }
     
+//个人中心提现申请 001
+function putwalletSubmit(){
+    /*var userId = $("#putwallet").find("##user_id").eq(0).val();
+    var username = $("#putwallet").find("#username").eq(0).val();
+    var money = $("#putwallet").find("#money").eq(0).val();
+    var payway = $("#putwallet").find("#payway").eq(0).val();
+    var mobile = $("#putwallet").find("#mobile").eq(0).val();
+    */
+	var zhanghujine = $("#zhanghujine").val();
+	
+	var userId = $("#userId").val();
+    var username = $("#user_name").val();
+    var money = $("#money").val();
+    var payway = $("#payways").val();
+    var mobile = $("#mobiles").val();
+	
+   
+    /*alert(zhanghujine);
+    alert(userId);
+    alert(username);
+    alert(money);
+    alert(payway);
+    alert(mobile);*/
     
+    if($(".tips ").is(":visible")){
+        return false;
+    }
+    if(money == null  || money == "" ){
+        showError("请输入您要提现的金额");
+        return false;
+    }
+    if(payway == null  || payway == ""){
+        showError("请输入您的支付宝账号");
+        return false;
+    }
+    if(mobile == null  || mobile == ""){
+        showError("请输入提现成功后的通知电话");
+        return false;
+    }
+    
+    if(zhanghujine < money){
+    	showError("您的账户余额不足，请重新输入提现金额");
+        return false;
+    }
+    if(Number.isInteger(zhanghujine)==false){
+    	showError("提现金额请输入整数");
+        return false;
+    }
+    var ajaxResult;
+    $.ajax({
+		url : ctx + "/putwallet.json",
+		type : "POST",
+		data : {
+			userId : userId,
+			username : username,
+			money : money,
+			payway : payway,
+			mobile : mobile
+		},
+    	dataType : 'json',
+    	async : false,
+		success : function(data) {
+			if (data.type == 'success') {
+				location.reload();
+			} else {
+				showError(data.msg);
+				ajaxResult = false;
+				return false;
+			}
+		},
+		error : function(data) {
+			showError(data.responseText);
+			ajaxResult = false;
+			return false;
+		}
+	});
+    
+    if (ajaxResult == false) {
+    	return false;
+    }
+    return true;
+}
+
+
+
    //个人中心修改买标信息 001
     function changebuySubmit(){
         var id = $("#changebuy").find("#idbuy").eq(0).val();

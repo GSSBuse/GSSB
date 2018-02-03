@@ -60,4 +60,11 @@ public class GbjUserService extends CrudService<GbjUserDao, GbjUser> {
 		gbjUserDao.updatewallet(gbjUser);
 	}
 
+	// 提现
+	@Transactional(readOnly = false)
+	public void upwallet(GbjUser gbjUser) {
+		// TODO Auto-generated method stub
+		gbjUserDao.upwallet(gbjUser);
+	}
+
 }
