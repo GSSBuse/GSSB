@@ -138,14 +138,14 @@
 												 >
 												<input name="id" type="hidden" id="id" value="${login_user.id}"></label>
 										</tr>
-										 <tr style="height: 35px; font-size: 16px;">
+										<!--  <tr style="height: 35px; font-size: 16px;">
 											<th style="text-align: right; width: 100px;">头像：</th>
 											<td class="line30"><label class="profile-gender"
 												for="passport-sex-1" style="padding-left: 20px;">
 											<input ms-change="choosePositive()" type="file" name="photo" accept="image/png,image/gif,image/jpeg">
 												</label>
 												
-										</tr> 
+										</tr>  -->
 
 
 										<tr style="height: 35px; font-size: 16px;">

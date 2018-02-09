@@ -47,7 +47,7 @@ $(function() {
        <li>
            <img src="${ctxStatic }/images/b3.jpg" alt="" />
        </li>
-       <li>
+      <%--  <li>
            <img src="${ctxStatic }/images/b4.jpg" alt="" />
        </li>
        <li>
@@ -58,7 +58,7 @@ $(function() {
        </li>
        <li>
            <img src="${ctxStatic }/images/b7.jpg" alt="" />
-       </li>
+       </li> --%>
    </ul>
    <div style="position:absolute; bottom:85px; padding:10px; width:60%; left: 20%; background: #ffffff26;
     border-radius: 5px;">

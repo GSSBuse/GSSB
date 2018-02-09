@@ -102,7 +102,7 @@ function rewardSubmit(){
 		});
 		alert(results);*/
 		
-		
+		return false;
 		
 		var x = 1;
 		var y = 2;

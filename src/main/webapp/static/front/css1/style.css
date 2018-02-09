@@ -902,18 +902,24 @@ p.m_9{
 .team_desc {
   margin-top: 1.5em;
 }
+
+.team_desc h3 {
+ color: #556b72;
+ font-weight: 800;
+ text-transform: uppercase;
+ font-size: 14px;
+ margin-bottom: 0;
+ text-align: center;
+}
 .team_desc-left{
     float:left;
 }
 .team_desc-right{
     float:right;
 }
-.team_desc-left h3{
-  color: #556b72;
-  font-weight: 800;
-  text-transform: uppercase;
-  font-size: 14px;
-  margin-bottom: 0;
+.team_desc h3 {
+ 	text-align: center;
+ 	font-size: 16px;
 }
 .team_desc-left p{
   color: #A2B6BD;

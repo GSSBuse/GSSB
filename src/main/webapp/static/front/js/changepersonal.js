@@ -95,10 +95,7 @@ function putwalletSubmit(){
     	showError("您的账户余额不足，请重新输入提现金额");
         return false;
     }
-    if(Number.isInteger(zhanghujine)==false){
-    	showError("提现金额请输入整数");
-        return false;
-    }
+    
     var ajaxResult;
     $.ajax({
 		url : ctx + "/putwallet.json",
